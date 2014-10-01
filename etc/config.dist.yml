@@ -1,0 +1,10 @@
+system:
+    debug: 1
+    timezone: 'UTC'
+database:
+    driver: mysql
+    host: localhost
+    user: root
+    password: ''
+    name: db_name
+    prefix: wind_

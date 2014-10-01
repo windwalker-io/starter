@@ -1,0 +1,12 @@
+home:
+  pattern: 'home'
+  variables:
+    _controller: 'Acme\Controller\Page\'
+page:
+  pattern: 'page'
+  variables:
+      _controller: 'Acme\Controller\Page\'
+cover:
+  pattern: 'cover'
+  variables:
+      _controller: 'Acme\Controller\Cover\'

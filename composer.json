@@ -1,0 +1,29 @@
+{
+	"name": "windwalker/starter",
+	"description": "Windwalker Starter.",
+	"homepage": "https://github.com/ventoviro/windwalker",
+	"license": "GNU Lesser General Public License",
+	"minimum-stability": "beta",
+	"authors": [
+		{
+			"name": "Simon Asika",
+			"email": "asika32764@gmail.com"
+		}
+	],
+	"require": {
+		"windwalker/framework" : "~2.0@alpha",
+		"joomla/date" : "~1.0@stable",
+		"symfony/yaml" : "2.*@stable",
+		"filp/whoops": "1.*@stable",
+		"robmorgan/phinx": "*@stable",
+
+		"twig/twig" : "~1.0@stable"
+	},
+	"require-dev": {
+	},
+	"autoload": {
+		"psr-4": {
+			"": "src/"
+		}
+	}
+}

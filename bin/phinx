@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Part of formosa project.
+ *
+ * @copyright  Copyright (C) 2011 - 2014 SMS Taiwan, Inc. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE
+ */
+
+if (count($_SERVER['argv']) >= 2)
+{
+	$_SERVER['argv'][] = '-c';
+	$_SERVER['argv'][] = realpath(__DIR__ . '/../etc/phinx.config.php');
+}
+
+include __DIR__ . '/../vendor/robmorgan/phinx/bin/phinx';
