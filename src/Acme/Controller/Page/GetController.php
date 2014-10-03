@@ -11,6 +11,7 @@ namespace Acme\Controller\Page;
 use Acme\View\Page\PageHtmlView;
 use Formosa\Utilities\Queue\Priority;
 use Windwalker\Controller\AbstractController;
+use Windwalker\Core\Language\Language;
 use Windwalker\Renderer\BladeRenderer;
 use Windwalker\Renderer\PhpRenderer;
 use Windwalker\Renderer\TwigRenderer;

@@ -11,6 +11,7 @@ namespace Windwalker\Application;
 use Symfony\Component\Yaml\Yaml;
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\Provider\DatabaseProvider;
+use Windwalker\Core\Provider\LanguageProvider;
 use Windwalker\Core\Provider\LoggerProvider;
 use Windwalker\Core\Provider\RouterProvider;
 use Windwalker\Core\Provider\SessionProvider;
@@ -51,6 +52,7 @@ class Application extends WebApplication
 			->registerServiceProvider(new DatabaseProvider($this->config))
 			->registerServiceProvider(new LoggerProvider($this->config))
 			->registerServiceProvider(new RouterProvider($this->config))
+			->registerServiceProvider(new LanguageProvider)
 			->registerServiceProvider(new SessionProvider($this->config));
 	}
 

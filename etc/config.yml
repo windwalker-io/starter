@@ -8,3 +8,9 @@ database:
     password: '1234'
     name: acme
     prefix: wind_
+language:
+    debug: 0
+    locale: en-GB
+    default: en-GB
+    format: ini
+    path: resources/languages
