@@ -10,7 +10,7 @@ $config = \Symfony\Component\Yaml\Yaml::parse(__DIR__ . '/config.yml');
 
 $phinx = <<<YML
 paths:
-    migrations: etc/migrations
+    migrations: resources/migrations
 
 environments:
     default_migration_table: migration_log

@@ -38,7 +38,7 @@ class GetController extends AbstractController
 
 		$content = $model->getContent();
 
-		$view = new CoverHtmlView(null, Priority::createQueue(WINDWALKER_TEMPLATE . '/acme/cover'));
+		$view = new CoverHtmlView;
 
 		return $view->set('content', $content)->render();
 	}

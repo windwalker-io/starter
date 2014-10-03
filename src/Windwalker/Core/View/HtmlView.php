@@ -28,6 +28,13 @@ class HtmlView extends \Windwalker\View\HtmlView
 	protected $name = null;
 
 	/**
+	 * Property package.
+	 *
+	 * @var  string
+	 */
+	protected $package;
+
+	/**
 	 * Method to instantiate the view.
 	 *
 	 * @param   array             $data     The data array.
@@ -39,7 +46,8 @@ class HtmlView extends \Windwalker\View\HtmlView
 	{
 		parent::__construct($data, $renderer);
 
-		$this->renderer->addPath(WINDWALKER_TEMPLATE . '/_global', Priority::NORMAL);
+		$this->renderer->addPath(WINDWALKER_TEMPLATE . '/_global', Priority::LOW);
+		$this->renderer->addPath(WINDWALKER_TEMPLATE . '/' . $this->getPackage() . '/' . $this->getName(), Priority::NORMAL);
 
 		$this->initialise();
 	}
@@ -122,24 +130,41 @@ class HtmlView extends \Windwalker\View\HtmlView
 	{
 		if (!$this->name)
 		{
-			$name = get_called_class();
+			$class = get_called_class();
 
 			// If we are using this class as default view, return default name.
-			if ($name == __CLASS__)
+			if ($class == __CLASS__)
 			{
 				return $this->name = 'default';
 			}
 
-			$name = explode('\\', $name);
+			$class = explode('\\', $class);
 
-			array_pop($name);
+			array_pop($class);
 
-			$name = array_pop($name);
+			$name = array_pop($class);
+
+			array_pop($class);
+
+			$this->package = strtolower(array_pop($class));
 
 			$this->name = strtolower($name);
 		}
 
 		return $this->name;
+	}
+
+	/**
+	 * Method to get property Package
+	 *
+	 * @return  string
+	 */
+	public function getPackage()
+	{
+		// Init name & package
+		$this->getName();
+
+		return $this->package;
 	}
 
 	/**

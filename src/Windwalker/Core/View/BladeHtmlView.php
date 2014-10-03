@@ -8,24 +8,24 @@
 
 namespace Windwalker\Core\View;
 
-use Windwalker\Renderer\TwigRenderer;
+use Windwalker\Renderer\BladeRenderer;
 
 /**
  * Class TwigHtmlView
  *
  * @since 1.0
  */
-class TwigHtmlView extends HtmlView
+class BladeHtmlView extends HtmlView
 {
 	/**
 	 * Class init.
 	 *
 	 * @param array             $data
-	 * @param TwigRenderer      $renderer
+	 * @param BladeRenderer     $renderer
 	 */
-	public function __construct($data = array(), TwigRenderer $renderer = null)
+	public function __construct($data = array(), BladeRenderer $renderer = null)
 	{
-		$renderer = $renderer ? : new TwigRenderer;
+		$renderer = $renderer ? : new BladeRenderer(null, array('cache_path' => WINDWALKER_CACHE . '/view'));
 
 		parent::__construct($data, $renderer);
 	}

@@ -17,7 +17,8 @@
 		"filp/whoops": "1.*@stable",
 		"robmorgan/phinx": "*@stable",
 
-		"twig/twig" : "~1.0@stable"
+		"twig/twig" : "~1.0@stable",
+		"illuminate/view" : "~4.0@stable"
 	},
 	"require-dev": {
 	},
