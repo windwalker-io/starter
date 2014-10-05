@@ -9,6 +9,7 @@
 namespace Windwalker\Core\Provider;
 
 use Windwalker\DI\Container;
+use Windwalker\DI\ServiceProviderInterface;
 use Windwalker\Session\Session;
 
 /**
@@ -16,7 +17,7 @@ use Windwalker\Session\Session;
  * 
  * @since  {DEPLOY_VERSION}
  */
-class SessionProvider extends AbstractConfigServiceProvider
+class SessionProvider implements ServiceProviderInterface
 {
 	/**
 	 * Registers the service provider with a DI container.
@@ -27,12 +28,17 @@ class SessionProvider extends AbstractConfigServiceProvider
 	 */
 	public function register(Container $container)
 	{
-		$handler = $this->config->get('session.handler', 'native');
-		$options = $this->config->get('session.options', array());
+		$self = $this;
 
-		$closure = function($container) use ($handler, $options)
+		$closure = function(Container $container) use ($self)
 		{
-			return new Session($this->getHandler($handler), null, null, null, $options);
+			/** @var \Windwalker\Registry\Registry $config */
+			$config = $container->get('system.config');
+
+			$handler = $config->get('session.handler', 'native');
+			$options = $config->get('session.options', array());
+
+			return new Session($self->getHandler($handler), null, null, null, $options);
 		};
 
 		$container->share('system.session', $closure)
@@ -46,7 +52,7 @@ class SessionProvider extends AbstractConfigServiceProvider
 	 *
 	 * @return  \Windwalker\Session\Handler\HandlerInterface
 	 */
-	protected function getHandler($handler)
+	public function getHandler($handler)
 	{
 		$class = sprintf('Windwalker\Session\Handler\%sHandler', ucfirst($handler));
 

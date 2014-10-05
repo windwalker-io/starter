@@ -40,7 +40,11 @@ class LanguageProvider implements ServiceProviderInterface
 
 			$loader = new FileLoader(array(WINDWALKER_ROOT . '/' . $path));
 
-			$language = new Language($config->get('language.locale', 'en-GB'), null, $loader);
+			$language = new Language(
+				$config->get('language.locale', 'en-GB'),
+				$config->get('language.default', 'en-GB'),
+				$loader
+			);
 
 			return $language->setDebug(($debug && $langDebug));
 		};

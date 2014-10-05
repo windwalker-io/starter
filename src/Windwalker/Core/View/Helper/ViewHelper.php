@@ -9,7 +9,7 @@
 namespace Windwalker\Core\View\Helper;
 
 use Joomla\Date\Date;
-use Windwalker\Core\Factory;
+use Windwalker\Core\Ioc;
 use Windwalker\Core\View\Helper\Set\HelperSet;
 
 /**
@@ -26,12 +26,12 @@ class ViewHelper extends AbstractHelper
 	 */
 	public static function getGlobalVariables()
 	{
-		$container = Factory::getContainer();
+		$container = Ioc::getContainer();
 
 		return array(
 			'uri' => $container->get('uri'),
 			'app' => $container->get('system.application'),
-			'container' => Factory::getContainer(),
+			'container' => Ioc::getContainer(),
 			'helper' => new HelperSet,
 			'flash' => $container->get('session')->getFlashBag()->takeAll(),
 			'datetime' => new Date('now', new \DateTimeZone($container->get('config')->get('system.timezone', 'UTC')))

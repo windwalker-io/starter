@@ -9,13 +9,14 @@
 namespace Windwalker\Core\Provider;
 
 use Windwalker\DI\Container;
+use Windwalker\DI\ServiceProviderInterface;
 
 /**
  * Class WhoopsProvider
  *
  * @since 1.0
  */
-class WhoopsProvider extends AbstractConfigServiceProvider
+class WhoopsProvider implements ServiceProviderInterface
 {
 	/**
 	 * Registers the service provider with a DI container.
@@ -28,7 +29,9 @@ class WhoopsProvider extends AbstractConfigServiceProvider
 	 */
 	public function register(Container $container)
 	{
-		if ($this->config->get('system.debug'))
+		$config = $container->get('system.config');
+
+		if ($config->get('system.debug'))
 		{
 			$whoops = new \Whoops\Run;
 
@@ -38,7 +41,10 @@ class WhoopsProvider extends AbstractConfigServiceProvider
 
 			$whoops->register();
 
-			$container->share('whoops', $whoops);
+			$container->share('system.debugger', $whoops)
+				->alias('whoops', 'system.debugger')
+				->alias('debugger', 'system.debugger');
+
 			$container->share('whoops.handler', $handler);
 		}
 	}

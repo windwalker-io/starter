@@ -10,9 +10,12 @@ namespace Windwalker\Application;
 
 use Symfony\Component\Yaml\Yaml;
 use Windwalker\Core\Application\WebApplication;
+use Windwalker\Core\Cache\CacheFactory;
+use Windwalker\Core\Ioc;
+use Windwalker\Core\Provider\CacheProvider;
 use Windwalker\Core\Provider\DatabaseProvider;
 use Windwalker\Core\Provider\LanguageProvider;
-use Windwalker\Core\Provider\LoggerProvider;
+use Windwalker\Core\Provider\MonologProvider;
 use Windwalker\Core\Provider\RouterProvider;
 use Windwalker\Core\Provider\SessionProvider;
 use Windwalker\Core\Provider\WhoopsProvider;
@@ -45,15 +48,14 @@ class Application extends WebApplication
 	 */
 	protected function registerProviders(Container $container)
 	{
-		parent::registerProviders($container);
-
 		$container
-			->registerServiceProvider(new WhoopsProvider($this->config))
-			->registerServiceProvider(new DatabaseProvider($this->config))
-			->registerServiceProvider(new LoggerProvider($this->config))
-			->registerServiceProvider(new RouterProvider($this->config))
+			->registerServiceProvider(new WhoopsProvider)
+			->registerServiceProvider(new DatabaseProvider)
+			->registerServiceProvider(new MonologProvider)
+			->registerServiceProvider(new RouterProvider)
 			->registerServiceProvider(new LanguageProvider)
-			->registerServiceProvider(new SessionProvider($this->config));
+			->registerServiceProvider(new CacheProvider)
+			->registerServiceProvider(new SessionProvider);
 	}
 
 	/**

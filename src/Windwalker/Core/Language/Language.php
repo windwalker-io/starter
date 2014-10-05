@@ -45,9 +45,6 @@ abstract class Language extends Facade
 		$default = $config['language.default'] ? : 'en-GB';
 		$locale  = $config['language.locale']  ? : 'en-GB';
 
-		/** @var WebApplication $app */
-		$app = static::getContainer()->get('app');
-
 		$default = LanguageNormalize::toLanguageTag($default);
 		$locale = LanguageNormalize::toLanguageTag($locale);
 
@@ -55,6 +52,7 @@ abstract class Language extends Facade
 
 		$language->load(sprintf($path, $default, $file, $format), $format);
 
+		// If locale not equals default locale, load it to override default
 		if ($locale != $default)
 		{
 			$language->load(sprintf($path, $locale, $file, $format), $format);

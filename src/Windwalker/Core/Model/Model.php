@@ -10,7 +10,7 @@ namespace Windwalker\Core\Model;
 
 use Windwalker\Cache\Cache;
 use Windwalker\Cache\Storage\RuntimeStorage;
-use Windwalker\Core\Factory;
+use Windwalker\Core\Ioc;
 use Windwalker\Database\Driver\DatabaseAwareTrait;
 use Windwalker\Database\Driver\DatabaseDriver;
 use Windwalker\Model\AbstractModel;
@@ -53,7 +53,7 @@ class Model extends AbstractModel implements DatabaseModelInterface
 	 */
 	public function __construct(Registry $state = null, DatabaseDriver $db = null)
 	{
-		$this->db = $db ? : Factory::getContainer()->get('db');
+		$this->db = $db ? : Ioc::getDatabase();
 
 		$this->cache = new Cache(new RuntimeStorage);
 

@@ -8,7 +8,6 @@
 
 namespace Windwalker\Core\Provider;
 
-use Formosa\Factory;
 use Windwalker\Database\DatabaseFactory;
 use Windwalker\DataMapper\Adapter\DatabaseAdapter;
 use Windwalker\DataMapper\Adapter\WindwalkerAdapter;
@@ -20,7 +19,7 @@ use Windwalker\DI\ServiceProviderInterface;
  *
  * @since 1.0
  */
-class DatabaseProvider extends AbstractConfigServiceProvider
+class DatabaseProvider implements ServiceProviderInterface
 {
 	/**
 	 * Registers the service provider with a DI container.
@@ -31,21 +30,25 @@ class DatabaseProvider extends AbstractConfigServiceProvider
 	 */
 	public function register(Container $container)
 	{
-		$closure = function($container)
+		$closure = function(Container $container)
 		{
+			$config = $container->get('system.config');
+
 			$option = array(
-				'driver'   => $this->config->get('database.driver', 'mysql'),
-				'host'     => $this->config->get('database.host', 'localhost'),
-				'user'     => $this->config->get('database.user', 'root'),
-				'password' => $this->config->get('database.password', ''),
-				'database' => $this->config->get('database.name'),
-				'prefix'   => $this->config->get('database.prefix', 'wind_'),
+				'driver'   => $config->get('database.driver', 'mysql'),
+				'host'     => $config->get('database.host', 'localhost'),
+				'user'     => $config->get('database.user', 'root'),
+				'password' => $config->get('database.password', ''),
+				'database' => $config->get('database.name'),
+				'prefix'   => $config->get('database.prefix', 'wind_'),
 			);
 
 			return DatabaseFactory::getDbo($option['driver'], $option);
 		};
 
-		$container->share('db', $closure);
+		$container->share('system.database', $closure)
+			->alias('database', 'system.database')
+			->alias('db', 'system.database');
 
 		// For DataMapper
 		DatabaseAdapter::setInstance(

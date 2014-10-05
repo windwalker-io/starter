@@ -20,25 +20,8 @@ use Windwalker\DI\ServiceProviderInterface;
  *
  * @since 1.0
  */
-class LoggerProvider implements ServiceProviderInterface
+class MonologProvider implements ServiceProviderInterface
 {
-	/**
-	 * Property config.
-	 *
-	 * @var \Windwalker\Registry\Registry
-	 */
-	private $config;
-
-	/**
-	 * Class init.
-	 *
-	 * @param $config
-	 */
-	public function __construct($config)
-	{
-		$this->config = $config;
-	}
-
 	/**
 	 * Registers the service provider with a DI container.
 	 *
@@ -48,7 +31,10 @@ class LoggerProvider implements ServiceProviderInterface
 	 */
 	public function register(Container $container)
 	{
-		if (!class_exists('Monolog\Logger') || $this->config->get('system.debug'))
+		/** @var \Windwalker\Registry\Registry $config */
+		$config = $container->get('system.config');
+
+		if (!class_exists('Monolog\Logger') || $config->get('system.debug'))
 		{
 			$log = function($container)
 			{
@@ -57,9 +43,9 @@ class LoggerProvider implements ServiceProviderInterface
 		}
 		else
 		{
-			$log = function($container)
+			$log = function($container) use ($config)
 			{
-				$level = $this->config->get('system.debug') ? Logger::DEBUG : Logger::WARNING;
+				$level = $config->get('system.debug') ? Logger::DEBUG : Logger::WARNING;
 
 				$log = new Logger('sql');
 				$stream = new StreamHandler(FORMOSA_ETC . '/logs/debug.log', $level);
@@ -68,7 +54,8 @@ class LoggerProvider implements ServiceProviderInterface
 			};
 		}
 
-		$container->share('logger', $log);
+		$container->share('system.logger', $log)
+			->alias('logger', 'system.logger');
 	}
 }
  

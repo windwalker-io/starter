@@ -8,7 +8,7 @@
 
 namespace Windwalker\Core\Facade;
 
-use Windwalker\Core\Factory;
+use Windwalker\Core\Ioc;
 use Windwalker\DI\Container;
 
 /**
@@ -63,7 +63,7 @@ abstract class Facade
 	{
 		if (!static::$container)
 		{
-			static::$container = Factory::getContainer(static::$name);
+			static::$container = Ioc::getContainer(static::$name);
 		}
 
 		return static::$container;

@@ -54,7 +54,7 @@ $exception = $data->exception;
 	}
 </style>
 
-<h1>Formosa Error</h1>
+<h1>Windwalker Error</h1>
 
 <p class="lead">
 	<?php echo $exception->getMessage(); ?>
@@ -83,10 +83,21 @@ $exception = $data->exception;
 			#<?php echo $i ; ?>
 		</td>
 		<td>
-			<?php echo $trace['class']; ?>::<?php echo $trace['function']; ?>()
+			<?php
+			if (!empty($trace['class']))
+			{
+				echo $trace['class'] . '::' . $trace['function'] . '()';
+			}
+			else
+			{
+				echo $trace['function'] . '()';
+			}
+			?>
 		</td>
 		<td>
-			<?php echo $trace['file']; ?> (<?php echo $trace['line']; ?>)
+			<?php if (!empty($trace['file'])): ?>
+				<?php echo $trace['file']; ?> (line: <?php echo $trace['line']; ?>)
+			<?php endif; ?>
 		</td>
 	</tr>
 	<?php endforeach; ?>

@@ -8,15 +8,15 @@
 
 namespace Windwalker\Core\Application;
 
-use Formosa\Error\SimpleErrorHandler;
 use Symfony\Component\Yaml\Yaml;
 use Windwalker\Application\AbstractWebApplication;
 use Windwalker\Application\Web\Response;
 use Windwalker\Application\Web\ResponseInterface;
-use Windwalker\Application\Web\WebEnvironment;
-use Windwalker\Core\Factory;
+use Windwalker\Core\Error\SimpleErrorHandler;
+use Windwalker\Core\Ioc;
 use Windwalker\Core\Provider\SystemProvider;
 use Windwalker\DI\Container;
+use Windwalker\Environment\Web\WebEnvironment;
 use Windwalker\IO\Input;
 use Windwalker\Registry\Registry;
 use Windwalker\Router\Route;
@@ -28,6 +28,13 @@ use Windwalker\Router\Route;
  */
 class WebApplication extends AbstractWebApplication
 {
+	/**
+	 * Property env.
+	 *
+	 * @var  string
+	 */
+	public $mode = 'prod';
+
 	/**
 	 * Property router.
 	 *
@@ -85,7 +92,7 @@ class WebApplication extends AbstractWebApplication
 	 */
 	protected function initialise()
 	{
-		$this->container = Factory::getContainer();
+		$this->container = Ioc::getContainer();
 
 		$this->loadConfiguration($this->config);
 
@@ -95,7 +102,10 @@ class WebApplication extends AbstractWebApplication
 		}
 
 		// Debug system
-		define('WINDWALKER_DEBUG', $this->config->get('system.debug'));
+		if (!defined('WINDWALKER_DEBUG'))
+		{
+			define('WINDWALKER_DEBUG', $this->config->get('system.debug'));
+		}
 
 		$this->container->registerServiceProvider(new SystemProvider($this));
 

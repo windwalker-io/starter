@@ -75,7 +75,7 @@ class SimpleErrorHandler
 
 		$app = new WebApplication;
 
-		$app->setBody($body)->output();
+		$app->setBody($body)->respond();
 
 		die;
 	}
