@@ -5,7 +5,7 @@ This is [Windwlaker Framework](https://github.com/ventoviro/windwalker) starter 
 ## Installation Via Composer
 
 ``` bash
-$ php composer.phar create-project windwalker/starter windwalker ~2.0
+$ php composer.phar create-project windwalker/starter windwalker ~2.0 -s beta
 ```
 
 ## Getting Started
