@@ -45,7 +45,7 @@ YML;
 
 $phinx = \Symfony\Component\Yaml\Yaml::parse($phinx);
 
-$phinx['paths']['migrations'] = __DIR__ . '/../etc/migrations';
+$phinx['paths']['migrations'] = __DIR__ . '/../resources/migrations';
 
 $phinx['environments']['production']['adapter'] = $config['database']['driver'];
 $phinx['environments']['production']['host'] = $config['database']['host'];
@@ -66,7 +66,7 @@ $phinx['environments']['testing']['user'] = $config['database']['user'];
 $phinx['environments']['testing']['pass'] = $config['database']['password'];
 
 // Prepare Windwalker DB
-$db = \Windwalker\Database\DatabaseFactory::getDbo($config['database']);
+$db = \Windwalker\Database\DatabaseFactory::getDbo($config['database']['driver'], $config['database']);
 
 \Windwalker\DataMapper\Adapter\DatabaseAdapter::setInstance(
 	new \Windwalker\DataMapper\Adapter\WindwalkerAdapter($db)

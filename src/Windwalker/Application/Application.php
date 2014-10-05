@@ -10,18 +10,15 @@ namespace Windwalker\Application;
 
 use Symfony\Component\Yaml\Yaml;
 use Windwalker\Core\Application\WebApplication;
-use Windwalker\Core\Cache\CacheFactory;
-use Windwalker\Core\Ioc;
-use Windwalker\Core\Language\Language;
 use Windwalker\Core\Provider\CacheProvider;
 use Windwalker\Core\Provider\DatabaseProvider;
 use Windwalker\Core\Provider\LanguageProvider;
-use Windwalker\Core\Provider\MonologProvider;
 use Windwalker\Core\Provider\RouterProvider;
 use Windwalker\Core\Provider\SessionProvider;
 use Windwalker\Core\Provider\WhoopsProvider;
 use Windwalker\DI\Container;
 use Windwalker\Registry\Registry;
+use Windwalker\SystemPackage\SystemPackage;
 
 /**
  * Class Application
@@ -47,7 +44,7 @@ class Application extends WebApplication
 	 *
 	 * @return  void
 	 */
-	protected function registerProviders(Container $container)
+	public static function registerProviders(Container $container)
 	{
 		$container
 			->registerServiceProvider(new WhoopsProvider)
@@ -56,6 +53,18 @@ class Application extends WebApplication
 			->registerServiceProvider(new LanguageProvider)
 			->registerServiceProvider(new CacheProvider)
 			->registerServiceProvider(new SessionProvider);
+	}
+
+	/**
+	 * getPackages
+	 *
+	 * @return  array
+	 */
+	public static function getPackages()
+	{
+		return array(
+			new SystemPackage
+		);
 	}
 
 	/**

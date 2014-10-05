@@ -15,6 +15,7 @@ use Windwalker\Application\Web\ResponseInterface;
 use Windwalker\Core\Error\SimpleErrorHandler;
 use Windwalker\Core\Ioc;
 use Windwalker\Core\Provider\SystemProvider;
+use Windwalker\Core\Provider\WebProvider;
 use Windwalker\DI\Container;
 use Windwalker\Environment\Web\WebEnvironment;
 use Windwalker\IO\Input;
@@ -107,9 +108,10 @@ class WebApplication extends AbstractWebApplication
 			define('WINDWALKER_DEBUG', $this->config->get('system.debug'));
 		}
 
-		$this->container->registerServiceProvider(new SystemProvider($this));
+		$this->container->registerServiceProvider(new SystemProvider($this))
+			->registerServiceProvider(new WebProvider($this));
 
-		$this->registerProviders($this->container);
+		static::registerProviders($this->container);
 	}
 
 	/**
@@ -119,7 +121,7 @@ class WebApplication extends AbstractWebApplication
 	 *
 	 * @return  void
 	 */
-	protected function registerProviders(Container $container)
+	protected static function registerProviders(Container $container)
 	{
 	}
 

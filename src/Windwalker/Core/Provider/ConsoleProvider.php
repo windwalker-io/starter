@@ -8,33 +8,30 @@
 
 namespace Windwalker\Core\Provider;
 
-use Windwalker\Application\AbstractWebApplication;
 use Windwalker\Core\Application\Console;
-use Windwalker\Core\Application\WebApplication;
 use Windwalker\DI\Container;
 use Windwalker\DI\ServiceProviderInterface;
-use Windwalker\Registry\Registry;
 
 /**
- * The SystemProvider class.
+ * The ConsoleProvider class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class SystemProvider implements ServiceProviderInterface
+class ConsoleProvider implements ServiceProviderInterface
 {
 	/**
 	 * Property app.
 	 *
-	 * @var AbstractWebApplication|WebApplication|Console
+	 * @var Console
 	 */
 	protected $app;
 
 	/**
 	 * Class init.
 	 *
-	 * @param AbstractWebApplication|Console $app
+	 * @param Console $app
 	 */
-	public function __construct($app)
+	public function __construct(Console $app)
 	{
 		$this->app = $app;
 	}
@@ -48,11 +45,16 @@ class SystemProvider implements ServiceProviderInterface
 	 */
 	public function register(Container $container)
 	{
-		$container->share('system.application', $this->app)
-			->alias('app', 'system.application');
+		// Input
+		$container->share('system.io', $this->app->io)
+			->alias('io', 'system.io');
 
-		$container->share('system.config', $this->app->config)
-			->alias('config', 'system.config');
+		// Environment
+//		$container->share('system.environment', $this->app->getEnvironment())
+//			->alias('environment', 'system.environment');
+//
+//		$container->share('system.client', $this->app->getEnvironment()->getClient());
+//		$container->share('system.server', $this->app->getEnvironment()->getServer());
 	}
 }
  
