@@ -2,7 +2,11 @@
 .*
 !.gitignore
 !.gitkeep
+!/www/.htaccess
 
 # Composer
 /vendor
 composer.lock
+
+#Windwalker
+/etc/config.yml
