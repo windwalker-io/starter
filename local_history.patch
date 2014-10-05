@@ -1,0 +1,6636 @@
+Index: vendor/windwalker/framework/src/IO/Cli/Color/ColorProcessor.php
+===================================================================
+--- vendor/windwalker/framework/src/IO/Cli/Color/ColorProcessor.php	(revision )
++++ vendor/windwalker/framework/src/IO/Cli/Color/ColorProcessor.php	(revision )
+@@ -146,7 +146,7 @@
+ 	/**
+ 	 * Adds predefined color styles to the ColorProcessor object
+ 	 *
+-	 * @return  static  Instance of $this to allow chaining.
++	 * @return  Stdout  Instance of $this to allow chaining.
+ 	 *
+ 	 * @since   {DEPLOY_VERSION}
+ 	 */
+@@ -171,30 +171,6 @@
+ 			'error',
+ 			new ColorStyle('white', 'red')
+ 		);
+-
+-		return $this;
+-	}
+-
+-	/**
+-	 * Method to get property NoColors
+-	 *
+-	 * @return  boolean
+-	 */
+-	public function getNoColors()
+-	{
+-		return $this->noColors;
+-	}
+-
+-	/**
+-	 * Method to set property noColors
+-	 *
+-	 * @param   boolean $noColors
+-	 *
+-	 * @return  static  Return self to support chaining.
+-	 */
+-	public function setNoColors($noColors)
+-	{
+-		$this->noColors = $noColors;
+ 
+ 		return $this;
+ 	}
+Index: vendor/windwalker/framework/src/IO/Cli/Color/ColorProcessorInterface.php
+===================================================================
+--- vendor/windwalker/framework/src/IO/Cli/Color/ColorProcessorInterface.php	(revision )
++++ vendor/windwalker/framework/src/IO/Cli/Color/ColorProcessorInterface.php	(revision )
+@@ -37,13 +37,4 @@
+ 	 * @since   {DEPLOY_VERSION}
+ 	 */
+ 	public function addStyle($name, ColorStyle $style);
+-
+-	/**
+-	 * Method to set property noColors
+-	 *
+-	 * @param   boolean $noColors
+-	 *
+-	 * @return  static  Return self to support chaining.
+-	 */
+-	public function setNoColors($noColors);
+ }
+Index: vendor/windwalker/framework/src/IO/Input.php
+===================================================================
+--- vendor/windwalker/framework/src/IO/Input.php	(revision )
++++ vendor/windwalker/framework/src/IO/Input.php	(revision )
+@@ -43,28 +43,28 @@
+ class Input implements \Serializable, \Countable
+ {
+ 	/**
+-	 * Input data.
++	 * Filter object to use.
+ 	 *
+-	 * @var    array
++	 * @var    \Windwalker\Filter\InputFilter
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+-	protected $data = array();
++	protected $filter = null;
+ 
+ 	/**
+-	 * Input objects
++	 * Input data.
+ 	 *
+ 	 * @var    array
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+-	protected $inputs = array();
++	protected $data = array();
+ 
+ 	/**
+-	 * Filter object to use.
++	 * Input objects
+ 	 *
+-	 * @var    \Windwalker\Filter\InputFilter
++	 * @var    array
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+-	protected $filter = null;
++	protected $inputs = array();
+ 
+ 	/**
+ 	 * Constructor.
+Index: vendor/windwalker/framework/src/IO/FilesInput.php
+===================================================================
+--- vendor/windwalker/framework/src/IO/FilesInput.php	(revision )
++++ vendor/windwalker/framework/src/IO/FilesInput.php	(revision )
+@@ -9,7 +9,7 @@
+ namespace Windwalker\IO;
+ 
+ /**
+- * Windwalker Input Files Class
++ * Joomla! Input Files Class
+  *
+  * @since  {DEPLOY_VERSION}
+  */
+Index: vendor/windwalker/framework/src/Dom/README.md
+===================================================================
+--- vendor/windwalker/framework/src/Dom/README.md	(revision )
++++ vendor/windwalker/framework/src/Dom/README.md	(revision )
+@@ -1,158 +1,7 @@
+-# Windwalker Dom Package
++# Part of Windwalker Package
+ 
+-## Installation via Composer
++This is the subtree split of [Windwalker Framework](https://github.com/ventoviro/windwalker).
+ 
+-Add this to the require block in your `composer.json`.
+-
+-``` json
+-{
+-    "require": {
+-        "windwalker/dom": "~2.0"
+-    }
+-}
+-```
+-
+-## Html & Dom Builder
+-
+-This is a convenience class to create XML and HTML element in an OO way.
+-
+-### DomElement
+-
+-DomElement and DomElements is use to create XML elements.
+-
+-``` php
+-use Windwalker\Dom\DomElement;
+-
+-$attrs = array('id' => 'foo', 'class' => 'bar');
+-
+-echo $dom = (string) new DomElement('field', 'Content', $attrs);
+-```
+-
+-Output:
+-
+-``` xml
+-<field id="foo" class="bar">Content</field>
+-```
+-
+-Add Children
+-
+-``` php
+-use Windwalker\Dom\DomElement;
+-
+-$attrs = array('id' => 'foo', 'class' => 'bar');
+-
+-$content = array(
+-    new DomElement('option', 'Yes', array('value' => 1)),
+-    new DomElement('option', 'No', array('value' => 0))
+-)
+-
+-echo $dom = (string) new DomElement('field', $content, $attrs);
+-```
+-
+-The output wil be:
+-
+-``` xml
+-<field id="foo" class="bar">
+-    <option value="1">Yes</option>
+-    <option value="0">No</option>
+-</field>
+-```
+-
+-### HtmlElement
+-
+-HtmlElement is use to create HTML elements, some specific tags will force to unpaired.
+-
+-``` php
+-use Windwalker\Dom\HtmlElement;
+-
+-$attrs = array(
+-    'class' => 'btn btn-mini',
+-    'onclick' => 'return fasle;'
+-);
+-
+-$html = (string) new HtmlElement('button', 'Click', $attrs);
+-```
+-
+-Then we will get this HTML:
+-
+-``` html
+-<button class="btn btn-mini" onclick="return false;">Click</button>
+-```
+-
+-#### Get Attributes by Array Access
+-
+-``` php
+-$class = $html['class'];
+-```
+-
+-### DomElements & HtmlElements
+-
+-It is a collection of HtmlElement set.
+-
+-``` php
+-$html = new HtmlElements(
+-    array(
+-        new HtmlElement('p', $content, $attrs),
+-        new HtmlElement('div', $content, $attrs),
+-        new HtmlElement('a', $content, $attrs)
+-    )
+-);
+-
+-echo $html;
+-```
+-
+-OR we can iterate it:
+-
+-``` php
+-foreach ($html as $element)
+-{
+-    echo $element;
+-}
+-```
+-
+-## XmlHelper
+-
+-`XmlHelper` using on get attributes of `SimpleXmlElement`.
+-
+-### Get Attributes
+-
+-``` php
+-use Windwalker\Dom\SimpleXml\XmlHelper;
+-
+-$xml = <<<XML
+-<root>
+-    <field name="foo" type="bar" readonly="true">
+-        <option></option>
+-    </field>
+-</root>
+-XML;
+-
+-$xml = simple_xml_load_string($xml);
+-
+-$element = $xml->xpath('field');
+-
+-$name = XmlHelper::getAttribute($element, 'name'); // result: foo
+-
+-// Same as get()
+-$name = XmlHelper::get($element, 'name'); // result: foo
+-```
+-
+-### Get Boolean
+-
+-`getBool()` can help us convert some string link `true`, `1`, `yes` to boolean `TRUE` and `no`, `false`, `disabled`, `null`, `none`, `0` string to booleand `FALSE`.
+-
+-``` php
+-$bool = XmlHelper::getBool($element, 'readonly'); // result: (boolean) TRUE
+-```
+-
+-### Get False
+-
+-Just an alias of `getBool()` but FALSE will return `TRUE`.
+-
+-### Set Default
+-
+-If this attribute not exists, use this value as default, or we use original value from xml.
+-
+-``` php
+-XmlHelper::def($element, 'class', 'input');
+-```
++This package has completed and prepare to use, but the document has work in process.
++Please see [Test](Test) to learn how to use and go to [Packagist/windwalker](https://packagist.org/packages/windwalker/)
++to find all the packages.
+Index: vendor/windwalker/framework/src/Uri/README.md
+===================================================================
+--- vendor/windwalker/framework/src/Uri/README.md	(revision )
++++ vendor/windwalker/framework/src/Uri/README.md	(revision )
+@@ -1,6 +1,6 @@
+ # Windwalker Uri Package
+ 
+-Windwalker Uri package is a Joomla Framework fork now, to support our Application package.
++Windwalker Uri package is a Windwalker Framework fork now, to support our Application package.
+ 
+ ## Introduction
+ 
+Index: vendor/windwalker/framework/src/Data/README.md
+===================================================================
+--- vendor/windwalker/framework/src/Data/README.md	(revision )
++++ vendor/windwalker/framework/src/Data/README.md	(revision )
+@@ -2,12 +2,12 @@
+ 
+ ## Installation via Composer
+ 
+-Add this to the require block in your `composer.json`.
++Add `"ventoviro/windwalker-data": "1.0.*"` to the require block in your composer.json.
+ 
+ ``` json
+ {
+     "require": {
+-        "windwalker/data": "~2.0"
++        "ventoviro/windwalker-data": "1.0.*"
+     }
+ }
+ ```
+@@ -29,7 +29,7 @@
+ echo $data->flower; // sakura
+ ```
+ 
+-### Binding object into it
++### Binding dat into it
+ 
+ ``` php
+ $obj = new \stdClass;
+@@ -47,10 +47,10 @@
+ ``` php
+ echo $data->foo; // exists
+ 
+-echo $data->yoo; // Not exists, but no warning, it will return null.
++echo $data->yoo; // Not exists, but no error, it will return null.
+ ```
+ 
+-We can also using getter and setter:
++We can also using normal getter and setter:
+ 
+ ``` php
+ $data->set('flower', 'rose');
+@@ -67,7 +67,7 @@
+ 
+ // OR
+ 
+-echo $data->flower ? : 'Default Value';
++echo $data->flower ?: 'Default Value';
+ ```
+ 
+ ### Array Access
+@@ -95,13 +95,20 @@
+ 
+ ### Null Data
+ 
+-In PHP, an empty object means not empty, so this code will return FALSE:
++In PHP, an empty object means exists, so this code will return FALSE:
+ 
+ ``` php
+-$data = new Data; // Data object with no properties
++$data = new Data; // Empty Data object
+ 
+ // IS NULL?
+-var_dump(empty($data)); // bool(false)
++if (empty($data))
++{
++    echo 'TRUE';
++}
++else
++{
++    echo 'FALSE';
++}
+ ```
+ 
+ So we use `isNull()` method to detect whether object is empty or not, this is similar to [Null Object pattern](http://en.wikipedia.org/wiki/Null_Object_pattern):
+@@ -110,14 +117,28 @@
+ $data = new Data;
+ 
+ // IS NULL?
+-var_dump($data->isNull()); // bool(true)
++if ($data->isNull())
++{
++    echo 'TRUE';
++}
++else
++{
++    echo 'FALSE';
++}
+ ```
+ 
+ Another simple way is convert it to array, this also work:
+ 
+ ``` php
+ // IS NULL?
+-var_dump(empty((array) $data)); // bool(true)
++if (!(array) $data)
++{
++    echo 'TRUE';
++}
++else
++{
++    echo 'FALSE';
++}
+ ```
+ 
+ ## Using DataSet Object
+@@ -138,7 +159,7 @@
+ 
+ ### Array Access
+ 
+-Operate `DataSet` as an array, it use magic method to get and set data.
++We can operate `DataSet` as an array, it use magic method to get and set data.
+ 
+ ``` php
+ echo $dataSet[0]->title; // Dog
+@@ -163,16 +184,14 @@
+ 
+ ### The Batch Getter & Setter
+ 
+-Get values of `foo` field from all data objects.
++Get values of `foo` field from all objects.
+ 
+ ``` php
+-// will be an array of every Data's foo property
+ $value = $dataset->foo;
+ ```
+ 
+ Set value to `bar` field of all object.
+ 
+ ``` php
+-// will set 'Fly' to every Data's bar property
+ $dataset->bar = 'Fly';
+ ```
+Index: vendor/windwalker/framework/src/Form/Test/Mock/FakeFilter.php
+===================================================================
+--- vendor/windwalker/framework/src/Form/Test/Mock/FakeFilter.php	(revision )
++++ vendor/windwalker/framework/src/Form/Test/Mock/FakeFilter.php	(revision )
+@@ -6,7 +6,7 @@
+  * @license    GNU General Public License version 2 or later;
+  */
+ 
+-namespace Windwalker\Form\Test\Mock;
++namespace Windwaklker\Form\Test\Mock;
+ 
+ /**
+  * The FakeFilter class.
+Index: vendor/windwalker/framework/src/Cache/Test/simple.php
+===================================================================
+--- vendor/windwalker/framework/src/Cache/Test/simple.php	(revision )
++++ vendor/windwalker/framework/src/Cache/Test/simple.php	(revision )
+@@ -1,20 +0,0 @@
+-<?php
+-/**
+- * Part of Windwalker project. 
+- *
+- * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
+- * @license    GNU General Public License version 2 or later;
+- */
+-
+-include_once __DIR__ . '/../../../vendor/autoload.php';
+-
+-use Windwalker\Cache\Cache;
+-use Windwalker\Cache\Storage\FileStorage;
+-
+-$cache = new Cache(new FileStorage(__DIR__ . '/cache'));
+-
+-$cache->set('flower', array('flower' => 'sakura'));
+-
+-$data = $cache->get('flower');
+-
+-print_r($data);
+Index: vendor/windwalker/framework/src/Cache/Storage/RawFileStorage.php
+===================================================================
+--- vendor/windwalker/framework/src/Cache/Storage/RawFileStorage.php	(revision )
++++ vendor/windwalker/framework/src/Cache/Storage/RawFileStorage.php	(revision )
+@@ -0,0 +1,56 @@
++<?php
++/**
++ * Part of Windwalker project. 
++ *
++ * @copyright  Copyright (C) 2008 - 2014 Asikart.com. All rights reserved.
++ * @license    GNU General Public License version 2 or later;
++ */
++
++namespace Windwalker\Cache\Storage;
++
++use Windwalker\Cache\Item\CacheItem;
++use Windwalker\Cache\Item\CacheItemInterface;
++
++/**
++ * Filesystem cache driver for the Joomla Framework.
++ *
++ * Supported options:
++ * - ttl (integer)          : The default number of seconds for the cache life.
++ * - file.locking (boolean) :
++ * - file.path              : The path for cache files.
++ *
++ * @since  {DEPLOY_VERSION}
++ */
++class RawFileStorage extends FileStorage
++{
++	/**
++	 * unserialize
++	 *
++	 * @param string $data
++	 *
++	 * @return  mixed|string
++	 */
++	protected function unserialize($data)
++	{
++		return $data;
++	}
++
++	/**
++	 * serialize
++	 *
++	 * @param mixed $data
++	 *
++	 * @throws  \InvalidArgumentException
++	 * @return  mixed|string
++	 */
++	protected function serialize($data)
++	{
++		if (is_array($data) || (is_object($data) && !method_exists($data, '_toString')))
++		{
++			throw new \InvalidArgumentException(__CLASS__ . ' can not handle an array or non-stringable object.');
++		}
++
++		return $data;
++	}
++}
++
+Index: vendor/windwalker/framework/src/Cache/Storage/FileStorage.php
+===================================================================
+--- vendor/windwalker/framework/src/Cache/Storage/FileStorage.php	(revision )
++++ vendor/windwalker/framework/src/Cache/Storage/FileStorage.php	(revision )
+@@ -12,7 +12,7 @@
+ use Windwalker\Cache\Item\CacheItemInterface;
+ 
+ /**
+- * Filesystem cache driver for the Windwalker Framework.
++ * Filesystem cache driver for the Joomla Framework.
+  *
+  * Supported options:
+  * - ttl (integer)          : The default number of seconds for the cache life.
+@@ -58,13 +58,10 @@
+ 	/**
+ 	 * Constructor.
+ 	 *
+-	 * @param   int     $path
+-	 * @param   string  $group
+-	 * @param   bool    $denyAccess
+-	 * @param   int     $ttl
+-	 * @param   mixed   $options An options array, or an object that implements \ArrayAccess
++	 * @param   mixed  $options  An options array, or an object that implements \ArrayAccess
+ 	 *
+ 	 * @since   {DEPLOY_VERSION}
++	 * @throws  \RuntimeException
+ 	 */
+ 	public function __construct($path, $group = '', $denyAccess = false, $ttl = null, $options = array())
+ 	{
+Index: vendor/windwalker/framework/src/Cache/Storage/NullStorage.php
+===================================================================
+--- vendor/windwalker/framework/src/Cache/Storage/NullStorage.php	(revision )
++++ vendor/windwalker/framework/src/Cache/Storage/NullStorage.php	(revision )
+@@ -40,7 +40,7 @@
+ 	 */
+ 	public function getItem($key)
+ 	{
+-		return new CacheItem($item);
++		return $this;
+ 	}
+ 
+ 	/**
+@@ -53,7 +53,7 @@
+ 	 */
+ 	public function setItem($item, $ttl = null)
+ 	{
+-		return $this;
++		return new CacheItem($item);
+ 	}
+ 
+ 	/**
+@@ -78,3 +78,4 @@
+ 		return $this;
+ 	}
+ }
++
+Index: vendor/windwalker/framework/src/Cache/README.md
+===================================================================
+--- vendor/windwalker/framework/src/Cache/README.md	(revision )
++++ vendor/windwalker/framework/src/Cache/README.md	(revision )
+@@ -1,185 +1,7 @@
+-# Windwalker Cache Package
++# Part of Windwalker Package
+ 
+-Windwalker Cache package provides an simple interface to easily store and fetch cache files.  
++This is the subtree split of [Windwalker Framework](https://github.com/ventoviro/windwalker).
+ 
+-## Installation via Composer
+-
+-Add this to the require block in your `composer.json`.
+-
+-``` json
+-{
+-    "require": {
+-        "windwalker/cache": "~2.0"
+-    }
+-}
+-```
+-
+-## Getting Started
+-
+-Create a cache object and store data.
+-
+-``` php
+-use Windwalker\Cache\Cache;
+-
+-$data = array('sakura');
+-
+-$cache = new Cache;
+-
+-$cache->set('flower', $data);
+-```
+-
+-Then we can get this data by same key.
+-
+-``` php
+-$data = $cache->get('flower');
+-```
+-
+-### Auto Fetch Data By Closure
+-
+-Using call method to auto detect is cache exists or not. 
+-
+-``` php
+-$data = $cache->call('flower', function()
+-{
+-    return array('sakura');
+-});
+-```
+-
+-It is same as this code:
+-
+-``` php
+-if (!$cache->has('flower'))
+-{
+-    $cache->set('flower', array('sakura'));
+-}
+-
+-$data = $cache->get('flower');
+-```
+-
+-### RuntimeStorage
+-
+-The default cache storage is `RuntimeStorage`, it means our data only keep in runtime but will not save as files.
+-
+-## Using FileStorage
+-
+-Create a cache with `FileStorage` and set a path to store files.
+-
+-``` php
+-use Windwalker\Cache\Cache;
+-use Windwalker\Cache\Storage\FileStorage;
+-
+-$path = 'your/cache/path';
+-
+-$cache = new Cache(new FileStorage($path));
+-
+-$cache->set('flower', array('sakura'));
+-```
+-
+-The file will store at `your/cache/path/~5a46b8253d07320a14cace9b4dcbf80f93dcef04.data`, and the data will be serialized string.
+-
+-```
+-a:1:{i:0;s:6:"sakura";}
+-```
+-
+-### Add Group
+-
+-``` php
+-$path = 'your/cache/path';
+-
+-$cache = new Cache(new FileStorage($path, 'mygroup'));
+-
+-$cache->set('flower', array('sakura'));
+-```
+-
+-The file wil store at `your/cache/path/mygroup/~5a46b8253d07320a14cace9b4dcbf80f93dcef04.data` that for organize your cache folder.
+-
+-### Deny Access
+-
+-If your cache folder are exposure on web environment, we have to make our cache files unable to access. The argument 3 
+- of `FileStorage` is use to deny access.
+-  
+-``` php
+-$path = 'your/cache/path';
+-
+-$cache = new Cache(new FileStorage($path, 'mygroup', true));
+-
+-$cache->set('flower', array('sakura'));
+-```
+-
+-The stored file will be a PHP file with code to deny access:
+-
+-`your/cache/path/mygroup/~5a46b8253d07320a14cace9b4dcbf80f93dcef04.php`
+-
+-``` php
+-<?php die("Access Deny"); ?>a:1:{i:0;s:6:"sakura";}
+-```
+-
+-## Available Storage
+-
+-- RuntimeStorage
+-- FileStorage
+-- RawFileStorage
+-- MemcachedStorage
+-- RedisStorage
+-- WincacheStorage
+-- XcacheStorage
+-- NullStorage
+-
+-## Storage Format
+-
+-The default data handler will make our data be serialized string, if you want to use other format, just change `DataHandler`
+-at second argument of Cache object.
+-
+-``` php
+-use Windwalker\Cache\Cache;
+-use Windwalker\Cache\Storage\FileStorage;
+-use Windwalker\Cache\DataHandler\JsonHandler;
+-
+-$cache = new Cache(new FileStorage(__DIR__ . '/cache'), new JsonHandler);
+-
+-$cache->set('flower', array('flower' => 'sakura'));
+-```
+-
+-The stored cache file is:
+-
+-```
+-{"flower":"sakura"}
+-```
+-
+-### Full Page Cache
+-
+-Sometimes we want to store whole html as static page cache. `StringHandler`  help us save raw string:
+- 
+-``` php
+-use Windwalker\Cache\Cache;
+-use Windwalker\Cache\Storage\RawFileStorage;
+-
+-$cache = new Cache(new FileStorage($path), new StringHandler);
+-
+-$url = 'http://mysite.com/foo/bar/baz';
+-
+-if ($cache->has($url))
+-{
+-    $html = $cache->get($url);
+-    
+-    exit();
+-}
+-
+-$view = new View;
+-
+-$html = $view->render();
+-
+-$cache->set($url, $html);
+-
+-echo $html;
+-```
+-
+-### Supported Handlers
+-
+-- SerializeHandler
+-- JsonHandler
+-- StringHandler
+-
+-## TODO
+-
+-Waiting for [PSR-6](https://github.com/php-fig/fig-standards/blob/master/proposed/cache.md) Compatible and will rewrite for it. 
++This package has completed and prepare to use, but the document has work in process.
++Please see [Test](Test) to learn how to use and go to [Packagist/windwalker](https://packagist.org/packages/windwalker/)
++to find all the packages.
+Index: vendor/windwalker/framework/src/Crypt/README.md
+===================================================================
+--- vendor/windwalker/framework/src/Crypt/README.md	(revision )
++++ vendor/windwalker/framework/src/Crypt/README.md	(revision )
+@@ -1,6 +1,6 @@
+ # Windwalker Crypt Package
+ 
+-Windwalker Crypt package is use to encrypt & verify password, and provides an easy interface to do Symmetric-Key Algorithm encryption.
++Windwalker Crypt package is using to hash/verify password, and provides an easy interface to make Symmetric-Key Algorithm.
+ 
+ ## Installation via Composer
+ 
+@@ -14,11 +14,8 @@
+ }
+ ```
+ 
+-## Password Encrypting
++## Password Hashing
+ 
+-`Password` object is a simple object to encrypt user's password, it is impossible to decrypt password hash, `Password` object
+-uses a one-way algorithm.
+-
+ ### Create Password
+ 
+ ``` php
+@@ -31,7 +28,7 @@
+ // $2y$10$csNfML/FJlKwaHR8xREgZuhp0pqSqeg.jdACqDsKO/MCHDkTuIZEa
+ ```
+ 
+-Using other hash algorithm
++Using other hash type
+ 
+ ``` php
+ use Windwalker\Crypt\Password;
+@@ -46,38 +43,31 @@
+ ``` php
+ use Windwalker\Crypt\Password;
+ 
+-// The Blowfish algorithm should set cost number between 4 to 31.
+-// We are suggest not higher than 15, else it will be too slow.
++// The Blowfish should set cost between 4 to 31.
++// We are suggest not higher than 15, or it will be too slow.
+ $password = new Password(Password::BLOWFISH, 15, md5('to be or not to be.'));
+ 
+ $pass = $password->create('pass1234');
+ 
+-// Note the Sha256 and Sha512 should set cost number higher than 1000
++// Note the Sha256 and Sha512 should set cost higher than 1000
+ $password = new Password(Password::BLOWFISH, 5000, md5('to be or not to be.'));
+ 
+ $pass = $password->create('pass1234');
+ ```
+ 
+-### Available algorithms
++### Verify
+- 
++
+-- Password::MD5
+-- Password::BLOWFISH
+-- Password::SHA256
+-- Password::SHA512
++We don't need to care the hash type, Password object will auto detect the type:
+ 
+-### Verify Password
+-
+-We don't need to care the hash algorithm, Password object will auto detect the algorithm type:
+-
+ ``` php
+ $bool = $password->verify('pass1234', $pass);
+ ```
+ 
+-## Symmetric-Key Algorithm Encryption
++## Symmetric-Key Algorithm
+ 
+-The `Crypt` object provides some Ciphers to encrypt our text. You must install PHP Mcrypt extension.
++The `Crypt` object provides some Ciphers to algorithm our text. You must install PHP Mcrypt extension.
+ 
+-But there has a `CipherSimple` are can use if your server is not able to install Mcrypt.
++But there has a `CipherSimple` can use if your server is not able to install Mcrypt.
+ 
+ ### Mcrypt Cipher
+ 
+@@ -102,13 +92,13 @@
+ $text = $crypt->decrypt($encrypted);
+ ```
+ 
+-### Available Ciphers
++### Supported Cipher
+ 
+-- [CipherBlowfish](http://en.wikipedia.org/wiki/Blowfish_(cipher))
+-- [CipherRijndael256](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
+-- [Cipher3DES](http://en.wikipedia.org/wiki/Triple_DES)
+-- CipherSimple - Only use this when system not support mcrypt. 
++- [Blowfish](http://en.wikipedia.org/wiki/Blowfish_(cipher))
++- [Rijndael256](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
++- [3DES](http://en.wikipedia.org/wiki/Triple_DES)
++- Simple - Only use this when system not support mcrypt. 
+ 
+ ### Installing Mcrypt
+ 
+-Install Mcrypt on OSX: http://goo.gl/s8O1SH
++Install Mcrypt on OSX: http://topicdesk.com/downloads/mcrypt/mcrypt-download
+Index: vendor/windwalker/framework/src/Crypt/CryptHelper.php
+===================================================================
+--- vendor/windwalker/framework/src/Crypt/CryptHelper.php	(revision )
++++ vendor/windwalker/framework/src/Crypt/CryptHelper.php	(revision )
+@@ -72,7 +72,7 @@
+ 	 *
+ 	 * @param   integer  $length  Length of the random data to generate
+ 	 *
+-	 * @note    This method is based on Joomla Crypt.
++	 * @note    This code is based on Joomla Crypt.
+ 	 * @return  string  Random binary data
+ 	 *
+ 	 * @since   {DEPLOY_VERSION}
+Index: vendor/windwalker/framework/src/Event/ListenerPriority.php
+===================================================================
+--- vendor/windwalker/framework/src/Event/ListenerPriority.php	(revision )
++++ vendor/windwalker/framework/src/Event/ListenerPriority.php	(revision )
+@@ -1,25 +0,0 @@
+-<?php
+-/**
+- * Part of Windwalker project. 
+- *
+- * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
+- * @license    GNU General Public License version 2 or later;
+- */
+-
+-namespace Windwalker\Event;
+-
+-/**
+- * The ListenerPriority class.
+- * 
+- * @since  {DEPLOY_VERSION}
+- */
+-class ListenerPriority
+-{
+-	const MIN = -3;
+-	const LOW = -2;
+-	const BELOW_NORMAL = -1;
+-	const NORMAL = 0;
+-	const ABOVE_NORMAL = 1;
+-	const HIGH = 2;
+-	const MAX = 3;
+-}
+Index: vendor/windwalker/framework/src/Event/Test/bin/event.php
+===================================================================
+--- vendor/windwalker/framework/src/Event/Test/bin/event.php	(revision )
++++ vendor/windwalker/framework/src/Event/Test/bin/event.php	(revision )
+@@ -1,40 +0,0 @@
+-<?php
+-/**
+- * Part of Windwalker project. 
+- *
+- * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
+- * @license    GNU General Public License version 2 or later;
+- */
+-
+-include_once __DIR__ . '/../../../../vendor/autoload.php';
+-
+-$event = new \Windwalker\Event\Event('Aaa');
+-
+-class AL
+-{
+-	public function Aaa($event)
+-	{
+-		echo 'Aaa' . "\n";
+-	}
+-
+-	public function Bbb($event)
+-	{
+-		echo 'Bbb' . "\n";
+-	}
+-}
+-
+-$d = new \Windwalker\Event\Dispatcher;
+-
+-$d->addListener(new AL);
+-$d->addListener(
+-	function($event)
+-	{
+-		echo 'Ccc' . "\n";
+-	},
+-	array('Ccc' => 5)
+-);
+-
+-$d->triggerEvent($event);
+-
+-$d->triggerEvent('Ccc');
+-
+Index: vendor/windwalker/framework/src/Event/Test/DispatcherTest.php
+===================================================================
+--- vendor/windwalker/framework/src/Event/Test/DispatcherTest.php	(revision )
++++ vendor/windwalker/framework/src/Event/Test/DispatcherTest.php	(revision )
+@@ -10,7 +10,7 @@
+ use Windwalker\Event\Event;
+ use Windwalker\Event\EventInterface;
+ use Windwalker\Event\EventImmutable;
+-use Windwalker\Event\ListenerPriority;
++use Windwalker\Event\ListenersQueue;
+ use Windwalker\Event\Test\Stub\EmptyListener;
+ use Windwalker\Event\Test\Stub\FirstListener;
+ use Windwalker\Event\Test\Stub\SecondListener;
+@@ -277,17 +277,17 @@
+ 		$this->assertTrue($this->instance->hasListener($listener3, 'onSomething'));
+ 		$this->assertTrue($this->instance->hasListener($listener3, 'onAfterSomething'));
+ 
+-		$this->assertEquals(ListenerPriority::NORMAL, $this->instance->getListenerPriority($listener1, 'onBeforeSomething'));
+-		$this->assertEquals(ListenerPriority::NORMAL, $this->instance->getListenerPriority($listener1, 'onSomething'));
+-		$this->assertEquals(ListenerPriority::NORMAL, $this->instance->getListenerPriority($listener1, 'onAfterSomething'));
++		$this->assertEquals(ListenersQueue::NORMAL, $this->instance->getListenerPriority($listener1, 'onBeforeSomething'));
++		$this->assertEquals(ListenersQueue::NORMAL, $this->instance->getListenerPriority($listener1, 'onSomething'));
++		$this->assertEquals(ListenersQueue::NORMAL, $this->instance->getListenerPriority($listener1, 'onAfterSomething'));
+ 
+-		$this->assertEquals(ListenerPriority::NORMAL, $this->instance->getListenerPriority($listener1, 'onBeforeSomething'));
+-		$this->assertEquals(ListenerPriority::NORMAL, $this->instance->getListenerPriority($listener1, 'onSomething'));
+-		$this->assertEquals(ListenerPriority::NORMAL, $this->instance->getListenerPriority($listener1, 'onAfterSomething'));
++		$this->assertEquals(ListenersQueue::NORMAL, $this->instance->getListenerPriority($listener1, 'onBeforeSomething'));
++		$this->assertEquals(ListenersQueue::NORMAL, $this->instance->getListenerPriority($listener1, 'onSomething'));
++		$this->assertEquals(ListenersQueue::NORMAL, $this->instance->getListenerPriority($listener1, 'onAfterSomething'));
+ 
+-		$this->assertEquals(ListenerPriority::NORMAL, $this->instance->getListenerPriority($listener3, 'onBeforeSomething'));
+-		$this->assertEquals(ListenerPriority::NORMAL, $this->instance->getListenerPriority($listener3, 'onSomething'));
+-		$this->assertEquals(ListenerPriority::NORMAL, $this->instance->getListenerPriority($listener3, 'onAfterSomething'));
++		$this->assertEquals(ListenersQueue::NORMAL, $this->instance->getListenerPriority($listener3, 'onBeforeSomething'));
++		$this->assertEquals(ListenersQueue::NORMAL, $this->instance->getListenerPriority($listener3, 'onSomething'));
++		$this->assertEquals(ListenersQueue::NORMAL, $this->instance->getListenerPriority($listener3, 'onAfterSomething'));
+ 	}
+ 
+ 	/**
+@@ -305,9 +305,9 @@
+ 		$this->instance->addListener(
+ 			$listener,
+ 			array(
+-				'onBeforeSomething' => ListenerPriority::MIN,
+-				'onSomething' => ListenerPriority::ABOVE_NORMAL,
+-				'onAfterSomething' => ListenerPriority::HIGH
++				'onBeforeSomething' => ListenersQueue::MIN,
++				'onSomething' => ListenersQueue::ABOVE_NORMAL,
++				'onAfterSomething' => ListenersQueue::HIGH
+ 			)
+ 		);
+ 
+@@ -315,9 +315,9 @@
+ 		$this->assertTrue($this->instance->hasListener($listener, 'onSomething'));
+ 		$this->assertTrue($this->instance->hasListener($listener, 'onAfterSomething'));
+ 
+-		$this->assertEquals(ListenerPriority::MIN, $this->instance->getListenerPriority($listener, 'onBeforeSomething'));
+-		$this->assertEquals(ListenerPriority::ABOVE_NORMAL, $this->instance->getListenerPriority($listener, 'onSomething'));
+-		$this->assertEquals(ListenerPriority::HIGH, $this->instance->getListenerPriority($listener, 'onAfterSomething'));
++		$this->assertEquals(ListenersQueue::MIN, $this->instance->getListenerPriority($listener, 'onBeforeSomething'));
++		$this->assertEquals(ListenersQueue::ABOVE_NORMAL, $this->instance->getListenerPriority($listener, 'onSomething'));
++		$this->assertEquals(ListenersQueue::HIGH, $this->instance->getListenerPriority($listener, 'onAfterSomething'));
+ 	}
+ 
+ 	/**
+@@ -335,8 +335,8 @@
+ 		$this->instance->addListener(
+ 			$listener,
+ 			array(
+-				'onBeforeSomething' => ListenerPriority::NORMAL,
+-				'onAfterSomething' => ListenerPriority::HIGH
++				'onBeforeSomething' => ListenersQueue::NORMAL,
++				'onAfterSomething' => ListenersQueue::HIGH
+ 			)
+ 		);
+ 
+@@ -362,8 +362,8 @@
+ 		$this->instance->addListener(
+ 			$listener,
+ 			array(
+-				'onSomething' => ListenerPriority::HIGH,
+-				'onAfterSomething' => ListenerPriority::NORMAL
++				'onSomething' => ListenersQueue::HIGH,
++				'onAfterSomething' => ListenersQueue::NORMAL
+ 			)
+ 		);
+ 
+@@ -371,8 +371,8 @@
+ 		$this->assertTrue($this->instance->hasListener($listener, 'onSomething'));
+ 		$this->assertTrue($this->instance->hasListener($listener, 'onAfterSomething'));
+ 
+-		$this->assertEquals(ListenerPriority::HIGH, $this->instance->getListenerPriority($listener, 'onSomething'));
+-		$this->assertEquals(ListenerPriority::NORMAL, $this->instance->getListenerPriority($listener, 'onAfterSomething'));
++		$this->assertEquals(ListenersQueue::HIGH, $this->instance->getListenerPriority($listener, 'onSomething'));
++		$this->assertEquals(ListenersQueue::NORMAL, $this->instance->getListenerPriority($listener, 'onAfterSomething'));
+ 	}
+ 
+ 	/**
+@@ -424,7 +424,7 @@
+ 		$this->instance->addListener($listener);
+ 
+ 		$this->assertEquals(
+-			ListenerPriority::NORMAL,
++			ListenersQueue::NORMAL,
+ 			$this->instance->getListenerPriority(
+ 				$listener,
+ 				new Event('onSomething')
+@@ -646,8 +646,8 @@
+ 		$this->instance->addListener($first)
+ 			->addListener($second)
+ 			->addListener($third)
+-			->addListener($fourth, array('onSomething' => ListenerPriority::NORMAL))
+-			->addListener($fifth, array('onSomething' => ListenerPriority::NORMAL));
++			->addListener($fourth, array('onSomething' => ListenersQueue::NORMAL))
++			->addListener($fifth, array('onSomething' => ListenersQueue::NORMAL));
+ 
+ 		// Inspect the event arguments to know the order of the listeners.
+ 		/** @var $event Event */
+@@ -687,11 +687,11 @@
+ 			$event->setArgument('listeners', $listeners);
+ 		};
+ 
+-		$this->instance->addListener($fourth, array('onSomething' => ListenerPriority::BELOW_NORMAL));
+-		$this->instance->addListener($fifth, array('onSomething' => ListenerPriority::BELOW_NORMAL));
+-		$this->instance->addListener($first, array('onSomething' => ListenerPriority::HIGH));
+-		$this->instance->addListener($second, array('onSomething' => ListenerPriority::HIGH));
+-		$this->instance->addListener($third, array('onSomething' => ListenerPriority::ABOVE_NORMAL));
++		$this->instance->addListener($fourth, array('onSomething' => ListenersQueue::BELOW_NORMAL));
++		$this->instance->addListener($fifth, array('onSomething' => ListenersQueue::BELOW_NORMAL));
++		$this->instance->addListener($first, array('onSomething' => ListenersQueue::HIGH));
++		$this->instance->addListener($second, array('onSomething' => ListenersQueue::HIGH));
++		$this->instance->addListener($third, array('onSomething' => ListenersQueue::ABOVE_NORMAL));
+ 
+ 		// Inspect the event arguments to know the order of the listeners.
+ 		/** @var $event Event */
+@@ -725,7 +725,7 @@
+ 
+ 		$this->instance->addListener($first)
+ 			->addListener($second)
+-			->addListener($stopper, array('onSomething' => ListenerPriority::NORMAL))
++			->addListener($stopper, array('onSomething' => ListenersQueue::NORMAL))
+ 			->addListener($third);
+ 
+ 		/** @var $event Event */
+Index: vendor/windwalker/framework/src/Event/Event.php
+===================================================================
+--- vendor/windwalker/framework/src/Event/Event.php	(revision )
++++ vendor/windwalker/framework/src/Event/Event.php	(revision )
+@@ -116,21 +116,6 @@
+ 	}
+ 
+ 	/**
+-	 * Method to set property arguments
+-	 *
+-	 * @param   array  $arguments  An associative array of argument names as keys
+-	 *                             and their values as values.
+-	 *
+-	 * @return  static  Return self to support chaining.
+-	 */
+-	public function setArguments(array $arguments)
+-	{
+-		$this->arguments = $arguments;
+-
+-		return $this;
+-	}
+-
+-	/**
+ 	 * Add an event argument, only if it is not existing.
+ 	 *
+ 	 * @param   string  $name   The argument name.
+Index: vendor/windwalker/framework/src/Event/README.md
+===================================================================
+--- vendor/windwalker/framework/src/Event/README.md	(revision )
++++ vendor/windwalker/framework/src/Event/README.md	(revision )
+@@ -1,245 +1,7 @@
+-# Windwalker Event Package
++# Part of Windwalker Package
+ 
+-Windwalker Event Package provides an interface to create event systems.
++This is the subtree split of [Windwalker Framework](https://github.com/ventoviro/windwalker).
+ 
+-## Installation via Composer
+-
+-Add this to the require block in your `composer.json`.
+-
+-``` json
+-{
+-    "require": {
+-        "windwalker/event": "~2.0"
+-    }
+-}
+-```
+-
+-## Getting Started
+-
+-Create an event object named `onBeforeContentSave`, and set some arguments.
+-
+-``` php
+-use Windwalker\Event\Event;
+-
+-$event = new Event('onBeforeContentSave');
+-
+-$content = new stdClass;
+-
+-$event->setArgument('title', 'My content');
+-$event->setArgument('content', $content);
+-```
+-
+-Create your listener:
+-
+-``` php
+-use Windwalker\Event\EventInterface;
+-
+-class ContentListener
+-{
+-    public function onBeforeContentSave(EventInterface $event)
+-    {
+-        $event->getArgument('content')->title = $event->getArgument('title'); 
+-    }
+-    
+-     public function onAfterContentSave(EventInterface $event)
+-    {
+-        // Do something
+-    }
+-}
+-```
+-
+-Add listener to Dispatcher:
+-
+-``` php
+-use Windwalker\Event\Dispatcher;
+-
+-$dispatcher = new Dispatcher;
+-
+-$dispatcher->addListener(new ContentListener);
+-```
+-
+-Then we trigger the event we created:
+-
+-``` php
+-// Trigger the onBeforeContentSave
+-$dispatcher->triggerEvent($event);
+-
+-// ContentListener::onBeforeContentSave will set title into $content object.
+-$content->title == 'My content';
+-```
+-
+-If a method name in listener equals to event name, Dispatcher will run this method and inject Event into this method.
+-Then we can do many things we want.
+-
+-## Listeners
+-
+-There can be two types of listeners, using class or closure.
+-
+-### Class Listeners
+-
+-Using class, just new an instance
+-
+-``` php
+-use Windwalker\Event\ListenerPriority;
+-
+-$dispatcher->addListener(new ContentListener);
+-```
+-
+-You may provides priority for every methods.
+-
+-``` php
+-// Add priorities
+-$dispatcher->addListener(
+-    new ContentListener,
+-    array(
+-        'onBeforeContentSave' => ListenerPriority::LOW,
+-        'onAfterContentSave' => ListenerPriority::HIGH
+-    )
+-);
+-
+-// Or using an inner method to get all methods
+-$dispatcher->addListener(new ContentListener, ContentListener::getPriorities());
+-```
+-
+-### Closure Listeners
+-
+-If using closure, you must provide the priority and an event name to listen.
+-
+-``` php
+-$dispatcher->addListener(
+-    function (EventInterface $event)
+-    {
+-        // Do something
+-    }, 
+-    array('onContentSave' => ListenerPriority::NORMAL)
+-);
+-```
+-
+-## Dispatcher
+-
+-### Trigger An Event Object
+-
+-This is the most normal way to trigger an event.
+-
+-``` php
+-$event = new Event('onFlowerBloom');
+-
+-$event->setArgument('flower', 'sakura');
+-
+-$dispatcher->triggerEvent($event);
+-```
+-
+-Add arguments when triggering event, the arguments will merge with previous arguments you set.
+-
+-``` php
+-$args = array(
+-    'foo' => 'bar'
+-);
+-
+-$dispatcher->triggerEvent($event, $args);
+-```
+-
+-### Add An Event Then Trigger It Later
+-
+-We can add an event into Dispatcher, then use event name to raise it laster.
+-
+-``` php
+-$event = new Event('onFlowerBloom');
+-
+-$event->setArgument('flower', 'sakura);
+-
+-$dispatcher->addEvent($event);
+-
+-// Nothing happen
+-
+-$dispatcher->triggerEvent('onFlowerBloom');
+-```
+-
+-### Trigger A New Event Instantly
+-
+-We don't need create event first, just trigger a string as event name, Dispatcher will create an event instantly.
+-
+-``` php
+-$args = array(
+-    'foo' => 'bar'
+-);
+-
+-$dispatcher->triggerEvent('onCloudMoving', $args);
+-```
+-
+-## Stopping Event
+-
+-If you stop an event, the next listeners in the queue won't be called.
+-
+-``` php
+-class ContentListener
+-{
+-    public function onBeforeContentSave(EventInterface $event)
+-    {
+-        // Stopping the Event propagation.
+-        $event->stop();
+-    }
+-}
+-```
+-
+-## Observable Pattern
+-
+-Most of time we use event system to inject some logic before & after our main logic:
+-
+-``` php
+-use Windwalker\Event\DispatcherAwareInterface;
+-
+-class Application implements DispatcherAwareInterface
+-{
+-    const BEFORE_INIT_EVENT = 'onBeforeSystemInit';
+-    const AFTER_INIT_EVENT  = 'onAfterSystemInit';
+-    const BEFORE_RUN_EVENT  = 'onBeforeSystemRun';
+-    const AFTER_RUN_EVENT   = 'onAfterSystemRun';
+-
+-    protected $dispatcher = null;
+-
+-    public function init()
+-    {
+-        $this->triggerEvent(static::BEFORE_INIT_EVENT);
+-        
+-        // ...
+-        
+-        $this->triggerEvent(static::AFTER_INIT_EVENT);
+-    }
+-
+-    public function execute()
+-    {
+-        $this->triggerEvent(static::BEFORE_RUN_EVENT);
+-                
+-        // ...
+-        
+-        $this->triggerEvent(static::AFTER_RUN_EVENT);
+-    }
+-
+-    public function triggerEvent($event)
+-    {
+-        $this->dispatcher->triggerEvent($event);
+-    }
+-
+-    public function setDispatcher($dispatcher)
+-    {
+-        $this->dispatcher = $dispatcher;
+-
+-        return $this;
+-    }
+-}
+-```
+-
+-In PHP 5.4 or higher, you can use `DispatcherAwareTrait`.
+-
+-``` php
+-use Windwalker\Event\DispatcherAwareInterface;
+-use Windwalker\Event\DispatcherAwareTrait;
+-
+-class Application implements DispatcherAwareInterface
+-{
+-    use DispatcherAwareTrait;
+-    
+-    // ...
+-}
+-```
++This package has completed and prepare to use, but the document has work in process.
++Please see [Test](Test) to learn how to use and go to [Packagist/windwalker](https://packagist.org/packages/windwalker/)
++to find all the packages.
+Index: vendor/windwalker/framework/src/Event/Dispatcher.php
+===================================================================
+--- vendor/windwalker/framework/src/Event/Dispatcher.php	(revision )
++++ vendor/windwalker/framework/src/Event/Dispatcher.php	(revision )
+@@ -8,6 +8,10 @@
+ 
+ namespace Windwalker\Event;
+ 
++use Windwalker\Event\Event;
++use Windwalker\Event\EventInterface;
++use Windwalker\Event\ListenersQueue;
++
+ /**
+  * The Dispatcher class.
+  *
+@@ -216,7 +220,7 @@
+ 
+ 			if (is_string($events))
+ 			{
+-				$events = array($events => ListenerPriority::NORMAL);
++				$events = array($events => ListenersQueue::NORMAL);
+ 			}
+ 
+ 			foreach ($events as $name => $priority)
+@@ -248,7 +252,7 @@
+ 				$this->listeners[$event] = new ListenersQueue;
+ 			}
+ 
+-			$priority = isset($events[$event]) ? $events[$event] : ListenerPriority::NORMAL;
++			$priority = isset($events[$event]) ? $events[$event] : ListenersQueue::NORMAL;
+ 
+ 			$this->listeners[$event]->add($listener, $priority);
+ 		}
+@@ -436,14 +440,13 @@
+ 	/**
+ 	 * Trigger an event.
+ 	 *
+-	 * @param   EventInterface|string $event The event object or name.
++	 * @param   EventInterface|string  $event  The event object or name.
+-	 * @param   array                 $args  The arguments to set in event.
+ 	 *
+ 	 * @return  EventInterface  The event after being passed through all listeners.
+ 	 *
+ 	 * @since   {DEPLOY_VERSION}
+ 	 */
+-	public function triggerEvent($event, $args = array())
++	public function triggerEvent($event)
+ 	{
+ 		if (!($event instanceof EventInterface))
+ 		{
+@@ -457,10 +460,6 @@
+ 			}
+ 		}
+ 
+-		$arguments = array_merge($event->getArguments(), $args);
+-
+-		$event->setArguments($arguments);
+-
+ 		if (isset($this->listeners[$event->getName()]))
+ 		{
+ 			foreach ($this->listeners[$event->getName()] as $listener)
+@@ -485,3 +484,4 @@
+ 		return $event;
+ 	}
+ }
++
+Index: vendor/windwalker/framework/src/Event/ListenersQueue.php
+===================================================================
+--- vendor/windwalker/framework/src/Event/ListenersQueue.php	(revision )
++++ vendor/windwalker/framework/src/Event/ListenersQueue.php	(revision )
+@@ -15,6 +15,14 @@
+  */
+ class ListenersQueue implements \IteratorAggregate, \Countable
+ {
++	const MIN = -3;
++	const LOW = -2;
++	const BELOW_NORMAL = -1;
++	const NORMAL = 0;
++	const ABOVE_NORMAL = 1;
++	const HIGH = 2;
++	const MAX = 3;
++
+ 	/**
+ 	 * The inner priority queue.
+ 	 *
+Index: vendor/windwalker/framework/src/Event/DispatcherAwareInterface.php
+===================================================================
+--- vendor/windwalker/framework/src/Event/DispatcherAwareInterface.php	(revision )
++++ vendor/windwalker/framework/src/Event/DispatcherAwareInterface.php	(revision )
+@@ -8,6 +8,8 @@
+ 
+ namespace Windwalker\Event;
+ 
++use Windwalker\Event\EventInterface;
++
+ /**
+  * Interface DispatcherAwareInterface
+  */
+Index: vendor/windwalker/framework/src/Query/Query/LimitableInterface.php
+===================================================================
+--- vendor/windwalker/framework/src/Query/Query/LimitableInterface.php	(revision )
++++ vendor/windwalker/framework/src/Query/Query/LimitableInterface.php	(revision )
+@@ -9,7 +9,7 @@
+ namespace Windwalker\Query\Query;
+ 
+ /**
+- * Windwalker Query LimitableInterface.
++ * Joomla Database Query LimitableInterface.
+  *
+  * Adds bind/unbind methods as well as a getBounded() method
+  * to retrieve the stored bounded variables on demand prior to
+Index: vendor/windwalker/framework/src/Query/Query/PreparableInterface.php
+===================================================================
+--- vendor/windwalker/framework/src/Query/Query/PreparableInterface.php	(revision )
++++ vendor/windwalker/framework/src/Query/Query/PreparableInterface.php	(revision )
+@@ -9,7 +9,7 @@
+ namespace Windwalker\Query\Query;
+ 
+ /**
+- * Windwalker Query Preparable Interface.
++ * Joomla Database Query Preparable Interface.
+  *
+  * Adds bind/unbind methods as well as a getBounded() method
+  * to retrieve the stored bounded variables on demand prior to
+Index: vendor/windwalker/framework/src/Filter/README.md
+===================================================================
+--- vendor/windwalker/framework/src/Filter/README.md	(revision )
++++ vendor/windwalker/framework/src/Filter/README.md	(revision )
+@@ -1,129 +1,7 @@
+-# Windwalker Filter Package
++# Part of Windwalker Package
+ 
+-Windwalker Filter package is a simple tool help us clean the input and output string. 
++This is the subtree split of [Windwalker Framework](https://github.com/ventoviro/windwalker).
+ 
+-## Installation via Composer
+-
+-Add this to the require block in your `composer.json`.
+-
+-``` json
+-{
+-    "require": {
+-        "windwalker/filter": "~2.0"
+-    }
+-}
+-```
+-
+-## Input Filter
+-
+-Create a filter object and use `clean()` to filter input string.
+-
+-``` php
+-use Windwalker\Filter\InputFilter;
+-
+-$filter = new InputFilter;
+-
+-$username = $_REQUEST['username'];
+-
+-$username = $filter->clean($username, InputFilter::STRING);
+-```
+-
+-Available filter rules:
+-
+-| Name                  | Description |
+-| --------------------- | ------------|
+-| InputFilter::INTEGER  | Only first part of int in a string |
+-| InputFilter::UINT     | Unsigned integer |
+-| InputFilter::FLOAT    | Float number |
+-| InputFilter::BOOLEAN  | Return true or false |
+-| InputFilter::WORD     | Contains spaces and special characters |
+-| InputFilter::ALNUM    | All numbers and letters (alphanumerics) |
+-| InputFilter::CMD      | Only letters and `-`, `_` |
+-| InputFilter::BASE64   | Base64 string |
+-| InputFilter::STRING   | Letters and spaces |
+-| InputFilter::HTML     | HTML format, but will clean tags in black list |
+-| InputFilter::ARRAY    | An array |
+-| InputFilter::PATH     | System path contains letters and `/`, `\` |
+-| InputFilter::USERNAME | Letters allow to use as username |
+-| InputFilter::EMAIL    | Letters allow to use as email |
+-| InputFilter::URL      | Letters allow to use in URL |
+-| InputFilter::RAW      | No filter |
+-
+-### Custom Rules
+-
+-Using closure as filter rule.
+-
+-``` php
+-$closure = function($value)
+-{
+-    return str_replace('Tony Stark', 'Iron Man', $value);
+-};
+-
+-$filter->setHandler('armor', $closure);
+-
+-$string = $filter->clean("Hi I'm Tony Stark~~~", 'armor');
+-
+-// $string will be "Hi I'm Iron Man"
+-```
+-
+-Using Cleaner object
+-
+-``` php
+-use Windwalker\Filter\Cleaner\CleanerInterface;
+-
+-class ArmorCleaner implements CleanerInterface
+-{
+-    public function clean($source)
+-    {
+-        return str_replace('Tony Stark', 'Iron Man', $value);
+-    }
+-}
+-
+-$filter->setHandler('armor', new ArmorCleaner);
+-
+-$string = $filter->clean("Hi I'm Tony Stark~~~", 'armor');
+-
+-// $string will be "Hi I'm Iron Man"
+-```
+-
+-## Output Filter
+-
+-OutputFilter provides some methods help us strip or escape unsafe code to prevent XSS attack.
+-
+-``` php
+-use Windwalker\Filter\OutputFilter;
+-
+-// Makes an object safe to display in forms
+-$object = (object) array('flower' => '<sakura>');
+-
+-OutputFilter::objectHTMLSafe($object); // &lt;sakura&gt;
+-
+-// This method processes a string and replaces all instances of & with &amp; in links only.
+-OutputFilter::linkXHTMLSafe($input);
+-
+-// This method processes a string and replaces all accented UTF-8 characters by unaccented
+-// ASCII-7 "equivalents", whitespaces are replaced by hyphens and the string is lowercase.
+-OutputFilter::stringURLSafe($url);
+-
+-// This method implements unicode slugs instead of transliteration.
+-OutputFilter::stringURLUnicodeSlug($url);
+-
+-// Replaces &amp; with & for XHTML compliance
+-OutputFilter::ampReplace($text);
+-
+-// Cleans text of all formatting and scripting code
+-OutputFilter::cleanText($text);
+-
+-// Strip img-tags from string
+-OutputFilter::stripImages($html);
+-
+-// Strip iframe-tags from string
+-OutputFilter::stripIframes($html);
+-
+-// Strip script-tags from string
+-OutputFilter::stripScript($html);
+-
+-// Strip style-tags from string
+-OutputFilter::stripStyle($html);
+-```
+-
++This package has completed and prepare to use, but the document has work in process.
++Please see [Test](Test) to learn how to use and go to [Packagist/windwalker](https://packagist.org/packages/windwalker/)
++to find all the packages.
+Index: vendor/windwalker/framework/src/Filter/OutputFilter.php
+===================================================================
+--- vendor/windwalker/framework/src/Filter/OutputFilter.php	(revision )
++++ vendor/windwalker/framework/src/Filter/OutputFilter.php	(revision )
+@@ -11,7 +11,7 @@
+ use Windwalker\Filter\Unicode\UnicodeHelper;
+ 
+ /**
+- * Windwalker Output Filter
++ * JFilterOutput
+  *
+  * @since  {DEPLOY_VERSION}
+  */
+Index: vendor/windwalker/framework/src/Record/NestedRecord.php
+===================================================================
+--- vendor/windwalker/framework/src/Record/NestedRecord.php	(revision )
++++ vendor/windwalker/framework/src/Record/NestedRecord.php	(revision )
+@@ -178,6 +178,7 @@
+ 	 *
+ 	 * @return  static
+ 	 *
++	 * @note    Since 12.1 this method returns void and throws an InvalidArgumentException when an invalid position is passed.
+ 	 * @since   11.1
+ 	 * @throws  \InvalidArgumentException
+ 	 */
+@@ -210,6 +211,7 @@
+ 	 *
+ 	 * @return  boolean  True on success.
+ 	 *
++	 * @link    http://docs.joomla.org/JTableNested/store
+ 	 * @since   11.1
+ 	 */
+ 	public function store($updateNulls = false)
+@@ -271,7 +273,7 @@
+ 				->update($this->table)
+ 				->set('lft = lft + 2')
+ 				->where($repositionData->left_where);
+-
++			
+ 			$this->db->setQuery($query)->execute();
+ 
+ 			// Create space in the tree at the new location for the new node in right ids.
+@@ -320,6 +322,7 @@
+ 	 *
+ 	 * @return  mixed    Boolean true on success.
+ 	 *
++	 * @link    http://docs.joomla.org/JTable/move
+ 	 * @since   11.1
+ 	 */
+ 	public function move($delta, $where = '')
+@@ -372,6 +375,7 @@
+ 	 *
+ 	 * @return  boolean  True on success.
+ 	 *
++	 * @link    http://docs.joomla.org/JTableNested/moveByReference
+ 	 * @since   11.1
+ 	 * @throws  \RuntimeException on database error.
+ 	 */
+@@ -672,6 +676,7 @@
+ 	 *
+ 	 * @return  integer  1 + value of root rgt on success, false on failure
+ 	 *
++	 * @link    http://docs.joomla.org/JTableNested/rebuild
+ 	 * @since   11.1
+ 	 * @throws  \RuntimeException on database error.
+ 	 */
+@@ -752,6 +757,7 @@
+ 	 *
+ 	 * @return  boolean  True on success.
+ 	 *
++	 * @link    http://docs.joomla.org/JTableNested/rebuildPath
+ 	 * @since   11.1
+ 	 */
+ 	public function rebuildPath($pk = null)
+Index: vendor/windwalker/framework/src/Router/Test/Matcher/TrieMatcherTest.php
+===================================================================
+--- vendor/windwalker/framework/src/Router/Test/Matcher/TrieMatcherTest.php	(revision )
++++ vendor/windwalker/framework/src/Router/Test/Matcher/TrieMatcherTest.php	(revision )
+@@ -62,7 +62,7 @@
+ 			// Port 80 with default route
+ 			array(
+ 				'http://windwalker.com/flower/5',
+-				'flower/:id',
++				'flower/(id)',
+ 				'GET',
+ 				true,
+ 				__LINE__
+@@ -70,7 +70,7 @@
+ 			// Port 443(default) with SSL
+ 			array(
+ 				'https://windwalker.com/flower/5',
+-				'flower/:id',
++				'flower/(id)',
+ 				'GET',
+ 				false,
+ 				__LINE__
+@@ -78,7 +78,7 @@
+ 			// Port 137 with SSL
+ 			array(
+ 				'https://windwalker.com:137/flower/5',
+-				'flower/:id',
++				'flower/(id)',
+ 				'GET',
+ 				false,
+ 				__LINE__
+@@ -86,7 +86,7 @@
+ 			// POST method
+ 			array(
+ 				'http://windwalker.com/flower/5',
+-				'flower/:id',
++				'flower/(id)',
+ 				'POST',
+ 				false,
+ 				__LINE__
+@@ -94,7 +94,7 @@
+ 			// PUT method
+ 			array(
+ 				'http://windwalker.com/flower/5',
+-				'flower/:id',
++				'flower/(id)',
+ 				'PUT',
+ 				true,
+ 				__LINE__
+@@ -102,42 +102,69 @@
+ 			// Different host
+ 			array(
+ 				'http://johnnywalker.com/flower/5',
+-				'flower/:id',
++				'flower/(id)',
+ 				'GET',
+ 				false,
+ 				__LINE__
+ 			),
+ 			// @ Match different routes
+ 
+-			// Root
+ 			array(
+-				'http://windwalker.com/',
+-				'/',
++				'http://windwalker.com/flower/5',
++				'flower/(id)/item/(alias)',
+ 				'GET',
+ 				true,
+ 				__LINE__
+ 			),
+ 
+-			// Basic rules
++			// Optional id
+ 			array(
+ 				'http://windwalker.com/flower/5',
+-				'flower/:id/item/:alias',
++				'flower(/id)',
+ 				'GET',
+-				false,
++				true,
+ 				__LINE__
+ 			),
+-
++			array(
++				'http://windwalker.com/flower',
++				'flower(/id)',
++				'GET',
++				true,
++				__LINE__
++			),
++			// Optional Multiple
++			array(
++				'http://windwalker.com/flower/5/sakura',
++				'flower(/id,alias)',
++				'GET',
++				true,
++				__LINE__
++			),
++			array(
++				'http://windwalker.com/flower/5',
++				'flower(/id,alias)',
++				'GET',
++				true,
++				__LINE__
++			),
++			array(
++				'http://windwalker.com/flower',
++				'flower(/id,alias)',
++				'GET',
++				true,
++				__LINE__
++			),
+ 			// Wildcards
+ 			array(
+ 				'http://windwalker.com/flower/foo/bar/baz',
+-				'flower/*tags',
++				'flower/(*tags)',
+ 				'GET',
+ 				true,
+ 				__LINE__
+ 			),
+ 			array(
+ 				'http://windwalker.com/flower',
+-				'flower/*tags',
++				'flower/(*tags)',
+ 				'GET',
+ 				false,
+ 				__LINE__
+@@ -176,68 +203,5 @@
+ 		$this->assertEquals('corge/quux/:qux', $matched->getName());
+ 
+ 		$this->instance->getCount();
+-	}
+-
+-	/**
+-	 * Method to test match().
+-	 *
+-	 * @param string  $url
+-	 * @param string  $pattern
+-	 * @param string  $method
+-	 * @param boolean $expected
+-	 * @param integer $line
+-	 *
+-	 * @return void
+-	 *
+-	 * @covers       Windwalker\Router\Route::match
+-	 *
+-	 * @dataProvider matchCases
+-	 */
+-	public function testMatchRules($url, $pattern, $method, $expected, $line)
+-	{
+-		$uri = new Uri($url);
+-
+-		$host = $uri->getHost();
+-		$scheme = $uri->getScheme();
+-		$port = $uri->getPort() ? : 80;
+-
+-		$config = array(
+-			'name' => 'flower',
+-			'pattern' => $pattern,
+-			'variables' => array(
+-				'_controller' => 'FlowerController',
+-				'id' => 1
+-			),
+-			'method' => array('GET', 'PUT'),
+-			'host' => 'windwalker.com',
+-			'scheme' => 'http',
+-			'port' => 80,
+-			'sslPort' => 443,
+-			'requirements' => array(
+-				'id' => '\d+'
+-			)
+-		);
+-
+-		$route = new \Windwalker\Router\Route(
+-			$config['name'],
+-			$config['pattern'],
+-			$config['variables'],
+-			$config['method'],
+-			$config
+-		);
+-
+-		$result = $this->instance
+-			->setRoutes(array($route))
+-			->match(
+-				$uri->getPath(),
+-				$method,
+-				array(
+-					'host' => $host,
+-					'scheme' => $scheme,
+-					'port' => $port
+-				)
+-			);
+-
+-		$this->assertEquals($expected, !empty($result), 'Match fail, case on line: ' . $line);
+ 	}
+ }
+Index: vendor/windwalker/framework/src/Router/Test/Matcher/SequentialMatcherTest.php
+===================================================================
+--- vendor/windwalker/framework/src/Router/Test/Matcher/SequentialMatcherTest.php	(revision )
++++ vendor/windwalker/framework/src/Router/Test/Matcher/SequentialMatcherTest.php	(revision )
+@@ -106,15 +106,6 @@
+ 			),
+ 			// @ Match different routes
+ 
+-			// Root
+-			array(
+-				'http://windwalker.com/',
+-				'/',
+-				'GET',
+-				true,
+-				__LINE__
+-			),
+-
+ 			// Optional id
+ 			array(
+ 				'http://windwalker.com/flower/5',
+Index: vendor/windwalker/framework/src/Router/Matcher/TrieMatcher.php
+===================================================================
+--- vendor/windwalker/framework/src/Router/Matcher/TrieMatcher.php	(revision )
++++ vendor/windwalker/framework/src/Router/Matcher/TrieMatcher.php	(revision )
+@@ -92,15 +92,8 @@
+ 	 */
+ 	protected function matchSegment($segments, $node, $level = 1)
+ 	{
+-		$segment = isset($segments[$level - 1]) ? $segments[$level - 1] : false;
++		$segment = $segments[$level - 1];
+ 
+-		if ($segment === false)
+-		{
+-			return false;
+-		}
+-
+-		$segment = $segment ? : '/';
+-
+ 		foreach ($node as $regex => $child)
+ 		{
+ 			$this->count++;
+@@ -197,8 +190,6 @@
+ 			{
+ 				// Fallback the placeholder to /
+ 				$segment = str_replace('{:PLACEHOLDER:}', '[^/]', $segment);
+-
+-				$segment = $segment ? : '/';
+ 
+ 				if (!isset($node[$segment]))
+ 				{
+Index: vendor/windwalker/framework/src/Router/Matcher/AbstractMatcher.php
+===================================================================
+--- vendor/windwalker/framework/src/Router/Matcher/AbstractMatcher.php	(revision )
++++ vendor/windwalker/framework/src/Router/Matcher/AbstractMatcher.php	(revision )
+@@ -91,12 +91,7 @@
+ 			$routeItem->setRegex($regex);
+ 		}
+ 
+-		$route = trim($route, '/');
+-
+-		// Check is root
+-		$route = $route ? : '/';
+-
+-		if (preg_match($regex, $route, $matches))
++		if (preg_match($regex, trim($route, '/'), $matches))
+ 		{
+ 			$variables = RouteHelper::getVariables($matches);
+ 
+Index: vendor/windwalker/framework/src/Router/Compiler/TrieCompiler.php
+===================================================================
+--- vendor/windwalker/framework/src/Router/Compiler/TrieCompiler.php	(revision )
++++ vendor/windwalker/framework/src/Router/Compiler/TrieCompiler.php	(revision )
+@@ -46,7 +46,7 @@
+ 			if ($segment == '')
+ 			{
+ 				// Match root route.
+-				$regex[] = '';
++				$regex[] = '\\/';
+ 			}
+ 			elseif ($segment == '*')
+ 			{
+Index: vendor/windwalker/framework/src/Compare/README.md
+===================================================================
+--- vendor/windwalker/framework/src/Compare/README.md	(revision )
++++ vendor/windwalker/framework/src/Compare/README.md	(revision )
+@@ -1,23 +1,23 @@
+ # Windwalker Compare Package
+ 
+-## What is Compare
+-
+-Sometimes we will need a dynamic compare interface, but it hard to convert `=` or `<=` string to be php operator.
+-
+-Compare object can help us create an object with compare logic between two values, and convert it to string, then we can use this string to build SQL or other use.
+-
+ ## Installation via Composer
+ 
+-Add this to the require block in your `composer.json`.
++Add `"ventoviro/windwalker-compare": "1.0.*"` to the require block in your composer.json.
+ 
+ ``` json
+ {
+     "require": {
+-        "windwalker/compare": "~2.0"
++        "ventoviro/windwalker-compare": "1.0.*"
+     }
+ }
+ ```
+ 
++## What is Compare
++
++Sometimes we will need a dynamic compare interface, but it hard to convert `=` or `<=` string to be php operator.
++
++Compare object can help us create an object with compare logic between two values, and convert it to string, then we can use this string to build SQL or other use.
++
+ ## Basic Usage
+ 
+ ``` php
+@@ -36,7 +36,7 @@
+ $sql = 'WHERE ' . implode(' AND ' , $conditions);
+ ```
+ 
+-We will get this string: `WHERE published >= 1 AND entry_id = 25 AND data <= '2014-03-02'`.
++We will get `WHERE published >= 1 AND entry_id = 25 AND data <= '2014-03-02'`.
+ 
+ ## Do Compare
+ 
+@@ -50,13 +50,13 @@
+ 
+ ## Available Compare Object
+ 
+-| Name       | Description         | Operator |
++| Name       | Description      | Operator |
+-| ---------- | ------------------- | -------- |
++| ---------- | ---------------- | -------- |
+-| EqCompare  | Equal                    | `=`  |
++| EqCompare  | Equal                | `=`  |
+-| NeqCompare | Not Equal                | `!=` |
++| NeqCompare | Not Equal            | `!=` |
+-| GtCompare  | Greater than             | `>`  |
++| GtCompare  | Greater than         | `>`  |
+-| GteCompare | Greater than or Equal    | `>=` |
++| GteCompare | Greate than or Equal | `>=` |
+-| LtCompare  | Less than                | `<`  |
++| LtCompare  | Less than            | `<`  |
+-| LteCompare | Less than or Equal       | `<=` |
++| LteCompare | Less than or Equal   | `<=` |
+-| InCompare  | In an array or list      | `IN` |
+-| NinCompare | Not In an array or list  | `IN` |
++
++
+Index: vendor/windwalker/framework/src/Console/IO/IOFactory.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/IO/IOFactory.php	(revision )
++++ vendor/windwalker/framework/src/Console/IO/IOFactory.php	(revision )
+@@ -1,39 +0,0 @@
+-<?php
+-/**
+- * Part of Windwalker project. 
+- *
+- * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
+- * @license    GNU General Public License version 2 or later;
+- */
+-
+-namespace Windwalker\Console\IO;
+-
+-/**
+- * The IOFactory class.
+- * 
+- * @since  {DEPLOY_VERSION}
+- */
+-class IOFactory
+-{
+-	/**
+-	 * Property io.
+-	 *
+-	 * @var IO
+-	 */
+-	public static $io;
+-
+-	/**
+-	 * getIO
+-	 *
+-	 * @return  IO
+-	 */
+-	public static function getIO()
+-	{
+-		if (!static::$io)
+-		{
+-			static::$io = new IO;
+-		}
+-
+-		return static::$io;
+-	}
+-}
+Index: vendor/windwalker/framework/src/Console/IO/IO.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/IO/IO.php	(revision )
++++ vendor/windwalker/framework/src/Console/IO/IO.php	(revision )
+@@ -119,7 +119,14 @@
+ 	{
+ 		if ($this->output instanceof ColorfulOutputInterface)
+ 		{
+-			$this->output->getProcessor()->setNoColors(!$bool);
++			if ($bool)
++			{
++				$this->output->setProcessor(new ColorProcessor);
++			}
++			else
++			{
++				$this->output->setProcessor(new NoColorProcessor);
++			}
+ 		}
+ 
+ 		return $this;
+Index: vendor/windwalker/framework/src/Console/Test/bin/console.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/Test/bin/console.php	(revision )
++++ vendor/windwalker/framework/src/Console/Test/bin/console.php	(revision )
+@@ -1,47 +0,0 @@
+-<?php
+-/**
+- * Part of Windwalker project. 
+- *
+- * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
+- * @license    GNU General Public License version 2 or later;
+- */
+-
+-$autoload = __DIR__ . '/../../../../vendor/autoload.php';
+-
+-if (!is_file($autoload))
+-{
+-	$autoload = __DIR__ . '/../../vendor/autoload.php';
+-}
+-
+-include_once $autoload;
+-
+-$console = new \Windwalker\Console\Console;
+-
+-$console->setName('Example Console')
+-	->setVersion('1.2.3')
+-	->setUsage('console.php <commands> <arguments> [-h|--help] [-q|--quiet]')
+-	->setDescription('Hello World')
+-	->setHelp(
+-<<<HELP
+-Hello, this is an example console, if you want to do something, see above:
+-
+-$ foo bar -h => foo bar --help
+-
+----------
+-
+-$ foo bar yoo -q => foo bar yoo --quiet
+-HELP
+-	);
+-
+-$console->setHandler(
+-	function($command)
+-	{
+-		$prompter = new \Windwalker\Console\Prompter\BooleanPrompter;
+-
+-		$result = $prompter->ask('Do you wan to do this [Y/n]: ');
+-
+-		var_dump($result);
+-	}
+-);
+-
+-$console->execute();
+Index: vendor/windwalker/framework/src/Console/Test/Stubs/Foo/Aaa/BbbCommand.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/Test/Stubs/Foo/Aaa/BbbCommand.php	(revision )
++++ vendor/windwalker/framework/src/Console/Test/Stubs/Foo/Aaa/BbbCommand.php	(revision )
+@@ -18,13 +18,13 @@
+ class BbbCommand extends Command
+ {
+ 	/**
+-	 * Initialise command.
++	 * Configure command.
+ 	 *
+ 	 * @return void
+ 	 *
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+-	public function initialise()
++	public function configure()
+ 	{
+ 		$this->setName('bbb');
+ 	}
+Index: vendor/windwalker/framework/src/Console/Test/Stubs/Foo/AaaCommand.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/Test/Stubs/Foo/AaaCommand.php	(revision )
++++ vendor/windwalker/framework/src/Console/Test/Stubs/Foo/AaaCommand.php	(revision )
+@@ -25,13 +25,13 @@
+ 	protected $name = 'aaa';
+ 
+ 	/**
+-	 * Initialise command.
++	 * Configure command.
+ 	 *
+ 	 * @return void
+ 	 *
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+-	public function initialise()
++	public function configure()
+ 	{
+ 		$this->addCommand(new Aaa\BbbCommand)
+ 			->addOption(
+Index: vendor/windwalker/framework/src/Console/Test/Stubs/FooCommand.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/Test/Stubs/FooCommand.php	(revision )
++++ vendor/windwalker/framework/src/Console/Test/Stubs/FooCommand.php	(revision )
+@@ -26,13 +26,13 @@
+ 	protected $name = 'foo';
+ 
+ 	/**
+-	 * Initialise command.
++	 * Configure command.
+ 	 *
+ 	 * @return void
+ 	 *
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+-	protected function initialise()
++	protected function configure()
+ 	{
+ 		$this->setDescription('Foo command desc')
+ 			->setUsage('foo <command> [option]')
+Index: vendor/windwalker/framework/src/Console/Test/ConsoleTest.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/Test/ConsoleTest.php	(revision )
++++ vendor/windwalker/framework/src/Console/Test/ConsoleTest.php	(revision )
+@@ -37,14 +37,11 @@
+ 	 */
+ 	public function testGetAndSetLogger()
+ 	{
+-		/* Re adding this test when we support PSR Logger
+-
+-		$this->assertInstanceOf('Psr\\Log\\NullLogger', $this->instance->getLogger());
+-
+-		$this->instance->setLogger(new MockLogger);
+-
+-		$this->assertInstanceOf('Windwalker\\Console\\Test\\Mock\\MockLogger', $this->instance->getLogger());
+-		*/
++//		$this->assertInstanceOf('Psr\\Log\\NullLogger', $this->instance->getLogger());
++//
++//		$this->instance->setLogger(new MockLogger);
++//
++//		$this->assertInstanceOf('Windwalker\\Console\\Test\\Mock\\MockLogger', $this->instance->getLogger());
+ 	}
+ 
+ 	/**
+@@ -294,4 +291,6 @@
+ 
+ 		$this->assertEquals(221, $this->instance->getRootCommand()->setIO(new MockIO)->execute());
+ 	}
++
++
+ }
+Index: vendor/windwalker/framework/src/Console/Test/TextDescriptorHelperTest.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/Test/TextDescriptorHelperTest.php	(revision )
++++ vendor/windwalker/framework/src/Console/Test/TextDescriptorHelperTest.php	(revision )
+@@ -68,10 +68,10 @@
+ 
+ Options:
+ 
+-  <info>-q | --quiet     </info>q desc
+-  <info>-s | --sakura    </info>sakura desc
+-  <info>-r               </info>rose desc
++  <info>-q / --quiet</info>
++      q desc
+ 
++
+ Available commands:
+ 
+   <info>aaa    </info>No description
+@@ -80,7 +80,6 @@
+ 
+   <info>yoo    </info>No description
+ 
+-
+ foo help';
+ 
+ 		$console = new Console(new MockIO);
+@@ -100,9 +99,7 @@
+ 				'Bar command desc'
+ 			)
+ 			->addCommand('yoo')
+-			->addOption(array('q', 'quiet'), 'default', 'q desc')
+-			->addOption(array('s', 'sakura'), 'default', 'sakura desc')
+-			->addOption(array('r'), 'default', 'rose desc');
++			->addOption(array('q', 'quiet'), 'default', 'q desc');
+ 
+ 		$result = $this->instance->describe($command);
+ 
+Index: vendor/windwalker/framework/src/Console/Command/README.md
+===================================================================
+--- vendor/windwalker/framework/src/Console/Command/README.md	(revision )
++++ vendor/windwalker/framework/src/Console/Command/README.md	(revision )
+@@ -1,30 +1,36 @@
+-# Windwalker Console Package Command Interface
++# Joomla Console Package Command Interface
+ 
+-## The Commands Structure
++A Joomla Framework Command package that support nested commend calling.
+ 
+-```
+-                    RootCommand
+-                         |
+-              ----------------------
+-              |                    |
+-          CommandA              CommandB
+-              |                    |
+-        ------------          ------------
+-        |          |          |          |
+-    CommandC   CommandD    CommandE   CommandF
+-```
++## The Command Calling Flow
+ 
+-If we type:
+-
+ ``` bash
+-$ php cli/console.php commandA commandC foo bar -a -bc -d=e --flower=sakura
++$ php cli/app.php command1 command2 command3 -a -b -cd --help
+ ```
+ 
+-Then we will been direct to `CommandC` class, and the following `foo bar` will be arguments.
++``` text
++command1
++    ->configure
++    ->execute
+-
++    
++    commend2
++        ->configure
++        ->execute
++        
++        commend3
++            ->configure
++            ->execute
++        
++        return
++    
++    return
++
++return
++```
++
+ ## Usage
+ 
+-We can using `Command` without `Console` object, just create this object.
++We can using `Command` without `CliApplicaion`, just create this object.
+ 
+ ### Simple One Command
+ 
+@@ -32,62 +38,66 @@
+ <?php
+ // cli/app.php
+ 
+-use Windwalker\Console\Command\Command;
+-use Windwalker\Console\Command\Option;
+-use Windwalker\Console\IO\IO;
++use Joomla\Command\Command;
++use Joomla\Command\Option;
++use Joomla\Input\Cli as Input;
+ 
+-$command = new Command('app', new IO);
++try
++{
++    $command = new Command('app', new Input);
+ 
+-$command->setDescription('This is first level command description')
+-    ->addOption(
+-        'q', // option name
+-        0,   // default value
+-        'Add this option can make output lower case.', // option description
+-        Option::IS_GLOBAL // sub command will extends this global option
+-    )
+-    ->addOption(
+-        ['y', 'yell', 'Y'], // First element will be option name, others will be alias
+-        0,
+-        'Yell will make output upper case.',
+-        Option::IS_PRIVATE // sub command will not extends normal option
+-    )
+-    ->setHandler(
++    $command->setDescription('This is first level command description')
++        ->addOption(
++            'q', // option name
++            0,   // default value
++            'Add this option can make output lower case.', // option description
++            Option::IS_GLOBAL // sub command will extends this global option
++        )
++        ->addOption(
++            ['y', 'yell', 'Y'], // First element will be option name, others will be alias
++            0,
++            'Yell will make output upper case.',
++            Option::IS_PRIVATE // sub command will not extends normal option
++        )
++        ->setHandler(
+-        function($command)
++            function($command, $input, $output)
+-        {
++            {
+-            $name = $command->getArgument(0);
+-        
+-            if (!$name)
++                if (empty($input->args[0]))
+-            {
++                {
+-                $name = $command->in('Please enter a name: ');
++                    $output->out('Please enter a name: ');
++                    $name = fread(STDIN, 8792);
+-            }
++                }
++                else
++                {
++                    $name = $input->args[0];
++                }
+ 
+-            $reply = 'Hello ' . $name;
++                $reply = 'Hello ' . $name;
+ 
+-            if ($command->getOption('y'))
+-            {
+-                $reply = strtoupper($reply);
+-            }
++                if ($command->getOption('y'))
++                {
++                    $reply = strtoupper($reply);
++                }
+ 
+-            if ($command->getOption('q'))
+-            {
+-                $reply = strtolower($reply);
+-            }
++                if ($command->getOption('q'))
++                {
++                    $reply = strtolower($reply);
++                }
+ 
+-            $command->out($reply);
++                $output->out($reply);
+-        }
+-    );
++            }
++        );
+ 
+-try
+-{
+     $command->execute();
+ }
+ catch(Exception $e)
+ {
+     $command->renderException($e);
+ }
++
+ ```
+ 
+-The `execute()` method will execute your command handler. We set a `Closure` into `Command` and execute it.
++The `execute()` method will execute your command code. We set a `Closure` into `Command` and execute it.
+ 
+ When we type:
+ 
+@@ -119,7 +129,7 @@
+ Type:
+ 
+ ``` bash
+-$ php cli/app.php Asika --yell
++$ php cli/app.php Asika -yell
+ ```
+ 
+ Output
+@@ -134,42 +144,46 @@
+ <?php
+ // cli/app.php
+ 
++use Joomla\Command\Command;
++use Joomla\Command\Option;
++use Joomla\Input\Cli as Input;
++
++try
++{
+-$command = new Command('app', new Input);
++    $command = new Command('app', new Input);
+ 
+-// Default Command
+-$command->setDescription('This is first level command description')
+-    ->addOption(
+-        'q',
+-        0,
+-        'Add this option can make output lower case.',
+-        Option::IS_GLOBAL
+-    )
+-    // First level code
+-    ->setHandler(
+-        function($command, $input, $output)
+-        {
+-            $output->out('First level command.');
+-        }
+-    )
+-    // Second level commend
+-    ->addCommand(
+-        'second',
+-        'The second level argument',
+-        array(
+-            new Option(
+-                array('a', 'A', 'ask'),
+-                'a default',
+-                'a desc'
+-            )
+-        ),
+-        function($command, $input, $output)
+-        {
+-            echo 'Second level commend.';
+-        }
+-    );
+-    
++    // Default Command
++    $command->setDescription('This is first level command description')
++        ->addOption(
++            'q',
++            0,
++            'Add this option can make output lower case.',
++            Option::IS_GLOBAL
++        )
++        // First level code
++        ->setHandler(
++            function($command, $input, $output)
++            {
++                $output->out('First level command.');
++            }
++        )
++        // Second level commend
++        ->addCommand(
++            'second',
++            'The second level argument',
++            array(
++                new Option(
++                    array('a', 'A', 'ask'),
++                    'a default',
++                    'a desc'
++                )
++            ),
++            function($command, $input, $output)
++            {
++                echo 'Second level commend.';
++            }
++        );
++
+-try
+-{
+     $command->execute();
+ }
+ catch(Exception $e)
+@@ -205,7 +219,7 @@
+ Second level commend.
+ ```
+ 
+-### Declaring Command Classes
++### Extends Classes
+ 
+ If you want to execute Command by your class, you can extends it from `Command`:
+ 
+@@ -215,11 +229,11 @@
+ 
+ namespace Myapp;
+ 
+-use Windwalker\Console\Command\Command;
++use Joomla\Command\Command;
+ 
+ class FooCommand extends Command
+ {
+-	public function initialise()
++	public function configure()
+ 	{
+ 		$this->setName('foo')
+ 		    ->setDescription('foo desc')
+@@ -247,11 +261,11 @@
+ 
+ namespace Myapp\Foo;
+ 
+-use Windwalker\Console\Command\Command;
++use Joomla\Command\Command;
+ 
+ class BarCommand extends Command
+ {
+-	public function initialise()
++	public function configure()
+ 	{
+ 		$this->setName('bar')
+             ->setDescription('bar desc')
+@@ -295,7 +309,7 @@
+ 
+ You can use the `RootCommand` instead base `Command`, it provides some useful functions like `--help`, `--verbose`, `--quiet`.
+ 
+-If we catch an exception, the `--verbose|-v` option help us print backtrace information.
++If we catched an exception, the `--verbose|-v` option can help us print backtrace information.
+ 
+ ``` php
+ <?php
+@@ -325,4 +339,5 @@
+ 
+ ## About Console Package
+ 
+-This is part of Windwalker Console package documentation, please see [Console Package](..).
++This is part of Joomla Console package documentation, please see [Console Package](..).
++
+Index: vendor/windwalker/framework/src/Console/Command/Command.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/Command/Command.php	(revision )
++++ vendor/windwalker/framework/src/Console/Command/Command.php	(revision )
+@@ -8,8 +8,6 @@
+ 
+ namespace Windwalker\Console\Command;
+ 
+-use Windwalker\Console\IO\IOFactory;
+-
+ /**
+  * Base Command class.
+  *
+@@ -53,7 +51,7 @@
+ 			$this->io->unshiftArgument('help');
+ 		}
+ 
+-		if ($this->getOption('no-ansi') && $this->getOption('no-ansi') != 'false')
++		if ($this->getOption('no-ansi'))
+ 		{
+ 			$this->io->useColor(false);
+ 		}
+Index: vendor/windwalker/framework/src/Console/Command/HelpCommand.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/Command/HelpCommand.php	(revision )
++++ vendor/windwalker/framework/src/Console/Command/HelpCommand.php	(revision )
+@@ -49,13 +49,13 @@
+ 	protected $describedCommand;
+ 
+ 	/**
+-	 * Initialise command.
++	 * Configure command.
+ 	 *
+ 	 * @return void
+ 	 *
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+-	protected function initialise()
++	protected function configure()
+ 	{
+ 		$this->setDescription('List all arguments and show usage & manual.');
+ 	}
+Index: vendor/windwalker/framework/src/Console/Command/RootCommand.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/Command/RootCommand.php	(revision )
++++ vendor/windwalker/framework/src/Console/Command/RootCommand.php	(revision )
+@@ -19,13 +19,13 @@
+ class RootCommand extends Command
+ {
+ 	/**
+-	 * Initialise command.
++	 * Configure command.
+ 	 *
+ 	 * @return void
+ 	 *
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+-	protected function initialise()
++	protected function configure()
+ 	{
+ 		// Get application file name
+ 		if (!$this->name)
+@@ -40,25 +40,21 @@
+ 			$file = $this->name;
+ 		}
+ 
+-		$defaultAnsi = defined('PHP_WINDOWS_VERSION_MAJOR') ? 1 : 0;
+-
+ 		$this->setName($file)
+ 			->setDescription('The default application command')
+ 			->addOption(array('h', 'help'),    0, 'Display this help message.',          Option::IS_GLOBAL)
+ 			->addOption(array('q', 'quiet'),   0, 'Do not output any message.',          Option::IS_GLOBAL)
+ 			->addOption(array('v', 'verbose'), 0, 'Increase the verbosity of messages.', Option::IS_GLOBAL)
+-			->addOption('no-ansi', $defaultAnsi, "Suppress ANSI colors on unsupported terminals.\nUse <option>--no-ansi=false</option> to force using color.",   Option::IS_GLOBAL)
++			->addOption('no-ansi', 0, 'Suppress ANSI colors on unsupported terminals.',   Option::IS_GLOBAL)
+ 			->setHelp(
+ 			// @TODO: Complete the help.
+ <<<HELP
+-Welcome to Windwalker Console.
++Welcome to Joomla! Console.
+ HELP
+ 			);
+ 
+ 		// Add a style <option> & <cmd>
+-		$this->io->addColor('option', 'cyan', '', array('bold'))
++		$this->io->addColor('option', 'cyan',    '', array('bold'))
+ 			->addColor('cmd', 'magenta', '', array('bold'));
+-
+-		Console\IO\IOFactory::$io = $this->io;
+ 	}
+ }
+Index: vendor/windwalker/framework/src/Console/Command/AbstractCommand.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/Command/AbstractCommand.php	(revision )
++++ vendor/windwalker/framework/src/Console/Command/AbstractCommand.php	(revision )
+@@ -141,7 +141,6 @@
+ 		$this->options       = new OptionSet;
+ 		$this->globalOptions = new OptionSet;
+ 
+-		$this->initialise();
+ 		$this->configure();
+ 
+ 		if (!$this->name)
+@@ -213,22 +212,9 @@
+ 	}
+ 
+ 	/**
+-	 * Initialise command.
++	 * Configure command.
+ 	 *
+ 	 * @return void
+-	 *
+-	 * @since  {DEPLOY_VERSION}
+-	 */
+-	protected function initialise()
+-	{
+-	}
+-
+-	/**
+-	 * Initialise command.
+-	 *
+-	 * @return  void
+-	 *
+-	 * @deprecated Use initialise() instead. Will be remove in 2.1.
+ 	 *
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+Index: vendor/windwalker/framework/src/Console/Prompter/AbstractPrompter.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/Prompter/AbstractPrompter.php	(revision )
++++ vendor/windwalker/framework/src/Console/Prompter/AbstractPrompter.php	(revision )
+@@ -8,7 +8,7 @@
+ 
+ namespace Windwalker\Console\Prompter;
+ 
+-use Windwalker\Console\IO\IOFactory;
++use Windwalker\Console\IO\IO;
+ use Windwalker\Console\IO\IOInterface;
+ 
+ /**
+@@ -65,28 +65,15 @@
+ 	 */
+ 	function __construct($question = null, $default = null, IOInterface $io = null)
+ 	{
+-		$this->io = $io ? : IOFactory::getIO();
++		$this->io = $io ? : new IO;
+ 		$this->question = $question;
+ 		$this->default  = $default;
+ 
+-		$this->initialise();
+ 		$this->preprocess();
+ 	}
+ 
+ 	/**
+ 	 * Method to initialise something customize.
+-	 *
+-	 * @return  void
+-	 */
+-	protected function initialise()
+-	{
+-		// Override this method to initialise something.
+-	}
+-
+-	/**
+-	 * Method to initialise something customize.
+-	 *
+-	 * @deprecated Use initialise() instead.
+ 	 *
+ 	 * @return  void
+ 	 */
+Index: vendor/windwalker/framework/src/Console/Prompter/PasswordPrompter.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/Prompter/PasswordPrompter.php	(revision )
++++ vendor/windwalker/framework/src/Console/Prompter/PasswordPrompter.php	(revision )
+@@ -67,7 +67,7 @@
+ 	 *
+ 	 * @return  void
+ 	 */
+-	protected function initialise()
++	protected function preprocess()
+ 	{
+ 		$this->win = defined('PHP_WINDOWS_VERSION_BUILD');
+ 
+Index: vendor/windwalker/framework/src/Console/README.md
+===================================================================
+--- vendor/windwalker/framework/src/Console/README.md	(revision )
++++ vendor/windwalker/framework/src/Console/README.md	(revision )
+@@ -1,58 +1,46 @@
+-# Windwalker Console Package
++# The Windwalker Console Package
+ 
+-The Windwalker Console package provides an elegant and nested command structure for your cli application.
++The Windwalker Console package provide an elegant and nested command structure for your cli application.
+ 
+-## Installation via Composer
++## The Command Calling Flow
+ 
+-Add this to the require block in your `composer.json`.
++If we type:
+ 
+-``` json
+-{
+-    "require": {
+-        "windwalker/console": "~2.0"
+-    }
+-}
++``` bash
++$ php cli/console.php command1 command2 command3 -a -b -cd --help
+ ```
+ 
+-## The Nested Command Structure
++The command calling flow is:
+ 
+ ```
+-          Console Application (RootCommand)
+-                         |
+-              ----------------------
+-              |                    |
+-          CommandA              CommandB
+-              |                    |
+-        ------------          ------------
+-        |          |          |          |
+-    CommandC   CommandD    CommandE   CommandF
+-```
++rootCommand (console application)
++    ->configure
++    ->execute
+ 
+-If we type:
++    command1
++        ->configure
++        ->execute
+ 
+-``` bash
+-$ php cli/console.php commandA commandC foo bar -a -bc -d=e --flower=sakura
+-```
++        commend2
++            ->configure
++            ->execute
+ 
+-Then we will been direct to `CommandC` class, and the following `foo bar` will be arguments.
++            commend3
++                ->configure
++                ->execute
+ 
+-``` php
+-class CommandC extend AbstractCommand
+-{
+-    public function execute()
+-    {
+-        $arg1 = $this->getArgument(0); // foo
+-        $arg2 = $this->getArgument(0); // bar
++            return exitCode
+-        
++
+-        $opt = $this->io->get('d') // e
+-        $opt = $this->io->get('flower') // sakura
+-    }
+-}
++        return exitCode
++
++    return exitCode
++
++return exitCode
+ ```
+ 
+ ## Initialising Console
+ 
+-Console is the main application help us create a command line program.
++Console is extends from [AbstractCliApplication](https://github.com/ventoviro/windwalker/tree/staging/src/Application#command-line-applications), help us create a command line application.
+ 
+ An example console application skeleton in `cli/console.php` file:
+ 
+@@ -72,9 +60,9 @@
+ The `execute()` will find commands matched the cli input argument. If there are not any command registered,
+ console will execute the `Default Command`.
+ 
+-### Default RootCommand
++### Default Command
+ 
+-`RootCommand` is a command object extends from base `Command`. It provides some useful helpers,
++`RootCommand` is a command object extends from base `Command` object. It provides some useful helper,
+ we can list all commands by typing:
+ 
+ ``` bash
+@@ -84,7 +72,7 @@
+ By default, the output is:
+ 
+ ``` bash
+-Windwalker Console - version: 1.0
++windwalker! Console - version: 1.0
+ ------------------------------------------------------------
+ 
+ [console.php Help]
+@@ -97,21 +85,28 @@
+ 
+ Options:
+ 
+-  -h | --help       Display this help message.
+-  -q | --quiet      Do not output any message.
+-  -v | --verbose    Increase the verbosity of messages.
+-  --no-ansi         Suppress ANSI colors on unsupported terminals.
+-                    Use --no-ansi=false to force using color.
++  -h / --help
++      Display this help message.
+ 
++  -q / --quiet
++      Do not output any message.
++
++  -v / --verbose
++      Increase the verbosity of messages.
++
++  --no-ansi
++      Suppress ANSI colors on unsupported terminals.
++
++
+ Available commands:
+ 
+   help    List all arguments and show usage & manual.
+ 
+ 
+-Welcome to Windwalker Console.
++Welcome to windwalker! Console.
+ ```
+ 
+-### Set Handler for RootCommand
++### Set Executing Code for RootCommand
+ 
+ We can add closure to every commands, that this command will execute this function first. Use `setHandler()` on
+ `$console`, the Console will auto pass the code to RootCommand:
+@@ -134,7 +129,7 @@
+ $console->execute();
+ ```
+ 
+-This code will do same action:
++This will do same action:
+ 
+ ``` php
+ <?php
+@@ -142,7 +137,8 @@
+ 
+ // ...
+ 
+-$console->getRootCommand()
++$console
++    ->getRootCommand() // Return the RootCommand
+     ->setHandler(
+         function($command)
+         {
+@@ -165,14 +161,16 @@
+ 
+ ``` bash
+ $ cli/console.php help
++```
+ 
+-# OR
++OR
+ 
++``` bash
+ $ cli/console.php --help
+ ```
+ 
+ > Note: Command only return integer between 0 and 255, `0` means success, while others means failure or other status.
+-  The exit code of Unix/Linux meaning please see: [Exit Codes Meanings](http://www.tldp.org/LDP/abs/html/exitcodes.html)
++> The exit code of Unix/Linux meaning please see: [Exit Codes Meanings](http://www.tldp.org/LDP/abs/html/exitcodes.html)
+ 
+ ## Add Help Message to Console
+ 
+@@ -185,11 +183,10 @@
+ 
+ // ...
+ 
+-$console = new \Windwalker\Console\Console;
+-
+-$console->setName('Example Console')
++$console = with(new Console)
++	->setName('Example Console')
+ 	->setVersion('1.2.3')
+-	->setUsage('console.php <commands> <arguments> [-h|--help] [-q|--quiet]')
++	->setUsage('console.php <arguments> [-h|--help] [-q|--quiet]')
+ 	->setDescription('Hello World')
+ 	->setHelp(
+ <<<HELP
+@@ -208,13 +205,13 @@
+ 
+ The help will show:
+ 
+-![console example](https://cloud.githubusercontent.com/assets/1639206/4477512/bae50278-497e-11e4-92a6-0f998461442b.png)
++![help](http://cl.ly/SPTF/cli-help.jpg)
+ 
+ ## Add First Level Command to Console
+ 
+-Now, we just use the default root command. But there are no first level command are available to call except `HelpCommand`.
++Now, we just use the default command. But there are not first level arguments we can call except `HelpCommand`.
+ 
+-We can add a new command by this code:
++We can add a command by this code:
+ 
+ ``` php
+ <?php
+@@ -254,11 +251,11 @@
+ 
+ ![foo-help](http://cl.ly/SOfp/p2013-11-10-3.jpg)
+ 
+-## Declaring Command Class
++## Using My Command Object
+ 
+ We can create our own command object instead setting it in runtime.
+ 
+-This is an example FooCommand declaration:
++This is an example FooCommand:
+ 
+ ``` php
+ <?php
+@@ -270,14 +267,10 @@
+ 
+ class FooCommand extends Command
+ {
+-    protected $name  = 'foo';
++    protected $name = 'foo';
+-    protected $usage = 'foo command [--option]';
+-    protected $help  = 'foo help';
+-    protected $description = 'This is first level foo command.';
+ 
+-    public function initialise()
++    public function configure()
+     {
+-        // We can also set help message in initialise method 
+         $this->setDescription('This is first level foo command.')
+             ->setUsage('foo command [--option]')
+             ->setHelp('foo help');
+@@ -285,13 +278,13 @@
+ 
+     public function doExecute()
+     {
+-        $this->out('This is Foo Command executing.');
++        $this->out('This is Foo Command executing code.');
+     }
+ }
+ 
+ ```
+ 
+-Then we register it in Console:
++And we register it in Console:
+ 
+ ``` php
+ <?php
+@@ -300,38 +293,41 @@
+ $console->addCommand(new FooCommand);
+ ```
+ 
+-## Get Arguments and Options
++## Using Arguments and Options
+ 
+-We can use this code to get arguments and options, setting them in `FooCommand`.
++We can use this code to get arguments and options
+ 
+ ``` php
+-// src/Myapp/Command/FooCommand.php
+-
+-public function initialise()
++public function configure()
+ {
+-    // Define options first that we can set option aliases. 
+-    $this->addOption(
++    $this->setDescription('This is first level foo command.')
++        ->setUsage('foo command [--option]')
++        ->addOption(
+             's', // option name
+             0,   // default value
+             'Add this option can make output lower case.', // option description
+             Option::IS_GLOBAL // sub command will extends this global option
+         )
+         ->addOption(
+-            array('y', 'yell', 'Y'), // First element `y` will be option name, others will be alias
++            array('y', 'yell', 'Y'), // First element will be option name, others will be alias
+             0,
+             'Yell will make output upper case.',
+             Option::IS_PRIVATE // sub command will not extends private option, this is default value, we don't need set private manually.
+-        );
++        )
++        ->setHelp('foo help');
+ }
+ 
+ public function doExecute()
+ {
+-    $name = #this->getArgument(0);
+-
+-    if (!$name)
++    if (empty($this->input->args[0]))
+     {
+-        $this->io->in('Please enter a name: ');
++        $this->out('Please enter a name: ');
++        $name = fread(STDIN, 8792);
+     }
++    else
++    {
++        $name = $this->input->args[0];
++    }
+ 
+     $reply = 'Hello ' . $name;
+ 
+@@ -353,9 +349,11 @@
+ 
+ ``` bash
+ $ php cli/console.php foo Asika --yell
++```
+ 
+-# OR
++OR
+ 
++``` bash
+ $ php cli/console.php foo Asika -y
+ ```
+ 
+@@ -365,23 +363,23 @@
+ HELLO: ASIKA
+ ```
+ 
+-> Note: We have to use `addOption()` to define options first, then the `$this->getOption('x')` will be able to 
+-get the input option which we want. If we didn't do this, we have to use `$this->io->get('x')` 
+-to get option value, but this way do not support option aliases.
++> Note: We have to `addOption()` first, then the `getOption('x')` is able to get the input option which we wanted.
++>
++> If we don't do this first, we have to use `$this->input->get('x')` to get option value,
++> but this way do not support option aliases.
+ 
+ ## Add Second Level Commands and more...
+ 
+-Now, FooCommand is the first level commands in our command tree, if we want to add several commands under FooCommand, 
+-we can use `addCommand()` method. Now we add two `bar` and `yoo` command under `FooCommand`.
++If we want to add several commands after FooCommand, we can use `addCommand()` method. Now we add two `bar` and `yoo`
++command to `FooCommand`.
+ 
+ ### Adding command in runtime.
+ 
+-We can use `addCommand()` to add a command as other commands' child.
++We use `addCommand()` to add commands.
+ 
+-If a command has one or more children, the arguments means to call children which the name equals to this argument.
++If a command has one or more sub commands, the arguments means to call sub command which name equals to first argument.
+ 
+-If a command has no child, Command object will run handler closure if has set, or run `doExecute()` if handler not set. 
+-Then the remaining arguments will be able to get by `$this->getArgument({offset})`.
++If a command has on sub commands, Command object will run executing code if set, or run `doExecute()` if executing code not set. Then the remaining arguments will save in `$this->input->args`.
+ 
+ ``` php
+ <?php
+@@ -391,9 +389,12 @@
+ 
+ //...
+ 
+-    public function initialise()
++    public function configure()
+     {
+-        $this->addCommand(
++        $this->setDescription('This is first level foo command.')
++            ->setUsage('foo command [--option]')
++            ->setHelp('foo help')
++            ->addCommand(
+                 'bar',
+                 'Bar description.'
+             )
+@@ -423,28 +424,21 @@
+ class BarCommand extends Command
+ {
+     protected $name = 'bar';
+-    protected $usage = 'bar command [--option]';
+-    protected $help  = 'bar help';
+-    protected $description = 'This is second level bar command.';
+ 
+-    public function initialise()
++    public function configure()
+     {
+-        $this->addOption(new Option(array('y', 'yell'), 0))
++        $this->setDescription('This is second level bar command.')
++            ->setUsage('bar command [--option]')
++            ->setHelp('bar help')
++            ->addOption(new Option(array('y', 'yell'), 0))
+             ->addOption(new Option('s', 0, 'desc', Option::IS_GLOBAL));
+     }
+ 
+     public function doExecute()
+     {
+-        $this->out('This is Bar Command executing.');
+-        
+-        $arg1 = $this->getArgument(0);
+-        
+-        if ($arg1)
+-        {
+-            $this->out('Argument1: ' . $arg1);
++        $this->out('This is Bar Command executing code.');
+-        }
+-    }
++    }
++}
+-}
+ ```
+ 
+ Then register them to `FooCommand`:
+@@ -458,14 +452,17 @@
+ 
+ //...
+ 
+-    public function initialise()
++    public function configure()
+     {
+-        $this->addCommand(new BarCommand)
++        $this->setDescription('This is first level foo command.')
++            ->setUsage('foo command [--option]')
++            ->setHelp('foo help')
++            ->addCommand(new BarCommand)
+             ->addCommand(new YooCommand);
+     }
+ ```
+ 
+-OK, let's typing:
++OK, typing:
+ 
+ ``` bash
+ $ cli/console.php foo bar
+@@ -477,181 +474,6 @@
+ This is Bar Command executing code.
+ ```
+ 
+-And typing
+-
+-``` bash
+-$ cli/console.php foo bar sakura
+-```
+-
+-get:
+-
+-```
+-This is Bar Command executing code.
+-Argument1: sakura
+-```
+-
+-### Get Child by Path
+-
+-``` php
+-$command = $console->getCommand('foo/bar'); // BarCommand
+-
+-// OR
+-
+-$command = $command->getChild('foo/bar/baz');
+-```
+-
+-## The Prompter
+-
+-Prompter is a set of dialog tools help us asking questions for user.
+-
+-``` php
+-$prompter = new \Windwalker\Console\Prompter\TextPrompter;
+-
+-$name = $prompter->ask('Tell me your name:', 'default');
+-```
+-
+-OR set question in constructor.
+-
+-``` php
+-$prompter = new TextPrompter('Tell me your name: ', $this->io);
+-
+-// If argument not exists, auto ask user.
+-$name = $this->getArgument(0, $prompter);
+-```
+-
+-### Validate Input Value
+-
+-``` php
+-$prompter = new \Windwalker\Console\Prompter\ValidatePrompter;
+-
+-$prompter->setAttempt(3);
+-
+-$prompter->ask('Please enter username: ');
+-```
+-
+-If we didn't type anything, ValidatePrompter will try ask us three times (We set this number by `setAttempt()`).
+-
+-```
+-Please enter username:
+-  Not a valid value.
+-
+-Please enter username:
+-  Not a valid value.
+-
+-Please enter username:
+-  Not a valid value.
+-```
+-
+-We can set closure to validate our rule:
+-
+-``` php
+-$prompter->setAttempt(3)
+-    ->setNoValidMessage('No valid number.')
+-    ->setHandler(
+-    function($value)
+-    {
+-        return $value == 9;
+-    }
+-);
+-
+-$prompter->ask('Please enter right number: ');
+-```
+-
+-Result
+-
+-```
+-Please enter right number: 1
+-No valid number.
+-
+-Please enter right number: 2
+-No valid number.
+-
+-Please enter right number: 3
+-No valid number.
+-```
+-
+-If validate fail, we can choose shut down our process:
+- 
+-``` php
+-// ...
+-
+-$prompter->failToClose(true, 'Number validate fail and close');
+-
+-$prompter->ask('Please enter right number: ');
+-```
+-
+-Result
+-
+-```
+-Please enter right number:
+-No valid number.
+-
+-Please enter right number:
+-No valid number.
+-
+-Please enter right number:
+-No valid number.
+-
+-Number validate fail and close
+-```
+-
+-### Select List
+-
+-``` php
+-$options = array(
+-    's' => 'sakura',
+-    'r' => 'Rose',
+-    'o' => 'Olive'
+-);
+-
+-$prompter = new \Windwalker\Console\Prompter\SelectPrompter('Which do you want: ', $options);
+-
+-$result = $prompter->ask();
+-
+-$command->out('You choose: ' . $result);
+-```
+-
+-Output
+-
+-```
+-  [s] - sakura
+-  [r] - Rose
+-  [o] - Olive
+-
+-Which do you want: r
+-You choose: r
+-```
+-
+-### Boolean Prompter
+-
+-BooleanPrompter convert input string to boolean type, the (y, yes, 1) weill be `true`, (n, no, 0, null) will be `false`.
+-
+-``` php
+-$prompter = new \Windwalker\Console\Prompter\BooleanPrompter;
+-
+-$result = $prompter->ask('Do you wan to do this [Y/n]: ');
+-
+-var_dump($result);
+-```
+-
+-Result
+-
+-```
+-Do you wan to do this [Y/n]: y
+-bool(true)
+-```
+-
+-### Available Prompters
+-
+-- TextPrompter
+-- SelectPrompter
+-- CallbackPrompter
+-- ValidatePrompter
+-- NotNullPrompter
+-- PasswordPrompter
+-
+-### Available Prompters
+-
+ ## HelpCommand
+ 
+ `HelpCommand` will auto generate help list for us.
+@@ -698,16 +520,26 @@
+ 
+ ## Use Command Without Console
+ 
+-We can using `Command` without, please see [Command README](Command).
++We can using `Command` without `Console` or `CliApplicaion`, please see [Command README](Command).
+ 
+-## Credits
+ 
+-Windwalker Console incorporated many ideas from other CLI packages. 
+-Below is a short list of projects which Windwalker drew inspiration.
++## Installation via Composer
+ 
+-- [Symfony Console](https://github.com/symfony/Console)
+-- [Commando](https://github.com/symfony/Console)
+-- [CLIFramework](https://github.com/c9s/CLIFramework)
+-- [Composer](https://github.com/composer/composer)
++Add `"windwalker/application": "~2.0"` to the require block in your composer.json,
++make sure you have `"minimum-stability": "dev"` and then run composer install.
+ 
++``` json
++{
++    "require": {
++        "asika/windwalker-console": "~2.0"
++    },
++    "minimum-stability": "dev"
++}
++```
+ 
++Alternatively, you can simply run the following from the command line:
++
++```
++composer init --stability="dev"
++composer require asika/windwalker-console "~2.0"
++```
+Index: vendor/windwalker/framework/src/Console/Descriptor/Text/TextDescriptorHelper.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/Descriptor/Text/TextDescriptorHelper.php	(revision )
++++ vendor/windwalker/framework/src/Console/Descriptor/Text/TextDescriptorHelper.php	(revision )
+@@ -38,7 +38,6 @@
+   %s
+ {OPTIONS}
+ {COMMANDS}
+-
+ %s
+ EOF;
+ 
+Index: vendor/windwalker/framework/src/Console/Descriptor/Text/TextOptionDescriptor.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/Descriptor/Text/TextOptionDescriptor.php	(revision )
++++ vendor/windwalker/framework/src/Console/Descriptor/Text/TextOptionDescriptor.php	(revision )
+@@ -19,33 +19,26 @@
+ class TextOptionDescriptor extends AbstractDescriptor
+ {
+ 	/**
+-	 * The max length of command.
++	 * Option description template.
+ 	 *
+-	 * @var int
++	 * @var string
+ 	 *
+-	 * @since  1.0
++	 * @since  {DEPLOY_VERSION}
+ 	 */
+-	protected $maxLength = 0;
++	protected $template = <<<EOF
++  <info>%s</info>
++%s
+ 
+-	/**
+-	 * Offset that between every commands and their descriptions.
+-	 *
+-	 * @var int
+-	 *
+-	 * @since  1.0
+-	 */
+-	protected $offsetAfterCommand = 4;
++EOF;
+ 
+ 	/**
+-	 * Option description template.
++	 * The template of every description line.
+ 	 *
+ 	 * @var string
+ 	 *
+-	 * @since  1.0
++	 * @since  {DEPLOY_VERSION}
+ 	 */
+-	protected $template = <<<EOF
+-  <info>%-{WIDTH}s</info>%s
+-EOF;
++	protected $templateLineBody = '      %s';
+ 
+ 	/**
+ 	 * Render an item description.
+@@ -55,19 +48,19 @@
+ 	 * @throws  \InvalidArgumentException
+ 	 * @return  string  Rendered description.
+ 	 *
+-	 * @since   1.0
++	 * @since   {DEPLOY_VERSION}
+ 	 */
+ 	protected function renderItem($option)
+ 	{
+ 		if (!($option instanceof Option))
+ 		{
+-			throw new \InvalidArgumentException('Command descriptor need Command object to describe it.');
++			throw new \InvalidArgumentException('Option descriptor need Command object to describe it.');
+ 		}
+ 
+-		/** @var Option $command */
++		/** @var Option $option */
+ 		$name        = $option->getName();
+-		$description = $option->getDescription() ?: 'No description';
+ 		$aliases     = $option->getAlias();
++		$description = $option->getDescription() ?: 'No description';
+ 
+ 		// Merge aliases
+ 		array_unshift($aliases, $name);
+@@ -77,26 +70,19 @@
+ 			$alias = strlen($alias) > 1 ? '--' . $alias : '-' . $alias;
+ 		}
+ 
+-		$name = implode(' | ', $aliases);
+-
+-		$template = str_replace('{WIDTH}', $this->maxLength + $this->offsetAfterCommand, $this->template);
+-
+ 		// Sets the body indent.
+ 		$body = array();
+ 
+ 		$description = explode("\n", $description);
+ 
+-		$line1  = array_shift($description);
+-		$body[] = sprintf($template, $name, $line1);
+-
+ 		foreach ($description as $line)
+ 		{
+ 			$line = trim($line);
+-			$line = sprintf($template, '', $line);
++			$line = sprintf($this->templateLineBody, $line);
+ 			$body[] = $line;
+ 		}
+ 
+-		return implode("\n", $body);
++		return sprintf($this->template, implode(' / ', $aliases), implode("\n", $body));
+ 	}
+ 
+ 	/**
+@@ -104,35 +90,10 @@
+ 	 *
+ 	 * @return  string
+ 	 *
+-	 * @since  1.0
++	 * @since  {DEPLOY_VERSION}
+ 	 */
+ 	public function render()
+ 	{
+-		// Count the max command length as column width.
+-		foreach ($this->items as $item)
+-		{
+-			/** @var $item Option */
+-			$name    = $item->getName();
+-			$aliases = $item->getAlias();
+-
+-			// Merge aliases
+-			array_unshift($aliases, $name);
+-
+-			foreach ($aliases as &$alias)
+-			{
+-				$alias = strlen($alias) > 1 ? '--' . $alias : '-' . $alias;
+-			}
+-
+-			$name = implode(' | ', $aliases);
+-
+-			$length = strlen($name);
+-
+-			if ($length > $this->maxLength)
+-			{
+-				$this->maxLength = $length;
+-			}
+-		}
+-
+ 		return parent::render();
+ 	}
+ }
+Index: vendor/windwalker/framework/src/Console/Console.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/Console.php	(revision )
++++ vendor/windwalker/framework/src/Console/Console.php	(revision )
+@@ -202,22 +202,6 @@
+ 	}
+ 
+ 	/**
+-	 * Get command by path.
+-	 *
+-	 * Example: getCommand('foo/bar/baz');
+-	 *
+-	 * @param   string  $path  The path or name of child.
+-	 *
+-	 * @return  AbstractCommand
+-	 *
+-	 * @since  {DEPLOY_VERSION}
+-	 */
+-	public function getCommand($path)
+-	{
+-		return $this->getRootCommand()->getChild($path);
+-	}
+-
+-	/**
+ 	 * Sets whether to automatically exit after a command execution or not.
+ 	 *
+ 	 * @param   boolean  $boolean  Whether to automatically exit after a command execution or not.
+Index: vendor/windwalker/framework/src/Console/AbstractConsole.php
+===================================================================
+--- vendor/windwalker/framework/src/Console/AbstractConsole.php	(revision )
++++ vendor/windwalker/framework/src/Console/AbstractConsole.php	(revision )
+@@ -180,6 +180,7 @@
+ 	 *
+ 	 * @return  void
+ 	 *
++	 * @codeCoverageIgnore
+ 	 * @since   {DEPLOY_VERSION}
+ 	 */
+ 	protected function initialise()
+Index: vendor/windwalker/framework/src/Database/docs/table.md
+===================================================================
+--- vendor/windwalker/framework/src/Database/docs/table.md	(revision )
++++ vendor/windwalker/framework/src/Database/docs/table.md	(revision )
+@@ -10,18 +10,17 @@
+ 
+ Create a new table.
+ 
+-> *NOTE:* Table has not support foreign key now.
++> *NOTE:* Table do not support foreign key now.
+ 
+ ``` php
+ use Windwalker\Database\Command\Table\Column;
+ use Windwalker\Database\Command\Table\Key;
+-use Windwalker\Database\Command\Table\DataType;
+ 
+ $table = $db->getTable('#__articles');
+ 
+-$table->addColumn('id', DataType::INTEGER, Column::UNSIGNED, Column::NOT_NULL, '', 'PK', array('primary' => true))
+-    ->addColumn('name', DataType::VARCHAR, Column::SIGNED, Column::NOT_NULL, '', 'Name', array('length' => 255))
+-    ->addColumn('alias', DataType::VARCHAR, Column::SIGNED, Column::NOT_NULL, '', 'Alias')
++$table->addColumn('id', 'int(11)', Column::UNSIGNED, Column::NOT_NULL, '', 'PK', array('primary' => true))
++    ->addColumn('name', 'varchar(255)', Column::SIGNED, Column::NOT_NULL, '', 'Name')
++    ->addColumn('alias', 'varchar(255)', Column::SIGNED, Column::NOT_NULL, '', 'Alias')
+     ->addIndex(Key::TYPE_INDEX, 'idx_name', 'name', 'Test')
+     ->addIndex(Key::TYPE_UNIQUE, 'idx_alias', 'alias', 'Alias Index')
+     ->create(true); // True to add IF NOT EXISTS
+@@ -37,8 +36,8 @@
+ 
+ $table = $db->getTable('#__articles');
+ 
+-$table->addColumn('state', DataType::TINYINT, Column::SIGNED, Column::NOT_NULL, 0, 'State', array('position' => 'AFTER ordering', 'length' => 1))
+-    ->addIndex(Key::TYPE_INDEX, 'idx_ordering', array('ordering', 'id'))
++$table->addColumn('state', 'int(1)', Column::SIGNED, Column::NOT_NULL, 0, 'State', array('position' => 'AFTER ordering'))
++    ->addIndex('key', 'idx_ordering', array('ordering', 'id'))
+     ->update();
+ ```
+ 
+@@ -52,7 +51,7 @@
+ 
+ $table = $db->getTable('#__articles');
+ 
+-$table->addColumn('state', DataType::TINYINT, Column::SIGNED, Column::NOT_NULL, 0, 'State', array('position' => 'AFTER ordering', 'length' => 1))
++$table->addColumn('state', 'int(1)', Column::SIGNED, Column::NOT_NULL, 0, 'State', array('position' => 'AFTER ordering'))
+     ->addIndex(Key::TYPE_INDEX, 'idx_ordering', array('ordering', 'id'))
+     ->save();
+ ```
+Index: vendor/windwalker/framework/src/Database/README.md
+===================================================================
+--- vendor/windwalker/framework/src/Database/README.md	(revision )
++++ vendor/windwalker/framework/src/Database/README.md	(revision )
+@@ -9,10 +9,12 @@
+ ``` json
+ {
+     "require": {
+-        "windwalker/database" : "~2.0"
++        "windwalker/database" : "2.0.*"
+     }
+ }
+ ```
++
++> Note: Before stable version released, you have to use `dev-master` as the version, and make sure the `minimum-stability` is `dev`.
+ 
+ ## Getting Started
+ 
+Index: vendor/windwalker/framework/src/Database/composer.json
+===================================================================
+--- vendor/windwalker/framework/src/Database/composer.json	(revision )
++++ vendor/windwalker/framework/src/Database/composer.json	(revision )
+@@ -7,7 +7,7 @@
+ 	"license": "GPL-2.0+",
+ 	"require": {
+ 		"php": ">=5.3.10",
+-		"psr/log" : "1.*@stable",
++		"psr/log" : "1.*",
+ 		"windwalker/query" : "~2.0"
+ 	},
+ 	"require-dev": {
+Index: vendor/windwalker/framework/src/Language/Loader/FileLoader.php
+===================================================================
+--- vendor/windwalker/framework/src/Language/Loader/FileLoader.php	(revision )
++++ vendor/windwalker/framework/src/Language/Loader/FileLoader.php	(revision )
+@@ -53,8 +53,6 @@
+ 			{
+ 				$queue->insert($path, $priority);
+ 			}
+-
+-			$paths = $queue;
+ 		}
+ 
+ 		$this->paths = $paths;
+@@ -74,11 +72,7 @@
+ 		{
+ 			if (!$file = $this->findFile($file))
+ 			{
+-				$paths = array_values(iterator_to_array(clone $this->paths));
+-
+-				$paths = implode(" / ", $paths);
+-
+-				throw new \RuntimeException(sprintf('Language file: %s not found. Paths in queue: %s', $file, $paths));
++				throw new \RuntimeException(sprintf('Language file: %s not found.', $file));
+ 			}
+ 		}
+ 
+Index: vendor/windwalker/framework/src/Language/Language.php
+===================================================================
+--- vendor/windwalker/framework/src/Language/Language.php	(revision )
++++ vendor/windwalker/framework/src/Language/Language.php	(revision )
+@@ -71,18 +71,11 @@
+ 	protected $locale = null;
+ 
+ 	/**
+-	 * Property defaultLocale.
+-	 *
+-	 * @var  string
+-	 */
+-	protected $defaultLocale = null;
+-
+-	/**
+ 	 * Property localise.
+ 	 *
+-	 * @var  LocaliseInterface[]
++	 * @var  LocaliseInterface
+ 	 */
+-	protected $localises = array();
++	protected $localise = null;
+ 
+ 	/**
+ 	 * Property normalizeHandler.
+@@ -95,17 +88,15 @@
+ 	 * Constructor.
+ 	 *
+ 	 * @param string                            $locale
+-	 * @param string                            $defaultLocale
+-	 * @param LoaderInterface|LoaderInterface[] $loaders
+ 	 * @param FormatInterface|FormatInterface[] $formats
++	 * @param LoaderInterface|LoaderInterface[] $loaders
+ 	 */
+-	public function __construct($locale = 'en-GB', $defaultLocale = 'en-GB', $loaders = null, $formats = null)
++	public function __construct($locale = 'en-GB', $formats = null, $loaders = null)
+ 	{
+ 		$formats = $formats ? : new IniFormat;
+ 		$loaders = $loaders ? : new FileLoader;
+ 
+ 		$this->setLocale($locale);
+-		$this->setDefaultLocale($locale);
+ 		$this->setFormats($formats);
+ 		$this->setLoaders($loaders);
+ 	}
+@@ -186,7 +177,7 @@
+ 	 */
+ 	public function plural($string, $count = 1)
+ 	{
+-		$localise = $this->getLocalise($this->locale);
++		$localise = $this->getLocalise();
+ 
+ 		// Get language plural handles
+ 		$suffix = $localise->getPluralSuffix((int) $count);
+@@ -201,27 +192,6 @@
+ 			}
+ 		}
+ 
+-		// If current locale do not have singular & plural string
+-		// We try to do same thing to default locale
+-		if (!$this->exists($string))
+-		{
+-			// Find default localise
+-			$localise = $this->getLocalise($this->defaultLocale);
+-
+-			// Get language plural handles
+-			$suffix = $localise->getPluralSuffix((int) $count);
+-
+-			if ($suffix || $suffix == 0)
+-			{
+-				$key = $string . '_' . $suffix;
+-
+-				if ($this->exists($key))
+-				{
+-					$string = $key;
+-				}
+-			}
+-		}
+-
+ 		// If more arguments exists, use sprintf()
+ 		$args = func_get_args();
+ 
+@@ -489,64 +459,33 @@
+ 	{
+ 		$this->locale = LanguageNormalize::toLanguageTag($locale);
+ 
+-		$this->localises[$locale] = null;
++		$this->localise = null;
+ 
+ 		return $this;
+ 	}
+ 
+ 	/**
+-	 * Method to get property DefaultLocale
+-	 *
+-	 * @return  string
+-	 */
+-	public function getDefaultLocale()
+-	{
+-		return $this->defaultLocale;
+-	}
+-
+-	/**
+-	 * Method to set property defaultLocale
+-	 *
+-	 * @param   string $defaultLocale
+-	 *
+-	 * @return  static  Return self to support chaining.
+-	 */
+-	public function setDefaultLocale($defaultLocale)
+-	{
+-		$this->defaultLocale = LanguageNormalize::toLanguageTag($defaultLocale);
+-
+-		return $this;
+-	}
+-
+-	/**
+ 	 * setLocalise
+ 	 *
+-	 * @param   string            $locale
+ 	 * @param   LocaliseInterface $localise
+ 	 *
+ 	 * @return  Language  Return self to support chaining.
+ 	 */
+-	public function setLocalise($locale = 'en-GB', LocaliseInterface $localise)
++	public function setLocalise(LocaliseInterface $localise)
+ 	{
+-		$locale = LanguageNormalize::toLanguageTag($locale);
++		$this->localise = $localise;
+ 
+-		$this->localises[$locale] = $localise;
+-
+ 		return $this;
+ 	}
+ 
+ 	/**
+ 	 * getLocalise
+ 	 *
+-	 * @param string $locale
+-	 *
+ 	 * @return  LocaliseInterface
+ 	 */
+-	protected function getLocalise($locale = 'en-GB')
++	protected function getLocalise()
+ 	{
+-		$locale = LanguageNormalize::toLanguageTag($locale);
+-
+-		if (empty($this->localises[$locale]) || !($this->localises[$locale] instanceof LocaliseInterface))
++		if (!($this->localise instanceof LocaliseInterface))
+ 		{
+ 			$tag = LanguageNormalize::getLocaliseClassPrefix($this->locale);
+ 
+@@ -557,10 +496,10 @@
+ 				$class = 'Windwalker\\Language\\Localise\\NullLocalise';
+ 			}
+ 
+-			$this->localises[$locale] = new $class;
++			$this->localise = new $class;
+ 		}
+ 
+-		return $this->localises[$locale];
++		return $this->localise;
+ 	}
+ 
+ 	/**
+Index: vendor/windwalker/framework/src/Language/LanguageNormalize.php
+===================================================================
+--- vendor/windwalker/framework/src/Language/LanguageNormalize.php	(revision )
++++ vendor/windwalker/framework/src/Language/LanguageNormalize.php	(revision )
+@@ -64,9 +64,9 @@
+ 	public static function toLanguageKey($key)
+ 	{
+ 		// Only allow A-Z a-z 0-9 and "_", other characters will be replace with "_".
+-		$key = preg_replace('/[^A-Z0-9]+/i', '.', $key);
++		$key = preg_replace('/[^A-Z0-9_]+/i', '_', $key);
+ 
+-		return strtolower(trim($key, '_'));
++		return strtoupper(trim($key, '_'));
+ 	}
+ }
+ 
+Index: vendor/windwalker/framework/src/Registry/Registry.php
+===================================================================
+--- vendor/windwalker/framework/src/Registry/Registry.php	(revision )
++++ vendor/windwalker/framework/src/Registry/Registry.php	(revision )
+@@ -388,7 +388,7 @@
+ 
+ 		/**
+ 		 * Explode the registry path into an array and remove empty
+-		 * nodes that occur as a result of a double dot. ex: windwalker..test
++		 * nodes that occur as a result of a double dot. ex: joomla..test
+ 		 * Finally, re-key the array so they are sequential.
+ 		 */
+ 		$nodes = array_values(array_filter(explode('.', $path), 'strlen'));
+Index: vendor/windwalker/framework/src/Renderer/PhpRenderer.php
+===================================================================
+--- vendor/windwalker/framework/src/Renderer/PhpRenderer.php	(revision )
++++ vendor/windwalker/framework/src/Renderer/PhpRenderer.php	(revision )
+@@ -85,11 +85,7 @@
+ 
+ 		if (!$filePath)
+ 		{
+-			$paths = array_values(iterator_to_array(clone $this->paths));
+-
+-			$paths = implode(" / ", $paths);
+-
+-			throw new \UnexpectedValueException(sprintf('File: %s not found. Paths in queue: ', $file, $paths));
++			throw new \UnexpectedValueException(sprintf('File: %s not found', $file));
+ 		}
+ 
+ 		// Start an output buffer.
+Index: vendor/windwalker/framework/src/Renderer/TwigRenderer.php
+===================================================================
+--- vendor/windwalker/framework/src/Renderer/TwigRenderer.php	(revision )
++++ vendor/windwalker/framework/src/Renderer/TwigRenderer.php	(revision )
+@@ -64,8 +64,6 @@
+ 	 */
+ 	public function render($file, $data = array())
+ 	{
+-		$file = pathinfo($file, PATHINFO_EXTENSION) == 'twig' ? $file : $file . '.twig';
+-
+ 		$this->extensions = array_merge($this->extensions, (array) $this->config->get('extensions', array()));
+ 
+ 		return $this->getEngine()->render($file, $data);
+Index: vendor/windwalker/framework/src/Renderer/BladeRenderer.php
+===================================================================
+--- vendor/windwalker/framework/src/Renderer/BladeRenderer.php	(revision )
++++ vendor/windwalker/framework/src/Renderer/BladeRenderer.php	(revision )
+@@ -14,14 +14,8 @@
+ use Illuminate\View\Engines\EngineResolver;
+ use Illuminate\View\Compilers\BladeCompiler;
+ use Illuminate\View\FileViewFinder;
+-use Illuminate\View\Factory as BladeEnvironment;
++use Illuminate\View\Environment as BladeEnvironment;
+ 
+-// Fix for Illuminate 4.1 B/C
+-if (!class_exists('Illuminate\View\Factory'))
+-{
+-	class_alias('Illuminate\View\Environment', 'Illuminate\View\Factory');
+-}
+-
+ /**
+  * The BladeRenderer class.
+  *
+@@ -81,7 +75,7 @@
+ 	 */
+ 	public function render($file, $data = array())
+ 	{
+-		return $this->getEngine()->make($file, $data)->render();
++		return $this->getEngine()->make($file);
+ 	}
+ 
+ 	/**
+@@ -260,11 +254,6 @@
+ 			if (!$cachePath)
+ 			{
+ 				throw new \InvalidArgumentException('Please set cache_path into config.');
+-			}
+-
+-			if (!is_dir($cachePath))
+-			{
+-				mkdir($cachePath, 0755, true);
+ 			}
+ 
+ 			$this->compiler = new CompilerEngine(new BladeCompiler($this->getFilesystem(), $cachePath));
+Index: vendor/windwalker/framework/src/Utilities/Queue/Priority.php
+===================================================================
+--- vendor/windwalker/framework/src/Utilities/Queue/Priority.php	(revision )
++++ vendor/windwalker/framework/src/Utilities/Queue/Priority.php	(revision )
+@@ -1,56 +0,0 @@
+-<?php
+-/**
+- * Part of formosa project. 
+- *
+- * @copyright  Copyright (C) 2011 - 2014 SMS Taiwan, Inc. All rights reserved.
+- * @license    GNU General Public License version 2 or later; see LICENSE
+- */
+-
+-namespace Windwalker\Utilities\Queue;
+-
+-/**
+- * Class Priority
+- *
+- * @since 1.0
+- */
+-class Priority
+-{
+-	const MIN = -3;
+-	const LOW = -2;
+-	const BELOW_NORMAL = -1;
+-	const NORMAL = 0;
+-	const ABOVE_NORMAL = 1;
+-	const HIGH = 2;
+-	const MAX = 3;
+-
+-	/**
+-	 * createQueue
+-	 *
+-	 * @param array|string $queue
+-	 * @param integer      $priority
+-	 *
+-	 * @return  \SplPriorityQueue
+-	 */
+-	public static function createQueue($queue, $priority = Priority::NORMAL)
+-	{
+-		$queueObject = static::createPriorityQueueObject();
+-
+-		foreach ((array) $queue as $item)
+-		{
+-			$queueObject->insert($item, $priority);
+-		}
+-
+-		return $queueObject;
+-	}
+-
+-	/**
+-	 * createPriorityQueueObject
+-	 *
+-	 * @return  \SplPriorityQueue
+-	 */
+-	public static function createPriorityQueueObject()
+-	{
+-		return new \SplPriorityQueue;
+-	}
+-}
+- 
+\ No newline at end of file
+Index: vendor/windwalker/framework/src/Utilities/Classes/MultiSingletonTrait.php
+===================================================================
+--- vendor/windwalker/framework/src/Utilities/Classes/MultiSingletonTrait.php	(revision )
++++ vendor/windwalker/framework/src/Utilities/Classes/MultiSingletonTrait.php	(revision )
+@@ -1,66 +0,0 @@
+-<?php
+-/**
+- * Part of Windwalker project. 
+- *
+- * @copyright  Copyright (C) 2011 - 2014 SMS Taiwan, Inc. All rights reserved.
+- * @license    GNU General Public License version 2 or later; see LICENSE
+- */
+-
+-namespace Formosa\Utilities\Classes;
+-
+-/**
+- * The MultiSingletonTrait class.
+- *
+- * @since  {DEPLOY_VERSION}
+- */
+-trait MultiSingletonTrait
+-{
+-	/**
+-	 * Property instances.
+-	 *
+-	 * @var  array
+-	 */
+-	protected static $instances = array();
+-
+-	/**
+-	 * getInstance
+-	 *
+-	 * @param string $name
+-	 *
+-	 * @return  static
+-	 */
+-	public static function getInstance($name)
+-	{
+-		if (!empty(static::$instances[$name]))
+-		{
+-			return static::$instances[$name];
+-		}
+-
+-		return null;
+-	}
+-
+-	/**
+-	 * setInstance
+-	 *
+-	 * @param string $name
+-	 * @param object $instance
+-	 *
+-	 * @return  mixed
+-	 */
+-	protected static function setInstance($name, $instance)
+-	{
+-		return static::$instances[$name] = $instance;
+-	}
+-
+-	/**
+-	 * hasInstance
+-	 *
+-	 * @param string $name
+-	 *
+-	 * @return  bool
+-	 */
+-	protected static function hasInstance($name)
+-	{
+-		return isset(static::$instances[$name]);
+-	}
+-} 
+\ No newline at end of file
+Index: vendor/windwalker/framework/src/Controller/Test/AbstractMultiActionControllerTest.php
+===================================================================
+--- vendor/windwalker/framework/src/Controller/Test/AbstractMultiActionControllerTest.php	(revision )
++++ vendor/windwalker/framework/src/Controller/Test/AbstractMultiActionControllerTest.php	(revision )
+@@ -56,11 +56,11 @@
+ 	{
+ 		$this->assertEquals('index', $this->instance->execute());
+ 
+-		$this->instance->setActionName('update')->setArguments(array(5, 'Flower'));
++		$this->instance->setAction('update')->setArguments(array(5, 'Flower'));
+ 
+ 		$this->assertEquals('ID: 5 Title: Flower', $this->instance->execute());
+ 
+-		$this->instance->setActionName('create');
++		$this->instance->setAction('create');
+ 
+ 		try
+ 		{
+@@ -96,10 +96,10 @@
+ 	 */
+ 	public function testGetAndSetAction()
+ 	{
+-		$this->instance->setActionName('update')->setArguments(array(5, 'Flower'));
++		$this->instance->setAction('update')->setArguments(array(5, 'Flower'));
+ 
+ 		$this->assertEquals('ID: 5 Title: Flower', $this->instance->execute());
+ 
+-		$this->assertEquals('update', $this->instance->getActionName());
++		$this->assertEquals('update', $this->instance->getAction());
+ 	}
+ }
+Index: vendor/windwalker/framework/src/Controller/README.md
+===================================================================
+--- vendor/windwalker/framework/src/Controller/README.md	(revision )
++++ vendor/windwalker/framework/src/Controller/README.md	(revision )
+@@ -1,126 +1,7 @@
+-# Windwalker Controller Package
++# Part of Windwalker Package
+ 
+-The Windwalker Controller package is a simple interface to control some business logic, id didn't dependency to any other packages.
+- You may integrate it to any systems.
++This is the subtree split of [Windwalker Framework](https://github.com/ventoviro/windwalker).
+ 
+-## Installation via Composer
+-
+-Add this to the require block in your `composer.json`.
+-
+-``` json
+-{
+-    "require": {
+-        "windwalker/controller": "~2.0"
+-    }
+-}
+-```
+-
+-## Create Your Controller
+-
+-``` php
+-use Windwalker\Controller\Controller;
+-
+-class IndexController extends AbstractController
+-{
+-    public function execute()
+-    {
+-        return 'Index';
+-    }
+-}
+-
+-$controller = new IndexController;
+-
+-$output = $contorller->execute();
+-```
+-
+-Windwakler Controller is a "Single Action Controller", follows single responsibility principle,
+-every controller just maintain one task(action). It is inspired from [Joomla New MVC](http://magazine.joomla.org/issues/issue-nov-2013/item/1580-new-mvc-for-joomla-cms). You can create
+-`IndexController`, `CreateController`, `UpdateController` and `DeleteController` for [CRUD](http://en.wikipedia.org/wiki/Create,_read,_update_and_delete).
+-
+-## Using Input and Application
+-
+-By default, controller maintains an input and an application object. We can set it when construct:
+-
+-``` php
+-use Windwalker\Controller\Controller;
+-
+-class IndexController extends AbstractController
+-{
+-    public function execute()
+-    {
+-        // Get params from http request
+-        $method = $this->input->get('_method');
+-
+-        $this->app->redirect('...');
+-
+-        return true;
+-    }
+-}
+-
+-$input = new Input;
+-$app = new WebApplication;
+-
+-$controller = new IndexController($input, $app);
+-
+-$output = $contorller->execute();
+-```
+-
+-It didn't dependency to Windwalker self, you can push other framework's input and application into it:
+-
+-``` php
+-$input = new Request;
+-$app = new HttpKernel;
+-
+-$controller = new IndexController($input, $app);
+-
+-$output = $contorller->execute();
+-```
+-
+-## HMVC
+-
+-Using [HMVC](http://en.wikipedia.org/wiki/Hierarchical_model%E2%80%93view%E2%80%93controller) in Windwalker controller is very easy:
+-
+-``` php
+-class IndexController extends AbstractController
+-{
+-    public function execute()
+-    {
+-        $this->input->set('id', 123);
+-
+-        $foo = new FooController($this->input, $this->app);
+-
+-        echo $foo->execute();
+-
+-        return true;
+-    }
+-}
+-```
+-
+-## Multi Action Controller
+-
+-If you are familiar to common multiple action pattern, use `AbstractMultiActionController`:
+-
+-``` php
+-use Windwalker\Controller\AbstractMultiActionController;
+-
+-class ArticleController extends AbstractMultiActionController
+-{
+-    public function indexAction()
+-    {}
+-
+-    public function saveAction($id = null, $data = array())
+-    {}
+-
+-    public function deleteAction($id = null)
+-    {}
+-}
+-
+-$controller = new ArticleController;
+-
+-// Will call saveAction()
+-$controller->setActionName('save')
+-    ->setArguments(array(5, $data))
+-    ->execute();
+-```
+-
+-If no action set, will call `doExecute()` instead, but you still need to override `doExecute()` first.
++This package has completed and prepare to use, but the document has work in process.
++Please see [Test](Test) to learn how to use and go to [Packagist/windwalker](https://packagist.org/packages/windwalker/)
++to find all the packages.
+Index: vendor/windwalker/framework/src/Controller/AbstractMultiActionController.php
+===================================================================
+--- vendor/windwalker/framework/src/Controller/AbstractMultiActionController.php	(revision )
++++ vendor/windwalker/framework/src/Controller/AbstractMultiActionController.php	(revision )
+@@ -39,7 +39,6 @@
+ 	/**
+ 	 * Execute the controller.
+ 	 *
+-	 * @throws  \LogicException
+ 	 * @return  mixed Return executed result.
+ 	 */
+ 	public function execute()
+@@ -81,7 +80,6 @@
+ 	/**
+ 	 * doExecute
+ 	 *
+-	 * @throws  \LogicException
+ 	 * @return  mixed
+ 	 */
+ 	protected function doExecute()
+@@ -94,7 +92,7 @@
+ 	 *
+ 	 * @return  string
+ 	 */
+-	public function getActionName()
++	public function getAction()
+ 	{
+ 		return $this->action;
+ 	}
+@@ -106,7 +104,7 @@
+ 	 *
+ 	 * @return  static  Return self to support chaining.
+ 	 */
+-	public function setActionName($action)
++	public function setAction($action)
+ 	{
+ 		$this->action = $action;
+ 
+Index: vendor/windwalker/framework/src/DataMapper/Test/RelationDataMapperTest.php
+===================================================================
+--- vendor/windwalker/framework/src/DataMapper/Test/RelationDataMapperTest.php	(revision )
++++ vendor/windwalker/framework/src/DataMapper/Test/RelationDataMapperTest.php	(revision )
+@@ -39,7 +39,7 @@
+ 
+ 		$this->instance = new RelationDataMapper('flower', 'ww_flower');
+ 
+-		$this->instance->addTable('category', 'ww_categories', 'flower.catid = category.id');
++		$this->instance->addTable('cat', 'ww_categories', 'flower.catid = cat.id');
+ 	}
+ 
+ 	/**
+@@ -64,7 +64,7 @@
+ 		$dataset = $this->instance->find(
+ 			array(
+ 				'flower.state' => 1,
+-				new GteCompare('category.id', 2)
++				new GteCompare('cat.id', 2)
+ 			),
+ 			'flower.title DESC',
+ 			1,
+@@ -79,14 +79,14 @@
+ 	`flower`.`ordering`,
+ 	`flower`.`state`,
+ 	`flower`.`params`,
+-	`category`.`id` AS `category_id`,
+-	`category`.`title` AS `category_title`,
+-	`category`.`ordering` AS `category_ordering`,
+-	`category`.`params` AS `category_params`
++	`cat`.`id` AS `cat_id`,
++	`cat`.`title` AS `cat_title`,
++	`cat`.`ordering` AS `cat_ordering`,
++	`cat`.`params` AS `cat_params`
+ FROM `ww_flower` AS `flower`
+-	LEFT JOIN `ww_categories` AS `category` ON flower.catid = category.id
++	LEFT JOIN `ww_categories` AS `cat` ON flower.catid = cat.id
+ WHERE `flower`.`state` = 1
+-	AND `category`.`id` >= 2
++	AND `cat`.`id` >= 2
+ ORDER BY flower.title DESC
+ LIMIT 1, 3
+ SQL;
+@@ -117,12 +117,12 @@
+ 	`flower`.`ordering`,
+ 	`flower`.`state`,
+ 	`flower`.`params`,
+-	`category`.`id` AS `category_id`,
+-	`category`.`title` AS `category_title`,
+-	`category`.`ordering` AS `category_ordering`,
+-	`category`.`params` AS `category_params`
++	`cat`.`id` AS `cat_id`,
++	`cat`.`title` AS `cat_title`,
++	`cat`.`ordering` AS `cat_ordering`,
++	`cat`.`params` AS `cat_params`
+ FROM `ww_flower` AS `flower`
+-	LEFT JOIN `ww_categories` AS `category` ON flower.catid = category.id
++	LEFT JOIN `ww_categories` AS `cat` ON flower.catid = cat.id
+ ORDER BY flower.title DESC
+ LIMIT 1, 3
+ SQL;
+@@ -142,7 +142,7 @@
+ 		$data = $this->instance->findOne(
+ 			array(
+ 				'flower.state' => 1,
+-				new GteCompare('category.id', 2)
++				new GteCompare('cat.id', 2)
+ 			),
+ 			'flower.title DESC'
+ 		);
+@@ -155,14 +155,14 @@
+ 	`flower`.`ordering`,
+ 	`flower`.`state`,
+ 	`flower`.`params`,
+-	`category`.`id` AS `category_id`,
+-	`category`.`title` AS `category_title`,
+-	`category`.`ordering` AS `category_ordering`,
+-	`category`.`params` AS `category_params`
++	`cat`.`id` AS `cat_id`,
++	`cat`.`title` AS `cat_title`,
++	`cat`.`ordering` AS `cat_ordering`,
++	`cat`.`params` AS `cat_params`
+ FROM `ww_flower` AS `flower`
+-	LEFT JOIN `ww_categories` AS `category` ON flower.catid = category.id
++	LEFT JOIN `ww_categories` AS `cat` ON flower.catid = cat.id
+ WHERE `flower`.`state` = 1
+-	AND `category`.`id` >= 2
++	AND `cat`.`id` >= 2
+ ORDER BY flower.title DESC
+ SQL;
+ 
+Index: vendor/windwalker/framework/src/DataMapper/legacy/OtoDataMapperTest.php
+===================================================================
+--- vendor/windwalker/framework/src/DataMapper/legacy/OtoDataMapperTest.php	(revision )
++++ vendor/windwalker/framework/src/DataMapper/legacy/OtoDataMapperTest.php	(revision )
+@@ -1,7 +1,7 @@
+ <?php
+ namespace Windwalker\DataMapper\Test;
+ 
+-use Windwalker\Utilities\ArrayHelper;
++use Joomla\Utilities\ArrayHelper;
+ use Windwalker\Compare\Compare;
+ use Windwalker\Compare\EqCompare;
+ use Windwalker\Data\Data;
+Index: vendor/windwalker/framework/src/DataMapper/README.md
+===================================================================
+--- vendor/windwalker/framework/src/DataMapper/README.md	(revision )
++++ vendor/windwalker/framework/src/DataMapper/README.md	(revision )
+@@ -2,26 +2,25 @@
+ 
+ ## Installation via Composer
+ 
+-Add this to the require block in your `composer.json`.
++Add `"ventoviro/windwalker-middleware": "1.0.*"` to the require block in your composer.json.
+ 
+ ``` json
+ {
+     "require": {
+-        "windwalker/datamapper": "~2.0"
++        "ventoviro/windwalker-datamapper": "1.0.*"
+     }
+ }
+ ```
+ 
+ ## Getting Started
+ 
+-### Prepare Windwalker Database object
++### Prepare Database object
+ 
+ ``` php
+ use Windwalker\Database\DatabaseFactory;
+ 
+ // Make the database driver.
+ $db = DatabaseFactory::getDbo(
+-    'mysql',
+ 	array(
+ 		'driver'   => 'mysql',
+ 		'host'     => 'localhost',
+@@ -33,18 +32,14 @@
+ );
+ ```
+ 
+-The DatabaseDriver will be cache in Factory, now DataMapper will auto load Windwalker DatabaseDriver 
+-from `DatabaseFactory` and `DatabaseAdapter` to operate DB.
++You can get Database later by Factory:
+ 
+-### Manually Set An Exists DatabaseDriver To Adapter
+- 
+ ``` php
+-use Windwalker\DataMapper\Adapter\DatabaseAdapter;
+-use Windwalker\DataMapper\Adapter\WindwalkerAdapter;
+-
+-DatabaseAdapter::setInstance(new WindwalkerAdapter($db));
++$db = DatabaseFactory::getDbo();
+ ```
+ 
++See Joomla Database: https://github.com/joomla-framework/database
++
+ ## Create a DataMapper
+ 
+ ``` php
+@@ -55,45 +50,6 @@
+ $fooSet = $fooMapper->find(array('id' => 1));
+ ```
+ 
+-### Extend It
+-
+-You can also create a class to operate specific table:
+-
+-``` php
+-class FooMapper extends DataMapper
+-{
+-    protected $table = '#__foo';
+-}
+-
+-$data = (new FooMapper)->findAll();
+-```
+-
+-Or using facade:
+-
+-``` php
+-abstract class FooMapper
+-{
+-    protected static $instance;
+-    
+-    public static function getInstance()
+-    {
+-        if (!static::$instance)
+-        {
+-            static::$instance = new DataMapper('#__foo');
+-        }
+-        
+-        return static::$instance;
+-    }
+-    
+-    public static function __callStatic($name, $args)
+-    {
+-        return call_user_func_array(array(static::getInstance(), $name), $args);
+-    }
+-}
+-
+-$data = FooMapper::findOne(array('id' => 5, 'alias' => 'bar'));
+-```
+-
+ ## Find Records
+ 
+ Find method will fetch rows from table, and return `DataSet` class.
+@@ -264,33 +220,18 @@
+ Using `RelationDataMapper` to join tables.
+ 
+ ``` php
+-$fooMapper = new RelationDataMapper('flower', '#__flower');
++$fooMapper = new RelationDataMapper('foo', '#__foo');
+ 
+-$fooMapper->addTable('author', '#__users', 'flower.user_id = author.id', 'LEFT')
+-    ->addTable('category', '#__categories', array('category.lft >= flower.lft', 'category.rgt <= flower.rgt'), 'INNER');
++$fooMapper->addTable('author', '#__users', 'foo.user_id = author.id', 'LEFT')
++    ->addTable('category', '#__categories', array('category.lft >= foo.lft', 'category.rgt <= foo.rgt'), 'INNER');
+ 
+ // Don't forget add alias on where conditions.
+-$dataset = $fooMapper->find(array('flower.id' => 5));
++$dataset = $fooMapper->find(array('foo.id' => 5));
+ ```
+ 
+ The Join query will be:
+ 
+ ``` sql
+-SELECT `flower`.`id`,
+-	`flower`.`catid`,
+-	`flower`.`title`,
+-	`flower`.`user_id`,
+-	`flower`.`meaning`,
+-	`flower`.`ordering`,
+-	`flower`.`state`,
+-	`flower`.`params`,
+-	`author`.`id` AS `author_id`,
+-	`author`.`name` AS `author_name`,
+-	`author`.`pass` AS `author_pass`,
+-	`category`.`id` AS `category_id`,
+-	`category`.`title` AS `category_title`,
+-	`category`.`ordering` AS `category_ordering`,
+-	`category`.`params` AS `category_params`
+ FROM #__foo AS foo
+     LEFT JOIN #__users AS author ON foo.user_id = author.id
+     INNER JOIN #__categories AS category ON category.lft >= foo.lft AND category.rgt <= foo.rgt
+@@ -331,18 +272,16 @@
+     AND `catid` NOT IN (1,2,3,4,5)
+ ```
+ 
+-### Available compares:
++### Abailable compares:
+ 
+-| Name       | Description      | Operator |
+-| ---------- | -----------------| -------- |
+-| EqCompare  | Equal                 | `=`  |
+-| NeqCompare | Not Equal             | `!=` |
+-| GtCompare  | Greater than          | `>`  |
+-| GteCompare | Greater than or Equal | `>=` |
+-| LtCompare  | Less than             | `<`  |
+-| LteCompare | Less than or Equal    | `<=` |
+-| InCompare  | In                    | `IN` |
+-| NinCompare | Not In                | `IN` |
++- EqCompare  : Equal `=`
++- NeqCompare : Not Equal `!=`
++- GtCompare  : Greater than `>`
++- GteCompare : Greate than or Equal `>=`
++- LtCompare  : Less than `<`
++- LteCompare : Less than or Equal `<=`
++- InCompare  : In `IN`
++- NinCompare : Not In `NOT IN`
+ 
+ ### Custom Compare
+ 
+@@ -358,36 +297,10 @@
+ 
+ See: https://github.com/ventoviro/windwalker-compare
+ 
++
+ ## Using Data and DataSet
+ 
+ See: https://github.com/ventoviro/windwalker-data
+ 
+-## Integrate Other Framework's DB Object
+- 
++
+-Create your own adapter.
+- 
++
+-``` php
+-class MyDatabaseAdapter extends DatabaseAdapter
+-{
+-    protected $db;
+-
+-    public function __construct(MyDBObject $db)
+-    {
+-        $this->db = $db;
+-    }
+-
+-	public function find($table, $select = '*', array $conditions = array(), array $orders = array(), $start = 0, $limit = null) {}
+-	public function create($table, $data, $pk = null) {}
+-	public function updateOne($table, $data, array $condFields = array()) {}
+-	public function updateAll($table, $data, array $conditions = array()) {}
+-	public function delete($table, array $conditions = array()) {}
+-	public function getFields($table) {}
+-	public function transactionStart($asSavePoint = false) {}
+-	public function transactionCommit($asSavePoint = false) {}
+-	public function transactionRollback($asSavePoint = false) {}
+-}
+-
+-DatabaseAdapter::setInstance(new MyDatabaseAdapter($db));
+-```
+-
+-DataMapper will call this adapter to operate DB, it prevents that there may be 2 DB connections exists at the same time. 
+Index: vendor/windwalker/framework/src/DataMapper/DataMapper.php
+===================================================================
+--- vendor/windwalker/framework/src/DataMapper/DataMapper.php	(revision )
++++ vendor/windwalker/framework/src/DataMapper/DataMapper.php	(revision )
+@@ -18,7 +18,7 @@
+ class DataMapper extends AbstractDataMapper
+ {
+ 	/**
+-	 * The DB adapter.
++	 * Joomla DB adapter.
+ 	 *
+ 	 * @var DatabaseAdapter
+ 	 */
+@@ -232,7 +232,7 @@
+ 	/**
+ 	 * Get DB adapter.
+ 	 *
+-	 * @return  \Windwalker\Database\Driver\DatabaseDriver Db adapter.
++	 * @return  \Windwalker\Database\DatabaseDriver Db adapter.
+ 	 */
+ 	public function getDb()
+ 	{
+@@ -242,7 +242,7 @@
+ 	/**
+ 	 * Set db adapter.
+ 	 *
+-	 * @param   \Windwalker\Database\Driver\DatabaseDriver $db Db adapter.
++	 * @param   \Windwalker\Database\DatabaseDriver $db Db adapter.
+ 	 *
+ 	 * @return  DataMapper  Return self to support chaining.
+ 	 */
+Index: vendor/windwalker/framework/src/DataMapper/AbstractDataMapper.php
+===================================================================
+--- vendor/windwalker/framework/src/DataMapper/AbstractDataMapper.php	(revision )
++++ vendor/windwalker/framework/src/DataMapper/AbstractDataMapper.php	(revision )
+@@ -79,13 +79,17 @@
+ 	 */
+ 	public function __construct($table = null, $pk = 'id')
+ 	{
+-		$this->table = $this->table ? : $table;
+-		$this->pk = $this->pk ? : $pk;
++		if (!$this->table)
++		{
++			$this->table = $table;
++		}
+ 
+ 		if (!$this->table)
+ 		{
+ 			throw new \Exception('Hey, please give me a table name~!');
+ 		}
++
++		$this->pk = $pk;
+ 
+ 		// Set some custom configuration.
+ 		$this->prepare();
+Index: vendor/windwalker/framework/src/DataMapper/RelationDataMapper.php
+===================================================================
+--- vendor/windwalker/framework/src/DataMapper/RelationDataMapper.php	(revision )
++++ vendor/windwalker/framework/src/DataMapper/RelationDataMapper.php	(revision )
+@@ -30,10 +30,10 @@
+ 	/**
+ 	 * Constructor.
+ 	 *
+-	 * @param string                   $alias  Table alias.
++	 * @param string                   $alias       Table alias.
+-	 * @param string                   $table  Table name.
++	 * @param string                   $table       Table name.
+-	 * @param string|array             $pk     Primary key.
++	 * @param string|array             $pk          Primary key.
+-	 * @param DatabaseAdapterInterface $db     Database adapter.
++	 * @param DatabaseAdapterInterface $db          Database adapter.
+ 	 */
+ 	public function __construct($alias, $table, $pk = 'id', DatabaseAdapterInterface $db = null)
+ 	{
+Index: vendor/windwalker/framework/src/Filesystem/Path/README.md
+===================================================================
+--- vendor/windwalker/framework/src/Filesystem/Path/README.md	(revision )
++++ vendor/windwalker/framework/src/Filesystem/Path/README.md	(revision )
+@@ -1,283 +0,0 @@
+-# Windwalker Filesystem PathLocator
+-
+-## PathLocator object
+-
+-A Path locator, help us locate a system path or relative path.
+-
+-We can use this object to find files or list files, and also support using callback to filter files.
+-
+-#### Create a new PathLocator
+-
+-``` php
+-$path = new PathLocator('/var/www/flower');
+-```
+-
+-#### Convert to string
+-
+-``` php
+-echo $path
+-
+-//or
+-
+-(string) $path;
+-```
+-
+-#### Path operation
+-
+-Use chaining to operate path.
+-
+-##### Child
+-
+-``` php
+-$path->child('plugins')           // => /var/www/flower/plugins
+-    ->child('system/flower/lib'); // => /var/www/flower/plugins/system/flower/lib
+-```
+-
+-##### Parent
+-
+-``` php
+-$path->parent()       // => /var/www/flower/plugins/system/flower (Up one level)
+-    ->parent(2)       // => /var/www/flower/plugins               (Up 2 levels)
+-    ->parent('www');  // => /var/www                              (Find a parent and go this level)
+-```
+-
+-##### Prefix
+-
+-Add a prefix of system path, we can change it, only when converting to string, the prefix will be added to path.
+-
+-``` php
+-$path2 = new PathLocator('src/Sakura/Olive');
+-
+-echo $path->addPrefix($_SERVER['DOCUMENT_ROOT']); // => /var/www/src/Sakura/Olive
+-```
+-
+-#### Filesystem Operation
+-
+-``` php
+-echo $path->isDir();  // true or false
+-echo $path->isFile(); // true or false
+-echo $path->exists(); // true or false
+-```
+-
+-##### Get file info
+-
+-This function has not prepared yet.
+-
+-``` php
+-$path->getInfo();            // return SplFileInfo of current directory
+-
+-$path->getInfo('index.php'); // return SplFileInfo of this file
+-```
+-
+-##### Scan dir
+-
+-Get Folders
+-
+-``` php
+-$dirs = $path->getFolders([true to recrusive]);
+-
+-foreach($dirs as $dir)
+-{
+-    echo $dir . '<br />'; // print all dir's name
+-}
+-```
+-
+-Get Files
+-
+-``` php
+-$files = $path->getFiles([true to recrusive]);
+-
+-foreach($files as $file)
+-{
+-    echo $file->getPathname() . '<br />'; // print all file's name
+-}
+-```
+-
+-##### Find files
+-
+-Find by string or regex
+-
+-``` php
+-echo $path->find('config.json');     // Find one file and return fileinfo object
+-
+-echo $path->find(array('^config'));  // Find one file by regex
+-
+-// Second argument set to TRUE for recursive
+-foreach($path->findAll(array('^config_*.json', '!^..'), true) as $file)
+-{
+-    // Find all files as array, param 2 to recursive
+-}
+-```
+-
+-Find by callback
+-
+-``` php
+-$callback = function($current, $key, $iterator)
+-{
+-    return return @preg_match('^Foo', $current->getFilename())  && ! $iterator->isDot();
+-};
+-
+-foreach($path->findAll($callback, true) as $file)
+-{
+-    // ...
+-}
+-```
+-
+-Find by Comparator
+-
+-This comparator object may contain the filter logic, but not prepared yet.
+-
+-``` php
+-$comparator = new FileComparator;
+-
+-foreach($path->findAll(FileComparatorInterface $comparator, true) as $file)
+-{
+-    // ...
+-}
+-```
+-
+-#### Strict Mode
+-
+-This function not prepared yet.
+-
+-``` php
+-$dl2 = new \DirectoryLocator($_SERVER['DOCUMENT_ROOT'] . '/src', true);
+-$dls->child('Campenont');        // throw PathNotExistsException();
+-$dls->child('../www/index.php'); // throw PathNotDirException();
+-```
+-
+-*
+-
+-## PathCollection object
+-
+-A collection of paths, we can put many paths to this object, and use it as array.
+-
+-And we can use this collection to iterate all sub dirs and files, also find files.
+-
+-The iterator will travel to every `PathLocator` in this collection object, and return an SplFileInfo for us.
+-
+-#### Create a new PathCollection
+-
+-##### Add with no key
+-
+-``` php
+-$paths = new PathCollection(array(
+-    new PathLocator('templates/' . $template . '/html/' . $option),
+-    new PathLocator('Sakuras/' . $option . '/view/tmpl/'),
+-    'layouts/' . $option ,     // Auto convert to PathLocator
+-));
+-```
+-
+-##### Add with key name
+-
+-``` php
+-$paths = new PathColleciotn(array(
+-    'Template'  => new PathLocator('templates/' . $template . '/html/' . $option),
+-    'Sakura' => new PathLocator('Sakuras/' . $option . '/view/tmpl/'),
+-    'Layout'    => new PathLocator('layouts/' . $option)
+-));
+-```
+-
+-#### Paths operations
+-
+-##### Add path
+-
+-``` php
+-$paths->addPath(new PathLocator('Foo'));        // No key name, will using number as key
+-
+-$paths->addPath(new PathLocator('Foo'), 'Foo'); // With key name
+-```
+-
+-##### Add paths
+-
+-``` php
+-$paths->addPaths(array(new PathLocator('Bar'))); // Add by array
+-```
+-
+-##### Remove path
+-
+-``` php
+-$paths->removePath('Foo');  // Remove by key name
+-$paths->removePath(0);      // Remove by number
+-```
+-
+-##### Set prefix to all paths
+-
+-We can change this prefix, only when converting to string,
+-the prefix will have been added to path.
+-
+-``` php
+-// Prepend all path with a prefix path.
+-
+-$paths->setPrefix('/var/www/flower');
+-```
+-
+-#### Iterator
+-
+-List all PathLocator
+-
+-``` php
+-foreach($paths as $path)
+-{
+-    echo $path // print path string
+-}
+-```
+-
+-Return a raw array
+-
+-``` php
+-foreach($paths->toArray() as $path)
+-{
+-    echo $path // print path string
+-}
+-```
+-
+-List all files and folders of all paths
+-
+-``` php
+-foreach($paths->getAllChildren([true to recrusive]) as $file)
+-{
+-    echo $file // SplFileInfo
+-}
+-```
+-
+-List all files
+-
+-``` php
+-foreach($paths->getFiles([true to recrusive]) as $file)
+-{
+-    echo $file->getFilename() // SplFileInfo
+-}
+-```
+-
+-List all folders
+-
+-``` php
+-foreach($paths->getFolders([true to recrusive]) as $dir)
+-{
+-    echo $file->getPathname() // SplFileInfo
+-}
+-```
+-
+-#### Find Files and Folders
+-
+-Same as PathLocator, but return all paths' file & folders.
+-
+-``` php
+-$paths->find('config.json');
+-
+-$paths->findAll('config_*.json');
+-```
+-
+--------
+-
+-### Using it as array or string
+-
+-``` php
+-$cache  = new PathLocator($_SERVER['DOCUMENT_ROOT'] . '/cache');
+-$loader = new \Twig_Loader_Filesystem($paths);
+-
+-$twig = new \Twig_Environment($loader, array(
+-    'cache' => (string) $cache,
+-));
+-```
+Index: vendor/windwalker/framework/src/Filesystem/Path/PathLocator.php
+===================================================================
+--- vendor/windwalker/framework/src/Filesystem/Path/PathLocator.php	(revision )
++++ vendor/windwalker/framework/src/Filesystem/Path/PathLocator.php	(revision )
+@@ -44,7 +44,7 @@
+ 	/**
+ 	 * Constructor to handle path.
+ 	 *
+-	 * @param   string $path Path to parse.
++	 * @param   string  $path  Path to parse.
+ 	 *
+ 	 * @since   {DEPLOY_VERSION}
+ 	 */
+@@ -56,9 +56,9 @@
+ 	/**
+ 	 * Replace with a new path.
+ 	 *
+-	 * @param   string $path Path to parse.
++	 * @param   string  $path  Path to parse.
+ 	 *
+-	 * @return  static  Return this object to support chaining.
++	 * @return  PathLocator  Return this object to support chaining.
+ 	 *
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+@@ -72,7 +72,7 @@
+ 	/**
+ 	 * Get file iterator of current dir.
+ 	 *
+-	 * @param  boolean $recursive True to resursive.
++	 * @param  boolean  $recursive  True to resursive.
+ 	 *
+ 	 * @return  \FilesystemIterator|\RecursiveIteratorIterator  File & dir iterator.
+ 	 */
+@@ -85,7 +85,7 @@
+ 	/**
+ 	 * Get folder iterator of current dir.
+ 	 *
+-	 * @param  boolean $recursive True to resursive.
++	 * @param  boolean  $recursive  True to resursive.
+ 	 *
+ 	 * @return  \CallbackFilterIterator  Iterator only include dirs.
+ 	 */
+@@ -97,7 +97,7 @@
+ 	/**
+ 	 * Get file iterator of current dir
+ 	 *
+-	 * @param  boolean $recursive True to resursive.
++	 * @param  boolean  $recursive  True to resursive.
+ 	 *
+ 	 * @return  \CallbackFilterIterator  Iterator only include files.
+ 	 */
+@@ -109,15 +109,15 @@
+ 	/**
+ 	 * Find one file and return.
+ 	 *
+-	 * @param  mixed   $condition       Finding condition, that can be a string, a regex or a callback function.
++	 * @param  mixed   $condition  Finding condition, that can be a string, a regex or a callback function.
+-	 *                                  Callback example:
++	 *                            Callback example:
+-	 *                                  <code>
++	 *                            <code>
+-	 *                                  function($current, $key, $iterator)
++	 *                            function($current, $key, $iterator)
+-	 *                                  {
++	 *                            {
+-	 *                                  return @preg_match('^Foo', $current->getFilename())  && ! $iterator->isDot();
++	 *                                return @preg_match('^Foo', $current->getFilename())  && ! $iterator->isDot();
+-	 *                                  }
++	 *                            }
+-	 *                                  </code>
++	 *                            </code>
+-	 * @param  boolean $recursive       True to resursive.
++	 * @param  boolean  $recursive  True to resursive.
+ 	 *
+ 	 * @return  \SplFileInfo  Finded file info object.
+ 	 *
+@@ -131,15 +131,15 @@
+ 	/**
+ 	 * Find all files which matches condition.
+ 	 *
+-	 * @param  mixed   $condition       Finding condition, that can be a string, a regex or a callback function.
++	 * @param  mixed   $condition  Finding condition, that can be a string, a regex or a callback function.
+-	 *                                  Callback example:
++	 *                            Callback example:
+-	 *                                  <code>
++	 *                            <code>
+-	 *                                  function($current, $key, $iterator)
++	 *                            function($current, $key, $iterator)
+-	 *                                  {
++	 *                            {
+-	 *                                  return @preg_match('^Foo', $current->getFilename())  && ! $iterator->isDot();
++	 *                                return @preg_match('^Foo', $current->getFilename())  && ! $iterator->isDot();
+-	 *                                  }
++	 *                            }
+-	 *                                  </code>
++	 *                            </code>
+-	 * @param  boolean $recursive       True to resursive.
++	 * @param  boolean  $recursive  True to resursive.
+ 	 *
+ 	 * @return  \CallbackFilterIterator  Finded files or paths iterator.
+ 	 *
+@@ -153,12 +153,13 @@
+ 	/**
+ 	 * Using a closure function to filter file.
+ 	 *
++	 * Reference: http://www.php.net/manual/en/class.callbackfilteriterator.php
++	 *
+-	 * @param  \Closure $callback  A callback function to filter file.
++	 * @param  \Closure  $callback   A callback function to filter file.
+-	 * @param  boolean  $recursive True to recursive.
++	 * @param  boolean   $recursive  True to resursive.
+ 	 *
+ 	 * @return  \CallbackFilterIterator  Filtered file or path iteator.
+ 	 *
+-	 * @see    http://www.php.net/manual/en/class.callbackfilteriterator.php
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+ 	public function findByCallback(\Closure $callback, $recursive = false)
+@@ -169,8 +170,8 @@
+ 	/**
+ 	 * Normalize path, remove not necessary elements.
+ 	 *
+-	 * @param  string $path         A given path to normalize.
++	 * @param  string     $path         A given path to normalize.
+-	 * @param  bool   $returnString Return string or array.
++	 * @param  bool       $returnString Return string or array.
+ 	 *
+ 	 * @return  string|array  Normalized path.
+ 	 *
+@@ -199,7 +200,7 @@
+ 	/**
+ 	 * Clean path and remove dots.
+ 	 *
+-	 * @param   string $path A given path to parse.
++	 * @param   string   $path  A given path to parse.
+ 	 *
+ 	 * @return  string  Cleaned path.
+ 	 *
+@@ -209,7 +210,7 @@
+ 	{
+ 		$path = rtrim($path, ' /\\');
+ 
+-		$path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
++		$path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR ,$path);
+ 
+ 		return $path;
+ 	}
+@@ -217,7 +218,7 @@
+ 	/**
+ 	 * Remove dots from path.
+ 	 *
+-	 * @param  string|array $path A given path to remove dots.
++	 * @param  string|array  $path  A given path to remove dots.
+ 	 *
+ 	 * @return  string|array  Cleaned path.
+ 	 *
+@@ -225,7 +226,7 @@
+ 	 */
+ 	protected function removeDots($path)
+ 	{
+-		$isBeginning = true;
++		$isBeginning = true ;
+ 
+ 		// If not array, extract it.
+ 		$isArray = is_array($path);
+@@ -233,23 +234,23 @@
+ 		$path = $isArray ? $path : $this->extract($path);
+ 
+ 		// Search for dot files
+-		foreach ($path as $key => $row)
++		foreach($path as $key => $row)
+ 		{
+ 			// Remove dot files
+-			if ($row == '.')
++			if($row == '.')
+ 			{
+ 				unset($path[$key]);
+ 			}
+ 
+ 			// Remove dots and go parent dir
+-			if ($row == '..' && !$isBeginning)
++			if($row == '..' && !$isBeginning)
+ 			{
+ 				unset($path[$key]);
+ 				unset($path[$key - 1]);
+ 			}
+ 
+ 			// Do not get parent if dots in the beginning
+-			if ($row != '..' && $isBeginning)
++			if($row != '..' && $isBeginning)
+ 			{
+ 				$isBeginning = false;
+ 			}
+@@ -301,9 +302,9 @@
+ 	 * Set a prefix, when this object convert to string,
+ 	 * prefix will auto add to the front of path.
+ 	 *
+-	 * @param   string $prefix Prefix string to set.
++	 * @param   string  $prefix  Prefix string to set.
+ 	 *
+-	 * @return  static  Return this object to support chaining.
++	 * @return  PathLocator  Return this object to support chaining.
+ 	 *
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+@@ -317,9 +318,9 @@
+ 	/**
+ 	 * Get a child path of given name.
+ 	 *
+-	 * @param   string $name Child name.
++	 * @param   string  $name  Child name.
+ 	 *
+-	 * @return  static  Return this object to support chaining.
++	 * @return  PathLocator  Return this object to support chaining.
+ 	 *
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+@@ -335,26 +336,26 @@
+ 	/**
+ 	 * Get a parent path of given condition.
+ 	 *
+-	 * @param   boolean $condition Parent condition.
++	 * @param   boolean  $condition  Parent condition.
+ 	 *
+-	 * @return  static  Return this object to support chaining.
++	 * @return  PathLocator  Return this object to support chaining.
+ 	 *
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+ 	public function parent($condition = null)
+ 	{
+ 		// Up one level
+-		if (is_null($condition))
++		if(is_null($condition))
+ 		{
+ 			array_pop($this->paths);
+ 		}
+ 		// Up mutiple level
+-		elseif (is_int($condition))
++		elseif(is_int($condition))
+ 		{
+ 			$this->paths = array_slice($this->paths, 0, -$condition);
+ 		}
+ 		// Find a dir name and go to this level
+-		elseif (is_string($condition))
++		elseif(is_string($condition))
+ 		{
+ 			$paths = $this->paths;
+ 
+@@ -362,17 +363,15 @@
+ 
+ 			// Find parent
+ 			$n = 0;
+-
+-			foreach ($paths as $key => $name)
++			foreach($paths as $key => $name)
+ 			{
+-				if ($key == 0)
++				if($key == 0)
+ 				{
+-					// Ignore latest dir
+-					continue;
++					continue; // Ignore latest dir
+ 				}
+ 
+ 				// Is this dir match condition?
+-				if ($name == $condition)
++				if($name == $condition)
+ 				{
+ 					$n = $key;
+ 					break;
+@@ -388,15 +387,15 @@
+ 	/**
+ 	 * Append a new path before current path.
+ 	 *
+-	 * @param   string $path Path to append.
++	 * @param   string  $path  Path to append.
+ 	 *
+-	 * @return  static  Return this object to support chaining.
++	 * @return  PathLocator  Return this object to support chaining.
+ 	 *
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+ 	public function append($path)
+ 	{
+-		if (!is_array($path))
++		if(!is_array($path))
+ 		{
+ 			$path = $this->normalize($path);
+ 		}
+@@ -411,15 +410,15 @@
+ 	/**
+ 	 * Append a new path before current path.
+ 	 *
+-	 * @param   string $path Path to append.
++	 * @param   string  $path  Path to append.
+ 	 *
+-	 * @return  static  Return this object to support chaining.
++	 * @return  PathLocator  Return this object to support chaining.
+ 	 *
+ 	 * @since  {DEPLOY_VERSION}
+ 	 */
+ 	public function prepend($path)
+ 	{
+-		if (!is_array($path))
++		if(!is_array($path))
+ 		{
+ 			$path = $this->normalize($path);
+ 		}
+@@ -434,7 +433,7 @@
+ 	/**
+ 	 * Is this path subdir of given path?
+ 	 *
+-	 * @param  string $parent Given path to detect.
++	 * @param  string  $parent  Given path to detect.
+ 	 *
+ 	 * @return  boolean  Is subdir or not.
+ 	 *
+@@ -447,13 +446,13 @@
+ 		$parent = $this->normalize($parent, true);
+ 
+ 		// Path is self
+-		if ($self == $parent)
++		if($self == $parent)
+ 		{
+ 			return false;
+ 		}
+ 
+ 		// Path is parent
+-		if (strpos($parent, $self) === 0)
++		if(strpos($parent, $self) === 0)
+ 		{
+ 			return true;
+ 		}
+@@ -472,7 +471,7 @@
+ 	{
+ 		$path = $this->compact($this->paths);
+ 
+-		if ($this->prefix)
++		if($this->prefix)
+ 		{
+ 			$path = rtrim($this->prefix, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . trim($path, DIRECTORY_SEPARATOR);
+ 		}
+@@ -485,7 +484,7 @@
+ 	/**
+ 	 * Explode path by DIRECTORY_SEPARATOR.
+ 	 *
+-	 * @param   string $path Path to extract.
++	 * @param   string  $path  Path to extract.
+ 	 *
+ 	 * @return  array  Extracted path array.
+ 	 *
+@@ -499,7 +498,7 @@
+ 	/**
+ 	 * Implode path by DIRECTORY_SEPARATOR.
+ 	 *
+-	 * @param   string $path Path to compact.
++	 * @param   string  $path  Path to compact.
+ 	 *
+ 	 * @return  array  Compacted path array.
+ 	 *
+Index: vendor/windwalker/framework/src/Filesystem/Path/PathCollection.php
+===================================================================
+--- vendor/windwalker/framework/src/Filesystem/Path/PathCollection.php	(revision )
++++ vendor/windwalker/framework/src/Filesystem/Path/PathCollection.php	(revision )
+@@ -343,7 +343,7 @@
+ 	 */
+ 	public function appendAll($appended)
+ 	{
+-		foreach ($this->storage as &$path)
++		foreach ($this->paths as &$path)
+ 		{
+ 			$path->append($appended);
+ 		}
+@@ -362,7 +362,7 @@
+ 	 */
+ 	public function prependAll($prepended)
+ 	{
+-		foreach ($this->storage as &$path)
++		foreach ($this->paths as &$path)
+ 		{
+ 			$path->prepend($prepended);
+ 		}
+@@ -401,7 +401,7 @@
+ 	/**
+ 	 * Is this path a subdir of another path in bag?
+ 	 *
+-	 * When running recursive scan dir, we have to avoid to re scan same dir.
++	 * When running recrusive scan dir, we have to avoid to re scan same dir.
+ 	 *
+ 	 * @param  PathLocator $path The path to detect is subdir or not.
+ 	 *
+@@ -411,7 +411,7 @@
+ 	 */
+ 	public function isSubdir($path)
+ 	{
+-		foreach ($this->storage as $member)
++		foreach ($this->paths as $member)
+ 		{
+ 			if ($member->isSubdirOf($path))
+ 			{
+@@ -420,5 +420,20 @@
+ 		}
+ 
+ 		return false;
++	}
++
++	/**
++	 * Automatic all parent methods
++	 *
++	 * @param   string $name Name of the method name we want to gall.
++	 * @param   array  $args Called args.
++	 *
++	 * @return  mixed   The filtered input value.
++	 *
++	 * @since  {DEPLOY_VERSION}
++	 */
++	public function __call($name, $args)
++	{
++		return call_user_func_array(array(parent, $name), $args);
+ 	}
+ }
+Index: vendor/windwalker/framework/src/Filesystem/Test/PathCollectionTest.php
+===================================================================
+--- vendor/windwalker/framework/src/Filesystem/Test/PathCollectionTest.php	(revision )
++++ vendor/windwalker/framework/src/Filesystem/Test/PathCollectionTest.php	(revision )
+@@ -62,12 +62,12 @@
+ 				array(
+ 					'/',
+ 					'/var/www/foo/bar',
+-					'/var/www/windwalker/bar/foo'
++					'/var/www/joomla/bar/foo'
+ 				),
+ 				array(
+ 					new PathLocator('/'),
+ 					new PathLocator('/var/www/foo/bar'),
+-					new PathLocator('/var/www/windwalker/bar/foo')
++					new PathLocator('/var/www/joomla/bar/foo')
+ 				)
+ 			),
+ 			
+@@ -366,14 +366,14 @@
+ 	{
+ 		$this->setUp();
+ 		
+-		$this->collection->addPath('windwalker/dir/foo/bar', 'foo');
+-		$this->collection->addPath('windwalker/dir/yoo/hoo', 'yoo');
++		$this->collection->addPath('joomla/dir/foo/bar', 'foo');
++		$this->collection->addPath('joomla/dir/yoo/hoo', 'yoo');
+ 
+ 		$this->collection->setPrefix('/var/www');
+ 
+ 		$expects = array(
+-			Path::clean('/var/www/windwalker/dir/foo/bar'),
+-			Path::clean('/var/www/windwalker/dir/yoo/hoo'),
++			Path::clean('/var/www/joomla/dir/foo/bar'),
++			Path::clean('/var/www/joomla/dir/yoo/hoo'),
+ 		);
+ 
+ 		$paths = array(
+Index: vendor/windwalker/framework/src/Filesystem/README.md
+===================================================================
+--- vendor/windwalker/framework/src/Filesystem/README.md	(revision )
++++ vendor/windwalker/framework/src/Filesystem/README.md	(revision )
+@@ -1,362 +1,7 @@
+-# Windwalker Filesystem Package
++# Part of Windwalker Package
+ 
+-Windwalker Filesystem provides some easy interface to operate file and folders.
++This is the subtree split of [Windwalker Framework](https://github.com/ventoviro/windwalker).
+ 
+-## Installation via Composer
+-
+-Add this to the require block in your `composer.json`.
+-
+-``` json
+-{
+-    "require": {
+-        "windwalker/filesystem": "~2.0"
+-    }
+-}
+-```
+-
+-## File
+-
+-File is a abstract class provides methods to operate files.
+-
+-### Write & Delete files
+-
+-``` php
+-use Windwalker\Filesystem\File;
+-
+-$file = '/path/to/file.txt';
+-
+-File::write($file, $content);
+-
+-File::delete($file);
+-```
+-
+-### Move & Copy
+-
+-``` php
+-$src = '/path/to/file.txt';
+-$dest = '/path/of/new/file.txt';
+-
+-// Move
+-File::move($src, $dest);
+-
+-// Force move if file exsits
+-File::move($src, $dest, true);
+-
+-// Copy
+-File::copy($src, $dest);
+-
+-// Force copy if file exists
+-File::copy($src, $dest, true);
+-```
+-
+-### Upload
+-
+-``` php
+-File::upload($src, $dest);
+-```
+-
+-It is basically the wrapper for the PHP `move_uploaded_file()` function, but also does checks availability
+-and permissions on both source and destination path.
+-
+-### File Name
+-
+-Strip extension and get simple path:
+-
+-``` php
+-$file = '/path/to/flower.txt';
+-
+-$name = File::stripExtension($file); // /path/to/flower
+-```
+-
+-Get extension:
+-
+-``` php
+-$file = '/path/to/flower.txt';
+-
+-File::getExtension($file); // txt
+-```
+-
+-Get only file name.
+-
+-``` php
+-$file = '/path/to/flower.txt';
+-
+-File::getFilename($file); // flower.txt
+-```
+-
+-Make file name safe to store.
+-
+-``` php
+-$path = /path!/to/flower sakura.
+-
+-File::makeSafe($path); // /path/to/flowersakura
+-```
+-
+-##  Folder
+-
+-Folder class help us operate folders and list files of a folder.
+-
+-### Folder Operation
+-
+-Move & Copy
+-
+-``` php
+-use Windwalker\Filesystem\Folder;
+-
+-// Move folder
+-Folder::move($src, $dest);
+-
+-// Force move if folder exists
+-Folder::move($src, $dest, true);
+-
+-// Copy folder, will also copy all children
+-Folder::copy($src, $dest);
+-
+-// Force copy if folder exists
+-Folder::copy($src, $dest, true);
+-```
+-
+-Create & Delete
+-
+-``` php
+-Folder::create($path);
+-
+-Folder::delete($path);
+-```
+-
+-### List Files
+-
+-#### List Folders
+-
+-``` php
+-// List folders of a folder
+-Folder::folders($dir);
+-
+-// List folders recursive
+-Folder::folders($dir, true);
+-
+-// Path type: Get basename of every item
+-Folder::folders($dir, true, Folder::PATH_BASENAME);
+-```
+-
+-Available path type:
+-
+-- `Folder::PATH_ABSOLUTE` - Absolute full path.
+-- `Folder::PATH_RELATIVE` - Relative path from folder you scan.
+-- `Folder::PATH_BASENAME` - The folder or file name.
+-
+-#### List Files
+-
+-``` php
+-// List files of a folder
+-Folder::files($dir);
+-
+-// List files recursive
+-Folder::files($dir, true);
+-
+-// Path type: Get basename of every item
+-Folder::files($dir, true, Folder::PATH_BASENAME);
+-```
+-
+-#### List Files & Folders
+-
+-``` php
+-// List files & folders of a folder
+-Folder::items($dir);
+-
+-// List files & folders recursive
+-Folder::items($dir, true);
+-
+-// Path type: Get basename of every item
+-Folder::items($dir, true, Folder::PATH_RELATIVE);
+-```
+-
+-## Filesystem Class
+-
+-Filesystem class is a universal finder to find and operate folders & files.
+-
+-### Folder & File Operation
+-
+-Filesystem move & copy method will auto detect the path is a folder or file, if is folder, it will call `Folder::move()`,
+- if is file, it will call `File::move()`.
+-
+-``` php
+-// we don't need to know $src is a folder or file, Filesystem will detect it.
+-Filesystem::move($src, $dest);
+-Filesystem::copy($src, $dest);
+-Filesystem::delete($src, $dest);
+-```
+-
+-## Path
+-
+-A simple helper to handler some path string.
+-
+-### Clean Path
+-
+-To strip additional / or \ in a path name.
+-
+-``` php
+-$path = '/var/www\flower\sakura/olive';
+-
+-$path = Path::clean($path); // Will be: '/var/www/flower/sakura/olive'
+-```
+-
+-### Permissions
+-
+-``` php
+-// Get by number
+-Path::getPermissions($path); // 755
+-
+-// Get by string
+-Path::getPermissions($path, true); // dwrxwrx--x
+-
+-// Set permissions, if is file, set to 644, if is folder set to 755
+-Path::setPermissions($path, '0644', '0755');
+-
+-// Check can change Permissions
+-Path::canChmod($path); // Bool
+-```
+-
+-
+-
+-### Finder
+-
+-Finder is the most powerful function of Filesystem, it provides an interface to let us use our logic to filter files.
+-
+-####  Simple Finder
+-
+-``` php
+-// Argument 2 is recursive
+-$folders = Filesystem::folders($path, true);
+-$files   = Filesystem::files($path, true);
+-$items   = Filesystem::items($path, true);
+-```
+-
+-The simple finder are same as Folder, but it will not scan all files instantly, but returns an Iterator instead,
+- we can send this iterator to `foreach` and do some filter by `SplFileInfo` object.
+-
+-``` php
+-foreach ($items as $item)
+-{
+-    if ($item->isDir() || $item->isDot())
+-    {
+-        continue;
+-    }
+-
+-    // Do something
+-}
+-```
+-
+-If you really need array not an Iterator, use `Filesystem::iteratorToArray()`.
+-
+-``` php
+-$folders = Filesystem::folder($path, true);
+-
+-// To array
+-$folders = Filesystem::iteratorToArray($folders);
+-```
+-
+-Or set argument 3 to `TRUE`.
+-
+-``` php
+-$folders = Filesystem::folder($path, true, true);
+-
+-is_array($folders); // TRUE
+-```
+-
+-### Advanced Finder
+-
+-Find by name.
+-
+-``` php
+-$files = Filesystem::find($path, 'flower.php');
+-```
+-
+-Multiple name.
+-
+-``` php
+-$files = Filesystem::find($path, array('flower.php', 'sakura.php'));
+-```
+-
+-Find by regex
+-
+-``` php
+-$files = Filesystem::find($path, '^[a-zA-Z0-9]');
+-```
+-
+-Only find first matched.
+-
+-``` php
+-$file = Filesystem::findOne($path, array('flower.php', 'sakura.php'));
+-```
+-
+-Find recursive
+-
+-``` php
+-$files = Filesystem::find($path, array('flower.php', 'sakura.php'), true);
+-```
+-
+-To array
+-
+-``` php
+-$files = Filesystem::find($path, array('flower.php', 'sakura.php'), true, true);
+-```
+-
+-### Callback Finder
+-
+-Inject our filter logic to find files.
+-
+-``` php
+-/**
+- * Files callback
+- *
+- * @param \SplFileInfo                $current  Current item's value
+- * @param string                      $key      Current item's key
+- * @param \RecursiveDirectoryIterator $iterator Iterator being filtered
+- *
+- * @return boolean   TRUE to accept the current item, FALSE otherwise
+- */
+-$closure = function($current, $key, $iterator)
+-{
+-    return Path::getPermissions($current->getPath()) >= 755;
+-};
+-
+-$files = Filesystem::find($path, $closure, true);
+-```
+-
+-Or create a `FileComparator` object.
+-
+-``` php
+-use Windwalker\Filesystem\Comparator\FileComparatorInterface;
+-
+-class MyComparator implements FileComparatorInterface
+-{
+-   public function compare($current, $key, $iterator)
+-   {
+-       return Path::getPermissions($current->getPath()) >= 755;
+-   }
+-}
+-
+-$files = Filesystem::find($path, new MyComparator, true);
+-```
+-
+-### Advanced Comparator
+-
+-We can create our own comparator like an finder object.
+-
+-``` php
+-// This is just an example
+-
+-$comparator = new MyAdvancedComparator;
+-
+-$comparator->setTimeGreaterThan(new DataTime)
+-    ->setExtension('ini|php')
+-    ->setSize('< 2M')
+-    ->setPermission('>= 644');
+-
+-$files = Filesystem::find($path, $comparator, true);
+-```
+-
+-## PathLocator & PathCollection
+-
+-See [PathLocator Document](Path)
++This package has completed and prepare to use, but the document has work in process.
++Please see [Test](Test) to learn how to use and go to [Packagist/windwalker](https://packagist.org/packages/windwalker/)
++to find all the packages.
+Index: vendor/windwalker/framework/src/Filesystem/Folder.php
+===================================================================
+--- vendor/windwalker/framework/src/Filesystem/Folder.php	(revision )
++++ vendor/windwalker/framework/src/Filesystem/Folder.php	(revision )
+@@ -282,15 +282,6 @@
+ 		return true;
+ 	}
+ 
+-	/**
+-	 * files
+-	 *
+-	 * @param string   $path
+-	 * @param boolean  $recursive
+-	 * @param integer  $pathType
+-	 *
+-	 * @return  array
+-	 */
+ 	public static function files($path, $recursive = false, $pathType = self::PATH_ABSOLUTE)
+ 	{
+ 		$files = array();
+@@ -322,15 +313,6 @@
+ 		return $files;
+ 	}
+ 
+-	/**
+-	 * items
+-	 *
+-	 * @param string   $path
+-	 * @param boolean  $recursive
+-	 * @param integer  $pathType
+-	 *
+-	 * @return  array
+-	 */
+ 	public static function items($path, $recursive = false, $pathType = self::PATH_ABSOLUTE)
+ 	{
+ 		$files = array();
+@@ -363,15 +345,6 @@
+ 		return $files;
+ 	}
+ 
+-	/**
+-	 * folders
+-	 *
+-	 * @param string   $path
+-	 * @param boolean  $recursive
+-	 * @param integer  $pathType
+-	 *
+-	 * @return  array
+-	 */
+ 	public static function folders($path, $recursive = false, $pathType = self::PATH_ABSOLUTE)
+ 	{
+ 		$files = array();
+Index: vendor/windwalker/framework/src/Application/Web/WebEnvironment.php
+===================================================================
+--- vendor/windwalker/framework/src/Application/Web/WebEnvironment.php	(revision )
++++ vendor/windwalker/framework/src/Application/Web/WebEnvironment.php	(revision )
+@@ -0,0 +1,65 @@
++<?php
++/**
++ * Part of Windwalker project. 
++ *
++ * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
++ * @license    GNU General Public License version 2 or later;
++ */
++
++namespace Windwalker\Application\Web;
++
++use Windwalker\Environment\Environment;
++use Windwalker\Environment\ServerInterface;
++use Windwalker\Environment\Web\WebClient;
++
++/**
++ * The WebEnvironment class.
++ * 
++ * @since  {DEPLOY_VERSION}
++ */
++class WebEnvironment extends Environment
++{
++	/**
++	 * Property client.
++	 *
++	 * @var  WebClient
++	 */
++	public $client;
++
++	/**
++	 * Class init.
++	 *
++	 * @param WebClient       $client
++	 * @param ServerInterface $server
++	 */
++	public function __construct(WebClient $client = null, ServerInterface $server = null)
++	{
++		$this->client = $client ? : new WebClient;
++
++		parent::__construct($server);
++	}
++
++	/**
++	 * Method to get property Client
++	 *
++	 * @return  WebClient
++	 */
++	public function getClient()
++	{
++		return $this->client;
++	}
++
++	/**
++	 * Method to set property client
++	 *
++	 * @param   WebClient $client
++	 *
++	 * @return  static  Return self to support chaining.
++	 */
++	public function setClient($client)
++	{
++		$this->client = $client;
++
++		return $this;
++	}
++}
+Index: vendor/windwalker/framework/src/Application/Test/AbstractWebApplicationTest.php
+===================================================================
+--- vendor/windwalker/framework/src/Application/Test/AbstractWebApplicationTest.php	(revision )
++++ vendor/windwalker/framework/src/Application/Test/AbstractWebApplicationTest.php	(revision )
+@@ -78,7 +78,7 @@
+ 		);
+ 
+ 		$this->assertInstanceOf(
+-			'Windwalker\\Environment\\Web\\WebEnvironment',
++			'Windwalker\\Application\\Web\\WebEnvironment',
+ 			$this->instance->getEnvironment(),
+ 			'Environment property wrong type'
+ 		);
+Index: vendor/windwalker/framework/src/Application/AbstractWebApplication.php
+===================================================================
+--- vendor/windwalker/framework/src/Application/AbstractWebApplication.php	(revision )
++++ vendor/windwalker/framework/src/Application/AbstractWebApplication.php	(revision )
+@@ -9,11 +9,11 @@
+ namespace Windwalker\Application;
+ 
+ use Windwalker\Environment\Web\WebClient;
+-use Windwalker\Environment\Web\WebEnvironment;
+ use Windwalker\IO\Input;
+ use Windwalker\Uri\Uri;
+ use Windwalker\Application\Helper\ApplicationHelper;
+ use Windwalker\Application\Web\Response;
++use Windwalker\Application\Web\WebEnvironment;
+ use Windwalker\Application\Web\ResponseInterface;
+ use Windwalker\Registry\Registry;
+ 
+@@ -459,7 +459,7 @@
+ 	/**
+ 	 * Method to get property Environment
+ 	 *
+-	 * @return  \Windwalker\Environment\Web\WebEnvironment
++	 * @return  \Windwalker\Application\Web\WebEnvironment
+ 	 */
+ 	public function getEnvironment()
+ 	{
+@@ -469,7 +469,7 @@
+ 	/**
+ 	 * Method to set property environment
+ 	 *
+-	 * @param   \Windwalker\Environment\Web\WebEnvironment $environment
++	 * @param   \Windwalker\Application\Web\WebEnvironment $environment
+ 	 *
+ 	 * @return  static  Return self to support chaining.
+ 	 */
+Index: vendor/windwalker/framework/src/Application/AbstractDaemonApplication.php
+===================================================================
+--- vendor/windwalker/framework/src/Application/AbstractDaemonApplication.php	(revision )
++++ vendor/windwalker/framework/src/Application/AbstractDaemonApplication.php	(revision )
+@@ -285,19 +285,19 @@
+ 
+ 		// The application author name.  This string is used in generating startup scripts and has
+ 		// a maximum of 50 characters.
+-		$tmp = (string) $this->config->get('author_name', 'Windwalker Framework');
++		$tmp = (string) $this->config->get('author_name', 'Joomla Framework');
+ 		$this->config->set('author_name', (strlen($tmp) > 50) ? substr($tmp, 0, 50) : $tmp);
+ 
+ 		// The application author email.  This string is used in generating startup scripts.
+-		$tmp = (string) $this->config->get('author_email', 'admin@windwalker.org');
++		$tmp = (string) $this->config->get('author_email', 'admin@joomla.org');
+ 		$this->config->set('author_email', filter_var($tmp, FILTER_VALIDATE_EMAIL));
+ 
+ 		// The application name.  This string is used in generating startup scripts.
+-		$tmp = (string) $this->config->get('application_name', 'WindwalkerDaemon');
++		$tmp = (string) $this->config->get('application_name', 'JApplicationDaemon');
+ 		$this->config->set('application_name', (string) preg_replace('/[^A-Z0-9_-]/i', '', $tmp));
+ 
+ 		// The application description.  This string is used in generating startup scripts.
+-		$tmp = (string) $this->config->get('application_description', 'A generic Windwalker Framework application.');
++		$tmp = (string) $this->config->get('application_description', 'A generic Joomla Framework application.');
+ 		$this->config->set('application_description', filter_var($tmp, FILTER_SANITIZE_STRING));
+ 
+ 		/*
+Index: vendor/windwalker/framework/src/Environment/Web/WebEnvironment.php
+===================================================================
+--- vendor/windwalker/framework/src/Environment/Web/WebEnvironment.php	(revision )
++++ vendor/windwalker/framework/src/Environment/Web/WebEnvironment.php	(revision )
+@@ -1,64 +0,0 @@
+-<?php
+-/**
+- * Part of Windwalker project. 
+- *
+- * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
+- * @license    GNU General Public License version 2 or later;
+- */
+-
+-namespace Windwalker\Environment\Web;
+-
+-use Windwalker\Environment\Environment;
+-use Windwalker\Environment\ServerInterface;
+-
+-/**
+- * The WebEnvironment class.
+- * 
+- * @since  {DEPLOY_VERSION}
+- */
+-class WebEnvironment extends Environment
+-{
+-	/**
+-	 * Property client.
+-	 *
+-	 * @var  WebClient
+-	 */
+-	public $client;
+-
+-	/**
+-	 * Class init.
+-	 *
+-	 * @param WebClient       $client
+-	 * @param ServerInterface $server
+-	 */
+-	public function __construct(WebClient $client = null, ServerInterface $server = null)
+-	{
+-		$this->client = $client ? : new WebClient;
+-
+-		parent::__construct($server);
+-	}
+-
+-	/**
+-	 * Method to get property Client
+-	 *
+-	 * @return  WebClient
+-	 */
+-	public function getClient()
+-	{
+-		return $this->client;
+-	}
+-
+-	/**
+-	 * Method to set property client
+-	 *
+-	 * @param   WebClient $client
+-	 *
+-	 * @return  static  Return self to support chaining.
+-	 */
+-	public function setClient($client)
+-	{
+-		$this->client = $client;
+-
+-		return $this;
+-	}
+-}
+Index: vendor/windwalker/framework/src/Environment/Web/WebClient.php
+===================================================================
+--- vendor/windwalker/framework/src/Environment/Web/WebClient.php	(revision )
++++ vendor/windwalker/framework/src/Environment/Web/WebClient.php	(revision )
+@@ -11,8 +11,6 @@
+ /**
+  * Class to model a Web Client.
+  *
+- * This class is based on Joomla WebClient
+- *
+  * @since  {DEPLOY_VERSION}
+  */
+ class WebClient
+@@ -38,7 +36,7 @@
+ 	const CHROME = 19;
+ 	const SAFARI = 20;
+ 	const OPERA = 21;
+-	const ANDROID_TABLET = 22;
++	const ANDROIDTABLET = 22;
+ 
+ 	/**
+ 	 * The detected platform on which the web client runs.
+@@ -415,18 +413,18 @@
+ 		{
+ 			$this->mobile = true;
+ 			$this->platform = self::ANDROID;
+-			/*
++			/**
+ 			 * Attempt to distinguish between Android phones and tablets
+ 			 * There is no totally foolproof method but certain rules almost always hold
+-			 * Android 3.x is only used for tablets
++			 *   Android 3.x is only used for tablets
+-			 * Some devices and browsers encourage users to change their UA string to include Tablet.
++			 *   Some devices and browsers encourage users to change their UA string to include Tablet.
+-			 * Google encourages manufacturers to exclude the string Mobile from tablet device UA strings.
++			 *   Google encourages manufacturers to exclude the string Mobile from tablet device UA strings.
+-			 * In some modes Kindle Android devices include the string Mobile but they include the string Silk.
++			 *   In some modes Kindle Android devices include the string Mobile but they include the string Silk.
+ 			 */
+ 			if (stripos($userAgent, 'Android 3') !== false || stripos($userAgent, 'Tablet') !== false
+ 				|| stripos($userAgent, 'Mobile') === false || stripos($userAgent, 'Silk') !== false )
+ 			{
+-				$this->platform = self::ANDROID_TABLET;
++				$this->platform = self::ANDROIDTABLET;
+ 			}
+ 		}
+ 		elseif (stripos($userAgent, 'Linux') !== false)
+Index: vendor/windwalker/framework/src/Environment/Test/server.php
+===================================================================
+--- vendor/windwalker/framework/src/Environment/Test/server.php	(revision )
++++ vendor/windwalker/framework/src/Environment/Test/server.php	(revision )
+@@ -1,22 +0,0 @@
+-<?php
+-/**
+- * Part of Windwalker project. 
+- *
+- * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
+- * @license    GNU General Public License version 2 or later;
+- */
+-
+-use Windwalker\Environment\Server;
+-
+-$autoload = __DIR__ . '/../../../vendor/autoload.php';
+-
+-if (!is_file($autoload))
+-{
+-	$autoload = __DIR__ . '/../vendor/autoload.php';
+-}
+-
+-include_once $autoload;
+-
+-$server = new Server;
+-
+-echo $server->getRoot(false);
+Index: vendor/windwalker/framework/src/Environment/Test/WebClientTest.php
+===================================================================
+--- vendor/windwalker/framework/src/Environment/Test/WebClientTest.php	(revision )
++++ vendor/windwalker/framework/src/Environment/Test/WebClientTest.php	(revision )
+@@ -74,18 +74,18 @@
+ 				'Mozilla/5.0 (BlackBerry; U; BlackBerry 9700; pt) AppleWebKit/534.8+ (KHTML, like Gecko) Version/6.0.0.546 Mobile Safari/534.8+'),
+ 			array(WebClient::BLACKBERRY, true, WebClient::WEBKIT, '', '',
+ 				'BlackBerry9700/5.0.0.862 Profile/MIDP-2.1 Configuration/CLDC-1.1 VendorID/120'),
+-			array(WebClient::ANDROID_TABLET, true, WebClient::WEBKIT, WebClient::SAFARI, '999.9',
++			array(WebClient::ANDROIDTABLET, true, WebClient::WEBKIT, WebClient::SAFARI, '999.9',
+ 				'Mozilla/5.0 (Linux; U; Android 2.3; en-us) AppleWebKit/999+ (KHTML, like Gecko) Safari/999.9'),
+ 			array(WebClient::ANDROID, true, WebClient::WEBKIT, WebClient::SAFARI, '4',
+ 				'Mozilla/5.0 (Linux; U; Android 2.2.1; en-ca; LG-P505R Build/FRG83) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1'),
+-			array(WebClient::ANDROID_TABLET, true, WebClient::WEBKIT, WebClient::SAFARI, '4',
++			array(WebClient::ANDROIDTABLET, true, WebClient::WEBKIT, WebClient::SAFARI, '4',
+ 				'Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13'),
+-			array(WebClient::ANDROID_TABLET, true, WebClient::WEBKIT, WebClient::SAFARI, '4',
++			array(WebClient::ANDROIDTABLET, true, WebClient::WEBKIT, WebClient::SAFARI, '4',
+ 				'Mozilla/5.0 (Linux; U; Android 2.3.4; en-us; Silk/1.1.0-84) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 ' .
+ 				'Mobile Safari/533.1 Silk-Accelerated=false'),
+-			array(WebClient::ANDROID_TABLET, true, WebClient::GECKO, WebClient::FIREFOX, '12',
++			array(WebClient::ANDROIDTABLET, true, WebClient::GECKO, WebClient::FIREFOX, '12',
+ 				' Mozilla/5.0 (Android; Tablet; rv:12.0) Gecko/12.0 Firefox/12.0'),
+-			array(WebClient::ANDROID_TABLET, true, WebClient::PRESTO, WebClient::OPERA, '11.5',
++			array(WebClient::ANDROIDTABLET, true, WebClient::PRESTO, WebClient::OPERA, '11.5',
+ 				'Opera/9.80 (Android 3.2.1; Linux; Opera Tablet/ADR-1111101157; U; en) Presto/2.9.201 Version/11.50'),
+ 			array(WebClient::IPAD, true, WebClient::WEBKIT, WebClient::SAFARI, '4.0.4',
+ 				'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 ' .
+Index: vendor/windwalker/framework/src/Environment/README.md
+===================================================================
+--- vendor/windwalker/framework/src/Environment/README.md	(revision )
++++ vendor/windwalker/framework/src/Environment/README.md	(revision )
+@@ -1,246 +1,7 @@
+-# Windwalker Environment Package
++# Part of Windwalker Package
+ 
+-Environment package provides a set of methods help us know information of our server and user's browser.
++This is the subtree split of [Windwalker Framework](https://github.com/ventoviro/windwalker).
+ 
+-## Installation via Composer
+-
+-Add this to the require block in your `composer.json`.
+-
+-``` json
+-{
+-    "require": {
+-        "windwalker/environment": "~2.0"
+-    }
+-}
+-```
+-
+-## Create An Environment Object
+-
+-The default environment maintains a server object provides us some information of our server. 
+-
+-``` php
+-$env = new Environment;
+-
+-$server = $env->getServer();
+-```
+-
+-## The Server Object
+-
+-### Detect Running Environment
+-
+-``` php
+-$server->isWeb();
+-$server->isCli();
+-```
+-
+-Same as:
+-
+-``` php
+-use Windwalker\Environment\PhpHelper;
+-
+-PhpHelper:isWeb();
+-PhpHelper::isCli();
+-```
+-
+-### Detect System OS
+-
+-Get server OS information. The `getOS()` return first 3 letters from `getUname()`. The Uname is same as `PHP_OS`. 
+-List of `PHP_OS` please see: https://gist.github.com/asika32764/90e49a82c124858c9e1a 
+-
+-``` php
+-$sever->getOS();  // WIN, UNI, LIN, DAR ... etc.
+-$sever->getUname(); // PHP_OS
+-
+-$sever->isWin();
+-$sever->isLinux();
+-$sever->isUnix();
+-```
+-
+-### Get System Path
+-
+-``` php
+-$server->getWorkingDirectory();
+-
+-$server->getRoot();
+-
+-$server->getEntry();
+-
+-$server->getServerPublicRoot();
+-
+-$server->getRequestUri();
+-```
+-
+-#### getWorkingDirectory()
+-
+-If in Web environment, this method return running script directory.
+-
+-If in CLI environment, this method return current terminal working dir(same as `pwd` command).
+-
+-#### getRoot(`[$full = true]`)
+-
+-Get running script root directory. 
+-
+-Set first argument to `false`, will return relative path from DocumentRoot in Web, 
+-or return relative path from working dir in CLI. 
+-
+-#### getEntry(`[$full = true]`)
+-
+-Get running script file name.
+-
+-Set first argument to `false`, will return relative path from DocumentRoot in Web, 
+-or return relative path from working dir in CLI.
+-
+-#### getServerPublicRoot()
+-
+-Return the Http server DocumentRoot, same as `$_SERVER['DOCUMENT_ROOT']`.
+-
+-#### getRequestUri(`[$withParams = true]`)
+-
+-Call this method will return the URI path as `$_SERVER['REQUEST_URI']` with Http queries.
+-
+-```
+-/path/foo/?bar=baz
+-```
+-
+-Set first argument to `false` will return request path without params, same as `$_SERVER['PHP_SELF']`.
+-
+-```
+-/path/foo/
+-```
+-
+-## The PhpHelper
+-
+-PhpHelper provides some useful methods to know about our PHP status.
+-
+-### Check PHP Running Environment
+-
+-``` php
+-PhpHelper::isWeb();
+-PhpHelper::isCli();
+-PhpHelper::isHHVM();
+-PhpHelper::isPHP();
+-PhpHelper::isEmbed();
+-```
+-
+-### Get PHP Version
+-
+-If is PHP, return `PHP_VERSION`. If is HHVM, return `HHVM_VERSION`.
+-
+-``` php
+-PhpHelper::getVersion()
+-```
+-
+-### Set Debug Mode
+-
+-`setStrict()` will set `error_reporting()` to 32767.
+- 
+-`setMuted()` will set `error_reporting()` to 0.
+-
+-``` php
+-PhpHelper::setStrict();
+-PhpHelper::setMuted();
+-```
+-
+-### Check Extensions
+-
+-``` php
+-PhpHelper::hasXdebug();
+-PhpHelper::hasPcntl();
+-PhpHelper::hasCurl();
+-PhpHelper::hasMcrypt();
+-```
+-
+-## WebEnvironment
+-
+-WebEnvironment maintains two objects, the Server and the WebClient. 
+-
+-``` php
+-use Windwalker\Environment\Web\WebEnvironment;
+-
+-$env = new WebEnvironment;
+-
+-$server = $env->getServer();
+-$client = $env->getClient();
+-```
+-
+-## WebClient
+-
+-WebClient is a client detector help us know information about user's browser.
+-
+-### Detect Browser
+-
+-``` php
+-$browser = $client->getBrowser();
+-
+-// Check is IE
+-$browser == WebClient::IE;
+-```
+-
+-Available Browser Detection
+-
+-- IE
+-- FIREFOX
+-- CHROME
+-- SAFARI
+-- OPERA
+-- ANDROID_TABLET
+-
+-### Detect Browser Version
+-
+-``` php
+-$version = $client->getBrowserVersion();
+-
+-// Check version
+-$version >= 11;
+-```
+-
+-### Detect Browser Engine
+-
+-``` php
+-$engine = $client->getEngine();
+-
+-// Check engine
+-$engine == Client::WEBKIT
+-```
+-
+-Available Engines
+-
+-- TRIDENT
+-- WEBKIT
+-- GECKO
+-- PRESTO
+-- KHTML
+-- AMAYA
+-
+-### Detect User's OS or Device
+-
+-``` php
+-$platform = $client->getPlatform();
+-
+-// Check platform
+-$platform == Client::ANDROID
+-```
+-
+-Available Platforms
+-
+-- WINDOWS
+-- WINDOWS_PHONE
+-- WINDOWS_CE
+-- IPHONE
+-- IPAD
+-- IPOD
+-- MAC
+-- BLACKBERRY
+-- ANDROID
+-- LINUX
+-
+-### Other Detection
+- 
+-``` php
+-$client->isRobot();
+-$client->isMobile();
+-$client->getLanguages();
+-$client->getEncodings();
+-$client->isSSLConnection();
+-$client->getUserAgent();
+-```
++This package has completed and prepare to use, but the document has work in process.
++Please see [Test](Test) to learn how to use and go to [Packagist/windwalker](https://packagist.org/packages/windwalker/)
++to find all the packages.
+Index: vendor/windwalker/framework/src/Environment/Server.php
+===================================================================
+--- vendor/windwalker/framework/src/Environment/Server.php	(revision )
++++ vendor/windwalker/framework/src/Environment/Server.php	(revision )
+@@ -30,26 +30,6 @@
+ 	protected $uname = PHP_OS;
+ 
+ 	/**
+-	 * isWeb
+-	 *
+-	 * @return  boolean
+-	 */
+-	public function isWeb()
+-	{
+-		return PhpHelper::isWeb();
+-	}
+-
+-	/**
+-	 * isCli
+-	 *
+-	 * @return  boolean
+-	 */
+-	public function isCli()
+-	{
+-		return PhpHelper::isCli();
+-	}
+-
+-	/**
+ 	 * getOS
+ 	 *
+ 	 * @see  https://gist.github.com/asika32764/90e49a82c124858c9e1a
+@@ -148,101 +128,5 @@
+ 		$this->uname = $uname;
+ 
+ 		return $this;
+-	}
+-
+-	/**
+-	 * getWorkingDirectory
+-	 *
+-	 * @return  string
+-	 */
+-	public function getWorkingDirectory()
+-	{
+-		return getcwd();
+-	}
+-
+-	/**
+-	 * getRoot
+-	 *
+-	 * @param bool $full
+-	 *
+-	 * @return  string
+-	 */
+-	public function getRoot($full = true)
+-	{
+-		return dirname($this->getEntry($full));
+-	}
+-
+-	/**
+-	 * getDocumentRoot
+-	 *
+-	 * @return  string
+-	 */
+-	public function getServerPublicRoot()
+-	{
+-		return $this->getGlobals('_SERVER', 'DOCUMENT_ROOT');
+-	}
+-
+-	/**
+-	 * getEntry
+-	 *
+-	 * @param   bool $full
+-	 *
+-	 * @return  string
+-	 */
+-	public function getEntry($full = true)
+-	{
+-		$key = $full ? 'SCRIPT_FILENAME' : 'SCRIPT_NAME';
+-
+-		$file = $this->getGlobals('_SERVER', $key);
+-
+-		if ($full && $this->isCli())
+-		{
+-			$file = trim($file, '.' . DIRECTORY_SEPARATOR);
+-
+-			$file = $this->getWorkingDirectory() . DIRECTORY_SEPARATOR . $file;
+-		}
+-
+-		return $file;
+-	}
+-
+-	/**
+-	 * getRequestUri
+-	 *
+-	 * @param   bool $withParams
+-	 *
+-	 * @return  string
+-	 */
+-	public function getRequestUri($withParams = true)
+-	{
+-		if ($withParams)
+-		{
+-			return $this->getGlobals('_SERVER', 'REQUEST_URI');
+-		}
+-
+-		return $this->getGlobals('_SERVER', 'PHP_SELF');
+-	}
+-
+-	/**
+-	 * getGlobals
+-	 *
+-	 * @param string $type
+-	 * @param string $key
+-	 * @param mixed  $default
+-	 *
+-	 * @return  mixed
+-	 */
+-	protected function getGlobals($type, $key, $default = null)
+-	{
+-		if (!isset($GLOBALS['_SERVER']))
+-		{
+-			$GLOBALS['_SERVER'] = $_SERVER;
+-		}
+-
+-		if (isset($GLOBALS[$type][$key]))
+-		{
+-			return $GLOBALS[$type][$key];
+-		}
+-
+-		return $default;
+ 	}
+ }

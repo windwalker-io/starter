@@ -17,4 +17,5 @@ use Windwalker\Core\Package\AbstractPackage;
  */
 class SystemPackage extends AbstractPackage
 {
+	protected $name = 'system';
 }
