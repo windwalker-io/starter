@@ -8,6 +8,9 @@ database:
     password: '1234'
     name: acme
     prefix: wind_
+session:
+    handler: native
+    expire_time: 15
 cache:
     enabled: 0
     storage: file
@@ -20,15 +23,17 @@ language:
     default: en-GB
     format: ini
     path: resources/languages
-registry:
-    application: system.application
-    input: system.input
-    environment: system.environment
-    config: system.config
-    database: system.database
-    language: system.language
-    log: system.logger
-    router: system.router
-    session: system.session
-    cache: system.cache
-    debugger: whoops
+ioc:
+    registry:
+        application: system.application
+        input: system.input
+        environment: system.environment
+        dispatcher: system.dispatcher
+        config: system.config
+        database: system.database
+        language: system.language
+        log: system.logger
+        router: system.router
+        session: system.session
+        cache: system.cache
+        debugger: whoops

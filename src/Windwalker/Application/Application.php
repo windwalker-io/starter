@@ -9,9 +9,10 @@
 namespace Windwalker\Application;
 
 use Symfony\Component\Yaml\Yaml;
-use Windwalker\Core\Application\WebApplication;
+use Windwalker\Core\Application\WindwalkerWebApplication;
 use Windwalker\Core\Provider\CacheProvider;
 use Windwalker\Core\Provider\DatabaseProvider;
+use Windwalker\Core\Provider\EventProvider;
 use Windwalker\Core\Provider\LanguageProvider;
 use Windwalker\Core\Provider\RouterProvider;
 use Windwalker\Core\Provider\SessionProvider;
@@ -25,7 +26,7 @@ use Windwalker\SystemPackage\SystemPackage;
  *
  * @since 1.0
  */
-class Application extends WebApplication
+class Application extends WindwalkerWebApplication
 {
 	/**
 	 * initialise
@@ -48,6 +49,7 @@ class Application extends WebApplication
 	{
 		$container
 			->registerServiceProvider(new WhoopsProvider)
+			->registerServiceProvider(new EventProvider)
 			->registerServiceProvider(new DatabaseProvider)
 			->registerServiceProvider(new RouterProvider)
 			->registerServiceProvider(new LanguageProvider)

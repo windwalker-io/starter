@@ -10,14 +10,14 @@ namespace Acme\Controller\Cover;
 
 use Acme\Model\CoverModel;
 use Acme\View\Cover\CoverHtmlView;
-use Windwalker\Controller\AbstractController;
+use Windwalker\Core\Controller\Controller;
 
 /**
  * Class Get
  *
  * @since 1.0
  */
-class GetController extends AbstractController
+class GetController extends Controller
 {
 	/**
 	 * Execute the controller.

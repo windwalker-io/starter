@@ -9,8 +9,8 @@
 namespace Acme\Controller\Page;
 
 use Acme\View\Page\PageHtmlView;
+use Windwalker\Core\Controller\Controller;
 use Windwalker\Utilities\Queue\Priority;
-use Windwalker\Controller\AbstractController;
 use Windwalker\Renderer\BladeRenderer;
 use Windwalker\Renderer\PhpRenderer;
 use Windwalker\Renderer\TwigRenderer;
@@ -20,7 +20,7 @@ use Windwalker\Renderer\TwigRenderer;
  *
  * @since 1.0
  */
-class GetController extends AbstractController
+class GetController extends Controller
 {
 	/**
 	 * Execute the controller.
