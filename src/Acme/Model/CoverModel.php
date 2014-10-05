@@ -32,11 +32,6 @@ class CoverModel extends Model
 		}
 		catch (\Exception $e)
 		{
-			if (WINDWALKER_DEBUG)
-			{
-				throw new $e;
-			}
-
 			return new Data;
 		}
 	}

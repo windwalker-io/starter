@@ -52,3 +52,13 @@ Available commands:
 
   phinx    Migration system by Phinx
 ```
+
+### Import Sample Schema
+
+``` bash
+php bin/console phinx migrate
+```
+
+## How To Use Windwalker
+
+Please see README in every [Windwalker packages](https://github.com/ventoviro) first.
