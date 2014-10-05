@@ -9,9 +9,8 @@
 namespace Acme\Controller\Page;
 
 use Acme\View\Page\PageHtmlView;
-use Formosa\Utilities\Queue\Priority;
+use Windwalker\Utilities\Queue\Priority;
 use Windwalker\Controller\AbstractController;
-use Windwalker\Core\Language\Language;
 use Windwalker\Renderer\BladeRenderer;
 use Windwalker\Renderer\PhpRenderer;
 use Windwalker\Renderer\TwigRenderer;
@@ -39,7 +38,7 @@ class GetController extends AbstractController
 		$renderer = new PhpRenderer(Priority::createQueue(WINDWALKER_TEMPLATE . '/acme/page'));
 
 		// Using Blade
-		//$renderer = new BladeRenderer(Priority::createQueue(WINDWALKER_TEMPLATE . '/acme/page'), array('cache_path' => WINDWALKER_CACHE . '/view'));
+		// $renderer = new BladeRenderer(Priority::createQueue(WINDWALKER_TEMPLATE . '/acme/page'), array('cache_path' => WINDWALKER_CACHE . '/view'));
 
 		// Using Twig
 		// $renderer = new TwigRenderer(Priority::createQueue(WINDWALKER_TEMPLATE . '/acme/page'));

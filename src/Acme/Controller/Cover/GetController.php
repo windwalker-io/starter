@@ -10,8 +10,6 @@ namespace Acme\Controller\Cover;
 
 use Acme\Model\CoverModel;
 use Acme\View\Cover\CoverHtmlView;
-use Formosa\Factory;
-use Formosa\Utilities\Queue\Priority;
 use Windwalker\Controller\AbstractController;
 
 /**

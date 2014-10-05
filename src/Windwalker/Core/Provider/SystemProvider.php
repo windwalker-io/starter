@@ -59,7 +59,9 @@ class SystemProvider implements ServiceProviderInterface
 			->alias('config', 'system.config');
 
 		// Environment
-		$container->share('system.environment', $this->app->getEnvironment());
+		$container->share('system.environment', $this->app->getEnvironment())
+			->alias('environment', 'system.environment');
+
 		$container->share('system.client', $this->app->getEnvironment()->getClient());
 		$container->share('system.server', $this->app->getEnvironment()->getServer());
 

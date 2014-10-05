@@ -8,9 +8,27 @@ database:
     password: ''
     name: db_name
     prefix: wind_
+cache:
+    enabled: 0
+    storage: file
+    handler: serialize
+    dir: cache
+    time: 15
 language:
     debug: 0
     locale: en-GB
     default: en-GB
     format: ini
     path: resources/languages
+registry:
+    application: system.application
+    input: system.input
+    environment: system.environment
+    config: system.config
+    database: system.database
+    language: system.language
+    log: system.logger
+    router: system.router
+    session: system.session
+    cache: system.cache
+    debugger: whoops

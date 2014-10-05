@@ -12,6 +12,7 @@ use Symfony\Component\Yaml\Yaml;
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\Cache\CacheFactory;
 use Windwalker\Core\Ioc;
+use Windwalker\Core\Language\Language;
 use Windwalker\Core\Provider\CacheProvider;
 use Windwalker\Core\Provider\DatabaseProvider;
 use Windwalker\Core\Provider\LanguageProvider;
@@ -51,7 +52,6 @@ class Application extends WebApplication
 		$container
 			->registerServiceProvider(new WhoopsProvider)
 			->registerServiceProvider(new DatabaseProvider)
-			->registerServiceProvider(new MonologProvider)
 			->registerServiceProvider(new RouterProvider)
 			->registerServiceProvider(new LanguageProvider)
 			->registerServiceProvider(new CacheProvider)

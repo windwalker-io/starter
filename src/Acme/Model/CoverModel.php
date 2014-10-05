@@ -32,7 +32,7 @@ class CoverModel extends Model
 		}
 		catch (\Exception $e)
 		{
-			if (FORMOSA_DEBUG)
+			if (WINDWALKER_DEBUG)
 			{
 				throw new $e;
 			}
