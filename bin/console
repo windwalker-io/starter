@@ -28,4 +28,6 @@ define('WINDWALKER_VAR',       WINDWALKER_ROOT . '/var');
 define('WINDWALKER_VENDOR',    WINDWALKER_ROOT . '/vendor');
 define('WINDWALKER_PUBLIC',    WINDWALKER_ROOT . '/www');
 
-(new Windwalker\Core\Application\Console)->execute();
+$console = new Windwalker\Core\Console\Console;
+
+$console->execute();

@@ -8,6 +8,9 @@ database:
     password: '1234'
     name: acme
     prefix: wind_
+view:
+    template:
+        global: templates
 session:
     handler: native
     expire_time: 15
