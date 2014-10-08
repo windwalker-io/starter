@@ -22,7 +22,7 @@ class DatabaseSeeder extends AbstractSeeder
 	 */
 	public function doExecute()
 	{
-		$this->execute('UserSeeder');
+		$this->command->out('Seeder executed.')->out();
 	}
 
 	/**
@@ -32,7 +32,7 @@ class DatabaseSeeder extends AbstractSeeder
 	 */
 	public function doClean()
 	{
-		$this->db->getTable('users')->truncate();
+		$this->command->out('Database clean.')->out();
 	}
 }
  

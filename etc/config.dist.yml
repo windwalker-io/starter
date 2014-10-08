@@ -8,9 +8,6 @@ database:
     password: ''
     name: db_name
     prefix: wind_
-view:
-    template:
-        global: templates
 session:
     handler: native
     expire_time: 15

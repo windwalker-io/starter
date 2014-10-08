@@ -6,10 +6,10 @@
  * @license    GNU General Public License version 2 or later; see LICENSE
  */
 
-namespace Windwalker\Application;
+namespace Windwalker\Web;
 
-use Symfony\Component\Yaml\Yaml;
-use Windwalker\Core\Application\WindwalkerWebApplication;
+use Windwalker\Core\Application\WebApplication;
+use Windwalker\Core\Language\Language;
 use Windwalker\Core\Provider\CacheProvider;
 use Windwalker\Core\Provider\DatabaseProvider;
 use Windwalker\Core\Provider\EventProvider;
@@ -26,7 +26,7 @@ use Windwalker\Windwalker;
  *
  * @since 1.0
  */
-class Application extends WindwalkerWebApplication
+class Application extends WebApplication
 {
 	/**
 	 * initialise
@@ -38,6 +38,10 @@ class Application extends WindwalkerWebApplication
 		Windwalker::prepareSystemPath($this->config);
 
 		parent::initialise();
+
+		Language::load('system', 'system');
+
+		echo Language::translate('windwalker.system');
 	}
 
 	/**
@@ -49,6 +53,13 @@ class Application extends WindwalkerWebApplication
 	 */
 	public static function registerProviders(Container $container)
 	{
+		/*
+		 * Default Providers:
+		 * -----------------------------------------
+		 * This is some default service providers, we don't recommend to remove them,
+		 * But you can replace with yours, Make sure all the needed container key has
+		 * registered in your own providers.
+		 */
 		$container
 			->registerServiceProvider(new WhoopsProvider)
 			->registerServiceProvider(new EventProvider)
@@ -57,6 +68,15 @@ class Application extends WindwalkerWebApplication
 			->registerServiceProvider(new LanguageProvider)
 			->registerServiceProvider(new CacheProvider)
 			->registerServiceProvider(new SessionProvider);
+
+		/*
+		 * Custom Providers:
+		 * -----------------------------------------
+		 * You can add your own providers here. If you installed a 3rd party packages from composer,
+		 * but this package need some init logic, create a service provider to do this and register it here.
+		 */
+
+		// Custom Providers here...
 	}
 
 	/**
@@ -64,9 +84,26 @@ class Application extends WindwalkerWebApplication
 	 *
 	 * @return  array
 	 */
-	public static function getPackages()
+	public function getPackages()
 	{
-		return array();
+		/*
+		 * Get Global Packages
+		 * -----------------------------------------
+		 * If you want a package can be use in every applications (for example: Web and Console),
+		 * set it in Windwalker\Windwalker object.
+		 */
+		$packages = Windwalker::getPackages();
+
+		/*
+		 * Get Packages for This Application
+		 * -----------------------------------------
+		 * If you want a package only use in this application or want to override a global package,
+		 * set it here. Example: $packages[] = new Flower\FlowerPackage;
+		 */
+
+		// Your packages here...
+
+		return $packages;
 	}
 
 	/**
@@ -79,14 +116,7 @@ class Application extends WindwalkerWebApplication
 	 */
 	protected function loadConfiguration($config)
 	{
-		$file = WINDWALKER_ETC . '/config.yml';
-
-		if (!is_file($file))
-		{
-			exit('Please copy config.dist.yml to config.yml');
-		}
-
-		$config->loadFile($file, 'yaml');
+		Windwalker::loadConfiguration($config);
 	}
 
 	/**
@@ -96,7 +126,7 @@ class Application extends WindwalkerWebApplication
 	 */
 	protected function loadRoutingConfiguration()
 	{
-		return Yaml::parse(file_get_contents(WINDWALKER_ETC . '/routing.yml'));
+		return Windwalker::loadRouting();
 	}
 }
  

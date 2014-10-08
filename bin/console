@@ -18,6 +18,8 @@ include_once $autoload;
 
 include_once __DIR__ . '/../etc/define.php';
 
-$console = new Windwalker\Core\Console\Console;
+$console = new Windwalker\Console\Application;
+
+define('WINDWALKER_DEBUG', $console->get('system.debug'));
 
 $console->execute();

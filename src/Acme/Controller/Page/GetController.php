@@ -35,7 +35,7 @@ class GetController extends Controller
 	 */
 	public function execute()
 	{
-		$renderer = new PhpRenderer(Priority::createQueue(WINDWALKER_TEMPLATE . '/acme/page'));
+		$renderer = new PhpRenderer(Priority::createQueue(WINDWALKER_TEMPLATES . '/acme/page'));
 
 		// Using Blade
 		// $renderer = new BladeRenderer(Priority::createQueue(WINDWALKER_TEMPLATE . '/acme/page'), array('cache_path' => WINDWALKER_CACHE . '/view'));
