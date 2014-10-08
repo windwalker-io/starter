@@ -9,7 +9,6 @@
 namespace Windwalker\Web;
 
 use Windwalker\Core\Application\WebApplication;
-use Windwalker\Core\Language\Language;
 use Windwalker\Core\Provider\CacheProvider;
 use Windwalker\Core\Provider\DatabaseProvider;
 use Windwalker\Core\Provider\EventProvider;
@@ -19,6 +18,7 @@ use Windwalker\Core\Provider\SessionProvider;
 use Windwalker\Core\Provider\WhoopsProvider;
 use Windwalker\DI\Container;
 use Windwalker\Registry\Registry;
+use Windwalker\User\UserPackage;
 use Windwalker\Windwalker;
 
 /**
@@ -38,10 +38,6 @@ class Application extends WebApplication
 		Windwalker::prepareSystemPath($this->config);
 
 		parent::initialise();
-
-		Language::load('system', 'system');
-
-		echo Language::translate('windwalker.system');
 	}
 
 	/**
@@ -102,8 +98,27 @@ class Application extends WebApplication
 		 */
 
 		// Your packages here...
+		$packages[] = new UserPackage;
 
 		return $packages;
+	}
+
+	/**
+	 * Prepare execute hook.
+	 *
+	 * @return  void
+	 */
+	protected function prepareExecute()
+	{
+	}
+
+	/**
+	 * Pose execute hook.
+	 *
+	 * @return  mixed
+	 */
+	protected function postExecute()
+	{
 	}
 
 	/**

@@ -115,6 +115,24 @@ class Application extends WindwalkerConsole
 	}
 
 	/**
+	 * Prepare execute hook.
+	 *
+	 * @return  void
+	 */
+	protected function prepareExecute()
+	{
+	}
+
+	/**
+	 * Pose execute hook.
+	 *
+	 * @return  mixed
+	 */
+	protected function postExecute()
+	{
+	}
+
+	/**
 	 * loadConfiguration
 	 *
 	 * @param Registry $config
