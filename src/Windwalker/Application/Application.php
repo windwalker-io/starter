@@ -19,7 +19,7 @@ use Windwalker\Core\Provider\SessionProvider;
 use Windwalker\Core\Provider\WhoopsProvider;
 use Windwalker\DI\Container;
 use Windwalker\Registry\Registry;
-use Windwalker\SystemPackage\SystemPackage;
+use Windwalker\Windwalker;
 
 /**
  * Class Application
@@ -35,6 +35,8 @@ class Application extends WindwalkerWebApplication
 	 */
 	protected function initialise()
 	{
+		Windwalker::prepareSystemPath($this->config);
+
 		parent::initialise();
 	}
 
@@ -64,9 +66,7 @@ class Application extends WindwalkerWebApplication
 	 */
 	public static function getPackages()
 	{
-		return array(
-			new SystemPackage
-		);
+		return array();
 	}
 
 	/**
