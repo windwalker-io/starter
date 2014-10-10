@@ -26,6 +26,7 @@ language:
 ioc:
     registry:
         application: system.application
+        authenticate: system.authenticate
         input: system.input
         environment: system.environment
         dispatcher: system.dispatcher

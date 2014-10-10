@@ -104,7 +104,7 @@ class Application extends WebApplication
 		 */
 
 		// Your packages here...
-		$packages[] = new UserPackage;
+		$packages['wwuser'] = new UserPackage;
 
 		return $packages;
 	}
@@ -135,7 +135,7 @@ class Application extends WebApplication
 	 * @throws  \RuntimeException
 	 * @return  void
 	 */
-	protected function loadConfiguration($config)
+	protected function loadConfiguration(Registry $config)
 	{
 		Windwalker::loadConfiguration($config);
 	}

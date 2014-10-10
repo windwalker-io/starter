@@ -1,7 +1,8 @@
 login:
     pattern: login
-    variables:
-        _controller: 'Windwalker\User\Controller\Login'
+    controller: 'Windwalker\User\Controller\Login'
+    suffix:
+        post: 'LoginController'
 logout:
     pattern: logout
     variables:

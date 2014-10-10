@@ -19,7 +19,7 @@ use Windwalker\User\View\Login\LoginHtmlView;
  * 
  * @since  {DEPLOY_VERSION}
  */
-class SaveController extends Controller
+class LoginController extends Controller
 {
 	/**
 	 * Execute the controller.

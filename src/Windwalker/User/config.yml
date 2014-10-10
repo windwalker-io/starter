@@ -1,0 +1,6 @@
+listener:
+    user:
+        class: \Windwalker\User\Listener\UserListener
+        priority: 0
+        enabled: 1
+

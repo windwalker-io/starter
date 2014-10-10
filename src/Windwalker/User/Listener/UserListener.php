@@ -28,5 +28,8 @@ class UserListener
 	{
 		show($event);
 	}
+
+	public function onAfterInitialise(Event $event)
+	{
+	}
 }
- 

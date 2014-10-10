@@ -11,7 +11,7 @@
 		}
 	],
 	"require": {
-		"windwalker/core" : "dev-master",
+		"windwalker/core" : "dev-staging",
 		"joomla/date" : "~1.0@stable",
 		"symfony/yaml" : "2.*@stable",
 		"filp/whoops": "1.*@stable",

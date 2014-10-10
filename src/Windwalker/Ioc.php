@@ -18,4 +18,3 @@ use Windwalker\Core\Ioc as WindwalkerIoc;
 abstract class Ioc extends WindwalkerIoc
 {
 }
- 

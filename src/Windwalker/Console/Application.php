@@ -126,10 +126,13 @@ class Application extends WindwalkerConsole
 	/**
 	 * Pose execute hook.
 	 *
+	 * @param   mixed  $result  Executed return value.
+	 *
 	 * @return  mixed
 	 */
-	protected function postExecute()
+	protected function postExecute($result = null)
 	{
+		return $result;
 	}
 
 	/**
@@ -145,4 +148,3 @@ class Application extends WindwalkerConsole
 		Windwalker::loadConfiguration($this->config);
 	}
 }
- 

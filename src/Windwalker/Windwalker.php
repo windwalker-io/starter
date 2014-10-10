@@ -27,7 +27,7 @@ class Windwalker
 	public static function getPackages()
 	{
 		return array(
-			new SystemPackage
+			'system' => new SystemPackage
 		);
 	}
 
@@ -85,4 +85,3 @@ class Windwalker
 		$config['path.languages']  = WINDWALKER_LANGUAGES;
 	}
 }
- 
