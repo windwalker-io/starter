@@ -12,6 +12,7 @@ $root = $data->uri->get('base.path');
 	<?php $this->endblock(); ?>
 
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo $root; ?>media/css/page.css" />
 	<?php $this->block('style'); ?>
 	<?php $this->endblock(); ?>
 
@@ -44,6 +45,22 @@ $root = $data->uri->get('base.path');
 			</ul>
 		</div>
 		<!--/.nav-collapse -->
+	</div>
+</div>
+<?php $this->endblock(); ?>
+
+<?php $this->block('message') ?>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<?php foreach ($data->flashes as $type => $msgs): ?>
+				<?php foreach ($msgs as $msg): ?>
+				<div class="alert alert-<?php echo $type; ?>">
+					<?php echo $msg; ?>
+				</div>
+				<?php endforeach; ?>
+			<?php endforeach; ?>
+		</div>
 	</div>
 </div>
 <?php $this->endblock(); ?>

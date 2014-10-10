@@ -4,10 +4,6 @@ $root = $data->uri->get('base.path');
 $this->extend('html');
 ?>
 
-<?php $this->block('style') ?>
-<link rel="stylesheet" href="<?php echo $root; ?>media/css/acme/page.css" />
-<?php $this->endblock(); ?>
-
 <?php $this->block('siteTitle') ?>Acme Page<?php $this->endblock(); ?>
 
 <?php $this->block('nav') ?>

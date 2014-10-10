@@ -6,3 +6,7 @@ logout:
     pattern: logout
     variables:
         _controller: 'Windwalker\User\Controller\Logout'
+registration:
+    pattern: registration
+    variables:
+        _controller: 'Windwalker\User\Controller\Register'

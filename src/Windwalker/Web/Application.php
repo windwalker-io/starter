@@ -18,6 +18,7 @@ use Windwalker\Core\Provider\RouterProvider;
 use Windwalker\Core\Provider\SessionProvider;
 use Windwalker\Core\Provider\WhoopsProvider;
 use Windwalker\DI\Container;
+use Windwalker\Ioc;
 use Windwalker\Registry\Registry;
 use Windwalker\User\UserPackage;
 use Windwalker\Windwalker;
@@ -39,6 +40,9 @@ class Application extends WebApplication
 		Windwalker::prepareSystemPath($this->config);
 
 		parent::initialise();
+
+		// Start session
+		Ioc::getSession();
 	}
 
 	/**

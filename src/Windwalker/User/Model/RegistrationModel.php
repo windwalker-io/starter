@@ -8,30 +8,34 @@
 
 namespace Windwalker\User\Model;
 
-use Windwalker\Authenticate\Authenticate;
-use Windwalker\Authenticate\Credential;
 use Windwalker\Core\Authenticate\User;
+use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Model\Model;
-use Windwalker\DataMapper\DataMapper;
+use Windwalker\Crypt\Password;
+use Windwalker\Data\Data;
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Form;
-use Windwalker\Ioc;
-use Windwalker\User\Form\LoginFieldDefinition;
+use Windwalker\User\Form\RegistrationFieldDefinition;
 
 /**
- * The LoginModel class.
+ * The RegistrationModel class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class LoginModel extends Model
+class RegistrationModel extends Model
 {
+	/**
+	 * getForm
+	 *
+	 * @return  Form
+	 */
 	public function getForm()
 	{
 		return $this->fetch('login.form', function()
 		{
-			$form = new Form('user');
+			$form = new Form('registration');
 
-			$form->defineFormFields(new LoginFieldDefinition);
+			$form->defineFormFields(new RegistrationFieldDefinition);
 
 			foreach ($form as $field)
 			{
@@ -45,28 +49,30 @@ class LoginModel extends Model
 		});
 	}
 
-	public function login($username, $password)
+	/**
+	 * register
+	 *
+	 * @param array $user
+	 *
+	 * @throws \Exception
+	 * @return  bool
+	 */
+	public function register($user)
 	{
-		$credential = new Credential(array('username' => $username, 'password' => $password));
+		$user = new Data($user);
 
-		if (User::login($credential, true))
+		if ($user->password != $user->password2)
 		{
-			$this['errors'] = User::getResults();
-
-			return false;
+			throw new \Exception('Password not match.');
 		}
 
-		return true;
-	}
+		$password = new Password;
 
-	public function logout($username)
-	{
-		$credential = new Credential(array('username' => $username));
+		$user->password = $password->create($user->password);
 
-		if (User::logout($credential))
-		{
-			return false;
-		}
+		unset($user->password2);
+
+		User::save($user);
 
 		return true;
 	}

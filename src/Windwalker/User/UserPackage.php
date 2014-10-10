@@ -8,7 +8,9 @@
 
 namespace Windwalker\User;
 
+use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Package\AbstractPackage;
+use Windwalker\User\User\UserHandler;
 
 /**
  * The UserPackage class.
@@ -18,5 +20,12 @@ use Windwalker\Core\Package\AbstractPackage;
 class UserPackage extends AbstractPackage
 {
 	protected $name = 'user';
+
+	public function initialise()
+	{
+		parent::initialise();
+
+		User::setHandler(new UserHandler);
+	}
 }
  

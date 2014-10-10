@@ -6,11 +6,14 @@
  * @license    GNU General Public License version 2 or later;
  */
 
+/**
+ * @var \Windwalker\Data\Data $data
+ */
 $root = $data->uri['base.path'];
 
 $this->extend('html');
-
 ?>
+
 <?php $this->block('style'); ?>
 <link rel="stylesheet" href="<?php echo $root; ?>media/css/acme/page.css" />
 <link rel="stylesheet" href="<?php echo $root; ?>media/css/user/bs3-fix.css" />
@@ -20,14 +23,13 @@ $this->extend('html');
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<?php show($_SESSION); ?>
 			<form action="<?php echo $data->uri['current']; ?>" class="form-horizontal" method="post">
 				<fieldset>
-					<legend>LOGIN</legend>
+					<legend>REGISTRATION</legend>
 					<?php echo $data->form->renderFields(); ?>
 
 					<div class="buttons">
-						<button class="btn btn-primary" type="submit">Login</button>
+						<button class="btn btn-primary" type="submit">Register</button>
 					</div>
 				</fieldset>
 			</form>
@@ -35,3 +37,4 @@ $this->extend('html');
 	</div>
 </div>
 <?php $this->endblock(); ?>
+

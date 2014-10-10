@@ -6,20 +6,14 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Windwalker\User\Model;
-
-use Windwalker\Core\Model\Model;
+namespace Windwalker\User\Controller\Logout;
 
 /**
- * The UserModel class.
+ * The SaveController class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class UserModel extends Model
+class GetController extends SaveController
 {
-	public function register($user)
-	{
-
-	}
 }
  

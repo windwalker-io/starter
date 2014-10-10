@@ -1,10 +1,6 @@
 {{-- Part of starter project. --}}
 @extends('html')
 
-@section('style')
-<link rel="stylesheet" href="{{ $uri['base.path'] }}media/css/acme/page.css" />
-@stop
-
 @section('siteTitle')
 Acme Page
 @stop

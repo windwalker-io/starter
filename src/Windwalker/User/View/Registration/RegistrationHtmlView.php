@@ -6,20 +6,16 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Windwalker\User\Model;
+namespace Windwalker\User\View\Registration;
 
-use Windwalker\Core\Model\Model;
+use Windwalker\Core\View\HtmlView;
 
 /**
- * The UserModel class.
+ * The RegistrationHtmlView class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class UserModel extends Model
+class RegistrationHtmlView extends HtmlView
 {
-	public function register($user)
-	{
-
-	}
 }
  

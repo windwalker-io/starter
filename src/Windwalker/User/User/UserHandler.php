@@ -8,7 +8,7 @@
 
 namespace Windwalker\User\User;
 
-use Windwalker\Core\Auth\UserHandlerInterface;
+use Windwalker\Core\Authenticate\UserHandlerInterface;
 use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
 
