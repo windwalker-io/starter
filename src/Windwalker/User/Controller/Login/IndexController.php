@@ -9,7 +9,6 @@
 namespace Windwalker\User\Controller\Login;
 
 use Windwalker\Core\Controller\Controller;
-use Windwalker\Core\View\BladeHtmlView;
 use Windwalker\User\Model\LoginModel;
 use Windwalker\User\View\Login\LoginHtmlView;
 
@@ -18,7 +17,7 @@ use Windwalker\User\View\Login\LoginHtmlView;
  * 
  * @since  {DEPLOY_VERSION}
  */
-class GetController extends Controller
+class IndexController extends Controller
 {
 	/**
 	 * Execute the controller.

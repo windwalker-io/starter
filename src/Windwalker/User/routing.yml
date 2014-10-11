@@ -1,8 +1,9 @@
 login:
     pattern: login
     controller: 'Windwalker\User\Controller\Login'
-    suffix:
-        post: 'LoginController'
+    action:
+        'get': 'IndexController'
+        'post': 'LoginController'
 logout:
     pattern: logout
     variables:
