@@ -1,15 +1,12 @@
 home:
   pattern: '/'
-  variables:
-    _controller: 'Acme\Controller\Page\'
+  controller: 'Acme\Controller\Page\'
 page:
   pattern: 'page'
-  variables:
-      _controller: 'Acme\Controller\Page\'
+  controller: 'Acme\Controller\Page\'
 cover:
   pattern: 'cover'
-  variables:
-      _controller: 'Acme\Controller\Cover\'
+  controller: 'Acme\Controller\Cover\'
 user:
   pattern: '/'
   package: wwuser

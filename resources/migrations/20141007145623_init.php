@@ -1,8 +1,8 @@
 <?php
 
 use Phinx\Migration\AbstractMigration;
-use Windwalker\Database\Command\Table\Column;
-use Windwalker\Database\Command\Table\DataType;
+use Windwalker\Database\Schema\Column;
+use Windwalker\Database\Schema\DataType;
 
 class Init extends AbstractMigration
 {

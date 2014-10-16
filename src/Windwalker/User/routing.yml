@@ -6,9 +6,9 @@ login:
         'post': 'LoginController'
 logout:
     pattern: logout
-    variables:
-        _controller: 'Windwalker\User\Controller\Logout'
+    controller: 'Windwalker\User\Controller\Logout'
+    variables: {}
 registration:
     pattern: registration
-    variables:
-        _controller: 'Windwalker\User\Controller\Register'
+    controller: 'Windwalker\User\Controller\Register'
+    variables: {}
