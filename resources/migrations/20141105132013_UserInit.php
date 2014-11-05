@@ -1,30 +1,26 @@
 <?php
+/**
+ * Part of starter project. 
+ *
+ * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
+ * @license    GNU General Public License version 2 or later;
+ */
 
-use Phinx\Migration\AbstractMigration;
+use Windwalker\Core\Migration\AbstractMigration;
 use Windwalker\Database\Schema\Column;
 use Windwalker\Database\Schema\DataType;
 
-class Init extends AbstractMigration
+/**
+ * Migration class, version: 20141105132013
+ */
+class UserInit extends AbstractMigration
 {
-    /**
-     * Change Method.
-     *
-     * More information on this method is available here:
-     * http://docs.phinx.org/en/latest/migrations.html#the-change-method
-     *
-     * Uncomment this method if you would like to use it.
-     *
-    public function change()
-    {
-    }
-    */
-    
-    /**
-     * Migrate Up.
-     */
-    public function up()
-    {
-    	$db = \Windwalker\Ioc::getDatabase();
+	/**
+	 * Migrate Up.
+	 */
+	public function up()
+	{
+		$db = $this->db;
 
 		$db->getTable('users')
 			->addColumn('id',       DataType::INTEGER, Column::UNSIGNED, Column::NOT_NULL, null, 'Primary Key', ['primary' => true])
@@ -43,16 +39,14 @@ class Init extends AbstractMigration
 			->addColumn('views',       DataType::INTEGER, Column::UNSIGNED, Column::NOT_NULL, 0, 'View')
 			->addColumn('downloads',   DataType::INTEGER, Column::UNSIGNED, Column::NOT_NULL, 0, 'Downloads')
 			->create();
-    }
+	}
 
-    /**
-     * Migrate Down.
-     */
-    public function down()
-    {
-		$db = \Windwalker\Ioc::getDatabase();
-
-		$db->getTable('users')->drop();
-		$db->getTable('products')->drop();
-    }
+	/**
+	 * Migrate Down.
+	 */
+	public function down()
+	{
+		$this->db->getTable('users')->drop();
+		$this->db->getTable('products')->drop();
+	}
 }
