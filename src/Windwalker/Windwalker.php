@@ -24,7 +24,7 @@ class Windwalker
 	 *
 	 * @return  array
 	 */
-	public static function getPackages()
+	public static function loadPackages()
 	{
 		return array(
 			'system' => new SystemPackage

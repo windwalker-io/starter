@@ -9,8 +9,10 @@
 namespace Windwalker\User\Controller\Login;
 
 use Windwalker\Core\Controller\Controller;
+use Windwalker\Core\Language\Language;
 use Windwalker\Core\View\BladeHtmlView;
 use Windwalker\Ioc;
+use Windwalker\Uri\Uri;
 use Windwalker\User\Model\LoginModel;
 use Windwalker\User\View\Login\LoginHtmlView;
 
@@ -37,18 +39,33 @@ class LoginController extends Controller
 
 		$result = $model->login($user['username'], $user['password']);
 
+		$package = $this->getPackage();
+
 		if ($result)
 		{
-			echo 'Success';
+			$url = $package->get('redirect.login');
+
+			$msg = Language::translate('pkg.user.login.success');
 		}
 		else
 		{
-			echo 'Fail';
+			$router = Ioc::getRouter();
+
+			$url = $router->build($this->package->getRoutingPrefix() . ':login');
+
+			$msg = Language::translate('pkg.user.login.fail');
 		}
 
-		Ioc::getSession();
+		$uri = new Uri($url);
 
-		show($_SESSION);
+		if (!$uri->getScheme())
+		{
+			$url = $this->app->get('uri.base.full') . $url;
+		}
+
+		$this->setRedirect($url, $msg);
+
+		return true;
 	}
 }
  

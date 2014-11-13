@@ -14,6 +14,7 @@ use Windwalker\Core\Provider\DatabaseProvider;
 use Windwalker\Core\Provider\EventProvider;
 use Windwalker\Core\Provider\LanguageProvider;
 use Windwalker\DI\Container;
+use Windwalker\DI\ServiceProviderInterface;
 use Windwalker\Registry\Registry;
 use Windwalker\Windwalker;
 
@@ -37,35 +38,34 @@ class Application extends WindwalkerConsole
 	}
 
 	/**
-	 * registerProviders
+	 * loadProviders
 	 *
-	 * @param Container $container
-	 *
-	 * @return  void
+	 * @return  ServiceProviderInterface[]
 	 */
-	public function registerProviders(Container $container)
+	public static function loadProviders()
 	{
-		/*
-		 * Default Providers:
-		 * -----------------------------------------
-		 * This is some default service providers, we don't recommend to remove them,
-		 * But you can replace with yours, Make sure all the needed container key has
-		 * registered in your own providers.
-		 */
-		$container
-			->registerServiceProvider(new EventProvider)
-			->registerServiceProvider(new DatabaseProvider)
-			->registerServiceProvider(new LanguageProvider)
-			->registerServiceProvider(new CacheProvider);
+		return array(
+			/*
+			 * Default Providers:
+			 * -----------------------------------------
+			 * This is some default service providers, we don't recommend to remove them,
+			 * But you can replace with yours, Make sure all the needed container key has
+			 * registered in your own providers.
+			 */
+			'event'    => new EventProvider,
+			'database' => new DatabaseProvider,
+			'lang'     => new LanguageProvider,
+			'cache'    => new CacheProvider,
 
-		/*
-		 * Custom Providers:
-		 * -----------------------------------------
-		 * You can add your own providers here. If you installed a 3rd party packages from composer,
-		 * but this package need some init logic, create a service provider to do this and register it here.
-		 */
+			/*
+			 * Custom Providers:
+			 * -----------------------------------------
+			 * You can add your own providers here. If you installed a 3rd party packages from composer,
+			 * but this package need some init logic, create a service provider to do this and register it here.
+			 */
 
-		// Custom Providers here...
+			// Custom Providers here...
+		);
 	}
 
 	/**
@@ -100,7 +100,7 @@ class Application extends WindwalkerConsole
 		 * If you want a package can be use in every applications (for example: Web and Console),
 		 * set it in Windwalker\Windwalker object.
 		 */
-		$packages = Windwalker::getPackages();
+		$packages = Windwalker::loadPackages();
 
 		/*
 		 * Get Packages for This Application

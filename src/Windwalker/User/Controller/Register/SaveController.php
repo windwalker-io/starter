@@ -9,6 +9,7 @@
 namespace Windwalker\User\Controller\Register;
 
 use Windwalker\Core\Controller\Controller;
+use Windwalker\Core\Router\Router;
 use Windwalker\User\Model\RegistrationModel;
 
 /**
@@ -45,7 +46,7 @@ class SaveController extends Controller
 				$this->addFlash($result->getMessage(), 'danger');
 			}
 
-			$this->setRedirect('registration');
+			$this->setRedirect($this->package->buildRoute('login'));
 
 			return false;
 		}
@@ -61,7 +62,7 @@ class SaveController extends Controller
 				$this->addFlash($e->getMessage(), 'danger');
 			}
 
-			$this->setRedirect('registration', 'Save fail.');
+			$this->setRedirect($this->package->buildRoute('registration'), 'Save fail.');
 
 			return false;
 		}

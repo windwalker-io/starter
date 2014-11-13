@@ -49,7 +49,7 @@ class LoginModel extends Model
 	{
 		$credential = new Credential(array('username' => $username, 'password' => $password));
 
-		if (User::login($credential, true))
+		if (!User::login($credential, true))
 		{
 			$this['errors'] = User::getResults();
 
