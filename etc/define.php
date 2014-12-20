@@ -13,6 +13,7 @@ define('WINDWALKER_ETC',       WINDWALKER_ROOT . '/etc');
 define('WINDWALKER_LOGS',      WINDWALKER_ROOT . '/logs');
 define('WINDWALKER_RESOURCES', WINDWALKER_ROOT . '/resources');
 define('WINDWALKER_SOURCE',    WINDWALKER_ROOT . '/src');
+define('WINDWALKER_TEMP',      WINDWALKER_ROOT . '/tmp');
 define('WINDWALKER_TEMPLATES', WINDWALKER_ROOT . '/templates');
 define('WINDWALKER_VENDOR',    WINDWALKER_ROOT . '/vendor');
 define('WINDWALKER_PUBLIC',    WINDWALKER_ROOT . '/www');

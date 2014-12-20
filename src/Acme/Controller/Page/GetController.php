@@ -10,6 +10,8 @@ namespace Acme\Controller\Page;
 
 use Acme\View\Page\PageHtmlView;
 use Windwalker\Core\Controller\Controller;
+use Windwalker\Core\Utilities\Benchmark\BenchmarkHelper;
+use Windwalker\Profiler\Benchmark;
 use Windwalker\Utilities\Queue\Priority;
 use Windwalker\Renderer\BladeRenderer;
 use Windwalker\Renderer\PhpRenderer;

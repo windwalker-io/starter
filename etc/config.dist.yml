@@ -23,18 +23,3 @@ language:
     default: en-GB
     format: ini
     path: resources/languages
-ioc:
-    registry:
-        application: system.application
-        authenticate: system.authenticate
-        input: system.input
-        environment: system.environment
-        dispatcher: system.dispatcher
-        config: system.config
-        database: system.database
-        language: system.language
-        log: system.logger
-        router: system.router
-        session: system.session
-        cache: system.cache
-        debugger: whoops

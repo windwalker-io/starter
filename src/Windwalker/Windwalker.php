@@ -77,6 +77,7 @@ class Windwalker
 		$config['path.logs']       = WINDWALKER_LOGS;
 		$config['path.resources']  = WINDWALKER_RESOURCES;
 		$config['path.source']     = WINDWALKER_SOURCE;
+		$config['path.temp']       = WINDWALKER_TEMP;
 		$config['path.templates']  = WINDWALKER_TEMPLATES;
 		$config['path.vendor']     = WINDWALKER_VENDOR;
 		$config['path.public']     = WINDWALKER_PUBLIC;
