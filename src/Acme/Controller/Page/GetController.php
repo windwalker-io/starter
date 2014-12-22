@@ -10,8 +10,7 @@ namespace Acme\Controller\Page;
 
 use Acme\View\Page\PageHtmlView;
 use Windwalker\Core\Controller\Controller;
-use Windwalker\Core\Utilities\Benchmark\BenchmarkHelper;
-use Windwalker\Profiler\Benchmark;
+use Windwalker\Core\View\HtmlView;
 use Windwalker\Utilities\Queue\Priority;
 use Windwalker\Renderer\BladeRenderer;
 use Windwalker\Renderer\PhpRenderer;
@@ -45,7 +44,11 @@ class GetController extends Controller
 		// Using Twig
 		// $renderer = new TwigRenderer(Priority::createQueue(WINDWALKER_TEMPLATE . '/acme/page'));
 
-		$view = new PageHtmlView(array(), $renderer);
+		// $view = new PageHtmlView($this->package, array(), $renderer);
+
+		// return $view->setLayout('index')->render();
+
+		$view = new HtmlView($this->config);
 
 		return $view->setLayout('index')->render();
 	}
