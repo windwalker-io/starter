@@ -26,15 +26,13 @@ class GetController extends Controller
 	/**
 	 * Execute the controller.
 	 *
-	 * @return  boolean  True if controller finished execution, false if the controller did not
-	 *                   finish execution. A controller might return false if some precondition for
-	 *                   the controller to run has not been satisfied.
+	 * @return  mixed  Result.
 	 *
 	 * @since   1.0
 	 * @throws  \LogicException
 	 * @throws  \RuntimeException
 	 */
-	public function execute()
+	protected function doExecute()
 	{
 		$renderer = new PhpRenderer(Priority::createQueue(WINDWALKER_TEMPLATES . '/acme/page'));
 
@@ -44,11 +42,13 @@ class GetController extends Controller
 		// Using Twig
 		// $renderer = new TwigRenderer(Priority::createQueue(WINDWALKER_TEMPLATE . '/acme/page'));
 
-		// $view = new PageHtmlView($this->package, array(), $renderer);
+		 $view = new PageHtmlView(array(), $renderer);
 
-		// return $view->setLayout('index')->render();
+		 return $view->setLayout('index')->render();
 
-		$view = new HtmlView($this->config);
+//		$view = new HtmlView;
+//
+//		$view->setConfig($this->config);
 
 		return $view->setLayout('index')->render();
 	}

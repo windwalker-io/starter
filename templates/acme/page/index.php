@@ -1,7 +1,7 @@
 <?php
 $root = $data->uri->get('base.path');
 
-$this->extend('html');
+$this->extend('_global.html');
 ?>
 
 <?php $this->block('siteTitle') ?>Acme Page<?php $this->endblock(); ?>

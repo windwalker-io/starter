@@ -27,7 +27,7 @@ class IndexController extends Controller
 	 * @throws  \LogicException
 	 * @throws  \RuntimeException
 	 */
-	public function execute()
+	public function doExecute()
 	{
 		$model = new LoginModel;
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="test/bootstrap.php" colors="false"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	strict="true"
+	syntaxCheck="true"
+	>
+	<php>
+		<ini name="error_reporting" value="32767" />
+	</php>
+	<testsuites>
+		<testsuite name="Core">
+			<directory>vendor/windwalker/core/test</directory>
+		</testsuite>
+
+		<testsuite name="Starter">
+			<directory>src/*/Test</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>

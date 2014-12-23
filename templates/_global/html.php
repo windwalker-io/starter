@@ -12,7 +12,7 @@ $root = $data->uri->get('base.path');
 	<?php $this->endblock(); ?>
 
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?php echo $root; ?>media/css/page.css" />
+	<link rel="stylesheet" href="<?php echo $root; ?>media/css/main.css" />
 	<?php $this->block('style'); ?>
 	<?php $this->endblock(); ?>
 

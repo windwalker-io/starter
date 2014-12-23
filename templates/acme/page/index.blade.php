@@ -1,5 +1,5 @@
 {{-- Part of starter project. --}}
-@extends('html')
+@extends('_global.html')
 
 @section('siteTitle')
 Acme Page

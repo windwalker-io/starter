@@ -30,7 +30,7 @@ class GetController extends Controller
 	 * @throws  \LogicException
 	 * @throws  \RuntimeException
 	 */
-	public function execute()
+	public function doExecute()
 	{
 		$model = new CoverModel;
 
