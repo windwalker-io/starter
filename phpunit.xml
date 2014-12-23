@@ -12,6 +12,7 @@
 	<testsuites>
 		<testsuite name="Core">
 			<directory>vendor/windwalker/core/test</directory>
+			<directory>vendor/windwalker/core/src/*/Test</directory>
 		</testsuite>
 
 		<testsuite name="Starter">
