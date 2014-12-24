@@ -4,6 +4,8 @@ login:
     action:
         'get': 'IndexController'
         'post': 'LoginController'
+    extra:
+        flower: sakura
 logout:
     pattern: logout
     controller: 'Windwalker\User\Controller\Logout'

@@ -9,7 +9,6 @@
 namespace Windwalker\User\View\Login;
 
 use Windwalker\Core\View\HtmlView;
-use Windwalker\Ioc;
 
 /**
  * The LoginHtmlView class.
@@ -27,9 +26,6 @@ class LoginHtmlView extends HtmlView
 	 */
 	protected function prepareData($data)
 	{
-		$session = Ioc::getSession();
-
-		// $session->destroy();
 	}
 }
  
