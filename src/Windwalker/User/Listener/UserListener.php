@@ -8,7 +8,9 @@
 
 namespace Windwalker\User\Listener;
 
+use Windwalker\Core\Ioc;
 use Windwalker\Event\Event;
+use Windwalker\Filesystem\Folder;
 
 /**
  * The UserListener class.
@@ -26,6 +28,16 @@ class UserListener
 	 */
 	public function onUserAfterLogin(Event $event)
 	{
+		$options = $event['options'];
+
+		$remember = $options['remember'];
+
+		if ($remember)
+		{
+			$session = Ioc::getSession();
+
+			setcookie(session_name(), $_COOKIE[session_name()], time() + 60 * 60 * 24 * 100, $session->getOption('cookie_path'), $session->getOption('cookie_domain'));
+		}
 	}
 
 	/**

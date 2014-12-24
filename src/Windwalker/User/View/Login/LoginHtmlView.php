@@ -27,6 +27,9 @@ class LoginHtmlView extends HtmlView
 	 */
 	protected function prepareData($data)
 	{
+		$session = Ioc::getSession();
+
+		// $session->destroy();
 	}
 }
  

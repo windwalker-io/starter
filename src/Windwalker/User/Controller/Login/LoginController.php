@@ -51,7 +51,7 @@ class LoginController extends Controller
 		{
 			$router = Ioc::getRouter();
 
-			$url = $router->build($this->package->getRoutingPrefix() . ':login');
+			$url = $router->build($this->package->getName() . ':login');
 
 			$msg = Language::translate('pkg.user.login.fail');
 		}
