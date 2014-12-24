@@ -52,32 +52,34 @@ class Application extends WebApplication
 	 */
 	public static function loadProviders()
 	{
-		return array(
-			/*
-			 * Default Providers:
-			 * -----------------------------------------
-			 * This is some default service providers, we don't recommend to remove them,
-			 * But you can replace with yours, Make sure all the needed container key has
-			 * registered in your own providers.
-			 */
-			'debug'    => new WhoopsProvider,
-			'event'    => new EventProvider,
-			'database' => new DatabaseProvider,
-			'router'   => new RouterProvider,
-			'lang'     => new LanguageProvider,
-			'cache'    => new CacheProvider,
-			'session'  => new SessionProvider,
-			'auth'     => new AuthenticateProvider,
+		$providers = parent::loadProviders();
 
-			/*
-			 * Custom Providers:
-			 * -----------------------------------------
-			 * You can add your own providers here. If you installed a 3rd party packages from composer,
-			 * but this package need some init logic, create a service provider to do this and register it here.
-			 */
+		/*
+		 * Default Providers:
+		 * -----------------------------------------
+		 * This is some default service providers, we don't recommend to remove them,
+		 * But you can replace with yours, Make sure all the needed container key has
+		 * registered in your own providers.
+		 */
+		$providers['debug']    = new WhoopsProvider;
+		$providers['event']    = new EventProvider;
+		$providers['database'] = new DatabaseProvider;
+		$providers['router']   = new RouterProvider;
+		$providers['lang']     = new LanguageProvider;
+		$providers['cache']    = new CacheProvider;
+		$providers['session']  = new SessionProvider;
+		$providers['auth']     = new AuthenticateProvider;
 
-			// Custom Providers here...
-		);
+		/*
+		 * Custom Providers:
+		 * -----------------------------------------
+		 * You can add your own providers here. If you installed a 3rd party packages from composer,
+		 * but this package need some init logic, create a service provider to do this and register it here.
+		 */
+
+		// Custom Providers here...
+
+		return $providers;
 	}
 
 	/**

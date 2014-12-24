@@ -17,7 +17,7 @@ use Windwalker\SystemPackage\SystemPackage;
  * 
  * @since  {DEPLOY_VERSION}
  */
-class Windwalker
+class Windwalker extends \Windwalker\Core\Windwalker
 {
 	/**
 	 * getPackages
