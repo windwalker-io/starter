@@ -8,7 +8,7 @@
 
 $root = $data->uri['base.path'];
 
-$this->extend('html');
+$this->extend('_global.html');
 
 ?>
 <?php $this->block('style'); ?>
