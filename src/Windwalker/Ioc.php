@@ -8,13 +8,11 @@
 
 namespace Windwalker;
 
-use Windwalker\Core\Ioc as WindwalkerIoc;
-
 /**
  * The Ioc class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-abstract class Ioc extends WindwalkerIoc
+abstract class Ioc extends \Windwalker\Core\Ioc
 {
 }

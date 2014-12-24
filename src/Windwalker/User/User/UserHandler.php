@@ -8,7 +8,10 @@
 
 namespace Windwalker\User\User;
 
+use Windwalker\Core\Authenticate\UserData;
+use Windwalker\Core\Authenticate\UserDataInterface;
 use Windwalker\Core\Authenticate\UserHandlerInterface;
+use Windwalker\Core\Ioc;
 use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
 
@@ -31,30 +34,43 @@ class UserHandler implements UserHandlerInterface
 	 *
 	 * @param array $conditions
 	 *
-	 * @return  mixed
+	 * @return  UserDataInterface
 	 */
 	public function load($conditions)
 	{
-		$user = $this->getDataMapper()->findOne($conditions);
-
-		if ($user->isNull())
+		if (is_object($conditions))
 		{
-			return false;
+			$conditions = get_object_vars($conditions);
 		}
 
-		return (array) $user;
+		if (!$conditions)
+		{
+			$session = Ioc::getSession();
+
+			$user = $session->get('user');
+		}
+		else
+		{
+			$user = $this->getDataMapper()->findOne($conditions);
+		}
+
+		$user = new UserData((array) $user);
+
+		return $user;
 	}
 
 	/**
 	 * create
 	 *
-	 * @param Data $data
+	 * @param UserDataInterface|UserData $user
 	 *
-	 * @return  Data
+	 * @return  UserData
 	 */
-	public function save(Data $data)
+	public function save(UserDataInterface $user)
 	{
-		if ($data->id)
+		$data = new Data($user->dump());
+
+		if ($user->id)
 		{
 			$this->getDataMapper()->updateOne($data, 'id', true);
 		}
@@ -63,19 +79,51 @@ class UserHandler implements UserHandlerInterface
 			$this->getDataMapper()->createOne($data);
 		}
 
-		return $data;
+		return $user;
 	}
 
 	/**
 	 * delete
 	 *
-	 * @param array $conditions
+	 * @param UserDataInterface|UserData $user
 	 *
 	 * @return  boolean
 	 */
-	public function delete($conditions)
+	public function delete(UserDataInterface $user)
 	{
-		return $this->getDataMapper()->delete($conditions);
+		return $this->getDataMapper()->delete(array('id' => $user->id));
+	}
+
+	/**
+	 * login
+	 *
+	 * @param UserDataInterface|UserData $user
+	 *
+	 * @return  boolean
+	 */
+	public function login(UserDataInterface $user)
+	{
+		$session = Ioc::getSession();
+
+		$session->set('user', (array) $user);
+
+		return true;
+	}
+
+	/**
+	 * logout
+	 *
+	 * @param UserDataInterface|UserData $user
+	 *
+	 * @return bool
+	 */
+	public function logout(UserDataInterface $user)
+	{
+		$session = Ioc::getSession();
+
+		$session->remove('user');
+
+		return true;
 	}
 
 	/**

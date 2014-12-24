@@ -42,7 +42,7 @@ class Application extends WebApplication
 		parent::initialise();
 
 		// Start session
-		Ioc::getSession();
+		Ioc::getSession()->start();
 	}
 
 	/**

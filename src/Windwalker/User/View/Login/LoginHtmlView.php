@@ -9,6 +9,7 @@
 namespace Windwalker\User\View\Login;
 
 use Windwalker\Core\View\HtmlView;
+use Windwalker\Ioc;
 
 /**
  * The LoginHtmlView class.
@@ -17,6 +18,15 @@ use Windwalker\Core\View\HtmlView;
  */
 class LoginHtmlView extends HtmlView
 {
-
+	/**
+	 * prepareData
+	 *
+	 * @param \Windwalker\Data\Data $data
+	 *
+	 * @return  void
+	 */
+	protected function prepareData($data)
+	{
+	}
 }
  
