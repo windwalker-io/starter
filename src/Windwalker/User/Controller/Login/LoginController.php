@@ -10,7 +10,10 @@ namespace Windwalker\User\Controller\Login;
 
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Language\Language;
+use Windwalker\Core\Router\RestfulRouter;
+use Windwalker\Core\Router\Router;
 use Windwalker\Core\View\BladeHtmlView;
+use Windwalker\IO\Input;
 use Windwalker\Ioc;
 use Windwalker\Uri\Uri;
 use Windwalker\User\Model\LoginModel;
@@ -49,9 +52,9 @@ class LoginController extends Controller
 		}
 		else
 		{
-			$router = Ioc::getRouter();
+			$router = $this->package->getRouter();
 
-			$url = $router->build($this->package->getName() . ':login');
+			$url = $router->buildHttp('login', array(), RestfulRouter::TYPE_FULL);
 
 			$msg = Language::translate('pkg.user.login.fail');
 		}

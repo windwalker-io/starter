@@ -10,6 +10,7 @@ namespace Windwalker\User\Controller\Logout;
 
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Controller\Controller;
+use Windwalker\Core\Router\Router;
 use Windwalker\User\Model\LoginModel;
 
 /**
@@ -30,17 +31,18 @@ class SaveController extends Controller
 	public function doExecute()
 	{
 		$model = new LoginModel;
+		$router = $this->package->getRouter();
 
 		$user = User::get();
 
 		if ($user->isNull())
 		{
-			$this->setRedirect('login', 'Already logout', 'success');
+			$this->setRedirect($router->buildHttp('login', array(), Router::TYPE_FULL), 'Already logout', 'success');
 		}
 
 		$model->logout($user->username);
 
-		$this->setRedirect('login', 'Logout success', 'success');
+		$this->setRedirect($router->buildHttp('login', array(), Router::TYPE_FULL), 'Logout success', 'success');
 
 		return true;
 	}
