@@ -13,7 +13,6 @@ use Windwalker\Core\Provider\CacheProvider;
 use Windwalker\Core\Provider\DatabaseProvider;
 use Windwalker\Core\Provider\EventProvider;
 use Windwalker\Core\Provider\LanguageProvider;
-use Windwalker\DI\Container;
 use Windwalker\DI\ServiceProviderInterface;
 use Windwalker\Registry\Registry;
 use Windwalker\Windwalker;
@@ -42,7 +41,7 @@ class Application extends WindwalkerConsole
 	 *
 	 * @return  ServiceProviderInterface[]
 	 */
-	public static function loadProviders()
+	public function loadProviders()
 	{
 		return array(
 			/*
@@ -92,7 +91,7 @@ class Application extends WindwalkerConsole
 	 *
 	 * @return  array
 	 */
-	public function getPackages()
+	public function loadPackages()
 	{
 		/*
 		 * Get Global Packages
