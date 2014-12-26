@@ -10,14 +10,14 @@ $autoload = __DIR__ . '/../vendor/autoload.php';
 
 if (!is_file($autoload))
 {
-	exit('Please run <code>$ composer install</code> First.');
+	exit('Please run `composer install` First.');
 }
 
 include_once $autoload;
 
 include_once __DIR__ . '/../etc/define.php';
 
-$app = new Windwalker\Web\Application;
+$app = new Windwalker\Web\Application(\Windwalker\Ioc::factory());
 
 define('WINDWALKER_DEBUG', $app->get('system.debug'));
 
