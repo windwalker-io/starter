@@ -41,14 +41,14 @@ class Windwalker extends \Windwalker\Core\Windwalker
 	 */
 	public static function loadConfiguration(Registry $config)
 	{
-		$file = WINDWALKER_ETC . '/config.yml';
+		$config->loadFile($file = WINDWALKER_ETC . '/config.yml', 'yaml');
 
-		if (!is_file($file))
+		$secret = WINDWALKER_ETC . '/secret.yml';
+
+		if (is_file($secret))
 		{
-			exit('Please copy config.dist.yml to config.yml');
+			$config->loadFile($secret, 'yaml');
 		}
-
-		$config->loadFile($file, 'yaml');
 	}
 
 	/**

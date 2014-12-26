@@ -30,7 +30,7 @@ class CoverModel extends Model
 		{
 			return (new DataMapper('acme_cover'))->findOne(array('id' => 1));
 		}
-		catch (\Exception $e)
+		catch (\RuntimeException $e)
 		{
 			return new Data;
 		}

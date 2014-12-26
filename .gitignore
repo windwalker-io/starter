@@ -9,7 +9,7 @@
 composer.lock
 
 #Windwalker
-/etc/config.yml
+/etc/secret.yml
 
 #Test
 /phpunit.xml
