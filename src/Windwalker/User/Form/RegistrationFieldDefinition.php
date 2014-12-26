@@ -35,26 +35,26 @@ class RegistrationFieldDefinition implements FieldDefinitionInterface
 
 		$form->addField(new TextField('username'))
 			->label('Username')
-			->set('default', $faker->userName)
+			//->set('default', $faker->userName)
 			->required();
 
 		$form->addField(new TextField('name'))
 			->label('Name')
-			->set('default', $faker->name)
+			//->set('default', $faker->name)
 			->required();
 
 		$form->addField(new PasswordField('password'))
 			->label('Password')
-			->set('default', 1234)
+			//->set('default', 1234)
 			->required();
 
 		$form->addField(new PasswordField('password2'))
-			->set('default', 1234)
+			//->set('default', 1234)
 			->label('Valid Password');
 
 		$form->addField(new EmailField('email'))
 			->label('Email')
-			->set('default', $faker->email)
+			//->set('default', $faker->email)
 			->required();
 	}
 }

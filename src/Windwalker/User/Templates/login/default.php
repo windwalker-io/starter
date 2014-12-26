@@ -20,7 +20,6 @@ $this->extend('_global.html');
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<?php show($_SESSION); ?>
 			<form action="<?php echo $data->uri['current']; ?>" class="form-horizontal" method="post">
 				<fieldset>
 					<legend>LOGIN</legend>

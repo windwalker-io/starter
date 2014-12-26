@@ -30,8 +30,6 @@ class GetController extends Controller
 	 */
 	public function doExecute()
 	{
-		show($_SESSION);
-
 		$model = new RegistrationModel;
 
 		$view = new RegistrationHtmlView;
