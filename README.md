@@ -5,14 +5,20 @@ This is [Windwlaker Framework](https://github.com/ventoviro/windwalker) starter 
 ## Installation Via Composer
 
 ``` bash
-$ php composer.phar create-project windwalker/starter windwalker ~2.0 -s beta
+$ php composer.phar create-project windwalker/starter windwalker ~2.0
 ```
 
 ## Getting Started
 
-Copy `etc/config.dist.yml` to `etc/config.yml` and fill database information.
+Open `http://{Your project root}/www`, you will see the sample page.
 
-Open `http://{Your project root}/www`, you will see sample page.
+![img](https://cloud.githubusercontent.com/assets/1639206/5558343/48e86a7e-8d5e-11e4-86c6-43819ed5ccb7.jpg)
+
+Open `http://{Your project root}/www/dev.php`, you will enter the development mode.
+
+## Use Database
+
+Copy `etc/secret.dist.yml` to `etc/secret.yml` and fill database information.
 
 ## Using Console
 
@@ -41,22 +47,22 @@ Options:
   -h | --help       Display this help message.
   -q | --quiet      Do not output any message.
   -v | --verbose    Increase the verbosity of messages.
-  --no-ansi         Suppress ANSI colors on unsupported terminals.
-                    Use --no-ansi=false to force using color.
+  --ansi            Set 'off' to suppress ANSI colors on unsupported terminals.
 
-Available commands:
+Commands:
 
-  help     List all arguments and show usage & manual.
+  migration    Database migration system.
+  seed         The data seeder help you create fake data.
+  build        Some useful tools for building system.
 
-  build    Some useful tools for building system.
-
-  phinx    Migration system by Phinx
+Welcome to Windwalker Console.
 ```
 
 ### Import Sample Schema
 
 ``` bash
-php bin/console phinx migrate
+php bin/console migration status
+php bin/console migration migrate
 ```
 
 ## How To Use Windwalker
