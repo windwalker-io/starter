@@ -24,7 +24,7 @@ $root = $data->uri->get('base.path');
 </head>
 <body>
 <?php $this->block('navbar'); ?>
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -32,7 +32,9 @@ $root = $data->uri->get('base.path');
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="">Windwalker</a>
+			<a class="navbar-brand" href="">
+				<img src="https://cloud.githubusercontent.com/assets/1639206/2870854/176b987a-d2e4-11e3-8be6-9f70304a8499.png" alt="Windwalker LOGO" />
+			</a>
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
@@ -50,19 +52,7 @@ $root = $data->uri->get('base.path');
 <?php $this->endblock(); ?>
 
 <?php $this->block('message') ?>
-<div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<?php foreach ($data->flashes as $type => $msgs): ?>
-				<?php foreach ($msgs as $msg): ?>
-				<div class="alert alert-<?php echo $type; ?>">
-					<?php echo $msg; ?>
-				</div>
-				<?php endforeach; ?>
-			<?php endforeach; ?>
-		</div>
-	</div>
-</div>
+	<?php echo $this->load('windwalker.message.default'); ?>
 <?php $this->endblock(); ?>
 
 <?php $this->block('content') ?>
@@ -78,7 +68,7 @@ Contnet
 				<hr />
 
 				<footer>
-					&copy; Formosa <?php echo $data->datetime->year; ?>
+					&copy; Windwalker <?php echo $data->datetime->year; ?>
 				</footer>
 			</div>
 		</div>
