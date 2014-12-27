@@ -1,5 +1,7 @@
 # Windwalker Starter
 
+![logo](https://cloud.githubusercontent.com/assets/1639206/2870854/176b987a-d2e4-11e3-8be6-9f70304a8499.png)
+
 This is [Windwlaker Framework](https://github.com/ventoviro/windwalker) starter package.
 
 ## Installation Via Composer
@@ -12,7 +14,7 @@ $ php composer.phar create-project windwalker/starter windwalker ~2.0
 
 Open `http://{Your project root}/www`, you will see the sample page.
 
-![img](https://cloud.githubusercontent.com/assets/1639206/5558343/48e86a7e-8d5e-11e4-86c6-43819ed5ccb7.jpg)
+![acme_page](https://cloud.githubusercontent.com/assets/1639206/5560315/dd714ccc-8dba-11e4-8911-8a29e2a2b1f2.png)
 
 Open `http://{Your project root}/www/dev.php`, you will enter the development mode.
 
