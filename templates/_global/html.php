@@ -32,7 +32,7 @@ $root = $data->uri->get('base.path');
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="">
+			<a class="navbar-brand" href="<?php echo $root ?>">
 				<img src="https://cloud.githubusercontent.com/assets/1639206/2870854/176b987a-d2e4-11e3-8be6-9f70304a8499.png" alt="Windwalker LOGO" />
 			</a>
 		</div>
