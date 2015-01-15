@@ -68,17 +68,21 @@ class UserHandler implements UserHandlerInterface
 	 */
 	public function save(UserDataInterface $user)
 	{
-		$data = new Data($user->dump());
-
 		if ($user->id)
 		{
+			$data = $this->getDataMapper()->findOne($user->id);
+
+			$data->bind($user->dump());
+
 			$this->getDataMapper()->updateOne($data, 'id', true);
 		}
 		else
 		{
+			$data = new Data($user->dump());
+
 			$this->getDataMapper()->createOne($data);
 		}
-		
+
 		$user->id = $data->id;
 
 		return $user;
