@@ -78,6 +78,8 @@ class UserHandler implements UserHandlerInterface
 		{
 			$this->getDataMapper()->createOne($data);
 		}
+		
+		$user->id = $data->id;
 
 		return $user;
 	}
