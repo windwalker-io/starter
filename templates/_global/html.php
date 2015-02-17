@@ -68,7 +68,7 @@ Contnet
 				<hr />
 
 				<footer>
-					&copy; Windwalker <?php echo $data->datetime->year; ?>
+					&copy; Windwalker <?php echo $data->datetime->format('Y'); ?>
 				</footer>
 			</div>
 		</div>

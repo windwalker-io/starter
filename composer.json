@@ -12,7 +12,6 @@
 	],
 	"require": {
 		"windwalker/core" : "~2.0@stable",
-		"joomla/datetime" : "*@stable",
 		"symfony/yaml" : "2.*@stable",
 		"filp/whoops": "1.*@stable",
 		"fzaninotto/faker": "~1.0@stable",
@@ -20,9 +19,7 @@
 		"twig/twig" : "~1.0@stable"
 	},
 	"require-dev": {
-		"phpunit/phpunit-skeleton-generator": "dev-windwalker-tmpl",
-		"phpunit/phpunit": "*@stable",
-		"phpunit/dbunit": "*@stable"
+		"phpunit/phpunit-skeleton-generator": "dev-windwalker-tmpl"
 	},
 	"repositories": [
 		{
