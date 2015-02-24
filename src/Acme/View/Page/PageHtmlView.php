@@ -28,4 +28,3 @@ class PageHtmlView extends HtmlView
 	{
 	}
 }
- 

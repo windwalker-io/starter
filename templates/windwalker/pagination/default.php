@@ -26,7 +26,7 @@ $route = $data->route;
 <ul class="pagination windwalker-pagination">
 	<?php if ($pagination->getFirst()): ?>
 		<li>
-			<a href="<?php echo Router::buildHtml($route, array('page' => $pagination->getFirst())); ?>">
+			<a href="<?php echo $route(array('page' => $pagination->getFirst())); ?>">
 				<span class="glyphicon glyphicon-fast-backward"></span>
 				<span class="sr-only">First</span>
 			</a>
@@ -35,7 +35,7 @@ $route = $data->route;
 
 	<?php if ($pagination->getPrevious()): ?>
 		<li>
-			<a href="<?php echo Router::buildHtml($route, array('page' => $pagination->getPrevious())); ?>">
+			<a href="<?php echo $route(array('page' => $pagination->getPrevious())); ?>">
 				<span class="glyphicon glyphicon-backward"></span>
 				<span class="sr-only">Previous</span>
 			</a>
@@ -44,7 +44,7 @@ $route = $data->route;
 
 	<?php if ($pagination->getLess()): ?>
 		<li>
-			<a href="<?php echo Router::buildHtml($route, array('page' => $pagination->getLess())); ?>">
+			<a href="<?php echo $route(array('page' => $pagination->getLess())); ?>">
 				Less
 			</a>
 		</li>
@@ -54,7 +54,7 @@ $route = $data->route;
 		<?php $active = ($page == 'current') ? 'active' : ''; ?>
 		<li class="<?php echo $active; ?>">
 			<?php if (!$active): ?>
-				<a href="<?php echo Router::buildHtml($route, array('page' => $k)); ?>">
+				<a href="<?php echo $route(array('page' => $k)); ?>">
 					<?php echo $k; ?>
 				</a>
 			<?php else: ?>
@@ -67,7 +67,7 @@ $route = $data->route;
 
 	<?php if ($pagination->getMore()): ?>
 		<li>
-			<a href="<?php echo Router::buildHtml($route, array('page' => $pagination->getMore())); ?>">
+			<a href="<?php echo $route(array('page' => $pagination->getMore())); ?>">
 				More
 			</a>
 		</li>
@@ -75,7 +75,7 @@ $route = $data->route;
 
 	<?php if ($pagination->getNext()): ?>
 		<li>
-			<a href="<?php echo Router::buildHtml($route, array('page' => $pagination->getNext())); ?>">
+			<a href="<?php echo $route(array('page' => $pagination->getNext())); ?>">
 				<span class="glyphicon glyphicon-forward"></span>
 				<span class="sr-only">Next</span>
 			</a>
@@ -84,7 +84,7 @@ $route = $data->route;
 
 	<?php if ($pagination->getLast()): ?>
 		<li>
-			<a href="<?php echo Router::buildHtml($route, array('page' => $pagination->getLast())); ?>">
+			<a href="<?php echo $route(array('page' => $pagination->getLast())); ?>">
 				<span class="glyphicon glyphicon-fast-forward"></span>
 				<span class="sr-only">Last</span>
 			</a>
