@@ -1,6 +1,7 @@
 system:
     debug: 1
     timezone: 'UTC'
+    secret: 'This-token-is-not-safe'
 session:
     handler: native
     expire_time: 15

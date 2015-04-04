@@ -32,6 +32,11 @@
 			"": "src/"
 		}
 	},
+    "scripts": {
+        "post-install-cmd": [
+            "Windwalker\\Composer\\StarterInstaller::install"
+        ]
+    },
 	"extra": {
 		"branch-alias": {
 			"dev-master" : "2.1-dev"
