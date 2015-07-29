@@ -1,6 +1,6 @@
 <?php
 /**
- * Part of softvilla project. 
+ * Part of Windwalker project.
  *
  * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
  * @license    GNU Lesser General Public License version 3 or later.
@@ -22,6 +22,13 @@ class DatabaseSeeder extends AbstractSeeder
 	 */
 	public function doExecute()
 	{
+		// This is example seeder, you can delete it.
+		with(new \Windwalker\DataMapper\DataMapper('acme_cover'))->createOne(array(
+			'text' => 'Hello World',
+			'state' => 1
+		));
+		// Example seeder end.
+
 		$this->command->out('Seeder executed.')->out();
 	}
 

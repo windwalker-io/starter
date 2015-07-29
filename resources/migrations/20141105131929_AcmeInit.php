@@ -1,6 +1,6 @@
 <?php
 /**
- * Part of starter project. 
+ * Part of Windwalker project.
  *
  * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
  * @license    GNU Lesser General Public License version 3 or later.
@@ -21,7 +21,7 @@ class AcmeInit extends AbstractMigration
 	 */
 	public function up()
 	{
-		$this->db->getTable('acme_cover')
+		$this->db->getTable('acme_cover', true)
 			->addColumn(new Primary('id'))
 			->addColumn(new Text('text'))
 			->addColumn(new Integer('state'))
