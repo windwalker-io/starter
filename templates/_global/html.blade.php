@@ -6,7 +6,7 @@
     <title>@yield('siteTitle')</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ $uri['base.path'] }}media/images/favicon.ico" />
-    <meta name="generator" content="Formosa | Windwalker Framework" />
+    <meta name="generator" content="Windwalker Framework" />
     @yield('meta')
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">

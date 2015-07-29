@@ -7,7 +7,7 @@ $root = $data->uri->get('base.path');
 	<title><?php $this->block('siteTitle'); ?><?php $this->endblock(); ?></title>
 
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $root; ?>media/images/favicon.ico" />
-	<meta name="generator" content="Formosa | Windwalker Framework" />
+	<meta name="generator" content="Windwalker Framework" />
 	<?php $this->block('meta'); ?>
 	<?php $this->endblock(); ?>
 
