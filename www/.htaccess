@@ -1,4 +1,6 @@
 ##
+# Windwalker .htaccess file.
+#
 # READ THIS COMPLETELY IF YOU CHOOSE TO USE THIS FILE!
 #
 # The line just below this section: 'Options +FollowSymLinks' may cause problems
@@ -31,13 +33,15 @@ Options +FollowSymLinks
 
     ## End - Rewrite rules to block out some common exploits.
 
-    ## Begin - Custom redirects
-    #
+    ##
     # If you need to redirect some pages, or set a canonical non-www to
-    # www redirect (or vice versa), place that code here. Ensure those
-    # redirects use the correct RewriteRule syntax and the [R=301,L] flags.
+    # www redirect (or vice versa), place that code between Custom redirects block.
+    # Ensure those redirects use the correct RewriteRule syntax and the [R=301,L] flags.
     #
-    ## End - Custom redirects
+    # Begin - Custom redirects
+    #
+    # End - Custom redirects
+    ##
 
     ##
     # Uncomment following line if your webserver's URL
