@@ -8,6 +8,7 @@
 
 namespace Windwalker\Test;
 
+use Windwalker\Database\Test\DsnResolver;
 use Windwalker\Web\Application;
 
 /**
@@ -17,5 +18,4 @@ use Windwalker\Web\Application;
  */
 class TestApplication extends Application
 {
-
 }
