@@ -78,7 +78,7 @@ class StarterInstaller
 		$io->write('Database driver only support pdo mysql now.');
 
 		$driver = 'mysql';
-		$host = $io->ask("Database host [127.0.0.1]: ", '127.0.0.1');
+		$host = $io->ask("Database host [localhost]: ", 'localhost');
 		$name = $io->ask("Database name [acme]: ", 'acme');
 		$user = $io->ask("Database user [root]: ", 'root');
 		$pass = $io->askAndHideAnswer("Database password: ");
