@@ -1,4 +1,4 @@
-{{-- Part of starter project. --}}
+{{-- Part of Windwalker project. --}}
 @extends('_global.html')
 
 @section('siteTitle')

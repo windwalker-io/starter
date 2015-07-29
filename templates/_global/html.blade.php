@@ -1,4 +1,4 @@
-{{-- Part of starter project. --}}
+{{-- Part of Windwalker project. --}}
 <!doctype html>
 <html lang="zh-tw">
 <head>
