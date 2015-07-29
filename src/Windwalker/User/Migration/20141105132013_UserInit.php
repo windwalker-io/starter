@@ -2,8 +2,8 @@
 /**
  * Part of starter project. 
  *
- * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
- * @license    GNU General Public License version 2 or later;
+ * @copyright  Copyright (C) 2014 - 2015 LYRASOFT. All rights reserved.
+ * @license    GNU Lesser General Public License version 3 or later.
  */
 
 use Windwalker\Core\Migration\AbstractMigration;
