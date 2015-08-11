@@ -8,7 +8,6 @@
 
 namespace Windwalker\Test;
 
-use Windwalker\Database\Test\DsnResolver;
 use Windwalker\Web\Application;
 
 /**

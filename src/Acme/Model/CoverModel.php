@@ -36,4 +36,3 @@ class CoverModel extends Model
 		}
 	}
 }
- 
