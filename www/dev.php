@@ -6,27 +6,12 @@
  * @license    GNU Lesser General Public License version 3 or later. see LICENSE
  */
 
-// For dev environment
-$config = array(
-	'127.0.0.1',
-	'fe80::1',
-	'::1'
-);
-
-if (isset($_SERVER['HTTP_CLIENT_IP']) || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
-	|| !(in_array(@$_SERVER['REMOTE_ADDR'], $config)))
-{
-	header('HTTP/1.0 403 Forbidden');
-
-	exit('Forbidden');
-}
-
 // Start composer
 $autoload = __DIR__ . '/../vendor/autoload.php';
 
 if (!is_file($autoload))
 {
-	exit('Please run `composer install` First.');
+	exit();
 }
 
 include_once $autoload;
@@ -37,7 +22,7 @@ include_once __DIR__ . '/../etc/define.php';
 \Windwalker\Windwalker::loadConfiguration($config = new \Windwalker\Registry\Registry);
 
 if (isset($_SERVER['HTTP_CLIENT_IP']) || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
-	|| !(in_array(@$_SERVER['REMOTE_ADDR'], $config->get('dev.allow_ips', array()))))
+	|| !(in_array(@$_SERVER['REMOTE_ADDR'], (array) $config->get('dev.allow_ips'))))
 {
 	header('HTTP/1.1 403 Forbidden');
 

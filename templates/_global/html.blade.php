@@ -28,12 +28,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ $uri['base.path'] }}">Windwalker</a>
+                <a class="navbar-brand" href="{{ $router->html('home') }}">Windwalker</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                      @section('nav')
-                        <li class="active"><a href="{{ $uri['base.path'] }}">Home</a></li>
+                        <li class="active"><a href="{{ $router->html('home') }}">Home</a></li>
                      @show
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

@@ -37,12 +37,12 @@ class SaveController extends Controller
 
 		if ($user->isNull())
 		{
-			$this->setRedirect($router->buildHttp('login', array(), Router::TYPE_FULL), 'Already logout', 'success');
+			$this->setRedirect($router->http('login', array(), Router::TYPE_FULL), 'Already logout', 'success');
 		}
 
 		$model->logout($user->username);
 
-		$this->setRedirect($router->buildHttp('login', array(), Router::TYPE_FULL), 'Logout success', 'success');
+		$this->setRedirect($router->http('login', array(), Router::TYPE_FULL), 'Logout success', 'success');
 
 		return true;
 	}

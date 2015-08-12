@@ -54,7 +54,7 @@ class LoginController extends Controller
 		{
 			$router = $this->package->getRouter();
 
-			$url = $router->buildHttp('login', array(), RestfulRouter::TYPE_FULL);
+			$url = $router->http('login', array(), RestfulRouter::TYPE_FULL);
 
 			$msg = Language::translate('pkg.user.login.fail');
 		}
