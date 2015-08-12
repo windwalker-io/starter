@@ -13,3 +13,4 @@ composer.lock
 
 #Test
 /phpunit.xml
+/phpunit.core.xml
