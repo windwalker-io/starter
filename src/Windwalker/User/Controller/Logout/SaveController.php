@@ -8,7 +8,7 @@
 
 namespace Windwalker\User\Controller\Logout;
 
-use Windwalker\Core\Authenticate\User;
+use Windwalker\Core\Authentication\User;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Router\Router;
 use Windwalker\User\Model\LoginModel;

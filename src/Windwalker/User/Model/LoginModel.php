@@ -10,7 +10,7 @@ namespace Windwalker\User\Model;
 
 use Windwalker\Authenticate\Authenticate;
 use Windwalker\Authenticate\Credential;
-use Windwalker\Core\Authenticate\User;
+use Windwalker\Core\Authentication\User;
 use Windwalker\Core\Model\Model;
 use Windwalker\DataMapper\DataMapper;
 use Windwalker\Form\Field\AbstractField;

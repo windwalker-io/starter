@@ -9,7 +9,7 @@
 namespace Windwalker\User\Controller\Login;
 
 use Windwalker\Core\Controller\Controller;
-use Windwalker\Core\Language\Language;
+use Windwalker\Core\Language\Translator;
 use Windwalker\Core\Router\RestfulRouter;
 use Windwalker\Core\Router\Router;
 use Windwalker\Core\View\BladeHtmlView;
@@ -48,7 +48,7 @@ class LoginController extends Controller
 		{
 			$url = $package->get('redirect.login');
 
-			$msg = Language::translate('pkg.user.login.success');
+			$msg = Translator::translate('pkg.user.login.success');
 		}
 		else
 		{
@@ -56,7 +56,7 @@ class LoginController extends Controller
 
 			$url = $router->http('login', array(), RestfulRouter::TYPE_FULL);
 
-			$msg = Language::translate('pkg.user.login.fail');
+			$msg = Translator::translate('pkg.user.login.fail');
 		}
 
 		$uri = new Uri($url);

@@ -9,7 +9,7 @@
 namespace Windwalker\Web;
 
 use Windwalker\Core\Application\WebApplication;
-use Windwalker\Core\Provider\AuthenticateProvider;
+use Windwalker\Core\Provider\AuthenticationProvider;
 use Windwalker\Core\Provider\CacheProvider;
 use Windwalker\Core\Provider\DatabaseProvider;
 use Windwalker\Core\Provider\EventProvider;
@@ -68,7 +68,7 @@ class Application extends WebApplication
 		$providers['lang']     = new LanguageProvider;
 		$providers['cache']    = new CacheProvider;
 		$providers['session']  = new SessionProvider;
-		$providers['auth']     = new AuthenticateProvider;
+		$providers['auth']     = new AuthenticationProvider;
 
 		/*
 		 * Custom Providers:

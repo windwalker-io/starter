@@ -8,7 +8,7 @@
 
 namespace Windwalker\User;
 
-use Windwalker\Core\Authenticate\User;
+use Windwalker\Core\Authentication\User;
 use Windwalker\Core\Package\AbstractPackage;
 use Windwalker\User\User\UserHandler;
 

@@ -8,7 +8,7 @@
 
 namespace Windwalker\User\Model;
 
-use Windwalker\Core\Authenticate\User;
+use Windwalker\Core\Authentication\User;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Model\Model;
 use Windwalker\Crypt\Password;
