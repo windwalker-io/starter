@@ -9,20 +9,26 @@
 namespace Windwalker;
 
 use Symfony\Component\Yaml\Yaml;
+use Windwalker\Core\Package\AbstractPackage;
+use Windwalker\DI\ServiceProviderInterface;
 use Windwalker\Registry\Registry;
 use Windwalker\SystemPackage\SystemPackage;
 
 /**
- * The Windwalker class.
+ * The main Windwalker instantiate class.
+ *
+ * This class will load in both Web and Console. Write some configuration if you want to use in all environment.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.0
  */
 class Windwalker extends \Windwalker\Core\Windwalker
 {
 	/**
-	 * getPackages
+	 * Load packages.
 	 *
-	 * @return  array
+	 * If you want some packages run in both Web and Console, register them here.
+	 *
+	 * @return  AbstractPackage[]
 	 */
 	public static function loadPackages()
 	{
@@ -32,11 +38,24 @@ class Windwalker extends \Windwalker\Core\Windwalker
 	}
 
 	/**
-	 * loadConfiguration
+	 * Load providers.
 	 *
-	 * @param Registry $config
+	 * If you want seom 3rd libraries tun in both Web and Console, register them here.
+	 *
+	 * @return  ServiceProviderInterface[]
+	 */
+	public static function loadProviders()
+	{
+		return array();
+	}
+
+	/**
+	 * Load configuration files.
+	 *
+	 * @param   Registry  $config  The config registry object.
 	 *
 	 * @throws  \RuntimeException
+	 *
 	 * @return  void
 	 */
 	public static function loadConfiguration(Registry $config)
@@ -52,7 +71,7 @@ class Windwalker extends \Windwalker\Core\Windwalker
 	}
 
 	/**
-	 * loadRouting
+	 * Load routing profiles as an array.
 	 *
 	 * @return  array
 	 */
@@ -62,9 +81,11 @@ class Windwalker extends \Windwalker\Core\Windwalker
 	}
 
 	/**
-	 * prepareSystemPath
+	 * Prepare system path.
 	 *
-	 * @param Registry $config
+	 * Write your custom path to $config['path.xxx'].
+	 *
+	 * @param   Registry  $config  The config registry object.
 	 *
 	 * @return  void
 	 */

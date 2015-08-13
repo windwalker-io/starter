@@ -9,10 +9,7 @@
 namespace Windwalker\Console;
 
 use Windwalker\Core\Console\WindwalkerConsole;
-use Windwalker\Core\Provider\CacheProvider;
-use Windwalker\Core\Provider\DatabaseProvider;
-use Windwalker\Core\Provider\EventProvider;
-use Windwalker\Core\Provider\LanguageProvider;
+use Windwalker\Core\Provider;
 use Windwalker\DI\ServiceProviderInterface;
 use Windwalker\Registry\Registry;
 use Windwalker\User\UserPackage;
@@ -32,6 +29,7 @@ class Application extends WindwalkerConsole
 	 */
 	protected function initialise()
 	{
+		// Prepare system paths, we'll write all path constants into config.
 		Windwalker::prepareSystemPath($this->config);
 
 		parent::initialise();
@@ -44,28 +42,36 @@ class Application extends WindwalkerConsole
 	 */
 	public function loadProviders()
 	{
-		return array(
-			/*
-			 * Default Providers:
-			 * -----------------------------------------
-			 * This is some default service providers, we don't recommend to remove them,
-			 * But you can replace with yours, Make sure all the needed container key has
-			 * registered in your own providers.
-			 */
-			'event'    => new EventProvider,
-			'database' => new DatabaseProvider,
-			'lang'     => new LanguageProvider,
-			'cache'    => new CacheProvider,
+		/*
+		 * Get Global Providers
+		 * -----------------------------------------
+		 * If you want a provider can be used in every applications (for example: Web and Console),
+		 * set it in Windwalker\Windwalker object.
+		 */
+		$providers = array_merge(parent::loadProviders(), Windwalker::loadProviders());
 
-			/*
-			 * Custom Providers:
-			 * -----------------------------------------
-			 * You can add your own providers here. If you installed a 3rd party packages from composer,
-			 * but this package need some init logic, create a service provider to do this and register it here.
-			 */
+		/*
+		 * Default Providers:
+		 * -----------------------------------------
+		 * This is some default service providers, we don't recommend to remove them,
+		 * But you can replace with yours, Make sure all the needed container key has
+		 * registered in your own providers.
+		 */
+		$providers['event']    = new Provider\EventProvider;
+		$providers['database'] = new Provider\DatabaseProvider;
+		$providers['lang']     = new Provider\LanguageProvider;
+		$providers['cache']    = new Provider\CacheProvider;
 
-			// Custom Providers here...
-		);
+		/*
+		 * Custom Providers:
+		 * -----------------------------------------
+		 * You can add your own providers here. If you installed a 3rd party packages from composer,
+		 * but this package need some init logic, create a service provider to do it and register them here.
+		 */
+
+		// Custom Providers here...
+
+		return $providers;
 	}
 
 	/**

@@ -9,16 +9,8 @@
 namespace Windwalker\Web;
 
 use Windwalker\Core\Application\WebApplication;
-use Windwalker\Core\Provider\AuthenticationProvider;
-use Windwalker\Core\Provider\CacheProvider;
-use Windwalker\Core\Provider\DatabaseProvider;
-use Windwalker\Core\Provider\EventProvider;
-use Windwalker\Core\Provider\LanguageProvider;
-use Windwalker\Core\Provider\RouterProvider;
-use Windwalker\Core\Provider\SessionProvider;
-use Windwalker\Core\Provider\WhoopsProvider;
+use Windwalker\Core\Provider;
 use Windwalker\DI\ServiceProviderInterface;
-use Windwalker\Ioc;
 use Windwalker\Registry\Registry;
 use Windwalker\User\UserPackage;
 use Windwalker\Windwalker;
@@ -37,12 +29,13 @@ class Application extends WebApplication
 	 */
 	protected function initialise()
 	{
+		// Prepare system paths, we'll write all path constants into config.
 		Windwalker::prepareSystemPath($this->config);
 
 		parent::initialise();
 
 		// Start session
-		Ioc::getSession()->start();
+		$this->container->get('system.session')->start();
 	}
 
 	/**
@@ -52,7 +45,13 @@ class Application extends WebApplication
 	 */
 	public function loadProviders()
 	{
-		$providers = parent::loadProviders();
+		/*
+		 * Get Global Providers
+		 * -----------------------------------------
+		 * If you want a provider can be used in every applications (for example: Web and Console),
+		 * set it in Windwalker\Windwalker object.
+		 */
+		$providers = array_merge(parent::loadProviders(), Windwalker::loadProviders());
 
 		/*
 		 * Default Providers:
@@ -61,20 +60,21 @@ class Application extends WebApplication
 		 * But you can replace with yours, Make sure all the needed container key has
 		 * registered in your own providers.
 		 */
-		$providers['debug']    = new WhoopsProvider;
-		$providers['event']    = new EventProvider;
-		$providers['database'] = new DatabaseProvider;
-		$providers['router']   = new RouterProvider;
-		$providers['lang']     = new LanguageProvider;
-		$providers['cache']    = new CacheProvider;
-		$providers['session']  = new SessionProvider;
-		$providers['auth']     = new AuthenticationProvider;
+		$providers['debug']    = new Provider\WhoopsProvider;
+		$providers['event']    = new Provider\EventProvider;
+		$providers['database'] = new Provider\DatabaseProvider;
+		$providers['router']   = new Provider\RouterProvider;
+		$providers['lang']     = new Provider\LanguageProvider;
+		$providers['cache']    = new Provider\CacheProvider;
+		$providers['session']  = new Provider\SessionProvider;
+		$providers['auth']     = new Provider\AuthenticationProvider;
+		$providers['security'] = new Provider\SecurityProvider;
 
 		/*
 		 * Custom Providers:
 		 * -----------------------------------------
 		 * You can add your own providers here. If you installed a 3rd party packages from composer,
-		 * but this package need some init logic, create a service provider to do this and register it here.
+		 * but this package need some init logic, create a service provider to do it and register them here.
 		 */
 
 		// Custom Providers here...
@@ -92,7 +92,7 @@ class Application extends WebApplication
 		/*
 		 * Get Global Packages
 		 * -----------------------------------------
-		 * If you want a package can be use in every applications (for example: Web and Console),
+		 * If you want a package can be used in every applications (for example: Web and Console),
 		 * set it in Windwalker\Windwalker object.
 		 */
 		$packages = Windwalker::loadPackages();
@@ -151,4 +151,3 @@ class Application extends WebApplication
 		return Windwalker::loadRouting();
 	}
 }
- 
