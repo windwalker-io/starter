@@ -1,45 +1,46 @@
 {
-	"name": "windwalker/starter",
-	"description": "Windwalker Starter.",
-	"homepage": "https://github.com/ventoviro/windwalker",
-	"license": "GNU Lesser General Public License",
-	"minimum-stability": "beta",
-	"authors": [
-		{
-			"name": "Simon Asika",
-			"email": "asika32764@gmail.com"
-		}
-	],
-	"require": {
-		"windwalker/core" : "~2.0@stable",
-		"symfony/yaml" : "2.*@stable",
-		"filp/whoops": "1.*@stable",
-		"fzaninotto/faker": "~1.0@stable",
+    "name": "windwalker/starter",
+    "description": "Windwalker Starter.",
+    "homepage": "https://github.com/ventoviro/windwalker",
+    "license": "GNU Lesser General Public License",
+    "minimum-stability": "beta",
+    "authors": [
+        {
+            "name": "Simon Asika",
+            "email": "asika32764@gmail.com"
+        }
+    ],
+    "require": {
+        "windwalker/core" : "~2.0@stable",
+        "symfony/yaml" : "2.*@stable",
+        "filp/whoops": "1.*@stable",
+        "fzaninotto/faker": "~1.0@stable",
+        "monolog/monolog": "~1.0",
 
-		"twig/twig" : "~1.0@stable"
-	},
-	"require-dev": {
-		"phpunit/phpunit-skeleton-generator": "dev-windwalker-tmpl"
-	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/ventoviro/phpunit-skeleton-generator"
-		}
-	],
-	"autoload": {
-		"psr-4": {
-			"": "src/"
-		}
-	},
+        "twig/twig" : "~1.0@stable"
+    },
+    "require-dev": {
+        "phpunit/phpunit-skeleton-generator": "dev-windwalker-tmpl"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/ventoviro/phpunit-skeleton-generator"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
     "scripts": {
         "post-root-package-install": [
             "Windwalker\\Composer\\StarterInstaller::rootInstall"
         ]
     },
-	"extra": {
-		"branch-alias": {
-			"dev-master" : "2.1-dev"
-		}
-	}
+    "extra": {
+        "branch-alias": {
+            "dev-master" : "2.1-dev"
+        }
+    }
 }
