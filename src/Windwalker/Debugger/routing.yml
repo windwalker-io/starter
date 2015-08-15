@@ -1,0 +1,4 @@
+
+dashboard:
+    pattern: /
+    controller: Dashboard

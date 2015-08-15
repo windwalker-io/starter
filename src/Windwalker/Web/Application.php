@@ -13,6 +13,7 @@ use Windwalker\Core\Provider;
 use Windwalker\DI\ServiceProviderInterface;
 use Windwalker\Registry\Registry;
 use Windwalker\User\UserPackage;
+use Windwalker\Debugger\DebuggerPackage;
 use Windwalker\Windwalker;
 
 /**
@@ -60,15 +61,17 @@ class Application extends WebApplication
 		 * But you can replace with yours, Make sure all the needed container key has
 		 * registered in your own providers.
 		 */
-		$providers['debug']    = new Provider\WhoopsProvider;
-		$providers['event']    = new Provider\EventProvider;
-		$providers['database'] = new Provider\DatabaseProvider;
-		$providers['router']   = new Provider\RouterProvider;
-		$providers['lang']     = new Provider\LanguageProvider;
-		$providers['cache']    = new Provider\CacheProvider;
-		$providers['session']  = new Provider\SessionProvider;
-		$providers['auth']     = new Provider\AuthenticationProvider;
-		$providers['security'] = new Provider\SecurityProvider;
+		// $providers['logger']   = new Provider\LoggerProvider;
+		// $providers['debug']    = new Provider\WhoopsProvider;
+		// $providers['event']    = new Provider\EventProvider;
+		// $providers['database'] = new Provider\DatabaseProvider;
+		// $providers['router']   = new Provider\RouterProvider;
+		// $providers['lang']     = new Provider\LanguageProvider;
+		// $providers['cache']    = new Provider\CacheProvider;
+		// $providers['session']  = new Provider\SessionProvider;
+		// $providers['auth']     = new Provider\AuthenticationProvider;
+		// $providers['security'] = new Provider\SecurityProvider;
+		// $providers['profiler'] = new Provider\ProfilerProvider;
 
 		/*
 		 * Custom Providers:
@@ -106,6 +109,7 @@ class Application extends WebApplication
 
 		// Your packages here...
 		$packages['wwuser'] = new UserPackage;
+		$packages['_debugger'] = new DebuggerPackage;
 
 		return $packages;
 	}
