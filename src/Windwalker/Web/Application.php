@@ -44,7 +44,7 @@ class Application extends WebApplication
 	 *
 	 * @return  ServiceProviderInterface[]
 	 */
-	public function loadProviders()
+	public static function loadProviders()
 	{
 		/*
 		 * Get Global Providers
@@ -90,7 +90,7 @@ class Application extends WebApplication
 	 *
 	 * @return  array
 	 */
-	public function loadPackages()
+	public static function loadPackages()
 	{
 		/*
 		 * Get Global Packages

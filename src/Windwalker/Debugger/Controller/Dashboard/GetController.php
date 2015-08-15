@@ -24,6 +24,10 @@ class GetController extends Controller
 	 */
 	protected function doExecute()
 	{
-		exit('1234');
+		$view = $this->getView();
+
+		$view->setModel($this->getModel(), true);
+
+		return $view->render();
 	}
 }

@@ -32,7 +32,7 @@ class DevApplication extends Application
 	 *
 	 * @return  ServiceProviderInterface[]
 	 */
-	public function loadProviders()
+	public static function loadProviders()
 	{
 		/*
 		 * Get Global Providers

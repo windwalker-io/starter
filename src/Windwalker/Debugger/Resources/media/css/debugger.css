@@ -1,0 +1,19 @@
+/**
+ * Part of Windwalker project. 
+ *
+ * @copyright  Copyright (C) 2015 {ORGANIZATION}. All rights reserved.
+ * @license    GNU General Public License version 2 or later;
+ */
+
+body {
+	padding-top: 50px;
+}
+
+.header-title.jumbotron {
+	padding-top: 24px;
+	padding-bottom: 24px;
+}
+
+.header-title.jumbotron h1 {
+	margin: 10px 0;
+}

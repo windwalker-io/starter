@@ -10,6 +10,7 @@ namespace Windwalker\Debugger\Listener;
 
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\DateTime\DateTime;
+use Windwalker\Debugger\DebuggerPackage;
 use Windwalker\Event\Event;
 use Windwalker\Filesystem\Folder;
 
@@ -39,6 +40,11 @@ class DebuggerListener
 		$this->app = $event['app'];
 	}
 
+	public function onAfterRouting()
+	{
+
+	}
+
 	/**
 	 * onAfterRender
 	 *
@@ -47,6 +53,11 @@ class DebuggerListener
 	public function __destruct()
 	{
 		if (!$this->app instanceof WebApplication)
+		{
+			return;
+		}
+
+		if ($this->app->getPackage() instanceof DebuggerPackage)
 		{
 			return;
 		}

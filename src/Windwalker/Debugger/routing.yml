@@ -2,3 +2,9 @@
 dashboard:
     pattern: /
     controller: Dashboard
+
+request:
+    pattern: /(id)
+    controller: Request
+
+
