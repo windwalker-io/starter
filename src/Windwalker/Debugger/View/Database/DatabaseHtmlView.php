@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Windwalker\Debugger\View\Timeline;
+namespace Windwalker\Debugger\View\Database;
 
 use Windwalker\Debugger\Helper\TimelineHelper;
 use Windwalker\Debugger\View\AbstractDebuggerHtmlView;
@@ -16,7 +16,7 @@ use Windwalker\Debugger\View\AbstractDebuggerHtmlView;
  * 
  * @since  {DEPLOY_VERSION}
  */
-class TimelineHtmlView extends AbstractDebuggerHtmlView
+class DatabaseHtmlView extends AbstractDebuggerHtmlView
 {
 	/**
 	 * prepareData
@@ -32,7 +32,6 @@ class TimelineHtmlView extends AbstractDebuggerHtmlView
 		// Find system process points
 		$points = $profiler->getPoints();
 
-		$data->systemProcess = TimelineHelper::prepareTimeline($points, 'system.process');
-		$data->allProcess = TimelineHelper::prepareTimeline($points);
+		$data->queryProcess = TimelineHelper::prepareTimeline($points, 'database.query');
 	}
 }

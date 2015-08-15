@@ -23,7 +23,7 @@ $this->extend('_global.html');
 	<?php echo $this->load('default_request', array('type' => 'get')) ?>
 	<?php echo $this->load('default_request', array('type' => 'post')) ?>
 	<?php echo $this->load('default_request', array('type' => 'files')) ?>
-	<?php echo $this->load('default_request', array('type' => 'session')) ?>
+	<?php echo $this->load('session_request', array('type' => 'session')) ?>
 	<?php echo $this->load('default_request', array('type' => 'cookie')) ?>
 	<?php echo $this->load('default_request', array('type' => 'server')) ?>
 	<?php echo $this->load('default_request', array('type' => 'env')) ?>

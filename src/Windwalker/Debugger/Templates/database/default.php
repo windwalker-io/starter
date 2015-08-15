@@ -15,16 +15,19 @@ $this->extend('_global.html');
  */
 ?>
 
-<?php $this->block('page_title') ?>Timeline<?php $this->endblock(); ?>
+<?php $this->block('page_title') ?>Database<?php $this->endblock(); ?>
 
 <?php $this->block('content') ?>
-<h2>System Process</h2>
+<h2>Queryies</h2>
 
-<?php echo $this->load('timeline', array('timeline' => $systemProcess)) ?>
+<?php foreach ($queryProcess['timeline'] as $name => $point): ?>
 
-	<br /><br />
+<ol>
+	<li>
+		<?php echo $this->load('query_info', array('process' => $queryProcess, 'point' => $point)) ?>
+	</li>
+</ol>
 
-<h2>All Process</h2>
+<?php endforeach; ?>
 
-<?php echo $this->load('timeline', array('timeline' => $allProcess)) ?>
 <?php $this->endblock() ?>
