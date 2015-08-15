@@ -33,19 +33,18 @@ class DashboardHtmlView extends AbstractDebuggerHtmlView
 
 		$data->items = $this->model->getItems();
 
-		foreach ($data->items as $id => $item)
+		foreach ($data->items as $k => $item)
 		{
 			$item = new Data($item);
 			$collector = $item['collector'];
 
-			$item->id   = $id;
 			$item->url  = $collector['uri']['full'];
 			$item->link = $router->html('request', array('id' => $item->id));
 			$item->method = $collector['input']->getMethod();
 			$item->ip   = $collector['input']->server->getString('REMOTE_ADDR');
 			$item->time = $collector['time']->format(DateTime::$format);
 
-			$data->items[$id] = $item;
+			$data->items[$k] = $item;
 		}
 	}
 }

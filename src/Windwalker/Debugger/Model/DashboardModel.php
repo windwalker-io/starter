@@ -36,11 +36,10 @@ class DashboardModel extends Model
 				return array();
 			}
 
-			$limit = $state->get('list.limit', 20);
+			$limit = $state->get('list.limit', 100);
 
 			$files = new \RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS));
 			$items = array();
-			$i     = 1;
 
 			/** @var \SplFileInfo $file */
 			foreach ($files as $file)
@@ -49,15 +48,12 @@ class DashboardModel extends Model
 
 				$item['id'] = $file->getBasename();
 
-				$items[$file->getBasename()] = $item;
-
-				$i++;
-
-				if ($i > $limit)
-				{
-					break;
-				}
+				$items[$file->getMTime()] = $item;
 			}
+
+			krsort($items);
+
+			$items = array_slice($items, 0, $limit);
 
 			return $items;
 		});

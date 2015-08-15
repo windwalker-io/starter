@@ -120,25 +120,38 @@ class ProfilerProvider implements ServiceProviderInterface
 		$db->setProfilerHandler(
 			function (AbstractDatabaseDriver $db, $sql) use ($container, $collector)
 			{
+				if (stripos(trim($sql), 'EXPLAIN') === 0)
+				{
+					return;
+				}
+
 				$collector['queries'] = $collector['queries'] + 1;
 
 				$container->get('system.profiler')->mark(
 					'query.' . $collector['queries'] . '.before',
 					array(
-						'tag'    => 'database.query',
-						'serial' => $collector['queries'],
-						'query'  => $sql
+						'tag'     => 'database.query',
+						'serial'  => $collector['queries'],
+						'process' => 'before',
+						'query'   => $sql
 					)
 				);
 			},
-			function (AbstractDatabaseDriver $db, $sql) use ($container, $collector)
+			function (AbstractDatabaseDriver $db, $sql, $rows) use ($container, $collector)
 			{
+				if (stripos(trim($sql), 'EXPLAIN') === 0)
+				{
+					return;
+				}
+
 				$container->get('system.profiler')->mark(
 					'query.' . $collector['queries'] . '.after',
 					array(
-						'tag'    => 'database.query',
-						'serial' => $collector['queries'],
-						'query'  => $sql
+						'tag'     => 'database.query',
+						'serial'  => $collector['queries'],
+						'process' => 'after',
+						'query'   => $sql,
+						'rows'    => $rows
 					)
 				);
 			}

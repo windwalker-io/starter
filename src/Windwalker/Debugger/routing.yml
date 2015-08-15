@@ -14,3 +14,7 @@ request:
 timeline:
     pattern: /timeline(/id)
     controller: Timeline
+
+database:
+    pattern: /database(/id)
+    controller: Database

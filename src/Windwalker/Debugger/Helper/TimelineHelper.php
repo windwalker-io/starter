@@ -27,23 +27,23 @@ class TimelineHelper
 	 *
 	 * @return  string
 	 */
-	public static function getTextColor($value, $avgValue)
+	public static function getStateColor($value, $avgValue)
 	{
 		if ($value > $avgValue * 2)
 		{
-			return Bootstrap::getColorClasses(Bootstrap::COLOR_DANGER);
+			return 'danger';
 		}
 		elseif ($value > $avgValue * 1.5)
 		{
-			return Bootstrap::getColorClasses(Bootstrap::COLOR_WARNING);
+			return 'warning';
 		}
 		elseif ($value < $avgValue / 2)
 		{
-			return Bootstrap::getColorClasses(Bootstrap::COLOR_SUCCESS);
+			return 'success';
 		}
 		else
 		{
-			return Bootstrap::getColorClasses(Bootstrap::COLOR_INFO);
+			return 'info';
 		}
 	}
 
@@ -77,8 +77,8 @@ class TimelineHelper
 	/**
 	 * preparePoints
 	 *
-	 * @param array $points
-	 * @param null  $tag
+	 * @param Point[] $points
+	 * @param string  $tag
 	 *
 	 * @return  array
 	 */
@@ -122,10 +122,10 @@ class TimelineHelper
 
 		foreach ($timeline as &$item)
 		{
-			$item['total_time']['style']   = Bootstrap::getColorClasses(Bootstrap::COLOR_DEFAULT);
-			$item['time']['style']         = TimelineHelper::getTextColor($item['time']['value'], $fullTime / count($set));
-			$item['total_memory']['style'] = Bootstrap::getColorClasses(Bootstrap::COLOR_DEFAULT);
-			$item['memory']['style']       = TimelineHelper::getTextColor($item['memory']['value'], $fullMemory / count($set));
+			$item['total_time']['style']   = 'default';
+			$item['time']['style']         = TimelineHelper::getStateColor($item['time']['value'], $fullTime / count($set));
+			$item['total_memory']['style'] = 'default';
+			$item['memory']['style']       = TimelineHelper::getStateColor($item['memory']['value'], $fullMemory / count($set));
 		}
 
 		return array(
@@ -135,6 +135,61 @@ class TimelineHelper
 			'avg_time'    => $fullTime / count($set),
 			'full_memory' => $fullMemory,
 			'avg_memory'  => $fullMemory / count($set)
+		);
+	}
+
+	/**
+	 * prepareQueryTimeline
+	 *
+	 * @param Point[] $points
+	 * @param string  $tag
+	 *
+	 * @return  array
+	 */
+	public static function prepareQueryTimeline(array $points, $tag = null)
+	{
+		$set = static::getPoints($points, $tag);
+
+		// Prepare timeline data
+		$timeline = array();
+
+		$queryTasks = array();
+
+		foreach ($set as $name => $point)
+		{
+			$data = $point->getData();
+
+			if (!$data['serial'] || !$data['process'])
+			{
+				continue;
+			}
+
+			$queryTasks[$data['serial']][$data['process']] = $point;
+		}
+
+		foreach ($queryTasks as $serial => $task)
+		{
+			if (empty($task['before']) || empty($task['after']))
+			{
+				continue;
+			}
+
+			$time['value'] = abs($task['after']->getTime() - $task['before']->getTime()) * 1000;
+			$time['style'] = static::getStateColor($time['value'], 15);
+
+			$memory['value'] = abs($task['after']->getMemory() - $task['before']->getMemory()) / 1048576;
+			$memory['style'] = static::getStateColor($memory['value'], 0.01);
+
+			$timeline[$serial] = array(
+				'time'   => $time,
+				'memory' => $memory,
+				'data'   => $task['after']->getData()
+			);
+		}
+
+		return array(
+			'tag'      => $tag,
+			'timeline' => $timeline
 		);
 	}
 }

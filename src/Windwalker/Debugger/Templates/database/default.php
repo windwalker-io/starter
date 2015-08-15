@@ -20,13 +20,11 @@ $this->extend('_global.html');
 <?php $this->block('content') ?>
 <h2>Queryies</h2>
 
-<?php foreach ($queryProcess['timeline'] as $name => $point): ?>
+<?php foreach ($queryProcess['timeline'] as $name => $timeline): ?>
 
-<ol>
-	<li>
-		<?php echo $this->load('query_info', array('process' => $queryProcess, 'point' => $point)) ?>
-	</li>
-</ol>
+	<br />
+	<?php echo $this->load('query_info', array('timeline' => $timeline)) ?>
+	<br />
 
 <?php endforeach; ?>
 

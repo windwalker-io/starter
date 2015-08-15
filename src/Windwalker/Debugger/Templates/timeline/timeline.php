@@ -34,22 +34,22 @@
 				<?php echo $name; ?>
 			</td>
 			<td>
-				<span class="label <?php echo $point['total_time']['style']['label'] ?>">
+				<span class="label label-<?php echo $point['total_time']['style'] ?>">
 					<?php echo round($point['total_time']['value'], 2) ?> ms
 				</span>
 			</td>
 			<td>
-				<span class="label <?php echo $point['time']['style']['label'] ?>">
+				<span class="label label-<?php echo $point['time']['style'] ?>">
 					<?php echo round($point['time']['value'], 2) ?> ms
 				</span>
 			</td>
 			<td>
-				<span class="label <?php echo $point['total_memory']['style']['label'] ?>">
+				<span class="label label-<?php echo $point['total_memory']['style'] ?>">
 					<?php echo round($point['total_memory']['value'], 2) ?> MB
 				</span>
 			</td>
 			<td>
-				<span class="label <?php echo $point['memory']['style']['label'] ?>">
+				<span class="label label-<?php echo $point['memory']['style'] ?>">
 					<?php echo round($point['memory']['value'], 2) ?> MB
 				</span>
 			</td>

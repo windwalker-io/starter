@@ -32,6 +32,6 @@ class DatabaseHtmlView extends AbstractDebuggerHtmlView
 		// Find system process points
 		$points = $profiler->getPoints();
 
-		$data->queryProcess = TimelineHelper::prepareTimeline($points, 'database.query');
+		$data->queryProcess = TimelineHelper::prepareQueryTimeline($points, 'database.query');
 	}
 }

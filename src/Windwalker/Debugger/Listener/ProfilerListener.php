@@ -218,5 +218,21 @@ class ProfilerListener
 		$profiler->mark(__FUNCTION__, array(
 			'tag' => 'system.process'
 		));
+
+		// SQL Explain
+		$points = $profiler->getPoints();
+		$db = Ioc::getDatabase();
+
+		foreach ($points as $point)
+		{
+			$data = $point->getData();
+
+			if ($data['tag'] != 'database.query')
+			{
+				continue;
+			}
+
+			$data['explain'] = $db->setQuery('EXPLAIN ' . $data['query'])->loadAll();
+		}
 	}
 }
