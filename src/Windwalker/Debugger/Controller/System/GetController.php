@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Windwalker\Debugger\Controller\Request;
+namespace Windwalker\Debugger\Controller\System;
 
 use Windwalker\Core\Controller\Controller;
 

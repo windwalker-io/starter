@@ -3,6 +3,14 @@ dashboard:
     pattern: /
     controller: Dashboard
 
+system:
+    pattern: /system(/id)
+    controller: System
+
 request:
     pattern: /request(/id)
     controller: Request
+
+timeline:
+    pattern: /timeline(/id)
+    controller: Timeline

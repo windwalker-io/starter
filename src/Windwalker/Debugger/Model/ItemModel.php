@@ -9,6 +9,7 @@
 namespace Windwalker\Debugger\Model;
 
 use Windwalker\Core\Model\Model;
+use Windwalker\Debugger\Helper\PageRecordHelper;
 
 /**
  * The ItemModel class.
@@ -26,7 +27,7 @@ class ItemModel extends Model
 	 */
 	public function getItem($id)
 	{
-		$file = static::getItemFile($id);
+		$file = PageRecordHelper::getFile($id);
 
 		if (!is_file($file))
 		{
@@ -45,22 +46,8 @@ class ItemModel extends Model
 	 */
 	public function hasItem($id)
 	{
-		$file = static::getItemFile($id);
+		$file = PageRecordHelper::getFile($id);
 
 		return is_file($file);
-	}
-
-	/**
-	 * getItemFile
-	 *
-	 * @param   string  $id
-	 *
-	 * @return  string
-	 */
-	public static function getItemFile($id)
-	{
-		$folder = substr($id, 0, 6);
-
-		return WINDWALKER_CACHE . '/profiler/' . $folder . '/' . $id;
 	}
 }

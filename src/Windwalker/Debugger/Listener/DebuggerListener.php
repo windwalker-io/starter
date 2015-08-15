@@ -13,6 +13,7 @@ use Windwalker\Core\DateTime\DateTime;
 use Windwalker\Core\Ioc;
 use Windwalker\Core\Model\Model;
 use Windwalker\Debugger\DebuggerPackage;
+use Windwalker\Debugger\Helper\PageRecordHelper;
 use Windwalker\Debugger\Model\DashboardModel;
 use Windwalker\Event\Event;
 use Windwalker\Filesystem\Folder;
@@ -147,7 +148,7 @@ class DebuggerListener
 		$data = serialize($data);
 		$id = uniqid();
 
-		$dir = WINDWALKER_CACHE . '/profiler/' . substr($id, 0, 6);
+		$dir = WINDWALKER_CACHE . '/profiler/' . PageRecordHelper::getFolderName($id);
 
 		if (!is_dir($dir))
 		{

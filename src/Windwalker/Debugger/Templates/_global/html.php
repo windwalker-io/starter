@@ -55,12 +55,13 @@ use Windwalker\Registry\Registry;
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<?php $this->block('nav'); ?>
-				<li class="active"><a href="<?php echo $router->html('dashboard'); ?>">Dashboard</a></li>
-				<li class="active"><a href="<?php echo $router->html('request'); ?>">Request</a></li>
-				<li class=""><a href="<?php echo $router->html('home'); ?>">Timeline</a></li>
-				<li class=""><a href="<?php echo $router->html('home'); ?>">Events</a></li>
-				<li class=""><a href="<?php echo $router->html('home'); ?>">Logs</a></li>
-				<li class=""><a href="<?php echo $router->html('home'); ?>">Database</a></li>
+				<li class="<?php echo $helper->view->isActiveRoute('dashboard') ?>"><a href="<?php echo $router->html('dashboard'); ?>">Dashboard</a></li>
+				<li class="<?php echo $helper->view->isActiveRoute('system') ?>"><a href="<?php echo $router->html('system'); ?>">System</a></li>
+				<li class="<?php echo $helper->view->isActiveRoute('request') ?>"><a href="<?php echo $router->html('request'); ?>">Request</a></li>
+				<li class="<?php echo $helper->view->isActiveRoute('timeline') ?>"><a href="<?php echo $router->html('timeline'); ?>">Timeline</a></li>
+				<li class="<?php echo $helper->view->isActiveRoute('events') ?>"><a href="<?php echo $router->html('home'); ?>">Events</a></li>
+				<li class="<?php echo $helper->view->isActiveRoute('logs') ?>"><a href="<?php echo $router->html('home'); ?>">Logs</a></li>
+				<li class="<?php echo $helper->view->isActiveRoute('database') ?>"><a href="<?php echo $router->html('home'); ?>">Database</a></li>
 				<?php $this->endblock(); ?>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">

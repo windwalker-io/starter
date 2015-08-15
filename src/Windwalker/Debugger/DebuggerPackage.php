@@ -10,6 +10,8 @@ namespace Windwalker\Debugger;
 
 use Windwalker\Core\Package\AbstractPackage;
 use Windwalker\Debugger\Listener\DebuggerListener;
+use Windwalker\Debugger\Provider\ProfilerProvider;
+use Windwalker\DI\Container;
 use Windwalker\Event\Dispatcher;
 
 /**
@@ -24,7 +26,19 @@ class DebuggerPackage extends AbstractPackage
 	 *
 	 * @var  string
 	 */
-	protected $name = 'web_profiler';
+	protected $name = 'debugger';
+
+	/**
+	 * registerProviders
+	 *
+	 * @param Container $container
+	 *
+	 * @return  void
+	 */
+	public function registerProviders(Container $container)
+	{
+		$container->registerServiceProvider(new ProfilerProvider);
+	}
 
 	/**
 	 * registerListeners
