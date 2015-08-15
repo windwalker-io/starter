@@ -55,7 +55,7 @@ use Windwalker\Registry\Registry;
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<?php $this->block('nav'); ?>
-				<li class="active"><a href="<?php echo $router->html('home'); ?>">Dashboard</a></li>
+				<li class="active"><a href="<?php echo $router->html('dashboard'); ?>">Dashboard</a></li>
 				<li class="active"><a href="<?php echo $router->html('request'); ?>">Request</a></li>
 				<li class=""><a href="<?php echo $router->html('home'); ?>">Timeline</a></li>
 				<li class=""><a href="<?php echo $router->html('home'); ?>">Events</a></li>

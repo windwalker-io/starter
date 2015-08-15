@@ -45,7 +45,11 @@ class DashboardModel extends Model
 			/** @var \SplFileInfo $file */
 			foreach ($files as $file)
 			{
-				$items[$file->getBasename()] = unserialize(file_get_contents($file->getPathname()));
+				$item = unserialize(file_get_contents($file->getPathname()));
+
+				$item['id'] = $file->getBasename();
+
+				$items[$file->getBasename()] = $item;
 
 				$i++;
 
