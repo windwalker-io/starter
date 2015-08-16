@@ -37,7 +37,7 @@ echo BootstrapKeyValueGrid::create()
 
 <h2>Queries</h2>
 
-<?php foreach ($queryProcess['timeline'] as $name => $timeline): ?>
+<?php foreach ((array) $queryProcess['timeline'] as $name => $timeline): ?>
 
 	<br />
 	<?php echo $this->load('query_info', array('timeline' => $timeline)) ?>

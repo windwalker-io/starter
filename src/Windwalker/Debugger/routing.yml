@@ -19,6 +19,14 @@ timeline:
     pattern: /timeline(/id)
     controller: Timeline
 
+events:
+    pattern: /events(/id)
+    controller: Events
+
 database:
     pattern: /database(/id)
     controller: Database
+
+exception:
+    pattern: /exception(/id)
+    controller: Exception

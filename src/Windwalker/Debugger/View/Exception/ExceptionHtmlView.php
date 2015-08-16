@@ -6,9 +6,9 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Windwalker\Debugger\View\Timeline;
+namespace Windwalker\Debugger\View\Exception;
 
-use Windwalker\Debugger\Helper\TimelineHelper;
+use Windwalker\Data\Data;
 use Windwalker\Debugger\View\AbstractDebuggerHtmlView;
 
 /**
@@ -16,7 +16,7 @@ use Windwalker\Debugger\View\AbstractDebuggerHtmlView;
  * 
  * @since  {DEPLOY_VERSION}
  */
-class TimelineHtmlView extends AbstractDebuggerHtmlView
+class ExceptionHtmlView extends AbstractDebuggerHtmlView
 {
 	/**
 	 * prepareData
@@ -27,12 +27,8 @@ class TimelineHtmlView extends AbstractDebuggerHtmlView
 	 */
 	protected function prepareData($data)
 	{
-		$profiler = $data->item['profiler'];
+		$data->collector = $data->item['collector'];
 
-		// Find system process points
-		$points = (array) $profiler->getPoints();
-
-		$data->systemProcess = TimelineHelper::prepareTimeline($points, 'system.process');
-		$data->allProcess = TimelineHelper::prepareTimeline($points);
+		$data->exception = new Data($data->collector['exception']);
 	}
 }

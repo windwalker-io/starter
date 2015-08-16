@@ -9,6 +9,7 @@
 namespace Windwalker\Debugger\Helper;
 
 use Windwalker\Core\Frontend\Bootstrap;
+use Windwalker\Core\Object\NullObject;
 use Windwalker\Profiler\Point\Point;
 use Windwalker\Profiler\Profiler;
 
@@ -84,6 +85,11 @@ class TimelineHelper
 	 */
 	public static function prepareTimeline(array $points, $tag = null)
 	{
+		if (!$points)
+		{
+			return new NullObject;
+		}
+
 		$set = static::getPoints($points, $tag);
 
 		$profiler = new Profiler('system', null, $set);
@@ -148,6 +154,11 @@ class TimelineHelper
 	 */
 	public static function prepareQueryTimeline(array $points, $tag = null)
 	{
+		if (!$points)
+		{
+			return new NullObject;
+		}
+
 		$set = static::getPoints($points, $tag);
 
 		// Prepare timeline data

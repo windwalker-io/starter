@@ -27,13 +27,13 @@ $this->extend('_global.html');
 <?php
 echo BootstrapKeyValueGrid::create()
 	->addHeader()
-	->addItem('Request Method', $collector['request']['server']['REQUEST_METHOD'])
-	->addItem('Route Matcher', $collector['route.matcher'])
+	->addItem('Request Method', $collector['method'])
+	->addItem('Route Matcher', new HtmlElement('code', $collector['route.matcher']))
 	->addItem('Route Number', count($routes))
-	->addItem('Matched Route', $matchedRoute->getName())
+	->addItem('Matched Route', $matchedRoute->name)
 	->addItem('Package Name', $collector['package.name'])
 	->addItem('Package Class', new HtmlElement('code', $collector['package.class']))
-	->addItem('Controller', new HtmlElement('code', $collector['controllers'][0]->controller));
+	->addItem('Controller', new HtmlElement('code', $data->controller));
 ?>
 
 <br /><br />
@@ -42,15 +42,23 @@ echo BootstrapKeyValueGrid::create()
 
 <?php
 
-echo BootstrapKeyValueGrid::create()
-	->addHeader()
-	->configure(
-		ArrayHelper::flatten($collector['uri']),
-		function (BootstrapKeyValueGrid $grid, $key, $value)
-		{
-			$grid->addItem(new HtmlElement('code', $key), $value);
-		}
-	);
+if ($collector['uri'])
+{
+	echo BootstrapKeyValueGrid::create()
+		->addHeader()
+		->configure(
+			ArrayHelper::flatten($collector['uri']),
+			function (BootstrapKeyValueGrid $grid, $key, $value)
+			{
+				$grid->addItem(new HtmlElement('code', $key), $value);
+			}
+		);
+}
+else
+{
+	echo 'No data';
+}
+
 ?>
 
 <br /><br />

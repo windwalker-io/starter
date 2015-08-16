@@ -39,10 +39,10 @@ class DashboardHtmlView extends AbstractDebuggerHtmlView
 			$collector = $item['collector'];
 
 			$item->url  = $collector['uri']['full'];
-			$item->link = $router->html('request', array('id' => $item->id));
-			$item->method = $collector['input']->getMethod();
-			$item->ip   = $collector['input']->server->getString('REMOTE_ADDR');
-			$item->time = $collector['time']->format(DateTime::$format);
+			$item->link = $router->html('system', array('id' => $item->id));
+			$item->method = $collector['method'];
+			$item->ip   = $collector['ip'];
+			$item->time = $collector['time'];
 
 			$data->items[$k] = $item;
 		}

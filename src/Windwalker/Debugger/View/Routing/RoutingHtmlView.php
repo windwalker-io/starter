@@ -32,23 +32,24 @@ class RoutingHtmlView extends AbstractDebuggerHtmlView
 	{
 		$data->collector = $data->item['collector'];
 		$data->routes = new DataSet;
-		$data->matchedRoute = $data->collector['route.matched'];
+		$data->matchedRoute = new Data($data->collector['route.matched']);
 
 		/** @var Route $route */
-		foreach ($data->collector['routes'] as $name => $route)
+		foreach ((array) $data->collector['routes'] as $name => $route)
 		{
 			list($packageName, $routeName) = StringHelper::explode(':', $name, 2, 'array_unshift');
 
-			$data->routes[] = new Data(array(
-				'package'   => $packageName,
-				'name'      => $routeName,
-				'pattern'   => $route->getPattern(),
-				'compiled'  => $route->getRegex(),
-				'variables' => $route->getVariables(),
-				'methods'   => $route->getAllowMethods(),
-				'extra'     => $route->getExtra(),
-				'matched'   => $routeName == $data->matchedRoute->getName()
-			));
+			$route = new Data($route);
+			$route->package = $packageName;
+			$route->matched = $routeName == $data->matchedRoute->name;
+
+			$data->routes[] = $route;
+		}
+
+		// Controller
+		if (isset($data->collector['controllers'][0]->controller))
+		{
+			$data->controller = $data->collector['controllers'][0]->controller;
 		}
 	}
 }

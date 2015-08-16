@@ -9,6 +9,7 @@
 namespace Windwalker\Debugger\Model;
 
 use Windwalker\Core\Model\Model;
+use Windwalker\Core\Object\NullObject;
 use Windwalker\Data\Data;
 use Windwalker\Debugger\Helper\PageRecordHelper;
 
@@ -37,7 +38,17 @@ class ItemModel extends Model
 
 		$item = unserialize(file_get_contents($file));
 
-		$item = new Data($item);
+		$item = new Data((array) $item);
+
+		if (!$item->profiler)
+		{
+			$item->profiler = new NullObject;
+		}
+
+		if (!$item->collector)
+		{
+			$item->collector = new NullObject;
+		}
 
 		$item->id = $id;
 

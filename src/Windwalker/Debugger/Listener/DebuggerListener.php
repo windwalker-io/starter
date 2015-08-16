@@ -135,6 +135,8 @@ class DebuggerListener
 			return;
 		}
 
+		ProfilerListener::collectAllInformation();
+
 		$container = $this->app->getContainer();
 
 		$profiler = $container->get('system.profiler');

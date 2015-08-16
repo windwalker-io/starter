@@ -28,7 +28,7 @@
 	</tr>
 	</thead>
 	<tbody>
-	<?php foreach ($timeline['timeline'] as $name => $point): ?>
+	<?php foreach ((array) $timeline['timeline'] as $name => $point): ?>
 		<tr>
 			<td>
 				<?php echo $name; ?>

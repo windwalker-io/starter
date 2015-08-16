@@ -47,7 +47,7 @@ use Windwalker\Registry\Registry;
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<?php echo $router->html('home'); ?>">
+			<a class="navbar-brand" href="<a href="<?php echo $router->html('dashboard'); ?>">
 <!--				<img src="https://cloud.githubusercontent.com/assets/1639206/2870854/176b987a-d2e4-11e3-8be6-9f70304a8499.png" alt="Windwalker LOGO" />-->
 				Windwalker Debugger
 			</a>
@@ -55,14 +55,14 @@ use Windwalker\Registry\Registry;
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<?php $this->block('nav'); ?>
-				<li class="<?php echo $helper->view->isActiveRoute('dashboard') ?>"><a href="<?php echo $router->html('dashboard'); ?>">Dashboard</a></li>
 				<li class="<?php echo $helper->view->isActiveRoute('system') ?>"><a href="<?php echo $router->html('system'); ?>">System</a></li>
 				<li class="<?php echo $helper->view->isActiveRoute('request') ?>"><a href="<?php echo $router->html('request'); ?>">Request</a></li>
 				<li class="<?php echo $helper->view->isActiveRoute('routing') ?>"><a href="<?php echo $router->html('routing'); ?>">Routing</a></li>
 				<li class="<?php echo $helper->view->isActiveRoute('timeline') ?>"><a href="<?php echo $router->html('timeline'); ?>">Timeline</a></li>
-				<li class="<?php echo $helper->view->isActiveRoute('events') ?>"><a href="<?php echo $router->html('home'); ?>">Events</a></li>
+				<li class="<?php echo $helper->view->isActiveRoute('events') ?>"><a href="<?php echo $router->html('events'); ?>">Events</a></li>
 
 				<li class="<?php echo $helper->view->isActiveRoute('database') ?>"><a href="<?php echo $router->html('database'); ?>">Database</a></li>
+				<li class="<?php echo $helper->view->isActiveRoute('exception') ?>"><a href="<?php echo $router->html('exception'); ?>">Exception</a></li>
 				<?php $this->endblock(); ?>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">

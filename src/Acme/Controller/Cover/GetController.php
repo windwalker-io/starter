@@ -41,4 +41,3 @@ class GetController extends Controller
 		return $view->set('content', $content)->render();
 	}
 }
- 

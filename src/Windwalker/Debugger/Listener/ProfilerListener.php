@@ -10,6 +10,7 @@ namespace Windwalker\Debugger\Listener;
 
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\DateTime\DateTime;
+use Windwalker\Core\Event\EventDispatcher;
 use Windwalker\Core\Ioc;
 use Windwalker\Core\Package\AbstractPackage;
 use Windwalker\Core\Package\PackageHelper;
@@ -21,6 +22,7 @@ use Windwalker\DI\Container;
 use Windwalker\Event\Event;
 use Windwalker\Profiler\Point\Collector;
 use Windwalker\Profiler\Profiler;
+use Windwalker\Router\Route;
 
 /**
  * The ProfilerListender class.
@@ -46,10 +48,12 @@ class ProfilerListener
 		$container = $event['app']->getContainer();
 		$collector = $container->get('system.collector');
 		$profiler  = $container->get('system.profiler');
+		$input     = $container->get('system.input');
 
-		$collector['time']  = DateTime::create('now', DateTime::TZ_LOCALE);
-		$collector['uri']   = $container->get('uri');
-		$collector['input'] = $container->get('system.input');
+		$collector['time']   = DateTime::create('now', DateTime::TZ_LOCALE)->format(DateTime::$format);
+		$collector['uri']    = $container->get('uri')->toArray();
+		$collector['ip']     = $input->server->get('REMOTE_ADDR');
+		$collector['method'] = $input->getMethod();
 
 		$profiler->mark(__FUNCTION__, array(
 			'tag' => 'system.process'
@@ -77,10 +81,19 @@ class ProfilerListener
 		/** @var RestfulRouter $router */
 		$router = $event['app']->getRouter();
 
-		$collector['route.matched'] = $container->get('current.route');
-		$collector['routes']        = $router->getRoutes();
 		$collector['package.name']  = $container->get('current.package')->getName();
 		$collector['package.class'] = get_class($container->get('current.package'));
+		$collector['route.matcher'] = get_class($router->getMatcher());
+		$collector['route.matched'] = iterator_to_array($container->get('current.route'));
+
+		$routes = array();
+
+		foreach ($router->getRoutes() as $route)
+		{
+			$routes[] = iterator_to_array($route);
+		}
+
+		$collector['routes'] = $routes;
 
 		$profiler->mark(__FUNCTION__, array(
 			'tag' => 'system.process'
@@ -194,6 +207,27 @@ class ProfilerListener
 		$collector = $container->get('system.collector');
 		$profiler  = $container->get('system.profiler');
 
+		$profiler->mark(__FUNCTION__, array(
+			'tag' => 'system.process'
+		));
+	}
+
+	/**
+	 * collectAllInformation
+	 *
+	 * @return  void
+	 */
+	public static function collectAllInformation()
+	{
+		/**
+		 * @var Container $container
+		 * @var Collector $collector
+		 * @var Profiler  $profiler
+		 */
+		$container = Ioc::factory();
+		$collector = $container->get('system.collector');
+		$profiler  = $container->get('system.profiler');
+
 		// Packages
 		$packages = PackageHelper::getPackages();
 		$pkgs = array();
@@ -213,11 +247,7 @@ class ProfilerListener
 		$collector['php.extensions'] = get_loaded_extensions();
 
 		// Load all inputs
-		$collector['request'] = $collector['input']->dumpAllInputs();
-
-		$profiler->mark(__FUNCTION__, array(
-			'tag' => 'system.process'
-		));
+		$collector['request'] = Ioc::getInput()->dumpAllInputs();
 
 		// SQL Explain
 		$points = $profiler->getPoints();
@@ -239,5 +269,35 @@ class ProfilerListener
 		$collector['database.driver.name'] = $db->getName();
 		$collector['database.driver.class'] = get_class($db);
 		$collector['database.info'] = $db->getOptions();
+
+		// Events
+		/** @var EventDispatcher $dispatcher */
+		$dispatcher = $container->get('system.dispatcher');
+
+		$collector['event.executed'] = $dispatcher->getCollector();
+
+		$listenersMapping = array();
+
+		foreach ($dispatcher->getListeners() as $eventName => $listeners)
+		{
+			$listenersMapping[$eventName] = array();
+
+			foreach ($listeners as $listener)
+			{
+				if ($listener instanceof \Closure)
+				{
+					continue;
+				}
+
+				if (is_object($listener))
+				{
+					$listener = array(get_class($listener), $eventName);
+				}
+
+				$listenersMapping[$eventName][] = $listener;
+			}
+		}
+
+		$collector['event.listeners'] = $listenersMapping;
 	}
 }

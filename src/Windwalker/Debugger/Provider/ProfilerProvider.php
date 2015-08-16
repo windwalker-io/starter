@@ -75,14 +75,14 @@ class ProfilerProvider implements ServiceProviderInterface
 
 		$container->share('system.collector', $closure);
 
-		// Database profiler
+		// Event profiler
 		$closure = function(Container $container)
 		{
 			$config = $container->get('system.config');
 
 			if ($config->get('system.debug'))
 			{
-				return new Profiler('windwalker');
+				return new Profiler('windwalker.event');
 			}
 			else
 			{
@@ -90,13 +90,15 @@ class ProfilerProvider implements ServiceProviderInterface
 			}
 		};
 
-		$container->share('database.profiler', $closure);
+		$container->share('event.profiler', $closure);
 
 		if ($container->get('system.config')->get('system.debug'))
 		{
 			$this->registerProfilerListener($container, $container->get('system.config'));
 			$this->registerDatabaseProfiler($container, $container->get('system.config'));
 			$this->registerEventProfiler($container, $container->get('system.config'));
+			$this->registerEmailProfiler($container, $container->get('system.config'));
+			$this->registerLogsProfiler($container, $container->get('system.config'));
 		}
 	}
 
@@ -170,6 +172,8 @@ class ProfilerProvider implements ServiceProviderInterface
 	{
 		$dispatcher = $container->get('system.dispatcher');
 
+		$dispatcher->setDebug(true);
+
 		$dispatcher->addListener(new ProfilerListener, ListenerPriority::LOW);
 	}
 
@@ -183,7 +187,7 @@ class ProfilerProvider implements ServiceProviderInterface
 	 */
 	protected function registerEventProfiler(Container $container, Registry $config)
 	{
-
+		$dispatcher = $container->get('system.dispatcher');
 	}
 
 	/**
@@ -196,7 +200,7 @@ class ProfilerProvider implements ServiceProviderInterface
 	 */
 	protected function registerEmailProfiler(Container $container, Registry $config)
 	{
-
+		// Not implemented yet
 	}
 
 	/**
@@ -209,6 +213,6 @@ class ProfilerProvider implements ServiceProviderInterface
 	 */
 	protected function registerLogsProfiler(Container $container, Registry $config)
 	{
-
+		// Not implemented yet
 	}
 }
