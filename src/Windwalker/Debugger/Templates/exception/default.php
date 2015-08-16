@@ -24,7 +24,7 @@ $this->extend('_global.html');
 
 <?php $this->block('content') ?>
 
-<?php if ($exception): ?>
+<?php if ($exception->notNull()): ?>
 	<h2>Exception Information</h2>
 
 	<?php
