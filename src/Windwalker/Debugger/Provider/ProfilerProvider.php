@@ -8,6 +8,7 @@
 
 namespace Windwalker\Debugger\Provider;
 
+use Windwalker\Data\DataSet;
 use Windwalker\Debugger\Listener\ProfilerListener;
 use Windwalker\Core\Object\NullObject;
 use Windwalker\Core\Profiler\NullProfiler;
@@ -75,23 +76,6 @@ class ProfilerProvider implements ServiceProviderInterface
 
 		$container->share('system.collector', $closure);
 
-		// Event profiler
-		$closure = function(Container $container)
-		{
-			$config = $container->get('system.config');
-
-			if ($config->get('system.debug'))
-			{
-				return new Profiler('windwalker.event');
-			}
-			else
-			{
-				return new NullProfiler;
-			}
-		};
-
-		$container->share('event.profiler', $closure);
-
 		if ($container->get('system.config')->get('system.debug'))
 		{
 			$this->registerProfilerListener($container, $container->get('system.config'));
@@ -112,50 +96,44 @@ class ProfilerProvider implements ServiceProviderInterface
 	 */
 	protected function registerDatabaseProfiler(Container $container, Registry $config)
 	{
+		static $queryData = array();
+
 		$collector = $container->get('system.collector');
 
-		$collector['queries'] = 0;
+		$collector['database.query.times'] = 0;
+		$collector['database.queries'] = new DataSet;
 
 		$db = $container->get('system.database');
 
 		// Set profiler to DatabaseDriver
 		$db->setProfilerHandler(
-			function (AbstractDatabaseDriver $db, $sql) use ($container, $collector)
+			function (AbstractDatabaseDriver $db, $sql) use ($container, $collector, &$queryData)
 			{
 				if (stripos(trim($sql), 'EXPLAIN') === 0)
 				{
 					return;
 				}
 
-				$collector['queries'] = $collector['queries'] + 1;
+				$collector['database.query.times'] = $collector['database.query.times'] + 1;
 
-				$container->get('system.profiler')->mark(
-					'query.' . $collector['queries'] . '.before',
-					array(
-						'tag'     => 'database.query',
-						'serial'  => $collector['queries'],
-						'process' => 'before',
-						'query'   => $sql
-					)
+				$queryData = array(
+					'serial' => $collector['database.query.times'],
+					'time'   => array('start' => microtime(true)),
+					'memory' => array('start' => memory_get_usage(false))
 				);
 			},
-			function (AbstractDatabaseDriver $db, $sql, $rows) use ($container, $collector)
+			function (AbstractDatabaseDriver $db, $sql, $rows) use ($container, $collector, &$queryData)
 			{
 				if (stripos(trim($sql), 'EXPLAIN') === 0)
 				{
 					return;
 				}
 
-				$container->get('system.profiler')->mark(
-					'query.' . $collector['queries'] . '.after',
-					array(
-						'tag'     => 'database.query',
-						'serial'  => $collector['queries'],
-						'process' => 'after',
-						'query'   => $sql,
-						'rows'    => $rows
-					)
-				);
+				$queryData['time']['end'] = microtime(true);
+				$queryData['memory']['end'] = memory_get_usage(false);
+				$queryData['query'] = $sql;
+
+				$collector['database.queries']->push($queryData);
 			}
 		);
 	}

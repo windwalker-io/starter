@@ -10,6 +10,7 @@ namespace Windwalker\Debugger\Helper;
 
 use Windwalker\Core\Frontend\Bootstrap;
 use Windwalker\Core\Object\NullObject;
+use Windwalker\Data\Data;
 use Windwalker\Profiler\Point\Point;
 use Windwalker\Profiler\Profiler;
 
@@ -147,60 +148,35 @@ class TimelineHelper
 	/**
 	 * prepareQueryTimeline
 	 *
-	 * @param Point[] $points
-	 * @param string  $tag
+	 * @param Data[] $queries
 	 *
 	 * @return  array
 	 */
-	public static function prepareQueryTimeline(array $points, $tag = null)
+	public static function prepareQueryTimeline(array $queries)
 	{
-		if (!$points)
+		if (!$queries)
 		{
 			return new NullObject;
 		}
 
-		$set = static::getPoints($points, $tag);
-
 		// Prepare timeline data
 		$timeline = array();
 
-		$queryTasks = array();
-
-		foreach ($set as $name => $point)
+		foreach ($queries as $i => $data)
 		{
-			$data = $point->getData();
-
-			if (!$data['serial'] || !$data['process'])
-			{
-				continue;
-			}
-
-			$queryTasks[$data['serial']][$data['process']] = $point;
-		}
-
-		foreach ($queryTasks as $serial => $task)
-		{
-			if (empty($task['before']) || empty($task['after']))
-			{
-				continue;
-			}
-
-			$time['value'] = abs($task['after']->getTime() - $task['before']->getTime()) * 1000;
+			$time['value'] = abs($data['time']['start'] - $data['time']['end']) * 1000;
 			$time['style'] = static::getStateColor($time['value'], 15);
 
-			$memory['value'] = abs($task['after']->getMemory() - $task['before']->getMemory()) / 1048576;
+			$memory['value'] = abs($data['memory']['start'] - $data['memory']['end']) / 1048576;
 			$memory['style'] = static::getStateColor($memory['value'], 0.01);
 
-			$timeline[$serial] = array(
+			$timeline[$data['serial']] = array(
 				'time'   => $time,
 				'memory' => $memory,
-				'data'   => $task['after']->getData()
+				'data'   => $data
 			);
 		}
 
-		return array(
-			'tag'      => $tag,
-			'timeline' => $timeline
-		);
+		return $timeline;
 	}
 }

@@ -6,7 +6,9 @@
  * @license    GNU General Public License version 2 or later;
  */
 
+use Windwalker\Debugger\Html\BootstrapKeyValueGrid;
 use Windwalker\Profiler\Point\Collector;
+use Windwalker\Utilities\ArrayHelper;
 
 $this->extend('_global.html');
 
@@ -51,8 +53,10 @@ $this->extend('_global.html');
 
 <h2>Config</h2>
 
-<pre>
-<?php echo \Symfony\Component\Yaml\Yaml::dump($collector['windwalker.config'], 5); ?>
-</pre>
+<?php
+echo BootstrapKeyValueGrid::create()
+	->addHeader()
+	->addItems(ArrayHelper::flatten($collector['windwalker.config']));
+?>
 
 <?php $this->endblock() ?>

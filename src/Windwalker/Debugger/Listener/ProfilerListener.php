@@ -250,18 +250,11 @@ class ProfilerListener
 		$collector['request'] = Ioc::getInput()->dumpAllInputs();
 
 		// SQL Explain
-		$points = $profiler->getPoints();
+		$queries = $collector['database.queries'];
 		$db = Ioc::getDatabase();
 
-		foreach ($points as $point)
+		foreach ($queries as $data)
 		{
-			$data = $point->getData();
-
-			if ($data['tag'] != 'database.query')
-			{
-				continue;
-			}
-
 			$data['explain'] = $db->setQuery('EXPLAIN ' . $data['query'])->loadAll();
 		}
 
@@ -269,6 +262,11 @@ class ProfilerListener
 		$collector['database.driver.name'] = $db->getName();
 		$collector['database.driver.class'] = get_class($db);
 		$collector['database.info'] = $db->getOptions();
+
+		if ($queries instanceof DataSet)
+		{
+			$collector['database.queries'] = iterator_to_array($queries);
+		}
 
 		// Events
 		/** @var EventDispatcher $dispatcher */
