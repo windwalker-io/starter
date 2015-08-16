@@ -234,5 +234,10 @@ class ProfilerListener
 
 			$data['explain'] = $db->setQuery('EXPLAIN ' . $data['query'])->loadAll();
 		}
+
+		// Database Information
+		$collector['database.driver.name'] = $db->getName();
+		$collector['database.driver.class'] = get_class($db);
+		$collector['database.info'] = $db->getOptions();
 	}
 }

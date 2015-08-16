@@ -8,6 +8,7 @@
 
 namespace Windwalker\Debugger\View\Database;
 
+use Windwalker\Data\Data;
 use Windwalker\Debugger\Helper\TimelineHelper;
 use Windwalker\Debugger\View\AbstractDebuggerHtmlView;
 
@@ -28,6 +29,10 @@ class DatabaseHtmlView extends AbstractDebuggerHtmlView
 	protected function prepareData($data)
 	{
 		$profiler = $data->item['profiler'];
+		$data->collector = $collector = $data->item['collector'];
+
+		// Information
+		$data->options = new Data($collector['database.info']);
 
 		// Find system process points
 		$points = $profiler->getPoints();

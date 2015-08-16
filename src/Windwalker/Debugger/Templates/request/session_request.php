@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-use Windwalker\Debugger\Html\KeyValueGrid;
+use Windwalker\Debugger\Html\BootstrapKeyValueGrid;
 use Windwalker\Dom\HtmlElement;
 
 ?>
@@ -14,18 +14,13 @@ use Windwalker\Dom\HtmlElement;
 
 <?php if (!empty($collector['request'][$type])): ?>
 	<?php
-	$grid = KeyValueGrid::create('get-input');
+	$grid = BootstrapKeyValueGrid::create()->addHeader();
 
 	foreach ($collector['request'][$type] as $bagName => $bagValue)
 	{
 		if (is_array($bagValue) || is_object($bagValue))
 		{
-			$grid->addRow(array('class' => 'active'))
-				->setRowCell(
-					'key',
-					new HtmlElement('strong', $bagName),
-					array('colspan' => 3)
-				);
+			$grid->addTitle(new HtmlElement('strong', $bagName));
 
 			if ($bagValue)
 			{

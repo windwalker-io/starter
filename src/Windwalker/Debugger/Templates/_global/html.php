@@ -58,9 +58,10 @@ use Windwalker\Registry\Registry;
 				<li class="<?php echo $helper->view->isActiveRoute('dashboard') ?>"><a href="<?php echo $router->html('dashboard'); ?>">Dashboard</a></li>
 				<li class="<?php echo $helper->view->isActiveRoute('system') ?>"><a href="<?php echo $router->html('system'); ?>">System</a></li>
 				<li class="<?php echo $helper->view->isActiveRoute('request') ?>"><a href="<?php echo $router->html('request'); ?>">Request</a></li>
+				<li class="<?php echo $helper->view->isActiveRoute('routing') ?>"><a href="<?php echo $router->html('routing'); ?>">Routing</a></li>
 				<li class="<?php echo $helper->view->isActiveRoute('timeline') ?>"><a href="<?php echo $router->html('timeline'); ?>">Timeline</a></li>
 				<li class="<?php echo $helper->view->isActiveRoute('events') ?>"><a href="<?php echo $router->html('home'); ?>">Events</a></li>
-				<li class="<?php echo $helper->view->isActiveRoute('logs') ?>"><a href="<?php echo $router->html('home'); ?>">Logs</a></li>
+
 				<li class="<?php echo $helper->view->isActiveRoute('database') ?>"><a href="<?php echo $router->html('database'); ?>">Database</a></li>
 				<?php $this->endblock(); ?>
 			</ul>
@@ -80,6 +81,17 @@ use Windwalker\Registry\Registry;
 <div class="header-title jumbotron">
 	<div class="container">
 		<h1><?php $this->block('page_title'); ?><?php $this->endblock(); ?></h1>
+		<p>
+			<a class="btn btn-sm btn-info" href="<?php echo $router->html('dashboard'); ?>">
+				Choose Other URL
+			</a>
+			/
+			ID: <span class="text-muted"><?php echo $item->id; ?></span>
+			/
+			<a class="text-muted" href="<?php echo $item['collector']['uri']['full'] ?>" target="_blank">
+				<?php echo $item['collector']['uri']['full'] ?> <sup class="glyphicon glyphicon-new-window"></sup>
+			</a>
+		</p>
 	</div>
 </div>
 

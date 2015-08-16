@@ -1,12 +1,12 @@
 <?php
 /**
- * Part of starter project. 
+ * Part of Windwalker project. 
  *
  * @copyright  Copyright (C) 2015 {ORGANIZATION}. All rights reserved.
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Windwalker\Debugger\Controller\Dashboard;
+namespace Windwalker\Debugger\Controller\Routing;
 
 use Windwalker\Core\Controller\Controller;
 
@@ -25,10 +25,9 @@ class GetController extends Controller
 	protected function doExecute()
 	{
 		$view = $this->getView();
+		$model = $this->getModel('Item');
 
-		$view->setModel($model = $this->getModel(), true);
-
-		$view['item'] = $this->getModel('Item')->getItem($this->input->get('id'));
+		$view['item'] = $model->getItem($this->input->get('id'));
 
 		return $view->render();
 	}

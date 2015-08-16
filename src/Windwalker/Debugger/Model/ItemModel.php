@@ -9,6 +9,7 @@
 namespace Windwalker\Debugger\Model;
 
 use Windwalker\Core\Model\Model;
+use Windwalker\Data\Data;
 use Windwalker\Debugger\Helper\PageRecordHelper;
 
 /**
@@ -34,7 +35,13 @@ class ItemModel extends Model
 			return null;
 		}
 
-		return unserialize(file_get_contents($file));
+		$item = unserialize(file_get_contents($file));
+
+		$item = new Data($item);
+
+		$item->id = $id;
+
+		return $item;
 	}
 
 	/**

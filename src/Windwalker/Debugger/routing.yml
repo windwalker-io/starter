@@ -11,6 +11,10 @@ request:
     pattern: /request(/id)
     controller: Request
 
+routing:
+    pattern: /routing(/id)
+    controller: Routing
+
 timeline:
     pattern: /timeline(/id)
     controller: Timeline

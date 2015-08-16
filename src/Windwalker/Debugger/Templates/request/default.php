@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-use Windwalker\Debugger\Html\KeyValueGrid;
+use Windwalker\Html\Grid\KeyValueGrid;
 use Windwalker\Profiler\Point\Collector;
 
 $this->extend('_global.html');

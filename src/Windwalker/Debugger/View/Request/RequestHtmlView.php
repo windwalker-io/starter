@@ -9,7 +9,7 @@
 namespace Windwalker\Debugger\View\Request;
 
 use Windwalker\Debugger\View\AbstractDebuggerHtmlView;
-use Windwalker\Html\Grid;
+use Windwalker\Html\Grid\Grid;
 use Windwalker\Registry\Registry;
 
 /**

@@ -6,14 +6,14 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-use Windwalker\Debugger\Html\KeyValueGrid;
+use Windwalker\Debugger\Html\BootstrapKeyValueGrid;
 
 ?>
 <h2><?php echo strtoupper($type) ?> Variables</h2>
 
 <?php if (!empty($collector['request'][$type])): ?>
 	<?php
-	$grid = KeyValueGrid::create('get-input');
+	$grid = BootstrapKeyValueGrid::create()->addHeader();
 
 	foreach ($collector['request'][$type] as $key => $value)
 	{
