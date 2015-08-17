@@ -51,6 +51,24 @@ $this->extend('_global.html');
 	</tbody>
 </table>
 
+	<br /><br />
+
+<h2>Custom Data</h2>
+
+<?php
+echo BootstrapKeyValueGrid::create()
+	->addHeader()
+	->addItems((array) $collector['custom.data']);
+?>
+
+<div class="alert alert-info">
+	<p>
+		Add Custom data by use <code>Windwalker\Debugger\Helper\DebuggerHelper::addCustomData('key', $value)</code>
+	</p>
+</div>
+
+<br /><br />
+
 <h2>Config</h2>
 
 <?php

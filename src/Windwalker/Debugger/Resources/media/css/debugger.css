@@ -20,3 +20,9 @@ body {
 
 table.table td {
 }
+
+code {
+	color: inherit;
+	font-family: Monaco, Consolas, "Lucida Console", monospace;
+	background-color: rgba(125,125,125,.05);
+}

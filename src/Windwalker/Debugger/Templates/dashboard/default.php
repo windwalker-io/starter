@@ -66,10 +66,4 @@ $this->extend('_global.html');
 	</tbody>
 </table>
 
-<script>
-	$(function () {
-		$('[data-toggle="tooltip"]').tooltip()
-	})
-</script>
-
 <?php $this->endblock(); ?>

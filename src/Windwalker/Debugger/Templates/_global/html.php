@@ -36,6 +36,14 @@ use Windwalker\Registry\Registry;
 	<?php $this->block('script'); ?>
 	<?php $this->endblock(); ?>
 
+	<script>
+		jQuery(document).ready(function($)
+		{
+			$(function () {
+				$('[data-toggle="tooltip"]').tooltip()
+			})
+		});
+	</script>
 </head>
 <body>
 <?php $this->block('navbar'); ?>
@@ -81,10 +89,12 @@ use Windwalker\Registry\Registry;
 	<div class="container">
 		<h1><?php $this->block('page_title'); ?><?php $this->endblock(); ?></h1>
 		<p>
-			<a class="btn btn-sm btn-info" href="<?php echo $router->html('dashboard'); ?>">
+			<a class="btn btn-sm btn-info" href="<?php echo $router->html('dashboard'); ?>"
+				data-toggle="tooltip" data-placement="top" title="Choose other URLs">
 				<span class="glyphicon glyphicon-th-list"></span>
 			</a>
-			<a class="btn btn-sm btn-success" href="<?php echo $router->html($app->get('route.matched'), array('refresh' => 1, 'id' => $item['id'])); ?>">
+			<a class="btn btn-sm btn-success" href="<?php echo $router->html($app->get('route.matched'), array('refresh' => 1, 'id' => $item['id'])); ?>"
+				data-toggle="tooltip" data-placement="top" title="Refresh to latest URL">
 				<span class="glyphicon glyphicon-refresh"></span>
 			</a>
 			/
