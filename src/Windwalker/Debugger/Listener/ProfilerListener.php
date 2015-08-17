@@ -22,7 +22,6 @@ use Windwalker\DI\Container;
 use Windwalker\Event\Event;
 use Windwalker\Profiler\Point\Collector;
 use Windwalker\Profiler\Profiler;
-use Windwalker\Router\Route;
 
 /**
  * The ProfilerListender class.
@@ -52,8 +51,10 @@ class ProfilerListener
 
 		$collector['time']   = DateTime::create('now', DateTime::TZ_LOCALE)->format(DateTime::$format);
 		$collector['uri']    = $container->get('uri')->toArray();
-		$collector['ip']     = $input->server->get('REMOTE_ADDR');
+		$collector['ip']     = $input->server->getString('REMOTE_ADDR');
+		$collector['app.name'] = $event['app']->getName();
 		$collector['method'] = $input->getMethod();
+		$collector['custom_method'] = strtoupper($input->get('_method'));
 
 		$profiler->mark(__FUNCTION__, array(
 			'tag' => 'system.process'
@@ -83,6 +84,7 @@ class ProfilerListener
 
 		$collector['package.name']  = $container->get('current.package')->getName();
 		$collector['package.class'] = get_class($container->get('current.package'));
+		$collector['main.controller'] = $container->get('current.package')->getTask();
 		$collector['route.matcher'] = get_class($router->getMatcher());
 		$collector['route.matched'] = iterator_to_array($container->get('current.route'));
 
@@ -297,5 +299,9 @@ class ProfilerListener
 		}
 
 		$collector['event.listeners'] = $listenersMapping;
+
+		// Headers
+		$collector['http.status'] = http_response_code();
+		$collector['headers'] = headers_list();
 	}
 }

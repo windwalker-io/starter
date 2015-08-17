@@ -51,6 +51,6 @@ class DebuggerPackage extends AbstractPackage
 	{
 		parent::registerListeners($dispatcher);
 
-		$dispatcher->addListener(new DebuggerListener);
+		$dispatcher->addListener(new DebuggerListener($this));
 	}
 }

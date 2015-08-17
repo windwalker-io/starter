@@ -44,6 +44,23 @@ class DashboardHtmlView extends AbstractDebuggerHtmlView
 			$item->ip   = $collector['ip'];
 			$item->time = $collector['time'];
 
+			$item->status = $collector['http.status'];
+
+			if ($item->status == 200)
+			{
+				$item->status_style = 'label label-success';
+			}
+			elseif (in_array($item->status, array(301, 302, 303)))
+			{
+				$item->status_style = 'label label-warning';
+			}
+			else
+			{
+				$item->status_style = 'label label-danger';
+			}
+
+			$item->exception = new Data($collector['exception']);
+
 			$data->items[$k] = $item;
 		}
 	}

@@ -12,12 +12,17 @@ use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\DateTime\DateTime;
 use Windwalker\Core\Ioc;
 use Windwalker\Core\Model\Model;
+use Windwalker\Core\Widget\Widget;
+use Windwalker\Data\Data;
 use Windwalker\Debugger\DebuggerPackage;
 use Windwalker\Debugger\Helper\PageRecordHelper;
+use Windwalker\Debugger\Helper\TimelineHelper;
 use Windwalker\Debugger\Model\DashboardModel;
 use Windwalker\Event\Event;
 use Windwalker\Filesystem\Folder;
 use Windwalker\IO\Input;
+use Windwalker\Profiler\Point\Collector;
+use Windwalker\Profiler\Profiler;
 
 /**
  * The DebuggerListener class.
@@ -32,6 +37,23 @@ class DebuggerListener
 	 * @var  WebApplication
 	 */
 	protected $app;
+
+	/**
+	 * Property package.
+	 *
+	 * @var  DebuggerPackage
+	 */
+	protected $package;
+
+	/**
+	 * Class init.
+	 *
+	 * @param  DebuggerPackage $package
+	 */
+	public function __construct(DebuggerPackage $package)
+	{
+		$this->package = $package;
+	}
 
 	/**
 	 * onAfterInitialise
@@ -76,6 +98,21 @@ class DebuggerListener
 		/** @var Model $model */
 		$model = $controller->getModel('Dashboard');
 
+		if ($input->get('refresh'))
+		{
+			$input->set('id', null);
+			$session->set('debugger.current.id', null);
+
+			$item = $model->getLastItem();
+
+			if ($item)
+			{
+				$app->redirect($package->router->http($app->get('route.matched'), array('id' => $item['id'])));
+
+				return;
+			}
+		}
+
 		if (!$id = $input->get('id'))
 		{
 			// Get id from session
@@ -84,7 +121,6 @@ class DebuggerListener
 			// If session not exists, get last item.
 			if (!$id)
 			{
-
 				$item = $model->getLastItem();
 
 				// No item, redirect to front-end.
@@ -142,13 +178,17 @@ class DebuggerListener
 		$profiler = $container->get('system.profiler');
 		$collector = $container->get('system.collector');
 
+		$id = uniqid();
+		$collector['id'] = $id;
+
+		$this->pushDebugConsole($collector, $profiler);
+
 		$data = array(
 			'profiler'  => $profiler,
 			'collector' => $collector
 		);
 
 		$data = serialize($data);
-		$id = uniqid();
 
 		$dir = WINDWALKER_CACHE . '/profiler/' . PageRecordHelper::getFolderName($id);
 
@@ -158,5 +198,40 @@ class DebuggerListener
 		}
 
 		file_put_contents($dir . '/' . $id, $data);
+	}
+
+	/**
+	 * pushDebugConsole
+	 *
+	 * @param Collector $collector
+	 * @param Profiler  $profiler
+	 */
+	protected function pushDebugConsole(Collector $collector, Profiler $profiler)
+	{
+		// Prepare CSS
+		$style = $this->package->getDir() . '/Resources/media/css/console/style.css';
+
+		// Prepare Time
+		$points = $profiler->getPoints();
+		$first = array_shift($points);
+		$last = array_pop($points);
+		$time = $profiler->getTimeBetween($first->getName(), $last->getName());
+		$memory = $profiler->getMemoryBetween($first->getName(), $last->getName());
+
+		$data = new Data;
+		$data->collector = $collector;
+		$data->style = file_get_contents($style);
+		$data->time = $time * 1000;
+		$data->memory = $memory / 1048576;
+		$data->queryTimes = $collector['database.query.times'];
+		$data->queryTotalTime = $collector['database.query.total.time'] * 1000;
+		$data->queryTotalMemory = $collector['database.query.total.memory'] / 1048576;
+
+		$data->timeStyle = TimelineHelper::getStateColor($data->time, 250);
+		$data->memoryStyle = TimelineHelper::getStateColor($data->memory, 5);
+
+		$widget = new Widget('debugger.console', null, $this->package->getName());
+
+		echo $widget->render($data);
 	}
 }

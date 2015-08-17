@@ -101,6 +101,8 @@ class ProfilerProvider implements ServiceProviderInterface
 		$collector = $container->get('system.collector');
 
 		$collector['database.query.times'] = 0;
+		$collector['database.query.total.time'] = 0;
+		$collector['database.query.total.memory'] = 0;
 		$collector['database.queries'] = new DataSet;
 
 		$db = $container->get('system.database');
@@ -130,10 +132,15 @@ class ProfilerProvider implements ServiceProviderInterface
 				}
 
 				$queryData['time']['end'] = microtime(true);
+				$queryData['time']['duration'] = abs($queryData['time']['end'] - $queryData['time']['start']);
 				$queryData['memory']['end'] = memory_get_usage(false);
+				$queryData['memory']['duration'] = abs($queryData['memory']['end'] - $queryData['memory']['start']);
 				$queryData['query'] = $sql;
 
 				$collector['database.queries']->push($queryData);
+
+				$collector['database.query.total.time'] = $collector['database.query.total.time'] + $queryData['time']['duration'];
+				$collector['database.query.total.memory'] = $collector['database.query.total.memory'] + $queryData['memory']['duration'];
 			}
 		);
 	}

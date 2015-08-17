@@ -16,10 +16,12 @@ $this->extend('_global.html');
 	<thead>
 	<tr>
 		<th>ID</th>
+		<th>See</th>
 		<th>IP</th>
 		<th>Method</th>
 		<th>URL</th>
 		<th>Time</th>
+		<th>Info</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -28,6 +30,11 @@ $this->extend('_global.html');
 			<td>
 				<a class="text-muted" href="<?php echo $item->link ?>">
 					<?php echo $item->id; ?>
+				</a>
+			</td>
+			<td>
+				<a class="btn btn-info btn-sm" href="<?php echo $item->link ?>">
+					<span class="glyphicon glyphicon-eye-open"></span>
 				</a>
 			</td>
 			<td>
@@ -44,8 +51,25 @@ $this->extend('_global.html');
 			<td>
 				<?php echo $item->time; ?>
 			</td>
+			<td>
+				<span class="<?php echo $item->status_style ?>"
+					data-toggle="tooltip" data-placement="top" title="Http Status: <?php echo $item->status ?>">
+					<?php echo $item->status; ?>
+				</span>
+				&nbsp;
+				<?php if ($item->exception->notNull()): ?>
+				    <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="<?php echo $item->exception->type ?>">E</span>
+				<?php endif; ?>
+			</td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>
 </table>
+
+<script>
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
+</script>
+
 <?php $this->endblock(); ?>

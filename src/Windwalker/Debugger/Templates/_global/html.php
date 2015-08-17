@@ -32,7 +32,7 @@ use Windwalker\Registry\Registry;
 	<?php $this->endblock(); ?>
 
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="<?php echo $uri['media.path'] ?><?php echo $package->getName() ?>bootstrap/js/bootstrap.min.js"></script>
+	<script src="<?php echo $uri['media.path'] ?><?php echo $package->getName() ?>/js/bootstrap.min.js"></script>
 	<?php $this->block('script'); ?>
 	<?php $this->endblock(); ?>
 
@@ -48,7 +48,6 @@ use Windwalker\Registry\Registry;
 				<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="<?php echo $router->html('dashboard'); ?>">
-<!--				<img src="https://cloud.githubusercontent.com/assets/1639206/2870854/176b987a-d2e4-11e3-8be6-9f70304a8499.png" alt="Windwalker LOGO" />-->
 				Windwalker Debugger
 			</a>
 		</div>
@@ -66,7 +65,7 @@ use Windwalker\Registry\Registry;
 				<?php $this->endblock(); ?>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-
+				<li><a target="_blank" href="<?php echo $uri['base.path'] . $uri['script']; ?>"><span class="glyphicon glyphicon-globe"> Preview</span></a></li>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->
@@ -83,7 +82,10 @@ use Windwalker\Registry\Registry;
 		<h1><?php $this->block('page_title'); ?><?php $this->endblock(); ?></h1>
 		<p>
 			<a class="btn btn-sm btn-info" href="<?php echo $router->html('dashboard'); ?>">
-				Choose Other URL
+				<span class="glyphicon glyphicon-th-list"></span>
+			</a>
+			<a class="btn btn-sm btn-success" href="<?php echo $router->html($app->get('route.matched'), array('refresh' => 1, 'id' => $item['id'])); ?>">
+				<span class="glyphicon glyphicon-refresh"></span>
 			</a>
 			/
 			ID: <span class="text-muted"><?php echo $item->id; ?></span>
