@@ -19,6 +19,7 @@ use Windwalker\Debugger\Helper\PageRecordHelper;
 use Windwalker\Debugger\Helper\TimelineHelper;
 use Windwalker\Debugger\Model\DashboardModel;
 use Windwalker\Event\Event;
+use Windwalker\Filesystem\File;
 use Windwalker\Filesystem\Folder;
 use Windwalker\IO\Input;
 use Windwalker\Profiler\Point\Collector;
@@ -183,6 +184,8 @@ class DebuggerListener
 
 		$this->pushDebugConsole($collector, $profiler);
 
+		$this->deleteOldFiles();
+
 		$data = array(
 			'profiler'  => $profiler,
 			'collector' => $collector
@@ -233,5 +236,41 @@ class DebuggerListener
 		$widget = new Widget('debugger.console', null, $this->package->getName());
 
 		echo $widget->render($data);
+	}
+
+	/**
+	 * deleteOldFiles
+	 *
+	 * @return  void
+	 */
+	protected function deleteOldFiles()
+	{
+		$model = new DashboardModel;
+
+		$files = $model->getFiles();
+		$items = array();
+
+		/** @var \SplFileInfo $file */
+		foreach ($files as $file)
+		{
+			$items[$file->getMTime()] = $file;
+		}
+
+		krsort($items);
+
+		$i = 0;
+
+		/** @var \SplFileInfo $file */
+		foreach ($items as $file)
+		{
+			$i++;
+
+			if ($i < 100)
+			{
+				continue;
+			}
+
+			File::delete($file->getPathname());
+		}
 	}
 }

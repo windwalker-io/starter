@@ -9,6 +9,7 @@
 namespace Windwalker\Debugger\Model;
 
 use Windwalker\Core\Model\Model;
+use Windwalker\Filesystem\File;
 use Windwalker\Filesystem\Iterator\RecursiveDirectoryIterator;
 
 /**
@@ -29,16 +30,14 @@ class DashboardModel extends Model
 
 		return $this->fetch('items', function() use ($state)
 		{
-			$dir = WINDWALKER_CACHE . '/profiler';
+			$files = $this->getFiles();
 
-			if (!is_dir($dir))
+			if (!$files)
 			{
 				return array();
 			}
 
 			$limit = $state->get('list.limit', 100);
-
-			$files = new \RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS));
 			$items = array();
 
 			/** @var \SplFileInfo $file */
@@ -53,10 +52,27 @@ class DashboardModel extends Model
 
 			krsort($items);
 
-			$items = array_slice($items, 0, $limit);
+			$result = array_slice($items, 0, $limit);
 
-			return $items;
+			return $result;
 		});
+	}
+
+	/**
+	 * getFiles
+	 *
+	 * @return  \RecursiveIteratorIterator
+	 */
+	public function getFiles()
+	{
+		$dir = WINDWALKER_CACHE . '/profiler';
+
+		if (!is_dir($dir))
+		{
+			return array();
+		}
+
+		return new \RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS));
 	}
 
 	/**
