@@ -9,9 +9,11 @@
 namespace Windwalker\Web;
 
 use Symfony\Component\Yaml\Yaml;
+use Windwalker\Debugger\DebuggerPackage;
 use Windwalker\DI\ServiceProviderInterface;
 use Windwalker\Registry\Registry;
 use Windwalker\Core\Provider;
+use Windwalker\Windwalker;
 
 /**
  * The DevApplication class.
@@ -44,8 +46,37 @@ class DevApplication extends Application
 
 		// Custom Providers here...
 		$providers['debug'] = new Provider\WhoopsProvider;
+		$packages['_debugger'] = new DebuggerPackage;
 
 		return $providers;
+	}
+
+	/**
+	 * getPackages
+	 *
+	 * @return  array
+	 */
+	public static function loadPackages()
+	{
+		/*
+		 * Get Global Packages
+		 * -----------------------------------------
+		 * If you want a package can be used in every applications (for example: Web and Console),
+		 * set it in Windwalker\Windwalker object.
+		 */
+		$packages = Windwalker::loadPackages();
+
+		/*
+		 * Get Packages for This Application
+		 * -----------------------------------------
+		 * If you want a package only use in this application or want to override a global package,
+		 * set it here. Example: $packages[] = new Flower\FlowerPackage;
+		 */
+
+		// Your packages here...
+		$packages['_debugger'] = new DebuggerPackage;
+
+		return $packages;
 	}
 
 	/**
