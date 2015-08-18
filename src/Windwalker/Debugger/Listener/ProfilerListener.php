@@ -301,7 +301,7 @@ class ProfilerListener
 		$collector['event.listeners'] = $listenersMapping;
 
 		// Headers
-		$collector['http.status'] = http_response_code();
+		$collector['http.status'] = $collector['exception'] ? $collector['exception']['code'] : http_response_code();
 		$collector['headers'] = headers_list();
 	}
 }

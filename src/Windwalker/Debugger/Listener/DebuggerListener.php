@@ -156,6 +156,21 @@ class DebuggerListener
 	}
 
 	/**
+	 * onViewBeforeRender
+	 *
+	 * @param Event $event
+	 *
+	 * @return  void
+	 */
+	public function onViewBeforeRender(Event $event)
+	{
+		$theme = $this->package->getDir() . '/Resources/media/css/theme.css';
+		$main = $this->package->getDir() . '/Resources/media/css/debugger.css';
+
+		$event['data']->themeStyle = file_get_contents($theme) . "\n\n" . file_get_contents($main);
+	}
+
+	/**
 	 * onAfterRender
 	 *
 	 * @return  void
