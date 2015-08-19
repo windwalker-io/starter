@@ -19,7 +19,7 @@ use Windwalker\Windwalker;
 /**
  * Class Application
  *
- * @since 1.0
+ * @since 2.0
  */
 class Application extends WebApplication
 {
