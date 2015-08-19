@@ -11,6 +11,7 @@ namespace Windwalker\Web;
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\Provider;
 use Windwalker\DI\ServiceProviderInterface;
+use Windwalker\Listener\SystemListener;
 use Windwalker\Registry\Registry;
 use Windwalker\User\UserPackage;
 use Windwalker\Windwalker;
@@ -33,6 +34,9 @@ class Application extends WebApplication
 		Windwalker::prepareSystemPath($this->config);
 
 		parent::initialise();
+
+		// Prepare a system listener then you can add custom logic in it.
+		$this->getDispatcher()->addListener(new SystemListener);
 
 		// Start session
 		$this->container->get('system.session')->start();

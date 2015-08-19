@@ -15,7 +15,7 @@ use Windwalker\Core\Controller\Controller;
 /**
  * Class Get
  *
- * @since 1.0
+ * @since 2.0
  */
 class GetController extends Controller
 {
