@@ -1,6 +1,6 @@
 {{-- Part of Windwalker project. --}}
 <!doctype html>
-<html lang="zh-tw">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>@yield('siteTitle')</title>

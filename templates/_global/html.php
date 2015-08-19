@@ -1,7 +1,7 @@
 <?php
 $root = $data->uri->get('base.path');
 ?><!doctype html>
-<html lang="zh-tw">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title><?php $this->block('siteTitle'); ?><?php $this->endblock(); ?></title>
