@@ -31,7 +31,7 @@ class IndexController extends Controller
 	{
 		$model = new LoginModel;
 
-		$view = new LoginHtmlView;
+		$view = $this->getView();
 
 		$view['form'] = $model->getForm();
 

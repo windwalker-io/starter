@@ -19,8 +19,18 @@ use Windwalker\User\User\UserHandler;
  */
 class UserPackage extends AbstractPackage
 {
+	/**
+	 * Property name.
+	 *
+	 * @var  string
+	 */
 	protected $name = 'user';
 
+	/**
+	 * initialise
+	 *
+	 * @return  void
+	 */
 	public function initialise()
 	{
 		parent::initialise();

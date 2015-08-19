@@ -6,7 +6,7 @@
  * @license    GNU Lesser General Public License version 3 or later.
  */
 
-namespace Windwalker\User\Controller\Register;
+namespace Windwalker\User\Controller\Registration;
 
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Router\Router;
@@ -46,7 +46,7 @@ class SaveController extends Controller
 				$this->addFlash($result->getMessage(), 'danger');
 			}
 
-			$this->setRedirect($this->package->buildRoute('login'));
+			$this->setRedirect($this->package->router->http('login'));
 
 			return false;
 		}
@@ -62,7 +62,7 @@ class SaveController extends Controller
 				$this->addFlash($e->getMessage(), 'danger');
 			}
 
-			$this->setRedirect($this->package->buildRoute('registration'), 'Save fail.');
+			$this->setRedirect($this->package->router->http('registration'), 'Save fail.');
 
 			return false;
 		}

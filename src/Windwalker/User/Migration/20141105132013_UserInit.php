@@ -22,16 +22,18 @@ class UserInit extends AbstractMigration
 	{
 		$db = $this->db;
 
-		$db->getTable('users')
-			->addColumn('id',       DataType::INTEGER, Column::UNSIGNED, Column::NOT_NULL, null, 'Primary Key', ['primary' => true])
-			->addColumn('username', DataType::VARCHAR, Column::SIGNED,   Column::NOT_NULL, null, 'Username')
-			->addColumn('email',    DataType::VARCHAR, Column::SIGNED,   Column::NOT_NULL, null, 'Email')
-			->addColumn('password', DataType::VARCHAR, Column::SIGNED,   Column::NOT_NULL, null, 'Password')
-			->addColumn('group',    DataType::INTEGER, Column::UNSIGNED, Column::NOT_NULL, null, 'Group')
-			->addColumn('params',   DataType::TEXT,    Column::SIGNED,   Column::ALLOW_NULL, null, 'Params')
+		$db->getTable('users', true)
+			->addColumn('id',         DataType::INTEGER, Column::UNSIGNED, Column::NOT_NULL, null, 'Primary Key', ['primary' => true])
+			->addColumn('username',   DataType::VARCHAR, Column::SIGNED,   Column::NOT_NULL, null, 'Username')
+			->addColumn('email',      DataType::VARCHAR, Column::SIGNED,   Column::NOT_NULL, null, 'Email')
+			->addColumn('password',   DataType::VARCHAR, Column::SIGNED,   Column::NOT_NULL, null, 'Password')
+			->addColumn('group',      DataType::INTEGER, Column::UNSIGNED, Column::NOT_NULL, null, 'Group')
+			->addColumn('activation', DataType::VARCHAR, Column::SIGNED,   Column::NOT_NULL, null, 'Activated')
+			->addColumn('last_reset', DataType::VARCHAR, Column::SIGNED,   Column::NOT_NULL, null, 'Reset Password')
+			->addColumn('params',     DataType::TEXT,    Column::SIGNED,   Column::ALLOW_NULL, null, 'Params')
 			->create();
 
-		$db->getTable('products')
+		$db->getTable('products', true)
 			->addColumn('id',          DataType::INTEGER, Column::UNSIGNED, Column::NOT_NULL, null, 'Primary Key', ['primary' => true])
 			->addColumn('title',       DataType::VARCHAR, Column::SIGNED,   Column::NOT_NULL, null, 'Title')
 			->addColumn('description', DataType::VARCHAR, Column::SIGNED,   Column::NOT_NULL, null, 'Description')

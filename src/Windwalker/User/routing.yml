@@ -1,16 +1,20 @@
 login:
     pattern: login
-    controller: 'Windwalker\User\Controller\Login'
+    controller: Login
     action:
-        'get': 'IndexController'
-        'post': 'LoginController'
+        get:  IndexController
+        post: LoginController
     extra:
         flower: sakura
 logout:
     pattern: logout
-    controller: 'Windwalker\User\Controller\Logout'
+    controller: Logout
     variables: {}
 registration:
     pattern: registration
-    controller: 'Windwalker\User\Controller\Register'
+    controller: Registration
     variables: {}
+forgot:
+    pattern: forgot-password
+    controller: Forgot
+

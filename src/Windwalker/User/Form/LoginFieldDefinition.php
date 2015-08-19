@@ -51,19 +51,6 @@ class LoginFieldDefinition implements FieldDefinitionInterface
 				)
 			)
 		);
-//
-//		$form->addField(
-//			new PasswordField(
-//				'password2',
-//				'Validate Password'
-//			)
-//		);
-//
-//		$form->addField(new TextField('email'))
-//			->label('Email')
-//			->setFilter(InputFilter::EMAIL)
-//			->setValidator(new EmailValidator)
-//			->required(true);
 	}
 }
  

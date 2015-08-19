@@ -16,19 +16,24 @@ $this->extend('_global.html');
 
 <?php $this->block('style'); ?>
 <link rel="stylesheet" href="<?php echo $root; ?>media/css/acme/page.css" />
-<link rel="stylesheet" href="<?php echo $root; ?>media/css/user/bs3-fix.css" />
+<style>
+	.registration-form {
+		margin: 80px 0;
+	}
+</style>
 <?php $this->endblock(); ?>
 
 <?php $this->block('content'); ?>
 <div class="container">
-	<div class="row">
-		<div class="col-md-12">
+	<div class="row registration-form">
+		<div class="col-md-6 col-md-offset-3">
 			<form action="<?php echo $data->uri['current']; ?>" class="form-horizontal" method="post">
 				<fieldset>
-					<legend>REGISTRATION</legend>
-					<?php echo $data->form->renderFields(); ?>
+					<legend>Registration</legend>
 
-					<div class="buttons">
+					<?php echo \Windwalker\Core\Frontend\Bootstrap::renderFields($data->form->getFields()); ?>
+
+					<div class="buttons col-md-offset-3">
 						<button class="btn btn-primary" type="submit">Register</button>
 					</div>
 				</fieldset>

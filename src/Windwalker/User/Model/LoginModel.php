@@ -33,14 +33,6 @@ class LoginModel extends Model
 
 			$form->defineFormFields(new LoginFieldDefinition);
 
-			foreach ($form as $field)
-			{
-				/** @var AbstractField $field */
-				$field->set('controlClass', 'form-group');
-				$field->set('class', 'form-control col-md-10');
-				$field->set('labelClass', 'control-label col-md-2');
-			}
-
 			return $form;
 		});
 	}

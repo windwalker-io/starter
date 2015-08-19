@@ -6,12 +6,9 @@
  * @license    GNU Lesser General Public License version 3 or later.
  */
 
-namespace Windwalker\User\Controller\Register;
+namespace Windwalker\User\Controller\Registration;
 
 use Windwalker\Core\Controller\Controller;
-use Windwalker\User\Model\LoginModel;
-use Windwalker\User\Model\RegistrationModel;
-use Windwalker\User\View\Registration\RegistrationHtmlView;
 
 /**
  * The GetController class.
@@ -30,9 +27,9 @@ class GetController extends Controller
 	 */
 	public function doExecute()
 	{
-		$model = new RegistrationModel;
+		$model = $this->getModel();
 
-		$view = new RegistrationHtmlView;
+		$view = $this->getView();
 
 		$view['form'] = $model->getForm();
 
