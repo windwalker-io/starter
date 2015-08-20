@@ -15,9 +15,9 @@ registration:
     controller: Registration
     variables: {}
 forgot:
-    pattern: forgot-password
+    pattern: forgot-password(/task)
     controller: Forgot
 reset:
-    pattern: reset
+    pattern: reset-password(/username,token)
     controller: Reset
 

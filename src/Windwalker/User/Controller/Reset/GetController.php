@@ -24,15 +24,37 @@ class GetController extends Controller
 	 */
 	protected function doExecute()
 	{
-		$token = $this->input->get('token');
+		return $this->delegate($this->input->get('task', 'reset'));
+	}
 
+	/**
+	 * reset
+	 *
+	 * @return  string
+	 */
+	protected function reset()
+	{
 		$view = $this->getView();
-		$model = $this->getModel('Forgot');
+		$model = $this->getModel();
 
-		$view['token'] = $token;
 		$view['form'] = $model->getForm();
-		$view['form']->bind(array('token' => $token));
+		$view['form']->bind(array(
+			'username' => $this->input->getUsername('username'),
+			'token' => $this->input->get('token')
+		));
 
-		return $view->render();
+		return $view->setLayout('reset')->render();
+	}
+
+	/**
+	 * complete
+	 *
+	 * @return  string
+	 */
+	protected function complete()
+	{
+		$view = $this->getView();
+
+		return $view->setLayout('complete')->render();
 	}
 }

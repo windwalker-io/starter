@@ -23,14 +23,15 @@ class UserInit extends AbstractMigration
 		$db = $this->db;
 
 		$db->getTable('users', true)
-			->addColumn('id',         DataType::INTEGER, Column::UNSIGNED, Column::NOT_NULL, null, 'Primary Key', ['primary' => true])
-			->addColumn('username',   DataType::VARCHAR, Column::SIGNED,   Column::NOT_NULL, null, 'Username')
-			->addColumn('email',      DataType::VARCHAR, Column::SIGNED,   Column::NOT_NULL, null, 'Email')
-			->addColumn('password',   DataType::VARCHAR, Column::SIGNED,   Column::NOT_NULL, null, 'Password')
-			->addColumn('group',      DataType::INTEGER, Column::UNSIGNED, Column::NOT_NULL, null, 'Group')
-			->addColumn('activation', DataType::VARCHAR, Column::SIGNED,   Column::NOT_NULL, null, 'Activated')
-			->addColumn('last_reset', DataType::VARCHAR, Column::SIGNED,   Column::NOT_NULL, null, 'Reset Password')
-			->addColumn('params',     DataType::TEXT,    Column::SIGNED,   Column::ALLOW_NULL, null, 'Params')
+			->addColumn('id',          DataType::INTEGER,  Column::UNSIGNED, Column::NOT_NULL, null, 'Primary Key', ['primary' => true])
+			->addColumn('username',    DataType::VARCHAR,  Column::SIGNED,   Column::NOT_NULL, null, 'Username')
+			->addColumn('email',       DataType::VARCHAR,  Column::SIGNED,   Column::NOT_NULL, null, 'Email')
+			->addColumn('password',    DataType::VARCHAR,  Column::SIGNED,   Column::NOT_NULL, null, 'Password')
+			->addColumn('group',       DataType::INTEGER,  Column::UNSIGNED, Column::NOT_NULL, null, 'Group')
+			->addColumn('activation',  DataType::VARCHAR,  Column::SIGNED,   Column::NOT_NULL, null, 'Activated')
+			->addColumn('reset_token', DataType::VARCHAR,  Column::SIGNED,   Column::NOT_NULL, null, 'Reset Password Token')
+			->addColumn('reset_last',  DataType::DATETIME, Column::SIGNED,   Column::ALLOW_NULL, null, 'Reset Password Time')
+			->addColumn('params',      DataType::TEXT,     Column::SIGNED,   Column::ALLOW_NULL, null, 'Params')
 			->create();
 
 		$db->getTable('products', true)

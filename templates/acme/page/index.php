@@ -4,7 +4,7 @@ $root = $data->uri->get('base.path');
 $this->extend('_global.html');
 ?>
 
-<?php $this->block('siteTitle') ?>Acme Page<?php $this->endblock(); ?>
+<?php $this->block('page_title') ?>Acme Page<?php $this->endblock(); ?>
 
 <?php $this->block('nav') ?>
 <?php echo $this->parent() ?>

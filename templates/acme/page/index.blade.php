@@ -1,7 +1,7 @@
 {{-- Part of Windwalker project. --}}
 @extends('_global.html')
 
-@section('siteTitle')
+@section('page_title')
 Acme Page
 @stop
 

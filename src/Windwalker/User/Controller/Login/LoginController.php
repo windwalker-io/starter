@@ -13,6 +13,7 @@ use Windwalker\Core\Language\Translator;
 use Windwalker\Core\Router\RestfulRouter;
 use Windwalker\Core\Router\Router;
 use Windwalker\Core\View\BladeHtmlView;
+use Windwalker\Data\Data;
 use Windwalker\IO\Input;
 use Windwalker\Ioc;
 use Windwalker\Uri\Uri;
@@ -40,7 +41,9 @@ class LoginController extends Controller
 
 		$user = $this->input->getVar('user');
 
-		$result = $model->login($user['username'], $user['password']);
+		$user = new Data($user);
+
+		$result = $model->login($user['username'], $user['password'], $user['remember']);
 
 		$package = $this->getPackage();
 
@@ -48,7 +51,7 @@ class LoginController extends Controller
 		{
 			$url = $package->get('redirect.login');
 
-			$msg = Translator::translate('pkg.user.login.success');
+			$msg = Translator::translate('windwalker.user.login.success');
 		}
 		else
 		{
@@ -56,7 +59,7 @@ class LoginController extends Controller
 
 			$url = $router->http('login', array(), RestfulRouter::TYPE_FULL);
 
-			$msg = Translator::translate('pkg.user.login.fail');
+			$msg = Translator::translate('windwalker.user.login.fail');
 		}
 
 		$uri = new Uri($url);

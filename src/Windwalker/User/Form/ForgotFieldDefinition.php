@@ -8,6 +8,8 @@
 
 namespace Windwalker\User\Form;
 
+use Windwalker\Form\Field\HiddenField;
+use Windwalker\Form\Field\PasswordField;
 use Windwalker\Form\Field\TextField;
 use Windwalker\Form\FieldDefinitionInterface;
 use Windwalker\Form\Form;
@@ -35,7 +37,7 @@ class ForgotFieldDefinition implements FieldDefinitionInterface
 				->required();
 		});
 
-		$form->wrap('reset', null, function(Form $form)
+		$form->wrap('confirm', null, function(Form $form)
 		{
 			$form->add('username', new TextField)
 				->label('Username')

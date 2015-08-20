@@ -8,14 +8,10 @@
 
 namespace Windwalker\User\Model;
 
-use Windwalker\Authenticate\Authenticate;
-use Windwalker\Authenticate\Credential;
+use Windwalker\Authentication\Credential;
 use Windwalker\Core\Authentication\User;
 use Windwalker\Core\Model\Model;
-use Windwalker\DataMapper\DataMapper;
-use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Form;
-use Windwalker\Ioc;
 use Windwalker\User\Form\LoginFieldDefinition;
 
 /**
@@ -25,6 +21,11 @@ use Windwalker\User\Form\LoginFieldDefinition;
  */
 class LoginModel extends Model
 {
+	/**
+	 * getForm
+	 *
+	 * @return  Form
+	 */
 	public function getForm()
 	{
 		return $this->fetch('login.form', function()
@@ -37,11 +38,20 @@ class LoginModel extends Model
 		});
 	}
 
-	public function login($username, $password)
+	/**
+	 * login
+	 *
+	 * @param   string  $username
+	 * @param   string  $password
+	 * @param   bool    $remember
+	 *
+	 * @return  boolean
+	 */
+	public function login($username, $password, $remember = false)
 	{
 		$credential = new Credential(array('username' => $username, 'password' => $password));
 
-		if (!User::login($credential, true))
+		if (!User::login($credential, $remember))
 		{
 			$this['errors'] = User::getResults();
 
@@ -51,6 +61,13 @@ class LoginModel extends Model
 		return true;
 	}
 
+	/**
+	 * logout
+	 *
+	 * @param   string  $username
+	 *
+	 * @return  boolean
+	 */
 	public function logout($username)
 	{
 		$credential = new Credential(array('username' => $username));

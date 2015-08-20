@@ -20,6 +20,8 @@ $this->extend('_global.html');
 </style>
 <?php $this->endblock(); ?>
 
+<?php $this->block('page_title'); ?>Login<?php $this->endblock(); ?>
+
 <?php $this->block('content'); ?>
 <div class="container">
 	<div class="row login-form">

@@ -3,20 +3,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('siteTitle')</title>
+    <title>@yield('page_title')</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ $uri['base.path'] }}media/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ $uri['media.path'] }}images/favicon.ico" />
     <meta name="generator" content="Windwalker Framework" />
     @yield('meta')
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ $uri['base.path'] }}media/css/acme/main.css" />
+    <link rel="stylesheet" href="{{ $uri['media.path'] }}css/acme/main.css" />
     @yield('style')
 
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     @yield('script')
-
 </head>
 <body>
     @section('navbar')
@@ -49,7 +48,7 @@
         {{ \Windwalker\Core\Widget\WidgetHelper::render('windwalker.message.default', array('flashes' => $data->flashes)) }}
     @show
 
-    @yield('body', 'Content')
+    @yield('content', 'Content')
 
     @section('copyright')
     <div id="copyright">

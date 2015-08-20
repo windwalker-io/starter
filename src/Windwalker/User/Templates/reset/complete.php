@@ -1,9 +1,9 @@
 <?php
 /**
- * Part of Windwalker project. 
+ * Part of starter project.
  *
  * @copyright  Copyright (C) 2015 {ORGANIZATION}. All rights reserved.
- * @license    GNU General Public License version 2 or later.
+ * @license    GNU General Public License version 2 or later;
  */
 
 $this->extend('_global.html');
@@ -18,18 +18,23 @@ $this->extend('_global.html');
 	</style>
 <?php $this->endblock(); ?>
 
+<?php $this->block('page_title'); ?>Reset Complete<?php $this->endblock(); ?>
+
 <?php $this->block('content'); ?>
 	<div class="container">
 		<div class="row reset-form">
 			<div class="col-md-6 col-md-offset-3">
-				<form action="<?php echo $data->uri['current']; ?>" class="form-horizontal" method="post">
+				<form action="<?php echo $data->router->html('reset', array('task' => 'reset')); ?>" class="form-horizontal" method="post">
 					<fieldset>
-						<legend>Reset Confirm</legend>
-						<?php echo \Windwalker\Core\Frontend\Bootstrap::renderFields($data->form->getFields('reset')); ?>
+						<legend>Reset Complete</legend>
 
-						<div class="buttons col-md-offset-3">
+						<p>
+							Congrats, you successfully reset password.
+						</p>
+
+						<div class="buttons">
 							<p>
-								<button class="btn btn-primary" type="submit">Send Email</button>
+								<a class="btn btn-primary btn-block" href="<?php echo $data->router->html('login'); ?>">Login</a>
 							</p>
 						</div>
 					</fieldset>

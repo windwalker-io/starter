@@ -24,12 +24,41 @@ class GetController extends Controller
 	 */
 	protected function doExecute()
 	{
+		return $this->delegate($this->input->get('task', 'request'));
+	}
+
+	/**
+	 * request
+	 *
+	 * @return  string
+	 */
+	protected function request()
+	{
 		$model = $this->getModel();
 
 		$view = $this->getView();
 
 		$view['form'] = $model->getForm();
 
-		return $view->render();
+		return $view->setLayout('request')->render();
+	}
+
+	/**
+	 * confirm
+	 *
+	 * @return  string
+	 */
+	protected function confirm()
+	{
+		$token = $this->input->get('token');
+
+		$view = $this->getView();
+		$model = $this->getModel();
+
+		$view['token'] = $token;
+		$view['form'] = $model->getForm();
+		$view['form']->bind(array('token' => $token));
+
+		return $view->setLayout('confirm')->render();
 	}
 }

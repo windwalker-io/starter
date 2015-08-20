@@ -72,7 +72,7 @@ class UserHandler implements UserHandlerInterface
 		{
 			$data = $this->getDataMapper()->findOne($user->id);
 
-			$data->bind($user->dump());
+			$data->bind($user->dump(), true);
 
 			$this->getDataMapper()->updateOne($data, 'id', true);
 		}

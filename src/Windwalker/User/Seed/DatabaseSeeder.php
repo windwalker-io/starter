@@ -6,7 +6,7 @@
  * @license    GNU Lesser General Public License version 3 or later.
  */
 
-namespace Windwalker\User\Seeder;
+namespace Windwalker\User\Seed;
 
 use Windwalker\Core\Seeder\AbstractSeeder;
 use Windwalker\Crypt\Password;
@@ -17,7 +17,7 @@ use Windwalker\DataMapper\DataMapper;
  *
  * @since  {DEPLOY_VERSION}
  */
-class UserSeeder extends AbstractSeeder
+class DatabaseSeeder extends AbstractSeeder
 {
 	/**
 	 * doExecute
@@ -44,4 +44,3 @@ class UserSeeder extends AbstractSeeder
 		}
 	}
 }
- 

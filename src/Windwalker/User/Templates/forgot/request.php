@@ -18,6 +18,8 @@ $this->extend('_global.html');
 </style>
 <?php $this->endblock(); ?>
 
+<?php $this->block('page_title'); ?>Forgot Password<?php $this->endblock(); ?>
+
 <?php $this->block('content'); ?>
 <div class="container">
 	<div class="row forgot-form">

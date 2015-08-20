@@ -1,18 +1,16 @@
-<?php
-$root = $data->uri->get('base.path');
-?><!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title><?php $this->block('siteTitle'); ?><?php $this->endblock(); ?></title>
+	<title><?php $this->block('page_title'); ?><?php $this->endblock(); ?></title>
 
-	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $root; ?>media/images/favicon.ico" />
+	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $data->uri['media.path']; ?>images/favicon.ico" />
 	<meta name="generator" content="Windwalker Framework" />
 	<?php $this->block('meta'); ?>
 	<?php $this->endblock(); ?>
 
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?php echo $root; ?>media/css/main.css" />
+	<link rel="stylesheet" href="<?php echo $data->uri['media.path']; ?>css/main.css" />
 	<?php $this->block('style'); ?>
 	<?php $this->endblock(); ?>
 
@@ -20,7 +18,6 @@ $root = $data->uri->get('base.path');
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<?php $this->block('script'); ?>
 	<?php $this->endblock(); ?>
-
 </head>
 <body>
 <?php $this->block('navbar'); ?>
@@ -61,7 +58,7 @@ $root = $data->uri->get('base.path');
 Contnet
 <?php $this->endblock(); ?>
 
-<?php $this->block('copyblock') ?>
+<?php $this->block('copyright') ?>
 <div id="copyright">
 	<div class="container">
 		<div class="row">

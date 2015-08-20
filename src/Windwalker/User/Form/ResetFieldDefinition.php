@@ -1,0 +1,43 @@
+<?php
+/**
+ * Part of starter project.
+ *
+ * @copyright  Copyright (C) 2015 {ORGANIZATION}. All rights reserved.
+ * @license    GNU General Public License version 2 or later;
+ */
+
+namespace Windwalker\User\Form;
+
+use Windwalker\Form\Field\HiddenField;
+use Windwalker\Form\Field\PasswordField;
+use Windwalker\Form\FieldDefinitionInterface;
+use Windwalker\Form\Form;
+
+/**
+ * The ResetFieldDefinition class.
+ *
+ * @since  {DEPLOY_VERSION}
+ */
+class ResetFieldDefinition implements FieldDefinitionInterface
+{
+	/**
+	 * Define the form fields.
+	 *
+	 * @param Form $form The Windwalker form object.
+	 *
+	 * @return  void
+	 */
+	public function define(Form $form)
+	{
+		$form->add('password', new PasswordField)
+			->label('Password')
+			->required();
+
+		$form->add('password2', new PasswordField)
+			->label('Verify Password')
+			->required();
+
+		$form->add('username', new HiddenField);
+		$form->add('token', new HiddenField);
+	}
+}
