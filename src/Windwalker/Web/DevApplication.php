@@ -42,11 +42,10 @@ class DevApplication extends Application
 		 * If you want a provider can be used in every applications (for example: Web and Console),
 		 * set it in Windwalker\Windwalker object.
 		 */
-		$providers = parent::loadProviders();
+		$providers = array_merge(parent::loadProviders(), Windwalker::loadProviders());
 
 		// Custom Providers here...
 		$providers['debug'] = new Provider\WhoopsProvider;
-		$packages['_debugger'] = new DebuggerPackage;
 
 		return $providers;
 	}
@@ -64,7 +63,7 @@ class DevApplication extends Application
 		 * If you want a package can be used in every applications (for example: Web and Console),
 		 * set it in Windwalker\Windwalker object.
 		 */
-		$packages = Windwalker::loadPackages();
+		$packages = array_merge(parent::loadPackages(), Windwalker::loadPackages());
 
 		/*
 		 * Get Packages for This Application

@@ -101,7 +101,7 @@ class Application extends WebApplication
 		 * If you want a package can be used in every applications (for example: Web and Console),
 		 * set it in Windwalker\Windwalker object.
 		 */
-		$packages = Windwalker::loadPackages();
+		$packages = array_merge(parent::loadPackages(), Windwalker::loadPackages());
 
 		/*
 		 * Get Packages for This Application
