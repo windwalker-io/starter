@@ -10,7 +10,7 @@ Acme Page
     <li><a href="{{ $uri['base.path'] }}cover">Cover</a></li>
 @stop
 
-@section('body')
+@section('content')
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <div class="container">

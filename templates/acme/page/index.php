@@ -8,7 +8,7 @@ $this->extend('_global.html');
 
 <?php $this->block('nav') ?>
 <?php echo $this->parent() ?>
-<li><a href="<?php echo \Windwalker\Core\Router\Router::html('cover'); ?>">Cover</a></li>
+<li><a href="<?php echo $data->router->html('cover'); ?>">Cover</a></li>
 <?php $this->endblock(); ?>
 
 <?php $this->block('content') ?>

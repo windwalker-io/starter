@@ -20,7 +20,8 @@
         "twig/twig" : "~1.0@stable"
     },
     "require-dev": {
-        "phpunit/phpunit-skeleton-generator": "dev-windwalker-tmpl"
+        "phpunit/phpunit-skeleton-generator": "dev-windwalker-tmpl",
+        "illuminate/view": "5.*"
     },
     "repositories": [
         {
