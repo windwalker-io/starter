@@ -10,7 +10,7 @@
     @yield('meta')
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ $uri['media.path'] }}css/acme/main.css" />
+    <link rel="stylesheet" href="{{ $uri['media.path'] }}css/main.css" />
     @yield('style')
 
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
