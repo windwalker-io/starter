@@ -52,7 +52,9 @@ $root = $data->uri->get('base.path');
 <?php $this->endblock(); ?>
 
 <?php $this->block('message') ?>
-	<?php echo $this->load('windwalker.message.default'); ?>
+	<div id="messasge" class="container">
+		<?php echo \Windwalker\Core\Widget\WidgetHelper::render('windwalker.message.default', array('flashes' => $data->flashes)); ?>
+	</div>
 <?php $this->endblock(); ?>
 
 <?php $this->block('content') ?>

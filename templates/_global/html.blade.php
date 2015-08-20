@@ -45,6 +45,10 @@
     </div>
     @show
 
+    @section('message')
+        {{ \Windwalker\Core\Widget\WidgetHelper::render('windwalker.message.default', array('flashes' => $data->flashes)) }}
+    @show
+
     @yield('body', 'Content')
 
     @section('copyright')

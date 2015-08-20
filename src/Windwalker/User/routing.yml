@@ -17,4 +17,7 @@ registration:
 forgot:
     pattern: forgot-password
     controller: Forgot
+reset:
+    pattern: reset
+    controller: Reset
 

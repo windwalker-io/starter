@@ -10,6 +10,7 @@ namespace Windwalker\User\Model;
 
 use Windwalker\Core\Model\DatabaseModel;
 use Windwalker\Form\Form;
+use Windwalker\User\Form\ForgotFieldDefinition;
 
 /**
  * The ForgorModel class.
@@ -18,13 +19,18 @@ use Windwalker\Form\Form;
  */
 class ForgotModel extends DatabaseModel
 {
+	/**
+	 * getForm
+	 *
+	 * @return  Form
+	 */
 	public function getForm()
 	{
-		return $this->fetch('login.form', function()
+		return $this->fetch('forgot.form', function()
 		{
-			$form = new Form('user');
+			$form = new Form;
 
-			$form->defineFormFields(new LoginFieldDefinition);
+			$form->defineFormFields(new ForgotFieldDefinition);
 
 			return $form;
 		});

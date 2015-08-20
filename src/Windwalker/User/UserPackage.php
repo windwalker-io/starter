@@ -9,6 +9,7 @@
 namespace Windwalker\User;
 
 use Windwalker\Core\Authentication\User;
+use Windwalker\Core\Language\Translator;
 use Windwalker\Core\Package\AbstractPackage;
 use Windwalker\User\User\UserHandler;
 
@@ -34,6 +35,8 @@ class UserPackage extends AbstractPackage
 	public function initialise()
 	{
 		parent::initialise();
+
+		Translator::load('main', $this);
 
 		User::setHandler(new UserHandler);
 	}

@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later.
  */
 
-namespace Windwalker\User\Controller\Forgot;
+namespace Windwalker\User\Controller\Reset;
 
 use Windwalker\Core\Controller\Controller;
 
@@ -24,11 +24,14 @@ class GetController extends Controller
 	 */
 	protected function doExecute()
 	{
-		$model = $this->getModel();
+		$token = $this->input->get('token');
 
 		$view = $this->getView();
+		$model = $this->getModel('Forgot');
 
+		$view['token'] = $token;
 		$view['form'] = $model->getForm();
+		$view['form']->bind(array('token' => $token));
 
 		return $view->render();
 	}
