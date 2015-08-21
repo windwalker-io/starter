@@ -18,7 +18,7 @@ use Windwalker\DataMapper\DataMapper;
 /**
  * The UserHandler class.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class UserHandler implements UserHandlerInterface
 {

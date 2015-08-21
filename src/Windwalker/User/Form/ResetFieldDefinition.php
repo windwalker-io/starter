@@ -16,7 +16,7 @@ use Windwalker\Form\Form;
 /**
  * The ResetFieldDefinition class.
  *
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class ResetFieldDefinition implements FieldDefinitionInterface
 {

@@ -16,7 +16,7 @@ use Windwalker\User\User\UserHandler;
 /**
  * The UserPackage class.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class UserPackage extends AbstractPackage
 {

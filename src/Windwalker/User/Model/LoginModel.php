@@ -17,7 +17,7 @@ use Windwalker\User\Form\LoginFieldDefinition;
 /**
  * The LoginModel class.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class LoginModel extends Model
 {

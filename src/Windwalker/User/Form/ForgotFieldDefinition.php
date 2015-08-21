@@ -17,7 +17,7 @@ use Windwalker\Form\Form;
 /**
  * The ForgotFieldDefinition class.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class ForgotFieldDefinition implements FieldDefinitionInterface
 {

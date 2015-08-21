@@ -15,7 +15,7 @@ use Windwalker\User\Model\RegistrationModel;
 /**
  * The GetController class.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class SaveController extends Controller
 {

@@ -18,7 +18,7 @@ use Windwalker\Form\Form;
 /**
  * The RegistrationFieldDefainition class.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class RegistrationFieldDefinition implements FieldDefinitionInterface
 {

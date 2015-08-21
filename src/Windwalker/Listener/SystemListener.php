@@ -16,7 +16,7 @@ use Windwalker\Event\Event;
  *
  * NOTE: This listener has been registered after onAfterInitialise event. So the first event is onAfterRouting.
  *
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class SystemListener
 {

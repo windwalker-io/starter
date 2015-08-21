@@ -20,7 +20,7 @@ use Windwalker\Validator\Rule\EmailValidator;
 /**
  * The LoginFormDefinition class.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class LoginFieldDefinition implements FieldDefinitionInterface
 {

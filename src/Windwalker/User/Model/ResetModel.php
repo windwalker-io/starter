@@ -15,7 +15,7 @@ use Windwalker\User\Form\ResetFieldDefinition;
 /**
  * The ResetModel class.
  *
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class ResetModel extends DatabaseModel
 {

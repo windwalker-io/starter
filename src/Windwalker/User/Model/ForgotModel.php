@@ -15,7 +15,7 @@ use Windwalker\User\Form\ForgotFieldDefinition;
 /**
  * The ForgorModel class.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class ForgotModel extends DatabaseModel
 {

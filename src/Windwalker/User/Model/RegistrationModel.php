@@ -20,7 +20,7 @@ use Windwalker\User\Form\RegistrationFieldDefinition;
 /**
  * The RegistrationModel class.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class RegistrationModel extends Model
 {

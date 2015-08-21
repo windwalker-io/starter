@@ -19,7 +19,7 @@ use Windwalker\Crypt\Password;
 /**
  * The SaveController class.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class SaveController extends Controller
 {

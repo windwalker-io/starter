@@ -18,7 +18,7 @@ use Windwalker\Windwalker;
 /**
  * The WindwalkerConsole class.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class Application extends WindwalkerConsole
 {

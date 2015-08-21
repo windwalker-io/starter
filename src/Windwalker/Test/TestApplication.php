@@ -13,7 +13,7 @@ use Windwalker\Web\Application;
 /**
  * The TestApplication class.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class TestApplication extends Application
 {

@@ -11,7 +11,7 @@ namespace Windwalker\User\Controller\Logout;
 /**
  * The SaveController class.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class GetController extends SaveController
 {

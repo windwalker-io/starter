@@ -11,7 +11,7 @@ namespace Windwalker;
 /**
  * The Ioc class.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 abstract class Ioc extends \Windwalker\Core\Ioc
 {

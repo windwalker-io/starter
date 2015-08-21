@@ -15,7 +15,7 @@ use Windwalker\User\View\Login\LoginHtmlView;
 /**
  * The GetController class.
  * 
- * @since  {DEPLOY_VERSION}
+ * @since  2.1.1
  */
 class IndexController extends Controller
 {
