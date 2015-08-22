@@ -18,7 +18,7 @@
 	</php>
 	<testsuites>
 		<testsuite name="Starter">
-			<directory>src/*/Test</directory>
+			<directory>test</directory>
 		</testsuite>
 	</testsuites>
 </phpunit>
