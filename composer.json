@@ -11,13 +11,13 @@
         }
     ],
     "require": {
-        "windwalker/core" : "~2.0@stable",
-        "symfony/yaml" : "2.*@stable",
-        "filp/whoops": "1.*@stable",
-        "fzaninotto/faker": "~1.0@stable",
+        "windwalker/core" : "~2.0",
+        "symfony/yaml" : "~2.0",
+        "filp/whoops": "~1.0",
+        "fzaninotto/faker": "~1.0",
         "monolog/monolog": "~1.0",
 
-        "twig/twig" : "~1.0@stable"
+        "twig/twig" : "~1.0"
     },
     "require-dev": {
         "phpunit/phpunit-skeleton-generator": "dev-windwalker-tmpl"
