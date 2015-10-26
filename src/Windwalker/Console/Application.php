@@ -57,10 +57,11 @@ class Application extends WindwalkerConsole
 		 * But you can replace with yours, Make sure all the needed container key has
 		 * registered in your own providers.
 		 */
-		$providers['event']    = new Provider\EventProvider;
-		$providers['database'] = new Provider\DatabaseProvider;
-		$providers['lang']     = new Provider\LanguageProvider;
-		$providers['cache']    = new Provider\CacheProvider;
+		// $providers['event']    = new Provider\EventProvider;
+		// $providers['database'] = new Provider\DatabaseProvider;
+		// $providers['lang']     = new Provider\LanguageProvider;
+		// $providers['cache']    = new Provider\CacheProvider;
+		// $providers['datetime'] = new Provider\DateTimeProvider;
 
 		/*
 		 * Custom Providers:
