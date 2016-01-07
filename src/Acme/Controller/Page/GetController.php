@@ -53,4 +53,3 @@ class GetController extends Controller
 		// return $view->setLayout('index')->render();
 	}
 }
- 
