@@ -18,7 +18,7 @@ $flashes = $data->flashes;
 		</button>
 
 	<?php foreach ((array) $typeBag as $msg): ?>
-		<p><?php echo $msg; ?></p>
+		<p><?php echo nl2br($msg); ?></p>
 	<?php endforeach; ?>
 
 	</div>
