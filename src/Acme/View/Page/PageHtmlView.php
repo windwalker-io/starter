@@ -8,14 +8,14 @@
 
 namespace Acme\View\Page;
 
-use Windwalker\Core\View\HtmlView;
+use Windwalker\Core\View\PhpHtmlView;
 
 /**
  * Class PageHtmlView
  *
  * @since 1.0
  */
-class PageHtmlView extends HtmlView
+class PageHtmlView extends PhpHtmlView
 {
 	/**
 	 * prepareData

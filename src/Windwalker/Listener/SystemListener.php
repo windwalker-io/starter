@@ -8,7 +8,7 @@
 
 namespace Windwalker\Listener;
 
-use Windwalker\Core\View\HtmlView;
+use Windwalker\Core\View\PhpHtmlView;
 use Windwalker\Event\Event;
 
 /**
@@ -33,7 +33,7 @@ class SystemListener
 
 		if ($app->get('system.offline', false))
 		{
-			$view = new HtmlView;
+			$view = new PhpHtmlView;
 
 			$view->setLayout('windwalker.offline.offline');
 

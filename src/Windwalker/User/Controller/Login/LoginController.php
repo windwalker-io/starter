@@ -11,14 +11,9 @@ namespace Windwalker\User\Controller\Login;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Language\Translator;
 use Windwalker\Core\Router\RestfulRouter;
-use Windwalker\Core\Router\Router;
-use Windwalker\Core\View\BladeHtmlView;
 use Windwalker\Data\Data;
-use Windwalker\IO\Input;
-use Windwalker\Ioc;
 use Windwalker\Uri\Uri;
 use Windwalker\User\Model\LoginModel;
-use Windwalker\User\View\Login\LoginHtmlView;
 
 /**
  * The GetController class.

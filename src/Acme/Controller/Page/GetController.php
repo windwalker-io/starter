@@ -10,7 +10,7 @@ namespace Acme\Controller\Page;
 
 use Acme\View\Page\PageHtmlView;
 use Windwalker\Core\Controller\Controller;
-use Windwalker\Core\View\HtmlView;
+use Windwalker\Core\View\PhpHtmlView;
 use Windwalker\Utilities\Queue\Priority;
 use Windwalker\Renderer\BladeRenderer;
 use Windwalker\Renderer\PhpRenderer;
