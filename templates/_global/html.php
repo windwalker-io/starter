@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -9,13 +9,13 @@
 	<?php $this->block('meta'); ?>
 	<?php $this->endblock(); ?>
 
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo $data->uri['media.path']; ?>css/main.css" />
 	<?php $this->block('style'); ?>
 	<?php $this->endblock(); ?>
 
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<?php $this->block('script'); ?>
 	<?php $this->endblock(); ?>
 </head>
