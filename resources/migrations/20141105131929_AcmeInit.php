@@ -7,6 +7,7 @@
  */
 
 use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\Schema;
 use Windwalker\Database\Schema\Column\Integer;
 use Windwalker\Database\Schema\Column\Primary;
 use Windwalker\Database\Schema\Column\Text;
@@ -21,11 +22,12 @@ class AcmeInit extends AbstractMigration
 	 */
 	public function up()
 	{
-		$this->db->getTable('acme_cover', true)
-			->addColumn(new Primary('id'))
-			->addColumn(new Text('text'))
-			->addColumn(new Integer('state'))
-			->create();
+		$this->getTable('acme_cover', function(Schema $schema)
+		{
+			$schema->addColumn('id', new Primary)->comment('Primary Key');
+			$schema->addColumn('text', new Text)->comment('Content Text');
+			$schema->addColumn('state', new Integer)->signed(true)->comment('0: unpublished, 1: published');
+		})->create(true);
 	}
 
 	/**
@@ -33,7 +35,6 @@ class AcmeInit extends AbstractMigration
 	 */
 	public function down()
 	{
-		$this->db->getTable('acme_cover')
-			->drop();
+		$this->drop('acme_cover');
 	}
 }

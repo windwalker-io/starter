@@ -39,6 +39,8 @@ class DatabaseSeeder extends AbstractSeeder
 	 */
 	public function doClean()
 	{
+		$this->truncate('acme_cover');
+
 		$this->command->out('Database clean.')->out();
 	}
 }
