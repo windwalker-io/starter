@@ -5,6 +5,8 @@ system:
 session:
     handler: native
     expire_time: 15
+routing:
+    debug: 0
 cache:
     enabled: 0
     storage: file

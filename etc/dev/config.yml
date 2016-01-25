@@ -4,5 +4,7 @@ system:
 cache:
     enabled: 0
     time: 15
+routing:
+    debug: 0
 language:
     debug: 1
