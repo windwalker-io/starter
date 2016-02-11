@@ -6,7 +6,7 @@
  * @license    GNU Lesser General Public License version 3 or later. see LICENSE
  */
 
-namespace Acme\Model;
+namespace Main\Model;
 
 use Windwalker\Core\Model\Model;
 use Windwalker\Data\Data;

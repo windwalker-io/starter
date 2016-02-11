@@ -8,25 +8,24 @@
 
 use Windwalker\Core\Migration\AbstractMigration;
 use Windwalker\Core\Migration\Schema;
-use Windwalker\Database\Schema\Column\Integer;
-use Windwalker\Database\Schema\Column\Primary;
-use Windwalker\Database\Schema\Column\Text;
+use Windwalker\Database\Schema\Column;
 
 /**
  * Migration class, version: 20141105131929
  */
-class AcmeInit extends AbstractMigration
+class MainInit extends AbstractMigration
 {
 	/**
 	 * Migrate Up.
 	 */
 	public function up()
 	{
-		$this->getTable('acme_cover', function(Schema $schema)
+		$this->getTable('main_cover', function(Schema $schema)
 		{
-			$schema->addColumn('id', new Primary)->comment('Primary Key');
-			$schema->addColumn('text', new Text)->comment('Content Text');
-			$schema->addColumn('state', new Integer)->signed(true)->comment('0: unpublished, 1: published');
+			$schema->addColumn('id',    new Column\Primary)->comment('Primary Key');
+			$schema->addColumn('title', new Column\Varchar)->comment('Primary Key');
+			$schema->addColumn('text',  new Column\Text)->comment('Content Text');
+			$schema->addColumn('state', new Column\Integer)->signed(true)->comment('0: unpublished, 1: published');
 		})->create(true);
 	}
 

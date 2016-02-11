@@ -6,16 +6,16 @@
  * @license    GNU Lesser General Public License version 3 or later. see LICENSE
  */
 
-namespace Acme\View\Page;
+namespace Main\View\Cover;
 
-use Windwalker\Core\View\PhpHtmlView;
+use Windwalker\Core\View\TwigHtmlView;
 
 /**
  * Class PageHtmlView
  *
  * @since 1.0
  */
-class PageHtmlView extends PhpHtmlView
+class CoverHtmlView extends TwigHtmlView
 {
 	/**
 	 * prepareData
@@ -28,3 +28,4 @@ class PageHtmlView extends PhpHtmlView
 	{
 	}
 }
+ 

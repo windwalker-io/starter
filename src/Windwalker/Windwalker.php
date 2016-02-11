@@ -33,7 +33,8 @@ class Windwalker extends \Windwalker\Core\Windwalker
 	public static function loadPackages()
 	{
 		return array(
-			'system' => new SystemPackage
+			'system' => new SystemPackage,
+			'main' => 'Main\MainPackage'
 		);
 	}
 

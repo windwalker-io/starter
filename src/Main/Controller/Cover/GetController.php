@@ -6,10 +6,10 @@
  * @license    GNU Lesser General Public License version 3 or later. see LICENSE
  */
 
-namespace Acme\Controller\Cover;
+namespace Main\Controller\Cover;
 
-use Acme\Model\CoverModel;
-use Acme\View\Cover\CoverHtmlView;
+use Main\Model\CoverModel;
+use Main\View\Cover\CoverHtmlView;
 use Windwalker\Core\Controller\Controller;
 
 /**

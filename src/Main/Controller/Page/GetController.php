@@ -6,9 +6,9 @@
  * @license    GNU Lesser General Public License version 3 or later. see LICENSE
  */
 
-namespace Acme\Controller\Page;
+namespace Main\Controller\Page;
 
-use Acme\View\Page\PageHtmlView;
+use Main\View\Page\PageHtmlView;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\View\PhpHtmlView;
 use Windwalker\Utilities\Queue\Priority;
@@ -34,22 +34,8 @@ class GetController extends Controller
 	 */
 	protected function doExecute()
 	{
-		$renderer = new PhpRenderer(Priority::createQueue(WINDWALKER_TEMPLATES . '/acme/page'));
-
-		// Using Blade
-		// $renderer = new BladeRenderer(Priority::createQueue(WINDWALKER_TEMPLATES . '/acme/page'), array('cache_path' => WINDWALKER_CACHE . '/view'));
-
-		// Using Twig
-		// $renderer = new TwigRenderer(Priority::createQueue(WINDWALKER_TEMPLATES . '/acme/page'));
-
-		$view = new PageHtmlView(array(), $renderer);
+		$view = $this->getView();
 
 		return $view->setLayout('index')->render();
-
-		// $view = new HtmlView;
-
-		// $view->setConfig($this->config);
-
-		// return $view->setLayout('index')->render();
 	}
 }

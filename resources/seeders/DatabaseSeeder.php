@@ -22,14 +22,25 @@ class DatabaseSeeder extends AbstractSeeder
 	 */
 	public function doExecute()
 	{
+		$faker = \Faker\Factory::create();
+
 		// This is example seeder, you can delete it.
-		with(new \Windwalker\DataMapper\DataMapper('acme_cover'))->createOne(array(
-			'text' => 'Hello World',
-			'state' => 1
-		));
+		$mapper = new \Windwalker\DataMapper\DataMapper('main_cover');
+
+		foreach (range(1, 50) as $i)
+		{
+			$data = new \Windwalker\Data\Data;
+			$data->title = $faker->sentence(2);
+			$data->text = $faker->paragraph(3);
+			$data->state = $faker->randomElement(array(0, 1, 1));
+
+			$mapper->createOne($data);
+
+			$this->command->out('.', false);
+		}
 		// Example seeder end.
 
-		$this->command->out('Seeder executed.')->out();
+		$this->command->out()->out('Seeder executed.')->out();
 	}
 
 	/**
@@ -39,7 +50,7 @@ class DatabaseSeeder extends AbstractSeeder
 	 */
 	public function doClean()
 	{
-		$this->truncate('acme_cover');
+		$this->truncate('main_cover');
 
 		$this->command->out('Database clean.')->out();
 	}
