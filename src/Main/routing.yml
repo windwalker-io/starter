@@ -6,4 +6,4 @@ page:
     controller: Page
 cover:
     pattern: /cover
-    controller: Page
+    controller: Cover

@@ -27,7 +27,10 @@
 
                 <div class="inner cover">
                     {% if  not content.isNull() %}
-                        <h2>{{ content.text|raw }}</h2>
+                        <h2>{{ content.title }}</h2>
+                        <p>
+                            {{ content.text|raw }}
+                        </p>
                         <p>
                             Congrats, you imported schema success. You can run this command to rollback:
 
