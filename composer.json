@@ -20,14 +20,8 @@
         "twig/twig" : "~1.0"
     },
     "require-dev": {
-        "phpunit/phpunit-skeleton-generator": "dev-windwalker-tmpl"
+        "windwalker/phpunit-skeleton-generator": "2.*"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/ventoviro/phpunit-skeleton-generator"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "": "src/"
