@@ -13,7 +13,6 @@ use Windwalker\Core\Provider;
 use Windwalker\DI\ServiceProviderInterface;
 use Windwalker\Listener\SystemListener;
 use Windwalker\Registry\Registry;
-use Windwalker\User\UserPackage;
 use Windwalker\Windwalker;
 
 /**
