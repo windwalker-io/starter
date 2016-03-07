@@ -1,6 +1,3 @@
 main:
     pattern: /
     package: main
-user:
-    pattern: '/'
-    package: wwuser
