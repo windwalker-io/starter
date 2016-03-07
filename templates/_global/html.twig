@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app.get('language.locale') ? : app.get('language.default', 'en-GB') }}">
 <head>
     <meta charset="UTF-8">
     <title>{% block page_title %}{% endblock %}</title>

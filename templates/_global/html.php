@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $data->app->get('language.locale') ? : $data->app->get('language.default', 'en-GB'); ?>">
 <head>
 	<meta charset="UTF-8">
 	<title><?php $this->block('page_title'); ?><?php $this->endblock(); ?></title>

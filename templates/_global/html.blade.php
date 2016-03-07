@@ -1,6 +1,6 @@
 {{-- Part of Windwalker project. --}}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ $app->get('language.locale') ? : $app->get('language.default', 'en-GB') }}">
 <head>
     <meta charset="UTF-8">
     <title>@yield('page_title')</title>
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ $uri['media.path'] }}css/main.css" />
     @yield('style')
 
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     @yield('script')
 </head>
