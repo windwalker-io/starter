@@ -2,7 +2,8 @@
 .*
 !.gitignore
 !.gitkeep
-!/www/.htaccess
+!.htaccess
+!web.config
 
 # Composer
 /vendor
