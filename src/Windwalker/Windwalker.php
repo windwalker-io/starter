@@ -41,7 +41,7 @@ class Windwalker extends \Windwalker\Core\Windwalker
 	/**
 	 * Load providers.
 	 *
-	 * If you want seom 3rd libraries tun in both Web and Console, register them here.
+	 * If you want some 3rd libraries in both Web and Console, register them here.
 	 *
 	 * @return  ServiceProviderInterface[]
 	 */
