@@ -45,7 +45,6 @@ class DevApplication extends Application
 		$providers = array_merge(parent::loadProviders(), Windwalker::loadProviders());
 
 		// Custom Providers here...
-		$providers['debug'] = new Provider\WhoopsProvider;
 
 		return $providers;
 	}
