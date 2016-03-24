@@ -1,0 +1,11 @@
+system:
+    debug: 1
+    error_reporting: -1
+    offline: 0
+cache:
+    enabled: 0
+    time: 15
+routing:
+    debug: 0
+language:
+    debug: 1

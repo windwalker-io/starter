@@ -1,0 +1,22 @@
+system:
+    debug: 0
+    error_reporting: 0
+    timezone: 'UTC'
+    secret: 00460c4b9bf32da8f9cec434c27eca30
+session:
+    handler: native
+    expire_time: 15
+routing:
+    debug: 0
+cache:
+    enabled: 0
+    storage: file
+    handler: serialize
+    dir: cache
+    time: 15
+language:
+    debug: 0
+    locale: en-GB
+    default: en-GB
+    format: ini
+    path: resources/languages

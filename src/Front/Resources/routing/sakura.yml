@@ -1,0 +1,17 @@
+# Sakura
+sakura:
+    pattern: /sakura/(id)
+    controller: Sakura
+    extra:
+        layout: sakura
+        active:
+            manimenu: sakuras
+
+# Sakuras
+sakuras:
+    pattern: /sakuras(/page)
+    controller: Sakuras
+    extra:
+        layout: sakuras
+        active:
+            manimenu: sakuras

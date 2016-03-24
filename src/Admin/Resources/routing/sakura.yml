@@ -1,0 +1,21 @@
+# Sakura
+sakura:
+    pattern: /sakura(/id)
+    controller: Sakura
+    extra:
+        layout: sakura
+        active:
+            mainmenu: sakuras
+
+# Sakuras
+sakuras:
+    pattern: /sakuras(/page)
+    controller: Sakuras
+    action:
+        post: CopyController
+        patch: BatchController
+        put: FilterController
+    extra:
+        layout: sakuras
+        active:
+            mainmenu: sakuras
