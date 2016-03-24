@@ -15,7 +15,5 @@ namespace Admin\Table;
  */
 abstract class Table
 {
-	const SAKURAS = 'sakuras';
-
 	// @muse-placeholder  db-table  Do not remove this.
 }

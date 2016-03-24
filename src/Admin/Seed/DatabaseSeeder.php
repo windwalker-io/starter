@@ -22,8 +22,6 @@ class DatabaseSeeder extends AbstractSeeder
 	 */
 	public function doExecute()
 	{
-		$this->execute(new SakuraSeeder);
-
 		// @muse-placeholder  seeder-execute  Do not remove this.
 	}
 
@@ -34,8 +32,6 @@ class DatabaseSeeder extends AbstractSeeder
 	 */
 	public function doClear()
 	{
-		$this->clear(new SakuraSeeder);
-
 		// @muse-placeholder  seeder-clean  Do not remove this.
 	}
 }
