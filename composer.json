@@ -21,7 +21,6 @@
         "lyrasoft/luna": "1.*"
     },
     "require-dev": {
-        "windwalker/phpunit-skeleton-generator": "2.*"
     },
     "autoload": {
         "psr-4": {
