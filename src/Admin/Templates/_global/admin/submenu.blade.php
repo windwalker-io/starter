@@ -11,14 +11,44 @@
 
 <ul class="nav nav-stacked nav-pills">
     <li class="{{ $helper->menu->active('categories') }}">
-        <a href="#">
-            @translate('admin.categories.title')
+        <a href="{{ $router->html('categories', array('type' => 'article')) }}">
+            @translate($lunaPrefix . 'categories.title')
         </a>
     </li>
 
-    <li class="{{ $helper->menu->active('sakuras') }}">
-        <a href="{{ $router->html('sakuras') }}">
-            @translate('admin.sakuras.title')
+    <li class="{{ $helper->menu->active('articles') }}">
+        <a href="{{ $router->html('articles') }}">
+            @translate($lunaPrefix . 'articles.title')
+        </a>
+    </li>
+
+    <li class="{{ $helper->menu->active('tags') }}">
+        <a href="{{ $router->html('tags') }}">
+            @translate($lunaPrefix . 'tags.title')
+        </a>
+    </li>
+
+    <li class="{{ $helper->menu->active('comments') }}">
+        <a href="{{ $router->html('comments', array('type' => 'article')) }}">
+            @translate($lunaPrefix . 'comments.title')
+        </a>
+    </li>
+
+    <li class="{{ $helper->menu->active('languages') }}">
+        <a href="{{ $router->html('languages') }}">
+            @translate($lunaPrefix . 'languages.title')
+        </a>
+    </li>
+
+    <li class="{{ $helper->menu->active('modules') }}">
+        <a href="{{ $router->html('modules') }}">
+            @translate($lunaPrefix . 'modules.title')
+        </a>
+    </li>
+
+    <li class="{{ $helper->menu->active('users') }}">
+        <a href="{{ $router->html('users') }}">
+            @translate($warderPrefix . 'users.title')
         </a>
     </li>
 
