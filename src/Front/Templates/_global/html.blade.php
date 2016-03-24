@@ -45,7 +45,7 @@
                         <ul class="dropdown-menu">
                             @foreach ($categories as $category)
                             <li>
-                                <a href="{{ $router->html('article_') }}">
+                                <a href="{{ $router->html('article_category', array('path' => $category->path)) }}">
                                     {{ str_repeat('-', $category->level - 1) }}
                                     {{ $category->title }}
                                 </a>
