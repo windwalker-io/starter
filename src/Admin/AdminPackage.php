@@ -80,7 +80,7 @@ class AdminPackage extends AbstractPackage
 	 */
 	protected function checkAccess()
 	{
-		if (!UserHelper::authorise())
+		if (!UserHelper::authorise() /* && User::get()->group == 2 */)
 		{
 			UserHelper::goToLogin(Uri::full());
 		}
