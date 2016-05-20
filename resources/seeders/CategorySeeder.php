@@ -16,14 +16,24 @@ use Windwalker\Core\Seeder\AbstractSeeder;
 use Windwalker\Data\Data;
 use Windwalker\Filter\OutputFilter;
 use Windwalker\Warder\Admin\DataMapper\UserMapper;
+use Windwalker\Warder\Helper\WarderHelper;
 
 /**
  * The CategorySeeder class.
- * 
+ *
  * @since  1.0
  */
 class CategorySeeder extends AbstractSeeder
 {
+	/**
+	 * Property types.
+	 *
+	 * @var  array
+	 */
+	protected $types = array(
+		'article'
+	);
+
 	/**
 	 * doExecute
 	 *
@@ -33,25 +43,26 @@ class CategorySeeder extends AbstractSeeder
 	{
 		$faker = Factory::create();
 
-		$mapper = new CategoryMapper;
 		$record = new CategoryRecord;
-		$langMapper = new LanguageMapper;
 
-		$languages = $langMapper->find(array('state' => 1))->code;
+		$languages = LanguageMapper::find(array('state' => 1))->code;
 		$languages[] = '*';
 
-		if (\Windwalker\Warder\Helper\WarderHelper::tableExists('users'))
+		if (WarderHelper::tableExists('users'))
 		{
-			$userMapper = new UserMapper;
-
-			$userIds = $userMapper->findAll()->id;
+			$userIds = UserMapper::findAll()->id;
 		}
 		else
 		{
 			$userIds = range(1, 50);
 		}
 
-		$existsRecordIds = array(1);
+		$existsRecordIds = array();
+
+		foreach ($this->types as $type)
+		{
+			$existsRecordIds[$type] = array(1);
+		}
 
 		foreach (range(1, 30) as $i)
 		{
@@ -61,7 +72,7 @@ class CategorySeeder extends AbstractSeeder
 
 			$record['title']       = $faker->sentence(rand(1, 3)) . ' - [' . $lang . ']';
 			$record['alias']       = OutputFilter::stringURLSafe($record['title']);
-			$record['type']        = 'article';
+			$record['type']        = $faker->randomElement($this->types);
 			$record['description'] = $faker->paragraph(5);
 			$record['image']       = $faker->imageUrl();
 			$record['state']       = $faker->randomElement(array(1, 1, 1, 1, 0, 0));
@@ -73,13 +84,13 @@ class CategorySeeder extends AbstractSeeder
 			$record['language']    = $lang;
 			$record['params']      = '';
 
-			$record->setLocation($faker->randomElement($existsRecordIds), $record::LOCATION_LAST_CHILD);
+			$record->setLocation($faker->randomElement($existsRecordIds[$record['type']]), $record::LOCATION_LAST_CHILD);
 
 			$record->store();
 
 			$record->rebuildPath();
 
-			$existsRecordIds[] = $record->id;
+			$existsRecordIds[$record['type']][] = $record->id;
 
 			$this->command->out('.', false);
 		}

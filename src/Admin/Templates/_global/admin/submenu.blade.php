@@ -10,7 +10,7 @@
 </h3>
 
 <ul class="nav nav-stacked nav-pills">
-    <li class="{{ $helper->menu->active('categories') }}">
+    <li class="{{ $helper->menu->active('article', 'category') }}">
         <a href="{{ $router->html('categories', array('type' => 'article')) }}">
             @translate($lunaPrefix . 'categories.title')
         </a>
