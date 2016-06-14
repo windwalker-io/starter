@@ -10,4 +10,4 @@ routing:
 language:
     debug: 1
 database:
-    mysql_strict_mode: true
+    mysql_strict_mode: ~

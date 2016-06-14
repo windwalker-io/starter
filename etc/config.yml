@@ -21,4 +21,4 @@ language:
     format: ini
     path: resources/languages
 database:
-    mysql_strict_mode: false
+    mysql_strict_mode: ~
