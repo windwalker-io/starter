@@ -13,7 +13,7 @@ use Windwalker\Debugger\DebuggerPackage;
 use Windwalker\DI\ServiceProviderInterface;
 use Windwalker\Registry\Registry;
 use Windwalker\Core\Provider;
-use Windwalker\Windwalker;
+use Windwalker\Core\WindwalkerTrait;
 
 /**
  * The DevApplication class.
@@ -42,7 +42,7 @@ class DevApplication extends Application
 		 * If you want a provider can be used in every applications (for example: Web and Console),
 		 * set it in Windwalker\Windwalker object.
 		 */
-		$providers = array_merge(parent::loadProviders(), Windwalker::loadProviders());
+		$providers = array_merge(parent::loadProviders(), WindwalkerTrait::loadProviders());
 
 		// Custom Providers here...
 
@@ -62,7 +62,7 @@ class DevApplication extends Application
 		 * If you want a package can be used in every applications (for example: Web and Console),
 		 * set it in Windwalker\Windwalker object.
 		 */
-		$packages = array_merge(parent::loadPackages(), Windwalker::loadPackages());
+		$packages = array_merge(parent::loadPackages(), WindwalkerTrait::loadPackages());
 
 		/*
 		 * Get Packages for This Application

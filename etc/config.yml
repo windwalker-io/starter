@@ -1,6 +1,6 @@
 system:
-    debug: 0
-    error_reporting: 0
+    debug: 1
+    error_reporting: -1
     timezone: 'UTC'
     secret: 'This-token-is-not-safe'
 session:

@@ -4,13 +4,13 @@
 	<meta charset="UTF-8">
 	<title><?php $this->block('page_title'); ?><?php $this->endblock(); ?></title>
 
-	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $data->uri['media.path']; ?>images/favicon.ico" />
+	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $data->uri->path; ?>/media/images/favicon.ico" />
 	<meta name="generator" content="Windwalker Framework" />
 	<?php $this->block('meta'); ?>
 	<?php $this->endblock(); ?>
 
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?php echo $data->uri['media.path']; ?>css/main.css" />
+	<link rel="stylesheet" href="<?php echo $data->uri->path; ?>/media/css/main.css" />
 	<?php $this->block('style'); ?>
 	<?php $this->endblock(); ?>
 

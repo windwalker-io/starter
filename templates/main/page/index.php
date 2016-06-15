@@ -1,5 +1,5 @@
 <?php
-$root = $data->uri->get('base.path');
+$root = $data->uri->root;
 
 $this->extend('_global.html');
 ?>

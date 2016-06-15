@@ -19,7 +19,6 @@
         "twig/twig" : "~1.0"
     },
     "require-dev": {
-        "windwalker/phpunit-skeleton-generator": "2.*"
     },
     "autoload": {
         "psr-4": {
@@ -33,7 +32,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master" : "2.1-dev"
+            "dev-master" : "3.x-dev"
         }
     }
 }

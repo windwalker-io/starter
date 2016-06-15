@@ -12,7 +12,7 @@ use Windwalker\Core\Console\WindwalkerConsole;
 use Windwalker\Core\Provider;
 use Windwalker\DI\ServiceProviderInterface;
 use Windwalker\Registry\Registry;
-use Windwalker\Windwalker;
+use Windwalker\Core\WindwalkerTrait;
 
 /**
  * The WindwalkerConsole class.
@@ -29,7 +29,7 @@ class Application extends WindwalkerConsole
 	protected function initialise()
 	{
 		// Prepare system paths, we'll write all path constants into config.
-		Windwalker::prepareSystemPath($this->config);
+		WindwalkerTrait::prepareSystemPath($this->config);
 
 		parent::initialise();
 	}
@@ -47,7 +47,7 @@ class Application extends WindwalkerConsole
 		 * If you want a provider can be used in every applications (for example: Web and Console),
 		 * set it in Windwalker\Windwalker object.
 		 */
-		$providers = array_merge(parent::loadProviders(), Windwalker::loadProviders());
+		$providers = array_merge(parent::loadProviders(), WindwalkerTrait::loadProviders());
 
 		/*
 		 * Default Providers:
@@ -106,7 +106,7 @@ class Application extends WindwalkerConsole
 		 * If you want a package can be use in every applications (for example: Web and Console),
 		 * set it in Windwalker\Windwalker object.
 		 */
-		$packages = Windwalker::loadPackages();
+		$packages = WindwalkerTrait::loadPackages();
 
 		/*
 		 * Get Packages for This Application
@@ -151,6 +151,6 @@ class Application extends WindwalkerConsole
 	 */
 	protected function loadConfiguration($config)
 	{
-		Windwalker::loadConfiguration($this->config);
+		WindwalkerTrait::loadConfiguration($this->config);
 	}
 }

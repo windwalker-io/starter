@@ -19,7 +19,7 @@ include_once $autoload;
 include_once __DIR__ . '/../etc/define.php';
 
 // Get allow remote ips from config.
-\Windwalker\Windwalker::loadConfiguration($config = new \Windwalker\Registry\Registry);
+\Windwalker\Core\WindwalkerTrait::loadConfiguration($config = new \Windwalker\Registry\Registry);
 
 if (isset($_SERVER['HTTP_CLIENT_IP']) || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
 	|| !(in_array(@$_SERVER['REMOTE_ADDR'], (array) $config->get('dev.allow_ips'))))
