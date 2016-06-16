@@ -8,16 +8,14 @@
 
 namespace Main\View\Page;
 
-use Windwalker\Core\View\BladeHtmlView;
-use Windwalker\Core\View\PhpHtmlView;
-use Windwalker\Core\View\TwigHtmlView;
+use Windwalker\Core\View\HtmlView;
 
 /**
  * Class PageHtmlView
  *
- * @since 1.0
+ * @since 1.0 
  */
-class PageHtmlView extends PhpHtmlView
+class PageHtmlView extends HtmlView
 {
 	/**
 	 * prepareData

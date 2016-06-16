@@ -8,14 +8,14 @@
 
 namespace Main\Controller\Page;
 
-use Windwalker\Core\Controller\Controller;
+use Windwalker\Core\Controller\AbstractController;
 
 /**
  * Class Get
  *
  * @since 1.0
  */
-class GetController extends Controller
+class GetController extends AbstractController
 {
 	/**
 	 * Execute the controller.

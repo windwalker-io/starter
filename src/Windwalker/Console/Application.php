@@ -26,12 +26,12 @@ class Application extends WindwalkerConsole
 	 *
 	 * @return  void
 	 */
-	protected function initialise()
+	protected function init()
 	{
 		// Prepare system paths, we'll write all path constants into config.
 		WindwalkerTrait::prepareSystemPath($this->config);
 
-		parent::initialise();
+		parent::init();
 	}
 
 	/**
