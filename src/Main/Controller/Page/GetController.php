@@ -8,8 +8,10 @@
 
 namespace Main\Controller\Page;
 
-use Windwalker\Core\Cache\CacheFactory;
 use Windwalker\Core\Controller\AbstractController;
+use Windwalker\Core\Controller\Middleware\JsonFormatMiddleware;
+use Windwalker\Core\Controller\Traits\HtmlResponseTrait;
+use Windwalker\Core\Controller\Traits\JsonResponseTrait;
 
 /**
  * Class Get
@@ -18,6 +20,12 @@ use Windwalker\Core\Controller\AbstractController;
  */
 class GetController extends AbstractController
 {
+	use JsonResponseTrait;
+
+	protected $middlewares = [
+		JsonFormatMiddleware::class
+	];
+	
 	/**
 	 * Execute the controller.
 	 *
@@ -31,9 +39,6 @@ class GetController extends AbstractController
 	{
 		$view = $this->getView();
 
-		$cache = CacheFactory::getInstance()->create('test', 'file');
-		$cache->set('qwe', 'abc');
-
-		return $view->setLayout('index')->render();
+		return $view->getHandledData();
 	}
 }

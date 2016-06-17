@@ -54,14 +54,4 @@ class Application extends WebApplication
 	protected function postExecute()
 	{
 	}
-
-	/**
-	 * loadRoutingConfiguration
-	 *
-	 * @return  mixed
-	 */
-	protected function loadRoutingConfiguration()
-	{
-		return WindwalkerTrait::loadRouting();
-	}
 }

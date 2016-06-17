@@ -38,6 +38,7 @@ return ArrayHelper::merge(
 		],
 
 		'middlewares' => [
+			\Windwalker\Core\Application\Middleware\SessionRaiseMiddleware::class,
 			\Windwalker\Core\Application\Middleware\RoutingMiddleware::class
 		],
 
