@@ -8,6 +8,7 @@
 
 namespace Main\View\Page;
 
+use Windwalker\Core\Renderer\RendererHelper;
 use Windwalker\Core\View\HtmlView;
 
 /**
@@ -17,6 +18,8 @@ use Windwalker\Core\View\HtmlView;
  */
 class PageHtmlView extends HtmlView
 {
+	protected $renderer = RendererHelper::ENGINE_EDGE;
+
 	/**
 	 * prepareData
 	 *

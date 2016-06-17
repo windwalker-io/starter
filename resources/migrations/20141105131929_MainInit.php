@@ -7,8 +7,8 @@
  */
 
 use Windwalker\Core\Migration\AbstractMigration;
-use Windwalker\Core\Migration\Schema;
 use Windwalker\Database\Schema\Column;
+use Windwalker\Database\Schema\Schema;
 
 /**
  * Migration class, version: 20141105131929
@@ -20,13 +20,13 @@ class MainInit extends AbstractMigration
 	 */
 	public function up()
 	{
-		$this->getTable('main_cover', function(Schema $schema)
+		$this->createTable('main_cover', function(Schema $schema)
 		{
-			$schema->addColumn('id',    new Column\Primary)->comment('Primary Key');
-			$schema->addColumn('title', new Column\Varchar)->comment('Primary Key');
-			$schema->addColumn('text',  new Column\Text)->comment('Content Text');
-			$schema->addColumn('state', new Column\Integer)->signed(true)->comment('0: unpublished, 1: published');
-		})->create(true);
+			$schema->primary('id')->comment('Primary Key');
+			$schema->varchar('title')->comment('Primary Key');
+			$schema->text('text')->comment('Content Text');
+			$schema->integer('state')->signed(true)->comment('0: unpublished, 1: published');
+		});
 	}
 
 	/**
@@ -34,6 +34,6 @@ class MainInit extends AbstractMigration
 	 */
 	public function down()
 	{
-		$this->drop('acme_cover');
+		$this->drop('main_cover');
 	}
 }

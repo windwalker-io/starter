@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <title>@yield('page_title')</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ $uri['media.path'] }}images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ $uri->path }}/media/images/favicon.ico" />
     <meta name="generator" content="Windwalker Framework" />
     @yield('meta')
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ $uri['media.path'] }}css/main.css" />
+    <link rel="stylesheet" href="{{ $uri->path }}/media/css/main.css" />
     @yield('style')
 
     <script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
@@ -47,7 +47,7 @@
     @show
 
     @section('message')
-        {!! \Windwalker\Core\Widget\WidgetHelper::render('windwalker.message.default', array('flashes' => $flashes)) !!}
+        @messages()
     @show
 
     @yield('content', 'Content')

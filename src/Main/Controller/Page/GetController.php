@@ -8,6 +8,7 @@
 
 namespace Main\Controller\Page;
 
+use Windwalker\Core\Cache\CacheFactory;
 use Windwalker\Core\Controller\AbstractController;
 
 /**
@@ -29,6 +30,9 @@ class GetController extends AbstractController
 	protected function doExecute()
 	{
 		$view = $this->getView();
+
+		$cache = CacheFactory::getInstance()->create('test', 'file');
+		$cache->set('qwe', 'abc');
 
 		return $view->setLayout('index')->render();
 	}

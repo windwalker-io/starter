@@ -7,7 +7,7 @@ Acme Page
 
 @section('nav')
     @parent
-    <li><a href="{{ $uri['base.path'] }}cover">Cover</a></li>
+    <li><a href="{{ $uri->path }}cover">Cover</a></li>
 @stop
 
 @section('content')
