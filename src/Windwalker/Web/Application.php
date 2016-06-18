@@ -27,6 +27,13 @@ class Application extends WebApplication
 	protected $name = 'web';
 
 	/**
+	 * Property configPath.
+	 *
+	 * @var  string
+	 */
+	protected $configPath = WINDWALKER_ETC . '/app';
+
+	/**
 	 * initialise
 	 *
 	 * @return  void
