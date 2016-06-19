@@ -28,7 +28,7 @@ class CoverModel extends Model
 	{
 		try
 		{
-			return with(new DataMapper('main_cover'))->findOne(array('id' => 1));
+			return (new DataMapper('main_cover'))->findOne(array('id' => 1));
 		}
 		catch (\RuntimeException $e)
 		{

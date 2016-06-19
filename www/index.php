@@ -17,4 +17,8 @@ include_once $autoload;
 
 include_once __DIR__ . '/../etc/define.php';
 
-(new \Windwalker\Web\Application)->execute();
+$app = new \Windwalker\Web\Application;
+
+define('WINDWALKER_DEBUG', $app->get('system.debug'));
+
+$app->execute();

@@ -8,9 +8,11 @@
 
 namespace Windwalker\Web;
 
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Symfony\Component\Yaml\Yaml;
 use Windwalker\Debugger\DebuggerPackage;
 use Windwalker\DI\ServiceProviderInterface;
+use Windwalker\Environment\WebEnvironment;
 use Windwalker\Registry\Registry;
 use Windwalker\Core\Provider;
 use Windwalker\Core\WindwalkerTrait;
@@ -27,79 +29,23 @@ class DevApplication extends Application
 	 *
 	 * @var  string
 	 */
-	public $mode = 'dev';
+	protected $name = 'dev';
 
 	/**
-	 * loadProviders
+	 * Class constructor.
 	 *
-	 * @return  ServiceProviderInterface[]
+	 * @param   Request        $request       An optional argument to provide dependency injection for the Http request object.
+	 * @param   Registry       $config        An optional argument to provide dependency injection for the application's
+	 *                                        config object.
+	 * @param   WebEnvironment $environment   An optional argument to provide dependency injection for the application's
+	 *                                        environment object.
+	 *
+	 * @since   2.0
 	 */
-	public static function loadProviders()
+	public function __construct(Request $request = null, Registry $config = null, WebEnvironment $environment = null)
 	{
-		/*
-		 * Get Global Providers
-		 * -----------------------------------------
-		 * If you want a provider can be used in every applications (for example: Web and Console),
-		 * set it in Windwalker\Windwalker object.
-		 */
-		$providers = array_merge(parent::loadProviders(), WindwalkerTrait::loadProviders());
+		parent::__construct($request, $config, $environment);
 
-		// Custom Providers here...
-
-		return $providers;
-	}
-
-	/**
-	 * getPackages
-	 *
-	 * @return  array
-	 */
-	public static function loadPackages()
-	{
-		/*
-		 * Get Global Packages
-		 * -----------------------------------------
-		 * If you want a package can be used in every applications (for example: Web and Console),
-		 * set it in Windwalker\Windwalker object.
-		 */
-		$packages = array_merge(parent::loadPackages(), WindwalkerTrait::loadPackages());
-
-		/*
-		 * Get Packages for This Application
-		 * -----------------------------------------
-		 * If you want a package only use in this application or want to override a global package,
-		 * set it here. Example: $packages[] = new Flower\FlowerPackage;
-		 */
-
-		// Your packages here...
-		$packages['_debugger'] = new DebuggerPackage;
-
-		return $packages;
-	}
-
-	/**
-	 * loadConfiguration
-	 *
-	 * @param Registry $config
-	 *
-	 * @return  void
-	 */
-	protected function loadConfiguration(Registry $config)
-	{
-		parent::loadConfiguration($config);
-
-		$config->loadFile(WINDWALKER_ETC . '/dev/config.yml', 'yaml');
-	}
-
-	/**
-	 * loadRoutingConfiguration
-	 *
-	 * @return  array
-	 */
-	protected function loadRoutingConfiguration()
-	{
-		$routes = parent::loadRoutingConfiguration();
-
-		return array_merge($routes, Yaml::parse(file_get_contents(WINDWALKER_ETC . '/dev/routing.yml')));
+		$this->boot();
 	}
 }

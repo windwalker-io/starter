@@ -33,13 +33,13 @@ return ArrayHelper::merge(
 
 		'routing' => [
 			'files' => [
-				WINDWALKER_ETC . '/routing.yml'
+				'web' => WINDWALKER_ETC . '/routing.yml'
 			]
 		],
 
 		'middlewares' => [
-			\Windwalker\Core\Application\Middleware\SessionRaiseMiddleware::class,
-			\Windwalker\Core\Application\Middleware\RoutingMiddleware::class
+			1000 => \Windwalker\Core\Application\Middleware\SessionRaiseMiddleware::class,
+			900  => \Windwalker\Core\Application\Middleware\RoutingMiddleware::class
 		],
 
 		'configs' => [

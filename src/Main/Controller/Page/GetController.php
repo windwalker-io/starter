@@ -12,6 +12,8 @@ use Windwalker\Core\Controller\AbstractController;
 use Windwalker\Core\Controller\Middleware\JsonFormatMiddleware;
 use Windwalker\Core\Controller\Traits\HtmlResponseTrait;
 use Windwalker\Core\Controller\Traits\JsonResponseTrait;
+use Windwalker\Core\Model\Exception\ValidateFailException;
+use Windwalker\Core\Utilities\Debug\BacktraceHelper;
 
 /**
  * Class Get
@@ -20,10 +22,10 @@ use Windwalker\Core\Controller\Traits\JsonResponseTrait;
  */
 class GetController extends AbstractController
 {
-	use JsonResponseTrait;
+	use HtmlResponseTrait;
 
 	protected $middlewares = [
-		JsonFormatMiddleware::class
+//		JsonFormatMiddleware::class
 	];
 	
 	/**
@@ -39,6 +41,6 @@ class GetController extends AbstractController
 	{
 		$view = $this->getView();
 
-		return $view->getHandledData();
+		return $view->setLayout('index');
 	}
 }
