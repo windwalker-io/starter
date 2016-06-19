@@ -18,7 +18,7 @@ use Windwalker\Core\View\HtmlView;
  */
 class PageHtmlView extends HtmlView
 {
-	protected $renderer = RendererHelper::ENGINE_EDGE;
+	protected $renderer = RendererHelper::ENGINE_PHP;
 
 	/**
 	 * prepareData

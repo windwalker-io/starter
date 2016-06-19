@@ -5,17 +5,19 @@
     <meta charset="UTF-8">
     <title>@yield('page_title')</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ $uri->path }}/media/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ $uri->path }}/asset/images/favicon.ico" />
     <meta name="generator" content="Windwalker Framework" />
     @yield('meta')
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ $uri->path }}/media/css/main.css" />
+    <link rel="stylesheet" href="{{ $uri->path }}/asset/css/main.css" />
+    {!! $asset->renderStyles(true) !!}
     @yield('style')
 
     <script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     @yield('script')
+    {!! $asset->renderScripts(true) !!}
 </head>
 <body>
     @section('navbar')
@@ -68,5 +70,7 @@
         </div>
     </div>
     @show
+
+{!! $asset->getTemplate()->renderTemplates() !!}
 </body>
 </html>

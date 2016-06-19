@@ -4,20 +4,22 @@
 	<meta charset="UTF-8">
 	<title><?php $this->block('page_title'); ?><?php $this->endblock(); ?></title>
 
-	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $data->uri->path; ?>/media/images/favicon.ico" />
+	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $data->uri->path; ?>/asset/images/favicon.ico" />
 	<meta name="generator" content="Windwalker Framework" />
 	<?php $this->block('meta'); ?>
 	<?php $this->endblock(); ?>
 
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?php echo $data->uri->path; ?>/media/css/main.css" />
+	<link rel="stylesheet" href="<?php echo $data->uri->path; ?>/asset/css/main.css" />
 	<?php $this->block('style'); ?>
 	<?php $this->endblock(); ?>
+    <?php echo $data->asset->renderStyles(true); ?>
 
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<?php $this->block('script'); ?>
 	<?php $this->endblock(); ?>
+    <?php echo $data->asset->renderScripts(true); ?>
 </head>
 <body>
 <?php $this->block('navbar'); ?>
@@ -74,5 +76,6 @@ Contnet
 	</div>
 </div>
 <?php $this->endblock(); ?>
+<?php echo $data->asset->getTemplate()->renderTemplates(); ?>
 </body>
 </html>

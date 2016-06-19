@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <title>{% block page_title %}{% endblock %}</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ uri.media.path }}images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset.path }}/images/favicon.ico" />
     <meta name="generator" content="Windwalker Framework" />
     {% block meta %}
     {% endblock %}
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ uri.media.path }}css/acme/main.css" />
+    <link rel="stylesheet" href="{{ asset.path }}/css/acme/main.css" />
     {% block style %}
     {% endblock %}
+    {{ asset.renderStyles(true) | raw }}
 
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     {% block script %}
     {% endblock %}
+    {{ asset.renderScripts(true) | raw }}
 </head>
 <body>
     {% block navbar %}
@@ -66,5 +68,6 @@
         </div>
     </div>
     {% endblock %}
+{{ asset.getTemplate.renderTemplates() | raw }}
 </body>
 </html>

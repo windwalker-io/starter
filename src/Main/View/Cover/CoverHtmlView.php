@@ -8,15 +8,18 @@
 
 namespace Main\View\Cover;
 
-use Windwalker\Core\View\TwigHtmlView;
+use Windwalker\Core\Renderer\RendererHelper;
+use Windwalker\Core\View\HtmlView;
 
 /**
  * Class PageHtmlView
  *
  * @since 1.0
  */
-class CoverHtmlView extends TwigHtmlView
+class CoverHtmlView extends HtmlView
 {
+	protected $renderer = RendererHelper::ENGINE_TWIG;
+
 	/**
 	 * prepareData
 	 *

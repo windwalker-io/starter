@@ -22,7 +22,7 @@ return [
 	],
 
 	'listeners' => [
-
+		1000 => \Windwalker\Debugger\Listener\Ide\PhpStormMetaListener::class
 	],
 	
 	'path' => [

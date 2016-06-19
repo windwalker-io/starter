@@ -28,7 +28,8 @@ return ArrayHelper::merge(
 			'session'  => \Windwalker\Core\Provider\SessionProvider::class,
 			'auth'     => \Windwalker\Core\Provider\AuthenticationProvider::class,
 			'security' => \Windwalker\Core\Provider\SecurityProvider::class,
-			'datetime' => \Windwalker\Core\Provider\DateTimeProvider::class
+			'datetime' => \Windwalker\Core\Provider\DateTimeProvider::class,
+			'asset'    => \Windwalker\Core\Asset\AssetProvider::class
 		],
 
 		'routing' => [
@@ -46,7 +47,7 @@ return ArrayHelper::merge(
 		],
 
 		'listeners' => [
-
+			
 		]
 	]
 );
