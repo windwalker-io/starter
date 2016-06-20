@@ -26,7 +26,7 @@ return ArrayHelper::merge(
 			'template' => \Windwalker\Core\Provider\TemplateEngineProvider::class,
 			'cache'    => \Windwalker\Core\Provider\CacheProvider::class,
 			'session'  => \Windwalker\Core\Provider\SessionProvider::class,
-			'auth'     => \Windwalker\Core\Provider\AuthenticationProvider::class,
+			'auth'     => \Windwalker\Core\Provider\UserProvider::class,
 			'security' => \Windwalker\Core\Provider\SecurityProvider::class,
 			'datetime' => \Windwalker\Core\Provider\DateTimeProvider::class,
 			'asset'    => \Windwalker\Core\Asset\AssetProvider::class

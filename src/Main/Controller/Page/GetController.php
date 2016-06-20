@@ -8,13 +8,8 @@
 
 namespace Main\Controller\Page;
 
-use Windwalker\Core\Asset\Asset;
 use Windwalker\Core\Controller\AbstractController;
-use Windwalker\Core\Controller\Middleware\JsonFormatMiddleware;
 use Windwalker\Core\Controller\Traits\HtmlResponseTrait;
-use Windwalker\Core\Controller\Traits\JsonResponseTrait;
-use Windwalker\Core\Model\Exception\ValidateFailException;
-use Windwalker\Core\Utilities\Debug\BacktraceHelper;
 
 /**
  * Class Get

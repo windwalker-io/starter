@@ -22,6 +22,13 @@ use Windwalker\Core\WindwalkerTrait;
 class Application extends CoreConsole
 {
 	/**
+	 * Property configPath.
+	 *
+	 * @var  string
+	 */
+	protected $configPath = WINDWALKER_ETC . '/app';
+
+	/**
 	 * initialise
 	 *
 	 * @return  void
@@ -57,6 +64,7 @@ class Application extends CoreConsole
 	 */
 	protected function prepareExecute()
 	{
+		parent::prepareExecute();
 	}
 
 	/**

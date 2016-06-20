@@ -11,15 +11,13 @@
 
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo $data->uri->path; ?>/asset/css/main.css" />
-	<?php $this->block('style'); ?>
-	<?php $this->endblock(); ?>
-    <?php echo $data->asset->renderStyles(true); ?>
+	<?php $this->block('style'); ?><?php $this->endblock(); ?>
+<?php echo $data->asset->renderStyles(true); ?>
 
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<?php $this->block('script'); ?>
-	<?php $this->endblock(); ?>
-    <?php echo $data->asset->renderScripts(true); ?>
+	<?php $this->block('script'); ?><?php $this->endblock(); ?>
+<?php echo $data->asset->renderScripts(true); ?>
 </head>
 <body>
 <?php $this->block('navbar'); ?>
