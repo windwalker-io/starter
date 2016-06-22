@@ -39,7 +39,6 @@ return ArrayHelper::merge(
 		],
 
 		'middlewares' => [
-//			1000 => \Windwalker\Core\Application\Middleware\ErrorHandlingMiddleware::class,
 			900  => \Windwalker\Core\Application\Middleware\SessionRaiseMiddleware::class,
 			800  => \Windwalker\Core\Application\Middleware\RoutingMiddleware::class,
 		],

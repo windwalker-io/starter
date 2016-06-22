@@ -18,7 +18,7 @@ use Windwalker\Core\View\HtmlView;
  */
 class CoverView extends HtmlView
 {
-	protected $renderer = RendererHelper::TWIG;
+	protected $renderer = RendererHelper::EDGE;
 
 	/**
 	 * prepareData

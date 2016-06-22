@@ -1,14 +1,22 @@
-{% extends '_global/html.twig' %}
+@extends('_global.html')
 
-{% block style %}
-<link rel="stylesheet" href="{{ asset.path }}/css/acme/cover.css" />
-{% endblock %}
+@section('style')
+<link rel="stylesheet" href="{{ $asset->path }}/css/acme/cover.css" />
+@stop
 
-{% block page_title %}Acme Cover{% endblock %}
+@section('page_title')
+    Acme Cover
+@stop()
 
-{% block navbar %}{% endblock %}
+@section('navbar')
+@stop
 
-{% block body %}
+@section('content')
+    <style>
+        body {
+            padding: 0;
+        }
+    </style>
     <div class="site-wrapper">
 
         <div class="site-wrapper-inner">
@@ -19,31 +27,32 @@
                     <div class="inner">
                         <h3 class="masthead-brand">Windwalker Cover Theme</h3>
                         <ul class="nav masthead-nav">
-                            <li><a href="{{ router.html('home') }}">Home</a></li>
+                            <li><a href="{{ $route->encode('home') }}">Home</a></li>
                             <li class="active"><a href="#">Cover</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="inner cover">
-                    {% if  not content.isNull() %}
-                        <h2>{{ content.title }}</h2>
+                    @if (!$content->title)
+
+                        <h2>{{ $content->title }}</h2>
                         <p>
-                            {{ content.text|raw }}
+                            {!! $content->text !!}
                         </p>
                         <p>
                             Congrats, you imported schema success. You can run this command to rollback:
 
-                        <pre class="text-left"><code class="bash">$ php bin/console migration migrate 0</code></pre>
+                            <pre class="text-left"><code class="bash">$ php bin/console migration migrate 0</code></pre>
                         </p>
-                    {% else %}
+                    @else
                         <h1>You havn't import DB content</h1>
                         <p>
                             Please run this command:
 
                             <pre class="text-left"><code class="bash">$ php bin/console migration migrate --seed</code></pre>
                         </p>
-                    {% endif %}
+                    @endif
                 </div>
 
                 <div class="mastfoot">
@@ -57,6 +66,7 @@
         </div>
 
     </div>
-{% endblock %}
+@stop
 
-{% block copyright %}{% endblock %}
+@section('copyright')
+@stop

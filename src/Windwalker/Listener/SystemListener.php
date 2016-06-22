@@ -8,8 +8,10 @@
 
 namespace Windwalker\Listener;
 
+use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\View\HtmlView;
 use Windwalker\Event\Event;
+use Windwalker\Http\Response\HtmlResponse;
 
 /**
  * The SystemListener class.
@@ -21,6 +23,25 @@ use Windwalker\Event\Event;
 class SystemListener
 {
 	/**
+	 * onAfterInitialise
+	 *
+	 * @param Event $event
+	 *
+	 * @return  void
+	 */
+	public function onAfterInitialise(Event $event)
+	{
+		/** @var WebApplication $app */
+		$app = $event['app'];
+
+		// Remove index.php
+		if ($app->uri->script == 'index.php')
+		{
+			$app->uri->script = null;
+		}
+	}
+
+	/**
 	 * onBeforeRouting
 	 *
 	 * @param Event $event
@@ -29,6 +50,7 @@ class SystemListener
 	 */
 	public function onBeforeRouting(Event $event)
 	{
+		/** @var WebApplication $app */
 		$app = $event['app'];
 
 		if ($app->get('system.offline', false))
@@ -37,7 +59,7 @@ class SystemListener
 
 			$view->setLayout('windwalker.offline.offline');
 
-			echo $view->render();
+			$app->server->getOutput()->respond(new HtmlResponse((string) $view));
 
 			die;
 		}
