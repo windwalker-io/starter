@@ -1,8 +1,10 @@
 system:
-    debug: 1
-    error_reporting: -1
+    debug: 0
+    error_reporting: 0
     timezone: 'UTC'
     secret: 'This-token-is-not-safe'
+error:
+    template: windwalker.error.default
 session:
     handler: native
     expire_time: 15

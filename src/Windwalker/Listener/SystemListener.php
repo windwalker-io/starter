@@ -8,7 +8,7 @@
 
 namespace Windwalker\Listener;
 
-use Windwalker\Core\View\PhpHtmlView;
+use Windwalker\Core\View\HtmlView;
 use Windwalker\Event\Event;
 
 /**
@@ -27,13 +27,13 @@ class SystemListener
 	 *
 	 * @return  void
 	 */
-	public function onRegisterRouting(Event $event)
+	public function onBeforeRouting(Event $event)
 	{
 		$app = $event['app'];
 
 		if ($app->get('system.offline', false))
 		{
-			$view = new PhpHtmlView;
+			$view = new HtmlView;
 
 			$view->setLayout('windwalker.offline.offline');
 

@@ -16,7 +16,7 @@ return ArrayHelper::merge(
 		],
 
 		'providers' =>[
-
+			'error' => \Windwalker\Core\Provider\WhoopsProvider::class,
 		],
 
 		'routing' => [

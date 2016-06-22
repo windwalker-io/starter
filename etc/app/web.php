@@ -17,7 +17,7 @@ return ArrayHelper::merge(
 
 		'providers' =>[
 			'web'      => \Windwalker\Core\Provider\WebProvider::class,
-			'whoops'   => \Windwalker\Core\Provider\WhoopsProvider::class,
+			'error'    => \Windwalker\Core\Error\ErrorHandlingProvider::class,
 			'logger'   => \Windwalker\Core\Provider\LoggerProvider::class,
 			'event'    => \Windwalker\Core\Provider\EventProvider::class,
 			'database' => \Windwalker\Core\Provider\DatabaseProvider::class,
@@ -39,15 +39,16 @@ return ArrayHelper::merge(
 		],
 
 		'middlewares' => [
-			1000 => \Windwalker\Core\Application\Middleware\SessionRaiseMiddleware::class,
-			900  => \Windwalker\Core\Application\Middleware\RoutingMiddleware::class
+//			1000 => \Windwalker\Core\Application\Middleware\ErrorHandlingMiddleware::class,
+			900  => \Windwalker\Core\Application\Middleware\SessionRaiseMiddleware::class,
+			800  => \Windwalker\Core\Application\Middleware\RoutingMiddleware::class,
 		],
 
 		'configs' => [
 		],
 
 		'listeners' => [
-			
+			500 => \Windwalker\Listener\SystemListener::class
 		]
 	]
 );
