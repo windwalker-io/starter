@@ -6,7 +6,7 @@
  * @license    GNU Lesser General Public License version 3 or later. see LICENSE
  */
 
-namespace Main\View\Page;
+namespace Main\View\Cover;
 
 use Windwalker\Core\Renderer\RendererHelper;
 use Windwalker\Core\View\HtmlView;
@@ -14,11 +14,11 @@ use Windwalker\Core\View\HtmlView;
 /**
  * Class PageHtmlView
  *
- * @since 1.0 
+ * @since 1.0
  */
-class PageHtmlView extends HtmlView
+class CoverView extends HtmlView
 {
-	protected $renderer = RendererHelper::ENGINE_PHP;
+	protected $renderer = RendererHelper::TWIG;
 
 	/**
 	 * prepareData
@@ -31,3 +31,4 @@ class PageHtmlView extends HtmlView
 	{
 	}
 }
+ 

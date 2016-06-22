@@ -23,7 +23,7 @@ return ArrayHelper::merge(
 			'database' => \Windwalker\Core\Provider\DatabaseProvider::class,
 			'router'   => \Windwalker\Core\Provider\RouterProvider::class,
 			'lang'     => \Windwalker\Core\Provider\LanguageProvider::class,
-			'template' => \Windwalker\Core\Provider\TemplateEngineProvider::class,
+			'template' => \Windwalker\Core\Provider\RendererProvider::class,
 			'cache'    => \Windwalker\Core\Provider\CacheProvider::class,
 			'session'  => \Windwalker\Core\Provider\SessionProvider::class,
 			'auth'     => \Windwalker\Core\Provider\UserProvider::class,

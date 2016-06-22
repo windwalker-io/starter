@@ -13,7 +13,9 @@ return [
 
 	'providers' =>[
 		'logger' => \Windwalker\Core\Provider\LoggerProvider::class,
-		'event'  => \Windwalker\Core\Provider\EventProvider::class
+		'event'  => \Windwalker\Core\Provider\EventProvider::class,
+		'mailer' => \Windwalker\Core\Mailer\MailerProvider::class,
+		'swiftmailer' => \Windwalker\Core\Mailer\SwiftMailerProvider::class
 	],
 
 	'configs' => [

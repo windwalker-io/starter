@@ -9,7 +9,6 @@
 namespace Main\Controller\Page;
 
 use Windwalker\Core\Controller\AbstractController;
-use Windwalker\Core\Controller\Traits\HtmlResponseTrait;
 
 /**
  * Class Get
@@ -18,12 +17,6 @@ use Windwalker\Core\Controller\Traits\HtmlResponseTrait;
  */
 class GetController extends AbstractController
 {
-	use HtmlResponseTrait;
-
-	protected $middlewares = [
-//		JsonFormatMiddleware::class
-	];
-	
 	/**
 	 * Execute the controller.
 	 *
@@ -37,6 +30,6 @@ class GetController extends AbstractController
 	{
 		$view = $this->getView();
 
-		return $view->setLayout('index');
+		return $view->setLayout('index')->render();
 	}
 }
