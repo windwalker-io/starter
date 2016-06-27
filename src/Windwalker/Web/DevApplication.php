@@ -9,13 +9,9 @@
 namespace Windwalker\Web;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Symfony\Component\Yaml\Yaml;
-use Windwalker\Debugger\DebuggerPackage;
-use Windwalker\DI\ServiceProviderInterface;
 use Windwalker\Environment\WebEnvironment;
 use Windwalker\Registry\Registry;
 use Windwalker\Core\Provider;
-use Windwalker\Core\WindwalkerTrait;
 
 /**
  * The DevApplication class.

@@ -53,7 +53,7 @@ class SystemListener
 		/** @var WebApplication $app */
 		$app = $event['app'];
 
-		if ($app->get('system.offline', false))
+		if ($app->get('system.offline', false) && !$app->get('system.debug'))
 		{
 			$view = new HtmlView;
 

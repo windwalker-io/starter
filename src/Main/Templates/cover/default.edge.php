@@ -27,7 +27,7 @@
                     <div class="inner">
                         <h3 class="masthead-brand">Windwalker Cover Theme</h3>
                         <ul class="nav masthead-nav">
-                            <li><a href="{{ $route->encode('home') }}">Home</a></li>
+                            <li><a href="{{ $router->route('home') }}">Home</a></li>
                             <li class="active"><a href="#">Cover</a></li>
                         </ul>
                     </div>

@@ -10,7 +10,6 @@ namespace Windwalker\Web;
 
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\Provider;
-use Windwalker\Core\WindwalkerTrait;
 
 /**
  * Class Application

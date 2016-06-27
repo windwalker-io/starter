@@ -10,9 +10,6 @@ namespace Windwalker\Console;
 
 use Windwalker\Core\Console\CoreConsole;
 use Windwalker\Core\Provider;
-use Windwalker\DI\ServiceProviderInterface;
-use Windwalker\Registry\Registry;
-use Windwalker\Core\WindwalkerTrait;
 
 /**
  * The WindwalkerConsole class.

@@ -7,7 +7,6 @@
  */
 
 use Windwalker\Core\Pagination\PaginationResult;
-use Windwalker\Core\Router\Router;
 use Windwalker\Data\Data;
 
 /**

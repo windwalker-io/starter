@@ -29,7 +29,7 @@ class GetController extends AbstractController
 	protected function doExecute()
 	{
 		$view = $this->getView();
-
+		
 		return $view->setLayout('index')->render();
 	}
 }

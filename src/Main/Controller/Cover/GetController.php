@@ -9,7 +9,7 @@
 namespace Main\Controller\Cover;
 
 use Main\Model\CoverModel;
-use Main\View\Cover\CoverView;
+use Main\View\Cover\CoverHtmlView;
 use Windwalker\Core\Controller\AbstractController;
 
 /**
@@ -36,7 +36,7 @@ class GetController extends AbstractController
 
 		$content = $model->getContent();
 
-		$view = new CoverView;
+		$view = new CoverHtmlView;
 
 		return $view->set('content', $content)->render();
 	}
