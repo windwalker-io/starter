@@ -25,11 +25,10 @@ return ArrayHelper::merge(
 			'datetime' => \Windwalker\Core\Provider\DateTimeProvider::class
 		],
 
-		'commends' => [
-			'asset'     => \Windwalker\Core\Asset\Command\AssetCommand::class,
-			'migration' => \Windwalker\Core\Migration\Command\MigrationCommand::class,
-			'seed'      => \Windwalker\Core\Seeder\Command\SeedCommand::class,
-			'package'   => \Windwalker\Core\Package\Command\PackageCommand::class
+		'console' => [
+			'commends' => [
+				
+			]
 		],
 
 		'configs' => [
