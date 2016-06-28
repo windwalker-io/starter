@@ -7,7 +7,7 @@ system:
 
     # The system working mode.
     # - prod: Production mode, will block migration tools to protect your database.
-    # - dev: Development mode, will allow some danger operations.
+    # - dev: Development mode, will allow some dangerous operations.
     mode: prod
 
     # Default system timezone.

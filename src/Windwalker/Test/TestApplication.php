@@ -8,6 +8,7 @@
 
 namespace Windwalker\Test;
 
+use Windwalker\Session\Test\Mock\MockArrayBridge;
 use Windwalker\Web\Application;
 
 /**
@@ -17,4 +18,25 @@ use Windwalker\Web\Application;
  */
 class TestApplication extends Application
 {
+	/**
+	 * Property name.
+	 *
+	 * @var  string
+	 */
+	protected $name = 'test';
+
+	/**
+	 * initialise
+	 *
+	 * @return  void
+	 */
+	protected function init()
+	{
+		parent::init();
+
+		$this->boot();
+
+		$session = $this->session;
+		$session->setBridge(new MockArrayBridge);
+	}
 }
