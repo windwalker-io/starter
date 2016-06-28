@@ -43,14 +43,14 @@
                         <p>
                             Congrats, you imported schema success. You can run this command to rollback:
 
-                            <pre class="text-left"><code class="bash">$ php bin/console migration migrate 0</code></pre>
+                            <pre class="text-left"><code class="bash">$ php windwlaker migration migrate 0</code></pre>
                         </p>
                     @else
                         <h1>You havn't import DB content</h1>
                         <p>
                             Please run this command:
 
-                            <pre class="text-left"><code class="bash">$ php bin/console migration migrate --seed</code></pre>
+                            <pre class="text-left"><code class="bash">$ php windwlaker migration migrate --seed</code></pre>
                         </p>
                     @endif
                 </div>

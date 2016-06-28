@@ -32,12 +32,14 @@ class GetController extends AbstractController
 	 */
 	public function doExecute()
 	{
-		$model = new CoverModel;
+		/** @var CoverModel $model */
+		$model = $this->getModel();
 
-		$content = $model->getContent();
+		/** @var CoverHtmlView $view */
+		$view = $this->getView();
 
-		$view = new CoverHtmlView;
+		$view->setModel($model);
 
-		return $view->set('content', $content)->render();
+		return $view->render();
 	}
 }
