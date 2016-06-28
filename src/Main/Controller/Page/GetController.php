@@ -8,7 +8,9 @@
 
 namespace Main\Controller\Page;
 
+use Symfony\Component\Yaml\Yaml;
 use Windwalker\Core\Controller\AbstractController;
+use Windwalker\Registry\RegistryHelper;
 
 /**
  * Class Get
@@ -29,7 +31,7 @@ class GetController extends AbstractController
 	protected function doExecute()
 	{
 		$view = $this->getView();
-		
+
 		return $view->setLayout('index')->render();
 	}
 }

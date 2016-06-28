@@ -97,9 +97,6 @@ return ArrayHelper::merge(include __DIR__ . '/web.php', [
 	 * You can add a class name by `'foo' => \Namespace\MyListener::class` or new an object.
 	 * We also support callable, use `'onEventName' => ['Class', 'method]` to add callback.
 	 *
-	 * Closure is not support here because Windwalker config handler will convert it to scalar type,
-	 * But you can add closure as listener in runtime: `Ioc::getDispatcher()->listen('event', {Closure})`.
-	 *
 	 * If you want to add priority to control the execution ordering of listeners, use array to config it.
 	 * Example: 'foo' => ['class' => MyListener::class, 'priority' => 300, 'enabled' => boolean]
 	 */
