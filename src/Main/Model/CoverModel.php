@@ -9,6 +9,8 @@
 namespace Main\Model;
 
 use Windwalker\Core\Model\Model;
+use Windwalker\Core\Model\ModelRepositoryInterface;
+use Windwalker\Core\Model\Traits\ModelRepositoryTrait;
 use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
 
@@ -17,8 +19,17 @@ use Windwalker\DataMapper\DataMapper;
  *
  * @since 1.0
  */
-class CoverModel extends Model
+class CoverModel extends Model implements ModelRepositoryInterface
 {
+	use ModelRepositoryTrait;
+
+	/**
+	 * Property table.
+	 *
+	 * @var  string
+	 */
+	protected $table = 'main_cover';
+
 	/**
 	 * getContent
 	 *
@@ -26,13 +37,6 @@ class CoverModel extends Model
 	 */
 	public function getContent()
 	{
-		try
-		{
-			return (new DataMapper('main_cover'))->findOne(array('id' => 1));
-		}
-		catch (\RuntimeException $e)
-		{
-			return new Data;
-		}
+		$this->getDataMapper()->findOne(array('id' => 1));
 	}
 }
