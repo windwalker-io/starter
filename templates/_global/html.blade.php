@@ -40,7 +40,7 @@
                      @show
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    {{-- <li class="pull-right"><a href="{{ $uri['base.path'] }}admin">Admin</a></li> --}}
+                    {{-- <li class="pull-right"><a href="{{ $uri->path }}/admin">Admin</a></li> --}}
                 </ul>
             </div>
             <!--/.nav-collapse -->

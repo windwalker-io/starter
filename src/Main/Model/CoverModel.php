@@ -8,14 +8,14 @@
 
 namespace Main\Model;
 
-use Windwalker\Core\Model\DatabaseDatabaseModelRepository;
+use Windwalker\Core\Model\DatabaseModelRepository;
 
 /**
  * Class CoverModel
  *
  * @since 1.0
  */
-class CoverModel extends DatabaseDatabaseModelRepository
+class CoverModel extends DatabaseModelRepository
 {
 	/**
 	 * Property table.
