@@ -8,21 +8,15 @@
 
 namespace Main\Model;
 
-use Windwalker\Core\Model\Model;
-use Windwalker\Core\Model\ModelRepositoryInterface;
-use Windwalker\Core\Model\Traits\ModelRepositoryTrait;
-use Windwalker\Data\Data;
-use Windwalker\DataMapper\DataMapper;
+use Windwalker\Core\Model\DatabaseDatabaseModelRepository;
 
 /**
  * Class CoverModel
  *
  * @since 1.0
  */
-class CoverModel extends Model implements ModelRepositoryInterface
+class CoverModel extends DatabaseDatabaseModelRepository
 {
-	use ModelRepositoryTrait;
-
 	/**
 	 * Property table.
 	 *
