@@ -10,7 +10,6 @@ namespace Main\Controller\Page;
 
 use Symfony\Component\Yaml\Yaml;
 use Windwalker\Core\Controller\AbstractController;
-use Windwalker\Registry\RegistryHelper;
 
 /**
  * Class Get
