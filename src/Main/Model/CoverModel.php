@@ -8,7 +8,7 @@
 
 namespace Main\Model;
 
-use Windwalker\Core\Model\Model;
+use Windwalker\Core\Model\ModelRepository;
 use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
 
@@ -17,7 +17,7 @@ use Windwalker\DataMapper\DataMapper;
  *
  * @since 1.0
  */
-class CoverModel extends Model
+class CoverModel extends ModelRepository
 {
 	/**
 	 * getContent

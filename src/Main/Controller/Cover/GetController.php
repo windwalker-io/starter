@@ -36,7 +36,7 @@ class GetController extends AbstractController
 
 		$content = $model->getContent();
 
-		$view = new CoverHtmlView;
+		$view = $this->getView();
 
 		return $view->set('content', $content)->render();
 	}
