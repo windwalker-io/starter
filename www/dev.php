@@ -11,7 +11,7 @@ $autoload = __DIR__ . '/../vendor/autoload.php';
 
 if (!is_file($autoload))
 {
-	exit();
+	exit('Please run `composer install` First.');
 }
 
 include_once $autoload;

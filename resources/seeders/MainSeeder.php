@@ -9,11 +9,11 @@
 use Windwalker\Core\Seeder\AbstractSeeder;
 
 /**
- * The DatabaseSeeder class.
+ * The MainSeeder class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class DatabaseSeeder extends AbstractSeeder
+class MainSeeder extends AbstractSeeder
 {
 	/**
 	 * doExecute
@@ -36,23 +36,20 @@ class DatabaseSeeder extends AbstractSeeder
 
 			$mapper->createOne($data);
 
-			$this->command->out('.', false);
+			$this->outCounting();
 		}
-		// Example seeder end.
 
+		// Example seeder end.
 		$this->command->out()->out('Seeder executed.')->out();
 	}
 
 	/**
-	 * doClean
+	 * doClear
 	 *
 	 * @return  void
 	 */
-	public function doClean()
+	public function doClear()
 	{
 		$this->truncate('main_cover');
-
-		$this->command->out('Database clean.')->out();
 	}
 }
- 

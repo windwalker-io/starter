@@ -3,7 +3,7 @@
     "description": "Windwalker Starter.",
     "homepage": "https://github.com/ventoviro/windwalker",
     "license": "GNU Lesser General Public License",
-    "minimum-stability": "beta",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Simon Asika",
@@ -11,14 +11,8 @@
         }
     ],
     "require": {
-        "windwalker/core" : "~2.0",
-        "symfony/yaml" : "~2.0",
-        "fzaninotto/faker": "~1.0",
-        "monolog/monolog": "~1.0",
-        "filp/whoops": "~2.0",
-        "swiftmailer/swiftmailer": "5.*",
-
-        "twig/twig" : "~1.0"
+        "windwalker/core" : "~3.0",
+        "fzaninotto/faker": "~1.0"
     },
     "require-dev": {
     },

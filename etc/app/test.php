@@ -9,11 +9,11 @@
 use Windwalker\Utilities\ArrayHelper;
 
 /*
- * Windwalker Console Config
+ * Windwalker Web Dev Config
  * -------------------------------------
- * Things you config here will be used in console environment.
+ * Things you config here will be used in web environment with dev mode.
  */
-return ArrayHelper::merge(include __DIR__ . '/windwalker.php', [
+return ArrayHelper::merge(include __DIR__ . '/web.php', [
 	/*
 	 * Package Registration
 	 * -------------------------------------
@@ -23,7 +23,7 @@ return ArrayHelper::merge(include __DIR__ . '/windwalker.php', [
 	 * you registered here.
 	 */
 	'packages' => [
-		'system' => \Windwalker\SystemPackage\SystemPackage::class,
+
 	],
 
 	/*
@@ -42,29 +42,35 @@ return ArrayHelper::merge(include __DIR__ . '/windwalker.php', [
 	 *       break your system.
 	 */
 	'providers' =>[
-		//'console'  => \Windwalker\Core\Provider\ConsoleProvider::class,
-		//'logger'   => \Windwalker\Core\Provider\LoggerProvider::class,
-		//'event'    => \Windwalker\Core\Provider\EventProvider::class,
-		//'database' => \Windwalker\Core\Provider\DatabaseProvider::class,
-		//'lang'     => \Windwalker\Core\Provider\LanguageProvider::class,
-		//'cache'    => \Windwalker\Core\Provider\CacheProvider::class,
-		//'datetime' => \Windwalker\Core\Provider\DateTimeProvider::class
+		'error' => false,
 	],
 
 	/*
-	 * Register Commands
+	 * Register Routing Files
 	 * -------------------------------------
-	 * Add your own command object or class here.
-	 *
-	 * Uncomment below to override core commands.
+	 * If you have more routing files, please add them here. You can also override
+	 * core routing files, use same key name to override it.
 	 */
-	'console' => [
-		'commends' => [
-			//'asset'     => \Windwalker\Core\Asset\Command\AssetCommand::class,
-			//'migration' => \Windwalker\Core\Migration\Command\MigrationCommand::class,
-			//'seed'      => \Windwalker\Core\Seeder\Command\SeedCommand::class,
-			//'package'   => \Windwalker\Core\Package\Command\PackageCommand::class
+	'routing' => [
+		'files' => [
+			// Add something here...
 		]
+	],
+
+	/*
+	 * Http Middlewares
+	 * -------------------------------------
+	 * Register middlewares to Application, these middleware will execute one by one
+	 * and wrap the core process that you can add your logic before and after main
+	 * execution code.
+	 *
+	 * Use numeric key name to control the execution ordering, the biggest number will
+	 * execute first, and the smaller number will nearer to core logic.
+	 *
+	 * Uncomment the line below to override core middlewares.
+	 */
+	'middlewares' => [
+		// Add something here...
 	],
 
 	/*
@@ -77,7 +83,8 @@ return ArrayHelper::merge(include __DIR__ . '/windwalker.php', [
 	 * will be the latest file and override all configs.
 	 */
 	'configs' => [
-		// Add something here...
+		// Add dev config
+		200 => WINDWALKER_ETC . '/dev/config.yml'
 	],
 
 	/*
