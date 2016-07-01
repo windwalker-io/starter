@@ -12,11 +12,11 @@
     <meta charset="UTF-8">
     <title>Offline</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo $data->asset->path; ?>/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo $asset->path; ?>/images/favicon.ico" />
     <meta name="generator" content="Windwalker Framework" />
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo $data->asset->path; ?>/css/main.css" />
+    <link rel="stylesheet" href="<?php echo $asset->path; ?>/css/main.css" />
 
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -30,7 +30,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?php echo $data->uri->full; ?>">
+            <a class="navbar-brand" href="<?php echo $uri->full; ?>">
                 <img src="https://cloud.githubusercontent.com/assets/1639206/2870854/176b987a-d2e4-11e3-8be6-9f70304a8499.png" alt="Windwalker LOGO" />
             </a>
         </div>

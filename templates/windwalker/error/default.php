@@ -7,7 +7,6 @@
  */
 
 /** @var $exception Exception */
-$exception = $data->exception;
 ?>
 <style>
 	body {

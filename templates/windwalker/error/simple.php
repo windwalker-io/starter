@@ -7,6 +7,5 @@
  */
 
 /** @var $exception Exception */
-$exception = $data->exception;
 
 echo $exception->getMessage();
