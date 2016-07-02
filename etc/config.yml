@@ -5,11 +5,6 @@ system:
     # The PHP error reporting level, 0 is hide all errors, -1 is the biggest report level.
     error_reporting: 0
 
-    # The system working mode.
-    # - prod: Production mode, will block migration tools to protect your database.
-    # - dev: Development mode, will allow some dangerous operations.
-    mode: prod
-
     # Default system timezone.
     timezone: 'UTC'
 
@@ -65,9 +60,6 @@ language:
 
     # Dfault languaghe file format, you can use other foramt in runtime by `Translator::loadFile($file, 'yaml')`
     format: ini
-
-    # The global language file path.
-    path: resources/languages
 
 console:
     # Custom script, add some commends here to batch execute. Example:
