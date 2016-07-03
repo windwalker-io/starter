@@ -22,25 +22,7 @@ class MainSeeder extends AbstractSeeder
 	 */
 	public function doExecute()
 	{
-		$faker = \Faker\Factory::create();
-
-		// This is example seeder, you can delete it.
-		$mapper = new \Windwalker\DataMapper\DataMapper('main_cover');
-
-		foreach (range(1, 50) as $i)
-		{
-			$data = new \Windwalker\Data\Data;
-			$data->title = $faker->sentence(2);
-			$data->text = $faker->paragraph(3);
-			$data->state = $faker->randomElement(array(0, 1, 1));
-
-			$mapper->createOne($data);
-
-			$this->outCounting();
-		}
-
-		// Example seeder end.
-		$this->command->out()->out('Seeder executed.')->out();
+		$this->execute(CoverSeeder::class);
 	}
 
 	/**
@@ -50,6 +32,6 @@ class MainSeeder extends AbstractSeeder
 	 */
 	public function doClear()
 	{
-		$this->truncate('main_cover');
+		$this->clear(CoverSeeder::class);
 	}
 }
