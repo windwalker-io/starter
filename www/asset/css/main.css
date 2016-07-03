@@ -1,0 +1,16 @@
+/**
+ * Part of starter project. 
+ *
+ * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
+ * @license    GNU General Public License version 2 or later;
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+	padding-top: 50px;
+	padding-bottom: 20px;
+}
+.navbar-brand img {
+	height: 35px;
+	margin-top: -8px;
+}

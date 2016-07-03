@@ -1,7 +1,2 @@
-# System
-*
-!/.gitignore
-!/css
-!/images
-!/js
-
+# Write your own ignores here
+/flower
