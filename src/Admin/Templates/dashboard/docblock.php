@@ -21,8 +21,7 @@ defined('WINDWALKER') or die('Forbidden');
  *
  * View variables
  * --------------------------------------------------------------
- * @var $item  \Flower\Record\Traits\DashboardDataTrait
- * @var $state \Windwalker\Registry\Registry
+ * @var $state \Windwalker\Structure\Structure
  */
 
 $state = null;
