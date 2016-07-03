@@ -81,5 +81,5 @@ console:
             - git pull
             - composer install
             - php windwalker migration migrate
-            - php windwalker phoenix asset makesum
-            - php windwalker run prepare
+            - php windwalker asset makesum
+            - php windwalker run prepare --ansi
