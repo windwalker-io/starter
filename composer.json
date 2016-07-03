@@ -1,9 +1,9 @@
 {
-    "name": "windwalker/starter",
-    "description": "Windwalker Starter.",
-    "homepage": "https://github.com/ventoviro/windwalker",
+    "name": "lyrasoft/earth",
+    "description": "Home Land of LYRASOFT",
+    "homepage": "https://github.com/lyrasoft/earth",
     "license": "GNU Lesser General Public License",
-    "minimum-stability": "dev",
+    "minimum-stability": "beta",
     "authors": [
         {
             "name": "Simon Asika",

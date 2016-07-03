@@ -21,7 +21,6 @@ return [
 	 * you registered here.
 	 */
 	'packages' => [
-		'main'    => \Main\MainPackage::class,
 		'phoenix' => \Phoenix\PhoenixPackage::class,
 		'unidev'  => \Lyrasoft\Unidev\UnidevPackage::class,
 		'warder'  => \Lyrasoft\Warder\WarderPackage::class,
