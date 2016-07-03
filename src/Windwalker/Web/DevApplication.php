@@ -10,7 +10,7 @@ namespace Windwalker\Web;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Windwalker\Environment\WebEnvironment;
-use Windwalker\Registry\Registry;
+use Windwalker\Structure\Structure;
 use Windwalker\Core\Provider;
 
 /**
@@ -31,14 +31,14 @@ class DevApplication extends Application
 	 * Class constructor.
 	 *
 	 * @param   Request        $request       An optional argument to provide dependency injection for the Http request object.
-	 * @param   Registry       $config        An optional argument to provide dependency injection for the application's
+	 * @param   Structure      $config        An optional argument to provide dependency injection for the application's
 	 *                                        config object.
 	 * @param   WebEnvironment $environment   An optional argument to provide dependency injection for the application's
 	 *                                        environment object.
 	 *
 	 * @since   2.0
 	 */
-	public function __construct(Request $request = null, Registry $config = null, WebEnvironment $environment = null)
+	public function __construct(Request $request = null, Structure $config = null, WebEnvironment $environment = null)
 	{
 		parent::__construct($request, $config, $environment);
 

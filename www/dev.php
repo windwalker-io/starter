@@ -18,7 +18,7 @@ include_once $autoload;
 
 include_once __DIR__ . '/../etc/define.php';
 
-$config = new \Windwalker\Registry\Registry;
+$config = new \Windwalker\Structure\Structure;
 $secret = WINDWALKER_ETC . '/secret.yml';
 
 if (is_file($secret))
