@@ -8,10 +8,10 @@
 
 use Lyrasoft\Luna\Table\LunaTable;
 use Windwalker\Core\Migration\AbstractMigration;
-use Windwalker\Core\Migration\Schema;
 use Windwalker\Database\Schema\Column;
 use Windwalker\Database\Schema\DataType;
 use Windwalker\Database\Schema\Key;
+use Windwalker\Database\Schema\Schema;
 
 /**
  * Migration class of TagInit.
@@ -23,34 +23,34 @@ class TagInit extends AbstractMigration
 	 */
 	public function up()
 	{
-		$this->getTable(LunaTable::TAGS, function(Schema $sc)
+		$this->createTable(LunaTable::TAGS, function(Schema $sc)
 		{
-			$sc->addColumn('id',          new Column\Primary)->comment('Primary Key');
-			$sc->addColumn('title',       new Column\Varchar)->comment('Title');
-			$sc->addColumn('alias',       new Column\Varchar)->comment('Alias');
-			$sc->addColumn('state',       new Column\Tinyint)->signed(true)->comment('0: unpublished, 1:published');
-			$sc->addColumn('created',     new Column\Datetime)->comment('Created Date');
-			$sc->addColumn('created_by',  new Column\Integer)->comment('Author');
-			$sc->addColumn('modified',    new Column\Datetime)->comment('Modified Date');
-			$sc->addColumn('modified_by', new Column\Integer)->comment('Modified User');
-			$sc->addColumn('language',    new Column\Char)->length(7)->comment('Language');
-			$sc->addColumn('params',      new Column\Text)->comment('Params');
+			$sc->primary('id')->comment('Primary Key');
+			$sc->varchar('title')->comment('Title');
+			$sc->varchar('alias')->comment('Alias');
+			$sc->tinyint('state')->signed(true)->comment('0: unpublished, 1:published');
+			$sc->datetime('created')->comment('Created Date');
+			$sc->integer('created_by')->comment('Author');
+			$sc->datetime('modified')->comment('Modified Date');
+			$sc->integer('modified_by')->comment('Modified User');
+			$sc->char('language')->length(7)->comment('Language');
+			$sc->text('params')->comment('Params');
 
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_tags_alias', 'alias');
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_tags_language', 'language');
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_tags_created_by', 'created_by');
-		})->create(true);
+			$sc->addIndex('alias');
+			$sc->addIndex('language');
+			$sc->addIndex('created_by');
+		});
 
-		$this->getTable(LunaTable::TAG_MAPS, function(Schema $sc)
+		$this->createTable(LunaTable::TAG_MAPS, function(Schema $sc)
 		{
-			$sc->addColumn('tag_id',    new Column\Integer)->comment('Tag ID');
-			$sc->addColumn('target_id', new Column\Integer)->comment('Target ID');
-			$sc->addColumn('type',      new Column\Varchar)->comment('Type');
+			$sc->integer('tag_id')->comment('Tag ID');
+			$sc->integer('target_id')->comment('Target ID');
+			$sc->varchar('type')->comment('Type');
 
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_tag_maps_tag_id', 'tag_id');
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_tag_maps_target_id', 'target_id');
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_tag_maps_type', 'type');
-		})->create(true);
+			$sc->addIndex('tag_id');
+			$sc->addIndex('target_id');
+			$sc->addIndex('type');
+		});
 	}
 
 	/**
@@ -58,6 +58,7 @@ class TagInit extends AbstractMigration
 	 */
 	public function down()
 	{
-		$this->drop(LunaTable::TAGS)->drop(LunaTable::TAG_MAPS);
+		$this->drop(LunaTable::TAGS)
+			->drop(LunaTable::TAG_MAPS);
 	}
 }

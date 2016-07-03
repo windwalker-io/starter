@@ -8,17 +8,22 @@
 
 namespace Main\Model;
 
-use Windwalker\Core\Model\Model;
-use Windwalker\Data\Data;
-use Windwalker\DataMapper\DataMapper;
+use Windwalker\Core\Model\DatabaseModelRepository;
 
 /**
  * Class CoverModel
  *
  * @since 1.0
  */
-class CoverModel extends Model
+class CoverModel extends DatabaseModelRepository
 {
+	/**
+	 * Property table.
+	 *
+	 * @var  string
+	 */
+	protected $table = 'main_cover';
+
 	/**
 	 * getContent
 	 *
@@ -26,13 +31,6 @@ class CoverModel extends Model
 	 */
 	public function getContent()
 	{
-		try
-		{
-			return with(new DataMapper('main_cover'))->findOne(array('id' => 1));
-		}
-		catch (\RuntimeException $e)
-		{
-			return new Data;
-		}
+		$this->getDataMapper()->findOne(array('id' => 1));
 	}
 }

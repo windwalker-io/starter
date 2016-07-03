@@ -28,11 +28,7 @@ class LanguageSeeder extends AbstractSeeder
 	 */
 	public function doExecute()
 	{
-		$mapper = new LanguageMapper;
-
-		$mapper->updateAll(array('state' => 1), array('code' => array('zh-TW', 'ja-JP')));
-
-		$this->command->out();
+		LanguageMapper::updateBatch(['state' => 1], ['code' => ['zh-TW', 'ja-JP']]);
 	}
 
 	/**

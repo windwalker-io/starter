@@ -14,7 +14,8 @@ use Windwalker\Core\DateTime\DateTime;
 use Windwalker\Core\Seeder\AbstractSeeder;
 use Windwalker\Data\Data;
 use Windwalker\Filter\OutputFilter;
-use Windwalker\Warder\Admin\DataMapper\UserMapper;
+use Lyrasoft\Warder\Admin\DataMapper\UserMapper;
+use Lyrasoft\Warder\Helper\WarderHelper;
 
 /**
  * The CommentSeeder class.
@@ -32,16 +33,11 @@ class CommentSeeder extends AbstractSeeder
 	{
 		$faker = Factory::create();
 
-		$mapper = new CommentMapper;
-		$articleMapper = new ArticleMapper;
+		$articleIds = ArticleMapper::findAll()->id;
 
-		$articleIds = $articleMapper->findAll()->id;
-
-		if (\Windwalker\Warder\Helper\WarderHelper::tableExists('users'))
+		if (WarderHelper::tableExists('users'))
 		{
-			$userMapper = new UserMapper;
-
-			$userIds = $userMapper->findAll()->id;
+			$userIds = UserMapper::findAll()->id;
 		}
 		else
 		{
@@ -61,21 +57,19 @@ class CommentSeeder extends AbstractSeeder
 				$data['content']     = $faker->paragraph(5);
 				$data['reply']       = $faker->paragraph(3);
 				$data['reply_user_id'] = $faker->randomElement($userIds);
-				$data['created']     = $faker->dateTime->format(DateTime::FORMAT_SQL);
+				$data['created']     = $faker->dateTime->format(DateTime::getSqlFormat());
 				$data['created_by']  = $faker->randomElement($userIds);
-				$data['modified']    = $faker->dateTime->format(DateTime::FORMAT_SQL);
+				$data['modified']    = $faker->dateTime->format(DateTime::getSqlFormat());
 				$data['modified_by'] = $faker->randomElement($userIds);
 				$data['ordering']    = $i;
 				$data['state']       = 1;
 				$data['params']      = '';
 
-				$mapper->createOne($data);
+				CommentMapper::createOne($data);
 
-				$this->command->out('.', false);
+				$this->outCounting();
 			}
 		}
-
-		$this->command->out();
 	}
 
 	/**

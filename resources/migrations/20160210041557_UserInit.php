@@ -7,10 +7,11 @@
  */
 
 use Windwalker\Core\Migration\AbstractMigration;
-use Windwalker\Core\Migration\Schema;
 use Windwalker\Database\Schema\Column;
 use Windwalker\Database\Schema\DataType;
 use Windwalker\Database\Schema\Key;
+use Windwalker\Database\Schema\Schema;
+use Lyrasoft\Warder\Table\WarderTable;
 
 /**
  * Migration class, version: 20160210041557
@@ -22,38 +23,38 @@ class UserInit extends AbstractMigration
 	 */
 	public function up()
 	{
-		$this->getTable('users', function (Schema $sc)
+		$this->createTable(WarderTable::USERS, function (Schema $sc)
 		{
-			$sc->addColumn('id',         new Column\Primary)->comment('Primary Key');
-			$sc->addColumn('name',       new Column\Varchar)->comment('Full Name');
-			$sc->addColumn('username',   new Column\Varchar)->comment('Login name');
-			$sc->addColumn('email',      new Column\Varchar)->comment('Email');
-			$sc->addColumn('password',   new Column\Varchar)->comment('Password');
-			$sc->addColumn('avatar',     new Column\Varchar)->comment('Avatar');
-			$sc->addColumn('group',      new Column\Varchar)->comment('Group');
-			$sc->addColumn('blocked',    new Column\Tinyint)->comment('0: normal, 1: blocked');
-			$sc->addColumn('activation', new Column\Varchar)->comment('Activation code.');
-			$sc->addColumn('reset_token', new Column\Varchar)->comment('Reset Token');
-			$sc->addColumn('last_reset', new Column\Datetime)->comment('Last Reset Time');
-			$sc->addColumn('last_login', new Column\Datetime)->comment('Last Login Time');
-			$sc->addColumn('registered', new Column\Datetime)->comment('Register Time');
-			$sc->addColumn('modified',   new Column\Datetime)->comment('Modified Time');
-			$sc->addColumn('params',     new Column\Varchar)->comment('Params');
+			$sc->primary('id')->comment('Primary Key');
+			$sc->varchar('name')->comment('Full Name');
+			$sc->varchar('username')->comment('Login name');
+			$sc->varchar('email')->comment('Email');
+			$sc->varchar('password')->comment('Password');
+			$sc->varchar('avatar')->comment('Avatar');
+			$sc->varchar('group')->comment('Group');
+			$sc->tinyint('blocked')->comment('0: normal, 1: blocked');
+			$sc->varchar('activation')->comment('Activation code.');
+			$sc->varchar('reset_token')->comment('Reset Token');
+			$sc->datetime('last_reset')->comment('Last Reset Time');
+			$sc->datetime('last_login')->comment('Last Login Time');
+			$sc->datetime('registered')->comment('Register Time');
+			$sc->datetime('modified')->comment('Modified Time');
+			$sc->varchar('params')->comment('Params');
 
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_users_name', 'id');
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_users_username', 'username');
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_users_email', 'email');
-		})->create(true);
+			$sc->addIndex('id');
+			$sc->addIndex('username');
+			$sc->addIndex('email');
+		});
 
-		$this->getTable('user_socials', function (Schema $sc)
+		$this->createTable(WarderTable::USER_SOCIALS, function (Schema $sc)
 		{
-			$sc->addColumn('user_id',    new Column\Integer)->comment('User ID');
-			$sc->addColumn('identifier', new Column\Varchar)->comment('User identifier name');
-			$sc->addColumn('provider',   new Column\Char)->length(15)->comment('Social provider');
+			$sc->integer('user_id')->comment('User ID');
+			$sc->varchar('identifier')->comment('User identifier name');
+			$sc->char('provider')->length(15)->comment('Social provider');
 
-			$sc->addIndex(Key::TYPE_INDEX, 'user_socials_user_id', 'user_id');
-			$sc->addIndex(Key::TYPE_INDEX, 'user_socials_identifier', 'identifier');
-		})->create(true);
+			$sc->addIndex('user_id');
+			$sc->addIndex('identifier');
+		});
 	}
 
 	/**
@@ -61,7 +62,7 @@ class UserInit extends AbstractMigration
 	 */
 	public function down()
 	{
-		$this->drop('users');
-		$this->drop('user_socials');
+		$this->drop(WarderTable::USERS);
+		$this->drop(WarderTable::USER_SOCIALS);
 	}
 }

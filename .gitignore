@@ -3,12 +3,15 @@
 !.gitignore
 !.gitkeep
 !.htaccess
+!web.config
 
 # Composer
 /vendor
+
+# Remove this line when you start a project
 composer.lock
 
-#Windwalker
+# Windwalker
 /etc/secret.yml
 
 #Test

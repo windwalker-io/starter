@@ -10,14 +10,14 @@ namespace Main\Controller\Cover;
 
 use Main\Model\CoverModel;
 use Main\View\Cover\CoverHtmlView;
-use Windwalker\Core\Controller\Controller;
+use Windwalker\Core\Controller\AbstractController;
 
 /**
  * Class Get
  *
  * @since 2.0
  */
-class GetController extends Controller
+class GetController extends AbstractController
 {
 	/**
 	 * Execute the controller.
@@ -32,12 +32,14 @@ class GetController extends Controller
 	 */
 	public function doExecute()
 	{
-		$model = new CoverModel;
+		/** @var CoverModel $model */
+		$model = $this->getModel();
 
-		$content = $model->getContent();
+		/** @var CoverHtmlView $view */
+		$view = $this->getView();
 
-		$view = new CoverHtmlView;
+		$view->setModel($model);
 
-		return $view->set('content', $content)->render();
+		return $view->render();
 	}
 }

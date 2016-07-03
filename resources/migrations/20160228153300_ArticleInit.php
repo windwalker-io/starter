@@ -8,10 +8,10 @@
 
 use Lyrasoft\Luna\Table\LunaTable;
 use Windwalker\Core\Migration\AbstractMigration;
-use Windwalker\Core\Migration\Schema;
 use Windwalker\Database\Schema\Column;
 use Windwalker\Database\Schema\DataType;
 use Windwalker\Database\Schema\Key;
+use Windwalker\Database\Schema\Schema;
 
 /**
  * Migration class of ArticleInit.
@@ -23,29 +23,29 @@ class ArticleInit extends AbstractMigration
 	 */
 	public function up()
 	{
-		$this->getTable(LunaTable::ARTICLES, function(Schema $sc)
+		$this->createTable(LunaTable::ARTICLES, function(Schema $sc)
 		{
-			$sc->addColumn('id',          new Column\Primary)->comment('Primary Key');
-			$sc->addColumn('category_id', new Column\Integer)->comment('Category ID');
-			$sc->addColumn('title',       new Column\Varchar)->comment('Title');
-			$sc->addColumn('alias',       new Column\Varchar)->comment('Alias');
-			$sc->addColumn('image',       new Column\Varchar)->comment('Main Image');
-			$sc->addColumn('introtext',   new Column\Longtext)->comment('Intro Text');
-			$sc->addColumn('fulltext',    new Column\Longtext)->comment('Full Text');
-			$sc->addColumn('state',       new Column\Tinyint)->signed(true)->comment('0: unpublished, 1:published');
-			$sc->addColumn('ordering',    new Column\Integer)->comment('Ordering');
-			$sc->addColumn('created',     new Column\Datetime)->comment('Created Date');
-			$sc->addColumn('created_by',  new Column\Integer)->comment('Author');
-			$sc->addColumn('modified',    new Column\Datetime)->comment('Modified Date');
-			$sc->addColumn('modified_by', new Column\Integer)->comment('Modified User');
-			$sc->addColumn('language',    new Column\Char)->length(7)->comment('Language');
-			$sc->addColumn('params',      new Column\Text)->comment('Params');
+			$sc->primary('id')->comment('Primary Key');
+			$sc->integer('category_id')->comment('Category ID');
+			$sc->varchar('title')->comment('Title');
+			$sc->varchar('alias')->comment('Alias');
+			$sc->varchar('image')->comment('Main Image');
+			$sc->longtext('introtext')->comment('Intro Text');
+			$sc->longtext('fulltext')->comment('Full Text');
+			$sc->tinyint('state')->signed(true)->comment('0: unpublished, 1:published');
+			$sc->integer('ordering')->comment('Ordering');
+			$sc->datetime('created')->comment('Created Date');
+			$sc->integer('created_by')->comment('Author');
+			$sc->datetime('modified')->comment('Modified Date');
+			$sc->integer('modified_by')->comment('Modified User');
+			$sc->char('language')->length(7)->comment('Language');
+			$sc->text('params')->comment('Params');
 
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_articles_category_id', 'category_id');
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_articles_alias', 'alias');
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_articles_language', 'language');
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_articles_created_by', 'created_by');
-		})->create(true);
+			$sc->addIndex('category_id');
+			$sc->addIndex('alias');
+			$sc->addIndex('language');
+			$sc->addIndex('created_by');
+		});
 	}
 
 	/**

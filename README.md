@@ -1,11 +1,13 @@
-# LYRASOFT Earth
+# Windwalker Starter
 
-![151214-0001](https://cloud.githubusercontent.com/assets/1639206/14016277/15bb757c-f1fa-11e5-8b9c-821cb53d6f2a.jpg)
+![logo](https://cloud.githubusercontent.com/assets/1639206/2870854/176b987a-d2e4-11e3-8be6-9f70304a8499.png)
+
+This is [Windwlaker Framework](https://github.com/ventoviro/windwalker) starter package.
 
 ## Installation Via Composer
 
 ``` bash
-$ php composer.phar create-project lyrasoft/earth your_project 1.*
+$ php composer.phar create-project windwalker/starter windwalker ~3.0
 ```
 
 ## Getting Started
@@ -25,13 +27,13 @@ Copy `etc/secret.dist.yml` to `etc/secret.yml` and fill database information.
 Type this command in your terminal:
 
 ``` bash
-php bin/console
+php windwalker
 ```
 
 You will see console usage:
 
 ```
-Windwalker Console - version: 2.0
+Windwalker Console - version: 3.0
 ------------------------------------------------------------
 
 [console Help]
@@ -61,8 +63,8 @@ Welcome to Windwalker Console.
 ### Import Sample Schema
 
 ``` bash
-php bin/console migration status
-php bin/console migration migrate
+php windwalker migration status
+php windwalker migration migrate --seed
 ```
 
 ## How To Use Windwalker

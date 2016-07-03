@@ -2,21 +2,29 @@
 /**
  * Part of Windwalker project.
  *
- * @copyright  Copyright (C) 2014 - 2015 LYRASOFT. All rights reserved.
- * @license    GNU Lesser General Public License version 3 or later. see LICENSE
+ * @copyright  Copyright (C) 2016 {ORGANIZATION}. All rights reserved.
+ * @license    GNU General Public License version 2 or later.
  */
 
 namespace Main\View\Cover;
 
-use Windwalker\Core\View\TwigHtmlView;
+use Windwalker\Core\Renderer\RendererHelper;
+use Windwalker\Core\View\HtmlView;
 
 /**
- * Class PageHtmlView
+ * The CoverHtmlView class.
  *
- * @since 1.0
+ * @since  {DEPLOY_VERSION}
  */
-class CoverHtmlView extends TwigHtmlView
+class CoverHtmlView extends HtmlView
 {
+	/**
+	 * Property renderer.
+	 *
+	 * @var  string
+	 */
+	protected $renderer = RendererHelper::EDGE;
+
 	/**
 	 * prepareData
 	 *
@@ -26,6 +34,6 @@ class CoverHtmlView extends TwigHtmlView
 	 */
 	protected function prepareData($data)
 	{
+		$data->content = $this->model->getCotent();
 	}
 }
- 

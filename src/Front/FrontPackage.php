@@ -8,17 +8,20 @@
 
 namespace Front;
 
-use Front\Listener\ViewListener;
-use Lyrasoft\Luna\Helper\LunaHelper;
 use Phoenix\Language\TranslatorHelper;
 use Phoenix\Script\BootstrapScript;
 use Symfony\Component\Yaml\Yaml;
 use Windwalker\Core\Package\AbstractPackage;
+use Windwalker\Core\Router\CoreRouter;
 use Windwalker\Debugger\Helper\DebuggerHelper;
 use Windwalker\Event\Dispatcher;
 use Windwalker\Filesystem\File;
 use Windwalker\Filesystem\Folder;
-use Windwalker\Warder\Helper\WarderHelper;
+
+if (!defined('PACKAGE_FRONT_ROOT'))
+{
+	define('PACKAGE_FRONT_ROOT', __DIR__);
+}
 
 /**
  * The FrontPackage class.
@@ -33,9 +36,9 @@ class FrontPackage extends AbstractPackage
 	 * @throws  \LogicException
 	 * @return  void
 	 */
-	public function initialise()
+	public function boot()
 	{
-		parent::initialise();
+		parent::boot();
 	}
 
 	/**
@@ -80,49 +83,30 @@ class FrontPackage extends AbstractPackage
 			{
 				DebuggerHelper::addCustomData('Language Orphans', '<pre>' . TranslatorHelper::getFormattedOrphans() . '</pre>');
 			}
-
-			// Un comment this line, Translator will export all orphans to /cache/language
-			TranslatorHelper::dumpOrphans('ini');
 		}
 
 		return $result;
 	}
 
 	/**
-	 * registerListeners
-	 *
-	 * @param Dispatcher $dispatcher
-	 *
-	 * @return  void
-	 */
-	public function registerListeners(Dispatcher $dispatcher)
-	{
-		parent::registerListeners($dispatcher);
-
-		$dispatcher->addListener(new ViewListener);
-	}
-
-	/**
 	 * loadRouting
 	 *
-	 * @return  mixed
+	 * @param CoreRouter $router
+	 * @param string     $group
+	 *
+	 * @return CoreRouter
 	 */
-	public function loadRouting()
+	public function loadRouting(CoreRouter $router, $group = null)
 	{
-		$routes = parent::loadRouting();
+		$router = parent::loadRouting($router, $group);
 
-		foreach (Folder::files(__DIR__ . '/Resources/routing') as $file)
+		$router->group($group, function (CoreRouter $router)
 		{
-			if (File::getExtension($file) == 'yml')
-			{
-				$routes = array_merge($routes, Yaml::parse(file_get_contents($file)));
-			}
-		}
+			$router->addRouteFromFiles(Folder::files(__DIR__ . '/Resources/routing'), $this->getName());
 
-		// Merge other routes here...
-		$routes = array_merge($routes, WarderHelper::getFrontendRouting());
-		$routes = array_merge($routes, LunaHelper::getFrontendRouting());
+			// Merge other routes here...
+		});
 
-		return $routes;
+		return $router;
 	}
 }

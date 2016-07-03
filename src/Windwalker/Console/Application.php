@@ -8,70 +8,31 @@
 
 namespace Windwalker\Console;
 
-use Windwalker\Core\Console\WindwalkerConsole;
+use Windwalker\Core\Console\CoreConsole;
 use Windwalker\Core\Provider;
-use Windwalker\DI\ServiceProviderInterface;
-use Windwalker\Registry\Registry;
-use Windwalker\Windwalker;
 
 /**
  * The WindwalkerConsole class.
  * 
  * @since  2.1.1
  */
-class Application extends WindwalkerConsole
+class Application extends CoreConsole
 {
+	/**
+	 * Property configPath.
+	 *
+	 * @var  string
+	 */
+	protected $rootPath = WINDWALKER_ROOT;
+
 	/**
 	 * initialise
 	 *
 	 * @return  void
 	 */
-	protected function initialise()
+	protected function init()
 	{
-		// Prepare system paths, we'll write all path constants into config.
-		Windwalker::prepareSystemPath($this->config);
-
-		parent::initialise();
-	}
-
-	/**
-	 * loadProviders
-	 *
-	 * @return  ServiceProviderInterface[]
-	 */
-	public static function loadProviders()
-	{
-		/*
-		 * Get Global Providers
-		 * -----------------------------------------
-		 * If you want a provider can be used in every applications (for example: Web and Console),
-		 * set it in Windwalker\Windwalker object.
-		 */
-		$providers = array_merge(parent::loadProviders(), Windwalker::loadProviders());
-
-		/*
-		 * Default Providers:
-		 * -----------------------------------------
-		 * This is some default service providers, we don't recommend to remove them,
-		 * But you can replace with yours, Make sure all the needed container key has
-		 * registered in your own providers.
-		 */
-		// $providers['event']    = new Provider\EventProvider;
-		// $providers['database'] = new Provider\DatabaseProvider;
-		// $providers['lang']     = new Provider\LanguageProvider;
-		// $providers['cache']    = new Provider\CacheProvider;
-		// $providers['datetime'] = new Provider\DateTimeProvider;
-
-		/*
-		 * Custom Providers:
-		 * -----------------------------------------
-		 * You can add your own providers here. If you installed a 3rd party packages from composer,
-		 * but this package need some init logic, create a service provider to do it and register them here.
-		 */
-
-		// Custom Providers here...
-
-		return $providers;
+		parent::init();
 	}
 
 	/**
@@ -94,39 +55,13 @@ class Application extends WindwalkerConsole
 	}
 
 	/**
-	 * getPackages
-	 *
-	 * @return  array
-	 */
-	public static function loadPackages()
-	{
-		/*
-		 * Get Global Packages
-		 * -----------------------------------------
-		 * If you want a package can be use in every applications (for example: Web and Console),
-		 * set it in Windwalker\Windwalker object.
-		 */
-		$packages = Windwalker::loadPackages();
-
-		/*
-		 * Get Packages for This Application
-		 * -----------------------------------------
-		 * If you want a package only use in this application or want to override a global package,
-		 * set it here. Example: $packages[] = new Flower\FlowerPackage;
-		 */
-
-		// Your packages here...
-
-		return $packages;
-	}
-
-	/**
 	 * Prepare execute hook.
 	 *
 	 * @return  void
 	 */
 	protected function prepareExecute()
 	{
+		parent::prepareExecute();
 	}
 
 	/**
@@ -139,18 +74,5 @@ class Application extends WindwalkerConsole
 	protected function postExecute($result = null)
 	{
 		return $result;
-	}
-
-	/**
-	 * loadConfiguration
-	 *
-	 * @param Registry $config
-	 *
-	 * @throws  \RuntimeException
-	 * @return  void
-	 */
-	protected function loadConfiguration($config)
-	{
-		Windwalker::loadConfiguration($this->config);
 	}
 }

@@ -8,10 +8,10 @@
 
 use Lyrasoft\Luna\Table\LunaTable;
 use Windwalker\Core\Migration\AbstractMigration;
-use Windwalker\Core\Migration\Schema;
 use Windwalker\Database\Schema\Column;
 use Windwalker\Database\Schema\DataType;
 use Windwalker\Database\Schema\Key;
+use Windwalker\Database\Schema\Schema;
 
 /**
  * Migration class of CommentInit.
@@ -23,28 +23,28 @@ class CommentInit extends AbstractMigration
 	 */
 	public function up()
 	{
-		$this->getTable(LunaTable::COMMENTS, function(Schema $sc)
+		$this->createTable(LunaTable::COMMENTS, function(Schema $sc)
 		{
-			$sc->addColumn('id',          new Column\Primary)->comment('Primary Key');
-			$sc->addColumn('target_id',   new Column\Integer)->comment('Target ID');
-			$sc->addColumn('user_id',     new Column\Integer)->comment('User ID');
-			$sc->addColumn('type',        new Column\Varchar)->comment('Type');
-			$sc->addColumn('title',       new Column\Varchar)->comment('Title');
-			$sc->addColumn('content',     new Column\Text)->comment('Content');
-			$sc->addColumn('reply',       new Column\Text)->comment('Reply');
-			$sc->addColumn('reply_user_id', new Column\Integer)->comment('Reply User ID');
-			$sc->addColumn('state',       new Column\Tinyint)->signed(true)->comment('0: unpublished, 1:published');
-			$sc->addColumn('ordering',    new Column\Integer)->comment('Ordering');
-			$sc->addColumn('created',     new Column\Datetime)->comment('Created Date');
-			$sc->addColumn('created_by',  new Column\Integer)->comment('Author');
-			$sc->addColumn('modified',    new Column\Datetime)->comment('Modified Date');
-			$sc->addColumn('modified_by', new Column\Integer)->comment('Modified User');
-			$sc->addColumn('params',      new Column\Text)->comment('Params');
+			$sc->primary('id')->comment('Primary Key');
+			$sc->integer('target_id')->comment('Target ID');
+			$sc->integer('user_id')->comment('User ID');
+			$sc->varchar('type')->comment('Type');
+			$sc->varchar('title')->comment('Title');
+			$sc->text('content')->comment('Content');
+			$sc->text('reply')->comment('Reply');
+			$sc->integer('reply_user_id')->comment('Reply User ID');
+			$sc->tinyint('state')->signed(true)->comment('0: unpublished, 1:published');
+			$sc->integer('ordering')->comment('Ordering');
+			$sc->datetime('created')->comment('Created Date');
+			$sc->integer('created_by')->comment('Author');
+			$sc->datetime('modified')->comment('Modified Date');
+			$sc->integer('modified_by')->comment('Modified User');
+			$sc->text('params')->comment('Params');
 
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_comments_target_id', 'target_id');
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_comments_created_by', 'created_by');
-			$sc->addIndex(Key::TYPE_INDEX, 'idx_comments_replay_user_id', 'reply_user_id');
-		})->create(true);
+			$sc->addIndex('target_id');
+			$sc->addIndex('created_by');
+			$sc->addIndex('reply_user_id');
+		});
 	}
 
 	/**

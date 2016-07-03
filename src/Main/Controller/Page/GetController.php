@@ -8,20 +8,15 @@
 
 namespace Main\Controller\Page;
 
-use Main\View\Page\PageHtmlView;
-use Windwalker\Core\Controller\Controller;
-use Windwalker\Core\View\PhpHtmlView;
-use Windwalker\Utilities\Queue\Priority;
-use Windwalker\Renderer\BladeRenderer;
-use Windwalker\Renderer\PhpRenderer;
-use Windwalker\Renderer\TwigRenderer;
+use Symfony\Component\Yaml\Yaml;
+use Windwalker\Core\Controller\AbstractController;
 
 /**
  * Class Get
  *
  * @since 1.0
  */
-class GetController extends Controller
+class GetController extends AbstractController
 {
 	/**
 	 * Execute the controller.

@@ -11,12 +11,13 @@ use Lyrasoft\Luna\Admin\DataMapper\LanguageMapper;
 use Lyrasoft\Luna\Admin\Record\CategoryRecord;
 use Lyrasoft\Luna\Table\LunaTable;
 use Faker\Factory;
+use Lyrasoft\Unidev\Helper\UnsplashHelper;
 use Windwalker\Core\DateTime\DateTime;
 use Windwalker\Core\Seeder\AbstractSeeder;
 use Windwalker\Data\Data;
 use Windwalker\Filter\OutputFilter;
-use Windwalker\Warder\Admin\DataMapper\UserMapper;
-use Windwalker\Warder\Helper\WarderHelper;
+use Lyrasoft\Warder\Admin\DataMapper\UserMapper;
+use Lyrasoft\Warder\Helper\WarderHelper;
 
 /**
  * The CategorySeeder class.
@@ -74,12 +75,12 @@ class CategorySeeder extends AbstractSeeder
 			$record['alias']       = OutputFilter::stringURLSafe($record['title']);
 			$record['type']        = $faker->randomElement($this->types);
 			$record['description'] = $faker->paragraph(5);
-			$record['image']       = $faker->imageUrl();
+			$record['image']       = UnsplashHelper::getImageUrl();
 			$record['state']       = $faker->randomElement(array(1, 1, 1, 1, 0, 0));
 			$record['version']     = rand(1, 50);
-			$record['created']     = $faker->dateTime->format(DateTime::FORMAT_SQL);
+			$record['created']     = $faker->dateTime->format(DateTime::getSqlFormat());
 			$record['created_by']  = $faker->randomElement($userIds);
-			$record['modified']    = $faker->dateTime->format(DateTime::FORMAT_SQL);
+			$record['modified']    = $faker->dateTime->format(DateTime::getSqlFormat());
 			$record['modified_by'] = $faker->randomElement($userIds);
 			$record['language']    = $lang;
 			$record['params']      = '';
@@ -92,10 +93,8 @@ class CategorySeeder extends AbstractSeeder
 
 			$existsRecordIds[$record['type']][] = $record->id;
 
-			$this->command->out('.', false);
+			$this->outCounting();
 		}
-
-		$this->command->out();
 	}
 
 	/**

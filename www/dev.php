@@ -11,18 +11,24 @@ $autoload = __DIR__ . '/../vendor/autoload.php';
 
 if (!is_file($autoload))
 {
-	exit();
+	exit('Please run `composer install` First.');
 }
 
 include_once $autoload;
 
 include_once __DIR__ . '/../etc/define.php';
 
-// Get allow remote ips from config.
-\Windwalker\Windwalker::loadConfiguration($config = new \Windwalker\Registry\Registry);
+$config = new \Windwalker\Registry\Registry;
+$secret = WINDWALKER_ETC . '/secret.yml';
 
+if (is_file($secret))
+{
+	$config->loadFile($secret);
+}
+
+// Get allow remote ips from config.
 if (isset($_SERVER['HTTP_CLIENT_IP']) || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
-	|| !(in_array(@$_SERVER['REMOTE_ADDR'], (array) $config->get('dev.allow_ips'))))
+	|| !(in_array(@$_SERVER['REMOTE_ADDR'], (array) $config->get('dev.allow_ips', ['127.0.0.1', '::1', 'fe80::1']))))
 {
 	header('HTTP/1.1 403 Forbidden');
 
@@ -30,7 +36,7 @@ if (isset($_SERVER['HTTP_CLIENT_IP']) || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
 }
 
 // Start our application.
-$app = new Windwalker\Web\DevApplication(\Windwalker\Ioc::factory());
+$app = new Windwalker\Web\DevApplication;
 
 define('WINDWALKER_DEBUG', $app->get('system.debug'));
 

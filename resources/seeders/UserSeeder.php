@@ -7,11 +7,14 @@
  */
 
 use Faker\Factory;
+use Windwalker\Core\DateTime\DateTime;
 use Windwalker\Core\Seeder\AbstractSeeder;
 use Windwalker\Crypt\Password;
 use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
-use Windwalker\Warder\Helper\UserHelper;
+use Lyrasoft\Warder\Admin\DataMapper\UserMapper;
+use Lyrasoft\Warder\Helper\UserHelper;
+use Lyrasoft\Warder\Table\WarderTable;
 
 /**
  * The UserSeeder class.
@@ -35,8 +38,6 @@ class UserSeeder extends AbstractSeeder
 		{
 			$data = new Data;
 
-			$mapper = new DataMapper('users');
-
 			$data->name        = $faker->name;
 			$data->username    = $faker->userName;
 			$data->email       = $faker->email;
@@ -46,18 +47,16 @@ class UserSeeder extends AbstractSeeder
 			$data->blocked     = 0;
 			$data->activation  = '';
 			$data->reset_token = '';
-			$data->last_reset  = $faker->dateTime->format('Y-m-d H:i:s');
-			$data->last_login  = $faker->dateTime->format('Y-m-d H:i:s');
-			$data->registered  = $faker->dateTime->format('Y-m-d H:i:s');
-			$data->modified    = $faker->dateTime->format('Y-m-d H:i:s');
+			$data->last_reset  = $faker->dateTime->format(DateTime::getSqlFormat());
+			$data->last_login  = $faker->dateTime->format(DateTime::getSqlFormat());
+			$data->registered  = $faker->dateTime->format(DateTime::getSqlFormat());
+			$data->modified    = $faker->dateTime->format(DateTime::getSqlFormat());
 			$data->params      = '';
 
-			$mapper->createOne($data);
+			UserMapper::createOne($data);
 
-			$this->command->out('.', false);
+			$this->outCounting();
 		}
-
-		$this->command->out();
 	}
 
 	/**
@@ -67,6 +66,6 @@ class UserSeeder extends AbstractSeeder
 	 */
 	public function doClean()
 	{
-		$this->truncate('users');
+		$this->truncate(WarderTable::USERS);
 	}
 }

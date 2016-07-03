@@ -1,22 +1,73 @@
 system:
-    debug: 0
+    # Enanle debug mode, will disable cache, and log some errors.
+    debug: false
+
+    # The PHP error reporting level, 0 is hide all errors, -1 is the biggest report level.
     error_reporting: 0
+
+    # Default system timezone.
     timezone: 'UTC'
-    secret: 00460c4b9bf32da8f9cec434c27eca30
+
+    # Secret code will be a salt to generate hashs when system running,
+    # Will be replace when Windwalker installation.
+    secret: 'This-token-is-not-safe'
+
+error:
+    # The error template & renderer engine
+    template: windwalker.error.default
+    engine: php
+
 session:
+    # Session handler, supports `native`, `database`, `apc`, `memcached`
     handler: native
+    # By minutes
     expire_time: 15
+
 routing:
-    debug: 0
+    # Enable routing debug, if route key not found when you generate routs,
+    # will raise error and stop application.
+    debug: 1
+
+    # Simple routing help us auto find controller by URL: `{package}/{controller}` without routing config,
+    # Disable this function will enhance performance.
+    simple_route: true
+
 cache:
-    enabled: 0
+    # Disabled cache will make all cache as null storage and not stored to storage.
+    # But you can use CacheFactory::createCache('mycache') to ignore this settings.
+    enabled: false
+
+    # The default sotrage, you can use other storages by use `CacheManager::getCache('name', 'storage')`
+    # Support storages: file / raw_file / memcached / null / redis / array / runtime_array
     storage: file
-    handler: serialize
-    dir: cache
+
+    # Cache serializer decided how to serialize and store data into storage.
+    # Support serializers: php / json / string / raw
+    serializer: php
+
+    # Cache time (minutes)
     time: 15
+
 language:
-    debug: 0
+    # Language debug will mark untranslated string by `??` and stored orphan in Languages object.
+    debug: false
+
+    # The current locale
     locale: en-GB
+
+    # The default locale, if translated string in current locale not found, will fallback to default locale.
     default: en-GB
+
+    # Dfault languaghe file format, you can use other foramt in runtime by `Translator::loadFile($file, 'yaml')`
     format: ini
-    path: resources/languages
+
+console:
+    # Custom script, add some commends here to batch execute. Example:
+    # script:
+    #     foo:
+    #         - git pull
+    #         - composer install
+    #         - php windwalker migration migrate
+    #
+    # Then just run `$ php windwalker run foo`
+    script: ~

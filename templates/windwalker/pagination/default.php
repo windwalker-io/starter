@@ -7,16 +7,11 @@
  */
 
 use Windwalker\Core\Pagination\PaginationResult;
-use Windwalker\Core\Router\Router;
-use Windwalker\Data\Data;
 
 /**
- * @var Data             $data
  * @var PaginationResult $pagination
- * @var string           $route
+ * @var callable         $route
  */
-$pagination = $data->pagination;
-$route = $data->route;
 ?>
 <style>
 	.pagination .glyphicon {

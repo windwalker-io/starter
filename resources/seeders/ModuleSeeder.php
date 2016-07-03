@@ -7,13 +7,15 @@
  */
 
 use Lyrasoft\Luna\Admin\DataMapper\ModuleMapper;
+use Lyrasoft\Luna\Module\ModuleHelper;
 use Lyrasoft\Luna\Table\LunaTable;
 use Faker\Factory;
 use Windwalker\Core\DateTime\DateTime;
 use Windwalker\Core\Seeder\AbstractSeeder;
 use Windwalker\Data\Data;
 use Windwalker\Filter\OutputFilter;
-use Windwalker\Warder\Admin\DataMapper\UserMapper;
+use Lyrasoft\Warder\Admin\DataMapper\UserMapper;
+use Lyrasoft\Warder\Helper\WarderHelper;
 
 /**
  * The ModuleSeeder class.
@@ -31,13 +33,9 @@ class ModuleSeeder extends AbstractSeeder
 	{
 		$faker = Factory::create();
 
-		$mapper = new ModuleMapper;
-
-		if (\Windwalker\Warder\Helper\WarderHelper::tableExists('users'))
+		if (WarderHelper::tableExists('users'))
 		{
-			$userMapper = new UserMapper;
-
-			$userIds = $userMapper->findAll()->id;
+			$userIds = UserMapper::findAll()->id;
 		}
 		else
 		{
@@ -46,7 +44,7 @@ class ModuleSeeder extends AbstractSeeder
 
 		$positions = $faker->words(20);
 
-		$types = \Lyrasoft\Luna\Module\ModuleHelper::getModuleTypes()->dump();
+		$types = ModuleHelper::getModuleTypes()->dump();
 
 		foreach (range(1, 75) as $i)
 		{
@@ -62,20 +60,18 @@ class ModuleSeeder extends AbstractSeeder
 			$data['note']        = $faker->sentence(5);
 			$data['content']     = $faker->paragraph(5);
 			$data['state']       = $faker->randomElement(array(1, 1, 1, 1, 0, 0));
-			$data['created']     = $faker->dateTime->format(DateTime::FORMAT_SQL);
+			$data['created']     = $faker->dateTime->format(DateTime::getSqlFormat());
 			$data['created_by']  = $faker->randomElement($userIds);
-			$data['modified']    = $faker->dateTime->format(DateTime::FORMAT_SQL);
+			$data['modified']    = $faker->dateTime->format(DateTime::getSqlFormat());
 			$data['modified_by'] = $faker->randomElement($userIds);
 			$data['ordering']    = $i;
 			$data['language']    = 'en-GB';
 			$data['params']      = '';
 
-			$mapper->createOne($data);
+			ModuleMapper::createOne($data);
 
-			$this->command->out('.', false);
+			$this->outCounting();
 		}
-
-		$this->command->out();
 	}
 
 	/**

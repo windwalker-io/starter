@@ -1,11 +1,11 @@
 system:
-    debug: 1
+    debug: true
     error_reporting: -1
-    offline: 0
+    offline: false
 cache:
-    enabled: 0
+    enabled: false
     time: 15
 routing:
-    debug: 0
+    debug: false
 language:
-    debug: 1
+    debug: true

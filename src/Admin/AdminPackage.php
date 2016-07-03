@@ -8,27 +8,19 @@
 
 namespace Admin;
 
-use Lyrasoft\Luna\Helper\LunaHelper;
-use Phoenix\Asset\Asset;
-use Phoenix\DataMapper\DataMapperResolver;
+use Lyrasoft\Warder\Helper\UserHelper;
 use Phoenix\Language\TranslatorHelper;
-use Phoenix\Record\RecordResolver;
 use Phoenix\Script\BootstrapScript;
-use Phoenix\Uri\Uri;
-use Symfony\Component\Yaml\Yaml;
+use Windwalker\Core\Asset\Asset;
 use Windwalker\Core\Package\AbstractPackage;
+use Windwalker\Core\Router\CoreRouter;
 use Windwalker\Debugger\Helper\DebuggerHelper;
-use Windwalker\Event\Dispatcher;
-use Windwalker\Filesystem\File;
 use Windwalker\Filesystem\Folder;
-use Windwalker\Form\FieldHelper;
-use Windwalker\Form\ValidatorHelper;
-use Windwalker\Warder\Helper\UserHelper;
-use Windwalker\Warder\Helper\WarderHelper;
+use Windwalker\Router\Exception\RouteNotFoundException;
 
-if (!defined('ADMIN_ROOT'))
+if (!defined('PACKAGE_ADMIN_ROOT'))
 {
-	define('ADMIN_ROOT', __DIR__);
+	define('PACKAGE_ADMIN_ROOT', __DIR__);
 }
 
 /**
@@ -44,15 +36,11 @@ class AdminPackage extends AbstractPackage
 	 * @throws  \LogicException
 	 * @return  void
 	 */
-	public function initialise()
+	public function boot()
 	{
-		// Prepare Resolvers
-		RecordResolver::addNamespace(__NAMESPACE__ . '\Record');
-		DataMapperResolver::addNamespace(__NAMESPACE__ . '\DataMapper');
-		FieldHelper::addNamespace(__NAMESPACE__ . '\Field');
-		ValidatorHelper::addNamespace(__NAMESPACE__ . 'Validator');
+		parent::boot();
 
-		parent::initialise();
+		// Add your own boot logic
 	}
 
 	/**
@@ -67,7 +55,7 @@ class AdminPackage extends AbstractPackage
 		// Assets
 		BootstrapScript::css();
 		BootstrapScript::script();
-		Asset::addStyle('admin/css/admin.css');
+		Asset::addCSS($this->name . '/css/admin.css');
 
 		// Language
 		TranslatorHelper::loadAll($this, 'ini');
@@ -77,12 +65,16 @@ class AdminPackage extends AbstractPackage
 	 * checkAccess
 	 *
 	 * @return  void
+	 *
+	 * @throws  RouteNotFoundException
+	 * @throws  \Exception
 	 */
 	protected function checkAccess()
 	{
+		// Add your access checking
 		if (!UserHelper::authorise() /* && User::get()->group == 2 */)
 		{
-			UserHelper::goToLogin(Uri::full());
+			UserHelper::goToLogin($this->app->uri->full);
 		}
 	}
 
@@ -97,15 +89,9 @@ class AdminPackage extends AbstractPackage
 	{
 		if (WINDWALKER_DEBUG)
 		{
-			if (class_exists('Windwalker\Debugger\Helper\DebuggerHelper'))
+			if (class_exists(DebuggerHelper::class))
 			{
 				DebuggerHelper::addCustomData('Language Orphans', '<pre>' . TranslatorHelper::getFormattedOrphans() . '</pre>');
-			}
-
-			// Un comment this line, Translator will export all orphans to /cache/language
-			if ($this->app->get('language.debug'))
-			{
-				TranslatorHelper::dumpOrphans('ini');
 			}
 		}
 
@@ -113,38 +99,24 @@ class AdminPackage extends AbstractPackage
 	}
 
 	/**
-	 * registerListeners
-	 *
-	 * @param Dispatcher $dispatcher
-	 *
-	 * @return  void
-	 */
-	public function registerListeners(Dispatcher $dispatcher)
-	{
-		parent::registerListeners($dispatcher);
-	}
-
-	/**
 	 * loadRouting
 	 *
-	 * @return  mixed
+	 * @param CoreRouter $router
+	 * @param string     $group
+	 *
+	 * @return CoreRouter
 	 */
-	public function loadRouting()
+	public function loadRouting(CoreRouter $router, $group = null)
 	{
-		$routes = parent::loadRouting();
+		$router = parent::loadRouting($router, $group);
 
-		foreach (Folder::files(__DIR__ . '/Resources/routing') as $file)
+		$router->group($group, function (CoreRouter $router)
 		{
-			if (File::getExtension($file) == 'yml')
-			{
-				$routes = array_merge($routes, Yaml::parse(file_get_contents($file)));
-			}
-		}
+			$router->addRouteFromFiles(Folder::files(__DIR__ . '/Resources/routing'), $this->getName());
 
-		// Merge other routes here...
-		$routes = array_merge($routes, WarderHelper::getAdminRouting());
-		$routes = array_merge($routes, LunaHelper::getAdminRouting());
+			// Merge other routes here...
+		});
 
-		return $routes;
+		return $router;
 	}
 }

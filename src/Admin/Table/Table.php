@@ -15,5 +15,8 @@ namespace Admin\Table;
  */
 abstract class Table
 {
+
+	const DASHBOARDS = 'dashboards';
+
 	// @muse-placeholder  db-table  Do not remove this.
 }

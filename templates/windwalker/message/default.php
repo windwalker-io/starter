@@ -5,12 +5,9 @@
  * @copyright  Copyright (C) 2014 - 2015 LYRASOFT. All rights reserved.
  * @license    GNU Lesser General Public License version 3 or later.
  */
-
-$flashes = $data->flashes;
-
 ?>
 <div class="message-wrap">
-<?php foreach ((array) $flashes as $type => $typeBag): ?>
+<?php foreach ((array) $messages as $type => $typeBag): ?>
 	<div class="alert alert-<?php echo $type ?> alert-dismissible" role="alert">
 		<button type="button" class="close" data-dismiss="alert">
 		  <span aria-hidden="true">&times;</span>

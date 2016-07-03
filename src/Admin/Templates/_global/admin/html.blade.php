@@ -1,5 +1,17 @@
-{{-- Part of Admin project. --}}
-<!DOCTYPE html>
+<?php
+/**
+ * Global variables
+ * --------------------------------------------------------------
+ * @var $app      \Windwalker\Web\Application                 Global Application
+ * @var $package  \Windwalker\Core\Package\AbstractPackage    Package object.
+ * @var $view     \Windwalker\Data\Data                       Some information of this view.
+ * @var $uri      \Windwalker\Uri\UriData                     Uri information, example: $uri->path
+ * @var $datetime \DateTime                                   PHP DateTime object of current time.
+ * @var $helper   \Windwalker\Core\View\Helper\Set\HelperSet  The Windwalker HelperSet object.
+ * @var $route    \Windwalker\Core\Router\CoreRoute           Route builder object.
+ * @var $asset    \Windwalker\Core\Asset\AssetManager         The Asset manager.
+ */
+?><!DOCTYPE html>
 <html lang="{{ $app->get('language.locale') ? : $app->get('language.default', 'en-GB') }}">
 <head>
     <meta charset="UTF-8">
@@ -7,69 +19,24 @@
 
     <title>{{ \Phoenix\Html\HtmlHeader::getPageTitle() }}</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ $uri['media.path'] }}images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ $asset->addBase('images/favicon.ico') }}" />
     <meta name="generator" content="Windwalker Framework" />
     {!! \Phoenix\Html\HtmlHeader::renderMetadata() !!}
     @yield('meta')
 
-    {!! \Phoenix\Asset\Asset::renderStyles(true) !!}
+    {!! $asset->renderStyles(true) !!}
     @yield('style')
 
-    {!! \Phoenix\Asset\Asset::renderScripts(true) !!}
+    {!! $asset->renderScripts(true) !!}
     @yield('script')
     {!! \Phoenix\Html\HtmlHeader::renderCustomTags() !!}
 </head>
-<body class="{{ $package->getName() }}-admin-body phoenix-admin view-{{ $view->name }} layout-{{ $view->layout }}">
-@section ('superbody')
-    @section('navbar')
-        <div class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{ $router->html('home') }}">Windwalker Phoenix</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        @section('nav')
-                            @include('_global.admin.mainmenu')
-                        @show
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a target="_blank" href="{{ $router->html('front@home') }}">
-                                <span class="glyphicon glyphicon-eye-open fa fa-eye"></span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!--/.nav-collapse -->
-            </div>
-        </div>
-    @show
+<body class="{{ $package->getName() }}-admin-body phoenix-admin view-{{ $view->name }} layout-{{ $view->layout }} {{ $helper->getView() instanceof \Phoenix\View\EditView ? 'sidebar-hide' : null }}">
+@section('superbody')
 
-    @yield('content', 'Content')
+    @yield('body', 'Body Section')
 
-    @section('copyright')
-        <div id="copyright">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-
-                        <hr />
-
-                        <footer>
-                            &copy; Windwalker {{ $datetime->format('Y') }}
-                        </footer>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @show
 @show
-{!! \Phoenix\Asset\Asset::getTemplate()->renderTemplates() !!}
+{!! $asset->getTemplate()->renderTemplates() !!}
 </body>
 </html>

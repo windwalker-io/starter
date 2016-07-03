@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="<?php echo $data->app->get('language.locale') ? : $data->app->get('language.default', 'en-GB'); ?>">
+<html lang="<?php echo $app->get('language.locale') ? : $app->get('language.default', 'en-GB'); ?>">
 <head>
 	<meta charset="UTF-8">
 	<title><?php $this->block('page_title'); ?><?php $this->endblock(); ?></title>
 
-	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $data->uri['media.path']; ?>images/favicon.ico" />
+	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $uri->path; ?>/asset/images/favicon.ico" />
 	<meta name="generator" content="Windwalker Framework" />
 	<?php $this->block('meta'); ?>
 	<?php $this->endblock(); ?>
 
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?php echo $data->uri['media.path']; ?>css/main.css" />
-	<?php $this->block('style'); ?>
-	<?php $this->endblock(); ?>
+	<link rel="stylesheet" href="<?php echo $uri->path; ?>/asset/css/main.css" />
+	<?php $this->block('style'); ?><?php $this->endblock(); ?>
+<?php echo $asset->renderStyles(true); ?>
 
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<?php $this->block('script'); ?>
-	<?php $this->endblock(); ?>
+	<?php $this->block('script'); ?><?php $this->endblock(); ?>
+<?php echo $asset->renderScripts(true); ?>
 </head>
 <body>
 <?php $this->block('navbar'); ?>
@@ -29,14 +29,14 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<?php echo $data->router->html('home'); ?>">
+			<a class="navbar-brand" href="<?php echo $router->route('home'); ?>">
 				<img src="https://cloud.githubusercontent.com/assets/1639206/2870854/176b987a-d2e4-11e3-8be6-9f70304a8499.png" alt="Windwalker LOGO" />
 			</a>
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<?php $this->block('nav'); ?>
-				<li class="active"><a href="<?php echo $data->router->html('home'); ?>">Home</a></li>
+				<li class="active"><a href="<?php echo $router->route('home'); ?>">Home</a></li>
 				<?php $this->endblock(); ?>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -50,7 +50,7 @@
 
 <?php $this->block('message') ?>
 	<div id="messasge" class="container">
-		<?php echo \Windwalker\Core\Widget\WidgetHelper::render('windwalker.message.default', array('flashes' => $data->flashes)); ?>
+		<?php echo $widget->render('windwalker.message.default', array('messages' => $messages)); ?>
 	</div>
 <?php $this->endblock(); ?>
 
@@ -67,12 +67,13 @@ Contnet
 				<hr />
 
 				<footer>
-					&copy; Windwalker <?php echo $data->datetime->format('Y'); ?>
+					&copy; Windwalker <?php echo $datetime->format('Y'); ?>
 				</footer>
 			</div>
 		</div>
 	</div>
 </div>
 <?php $this->endblock(); ?>
+<?php echo $asset->getTemplate()->renderTemplates(); ?>
 </body>
 </html>
