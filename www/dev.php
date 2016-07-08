@@ -7,23 +7,21 @@
  */
 
 // Start composer
-$autoload = __DIR__ . '/../vendor/autoload.php';
+$root = __DIR__ . '/..';
 
-if (!is_file($autoload))
+if (!is_file($root . '/vendor/autoload.php'))
 {
 	exit('Please run `composer install` First.');
 }
 
-include_once $autoload;
-
-include_once __DIR__ . '/../etc/define.php';
+include_once $root . '/vendor/autoload.php';
+include_once $root . '/etc/define.php';
 
 $config = new \Windwalker\Structure\Structure;
-$secret = WINDWALKER_ETC . '/secret.yml';
 
-if (is_file($secret))
+if (is_file(WINDWALKER_ETC . '/secret.yml'))
 {
-	$config->loadFile($secret);
+	$config->loadFile(WINDWALKER_ETC . '/secret.yml');
 }
 
 // Get allow remote ips from config.

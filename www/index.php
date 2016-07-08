@@ -6,16 +6,15 @@
  * @license    GNU Lesser General Public License version 3 or later. see LICENSE
  */
 
-$autoload = __DIR__ . '/../vendor/autoload.php';
+$root = __DIR__ . '/..';
 
-if (!is_file($autoload))
+if (!is_file($root . '/vendor/autoload.php'))
 {
 	exit('Please run `composer install` First.');
 }
 
-include_once $autoload;
-
-include_once __DIR__ . '/../etc/define.php';
+include_once $root . '/vendor/autoload.php';
+include_once $root . '/etc/define.php';
 
 $app = new \Windwalker\Web\Application;
 
