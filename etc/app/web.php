@@ -23,7 +23,7 @@ return ArrayHelper::merge(include __DIR__ . '/windwalker.php', [
 	 * you registered here.
 	 */
 	'packages' => [
-		// Add something here...
+		'flower' => \Flower\FlowerPackage::class
 	],
 
 	/*
@@ -114,5 +114,15 @@ return ArrayHelper::merge(include __DIR__ . '/windwalker.php', [
 	 */
 	'listeners' => [
 		500 => \Windwalker\Listener\SystemListener::class
+	],
+
+	/*
+	 * Register Error Handler Classes
+	 */
+	'error' => [
+		'handlers' => [
+			// Uncommnet this line if you need error log support
+			'log' => \Windwalker\Core\Error\Handler\ErrorLogHandler::class
+		]
 	]
 ]);

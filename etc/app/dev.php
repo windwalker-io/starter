@@ -43,7 +43,7 @@ return ArrayHelper::merge(include __DIR__ . '/web.php', [
 	 */
 	'providers' =>[
 		// Add pretty error handler page.
-		'error' => \Windwalker\Core\Provider\WhoopsProvider::class,
+		'whoops' => \Windwalker\Core\Provider\WhoopsProvider::class,
 	],
 
 	/*
