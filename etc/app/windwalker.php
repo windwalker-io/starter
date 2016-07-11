@@ -86,6 +86,7 @@ return [
 			// System
 			'application' => \Windwalker\Core\Application\WindwalkerApplicationInterface::class,
 			'app'         => \Windwalker\Core\Application\WindwalkerApplicationInterface::class,
+			'config'      => \Windwalker\Core\Config\Config::class,
 			'package.resolver' => \Windwalker\Core\Package\PackageResolver::class,
 
 			// Web
@@ -122,14 +123,15 @@ return [
 			'widget.manager'   => \Windwalker\Core\Widget\WidgetManager::class,
 
 			// Cache
-			'cache.factory' => \Windwalker\Core\Cache\CacheFactory::class,
+			'cache.manager' => \Windwalker\Core\Cache\CacheManager::class,
+			'cache'         => \Windwalker\Cache\Cache::class,
 
 			// Session
 			'session' => \Windwalker\Session\Session::class,
 
 			// User
-			'authentication' => \Windwalker\Authentication\Authentication::class,
-			'authorisation'  => \Windwalker\Authorisation\Authorisation::class,
+			'authentication' => \Windwalker\Authentication\AuthenticationInterface::class,
+			'authorisation'  => \Windwalker\Authorisation\AuthorisationInterface::class,
 			'user.manager'   => \Windwalker\Core\User\UserManager::class,
 
 			// CSRF

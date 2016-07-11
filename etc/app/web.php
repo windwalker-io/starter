@@ -49,7 +49,7 @@ return ArrayHelper::merge(include __DIR__ . '/windwalker.php', [
 		//'database' => \Windwalker\Core\Provider\DatabaseProvider::class,
 		//'router'   => \Windwalker\Core\Provider\RouterProvider::class,
 		//'lang'     => \Windwalker\Core\Provider\LanguageProvider::class,
-		//'template' => \Windwalker\Core\Provider\RendererProvider::class,
+		//'renderer' => \Windwalker\Core\Provider\RendererProvider::class,
 		//'cache'    => \Windwalker\Core\Provider\CacheProvider::class,
 		//'session'  => \Windwalker\Core\Provider\SessionProvider::class,
 		//'auth'     => \Windwalker\Core\Provider\UserProvider::class,
@@ -123,6 +123,17 @@ return ArrayHelper::merge(include __DIR__ . '/windwalker.php', [
 		'handlers' => [
 			// Uncommnet this line if you need error log support
 			'log' => \Windwalker\Core\Error\Handler\ErrorLogHandler::class
+		]
+	],
+
+	/*
+	 * Register User Auth Handlers
+	 */
+	'user' => [
+		'handler' => null,
+		'methods' => [
+		],
+		'policies' => [
 		]
 	]
 ]);
