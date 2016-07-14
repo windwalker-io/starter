@@ -10,8 +10,8 @@ namespace Windwalker\Web;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Windwalker\Environment\WebEnvironment;
-use Windwalker\Core\Provider;
 use Windwalker\Structure\Structure;
+use Windwalker\Core\Provider;
 
 /**
  * The DevApplication class.

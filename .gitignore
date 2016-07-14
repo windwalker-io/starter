@@ -3,7 +3,6 @@
 !.gitignore
 !.gitkeep
 !.htaccess
-!.mode
 !web.config
 
 # Composer

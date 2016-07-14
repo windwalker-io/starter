@@ -1,0 +1,9 @@
+home:
+    pattern: /
+    controller: Page
+page:
+    pattern: /page
+    controller: Page
+cover:
+    pattern: /cover
+    controller: Cover
