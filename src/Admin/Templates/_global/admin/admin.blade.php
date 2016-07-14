@@ -3,9 +3,13 @@
 @extends('_global.admin.admin-wrapper')
 
 @section('content')
-    @include('_global.admin.widget.banner')
+    @section('banner')
+        @include('_global.admin.widget.banner')
+    @show
 
-    @include('_global.admin.widget.toolbar')
+    @section('toolbar')
+        @include('_global.admin.widget.toolbar')
+    @show
 
     @section('admin-area')
     <section id="admin-area">
