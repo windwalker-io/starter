@@ -78,16 +78,4 @@ console:
     #         - php windwalker migration migrate
     #
     # Then just run `$ php windwalker run foo`
-    script:
-        prepare:
-            - echo dev > .mode
-            - php windwalker asset sync phoenix
-            - php windwalker asset sync admin
-            - php windwalker asset sync front
-            - php windwalker asset sync luna
-        deploy:
-            - git pull
-            - composer install
-            - php windwalker migration migrate
-            - php windwalker asset makesum
-            - php windwalker run prepare --ansi
+    script: ~
