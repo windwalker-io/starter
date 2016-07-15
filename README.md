@@ -1,18 +1,20 @@
-# LYRASOFT Earth
+# Windwalker Starter
 
-![151214-0001](https://cloud.githubusercontent.com/assets/1639206/14016277/15bb757c-f1fa-11e5-8b9c-821cb53d6f2a.jpg)
+![logo](https://cloud.githubusercontent.com/assets/1639206/2870854/176b987a-d2e4-11e3-8be6-9f70304a8499.png)
 
-![p-2016-07-03-001](https://cloud.githubusercontent.com/assets/1639206/16545958/858490b6-416c-11e6-9981-03c6d1dce102.jpg)
+This is [Windwlaker Framework](https://github.com/ventoviro/windwalker) starter package.
 
 ## Installation Via Composer
 
 ``` bash
-$ php composer.phar create-project lyrasoft/earth your_project ~1.1
+$ php composer.phar create-project windwalker/starter windwalker ~3.0
 ```
 
 ## Getting Started
 
-Open `http://{Your project root}/www/admin`, you will see the sample page.
+Open `http://{Your project root}/www`, you will see the sample page.
+
+![acme_page](https://cloud.githubusercontent.com/assets/1639206/5560315/dd714ccc-8dba-11e4-8911-8a29e2a2b1f2.png)
 
 Open `http://{Your project root}/www/dev.php`, you will enter the development mode.
 
@@ -51,12 +53,9 @@ Options:
 
 Commands:
 
-  muse         The template generator.
-  phoenix      The Phoenix RAD package.
-  asset        Asset management
   migration    Database migration system.
   seed         The data seeder help you create fake data.
-  package      Package operations.
+  build        Some useful tools for building system.
 
 Welcome to Windwalker Console.
 ```
