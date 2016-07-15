@@ -1,7 +1,0 @@
-# Custom routing file, all default routing files please see ./Resources/routing
-
-home:
-    pattern: /
-    controller: Category
-    extra:
-        layout: category

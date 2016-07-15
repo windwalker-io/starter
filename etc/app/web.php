@@ -23,7 +23,7 @@ return ArrayHelper::merge(include __DIR__ . '/windwalker.php', [
 	 * you registered here.
 	 */
 	'packages' => [
-
+		'main' => \Main\MainPackage::class
 	],
 
 	/*

@@ -1,11 +1,3 @@
-#main:
-#    pattern: /
-#    package: main
-
-front:
+main:
     pattern: /
-    package: front
-
-admin:
-    pattern: /admin
-    package: admin
+    package: main

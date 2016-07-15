@@ -102,5 +102,26 @@ return ArrayHelper::merge(include __DIR__ . '/web.php', [
 	 */
 	'listeners' => [
 		// Add something here...
+	],
+
+	/*
+	 * Register Error Handler Classes
+	 */
+	'error' => [
+		'handlers' => [
+			// Uncommnet this line if you need error log support
+			// 'log' => \Windwalker\Core\Error\Handler\ErrorLogHandler::class
+		]
+	],
+
+	/*
+	 * Register User Auth Handlers
+	 */
+	'user' => [
+		'handler' => \Windwalker\Core\User\NullUserHandler::class,
+		'methods' => [
+		],
+		'policies' => [
+		]
 	]
 ]);

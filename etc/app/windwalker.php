@@ -21,13 +21,7 @@ return [
 	 * you registered here.
 	 */
 	'packages' => [
-		'phoenix' => \Phoenix\PhoenixPackage::class,
-		'unidev'  => \Lyrasoft\Unidev\UnidevPackage::class,
-		'warder'  => \Lyrasoft\Warder\WarderPackage::class,
-		'luna'    => \Lyrasoft\Luna\LunaPackage::class,
 
-		'admin' => \Admin\AdminPackage::class,
-		'front' => \Front\FrontPackage::class
 	],
 
 	/*

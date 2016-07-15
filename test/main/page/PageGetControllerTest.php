@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later.
  */
 
-use Windwalker\Core\Model\Model;
+use Windwalker\Core\Model\ModelRepository;
 use Windwalker\Core\Package\PackageHelper;
 use Windwalker\Core\View\HtmlView;
 use Windwalker\Ioc;
@@ -49,6 +49,6 @@ class PageGetControllerTest extends AbstractBaseTestCase
 	{
 		$ctrl = PackageHelper::getPackage()->getController('Page/GetController');
 
-		$this->assertInstanceOf(Model::class, $ctrl->getModel());
+		$this->assertInstanceOf(ModelRepository::class, $ctrl->getModel());
 	}
 }
