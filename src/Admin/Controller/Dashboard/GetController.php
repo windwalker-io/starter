@@ -10,7 +10,6 @@ namespace Admin\Controller\Dashboard;
 
 use Admin\Model\DashboardModel;
 use Admin\View\Dashboard\DashboardHtmlView;
-use Lyrasoft\Luna\Admin\Model\ArticlesModel;
 use Phoenix\Controller\Display\DisplayController;
 use Windwalker\Core\Model\ModelRepository;
 
@@ -67,18 +66,15 @@ class GetController extends DisplayController
 	}
 
 	/**
-	 * prepareModelState
+	 * prepareUserState
 	 *
 	 * @param   ModelRepository $model
 	 *
 	 * @return  void
 	 */
-	protected function prepareModelState(ModelRepository $model)
+	protected function prepareUserState(ModelRepository $model)
 	{
-		/** @var ArticlesModel $model */
-		$model = $this->getModel('Articles');
-
-		parent::prepareModelState($model);
+		parent::prepareUserState($model);
 	}
 
 	/**

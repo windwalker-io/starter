@@ -64,7 +64,7 @@
     @show
 
     @section('message')
-        @messages()
+        {!! \Windwalker\Core\Widget\WidgetHelper::render('windwalker.message.default', array('flashes' => $flashes)) !!}
     @show
 
     @yield('content', 'Content')
