@@ -130,7 +130,7 @@ return ArrayHelper::merge(include __DIR__ . '/windwalker.php', [
 	 * Register User Auth Handlers
 	 */
 	'user' => [
-		'handler' => null,
+		'handler' => \Windwalker\Core\User\NullUserHandler::class,
 		'methods' => [
 		],
 		'policies' => [
