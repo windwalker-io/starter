@@ -22,7 +22,19 @@ class MainSeeder extends AbstractSeeder
 	 */
 	public function doExecute()
 	{
-		$this->execute(CoverSeeder::class);
+		$this->execute(UserSeeder::class);
+
+		$this->execute(LanguageSeeder::class);
+
+		$this->execute(TagSeeder::class);
+
+		$this->execute(CategorySeeder::class);
+
+		$this->execute(ArticleSeeder::class);
+
+		$this->execute(CommentSeeder::class);
+
+		$this->execute(ModuleSeeder::class);
 	}
 
 	/**
@@ -32,6 +44,18 @@ class MainSeeder extends AbstractSeeder
 	 */
 	public function doClear()
 	{
-		$this->clear(CoverSeeder::class);
+		$this->clear(UserSeeder::class);
+
+		$this->clear(LanguageSeeder::class);
+
+		$this->clear(TagSeeder::class);
+
+		$this->clear(CategorySeeder::class);
+
+		$this->clear(ArticleSeeder::class);
+
+		$this->clear(CommentSeeder::class);
+
+		$this->clear(ModuleSeeder::class);
 	}
 }

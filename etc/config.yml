@@ -26,7 +26,7 @@ session:
 routing:
     # Enable routing debug, if route key not found when you generate routs,
     # will raise error and stop application.
-    debug: 0
+    debug: 1
 
     # Simple routing help us auto find controller by URL: `{package}/{controller}` without routing config,
     # Disable this function will enhance performance.
@@ -47,6 +47,14 @@ cache:
 
     # Cache time (minutes)
     time: 15
+
+asset:
+    # The asset folder in public root, default is `asset`
+    folder: asset
+
+    # The full asset uri, default is NULL. If you set this uri, it will override `asset.folder`.
+    # This is useful if you want to put all asset files on cloud storage.
+    uri: ~
 
 language:
     # Language debug will mark untranslated string by `??` and stored orphan in Languages object.

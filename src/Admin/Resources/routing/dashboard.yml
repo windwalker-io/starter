@@ -1,0 +1,9 @@
+# Dashboard
+home:
+    pattern: /
+    controller: Dashboard
+    extra:
+        layout: dashboard
+        active:
+            manimenu: dashboards
+
