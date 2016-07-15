@@ -69,4 +69,4 @@ php windwalker migration migrate --seed
 
 ## How To Use Windwalker
 
-Please see README in every [Windwalker packages](https://github.com/ventoviro) first.
+Please see [Documentation](http://windwalker.io/documentation/).
