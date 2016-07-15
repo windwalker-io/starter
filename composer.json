@@ -12,8 +12,7 @@
     ],
     "require": {
         "windwalker/core" : "~3.0",
-        "fzaninotto/faker": "~1.0",
-        "lyrasoft/luna": "~1.1"
+        "fzaninotto/faker": "~1.0"
     },
     "require-dev": {
     },
