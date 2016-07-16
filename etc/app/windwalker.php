@@ -134,8 +134,9 @@ return [
 			'authorisation'  => \Windwalker\Authorisation\AuthorisationInterface::class,
 			'user.manager'   => \Windwalker\Core\User\UserManager::class,
 
-			// CSRF
+			// Security
 			'security.csrf' => \Windwalker\Core\Security\CsrfGuard::class,
+			'crypt' => \Windwalker\Crypt\Crypt::class,
 
 			// DateTime
 			'datetime' => \Windwalker\Core\DateTime\DateTime::class,

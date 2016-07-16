@@ -70,7 +70,7 @@ language:
     format: ini
 
 console:
-    # Custom script, add some commends here to batch execute. Example:
+    # Custom scripts, add some commends here to batch execute. Example:
     # script:
     #     foo:
     #         - git pull
@@ -78,4 +78,4 @@ console:
     #         - php windwalker migration migrate
     #
     # Then just run `$ php windwalker run foo`
-    script: ~
+    scripts: ~
