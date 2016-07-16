@@ -43,7 +43,7 @@ return [
 		//'logger' => \Windwalker\Core\Provider\LoggerProvider::class,
 		//'event'  => \Windwalker\Core\Provider\EventProvider::class,
 		//'mailer' => \Windwalker\Core\Mailer\MailerProvider::class,
-		//'swiftmailer' => \Windwalker\Core\Mailer\SwiftMailerProvider::class
+		//'mailer_adapter' => \Windwalker\Core\Mailer\SwiftMailerProvider::class
 	],
 
 	/*
@@ -111,7 +111,7 @@ return [
 			'sql.exporter' => \Windwalker\Core\Database\Exporter\AbstractExporter::class,
 
 			// Router
-			'router' => \Windwalker\Core\Router\CoreRouter::class,
+			'router' => \Windwalker\Core\Router\MainRouter::class,
 
 			// Language
 			'language' => \Windwalker\Core\Language\CoreLanguage::class,
@@ -143,7 +143,10 @@ return [
 
 			// Asset
 			'asset' => \Windwalker\Core\Asset\AssetManager::class,
-			'script.manager' => \Windwalker\Core\Asset\ScriptManager::class
+			'script.manager' => \Windwalker\Core\Asset\ScriptManager::class,
+
+			// Mailer
+			'mailer' => \Windwalker\Core\Mailer\MailerManager::class
 		]
 	],
 

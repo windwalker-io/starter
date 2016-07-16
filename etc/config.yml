@@ -48,6 +48,11 @@ cache:
     # Cache time (minutes)
     time: 15
 
+crypt:
+    # The Crypt cipher method.
+    # Support ciphers: blowfish (bf) / aes-256 (aes) / 3des / php_aes
+    cipher: blowfish
+
 asset:
     # The asset folder in public root, default is `asset`
     folder: asset
@@ -71,7 +76,7 @@ language:
 
 console:
     # Custom scripts, add some commends here to batch execute. Example:
-    # script:
+    # scripts:
     #     foo:
     #         - git pull
     #         - composer install

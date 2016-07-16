@@ -8,7 +8,6 @@
 
 namespace Main\Controller\Page;
 
-use Symfony\Component\Yaml\Yaml;
 use Windwalker\Core\Controller\AbstractController;
 
 /**

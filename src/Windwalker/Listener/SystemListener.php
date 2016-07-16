@@ -8,6 +8,8 @@
 
 namespace Windwalker\Listener;
 
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\View\HtmlView;
 use Windwalker\Event\Event;
@@ -55,11 +57,15 @@ class SystemListener
 
 		if ($app->get('system.offline', false) && !$app->get('system.debug'))
 		{
-			$view = new HtmlView;
+			$app->server->setHandler(function (RequestInterface $request, ResponseInterface $response, callable $next = null)
+			{
+				$view = new HtmlView;
+				$view->setLayout('windwalker.offline.offline');
 
-			$view->setLayout('windwalker.offline.offline');
+				return new HtmlResponse($view->render());
+			});
 
-			$app->server->getOutput()->respond(new HtmlResponse((string) $view));
+			$app->server->listen();
 
 			die;
 		}

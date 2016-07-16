@@ -1,9 +1,9 @@
 {
-    "name": "lyrasoft/earth",
-    "description": "Home Land of LYRASOFT",
-    "homepage": "https://github.com/lyrasoft/earth",
+    "name": "windwalker/starter",
+    "description": "Windwalker Starter.",
+    "homepage": "https://github.com/ventoviro/windwalker",
     "license": "GNU Lesser General Public License",
-    "minimum-stability": "beta",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Simon Asika",
@@ -12,7 +12,8 @@
     ],
     "require": {
         "windwalker/core" : "~3.0",
-        "fzaninotto/faker": "~1.0"
+        "fzaninotto/faker": "~1.0",
+        "swiftmailer/swiftmailer": "~5.0"
     },
     "require-dev": {
     },
