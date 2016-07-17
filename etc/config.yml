@@ -16,6 +16,7 @@ error:
     # The error template & renderer engine
     template: windwalker.error.default
     engine: php
+    log: false
 
 session:
     # Session handler, supports `native`, `database`, `apc`, `memcached`
