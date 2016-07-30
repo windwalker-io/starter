@@ -6,6 +6,6 @@ cache:
     enabled: false
     time: 15
 routing:
-    debug: false
+    debug: true
 language:
     debug: true
