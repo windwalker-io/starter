@@ -76,7 +76,7 @@ language:
     format: ini
 
 console:
-    # Custom scripts, add some commends here to batch execute. Example:
+    # Custom scripts, add some commands here to batch execute. Example:
     # scripts:
     #     foo:
     #         - git pull

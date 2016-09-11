@@ -59,7 +59,7 @@ return ArrayHelper::merge(include __DIR__ . '/windwalker.php', [
 	 * Uncomment below to override core commands.
 	 */
 	'console' => [
-		'commends' => [
+		'commands' => [
 			//'asset'     => \Windwalker\Core\Asset\Command\AssetCommand::class,
 			//'migration' => \Windwalker\Core\Migration\Command\MigrationCommand::class,
 			//'seed'      => \Windwalker\Core\Seeder\Command\SeedCommand::class,
