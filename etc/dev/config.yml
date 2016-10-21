@@ -6,6 +6,6 @@ cache:
     enabled: false
     time: 15
 routing:
-    debug: true
+    debug: true  # @deprecated
 language:
     debug: true
