@@ -27,7 +27,8 @@ session:
 routing:
     # Enable routing debug, if route key not found when you generate routs,
     # will raise error and stop application.
-    debug: 0
+    # @deprecated
+    debug: true
 
     # Simple routing help us auto find controller by URL: `{package}/{controller}` without routing config,
     # Disable this function will enhance performance.
