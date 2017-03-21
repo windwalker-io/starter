@@ -1,0 +1,2 @@
+# Protect .git
+RedirectMatch 404 /\.git
