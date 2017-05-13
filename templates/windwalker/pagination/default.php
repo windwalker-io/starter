@@ -21,7 +21,7 @@ use Windwalker\Core\Pagination\PaginationResult;
 <ul class="pagination windwalker-pagination">
 	<?php if ($pagination->getFirst()): ?>
 		<li>
-			<a href="<?php echo $route(array('page' => $pagination->getFirst())); ?>">
+			<a href="<?php echo $route(['page' => $pagination->getFirst()]); ?>">
 				<span class="glyphicon glyphicon-fast-backward"></span>
 				<span class="sr-only">First</span>
 			</a>
@@ -30,7 +30,7 @@ use Windwalker\Core\Pagination\PaginationResult;
 
 	<?php if ($pagination->getPrevious()): ?>
 		<li>
-			<a href="<?php echo $route(array('page' => $pagination->getPrevious())); ?>">
+			<a href="<?php echo $route(['page' => $pagination->getPrevious()]); ?>">
 				<span class="glyphicon glyphicon-backward"></span>
 				<span class="sr-only">Previous</span>
 			</a>
@@ -39,7 +39,7 @@ use Windwalker\Core\Pagination\PaginationResult;
 
 	<?php if ($pagination->getLess()): ?>
 		<li>
-			<a href="<?php echo $route(array('page' => $pagination->getLess())); ?>">
+			<a href="<?php echo $route(['page' => $pagination->getLess()]); ?>">
 				Less
 			</a>
 		</li>
@@ -49,7 +49,7 @@ use Windwalker\Core\Pagination\PaginationResult;
 		<?php $active = ($page == 'current') ? 'active' : ''; ?>
 		<li class="<?php echo $active; ?>">
 			<?php if (!$active): ?>
-				<a href="<?php echo $route(array('page' => $k)); ?>">
+				<a href="<?php echo $route(['page' => $k]); ?>">
 					<?php echo $k; ?>
 				</a>
 			<?php else: ?>
@@ -62,7 +62,7 @@ use Windwalker\Core\Pagination\PaginationResult;
 
 	<?php if ($pagination->getMore()): ?>
 		<li>
-			<a href="<?php echo $route(array('page' => $pagination->getMore())); ?>">
+			<a href="<?php echo $route(['page' => $pagination->getMore()]); ?>">
 				More
 			</a>
 		</li>
@@ -70,7 +70,7 @@ use Windwalker\Core\Pagination\PaginationResult;
 
 	<?php if ($pagination->getNext()): ?>
 		<li>
-			<a href="<?php echo $route(array('page' => $pagination->getNext())); ?>">
+			<a href="<?php echo $route(['page' => $pagination->getNext()]); ?>">
 				<span class="glyphicon glyphicon-forward"></span>
 				<span class="sr-only">Next</span>
 			</a>
@@ -79,7 +79,7 @@ use Windwalker\Core\Pagination\PaginationResult;
 
 	<?php if ($pagination->getLast()): ?>
 		<li>
-			<a href="<?php echo $route(array('page' => $pagination->getLast())); ?>">
+			<a href="<?php echo $route(['page' => $pagination->getLast()]); ?>">
 				<span class="glyphicon glyphicon-fast-forward"></span>
 				<span class="sr-only">Last</span>
 			</a>

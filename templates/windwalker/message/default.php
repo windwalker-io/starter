@@ -7,7 +7,7 @@
  */
 ?>
 <div class="message-wrap">
-<?php foreach ((array) $messages as $type => $typeBag): ?>
+<?php foreach ($messages as $type => $typeBag): ?>
 	<div class="alert alert-<?php echo $type ?> alert-dismissible" role="alert">
 		<button type="button" class="close" data-dismiss="alert">
 		  <span aria-hidden="true">&times;</span>

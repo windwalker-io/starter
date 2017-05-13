@@ -33,7 +33,7 @@ class CoverSeeder extends AbstractSeeder
 
 			$data->title = $faker->sentence(2);
 			$data->text = $faker->paragraph(3);
-			$data->state = $faker->randomElement(array(0, 1, 1));
+			$data->state = $faker->randomElement([0, 1, 1]);
 
 			$mapper->createOne($data);
 

@@ -50,7 +50,7 @@
 
 <?php $this->block('message') ?>
 	<div id="messasge" class="container">
-		<?php echo $widget->render('windwalker.message.default', array('messages' => $messages)); ?>
+		<?php echo $widget->render('windwalker.message.default', ['messages' => $messages]); ?>
 	</div>
 <?php $this->endblock(); ?>
 

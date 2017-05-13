@@ -31,6 +31,6 @@ class CoverModel extends DatabaseModelRepository
 	 */
 	public function getContent()
 	{
-		$this->getDataMapper()->findOne(array('id' => 1));
+		$this->getDataMapper()->findOne(['id' => 1]);
 	}
 }

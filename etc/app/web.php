@@ -43,6 +43,7 @@ return ArrayHelper::merge(include __DIR__ . '/windwalker.php', [
 	 */
 	'providers' =>[
 		//'web'      => \Windwalker\Core\Provider\WebProvider::class,
+		//'datetime' => \Windwalker\Core\Provider\DateTimeProvider::class,
 		//'error'    => \Windwalker\Core\Error\ErrorHandlingProvider::class,
 		//'logger'   => \Windwalker\Core\Provider\LoggerProvider::class,
 		//'event'    => \Windwalker\Core\Provider\EventProvider::class,
@@ -54,7 +55,6 @@ return ArrayHelper::merge(include __DIR__ . '/windwalker.php', [
 		//'session'  => \Windwalker\Core\Provider\SessionProvider::class,
 		//'auth'     => \Windwalker\Core\Provider\UserProvider::class,
 		//'security' => \Windwalker\Core\Provider\SecurityProvider::class,
-		//'datetime' => \Windwalker\Core\Provider\DateTimeProvider::class,
 		//'asset'    => \Windwalker\Core\Asset\AssetProvider::class
 	],
 

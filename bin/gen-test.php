@@ -86,7 +86,7 @@ class GenTest extends AbstractCliApplication
 
 		$methods = $ref->getMethods(\ReflectionMethod::IS_PUBLIC);
 		$methodTmpl = file_get_contents(GENERATOR_BUNDLE_PATH . '/Template/test/testMethod.php');
-		$methodCodes = array();
+		$methodCodes = [];
 
 		foreach ($methods as $method)
 		{

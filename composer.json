@@ -26,7 +26,8 @@
     "scripts": {
         "post-create-project-cmd": [
             "Windwalker\\Composer\\StarterInstaller::rootInstall"
-        ]
+        ],
+        "post-autoload-dump": "php windwalker system clear-cache renderer"
     },
     "extra": {
         "branch-alias": {

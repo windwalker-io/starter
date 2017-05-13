@@ -86,14 +86,14 @@ class StarterInstaller
 			$pass   = $io->askAndHideAnswer("Database password: ");
 			$prefix = $io->ask("Table prefix [wind_]: ", 'wind_');
 
-			$secret['database'] = array(
+			$secret['database'] = [
 				'driver'   => $driver,
 				'host'     => $host,
 				'user'     => $user,
 				'password' => $pass,
 				'name'     => $name,
 				'prefix'   => $prefix
-			);
+			];
 		}
 
 		file_put_contents($etc . '/secret.yml', Yaml::dump($secret, 4));
