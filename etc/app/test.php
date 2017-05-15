@@ -6,14 +6,14 @@
  * @license    GNU General Public License version 2 or later.
  */
 
-use Windwalker\Utilities\ArrayHelper;
+use Windwalker\Utilities\Arr;
 
 /*
  * Windwalker Web Dev Config
  * -------------------------------------
  * Things you config here will be used in web environment with dev mode.
  */
-return ArrayHelper::merge(include __DIR__ . '/web.php', [
+return Arr::mergeRecursive(include __DIR__ . '/web.php', [
 	/*
 	 * Package Registration
 	 * -------------------------------------
