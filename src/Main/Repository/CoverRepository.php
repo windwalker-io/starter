@@ -6,16 +6,16 @@
  * @license    GNU Lesser General Public License version 3 or later. see LICENSE
  */
 
-namespace Main\Model;
+namespace Main\Repository;
 
-use Windwalker\Core\Model\DatabaseModelRepository;
+use Windwalker\Core\Repository\DatabaseModelRepository;
 
 /**
- * Class CoverModel
+ * Class CoverRepository
  *
  * @since 1.0
  */
-class CoverModel extends DatabaseModelRepository
+class CoverRepository extends DatabaseModelRepository
 {
 	/**
 	 * Property table.
@@ -31,6 +31,6 @@ class CoverModel extends DatabaseModelRepository
 	 */
 	public function getContent()
 	{
-		$this->getDataMapper()->findOne(['id' => 1]);
+		return $this->getDataMapper()->findOne(['id' => 1]);
 	}
 }

@@ -6,16 +6,16 @@
  * @license    GNU General Public License version 2 or later.
  */
 
-namespace Main\Model;
+namespace Main\Repository;
 
-use Windwalker\Core\Model\DatabaseModelRepository;
+use Windwalker\Core\Repository\DatabaseModelRepository;
 
 /**
- * The PageModel class.
+ * The PageRepository class.
  *
  * @since  {DEPLOY_VERSION}
  */
-class PageModel extends DatabaseModelRepository
+class PageRepository extends DatabaseModelRepository
 {
 	
 }

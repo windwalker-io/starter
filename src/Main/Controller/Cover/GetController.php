@@ -8,7 +8,7 @@
 
 namespace Main\Controller\Cover;
 
-use Main\Model\CoverModel;
+use Main\Repository\CoverRepository;
 use Main\View\Cover\CoverHtmlView;
 use Windwalker\Core\Controller\AbstractController;
 
@@ -32,13 +32,13 @@ class GetController extends AbstractController
 	 */
 	public function doExecute()
 	{
-		/** @var CoverModel $model */
-		$model = $this->getModel();
+		/** @var CoverRepository $repo */
+		$repo = $this->getRepository();
 
 		/** @var CoverHtmlView $view */
 		$view = $this->getView();
 
-		$view->setModel($model);
+		$view->setRepository($repo, true);
 
 		return $view->render();
 	}
