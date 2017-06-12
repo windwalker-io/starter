@@ -40,11 +40,11 @@ cache:
     enabled: false
 
     # The default sotrage, you can use other storages by use `CacheManager::getCache('name', 'storage')`
-    # Support storages: file / raw_file / memcached / null / redis / array / runtime_array
+    # Support storages: file / php_file / forever_file / memcached / null / redis / array / runtime_array
     storage: file
 
     # Cache serializer decided how to serialize and store data into storage.
-    # Support serializers: php / json / string / raw
+    # Support serializers: php / php_file / json / string / raw
     serializer: php
 
     # Cache time (minutes)
