@@ -42,13 +42,18 @@ return Arr::mergeRecursive(include __DIR__ . '/windwalker.php', [
 	 *       break your system.
 	 */
 	'providers' => [
-		//'console'  => \Windwalker\Core\Provider\ConsoleProvider::class,
-		//'datetime' => \Windwalker\Core\Provider\DateTimeProvider::class,
-		//'logger'   => \Windwalker\Core\Provider\LoggerProvider::class,
-		//'event'    => \Windwalker\Core\Provider\EventProvider::class,
-		//'database' => \Windwalker\Core\Provider\DatabaseProvider::class,
-		//'lang'     => \Windwalker\Core\Provider\LanguageProvider::class,
-		//'cache'    => \Windwalker\Core\Provider\CacheProvider::class,
+//		'console'  => \Windwalker\Core\Provider\ConsoleProvider::class,
+//		'logger'   => \Windwalker\Core\Provider\LoggerProvider::class,
+//		'event'    => \Windwalker\Core\Provider\EventProvider::class,
+//		'database' => \Windwalker\Core\Provider\DatabaseProvider::class,
+//		'lang'     => \Windwalker\Core\Provider\LanguageProvider::class,
+//		'cache'    => \Windwalker\Core\Provider\CacheProvider::class,
+//		'session'  => \Windwalker\Core\Provider\SessionProvider::class,
+//		'auth'     => \Windwalker\Core\Provider\UserProvider::class,
+//		'security' => \Windwalker\Core\Provider\SecurityProvider::class,
+//		'mailer'   => \Windwalker\Core\Mailer\MailerProvider::class,
+//		'mailer_adapter' => \Windwalker\Core\Mailer\SwiftMailerProvider::class,
+//		'queue'    => \Windwalker\Core\Queue\QueueProvider::class
 	],
 
 	/*

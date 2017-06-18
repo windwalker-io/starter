@@ -32,11 +32,11 @@ return [
 	 * Provider Registration
 	 * -------------------------------------
 	 * Register DI service providers to Container.
-	 * 
+	 *
 	 * If you installed 3rd packages from composer, you may add them to here.
 	 * The packages you want to register into Container must provides a Windwalker
 	 * service provider interface.
-	 * 
+	 *
 	 * You can override the default providers in Windwalker core. Just uncomment
 	 * the line, use same key name and replace provider class by your own.
 	 *
@@ -44,10 +44,8 @@ return [
 	 *       break your system.
 	 */
 	'providers' =>[
-		//'logger' => \Windwalker\Core\Provider\LoggerProvider::class,
-		//'event'  => \Windwalker\Core\Provider\EventProvider::class,
-		//'mailer' => \Windwalker\Core\Mailer\MailerProvider::class,
-		//'swiftmailer' => \Windwalker\Core\Mailer\SwiftMailerProvider::class
+		//		'logger' => \Windwalker\Core\Provider\LoggerProvider::class,
+		//		'event'  => \Windwalker\Core\Provider\EventProvider::class,
 	],
 
 	/*
@@ -77,7 +75,7 @@ return [
 	 * Example: 'foo' => ['class' => MyListener::class, 'priority' => 300, 'enabled' => boolean]
 	 */
 	'listeners' => [
-//		\Windwalker\Core\Mailer\Listener\MailInlinerListener::class
+
 	],
 
 	/*
