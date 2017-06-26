@@ -6,7 +6,10 @@
  * @license    GNU Lesser General Public License version 3 or later. see LICENSE
  */
 
+use Windwalker\Core\Utilities\Debug\BacktraceHelper;
+
 /** @var $exception Exception */
+$traces = BacktraceHelper::normalizeBacktraces($exception->getTrace());
 ?>
 <style>
 	body {
@@ -76,7 +79,7 @@
         <strong>Type:</strong> <?php echo get_class($exception); ?>
     </div>
     <div>
-        <strong>File:</strong> <?php echo $exception->getFile(); ?>
+        <strong>File:</strong> <?php echo BacktraceHelper::replaceRoot($exception->getFile()); ?>
     </div>
     <div>
         <strong>Line:</strong> <?php echo $exception->getLine(); ?>
@@ -85,27 +88,16 @@
     <h2>BackTrace</h2>
 
     <table>
-        <?php foreach ($exception->getTrace() as $i => $trace): ?>
+        <?php foreach ($traces as $i => $trace): ?>
             <tr>
                 <td>
                     #<?php echo $i ; ?>
                 </td>
                 <td>
-                    <?php
-                    if (!empty($trace['class']))
-                    {
-                        echo $trace['class'] . '::' . $trace['function'] . '()';
-                    }
-                    else
-                    {
-                        echo $trace['function'] . '()';
-                    }
-                    ?>
+                    <?php echo $trace['function']; ?>
                 </td>
                 <td>
-                    <?php if (!empty($trace['file'])): ?>
-                        <?php echo $trace['file']; ?> (line: <?php echo $trace['line']; ?>)
-                    <?php endif; ?>
+                    <?php echo $trace['file']; ?>
                 </td>
             </tr>
         <?php endforeach; ?>
