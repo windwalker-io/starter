@@ -9,3 +9,5 @@ routing:
     debug: true  # @deprecated
 language:
     debug: true
+whoops:
+    editor: phpstorm
