@@ -27,8 +27,7 @@ class CoverSeeder extends AbstractSeeder
         // This is example seeder, you can delete it.
         $mapper = new \Windwalker\DataMapper\DataMapper('main_cover');
 
-        foreach (range(1, 50) as $i)
-        {
+        foreach (range(1, 50) as $i) {
             $data = new \Windwalker\Data\Data;
 
             $data->title = $faker->sentence(2);

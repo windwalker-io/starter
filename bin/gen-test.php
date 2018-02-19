@@ -43,13 +43,11 @@ class GenTest extends AbstractCliApplication
         $target  = StringNormalise::toClassNamespace($target);
         $package = ucfirst($package);
 
-        if (!class_exists($class))
-        {
+        if (!class_exists($class)) {
             $class = 'Windwalker\\Core\\' . $package . '\\' . $class;
         }
 
-        if (!class_exists($class))
-        {
+        if (!class_exists($class)) {
             $this->out('Class not exists: ' . $class);
 
             exit();
@@ -78,8 +76,7 @@ class GenTest extends AbstractCliApplication
         $config = new Registry;
 
         // Set replace to config.
-        foreach ($this->replace as $key => $val)
-        {
+        foreach ($this->replace as $key => $val) {
             $config->set('replace.' . $key, $val);
         }
 
@@ -87,8 +84,7 @@ class GenTest extends AbstractCliApplication
         $methodTmpl  = file_get_contents(GENERATOR_BUNDLE_PATH . '/Template/test/testMethod.php');
         $methodCodes = [];
 
-        foreach ($methods as $method)
-        {
+        foreach ($methods as $method) {
             $config['replace.origin.method'] = $method->getName();
             $config['replace.test.method']   = ucfirst($method->getName());
 

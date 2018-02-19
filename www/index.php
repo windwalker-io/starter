@@ -8,8 +8,7 @@
 
 $root = __DIR__ . '/..';
 
-if (!is_file($root . '/vendor/autoload.php'))
-{
+if (!is_file($root . '/vendor/autoload.php')) {
     exit('Please run `composer install` First.');
 }
 

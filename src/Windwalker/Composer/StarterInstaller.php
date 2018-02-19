@@ -74,8 +74,7 @@ class StarterInstaller
         $etc    = __DIR__ . '/../../../etc';
         $secret = Yaml::parse(file_get_contents($etc . '/secret.dist.yml'));
 
-        if ($io->askConfirmation("\nDo you want to use database? [Y/n]: ", true))
-        {
+        if ($io->askConfirmation("\nDo you want to use database? [Y/n]: ", true)) {
             $io->write('');
             $io->write('Database driver only support mysql/postgresql now.');
 
@@ -87,12 +86,12 @@ class StarterInstaller
             $prefix = $io->ask("Table prefix [wind_]: ", 'wind_');
 
             $secret['database'] = [
-                'driver'   => $driver,
-                'host'     => $host,
-                'user'     => $user,
+                'driver' => $driver,
+                'host' => $host,
+                'user' => $user,
                 'password' => $pass,
-                'name'     => $name,
-                'prefix'   => $prefix
+                'name' => $name,
+                'prefix' => $prefix,
             ];
         }
 

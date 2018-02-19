@@ -19,36 +19,36 @@ use Windwalker\Test\TestCase\AbstractBaseTestCase;
  */
 class PageGetControllerTest extends AbstractBaseTestCase
 {
-	/**
-	 * Sets up the fixture, for example, open a network connection.
-	 * This method is called before a test is executed.
-	 */
-	protected function setUp()
-	{
-		Ioc::getApplication()->setCurrentPackage('main');
-	}
+    /**
+     * Sets up the fixture, for example, open a network connection.
+     * This method is called before a test is executed.
+     */
+    protected function setUp()
+    {
+        Ioc::getApplication()->setCurrentPackage('main');
+    }
 
-	/**
-	 * testRender
-	 *
-	 * @return  void
-	 */
-	public function testGetView()
-	{
-		$ctrl = PackageHelper::getPackage()->getController('Page/GetController');
+    /**
+     * testRender
+     *
+     * @return  void
+     */
+    public function testGetView()
+    {
+        $ctrl = PackageHelper::getPackage()->getController('Page/GetController');
 
-		$this->assertInstanceOf(HtmlView::class, $ctrl->getView());
-	}
+        $this->assertInstanceOf(HtmlView::class, $ctrl->getView());
+    }
 
-	/**
-	 * testGetModel
-	 *
-	 * @return  void
-	 */
-	public function testGetModel()
-	{
-		$ctrl = PackageHelper::getPackage()->getController('Page/GetController');
+    /**
+     * testGetModel
+     *
+     * @return  void
+     */
+    public function testGetModel()
+    {
+        $ctrl = PackageHelper::getPackage()->getController('Page/GetController');
 
-		$this->assertInstanceOf(ModelRepository::class, $ctrl->getModel());
-	}
+        $this->assertInstanceOf(ModelRepository::class, $ctrl->getModel());
+    }
 }

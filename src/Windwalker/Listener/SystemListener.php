@@ -37,8 +37,7 @@ class SystemListener
         $app = $event['app'];
 
         // Remove index.php
-        if ($app->uri->script == 'index.php')
-        {
+        if ($app->uri->script == 'index.php') {
             $app->uri->script = null;
         }
     }
@@ -55,8 +54,7 @@ class SystemListener
         /** @var WebApplication $app */
         $app = $event['app'];
 
-        if ($app->get('system.offline', false) && !$app->get('system.debug'))
-        {
+        if ($app->get('system.offline', false) && !$app->get('system.debug')) {
             $app->server->setHandler(
                 function (RequestInterface $request, ResponseInterface $response, callable $next = null) {
                     $view = new HtmlView;

@@ -19,14 +19,12 @@ class MainInit extends AbstractMigration
      */
     public function up()
     {
-        $this->createTable(
-            'main_cover', function (Schema $schema) {
+        $this->createTable('main_cover', function (Schema $schema) {
             $schema->primary('id')->comment('Primary Key');
             $schema->varchar('title')->comment('Primary Key');
             $schema->text('text')->comment('Content Text');
             $schema->integer('state')->signed(true)->comment('0: unpublished, 1: published');
-        }
-        );
+        });
     }
 
     /**

@@ -29,10 +29,13 @@ class DevApplication extends Application
     /**
      * Class constructor.
      *
-     * @param   Request        $request       An optional argument to provide dependency injection for the Http request object.
-     * @param   Structure      $config        An optional argument to provide dependency injection for the application's
+     * @param   Request        $request       An optional argument to provide dependency injection for the Http request
+     *                                        object.
+     * @param   Structure      $config        An optional argument to provide dependency injection for the
+     *                                        application's
      *                                        config object.
-     * @param   WebEnvironment $environment   An optional argument to provide dependency injection for the application's
+     * @param   WebEnvironment $environment   An optional argument to provide dependency injection for the
+     *                                        application's
      *                                        environment object.
      *
      * @since   2.0

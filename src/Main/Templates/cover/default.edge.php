@@ -1,7 +1,7 @@
 @extends('_global.html')
 
 @section('style')
-<link rel="stylesheet" href="{{ $asset->path }}/css/acme/cover.css" />
+<link rel="stylesheet" href="{{ $asset->path }}/css/acme/cover.css"/>
 @stop
 
 @section('page_title')
