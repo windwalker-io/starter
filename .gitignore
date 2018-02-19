@@ -3,10 +3,13 @@
 !.gitignore
 !.gitkeep
 !.htaccess
+!.editorconfig
 !web.config
 
-# Composer
+# Libraries
 /vendor
+/node_modules
+/bower_components
 
 # Remove this line when you start a project
 composer.lock
