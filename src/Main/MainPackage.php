@@ -18,24 +18,24 @@ use Windwalker\Utilities\Queue\Priority;
  */
 class MainPackage extends AbstractPackage
 {
-	/**
-	 * initialise
-	 *
-	 * @throws  \LogicException
-	 * @return  void
-	 */
-	public function boot()
-	{
-		parent::boot();
-	}
+    /**
+     * initialise
+     *
+     * @throws  \LogicException
+     * @return  void
+     */
+    public function boot()
+    {
+        parent::boot();
+    }
 
-	/**
-	 * prepareExecute
-	 *
-	 * @return  void
-	 */
-	protected function prepareExecute()
-	{
-		parent::prepareExecute();
-	}
+    /**
+     * prepareExecute
+     *
+     * @return  void
+     */
+    protected function prepareExecute()
+    {
+        parent::prepareExecute();
+    }
 }

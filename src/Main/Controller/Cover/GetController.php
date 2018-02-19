@@ -19,27 +19,27 @@ use Windwalker\Core\Controller\AbstractController;
  */
 class GetController extends AbstractController
 {
-	/**
-	 * Execute the controller.
-	 *
-	 * @return  boolean  True if controller finished execution, false if the controller did not
-	 *                   finish execution. A controller might return false if some precondition for
-	 *                   the controller to run has not been satisfied.
-	 *
-	 * @since   1.0
-	 * @throws  \LogicException
-	 * @throws  \RuntimeException
-	 */
-	public function doExecute()
-	{
-		/** @var CoverModel $model */
-		$model = $this->getModel();
+    /**
+     * Execute the controller.
+     *
+     * @return  boolean  True if controller finished execution, false if the controller did not
+     *                   finish execution. A controller might return false if some precondition for
+     *                   the controller to run has not been satisfied.
+     *
+     * @since   1.0
+     * @throws  \LogicException
+     * @throws  \RuntimeException
+     */
+    public function doExecute()
+    {
+        /** @var CoverModel $model */
+        $model = $this->getModel();
 
-		/** @var CoverHtmlView $view */
-		$view = $this->getView();
+        /** @var CoverHtmlView $view */
+        $view = $this->getView();
 
-		$view->setModel($model);
+        $view->setModel($model);
 
-		return $view->render();
-	}
+        return $view->render();
+    }
 }

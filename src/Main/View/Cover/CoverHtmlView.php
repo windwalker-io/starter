@@ -18,22 +18,22 @@ use Windwalker\Core\View\HtmlView;
  */
 class CoverHtmlView extends HtmlView
 {
-	/**
-	 * Property renderer.
-	 *
-	 * @var  string
-	 */
-	protected $renderer = RendererHelper::EDGE;
+    /**
+     * Property renderer.
+     *
+     * @var  string
+     */
+    protected $renderer = RendererHelper::EDGE;
 
-	/**
-	 * prepareData
-	 *
-	 * @param \Windwalker\Data\Data $data
-	 *
-	 * @return  void
-	 */
-	protected function prepareData($data)
-	{
-		$data->content = $this->model->getCotent();
-	}
+    /**
+     * prepareData
+     *
+     * @param \Windwalker\Data\Data $data
+     *
+     * @return  void
+     */
+    protected function prepareData($data)
+    {
+        $data->content = $this->model->getCotent();
+    }
 }

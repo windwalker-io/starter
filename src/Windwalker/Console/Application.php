@@ -9,70 +9,69 @@
 namespace Windwalker\Console;
 
 use Windwalker\Core\Console\CoreConsole;
-use Windwalker\Core\Provider;
 
 /**
  * The WindwalkerConsole class.
- * 
+ *
  * @since  2.1.1
  */
 class Application extends CoreConsole
 {
-	/**
-	 * Property configPath.
-	 *
-	 * @var  string
-	 */
-	protected $rootPath = WINDWALKER_ROOT;
+    /**
+     * Property configPath.
+     *
+     * @var  string
+     */
+    protected $rootPath = WINDWALKER_ROOT;
 
-	/**
-	 * initialise
-	 *
-	 * @return  void
-	 */
-	protected function init()
-	{
-		parent::init();
-	}
+    /**
+     * initialise
+     *
+     * @return  void
+     */
+    protected function init()
+    {
+        parent::init();
+    }
 
-	/**
-	 * registerCommands
-	 *
-	 * @return  void
-	 */
-	public function registerCommands()
-	{
-		parent::registerCommands();
+    /**
+     * registerCommands
+     *
+     * @return  void
+     */
+    public function registerCommands()
+    {
+        parent::registerCommands();
 
-		/*
+        /*
 		 * Register Commands
 		 * --------------------------------------------
 		 * Register your own commands here, make sure you have call the parent, some important
 		 * system command has registered at parent::registerCommands().
 		 */
 
-		// Your commands here.
-	}
+        // Your commands here.
+    }
 
-	/**
-	 * Prepare execute hook.
-	 *
-	 * @return  void
-	 */
-	protected function prepareExecute()
-	{
-		parent::prepareExecute();
-	}
+    /**
+     * Prepare execute hook.
+     *
+     * @return  void
+     */
+    protected function prepareExecute()
+    {
+        parent::prepareExecute();
+    }
 
-	/**
-	 * Pose execute hook.
-	 *
-	 * @param   mixed  $result  Executed return value.
-	 *
-	 * @return  mixed
-	 */
-	protected function postExecute($result = null)
-	{
-		return $result;
-	}
+    /**
+     * Pose execute hook.
+     *
+     * @param   mixed $result Executed return value.
+     *
+     * @return  mixed
+     */
+    protected function postExecute($result = null)
+    {
+        return $result;
+    }
 }

@@ -13,8 +13,9 @@ use Windwalker\Utilities\Arr;
  * -------------------------------------
  * Things you config here will be used in web environment with dev mode.
  */
-return Arr::mergeRecursive(include __DIR__ . '/web.php', [
-	/*
+return Arr::mergeRecursive(
+    include __DIR__ . '/web.php', [
+    /*
 	 * Package Registration
 	 * -------------------------------------
 	 * Register new packages to Application. The key ia package name (alias).
@@ -22,11 +23,11 @@ return Arr::mergeRecursive(include __DIR__ . '/web.php', [
 	 * You can use `PackageHelper::getPackage('foo')` to get the packages
 	 * you registered here.
 	 */
-	'packages' => [
-		'_debugger' => \Windwalker\Debugger\DebuggerPackage::class
-	],
+    'packages'    => [
+        '_debugger' => \Windwalker\Debugger\DebuggerPackage::class
+    ],
 
-	/*
+    /*
 	 * Provider Registration
 	 * -------------------------------------
 	 * Register DI service providers to Container.
@@ -41,24 +42,24 @@ return Arr::mergeRecursive(include __DIR__ . '/web.php', [
 	 * NOTE: You must familiar about how DI Container working, otherwise you may
 	 *       break your system.
 	 */
-	'providers' =>[
-		// Add pretty error handler page.
-		'whoops' => \Windwalker\Core\Provider\WhoopsProvider::class,
-	],
+    'providers'   => [
+        // Add pretty error handler page.
+        'whoops' => \Windwalker\Core\Provider\WhoopsProvider::class,
+    ],
 
-	/*
+    /*
 	 * Register Routing Files
 	 * -------------------------------------
 	 * If you have more routing files, please add them here. You can also override
 	 * core routing files, use same key name to override it.
 	 */
-	'routing' => [
-		'files' => [
-			'dev' => WINDWALKER_ETC . '/dev/routing.yml'
-		]
-	],
+    'routing'     => [
+        'files' => [
+            'dev' => WINDWALKER_ETC . '/dev/routing.yml'
+        ]
+    ],
 
-	/*
+    /*
 	 * Http Middlewares
 	 * -------------------------------------
 	 * Register middlewares to Application, these middleware will execute one by one
@@ -70,11 +71,11 @@ return Arr::mergeRecursive(include __DIR__ . '/web.php', [
 	 *
 	 * Uncomment the line below to override core middlewares.
 	 */
-	'middlewares' => [
-		// Add something here...
-	],
+    'middlewares' => [
+        // Add something here...
+    ],
 
-	/*
+    /*
 	 * Load Config Files
 	 * -------------------------------------
 	 * Add extra config file that you can customize your application by more settings.
@@ -83,12 +84,12 @@ return Arr::mergeRecursive(include __DIR__ . '/web.php', [
 	 * The bigger number will load later and override the previous, so `stc/secret.yml`
 	 * will be the latest file and override all configs.
 	 */
-	'configs' => [
-		// Add dev config
-		200 => WINDWALKER_ETC . '/dev/config.yml'
-	],
+    'configs'     => [
+        // Add dev config
+        200 => WINDWALKER_ETC . '/dev/config.yml'
+    ],
 
-	/*
+    /*
 	 * Event Listeners
 	 * -------------------------------------
 	 * Add event listeners to event Dispatcher, this function help us inject logic between
@@ -100,28 +101,29 @@ return Arr::mergeRecursive(include __DIR__ . '/web.php', [
 	 * If you want to add priority to control the execution ordering of listeners, use array to config it.
 	 * Example: 'foo' => ['class' => MyListener::class, 'priority' => 300, 'enabled' => boolean]
 	 */
-	'listeners' => [
-		// Add something here...
-	],
+    'listeners'   => [
+        // Add something here...
+    ],
 
-	/*
+    /*
 	 * Register Error Handler Classes
 	 */
-	'error' => [
-		'handlers' => [
-			// Uncommnet this line if you need error log support
-			// 'log' => \Windwalker\Core\Error\Handler\ErrorLogHandler::class
-		]
-	],
+    'error'       => [
+        'handlers' => [
+            // Uncommnet this line if you need error log support
+            // 'log' => \Windwalker\Core\Error\Handler\ErrorLogHandler::class
+        ]
+    ],
 
-	/*
+    /*
 	 * Register User Auth Handlers
 	 */
-	'user' => [
-		'handler' => \Windwalker\Core\User\NullUserHandler::class,
-		'methods' => [
-		],
-		'policies' => [
-		]
-	]
-]);
+    'user'        => [
+        'handler'  => \Windwalker\Core\User\NullUserHandler::class,
+        'methods'  => [
+        ],
+        'policies' => [
+        ]
+    ]
+]
+);

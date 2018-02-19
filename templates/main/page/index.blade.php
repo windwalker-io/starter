@@ -2,7 +2,7 @@
 @extends('_global.html')
 
 @section('page_title')
-Acme Page
+    Acme Page
 @stop
 
 @section('nav')

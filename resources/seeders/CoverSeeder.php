@@ -15,39 +15,39 @@ use Windwalker\Core\Seeder\AbstractSeeder;
  */
 class CoverSeeder extends AbstractSeeder
 {
-	/**
-	 * doExecute
-	 *
-	 * @return  void
-	 */
-	public function doExecute()
-	{
-		$faker = \Faker\Factory::create();
+    /**
+     * doExecute
+     *
+     * @return  void
+     */
+    public function doExecute()
+    {
+        $faker = \Faker\Factory::create();
 
-		// This is example seeder, you can delete it.
-		$mapper = new \Windwalker\DataMapper\DataMapper('main_cover');
+        // This is example seeder, you can delete it.
+        $mapper = new \Windwalker\DataMapper\DataMapper('main_cover');
 
-		foreach (range(1, 50) as $i)
-		{
-			$data = new \Windwalker\Data\Data;
+        foreach (range(1, 50) as $i)
+        {
+            $data = new \Windwalker\Data\Data;
 
-			$data->title = $faker->sentence(2);
-			$data->text = $faker->paragraph(3);
-			$data->state = $faker->randomElement([0, 1, 1]);
+            $data->title = $faker->sentence(2);
+            $data->text  = $faker->paragraph(3);
+            $data->state = $faker->randomElement([0, 1, 1]);
 
-			$mapper->createOne($data);
+            $mapper->createOne($data);
 
-			$this->outCounting();
-		}
-	}
+            $this->outCounting();
+        }
+    }
 
-	/**
-	 * doClear
-	 *
-	 * @return  void
-	 */
-	public function doClear()
-	{
-		$this->truncate('main_cover');
-	}
+    /**
+     * doClear
+     *
+     * @return  void
+     */
+    public function doClear()
+    {
+        $this->truncate('main_cover');
+    }
 }

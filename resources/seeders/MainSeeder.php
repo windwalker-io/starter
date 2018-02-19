@@ -10,28 +10,28 @@ use Windwalker\Core\Seeder\AbstractSeeder;
 
 /**
  * The MainSeeder class.
- * 
+ *
  * @since  {DEPLOY_VERSION}
  */
 class MainSeeder extends AbstractSeeder
 {
-	/**
-	 * doExecute
-	 *
-	 * @return  void
-	 */
-	public function doExecute()
-	{
-		$this->execute(CoverSeeder::class);
-	}
+    /**
+     * doExecute
+     *
+     * @return  void
+     */
+    public function doExecute()
+    {
+        $this->execute(CoverSeeder::class);
+    }
 
-	/**
-	 * doClear
-	 *
-	 * @return  void
-	 */
-	public function doClear()
-	{
-		$this->clear(CoverSeeder::class);
-	}
+    /**
+     * doClear
+     *
+     * @return  void
+     */
+    public function doClear()
+    {
+        $this->clear(CoverSeeder::class);
+    }
 }

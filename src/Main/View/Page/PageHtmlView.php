@@ -17,5 +17,5 @@ use Windwalker\Core\View\HtmlView;
  */
 class PageHtmlView extends HtmlView
 {
-	protected $layout = 'index';
+    protected $layout = 'index';
 }

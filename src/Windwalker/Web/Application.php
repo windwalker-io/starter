@@ -9,7 +9,6 @@
 namespace Windwalker\Web;
 
 use Windwalker\Core\Application\WebApplication;
-use Windwalker\Core\Provider;
 
 /**
  * Class Application
@@ -18,46 +17,45 @@ use Windwalker\Core\Provider;
  */
 class Application extends WebApplication
 {
-	/**
-	 * Property name.
-	 *
-	 * @var  string
-	 */
-	protected $name = 'web';
+    /**
+     * Property name.
+     *
+     * @var  string
+     */
+    protected $name = 'web';
+    /**
+     * Property configPath.
+     *
+     * @var  string
+     */
+    protected $rootPath = WINDWALKER_ROOT;
 
-	/**
-	 * Property configPath.
-	 *
-	 * @var  string
-	 */
-	protected $rootPath = WINDWALKER_ROOT;
+    /**
+     * initialise
+     *
+     * @return  void
+     */
+    protected function init()
+    {
+        parent::init();
+    }
 
-	/**
-	 * initialise
-	 *
-	 * @return  void
-	 */
-	protected function init()
-	{
-		parent::init();
-	}
+    /**
+     * Prepare execute hook.
+     *
+     * @return  void
+     */
+    protected function prepareExecute()
+    {
 
-	/**
-	 * Prepare execute hook.
-	 *
-	 * @return  void
-	 */
-	protected function prepareExecute()
-	{
-		
-	}
+    }
 
-	/**
-	 * Pose execute hook.
-	 *
-	 * @return  mixed
-	 */
-	protected function postExecute()
-	{
-	}
+    /**
+     * Pose execute hook.
+     *
+     * @return  mixed
+     */
+    protected function postExecute()
+    {
+    }
 }

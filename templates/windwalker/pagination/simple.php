@@ -7,7 +7,6 @@
  */
 
 use Windwalker\Core\Pagination\PaginationResult;
-use Windwalker\Data\Data;
 
 /**
  * @var PaginationResult $pagination
@@ -38,14 +37,14 @@ use Windwalker\Data\Data;
     </div>
 
     <div class="pull-right">
-	    <?php if ($pagination->getNext()): ?>
-			<a href="<?php echo $route(['page' => $pagination->getNext()]); ?>"
-				class="hasTooltip btn btn-default" title="Next Page">
-				<span class="glyphicon glyphicon-forward"></span>
-				<span class="sr-only">
+        <?php if ($pagination->getNext()): ?>
+            <a href="<?php echo $route(['page' => $pagination->getNext()]); ?>"
+                class="hasTooltip btn btn-default" title="Next Page">
+                <span class="glyphicon glyphicon-forward"></span>
+                <span class="sr-only">
 					Next Page
 				</span>
-			</a>
-	    <?php endif; ?>
+            </a>
+        <?php endif; ?>
     </div>
 </div>

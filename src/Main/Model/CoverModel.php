@@ -17,20 +17,20 @@ use Windwalker\Core\Model\DatabaseModelRepository;
  */
 class CoverModel extends DatabaseModelRepository
 {
-	/**
-	 * Property table.
-	 *
-	 * @var  string
-	 */
-	protected $table = 'main_cover';
+    /**
+     * Property table.
+     *
+     * @var  string
+     */
+    protected $table = 'main_cover';
 
-	/**
-	 * getContent
-	 *
-	 * @return  \Windwalker\Data\Data
-	 */
-	public function getContent()
-	{
-		$this->getDataMapper()->findOne(['id' => 1]);
-	}
+    /**
+     * getContent
+     *
+     * @return  \Windwalker\Data\Data
+     */
+    public function getContent()
+    {
+        $this->getDataMapper()->findOne(['id' => 1]);
+    }
 }

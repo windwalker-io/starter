@@ -17,5 +17,4 @@ use Windwalker\Core\Model\DatabaseModelRepository;
  */
 class PageModel extends DatabaseModelRepository
 {
-	
 }

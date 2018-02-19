@@ -17,19 +17,19 @@ use Windwalker\Core\Controller\AbstractController;
  */
 class GetController extends AbstractController
 {
-	/**
-	 * Execute the controller.
-	 *
-	 * @return  mixed  Result.
-	 *
-	 * @since   1.0
-	 * @throws  \LogicException
-	 * @throws  \RuntimeException
-	 */
-	protected function doExecute()
-	{
-		$view = $this->getView();
+    /**
+     * Execute the controller.
+     *
+     * @return  mixed  Result.
+     *
+     * @since   1.0
+     * @throws  \LogicException
+     * @throws  \RuntimeException
+     */
+    protected function doExecute()
+    {
+        $view = $this->getView();
 
-		return $view->setLayout('index')->render();
-	}
+        return $view->setLayout('index')->render();
+    }
 }

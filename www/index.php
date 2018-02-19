@@ -10,7 +10,7 @@ $root = __DIR__ . '/..';
 
 if (!is_file($root . '/vendor/autoload.php'))
 {
-	exit('Please run `composer install` First.');
+    exit('Please run `composer install` First.');
 }
 
 include $root . '/vendor/autoload.php';

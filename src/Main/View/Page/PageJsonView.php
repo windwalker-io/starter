@@ -18,15 +18,15 @@ use Windwalker\Structure\Structure;
  */
 class PageJsonView extends StructureView
 {
-	/**
-	 * prepareData
-	 *
-	 * @param Structure $registry
-	 *
-	 * @return  void
-	 */
-	protected function prepareData($registry)
-	{
-		$registry['items'] = [1, 2, 3];
-	}
+    /**
+     * prepareData
+     *
+     * @param Structure $registry
+     *
+     * @return  void
+     */
+    protected function prepareData($registry)
+    {
+        $registry['items'] = [1, 2, 3];
+    }
 }
