@@ -19,6 +19,12 @@ a:hover {
 	border: 1px solid #fff;
 }
 
+pre {
+  background-color: #eee;
+  padding: 10px;
+  border-radius: 3px;
+}
+
 
 /*
  * Base structure

@@ -9,6 +9,7 @@
 namespace Main\Model;
 
 use Windwalker\Core\Model\DatabaseModelRepository;
+use Windwalker\Data\Data;
 
 /**
  * Class CoverModel
@@ -31,6 +32,10 @@ class CoverModel extends DatabaseModelRepository
      */
     public function getContent()
     {
-        $this->getDataMapper()->findOne(['id' => 1]);
+        try {
+            return $this->getDataMapper()->findOne(['id' => 1]);
+        } catch (\RuntimeException $e) {
+            return new Data();
+        }
     }
 }

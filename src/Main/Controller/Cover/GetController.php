@@ -38,7 +38,7 @@ class GetController extends AbstractController
         /** @var CoverHtmlView $view */
         $view = $this->getView();
 
-        $view->setModel($model);
+        $view->setModel($model, true);
 
         return $view->render();
     }
