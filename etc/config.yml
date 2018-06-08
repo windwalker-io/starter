@@ -32,7 +32,8 @@ routing:
 
     # Simple routing help us auto find controller by URL: `{package}/{controller}` without routing config,
     # Disable this function will enhance performance.
-    simple_route: true
+    # @deprecated
+    simple_route: false
 
 cache:
     # Disabled cache will make all cache as null storage and not stored to storage.
