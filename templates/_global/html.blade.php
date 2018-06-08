@@ -1,5 +1,5 @@
 {{-- Part of Windwalker project. --}}
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ $app->get('language.locale') ? : $app->get('language.default', 'en-GB') }}">
 <head>
     <meta charset="UTF-8">
@@ -13,11 +13,13 @@
     <link rel="stylesheet" href="<?php echo $uri->path; ?>/asset/css/main.css" />
     {!! $asset->renderStyles(true) !!}
     @yield('style')
+@stack('style')
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
-    @yield('script')
     {!! $asset->renderScripts(true) !!}
+    @yield('script')
+@stack('script')
 </head>
 <body>
 @section('navbar')

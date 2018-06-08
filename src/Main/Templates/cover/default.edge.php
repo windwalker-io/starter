@@ -1,8 +1,8 @@
 @extends('_global.html')
 
-@section('style')
+@push('style')
 <link rel="stylesheet" href="{{ $asset->path }}/css/acme/cover.css"/>
-@stop
+@endpush
 
 @section('page_title')
 Acme Cover
