@@ -118,7 +118,7 @@ return Arr::mergeRecursive(include __DIR__ . '/web.php', [
      * Register User Auth Handlers
      */
     'user' => [
-        'handler' => \Windwalker\Core\User\NullUserHandler::class,
+        'handler' => null,
         'methods' => [
         ],
         'policies' => [
