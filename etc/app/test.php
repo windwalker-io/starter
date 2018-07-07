@@ -41,7 +41,7 @@ return Arr::mergeRecursive(include __DIR__ . '/web.php', [
      * NOTE: You must familiar about how DI Container working, otherwise you may
      *       break your system.
      */
-    'providers' =>[
+    'providers' => [
         'error' => false,
     ],
 

@@ -38,7 +38,7 @@ return [
      * NOTE: You must familiar about how DI Container working, otherwise you may
      *       break your system.
      */
-    'providers' =>[
+    'providers' => [
         //        'logger' => \Windwalker\Core\Provider\LoggerProvider::class,
         //        'event'  => \Windwalker\Core\Provider\EventProvider::class,
     ],
@@ -82,16 +82,16 @@ return [
         'aliases' => [
             // System
             'application' => \Windwalker\Core\Application\WindwalkerApplicationInterface::class,
-            'app'         => \Windwalker\Core\Application\WindwalkerApplicationInterface::class,
-            'config'      => \Windwalker\Core\Config\Config::class,
+            'app' => \Windwalker\Core\Application\WindwalkerApplicationInterface::class,
+            'config' => \Windwalker\Core\Config\Config::class,
             'package.resolver' => \Windwalker\Core\Package\PackageResolver::class,
 
             // Web
-            'input'       => \Windwalker\IO\Input::class,
+            'input' => \Windwalker\IO\Input::class,
             'environment' => \Windwalker\Environment\WebEnvironment::class,
-            'browser'     => \Windwalker\Environment\Browser\Browser::class,
-            'platform'    => \Windwalker\Environment\Platform::class,
-            'uri'         => \Windwalker\Uri\UriData::class,
+            'browser' => \Windwalker\Environment\Browser\Browser::class,
+            'platform' => \Windwalker\Environment\Platform::class,
+            'uri' => \Windwalker\Uri\UriData::class,
 
             // Error
             'error.handler' => \Windwalker\Core\Error\ErrorManager::class,
@@ -103,8 +103,8 @@ return [
             'dispatcher' => \Windwalker\Core\Event\EventDispatcher::class,
 
             // Database
-            'database'     => \Windwalker\Database\Driver\AbstractDatabaseDriver::class,
-            'db'           => \Windwalker\Database\Driver\AbstractDatabaseDriver::class,
+            'database' => \Windwalker\Database\Driver\AbstractDatabaseDriver::class,
+            'db' => \Windwalker\Database\Driver\AbstractDatabaseDriver::class,
             'sql.exporter' => \Windwalker\Core\Database\Exporter\AbstractExporter::class,
 
             // Router
@@ -115,21 +115,21 @@ return [
 
             // Renderer
             'renderer.manager' => \Windwalker\Core\Renderer\RendererManager::class,
-            'renderer'         => \Windwalker\Core\Renderer\RendererManager::class,
-            'package.finder'   => \Windwalker\Core\Renderer\Finder\PackageFinder::class,
-            'widget.manager'   => \Windwalker\Core\Widget\WidgetManager::class,
+            'renderer' => \Windwalker\Core\Renderer\RendererManager::class,
+            'package.finder' => \Windwalker\Core\Renderer\Finder\PackageFinder::class,
+            'widget.manager' => \Windwalker\Core\Widget\WidgetManager::class,
 
             // Cache
             'cache.manager' => \Windwalker\Core\Cache\CacheManager::class,
-            'cache'         => \Windwalker\Cache\Cache::class,
+            'cache' => \Windwalker\Cache\Cache::class,
 
             // Session
             'session' => \Windwalker\Session\Session::class,
 
             // User
             'authentication' => \Windwalker\Authentication\AuthenticationInterface::class,
-            'authorisation'  => \Windwalker\Authorisation\AuthorisationInterface::class,
-            'user.manager'   => \Windwalker\Core\User\UserManager::class,
+            'authorisation' => \Windwalker\Authorisation\AuthorisationInterface::class,
+            'user.manager' => \Windwalker\Core\User\UserManager::class,
 
             // Security
             'security.csrf' => \Windwalker\Core\Security\CsrfGuard::class,
@@ -158,19 +158,19 @@ return [
      * These paths make our core library works correctly.
      */
     'path' => [
-        'root'       => WINDWALKER_ROOT,
-        'bin'        => WINDWALKER_BIN,
-        'cache'      => WINDWALKER_CACHE,
-        'etc'        => WINDWALKER_ETC,
-        'logs'       => WINDWALKER_LOGS,
-        'resources'  => WINDWALKER_RESOURCES,
-        'source'     => WINDWALKER_SOURCE,
-        'temp'       => WINDWALKER_TEMP,
-        'templates'  => WINDWALKER_TEMPLATES,
-        'vendor'     => WINDWALKER_VENDOR,
-        'public'     => WINDWALKER_PUBLIC,
+        'root' => WINDWALKER_ROOT,
+        'bin' => WINDWALKER_BIN,
+        'cache' => WINDWALKER_CACHE,
+        'etc' => WINDWALKER_ETC,
+        'logs' => WINDWALKER_LOGS,
+        'resources' => WINDWALKER_RESOURCES,
+        'source' => WINDWALKER_SOURCE,
+        'temp' => WINDWALKER_TEMP,
+        'templates' => WINDWALKER_TEMPLATES,
+        'vendor' => WINDWALKER_VENDOR,
+        'public' => WINDWALKER_PUBLIC,
         'migrations' => WINDWALKER_MIGRATIONS,
-        'seeders'    => WINDWALKER_SEEDERS,
-        'languages'  => WINDWALKER_LANGUAGES,
+        'seeders' => WINDWALKER_SEEDERS,
+        'languages' => WINDWALKER_LANGUAGES,
     ]
 ];

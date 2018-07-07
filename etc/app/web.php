@@ -41,7 +41,7 @@ return Arr::mergeRecursive(include __DIR__ . '/windwalker.php', [
      * NOTE: You must familiar about how DI Container working, otherwise you may
      *       break your system.
      */
-    'providers' =>[
+    'providers' => [
 //        'web'      => \Windwalker\Core\Provider\WebProvider::class,
 //        'error'    => \Windwalker\Core\Error\ErrorHandlingProvider::class,
 //        'logger'   => \Windwalker\Core\Provider\LoggerProvider::class,
