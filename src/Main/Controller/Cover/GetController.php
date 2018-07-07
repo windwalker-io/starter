@@ -8,7 +8,7 @@
 
 namespace Main\Controller\Cover;
 
-use Main\Model\CoverModel;
+use Main\Repository\CoverRepository;
 use Main\View\Cover\CoverHtmlView;
 use Windwalker\Core\Controller\AbstractController;
 
@@ -27,18 +27,17 @@ class GetController extends AbstractController
      *                   the controller to run has not been satisfied.
      *
      * @since   1.0
-     * @throws  \LogicException
-     * @throws  \RuntimeException
+     * @throws  \Exception
      */
     public function doExecute()
     {
-        /** @var CoverModel $model */
-        $model = $this->getModel();
+        /** @var CoverRepository $repository */
+        $repository = $this->getRepository();
 
         /** @var CoverHtmlView $view */
         $view = $this->getView();
 
-        $view->setModel($model, true);
+        $view->setRepository($repository, true);
 
         return $view->render();
     }

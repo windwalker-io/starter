@@ -23,8 +23,7 @@ class GetController extends AbstractController
      * @return  mixed  Result.
      *
      * @since   1.0
-     * @throws  \LogicException
-     * @throws  \RuntimeException
+     * @throws  \Exception
      */
     protected function doExecute()
     {

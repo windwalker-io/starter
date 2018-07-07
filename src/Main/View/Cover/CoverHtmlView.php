@@ -34,6 +34,6 @@ class CoverHtmlView extends HtmlView
      */
     protected function prepareData($data)
     {
-        $data->content = $this->model->getContent();
+        $data->content = $this->repository->getContent();
     }
 }

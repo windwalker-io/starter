@@ -6,7 +6,7 @@
  * @license    GNU Lesser General Public License version 3 or later. see LICENSE
  */
 
-namespace Main\Model;
+namespace Main\Repository;
 
 use Windwalker\Core\Model\DatabaseModelRepository;
 use Windwalker\Data\Data;
@@ -16,7 +16,7 @@ use Windwalker\Data\Data;
  *
  * @since 1.0
  */
-class CoverModel extends DatabaseModelRepository
+class CoverRepository extends DatabaseModelRepository
 {
     /**
      * Property table.
@@ -29,6 +29,7 @@ class CoverModel extends DatabaseModelRepository
      * getContent
      *
      * @return  \Windwalker\Data\Data
+     * @throws  \Exception
      */
     public function getContent()
     {
