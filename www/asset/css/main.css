@@ -7,10 +7,11 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-	padding-top: 50px;
-	padding-bottom: 20px;
+  padding-top: 50px;
+  padding-bottom: 20px;
 }
+
 .navbar-brand img {
-	height: 35px;
-	margin-top: -8px;
+  height: 35px;
+  margin-top: -8px;
 }
