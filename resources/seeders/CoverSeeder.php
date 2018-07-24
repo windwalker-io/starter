@@ -6,7 +6,11 @@
  * @license    GNU General Public License version 2 or later.
  */
 
+// phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
+
 use Windwalker\Core\Seeder\AbstractSeeder;
+use Windwalker\Data\Data;
+use Windwalker\DataMapper\DataMapper;
 
 /**
  * The CoverSeeder class.
@@ -19,16 +23,17 @@ class CoverSeeder extends AbstractSeeder
      * doExecute
      *
      * @return  void
+     * @throws Exception
      */
     public function doExecute()
     {
         $faker = \Faker\Factory::create();
 
         // This is example seeder, you can delete it.
-        $mapper = new \Windwalker\DataMapper\DataMapper('main_cover');
+        $mapper = new DataMapper('main_cover');
 
         foreach (range(1, 50) as $i) {
-            $data = new \Windwalker\Data\Data;
+            $data = new Data();
 
             $data->title = $faker->sentence(2);
             $data->text  = $faker->paragraph(3);

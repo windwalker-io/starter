@@ -44,11 +44,11 @@ class Application extends CoreConsole
         parent::registerCommands();
 
         /*
-		 * Register Commands
-		 * --------------------------------------------
-		 * Register your own commands here, make sure you have call the parent, some important
-		 * system command has registered at parent::registerCommands().
-		 */
+         * Register Commands
+         * --------------------------------------------
+         * Register your own commands here, make sure you have call the parent, some important
+         * system command has registered at parent::registerCommands().
+         */
 
         // Your commands here.
     }

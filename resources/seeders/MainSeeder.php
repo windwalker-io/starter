@@ -6,6 +6,8 @@
  * @license    GNU Lesser General Public License version 3 or later.
  */
 
+// phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
+
 use Windwalker\Core\Seeder\AbstractSeeder;
 
 /**
@@ -19,6 +21,7 @@ class MainSeeder extends AbstractSeeder
      * doExecute
      *
      * @return  void
+     * @throws ReflectionException
      */
     public function doExecute()
     {
@@ -29,6 +32,7 @@ class MainSeeder extends AbstractSeeder
      * doClear
      *
      * @return  void
+     * @throws ReflectionException
      */
     public function doClear()
     {
