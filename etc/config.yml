@@ -58,9 +58,11 @@ crypt:
 
     # The hashing algorithm
     # Support algorithms: blowfish (bf) / md5 / sha256 / sha512 / argon2 / scrypt
+    # @deprecated
     hash_algo: blowfish
 
     # The hashing cost depends on different algorithms. Keep default if you don't know how to use it.
+    # @deprecated
     hash_cost: ~
 
 asset:
