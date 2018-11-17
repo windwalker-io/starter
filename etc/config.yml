@@ -2,6 +2,9 @@ system:
     # Enanle debug mode, will disable cache, and log some errors.
     debug: false
 
+    # The var dump server host.
+    var_dump_server_host: tcp://127.0.0.1:9912
+
     # The PHP error reporting level, 0 is hide all errors, -1 is the biggest report level.
     error_reporting: 0
 
