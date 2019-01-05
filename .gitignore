@@ -16,7 +16,7 @@ composer.lock
 yarn.lock
 
 # Windwalker
-/etc/secret.yml
+!/.env.dist
 
 #Test
 /phpunit.xml

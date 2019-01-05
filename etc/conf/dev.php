@@ -7,9 +7,5 @@
  */
 
 return [
-    'allow_ips' => [
-        '127.0.0.1',
-        'fe80::1',
-        '::1'
-    ]
+    'allow_ips' => env('DEV_ALLOW_IPS') ?? ''
 ];

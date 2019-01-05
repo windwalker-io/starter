@@ -13,9 +13,9 @@ return [
     ],
     'transport' => env('MAIL_TRANSPORT'),
     'smtp' => [
-        'security' => env('MAIL_SMTP_SECURITY'),
+        'security' => env('MAIL_SMTP_SECURITY') ?? 'tls',
+        'port' => env('MAIL_SMTP_PORT') ?? 2525,
         'host' => env('MAIL_SMTP_HOST'),
-        'port' => env('MAIL_SMTP_PORT'),
         'username' => env('MAIL_SMTP_USERNAME'),
         'password' => env('MAIL_SMTP_PASSWORD'),
         'local' => '',

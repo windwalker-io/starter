@@ -6,6 +6,8 @@
  * @license    GNU Lesser General Public License version 3 or later.
  */
 
+use Symfony\Component\Dotenv\Dotenv;
+
 define('WINDWALKER_ROOT', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..'));
 define('WINDWALKER_BIN', WINDWALKER_ROOT . DIRECTORY_SEPARATOR . 'bin');
 define('WINDWALKER_CACHE', WINDWALKER_ROOT . DIRECTORY_SEPARATOR . 'cache');
@@ -21,3 +23,9 @@ define('WINDWALKER_PUBLIC', WINDWALKER_ROOT . DIRECTORY_SEPARATOR . 'www');
 define('WINDWALKER_MIGRATIONS', WINDWALKER_RESOURCES . DIRECTORY_SEPARATOR . 'migrations');
 define('WINDWALKER_SEEDERS', WINDWALKER_RESOURCES . DIRECTORY_SEPARATOR . 'seeders');
 define('WINDWALKER_LANGUAGES', WINDWALKER_RESOURCES . DIRECTORY_SEPARATOR . 'languages');
+
+$env = WINDWALKER_ROOT . '/.env';
+
+if (is_file($env)) {
+    (new Dotenv())->load($env);
+}
