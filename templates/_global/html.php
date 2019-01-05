@@ -49,7 +49,7 @@
 
 <?php $this->block('message') ?>
 <div id="messasge" class="container">
-    <?php echo $widget->render('windwalker.message.default', ['messages' => $messages]); ?>
+    <?php echo \Windwalker\Core\Message\MessageHelper::render($widget, 'windwalker.message.default'); ?>
 </div>
 <?php $this->endblock(); ?>
 

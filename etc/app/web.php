@@ -115,9 +115,7 @@ return Arr::mergeRecursive(include __DIR__ . '/windwalker.php', [
 	 * Example: 'foo' => ['class' => MyListener::class, 'priority' => 300, 'enabled' => boolean]
 	 */
 	'listeners' => [
-		500 => \Windwalker\Listener\SystemListener::class,
-//		'minify' => \Phoenix\Listener\CssMinifyListener::class,
-		'inliner' => \Windwalker\Core\Mailer\Listener\MailInlinerListener::class
+		500 => \Windwalker\SystemPackage\Listener\SystemListener::class
 	],
 
 	/*

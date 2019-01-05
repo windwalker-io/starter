@@ -10,8 +10,9 @@ return Arr::mergeRecursive(
     [
         'dev'      => require __DIR__ . '/conf/dev.php',
         'system'   => require __DIR__ . '/conf/system.php',
-        'database' => require __DIR__ . '/conf/database.php',
+        'logs'     => require __DIR__ . '/conf/logs.php',
         'error'    => require __DIR__ . '/conf/error.php',
+        'database' => require __DIR__ . '/conf/database.php',
         'session'  => require __DIR__ . '/conf/session.php',
         'routing'  => require __DIR__ . '/conf/routing.php',
         'cache'    => require __DIR__ . '/conf/cache.php',
