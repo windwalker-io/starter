@@ -85,7 +85,7 @@ return Arr::mergeRecursive(include __DIR__ . '/web.php', [
      */
     'configs' => [
         // Add dev config
-        200 => WINDWALKER_ETC . '/dev/config.yml'
+        200 => WINDWALKER_ETC . '/dev/config.php'
     ],
 
     /*
