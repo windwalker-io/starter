@@ -16,15 +16,6 @@ return [
     //
     // Then just run `$ php windwalker run foo`
     'scripts' => [
-        'init' => [
-            'php windwalker muse init Asuka/Flower sakura.sakuras',
-            'php windwalker muse init Asuka/Fsimple sakura.sakuras -t=simple',
-            'php windwalker muse init Asuka/Fempty sakura.sakuras -t=empty'
-        ],
-        'convert' => [
-            'php windwalker muse convert Asuka/Flower sakura.sakuras',
-            'php windwalker muse convert Asuka/Fsimple sakura.sakuras -t=simple',
-            'php windwalker muse convert Asuka/Fempty sakura.sakuras -t=empty'
-        ]
+        //
     ]
 ];
