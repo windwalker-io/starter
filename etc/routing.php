@@ -1,18 +1,12 @@
-main:
-    pattern: /
-    package: main
+<?php
+/**
+ * Part of Windwalker project.
+ *
+ * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
+ * @license    GNU Lesser General Public License version 3 or later.
+ */
 
-# Routing of package: flower
-flower:
-    pattern: /flower
-    package: flower
+use Windwalker\Core\Router\RouteCreator;
 
-# Routing of package: fsimple
-fsimple:
-    pattern: /fsimple
-    package: fsimple
-
-# Routing of package: fempty
-fempty:
-    pattern: /fempty
-    package: fempty
+/** @var RouteCreator $router */
+$router->registerPackage('main', '/');
