@@ -26,37 +26,39 @@ return Arr::mergeRecursive(include __DIR__ . '/windwalker.php', [
 		'main' => \Main\MainPackage::class
 	],
 
-	/*
-	 * Provider Registration
-	 * -------------------------------------
-	 * Register DI service providers to Container.
-	 *
-	 * If you installed 3rd packages from composer, you may add them to here.
-	 * The packages you want to register into Container must provides a Windwalker
-	 * service provider interface.
-	 *
-	 * You can override the default providers in Windwalker core. Just uncomment
-	 * the line, use same key name and replace provider class by your own.
-	 *
-	 * NOTE: You must familiar about how DI Container working, otherwise you may
-	 *       break your system.
-	 */
-	'providers' =>[
-		//'web'      => \Windwalker\Core\Provider\WebProvider::class,
-		//'datetime' => \Windwalker\Core\Provider\DateTimeProvider::class,
-		//'error'    => \Windwalker\Core\Error\ErrorHandlingProvider::class,
-		//'logger'   => \Windwalker\Core\Provider\LoggerProvider::class,
-		//'event'    => \Windwalker\Core\Provider\EventProvider::class,
-		//'database' => \Windwalker\Core\Provider\DatabaseProvider::class,
-		//'router'   => \Windwalker\Core\Provider\RouterProvider::class,
-		//'lang'     => \Windwalker\Core\Provider\LanguageProvider::class,
-		//'renderer' => \Windwalker\Core\Provider\RendererProvider::class,
-		//'cache'    => \Windwalker\Core\Provider\CacheProvider::class,
-		//'session'  => \Windwalker\Core\Provider\SessionProvider::class,
-		//'auth'     => \Windwalker\Core\Provider\UserProvider::class,
-		//'security' => \Windwalker\Core\Provider\SecurityProvider::class,
-		//'asset'    => \Windwalker\Core\Asset\AssetProvider::class
-	],
+    /*
+     * Provider Registration
+     * -------------------------------------
+     * Register DI service providers to Container.
+     *
+     * If you installed 3rd packages from composer, you may add them to here.
+     * The packages you want to register into Container must provides a Windwalker
+     * service provider interface.
+     *
+     * You can override the default providers in Windwalker core. Just uncomment
+     * the line, use same key name and replace provider class by your own.
+     *
+     * NOTE: You must familiar about how DI Container working, otherwise you may
+     *       break your system.
+     */
+    'providers' => [
+//        'web'      => \Windwalker\Core\Provider\WebProvider::class,
+//        'error'    => \Windwalker\Core\Error\ErrorHandlingProvider::class,
+//        'logger'   => \Windwalker\Core\Provider\LoggerProvider::class,
+//        'event'    => \Windwalker\Core\Provider\EventProvider::class,
+//        'database' => \Windwalker\Core\Provider\DatabaseProvider::class,
+//        'router'   => \Windwalker\Core\Provider\RouterProvider::class,
+//        'lang'     => \Windwalker\Core\Provider\LanguageProvider::class,
+//        'renderer' => \Windwalker\Core\Provider\RendererProvider::class,
+//        'cache'    => \Windwalker\Core\Provider\CacheProvider::class,
+//        'session'  => \Windwalker\Core\Provider\SessionProvider::class,
+//        'auth'     => \Windwalker\Core\Provider\UserProvider::class,
+//        'security' => \Windwalker\Core\Provider\SecurityProvider::class,
+//        'asset'    => \Windwalker\Core\Asset\AssetProvider::class,
+//        'mailer'   => \Windwalker\Core\Mailer\MailerProvider::class,
+//        'mailer_adapter' => \Windwalker\Core\Mailer\SwiftMailerProvider::class,
+//        'queue'    => \Windwalker\Core\Queue\QueueProvider::class
+    ],
 
 	/*
 	 * Register Routing Files

@@ -29,6 +29,8 @@ class TestApplication extends Application
      * initialise
      *
      * @return  void
+     * @throws \ReflectionException
+     * @throws \Windwalker\DI\Exception\DependencyResolutionException
      */
     protected function init()
     {
@@ -37,6 +39,6 @@ class TestApplication extends Application
         $this->boot();
 
         $session = $this->session;
-        $session->setBridge(new MockArrayBridge);
+        $session->setBridge(new MockArrayBridge());
     }
 }

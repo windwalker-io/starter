@@ -23,7 +23,7 @@
 <?php $this->block('navbar'); ?>
 <div class="navbar navbar-default navbar-fixed-top fixed-top navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="<?php echo $router->route('home'); ?>">
+        <a class="navbar-brand" href="<?php echo $router->to('home')->mute(); ?>">
             <img src="https://cloud.githubusercontent.com/assets/1639206/2870854/176b987a-d2e4-11e3-8be6-9f70304a8499.png" alt="Windwalker LOGO" />
         </a>
         <button type="button" class="navbar-toggle navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
@@ -35,7 +35,7 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <?php $this->block('nav'); ?>
-                <li class="nav-item active"><a class="nav-link" href="<?php echo $router->route('home'); ?>">Home</a></li>
+                <li class="nav-item active"><a class="nav-link" href="<?php echo $router->to('home')->mute(); ?>">Home</a></li>
                 <?php $this->endblock(); ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">

@@ -7,65 +7,41 @@
  */
 
 ?><!DOCTYPE html>
-<html lang="en-GB">
+<html lang="<?php echo $app->get('language.locale', 'en-GB'); ?>">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
     <title>Offline</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo $asset->path; ?>/images/favicon.ico" />
     <meta name="generator" content="Windwalker Framework" />
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo $asset->path; ?>/css/main.css" />
-
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
 </head>
 <body>
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="<?php echo $uri->full; ?>">
-                <img src="https://cloud.githubusercontent.com/assets/1639206/2870854/176b987a-d2e4-11e3-8be6-9f70304a8499.png" alt="Windwalker LOGO" />
-            </a>
-        </div>
-        <!--/.nav-collapse -->
-    </div>
-</div>
-
 <style>
-    footer {
-        text-align: center;
+    main {
+        min-height: 100vh;
     }
 </style>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3 text-center" style="margin-top: 50px; margin-bottom: 70px">
-            <img src="https://cloud.githubusercontent.com/assets/1639206/2870854/176b987a-d2e4-11e3-8be6-9f70304a8499.png" alt="img" />
+<main class="main-wrapper d-flex flex-column">
+    <div class="main-body container flex-grow-1 d-flex align-items-center">
+        <div class="text-center mx-auto">
+            <img src="https://i.imgur.com/Wn1FPH5.png" alt="logo" />
             <h2>Site Offline</h2>
             <p>Sorry, we are maintaining, please come back later.</p>
         </div>
     </div>
-</div>
 
-<div id="copyright">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-
-                <hr />
-
-                <footer>
-                    &copy; Windwalker <?php echo gmdate('Y'); ?>
-                </footer>
-            </div>
+    <div id="copyright" class="">
+        <div class="container">
+            <footer class="py-4 border-top text-center">
+                &copy; Windwalker <?php echo gmdate('Y'); ?>
+            </footer>
         </div>
     </div>
-</div>
+</main>
 </body>
 </html>

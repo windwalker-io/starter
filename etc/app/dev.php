@@ -41,7 +41,7 @@ return Arr::mergeRecursive(include __DIR__ . '/web.php', [
      * NOTE: You must familiar about how DI Container working, otherwise you may
      *       break your system.
      */
-    'providers' =>[
+    'providers' => [
         // Add pretty error handler page.
         'whoops' => \Windwalker\Core\Provider\WhoopsProvider::class,
     ],
@@ -118,7 +118,7 @@ return Arr::mergeRecursive(include __DIR__ . '/web.php', [
      * Register User Auth Handlers
      */
     'user' => [
-        'handler' => \Windwalker\Core\User\NullUserHandler::class,
+        'handler' => null,
         'methods' => [
         ],
         'policies' => [
