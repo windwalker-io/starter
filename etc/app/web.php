@@ -68,7 +68,7 @@ return Arr::mergeRecursive(include __DIR__ . '/windwalker.php', [
 	 */
 	'routing' => [
 		'files' => [
-			'web' => WINDWALKER_ETC . '/routing.yml'
+			'web' => WINDWALKER_ETC . '/routing.php'
 		]
 	],
 
