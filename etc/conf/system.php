@@ -8,7 +8,7 @@
 
 return [
     // Enable debug mode, will disable cache, and log some errors.
-    'debug' => env('SYSTEM_DEBUG') ?? false,
+    'debug' => (bool) (env('SYSTEM_DEBUG') ?? false),
 
     // The PHP error reporting level, 0 is hide all errors, -1 is the biggest report level.
     'error_reporting' => env('SYSTEM_ERROR_REPORTING') ?? 0,
@@ -17,7 +17,7 @@ return [
     'timezone' => env('SYSTEM_TIMEZONE') ?? 'UTC',
 
     // Set system offline
-    'offline' => env('SYSTEM_OFFLINE') ?? false,
+    'offline' => (bool) (env('SYSTEM_OFFLINE') ?? false),
 
     // Secret code will be a salt to generate hashs when system running,
     // Will be replace when Windwalker installation.

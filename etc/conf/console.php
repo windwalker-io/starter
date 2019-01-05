@@ -8,11 +8,11 @@
 
 return [
     // Custom scripts, add some commands here to batch execute. Example:
-    // scripts:
-    //     foo:
-    //         - git pull
-    //         - composer install
-    //         - php windwalker migration migrate
+    // 'scripts' => [
+    //     'foo' => [
+    //         'git pull'
+    //         'composer install'
+    //         'php windwalker migration migrate'
     //
     // Then just run `$ php windwalker run foo`
     'scripts' => [

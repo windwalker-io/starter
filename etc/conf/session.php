@@ -11,5 +11,5 @@ return [
     'handler' => 'native',
 
     // By minutes
-    'expire_time' => 15
+    'expire_time' => 150
 ];

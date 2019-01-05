@@ -8,7 +8,7 @@
 
 return [
     # Language debug will mark untranslated string by `??` and stored orphan in Languages object.
-    'debug' => '',
+    'debug' => false,
 
     # The current locale
     'locale' => 'en-GB',
@@ -16,6 +16,6 @@ return [
     # The default locale, if translated string in current locale not found, will fallback to default locale.
     'default' => 'en-GB',
 
-    # Dfault languaghe file format, you can use other foramt in runtime by `Translator::loadFile($file, 'yaml')`
+    # Default languaghe file format, you can use other format in runtime by `Translator::loadFile($file, 'yaml')`
     'format' => 'ini'
 ];

@@ -11,14 +11,36 @@ return [
     // But you can use CacheFactory::createCache('mycache') to ignore this settings.
     'enabled' => false,
 
-    // The default sotrage, you can use other storages by use `CacheManager::getCache('name', 'storage')`
-    // Support storage: file / php_file / forever_file / memcached / null / redis / array / runtime_array
-    'storage' => 'file',
+    // The default cache profile
+    'default' => 'global',
 
-    // Cache serializer decided how to serialize and store data into storage.
-    // Support serializers: php / php_file / json / string / raw
-    'serializer' => 'php',
+    // Cache profiles
+    'profiles' => [
+        'global' => [
+            // The name or subfolder of different storage settings.
+            'name' => 'windwalker',
 
-    // Cache time (minutes)
-    'time' => 15,
+            // The cache storage, can be storage name or class name.
+            // Support storage: file / php_file / forever_file / memcached / null / redis / array / runtime_array
+            'storage' => \Windwalker\Cache\Storage\FileStorage::class,
+
+            // Cache serializer decided how to serialize and store data into storage. can be name or class.
+            // Support serializers: php / php_file / json / string / raw
+            'serializer' => \Windwalker\Cache\Serializer\PhpSerializer::class,
+
+            // Cache time (minutes)
+            'time' => 15,
+
+            // If system in debug mode or set cache as disabled, cache will be a NullStorage,
+            // Set this to TRUE to force this profile always works.
+            'force_enabled' => false
+        ],
+        'html' => [
+            'name' => 'windwalker',
+            'storage' => \Windwalker\Cache\Storage\FileStorage::class,
+            'serializer' => \Windwalker\Cache\Serializer\RawSerializer::class,
+            'time' => 15,
+            'force_enabled' => false
+        ]
+    ]
 ];

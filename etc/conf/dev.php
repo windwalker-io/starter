@@ -7,5 +7,7 @@
  */
 
 return [
+    // Allow IPs to access dev.php
+    // Use comma to separate IPs
     'allow_ips' => env('DEV_ALLOW_IPS') ?? ''
 ];
