@@ -21,5 +21,6 @@ return [
         'local' => '',
         'verify' => env('MAIL_SMTP_VERIFY') ?? false
     ],
-    'sendmail' => env('MAIL_SENDMAIL') ?? '/usr/sbin/sendmail'
+    'sendmail' => env('MAIL_SENDMAIL') ?? '/usr/sbin/sendmail',
+    'test_forwards' => env('MAIL_TESTER')
 ];
