@@ -7,12 +7,18 @@
  */
 
 return [
-    'eanbled' => (bool) (env('MAIL_ENABLED') ?? false),
+    'enabled' => (bool) (env('MAIL_ENABLED') ?? false),
+
+    // Auto use this as sender if not provided in runtime.
     'from' => [
         'name' => 'Windwalker',
         'email' => 'noreply@windwalker.local'
     ],
+
+    // Transport to send mail (SwiftMailer transport)
     'transport' => env('MAIL_TRANSPORT'),
+    
+    // SMTP auth profile.
     'smtp' => [
         'security' => env('MAIL_SMTP_SECURITY') ?? 'tls',
         'port' => env('MAIL_SMTP_PORT') ?? 2525,
@@ -22,6 +28,13 @@ return [
         'local' => '',
         'verify' => env('MAIL_SMTP_VERIFY') ?? false
     ],
+
+    // Sendmail position
     'sendmail' => env('MAIL_SENDMAIL') ?? '/usr/sbin/sendmail',
-    'test_forwards' => env('MAIL_TESTER')
+
+    // Auto CC to emails, use (,) separate addresses.
+    'cc' => '',
+
+    // Auto BCC to emails, use (,) separate addresses.
+    'bcc' => env('MAIL_BCC')
 ];

@@ -7,7 +7,7 @@
  */
 
 return [
-    # Simple routing help us auto find controller by URL: `{package}/{controller}` without routing config,
-    # Disable this function will enhance performance.
+    // Simple routing help us auto find controller by URL: `{package}/{controller}` without routing config,
+    // Disable this function will enhance performance.
     'simple_route' => true
 ];
