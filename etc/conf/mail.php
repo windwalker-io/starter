@@ -7,6 +7,7 @@
  */
 
 return [
+    'eanbled' => (bool) (env('MAIL_ENABLED') ?? false),
     'from' => [
         'name' => 'Windwalker',
         'email' => 'noreply@windwalker.local'
