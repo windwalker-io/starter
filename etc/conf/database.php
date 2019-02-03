@@ -19,6 +19,9 @@ return [
             'password' => env('DATABASE_PASSWORD'),
             'name'     => env('DATABASE_NAME') ?? 'db_name',
             'prefix'   => env('DATABASE_PREFIX') ?? 'wind_',
+            'mysql' => [
+                'strict' => env('DATABASE_MYSQL_STRICT') ?? false
+            ]
         ],
     ]
 ];
