@@ -9,6 +9,7 @@
 use Monolog\Handler\RotatingFileHandler;
 use Psr\Log\LogLevel;
 use Windwalker\Core\Logger\Monolog\MessageHandler;
+use Windwalker\DI\Container;
 
 return [
     'channels' => [
@@ -17,24 +18,26 @@ return [
             'level' => LogLevel::INFO,
             'handlers' => [
                 MessageHandler::class,
-                [
-                    'class' => RotatingFileHandler::class,
-                    'file_argument' => 'filename',
-                    'args' => [
-                        'maxFiles' => 7
-                    ]
-                ],
+                Container::meta(function (Container $container, array $args) {
+                    return new RotatingFileHandler(
+                        $args['filename'],
+                        7,
+                        $args['level']
+                    );
+                })
             ],
         ],
         'error' => [
             'enabled' => true,
             'level' => LogLevel::ERROR,
             'handlers' => [
-                'class' => RotatingFileHandler::class,
-                'file_argument' => 'filename',
-                'args' => [
-                    'maxFiles' => 7
-                ]
+                Container::meta(function (Container $container, array $args) {
+                    return new RotatingFileHandler(
+                        $args['filename'],
+                        7,
+                        $args['level']
+                    );
+                })
             ]
         ],
     ]
