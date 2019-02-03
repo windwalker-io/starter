@@ -17,7 +17,7 @@ return [
 
     // Transport to send mail (SwiftMailer transport)
     'transport' => env('MAIL_TRANSPORT'),
-    
+
     // SMTP auth profile.
     'smtp' => [
         'security' => env('MAIL_SMTP_SECURITY') ?? 'tls',
