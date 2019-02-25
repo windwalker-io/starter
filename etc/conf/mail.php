@@ -25,7 +25,7 @@ return [
         'host' => env('MAIL_SMTP_HOST'),
         'username' => env('MAIL_SMTP_USERNAME'),
         'password' => env('MAIL_SMTP_PASSWORD'),
-        'local' => '',
+        'local' => null,
         'verify' => env('MAIL_SMTP_VERIFY') ?? false
     ],
 
