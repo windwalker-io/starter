@@ -9,13 +9,15 @@
 namespace Windwalker\Console;
 
 use Windwalker\Core\Console\CoreConsole;
+use Windwalker\Core\Schedule\Schedule;
+use Windwalker\Core\Schedule\ScheduleConsoleInterface;
 
 /**
  * The WindwalkerConsole class.
  *
  * @since  2.1.1
  */
-class Application extends CoreConsole
+class Application extends CoreConsole implements ScheduleConsoleInterface
 {
     /**
      * Property configPath.
@@ -32,6 +34,20 @@ class Application extends CoreConsole
     protected function init()
     {
         parent::init();
+    }
+
+    /**
+     * schedule
+     *
+     * @param Schedule $schedule
+     *
+     * @return  void
+     * @throws \ReflectionException
+     * @throws \Windwalker\DI\Exception\DependencyResolutionException
+     */
+    public function schedule(Schedule $schedule): void
+    {
+        //
     }
 
     /**
