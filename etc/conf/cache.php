@@ -36,7 +36,7 @@ return [
             'force_enabled' => false
         ],
         'html' => [
-            'name' => 'windwalker',
+            'name' => 'html',
             'storage' => \Windwalker\Cache\Storage\FileStorage::class,
             'serializer' => \Windwalker\Cache\Serializer\RawSerializer::class,
             'time' => 15,
