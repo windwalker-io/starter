@@ -20,7 +20,7 @@ return [
             'name'     => env('DATABASE_NAME') ?? 'db_name',
             'prefix'   => env('DATABASE_PREFIX') ?? 'wind_',
             'mysql' => [
-                'strict' => env('DATABASE_MYSQL_STRICT') ?? false
+                'strict' => env('DATABASE_MYSQL_STRICT') ?? true
             ]
         ],
     ]

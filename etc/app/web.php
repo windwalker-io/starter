@@ -85,8 +85,8 @@ return Arr::mergeRecursive(include __DIR__ . '/windwalker.php', [
      * Uncomment the line below to override core middlewares.
      */
     'middlewares' => [
-        //900  => \Windwalker\Core\Application\Middleware\SessionRaiseMiddleware::class,
-        //800  => \Windwalker\Core\Application\Middleware\RoutingMiddleware::class,
+        //800  => \Windwalker\Core\Application\Middleware\SessionRaiseMiddleware::class,
+        //900  => \Windwalker\Core\Application\Middleware\RoutingMiddleware::class,
     ],
 
     /*

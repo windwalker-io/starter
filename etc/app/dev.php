@@ -101,7 +101,7 @@ return Arr::mergeRecursive(include __DIR__ . '/web.php', [
      * Example: 'foo' => ['class' => MyListener::class, 'priority' => 300, 'enabled' => boolean]
      */
     'listeners' => [
-        // Add something here...
+        'ide_meta' => \Windwalker\Debugger\Listener\Ide\PhpStormMetaListener::class
     ],
 
     /*

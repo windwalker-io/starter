@@ -14,7 +14,10 @@ return [
     'error_reporting' => env('SYSTEM_ERROR_REPORTING') ?? 0,
 
     // Default system timezone.
-    'timezone' => env('SYSTEM_TIMEZONE') ?? 'UTC',
+    'timezone' => env('SYSTEM_TIMEZONE') ?? 'Asia/Taipei',
+
+    // The default server timezone, DB will store datetime with this timezone
+    'server_timezone' => env('SYSTEM_SERVER_TIMEZONE') ?? 'Asia/Taipei',
 
     // Set system offline
     'offline' => (bool) (env('SYSTEM_OFFLINE') ?? false),

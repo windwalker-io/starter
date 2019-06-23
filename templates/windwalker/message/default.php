@@ -15,7 +15,7 @@
             </button>
 
             <?php foreach ((array) $typeBag as $msg): ?>
-                <p><?php echo nl2br($msg); ?></p>
+                <div><?php echo nl2br($msg); ?></div>
             <?php endforeach; ?>
 
         </div>
