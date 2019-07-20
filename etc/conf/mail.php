@@ -15,6 +15,8 @@ return [
         'email' => env('MAIL_FROM_EMAIL') ?: 'noreply@windwalker.local'
     ],
 
+    'adapter' => \Windwalker\Core\Mailer\Adapter\SwiftMailerAdapter::class,
+
     // Transport to send mail (SwiftMailer transport)
     'transport' => env('MAIL_TRANSPORT') ?: 'php',
 
