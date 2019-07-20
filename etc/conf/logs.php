@@ -12,32 +12,29 @@ use Windwalker\Core\Logger\Monolog\MessageHandler;
 use Windwalker\DI\Container;
 
 return [
+    'handlers' => [
+        'default' => Container::meta(function (Container $container, array $args) {
+            return new RotatingFileHandler(
+                $args['filename'],
+                7,
+                $args['level']
+            );
+        })
+    ],
     'channels' => [
         'message' => [
             'enabled' => true,
             'level' => LogLevel::INFO,
             'handlers' => [
                 MessageHandler::class,
-                Container::meta(function (Container $container, array $args) {
-                    return new RotatingFileHandler(
-                        $args['filename'],
-                        7,
-                        $args['level']
-                    );
-                })
+                Container::ref('logs.handlers.default')
             ],
         ],
         'error' => [
             'enabled' => true,
             'level' => LogLevel::ERROR,
             'handlers' => [
-                Container::meta(function (Container $container, array $args) {
-                    return new RotatingFileHandler(
-                        $args['filename'],
-                        7,
-                        $args['level']
-                    );
-                })
+                Container::ref('logs.handlers.default')
             ]
         ],
     ]
