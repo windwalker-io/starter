@@ -40,7 +40,7 @@ return [
             'storage' => \Windwalker\Cache\Storage\FileStorage::class,
             'serializer' => \Windwalker\Cache\Serializer\RawSerializer::class,
             'time' => 15,
-            'force_enabled' => false
+            'force_enabled' => true
         ]
     ]
 ];

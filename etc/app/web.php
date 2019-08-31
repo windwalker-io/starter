@@ -6,6 +6,7 @@
  * @license    GNU General Public License version 2 or later.
  */
 
+use Windwalker\Core\Application\Middleware\SecurityHeaderMiddleware;
 use Windwalker\Utilities\Arr;
 
 /*
@@ -87,6 +88,7 @@ return Arr::mergeRecursive(include __DIR__ . '/windwalker.php', [
     'middlewares' => [
         //800  => \Windwalker\Core\Application\Middleware\SessionRaiseMiddleware::class,
         //900  => \Windwalker\Core\Application\Middleware\RoutingMiddleware::class,
+        1000 => SecurityHeaderMiddleware::class
     ],
 
     /*

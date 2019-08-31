@@ -38,6 +38,8 @@ class DevApplication extends Application
      *                                        application's
      *                                        environment object.
      *
+     * @throws \ReflectionException
+     * @throws \Windwalker\DI\Exception\DependencyResolutionException
      * @since   2.0
      */
     public function __construct(Request $request = null, Structure $config = null, WebEnvironment $environment = null)

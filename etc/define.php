@@ -27,5 +27,5 @@ define('WINDWALKER_LANGUAGES', WINDWALKER_RESOURCES . DIRECTORY_SEPARATOR . 'lan
 $env = WINDWALKER_ROOT . '/.env';
 
 if (is_file($env)) {
-    (new Dotenv())->load($env);
+    (new Dotenv(true))->load($env);
 }
