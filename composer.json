@@ -1,9 +1,9 @@
 {
     "name": "windwalker/starter",
     "description": "Windwalker Starter.",
-    "homepage": "https://github.com/ventoviro/windwalker",
-    "license": "LGPL-2.0-or-later",
-    "minimum-stability": "beta",
+    "homepage": "https://github.com/ventoviro/windwalker-starter",
+    "license": "MIT",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Simon Asika",
@@ -11,12 +11,14 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
-        "windwalker/core": "~3.0",
+        "php": ">=8.0",
+        "windwalker/framework": "4.x-dev",
+        "windwalker/core": "4.x-dev",
         "fzaninotto/faker": "~1.0",
-        "swiftmailer/swiftmailer": "~5.0",
-        "windwalker/phoenix": "^1.6",
-        "symfony/dotenv": "^4.2"
+
+        "windwalker/packages": "4.x-dev",
+        "symfony/dotenv": "^5.0",
+        "nikic/fast-route": "^1.0"
     },
     "require-dev": {
     },
@@ -26,14 +28,15 @@
         }
     },
     "scripts": {
-        "post-create-project-cmd": [
-            "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall"
-        ],
-        "post-autoload-dump": "php windwalker system clear-cache renderer"
+    },
+    "config": {
+        "platform": {
+            "php": "8.0.0"
+        }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.x-dev"
+            "dev-master": "4.x-dev"
         }
     }
 }

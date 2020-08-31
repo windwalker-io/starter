@@ -3,7 +3,7 @@
 /**
  * Part of starter project.
  *
- * @copyright  Copyright (C) 2020 ${ORGANIZATION}.
+ * @copyright  Copyright (C) 2020 __ORGANIZATION__.
  * @license    __LICENSE__
  */
 
@@ -12,8 +12,8 @@ declare(strict_types=1);
 use Windwalker\Utilities\Arr;
 
 return Arr::mergeRecursive(
+    // Load with namespace,
     [
-        'server' => include __DIR__ . '/conf/server.php',
-        'di' => include __DIR__ . '/di.php',
+        'server' => include __DIR__ . '/di/server.php',
     ]
 );

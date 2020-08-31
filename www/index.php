@@ -6,6 +6,10 @@
  * @license    GNU Lesser General Public License version 3 or later. see LICENSE
  */
 
+use Windwalker\Core\Runtime\Runtime;
+use Windwalker\Http\Event\RequestEvent;
+use Windwalker\Http\Server\HttpServer;
+
 $root = __DIR__ . '/..';
 
 if (!is_file($root . '/vendor/autoload.php')) {
@@ -13,10 +17,20 @@ if (!is_file($root . '/vendor/autoload.php')) {
 }
 
 include $root . '/vendor/autoload.php';
-include_once $root . '/etc/define.php';
 
-$app = new \Windwalker\Web\Application();
+Runtime::boot(dirname(__DIR__), __DIR__);
 
-define('WINDWALKER_DEBUG', $app->get('system.debug'));
+Runtime::loadConfig(Runtime::getRootDir() . '/etc/config.php');
 
-$app->execute();
+$container = Runtime::getContainer();
+
+/** @var HttpServer $server */
+$server = $container->resolve(Runtime::get('server.servers.http'));
+
+$server->on('request', function (RequestEvent $event) {
+    $req = $event->getRequest();
+
+    show($req);
+});
+
+$server->listen();
