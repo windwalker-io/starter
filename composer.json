@@ -12,11 +12,10 @@
     ],
     "require": {
         "php": ">=8.0",
-        "windwalker/framework": "4.x-dev",
         "windwalker/core": "4.x-dev",
-        "fzaninotto/faker": "~1.0",
 
-        "windwalker/packages": "4.x-dev",
+        "windwalker/framework": "4.x-dev",
+        "fzaninotto/faker": "~1.0",
         "symfony/dotenv": "^5.0",
         "nikic/fast-route": "^1.0"
     },

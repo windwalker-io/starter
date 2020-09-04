@@ -14,6 +14,7 @@ use Windwalker\Utilities\Arr;
 return Arr::mergeRecursive(
     [
         'server' => include __DIR__ . '/conf/server.php',
+        'logs' => include __DIR__ . '/conf/logs.php',
         'di' => include __DIR__ . '/di.php',
     ]
 );

@@ -20,17 +20,20 @@ include $root . '/vendor/autoload.php';
 
 Runtime::boot(dirname(__DIR__), __DIR__);
 
-Runtime::loadConfig(Runtime::getRootDir() . '/etc/config.php');
+Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.php');
 
 $container = Runtime::getContainer();
 
 /** @var HttpServer $server */
-$server = $container->resolve(Runtime::get('server.servers.http'));
+$server = $container->resolve('server.http');
 
-$server->on('request', function (RequestEvent $event) {
+$server->on('request', function (RequestEvent $event) use ($container) {
     $req = $event->getRequest();
 
-    show($req);
+    $app = $container->resolve('app.main');
+
+    show($app);
+
 });
 
 $server->listen();

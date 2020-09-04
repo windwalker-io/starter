@@ -15,5 +15,6 @@ return Arr::mergeRecursive(
     // Load with namespace,
     [
         'server' => include __DIR__ . '/di/server.php',
+        'logs' => include __DIR__ . '/di/logs.php',
     ]
 );
