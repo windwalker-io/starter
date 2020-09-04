@@ -30,10 +30,10 @@ $server = $container->resolve('server.http');
 $server->on('request', function (RequestEvent $event) use ($container) {
     $req = $event->getRequest();
 
+    /** @var \Windwalker\Core\Application\WebApplication $app */
     $app = $container->resolve('app.main');
 
-    show($app);
-
+    $event->setResponse($app->execute($req));
 });
 
 $server->listen();
