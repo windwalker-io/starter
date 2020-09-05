@@ -18,6 +18,8 @@ if (!is_file($root . '/vendor/autoload.php')) {
 
 include $root . '/vendor/autoload.php';
 
+error_reporting(-1);
+
 Runtime::boot(dirname(__DIR__), __DIR__);
 
 Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.php');
@@ -32,6 +34,14 @@ $server->on('request', function (RequestEvent $event) use ($container) {
 
     /** @var \Windwalker\Core\Application\WebApplication $app */
     $app = $container->resolve('app.main');
+
+    $app->addMiddleware(function ($req, $next) use ($app) {
+        $r = $app->getContainer()->newInstance(\Windwalker\Core\Manager\LoggerManager::class);
+
+        show($r->create('default'));
+
+        return $next($req);
+    });
 
     $event->setResponse($app->execute($req));
 });

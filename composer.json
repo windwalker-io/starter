@@ -18,7 +18,9 @@
         "fzaninotto/faker": "~1.0",
         "symfony/dotenv": "^5.0",
         "nikic/fast-route": "^1.0",
-        "relay/relay": "9999999-dev"
+        "webmozart/glob": "^4.0",
+        "monolog/monolog": "^2.0",
+        "relay/relay": "^2.0"
     },
     "require-dev": {
     },

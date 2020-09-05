@@ -11,10 +11,14 @@ declare(strict_types=1);
 
 use Windwalker\Utilities\Arr;
 
+use function Windwalker\load_configs;
+
 return Arr::mergeRecursive(
     // Load with namespace,
     [
-        'server' => include __DIR__ . '/di/server.php',
-        'logs' => include __DIR__ . '/di/logs.php',
+        'factories' => load_configs(__DIR__ . '/di/factories/*', true),
+        'providers' => include __DIR__ . '/di/providers.php',
+        'binding' => include __DIR__ . '/di/binding.php',
+        'aliases' => include __DIR__ . '/di/aliases.php',
     ]
 );
