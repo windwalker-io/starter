@@ -11,10 +11,11 @@ declare(strict_types=1);
 
 use Windwalker\Utilities\Arr;
 
+use function Windwalker\include_files;
+
 return Arr::mergeRecursive(
+    include_files(__DIR__ . '/conf/*.php'),
     [
-        'server' => include __DIR__ . '/conf/server.php',
-        'logs' => include __DIR__ . '/conf/logs.php',
         'di' => include __DIR__ . '/di.php',
     ]
 );

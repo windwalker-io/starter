@@ -36,7 +36,7 @@ $server->on('request', function (RequestEvent $event) use ($container) {
     $app = $container->resolve('app.main');
 
     $app->addMiddleware(function ($req, $next) use ($app) {
-        $r = $app->getContainer()->newInstance(\Windwalker\Core\Manager\LoggerManager::class);
+        $r = $app->getContainer()->get(\Windwalker\Core\Manager\LoggerManager::class);
 
         show($r->create('default'));
 

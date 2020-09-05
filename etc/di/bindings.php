@@ -9,14 +9,6 @@
 
 declare(strict_types=1);
 
-use function Windwalker\ref;
-
 return [
-    'server' => [
-        'default' => 'http',
 
-        'servers' => [
-            'http' => ref('di.server.http')
-        ]
-    ]
 ];
