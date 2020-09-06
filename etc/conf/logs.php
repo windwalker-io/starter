@@ -17,6 +17,8 @@ use function Windwalker\ref;
 
 return [
     'logs' => [
+        'dir' => '',
+
         'default' => 'default',
         'channels' => [
             'none' => ref('logs.factories.loggers.none'),

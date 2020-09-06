@@ -20,7 +20,10 @@ include $root . '/vendor/autoload.php';
 
 error_reporting(-1);
 
-Runtime::boot(dirname(__DIR__), __DIR__);
+include __DIR__ . '/../etc/define.php';
+
+Runtime::boot(WINDWALKER_ROOT, __DIR__);
+Runtime::dev();
 
 Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.php');
 
@@ -36,9 +39,10 @@ $server->on('request', function (RequestEvent $event) use ($container) {
     $app = $container->resolve('app.main');
 
     $app->addMiddleware(function ($req, $next) use ($app) {
-        $r = $app->getContainer()->get(\Windwalker\Core\Manager\LoggerManager::class);
+        $r1 = $app->service(\Windwalker\Core\Manager\LoggerManager::class);
+        $r2 = $app->service(\Windwalker\Core\Manager\LoggerManager::class);
 
-        show($r->create('default'));
+        show($r1->create('default'));
 
         return $next($req);
     });

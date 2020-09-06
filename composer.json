@@ -20,7 +20,8 @@
         "nikic/fast-route": "^1.0",
         "webmozart/glob": "^4.0",
         "monolog/monolog": "^2.0",
-        "relay/relay": "^2.0"
+        "relay/relay": "^2.0",
+        "filp/whoops": "^2.1"
     },
     "require-dev": {
     },
