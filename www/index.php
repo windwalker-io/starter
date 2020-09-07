@@ -39,10 +39,8 @@ $server->on('request', function (RequestEvent $event) use ($container) {
     $app = $container->resolve('app.main');
 
     $app->addMiddleware(function ($req, $next) use ($app) {
-        $r1 = $app->service(\Windwalker\Core\Manager\LoggerManager::class);
-        $r2 = $app->service(\Windwalker\Core\Manager\LoggerManager::class);
-
-        show($r1->create('default'));
+        $log = $app->service(\Windwalker\Core\Service\LoggerService::class);
+        $log->error('error', 'Test');
 
         return $next($req);
     });
