@@ -7,6 +7,7 @@
  * @license    __LICENSE__
  */
 
+use Windwalker\Core\Error\ErrorLogHandler;
 use Windwalker\Core\Provider\ErrorHandlingProvider;
 
 return [
@@ -15,8 +16,20 @@ return [
             'error_reporting' => -1
         ],
 
+        'report_level' => E_ALL | E_STRICT,
+
+        'log' => true,
+
+        'log_channel' => 'error',
+
         'providers' => [
             ErrorHandlingProvider::class
         ],
+
+        'factories' => [
+            'handlers' => [
+                ErrorLogHandler::class
+            ]
+        ]
     ]
 ];

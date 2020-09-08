@@ -40,6 +40,8 @@ $server->on('request', function (RequestEvent $event) use ($container) {
 
     $app->addMiddleware(function ($req, $next) use ($app) {
         $log = $app->service(\Windwalker\Core\Service\LoggerService::class);
+        throw new \RuntimeException('Hello123');
+
         $log->error('error', 'Test');
 
         return $next($req);
