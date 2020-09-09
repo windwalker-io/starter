@@ -18,8 +18,12 @@ return Arr::mergeRecursive(
         'app' => include __DIR__ . '/conf/app.php',
         'logs' => include __DIR__ . '/conf/logs.php',
         'error' => include __DIR__ . '/conf/error.php',
-        'events' => include __DIR__ . '/conf/events.php',
+
         'whoops' => include __DIR__ . '/conf/whoops.php',
+
+        'events' => include __DIR__ . '/conf/events.php',
+        'database' => include __DIR__ . '/conf/database.php',
+
         'di' => include __DIR__ . '/di.php',
     ]
 );
