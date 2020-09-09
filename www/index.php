@@ -23,7 +23,6 @@ error_reporting(-1);
 include __DIR__ . '/../etc/define.php';
 
 Runtime::boot(WINDWALKER_ROOT, __DIR__);
-Runtime::dev();
 
 Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.php');
 
