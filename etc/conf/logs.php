@@ -11,6 +11,7 @@ use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Processor\PsrLogMessageProcessor;
+use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Windwalker\Core\Manager\LoggerManager;
 use Windwalker\Core\Provider\MonologProvider;
@@ -39,7 +40,7 @@ return [
     ],
     'bindings' => [
         LoggerManager::class,
-        LoggerService::class,
+        LoggerService::class
     ],
     'aliases' => [
         'logger.manager' => LoggerManager::class,
