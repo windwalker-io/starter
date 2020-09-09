@@ -9,14 +9,8 @@
 
 declare(strict_types=1);
 
-use function Windwalker\ref;
-
 return [
-    'server' => [
-        'default' => 'http',
+    'debug' => (bool) (env('APP_DEBUG') ?? false),
 
-        'servers' => [
-            'http' => ref('di.server.http')
-        ]
-    ]
+    'mode' => env('APP_ENV') ?? 'prod'
 ];

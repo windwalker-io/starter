@@ -7,8 +7,10 @@
  * @license    __LICENSE__
  */
 
+use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
+use Monolog\Processor\PsrLogMessageProcessor;
 use Psr\Log\NullLogger;
 use Windwalker\Core\Manager\LoggerManager;
 use Windwalker\Core\Provider\MonologProvider;
@@ -19,47 +21,54 @@ use function Windwalker\DI\create;
 use function Windwalker\ref;
 
 return [
-    'logs' => [
-        'dir' => '',
+    'dir' => '',
 
-        'default' => 'default',
-        'channels' => [
-            'none' => ref('logs.factories.loggers.none'),
-            'default' => ref('logs.factories.loggers.default'),
-        ],
-        'providers' => [
-            //
-        ],
-        'bindings' => [
-            LoggerManager::class,
-            LoggerService::class,
-        ],
-        'aliases' => [
-            'logger.manager' => LoggerManager::class,
-            'logger.service' => LoggerService::class,
-        ],
-        'factories' => [
-            'instances' => [
-                'none' => create(NullLogger::class),
-                'default' => function (Container $container, array $args, int $options = 0) {
-                    return MonologProvider::logger(
-                        $args['_name'],
-                        [
-                            ref('logs.factories.handlers.rotating'),
-                        ]
-                    );
-                },
-            ],
-            'handlers' => [
-                'stream' => create(StreamHandler::class),
-                'rotating' => function (Container $container, array $args, int $options = 0) {
-                    $args['filename'] ??= $args[0] ?? $container->getParam('@logs') . '/' . $args['_name'] . '.log';
+    'default' => 'default',
+    'channels' => [
+        'none' => ref('logs.factories.loggers.none'),
+        'default' => ref('logs.factories.loggers.default'),
+    ],
 
-                    unset($args[0]);
+    'global_handlers' => [],
+    'global_processors' => [
+        PsrLogMessageProcessor::class
+    ],
 
-                    return create(RotatingFileHandler::class, ...$args);
-                },
-            ],
+    'providers' => [
+        //
+    ],
+    'bindings' => [
+        LoggerManager::class,
+        LoggerService::class,
+    ],
+    'aliases' => [
+        'logger.manager' => LoggerManager::class,
+        'logger.service' => LoggerService::class,
+    ],
+    'factories' => [
+        'instances' => [
+            'none' => create(NullLogger::class),
+            'default' => function (Container $container, array $args, int $options = 0) {
+                return MonologProvider::logger(
+                    $args['_name'],
+                    [
+                        ref('logs.factories.handlers.rotating'),
+                    ]
+                );
+            },
         ],
+        'handlers' => [
+            'stream' => create(StreamHandler::class),
+            'rotating' => function (Container $container, array $args, int $options = 0) {
+                $args['filename'] ??= $args[0] ?? $container->getParam('@logs') . '/' . $args['_name'] . '.log';
+
+                unset($args[0]);
+
+                return create(RotatingFileHandler::class, ...$args);
+            },
+        ],
+        'formatters' => [
+            'line_formatter' => create(LineFormatter::class, null, null, true)
+        ]
     ],
 ];

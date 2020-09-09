@@ -14,8 +14,11 @@ use Windwalker\Utilities\Arr;
 use function Windwalker\include_files;
 
 return Arr::mergeRecursive(
-    include_files(__DIR__ . '/conf/*.php'),
     [
+        'app' => include __DIR__ . '/conf/app.php',
+        'logs' => include __DIR__ . '/conf/logs.php',
+        'error' => include __DIR__ . '/conf/error.php',
+        'whoops' => include __DIR__ . '/conf/whoops.php',
         'di' => include __DIR__ . '/di.php',
     ]
 );

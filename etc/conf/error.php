@@ -11,25 +11,27 @@ use Windwalker\Core\Error\ErrorLogHandler;
 use Windwalker\Core\Provider\ErrorHandlingProvider;
 
 return [
-    'error' => [
-        'ini' => [
-            'error_reporting' => -1
-        ],
+    'ini' => [
+        'error_reporting' => -1
+    ],
 
-        'report_level' => E_ALL | E_STRICT,
+    'report_level' => E_ALL | E_STRICT,
 
-        'log' => true,
+    'restore' => false,
 
-        'log_channel' => 'error',
+    'register_shutdown' => true,
 
-        'providers' => [
-            ErrorHandlingProvider::class
-        ],
+    'log' => true,
 
-        'factories' => [
-            'handlers' => [
-                ErrorLogHandler::class
-            ]
+    'log_channel' => 'error',
+
+    'providers' => [
+        ErrorHandlingProvider::class
+    ],
+
+    'factories' => [
+        'handlers' => [
+            'log' => ErrorLogHandler::class
         ]
     ]
 ];
