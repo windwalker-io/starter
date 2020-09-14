@@ -14,6 +14,7 @@ use Monolog\Processor\PsrLogMessageProcessor;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Windwalker\Core\Manager\LoggerManager;
+use Windwalker\Core\Provider\LoggerProvider;
 use Windwalker\Core\Provider\MonologProvider;
 use Windwalker\Core\Service\LoggerService;
 use Windwalker\DI\Container;
@@ -36,11 +37,10 @@ return [
     ],
 
     'providers' => [
-        //
+        LoggerProvider::class
     ],
     'bindings' => [
-        LoggerManager::class,
-        LoggerService::class
+        //
     ],
     'aliases' => [
         'logger.manager' => LoggerManager::class,
@@ -49,9 +49,9 @@ return [
     'factories' => [
         'instances' => [
             'none' => create(NullLogger::class),
-            'default' => function (Container $container, array $args, int $options = 0) {
+            'default' => function (string $instanceName) {
                 return MonologProvider::logger(
-                    $args['_name'],
+                    $instanceName,
                     [
                         ref('logs.factories.handlers.rotating'),
                     ]
@@ -60,8 +60,8 @@ return [
         ],
         'handlers' => [
             'stream' => create(StreamHandler::class),
-            'rotating' => function (Container $container, array $args, int $options = 0) {
-                $args['filename'] ??= $args[0] ?? $container->getParam('@logs') . '/' . $args['_name'] . '.log';
+            'rotating' => function (Container $container, string $instanceName, ...$args) {
+                $args['filename'] ??= $args[0] ?? $container->getParam('@logs') . '/' . $instanceName . '.log';
 
                 unset($args[0]);
 

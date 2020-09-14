@@ -8,7 +8,11 @@
  */
 
 use Windwalker\Core\Error\ErrorLogHandler;
+use Windwalker\Core\Error\SimpleErrorPageHandler;
 use Windwalker\Core\Provider\ErrorHandlingProvider;
+
+use function Windwalker\DI\create;
+use function Windwalker\ref;
 
 return [
     'ini' => [
@@ -21,9 +25,9 @@ return [
 
     'register_shutdown' => true,
 
-    'log' => true,
+    'template' => 'windwalker.error.simple',
 
-    'log_channel' => 'error',
+    'log' => true,
 
     'providers' => [
         ErrorHandlingProvider::class
@@ -31,7 +35,20 @@ return [
 
     'factories' => [
         'handlers' => [
-            'log' => ErrorLogHandler::class
+            'default' => create(
+                SimpleErrorPageHandler::class,
+                [
+                    'debug' => ref('system.debug'),
+                    'layout' => ref('error.template'),
+                ]
+            ),
+            'log' => create(
+                ErrorLogHandler::class,
+                options: [
+                    'channel' => 'error',
+                    'enabled' => ref('log')
+                ]
+            )
         ]
     ]
 ];
