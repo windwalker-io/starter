@@ -23,6 +23,7 @@ return Arr::mergeRecursive(
 
         'events' => include __DIR__ . '/conf/events.php',
         'database' => include __DIR__ . '/conf/database.php',
+        'router' => include __DIR__ . '/conf/router.php',
 
         'di' => include __DIR__ . '/di.php',
     ]

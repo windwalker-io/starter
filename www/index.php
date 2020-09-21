@@ -36,7 +36,9 @@ $server->on('request', function (RequestEvent $event) use ($container) {
 
     /** @var \Windwalker\Core\Application\WebApplication $app */
     $app = $container->resolve('app.main');
+    $app->boot();
 
+    $app->addMiddleware($app->make(\Windwalker\Core\Middleware\RoutingMiddleware::class));
     $app->addMiddleware(function ($req, $next) use ($app) {
         $app->service(\Windwalker\Core\Service\LoggerService::class)->error('error', 'werwwr');
         $db = $app->service(\Windwalker\Database\DatabaseAdapter::class);

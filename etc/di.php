@@ -26,5 +26,8 @@ return Arr::mergeRecursive(
         'aliases' => [
 
         ],
+        'attributes' => [
+            \Windwalker\Core\Attributes\Controller::class,
+        ]
     ]
 );
