@@ -12,7 +12,9 @@
     ],
     "require": {
         "php": ">=8.0",
+        "ext-json": "*",
         "windwalker/core": "4.x-dev",
+        "symfony/var-dumper": "^5.0",
 
         "windwalker/framework": "4.x-dev",
         "fzaninotto/faker": "~1.0",
@@ -22,8 +24,7 @@
         "monolog/monolog": "^2.0",
         "relay/relay": "^2.0",
         "filp/whoops": "^2.1",
-        "symfony/options-resolver": "^5.0",
-        "symfony/var-dumper": "^5.0"
+        "symfony/options-resolver": "^5.0"
     },
     "require-dev": {
     },
