@@ -1,2 +1,2 @@
 #!/bin/bash
-php8 $(which composer) update --ignore-platform-reqs --prefer-stable
+php8 $(which composer) update --prefer-stable

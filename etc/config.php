@@ -11,20 +11,26 @@ declare(strict_types=1);
 
 use Windwalker\Utilities\Arr;
 
-use function Windwalker\include_files;
-
 return Arr::mergeRecursive(
     [
-        'app' => include __DIR__ . '/conf/app.php',
-        'logs' => include __DIR__ . '/conf/logs.php',
-        'error' => include __DIR__ . '/conf/error.php',
-
-        'whoops' => include __DIR__ . '/conf/whoops.php',
-
-        'events' => include __DIR__ . '/conf/events.php',
+        'app'      => include __DIR__ . '/conf/app.php',
+        'logs'     => include __DIR__ . '/conf/logs.php',
+        'error'    => include __DIR__ . '/conf/error.php',
+        'whoops'   => include __DIR__ . '/conf/whoops.php',
+        'events'   => include __DIR__ . '/conf/events.php',
         'database' => include __DIR__ . '/conf/database.php',
-        'router' => include __DIR__ . '/conf/router.php',
+        'routing'  => include __DIR__ . '/conf/routing.php',
+        'cache'    => include __DIR__ . '/conf/cache.php',
+        'security' => include __DIR__ . '/conf/security.php',
+        // 'asset' => include __DIR__ . '/conf/asset.php',
+        // 'language' => include __DIR__ . '/conf/language.php',
+        // 'console' => include __DIR__ . '/conf/console.php',
+        // 'mail' => include __DIR__ . '/conf/mail.php',
+        // 'queue' => include __DIR__ . '/conf/queue.php',
 
         'di' => include __DIR__ . '/di.php',
-    ]
+    ],
+
+    // Load custom values
+    is_file(__DIR__ . '/conf/custom.php') ? require __DIR__ . '/conf/custom.php' : []
 );
