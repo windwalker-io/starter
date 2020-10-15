@@ -9,13 +9,24 @@
 
 declare(strict_types=1);
 
-/** @var \FastRoute\RouteCollector $router */
+use App\Controller\TestController;
+use Windwalker\Core\Router\RouteCreator;
 
-$router->get(
-    '/',
-    [\App\Controller\TestController::class, 'hello']
-);
-$router->get(
-    '/hello/{id:\d+}[/{name}]',
-    [\App\Controller\TestController::class, 'hello']
-);
+/** @var RouteCreator $router */
+
+$router->group('front')
+    ->register(function (RouteCreator $router) {
+        $router->get('home', '/')
+            ->handler([TestController::class, 'hello']);
+
+        $router->group('hello')
+            ->prefix('/hello')
+            ->register(function (RouteCreator $router) {
+                $router->any('hello', '/{id:\d+}[/{name}]')
+                    ->handlers(
+                        ['post'],
+                        TestController::class,
+                        'hello'
+                    );
+            });
+    });
