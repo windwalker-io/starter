@@ -9,6 +9,8 @@
 
 declare(strict_types=1);
 
+use Windwalker\Core\Attributes\Controller;
+use Windwalker\DI\Attributes\AttributeType;
 use Windwalker\Utilities\Arr;
 
 use function Windwalker\include_files;
@@ -27,7 +29,7 @@ return Arr::mergeRecursive(
 
         ],
         'attributes' => [
-            \Windwalker\Core\Attributes\Controller::class,
+            Controller::class => AttributeType::CLASSES,
         ]
     ]
 );

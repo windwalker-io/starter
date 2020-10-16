@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-use App\Controller\TestController;
+use Front\Test\TestController;
 use Windwalker\Core\Router\RouteCreator;
 
 /** @var RouteCreator $router */
@@ -24,9 +24,12 @@ $router->group('front')
             ->register(function (RouteCreator $router) {
                 $router->any('hello', '/{id:\d+}[/{name}]')
                     ->handlers(
-                        ['post'],
+                        ['get', 'post'],
                         TestController::class,
                         'hello'
                     );
+
+                $router->get('test', '/test')
+                    ->handler(TestController::class);
             });
     });

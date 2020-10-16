@@ -29,6 +29,8 @@ return [
 
     'log' => true,
 
+    'log_channel' => 'error',
+
     'providers' => [
         ErrorHandlingProvider::class
     ],

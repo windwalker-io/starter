@@ -9,19 +9,30 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace Front\Test;
 
+use Psr\Http\Message\ServerRequestInterface;
+use Windwalker\Core\Attributes\Controller;
 use Windwalker\Core\Manager\CacheManager;
 use Windwalker\Core\Manager\CryptoManager;
 use Windwalker\Crypt\HiddenString;
 use Windwalker\Crypt\Key;
+use Windwalker\Queue\Queue;
 
-/**
- * The TestController class.
- */
+#[Controller(
+    config: __DIR__ . '/test.config.php'
+)]
 class TestController
 {
-    public function hello($id, ?string $name, CacheManager $cacheManager, CryptoManager $cryptoManager)
+    /**
+     * TestController constructor.
+     */
+    public function __construct(Queue $queue)
+    {
+        show($queue);
+    }
+
+    public function hello(string $id, ?string $name, CacheManager $cacheManager, CryptoManager $cryptoManager): mixed
     {
         var_dump($id, $name);
 
@@ -43,5 +54,10 @@ class TestController
         );
 
         return $cipher->decrypt($enc, $key);
+    }
+
+    public function get(ServerRequestInterface $request)
+    {
+        show($request);
     }
 }
