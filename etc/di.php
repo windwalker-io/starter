@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 use Windwalker\Core\Attributes\Controller;
 use Windwalker\DI\Attributes\AttributeType;
+use Windwalker\DI\Attributes\Autowire;
+use Windwalker\DI\Attributes\Inject;
 use Windwalker\Utilities\Arr;
 
 use function Windwalker\include_files;
@@ -30,6 +32,8 @@ return Arr::mergeRecursive(
         ],
         'attributes' => [
             Controller::class => AttributeType::CLASSES,
+            Autowire::class => AttributeType::CLASSES | AttributeType::CALLABLE | AttributeType::PARAMETERS,
+            Inject::class => AttributeType::PROPERTIES,
         ]
     ]
 );

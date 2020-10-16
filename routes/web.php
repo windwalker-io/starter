@@ -29,7 +29,7 @@ $router->group('front')
                         'hello'
                     );
 
-                $router->get('test', '/test')
+                $router->any('test', '/test')
                     ->handler(TestController::class);
             });
     });

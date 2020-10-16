@@ -18,7 +18,9 @@ use Windwalker\Core\Manager\CacheManager;
 use Windwalker\Core\Manager\CryptoManager;
 use Windwalker\Crypt\HiddenString;
 use Windwalker\Crypt\Key;
+use Windwalker\DI\Attributes\Autowire;
 use Windwalker\Queue\Queue;
+use Windwalker\Renderer\CompositeRenderer;
 
 #[Controller(
     config: __DIR__ . '/test.config.php'
@@ -36,18 +38,11 @@ class TestController
     public function hello(
         string $id,
         ?string $name,
-        AppContext $context,
+        AppContext $app,
         CacheManager $cacheManager,
         CryptoManager $cryptoManager
     ): mixed {
         var_dump($id, $name);
-
-        $data = $context->input(
-            id: 'range: max=1',
-            name: 'raw'
-        );
-        
-        show($data);exit(' @Checkpoint');
 
         $cache = $cacheManager->get();
         $cipher = $cryptoManager->get();
@@ -69,8 +64,26 @@ class TestController
         return $cipher->decrypt($enc, $key);
     }
 
-    public function get(ServerRequestInterface $request)
+    public function index(
+        AppContext $app,
+        #[Autowire] CompositeRenderer $renderer
+    ) {
+        [$name, $id] = $app->input(
+            name: 'raw',
+            id: 'range: max=500',
+        )->values();
+
+        $renderer->addPath(WINDWALKER_VIEWS . '/front');
+        $renderer->addFileExtensions('edge', 'blade.php');
+
+        return $renderer->render('hello');
+    }
+
+    public function save(AppContext $app)
     {
-        show($request);
+        $req = $app->getRequest();
+        $files = $req->getUploadedFiles();
+        
+        show($files);exit(' @Checkpoint');
     }
 }
