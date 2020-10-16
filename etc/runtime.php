@@ -35,7 +35,7 @@ return [
             'main' => create(
                 static function (Container $container) {
                     $app = new WebApplication($container->createChild());
-                    $app->loadConfig(__DIR__ . '/config.php');
+                    $app->loadConfig(__DIR__ . '/app/main.php');
 
                     return $app;
                 }

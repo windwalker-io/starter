@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Front\Test;
 
 use Psr\Http\Message\ServerRequestInterface;
+use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\Controller;
 use Windwalker\Core\Manager\CacheManager;
 use Windwalker\Core\Manager\CryptoManager;
@@ -32,9 +33,21 @@ class TestController
         show($queue);
     }
 
-    public function hello(string $id, ?string $name, CacheManager $cacheManager, CryptoManager $cryptoManager): mixed
-    {
+    public function hello(
+        string $id,
+        ?string $name,
+        AppContext $context,
+        CacheManager $cacheManager,
+        CryptoManager $cryptoManager
+    ): mixed {
         var_dump($id, $name);
+
+        $data = $context->input(
+            id: 'range: max=1',
+            name: 'raw'
+        );
+        
+        show($data);exit(' @Checkpoint');
 
         $cache = $cacheManager->get();
         $cipher = $cryptoManager->get();

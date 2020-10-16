@@ -38,22 +38,6 @@ $server->on('request', function (RequestEvent $event) use ($container) {
     $app = $container->resolve('app.main');
     $app->boot();
 
-    $app->addMiddleware($app->make(\Windwalker\Core\Middleware\RoutingMiddleware::class));
-    $app->addMiddleware(function ($req, $next) use ($app) {
-        $app->service(\Windwalker\Core\Service\LoggerService::class)->error('error', 'werwwr');
-        $db = $app->service(\Windwalker\Database\DatabaseAdapter::class);
-
-        show(
-            $db->select('*')
-                ->from('articles')
-                ->where('id', 1)
-                ->all()
-                ->dump(true)
-        );
-
-        return $next($req);
-    });
-
     $event->setResponse($app->execute($req));
 });
 
