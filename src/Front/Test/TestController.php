@@ -16,9 +16,12 @@ use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\Controller;
 use Windwalker\Core\Manager\CacheManager;
 use Windwalker\Core\Manager\CryptoManager;
+use Windwalker\Core\Router\Navigator;
+use Windwalker\Core\Router\Router;
 use Windwalker\Crypt\HiddenString;
 use Windwalker\Crypt\Key;
 use Windwalker\DI\Attributes\Autowire;
+use Windwalker\Filesystem\Filesystem;
 use Windwalker\Queue\Queue;
 use Windwalker\Renderer\CompositeRenderer;
 
@@ -79,11 +82,16 @@ class TestController
         return $renderer->render('hello');
     }
 
-    public function save(AppContext $app)
+    public function save(AppContext $app, Navigator $nav)
     {
-        $req = $app->getRequest();
-        $files = $req->getUploadedFiles();
-        
-        show($files);exit(' @Checkpoint');
+        $file = $app->file('item')['file'];
+        $folder = WINDWALKER_TEMP . '/uploaded';
+        Filesystem::mkdir($folder);
+
+        $file->moveTo($folder . '/' . $file->getClientFilename());
+
+        $nav = $nav->options(Navigator::DEBUG_ALERT);
+
+        $nav->redirectInstant($nav->to('hello', ['id' => 123, 'name' => 'Hello']));
     }
 }
