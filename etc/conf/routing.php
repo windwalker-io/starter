@@ -9,16 +9,27 @@
 
 declare(strict_types=1);
 
+use Windwalker\Core\Router\Router;
+
+use Windwalker\DI\Container;
+
+use function Windwalker\DI\create;
+
 return [
     'routes' => [
-        WINDWALKER_ROUTES . '/web.php'
+        __DIR__ . '../../routes/web.php'
     ],
 
     'providers' => [
-        \Windwalker\Core\Provider\RouterProvider::class
+
     ],
 
     'bindings' => [
+        Router::class
+    ],
 
+    'extends' => [
+        Router::class => fn(Router $router, Container $container)
+            => $router->register($container->getParam('routing.routes'))
     ]
 ];
