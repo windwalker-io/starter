@@ -20,10 +20,14 @@ $app = new MicroApplication();
 // $app->loadConfig(__DIR__ . '/../etc/app/main.php');
 
 $app->routing(function (RouteCreator $router) {
-    $router->get('hello', '/hello/{id:\d+}[/{name}]')
-        ->handler(function ($id, $name, \Psr\Http\Message\ServerRequestInterface $request) {
-            show($id, $name, $request);
-        });
+    $router->get(
+        '/hello/{id:\d+}[/{name}]',
+        function ($id, $name, \Psr\Http\Message\ServerRequestInterface $request) {
+            show($id, $name);
+
+            return 'Hello';
+        }
+    );
 });
 
 $app->execute();
