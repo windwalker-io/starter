@@ -18,6 +18,7 @@ use Windwalker\Core\Manager\CacheManager;
 use Windwalker\Core\Manager\CryptoManager;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\Router;
+use Windwalker\Core\Router\RouteUri;
 use Windwalker\Crypt\HiddenString;
 use Windwalker\Crypt\Key;
 use Windwalker\DI\Attributes\Autowire;
@@ -92,6 +93,6 @@ class TestController
 
         $nav = $nav->options(Navigator::DEBUG_ALERT);
 
-        $nav->redirectInstant($nav->to('hello', ['id' => 123, 'name' => 'Hello']));
+        return $nav->to('hello', ['id' => 123, 'name' => 'Hello']);
     }
 }
