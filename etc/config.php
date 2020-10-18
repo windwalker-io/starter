@@ -22,6 +22,7 @@ return Arr::mergeRecursive(
         'routing'  => include __DIR__ . '/conf/routing.php',
         'cache'    => include __DIR__ . '/conf/cache.php',
         'security' => include __DIR__ . '/conf/security.php',
+        'renderer' => include __DIR__ . '/conf/renderer.php',
         // 'asset' => include __DIR__ . '/conf/asset.php',
         // 'language' => include __DIR__ . '/conf/language.php',
         // 'console' => include __DIR__ . '/conf/console.php',

@@ -9,22 +9,20 @@
 
 declare(strict_types=1);
 
-namespace Front\Test;
+namespace App\Front\Test;
 
-use Psr\Http\Message\ServerRequestInterface;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\Controller;
 use Windwalker\Core\Manager\CacheManager;
 use Windwalker\Core\Manager\CryptoManager;
 use Windwalker\Core\Router\Navigator;
-use Windwalker\Core\Router\Router;
-use Windwalker\Core\Router\RouteUri;
 use Windwalker\Crypt\HiddenString;
 use Windwalker\Crypt\Key;
 use Windwalker\DI\Attributes\Autowire;
 use Windwalker\Filesystem\Filesystem;
 use Windwalker\Queue\Queue;
 use Windwalker\Renderer\CompositeRenderer;
+use Windwalker\Renderer\RendererInterface;
 
 #[Controller(
     config: __DIR__ . '/test.config.php'
@@ -70,7 +68,8 @@ class TestController
 
     public function index(
         AppContext $app,
-        #[Autowire] CompositeRenderer $renderer
+        string $view,
+        RendererInterface $renderer
     ) {
         [$name, $id] = $app->input(
             name: 'raw',

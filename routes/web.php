@@ -9,7 +9,8 @@
 
 declare(strict_types=1);
 
-use Front\Test\TestController;
+use App\Front\Sakura\Sakura;
+use App\Front\Test\TestController;
 use Windwalker\Core\Router\RouteCreator;
 
 /** @var RouteCreator $router */
@@ -18,6 +19,15 @@ $router->group('front')
     ->register(function (RouteCreator $router) {
         $router->get('home', '/')
             ->handler([TestController::class, 'hello']);
+
+        $router->get('sakura', '/sakura')
+            ->handler(Sakura::class, 'index')
+            ->var('view', \App\Front\Test\HelloView::class);
+
+        $router->any('sakura_edit', '/sakura/edit[/{id:\d+}]')
+            ->getHandler(Sakura::class, 'index')
+            ->saveHandler(Sakura::class, 'save')
+            ->var('view', \App\Front\Test\SakuraEditView::class);
 
         $router->group('hello')
             ->prefix('/hello')

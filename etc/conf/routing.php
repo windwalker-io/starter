@@ -17,7 +17,7 @@ use function Windwalker\DI\create;
 
 return [
     'routes' => [
-        __DIR__ . '../../routes/web.php'
+        __DIR__ . '/../../routes/web.php'
     ],
 
     'providers' => [
@@ -25,11 +25,13 @@ return [
     ],
 
     'bindings' => [
-        Router::class
+        Router::class => create(Router::class)
+            ->extend(
+                fn(Router $router, Container $container) => $router->register($container->getParam('routing.routes'))
+            )
     ],
 
     'extends' => [
-        Router::class => fn(Router $router, Container $container)
-            => $router->register($container->getParam('routing.routes'))
+        //
     ]
 ];
