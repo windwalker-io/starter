@@ -31,12 +31,14 @@ $container = Runtime::getContainer();
 /** @var HttpServer $server */
 $server = $container->resolve('server.http');
 
-$server->on('request', function (RequestEvent $event) use ($container) {
+$server->on('request', function (RequestEvent $event) use ($server, $container) {
     $req = $event->getRequest();
 
     /** @var \Windwalker\Core\Application\WebApplication $app */
     $app = $container->resolve('app.main');
     $app->boot();
+
+    $server->getDispatcher()->registerDealer($app->getDispatcher());
 
     $event->setResponse($app->execute($req));
 });

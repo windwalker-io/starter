@@ -10,6 +10,7 @@
 declare(strict_types=1);
 
 use Windwalker\Core\Attributes\Controller;
+use Windwalker\Core\Attributes\Ref;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\DI\Attributes\AttributeType;
 use Windwalker\DI\Attributes\Autowire;
@@ -36,6 +37,7 @@ return Arr::mergeRecursive(
             ViewModel::class => AttributeType::CLASSES,
             Autowire::class => AttributeType::CLASSES | AttributeType::CALLABLE | AttributeType::PARAMETERS,
             Inject::class => AttributeType::PROPERTIES,
+            Ref::class => AttributeType::PARAMETERS
         ]
     ]
 );

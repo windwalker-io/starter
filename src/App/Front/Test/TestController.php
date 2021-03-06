@@ -24,6 +24,9 @@ use Windwalker\Queue\Queue;
 use Windwalker\Renderer\CompositeRenderer;
 use Windwalker\Renderer\RendererInterface;
 
+/**
+ * The TestController class.
+ */
 #[Controller(
     config: __DIR__ . '/test.config.php'
 )]
@@ -66,6 +69,15 @@ class TestController
         return $cipher->decrypt($enc, $key);
     }
 
+    /**
+     * index
+     *
+     * @param  AppContext         $app
+     * @param  string             $view
+     * @param  RendererInterface  $renderer
+     *
+     * @return  string
+     */
     public function index(
         AppContext $app,
         string $view,

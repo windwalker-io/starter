@@ -26,9 +26,7 @@ return [
         'servers' => [
             'http' => create(
                 HttpServer::class,
-                ...[
-                    PhpServer::class => create(PhpServer::class),
-                ]
+                adapter: create(PhpServer::class)
             ),
         ],
         'apps' => [

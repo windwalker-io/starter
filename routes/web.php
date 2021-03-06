@@ -9,6 +9,7 @@
 
 declare(strict_types=1);
 
+use App\Front\Home\HomeController;
 use App\Front\Sakura\Sakura;
 use App\Front\Test\TestController;
 use Windwalker\Core\Router\RouteCreator;
@@ -18,7 +19,7 @@ use Windwalker\Core\Router\RouteCreator;
 $router->group('front')
     ->register(function (RouteCreator $router) {
         $router->get('home', '/')
-            ->handler([TestController::class, 'hello']);
+            ->handler(HomeController::class);
 
         $router->get('sakura', '/sakura')
             ->handler(Sakura::class, 'index')

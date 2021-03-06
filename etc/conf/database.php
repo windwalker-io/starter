@@ -12,6 +12,8 @@ declare(strict_types=1);
 use Windwalker\Core\Provider\DatabaseProvider;
 use Windwalker\Database\DatabaseAdapter;
 
+use Windwalker\Database\DatabaseFactory;
+
 use function Windwalker\DI\create;
 use function Windwalker\ref;
 
@@ -32,10 +34,9 @@ return [
 
     'factories' => [
         'instances' => [
-            'local' => create(
-                DatabaseAdapter::class,
+            'local' => fn (DatabaseFactory $factory) => $factory->create(
+                env('DATABASE_DRIVER'),
                 [
-                    'driver' => env('DATABASE_DRIVER'),
                     'host' => env('DATABASE_HOST') ?: 'localhost',
                     'database' => env('DATABASE_NAME'),
                     'username' => env('DATABASE_USER'),
