@@ -29,8 +29,10 @@ class HomeController
 {
     public function index(Session $session)
     {
-
+        $foo =123;
         $session->start();
+
+        show($session->get('foo'), $session);
 
         // $session->start();
 
