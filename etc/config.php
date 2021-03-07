@@ -14,7 +14,8 @@ use Windwalker\Utilities\Arr;
 return Arr::mergeRecursive(
     [
         'app'      => include __DIR__ . '/conf/app.php',
-        'session'     => include __DIR__ . '/conf/session.php',
+        'auth'     => include __DIR__ . '/conf/auth.php',
+        'session'  => include __DIR__ . '/conf/session.php',
         'logs'     => include __DIR__ . '/conf/logs.php',
         'error'    => include __DIR__ . '/conf/error.php',
         'whoops'   => include __DIR__ . '/conf/whoops.php',

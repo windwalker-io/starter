@@ -12,8 +12,10 @@ declare(strict_types=1);
 namespace App\Front\Home;
 
 use Windwalker\Core\Attributes\Controller;
+use Windwalker\Core\Auth\AuthService;
 use Windwalker\Core\Manager\DatabaseManager;
 use Windwalker\Core\Manager\SessionManager;
+use Windwalker\Core\Security\CsrfService;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\Http\Response\Response;
 use Windwalker\ORM\ORM;
@@ -27,14 +29,20 @@ use Windwalker\Session\Session;
 )]
 class HomeController
 {
-    public function index(Session $session)
+    public function index(Session $session, AuthService $auth)
     {
-        $foo =123;
-        $session->start();
+        $r = $auth->authenticate(
+            [
+                'username' =>'admin',
+                'password' => '1234'
+            ]
+        );
 
-        show($session->get('foo'), $session);
+        $user =$r->getCredential();
 
-        // $session->start();
+        $r = $auth->authorise('can.save', $user);
+
+        show($r);
 
         return 'asd';
     }

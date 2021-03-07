@@ -9,16 +9,11 @@
 
 declare(strict_types=1);
 
-use Psr\Http\Message\ServerRequestInterface;
-use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\Ref;
 use Windwalker\Core\Provider\SessionProvider;
-use Windwalker\Core\Runtime\Config;
 use Windwalker\Session\Bridge\BridgeInterface;
 use Windwalker\Session\Bridge\NativeBridge;
 use Windwalker\Session\Bridge\PhpBridge;
-use Windwalker\Session\Cookie\ArrayCookies;
-use Windwalker\Session\Cookie\CallbackCookies;
 use Windwalker\Session\Cookie\Cookies;
 use Windwalker\Session\Handler\ArrayHandler;
 use Windwalker\Session\Handler\DatabaseHandler;
@@ -39,13 +34,13 @@ return [
         'domain' => null,
         'secure' => false,
         'httponly' => true,
-        'samesite' => Cookies::SAMESITE_LAX
+        'samesite' => Cookies::SAMESITE_LAX,
     ],
 
     'ini' => [
         'name' => 'WINDWALKER_SESSID',
         'save_path' => null,
-        'use_cookies' => '0'
+        'use_cookies' => '0',
     ],
 
     'providers' => [
@@ -60,11 +55,10 @@ return [
         'instances' => [
             'native' => create(
                 Session::class,
-                options: fn (#[Ref('session.ini')] array $ini) =>
-                [
-                    Session::OPTION_AUTO_COMMIT => true,
-                    'ini' => $ini
-                ],
+                options: fn(#[Ref('session.ini')] array $ini) => [
+                Session::OPTION_AUTO_COMMIT => true,
+                'ini' => $ini,
+            ],
                 bridge: ref('session.factories.bridges.php'),
                 cookies: ref('session.factories.cookies.request')
             ),
@@ -82,7 +76,7 @@ return [
                     BridgeInterface::OPTION_WITH_SUPER_GLOBAL => false,
                 ],
                 handler: ref('session.factories.handlers.filesystem')
-            )
+            ),
         ],
         'handlers' => [
             'array' => create(ArrayHandler::class),
@@ -97,11 +91,11 @@ return [
                 path: null,
                 options: []
             ),
-            'redis' => create(RedisHandler::class)
+            'redis' => create(RedisHandler::class),
         ],
         'cookies' => [
             'request' => create(SessionProvider::psrCookies()),
-            'native' => create(Cookies::class, ref('session.cookie_params'))
-        ]
+            'native' => create(Cookies::class, ref('session.cookie_params')),
+        ],
     ],
 ];
