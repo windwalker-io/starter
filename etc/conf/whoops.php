@@ -13,7 +13,7 @@ use Whoops\Run as Whoops;
 use Windwalker\Core\Provider\WhoopsProvider;
 
 return [
-    'editor' => env('WHOOPS_EDITOR') ?? 'phpstorm',
+    'editor' => env('WHOOPS_EDITOR') ?: 'phpstorm',
     'hidden_list' => [
         '_ENV' => array_keys($_ENV ?? []),
         '_SERVER' => array_merge(

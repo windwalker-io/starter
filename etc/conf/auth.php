@@ -26,9 +26,9 @@ return [
         ]
     ],
 
-    'authorization' => [
+    'authorisation' => [
         'policies' => [
-
+            //
         ]
     ],
 
