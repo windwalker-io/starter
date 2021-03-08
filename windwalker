@@ -7,18 +7,25 @@
  * @license    GNU General Public License version 2 or later.
  */
 
+use Windwalker\Core\Console\ConsoleApplication;
+use Windwalker\Core\Runtime\Runtime;
+
 $autoload = __DIR__ . '/vendor/autoload.php';
 
 if (!is_file($autoload)) {
     exit('Please run `composer install` First.');
 }
 
-include_once $autoload;
+include $autoload;
 
 include_once __DIR__ . '/etc/define.php';
 
-$console = new Windwalker\Console\Application;
+Runtime::boot(WINDWALKER_ROOT, __DIR__);
+Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.php');
 
-define('WINDWALKER_DEBUG', $console->get('system.debug'));
+$container = Runtime::getContainer();
 
-$console->execute();
+/** @var ConsoleApplication $console */
+$console = $container->resolve('console');
+
+$console->run();

@@ -7,7 +7,9 @@
  * @license    __LICENSE__
  */
 
+use Composer\InstalledVersions;
 use Windwalker\Core\Application\WebApplication;
+use Windwalker\Core\Console\ConsoleApplication;
 use Windwalker\DI\Container;
 use Windwalker\Http\Server\HttpServer;
 use Windwalker\Http\Server\PhpServer;
@@ -22,6 +24,7 @@ return [
     'app' => [
         'main' => ref('di.apps.main'),
     ],
+    'console' => ref('di.console'),
     'di' => [
         'servers' => [
             'http' => create(
@@ -39,6 +42,16 @@ return [
                 }
             ),
         ],
+        'console' => static function (Container $container) {
+            $console = new ConsoleApplication(
+                'Windwalker Console',
+                InstalledVersions::getPrettyVersion('windwalker/core')
+            );
+            $console->setContainer($container->createChild());
+            $console->setCommandLoader();
+            $console->setAutoExit(false);
+            return $console;
+        }
     ],
     '@root' => WINDWALKER_ROOT,
     '@bin' => WINDWALKER_BIN,
