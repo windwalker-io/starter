@@ -43,13 +43,10 @@ return [
             ),
         ],
         'console' => static function (Container $container) {
-            $console = new ConsoleApplication(
-                'Windwalker Console',
-                InstalledVersions::getPrettyVersion('windwalker/core')
-            );
-            $console->setContainer($container->createChild());
-            $console->setCommandLoader();
+            $console = new ConsoleApplication($container->createChild());
             $console->setAutoExit(false);
+            $console->loadConfig(__DIR__ . '/app/console.php');
+            $console->boot();
             return $console;
         }
     ],

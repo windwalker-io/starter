@@ -11,6 +11,8 @@ use Windwalker\Core\Error\ErrorLogHandler;
 use Windwalker\Core\Error\SimpleErrorPageHandler;
 use Windwalker\Core\Provider\ErrorHandlingProvider;
 
+use Windwalker\DI\Container;
+
 use function Windwalker\DI\create;
 use function Windwalker\ref;
 
@@ -46,10 +48,12 @@ return [
             ),
             'log' => create(
                 ErrorLogHandler::class,
-                options: [
-                    'channel' => 'error',
-                    'enabled' => ref('log')
-                ]
+                options: function (Container $container) {
+                    return [
+                        'channel' => 'error',
+                        'enabled' => $container->getParam('error.log')
+                    ];
+                }
             )
         ]
     ]

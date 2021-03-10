@@ -31,18 +31,18 @@ class HomeController
 {
     public function index(Session $session, AuthService $auth)
     {
-        $r = $auth->authenticate(
-            [
-                'username' =>'admin',
-                'password' => '1234'
-            ]
-        );
+        // $r = $auth->authenticate(
+        //     [
+        //         'username' =>'admin',
+        //         'password' => '1234'
+        //     ]
+        // );
+        //
+        // $user =$r->getCredential();
+        //
+        // $r = $auth->authorise('can.save', $user, 'sss');
 
-        $user =$r->getCredential();
-
-        $r = $auth->authorise('can.save', $user, 'sss');
-
-        show($r);
+        // show($r);
 
         return 'asd';
     }
