@@ -20,6 +20,8 @@ include $autoload;
 
 include_once __DIR__ . '/etc/define.php';
 
+error_reporting(-1);
+
 Runtime::boot(WINDWALKER_ROOT, __DIR__);
 Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.php');
 

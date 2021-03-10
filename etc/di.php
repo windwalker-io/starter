@@ -12,8 +12,10 @@ declare(strict_types=1);
 use Windwalker\Core\Attributes\Controller;
 use Windwalker\Core\Attributes\Ref;
 use Windwalker\Core\Attributes\ViewModel;
+use Windwalker\Core\Console\CoreCommand;
 use Windwalker\DI\Attributes\AttributeType;
 use Windwalker\DI\Attributes\Autowire;
+use Windwalker\DI\Attributes\Decorator;
 use Windwalker\DI\Attributes\Inject;
 use Windwalker\Utilities\Arr;
 
@@ -33,11 +35,16 @@ return Arr::mergeRecursive(
 
         ],
         'attributes' => [
-            Controller::class => AttributeType::CLASSES,
-            ViewModel::class => AttributeType::CLASSES,
+            // Declaration
+            Decorator::class => AttributeType::CLASSES,
             Autowire::class => AttributeType::CLASSES | AttributeType::CALLABLE | AttributeType::PARAMETERS,
             Inject::class => AttributeType::PROPERTIES,
-            Ref::class => AttributeType::PARAMETERS
+            Ref::class => AttributeType::PARAMETERS,
+
+            // Decorators
+            Controller::class => AttributeType::CLASSES,
+            ViewModel::class => AttributeType::CLASSES,
+            CoreCommand::class => AttributeType::CLASSES | AttributeType::CALLABLE,
         ]
     ]
 );

@@ -7,6 +7,7 @@
  * @license    __LICENSE__
  */
 
+use Windwalker\Core\Application\ApplicationInterface;
 use Windwalker\Core\Error\ErrorLogHandler;
 use Windwalker\Core\Error\SimpleErrorPageHandler;
 use Windwalker\Core\Provider\ErrorHandlingProvider;
@@ -18,7 +19,7 @@ use function Windwalker\ref;
 
 return [
     'ini' => [
-        'error_reporting' => -1
+        'error_reporting' => '-1'
     ],
 
     'report_level' => E_ALL | E_STRICT,
@@ -35,6 +36,16 @@ return [
 
     'providers' => [
         ErrorHandlingProvider::class
+    ],
+
+    'handlers' => [
+        ApplicationInterface::CLIENT_WEB => [
+            ref('error.factories.handlers.default'),
+            ref('error.factories.handlers.log'),
+        ],
+        ApplicationInterface::CLIENT_CONSOLE => [
+            ref('error.factories.handlers.console_log'),
+        ]
     ],
 
     'factories' => [
@@ -54,7 +65,16 @@ return [
                         'enabled' => $container->getParam('error.log')
                     ];
                 }
-            )
+            ),
+            'console_log' => create(
+                ErrorLogHandler::class,
+                options: function (Container $container) {
+                    return [
+                        'channel' => 'console-error',
+                        'enabled' => $container->getParam('error.log')
+                    ];
+                }
+            ),
         ]
     ]
 ];
