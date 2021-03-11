@@ -12,6 +12,7 @@ declare(strict_types=1);
 use Windwalker\Core\Attributes\Controller;
 use Windwalker\Core\Attributes\Ref;
 use Windwalker\Core\Attributes\ViewModel;
+use Windwalker\Core\Console\CommandWrapper;
 use Windwalker\Core\Console\CoreCommand;
 use Windwalker\DI\Attributes\AttributeType;
 use Windwalker\DI\Attributes\Autowire;
@@ -44,7 +45,7 @@ return Arr::mergeRecursive(
             // Decorators
             Controller::class => AttributeType::CLASSES,
             ViewModel::class => AttributeType::CLASSES,
-            CoreCommand::class => AttributeType::CLASSES | AttributeType::CALLABLE,
+            CommandWrapper::class => AttributeType::CLASSES | AttributeType::CALLABLE,
         ]
     ]
 );

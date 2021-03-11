@@ -24,7 +24,7 @@ return Arr::mergeRecursive(
             'debug:dump-server' => \Windwalker\Core\Command\DumpServerCommand::class,
             //
             // 'db:mig:reset' => '',
-            'migration:to' => \Windwalker\Core\Migration\Command\MigrationToCommand::class,
+            'db:migrate' => \Windwalker\Core\Migration\Command\MigrateCommand::class,
             // 'db:mig:rollback' => '',
             // 'db:mig:update' => '',
             // 'db:mig:status' => '',
@@ -36,6 +36,7 @@ return Arr::mergeRecursive(
             // 'asset:makesum' => '',
             //
             // 'run' => '',
+            'test' => __DIR__ . '/../../resources/commands/test.php'
         ],
 
         'listeners' => [
