@@ -3,7 +3,7 @@
     "description": "Windwalker Starter.",
     "homepage": "https://github.com/ventoviro/windwalker-starter",
     "license": "MIT",
-    "minimum-stability": "dev",
+    "minimum-stability": "beta",
     "authors": [
         {
             "name": "Simon Asika",
@@ -14,7 +14,7 @@
         "php": ">=8.0",
         "ext-json": "*",
         "windwalker/core": "4.x-dev",
-        "symfony/var-dumper": "^5.0",
+        "symfony/var-dumper": "^5.2",
 
         "windwalker/framework": "4.x-dev",
         "symfony/dotenv": "^5.0",
@@ -24,9 +24,9 @@
         "relay/relay": "^2.0",
         "filp/whoops": "^2.1",
         "symfony/options-resolver": "^5.0",
-        "symfony/console": "5.x-dev",
+        "symfony/console": "^5.2",
         "fakerphp/faker": "^1.0",
-        "symfony/process": "9999999-dev"
+        "symfony/process": "^5.2"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.0"

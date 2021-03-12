@@ -21,14 +21,14 @@ return Arr::mergeRecursive(
             //
             // 'mail:test' => '',
             //
-            'debug:dump-server' => \Windwalker\Core\Command\DumpServerCommand::class,
+            'dump-server' => \Windwalker\Core\Command\DumpServerCommand::class,
             //
             // 'db:mig:reset' => '',
             'mig:go' => \Windwalker\Core\Migration\Command\MigrateCommand::class,
             'mig:reset' => \Windwalker\Core\Migration\Command\ResetCommand::class,
             'mig:status' => \Windwalker\Core\Migration\Command\StatusCommand::class,
             'mig:create' => \Windwalker\Core\Migration\Command\CreateCommand::class,
-            // 'db:export' => '',
+            'db:export' => \Windwalker\Core\Command\DbExportCommand::class,
             // 'db:seed:import' => '',
             // 'db:seed:clear' => '',
             //

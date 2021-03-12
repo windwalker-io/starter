@@ -43,8 +43,8 @@ return [
                 env('DATABASE_DRIVER'),
                 [
                     'host' => env('DATABASE_HOST') ?: 'localhost',
-                    'database' => env('DATABASE_NAME'),
-                    'username' => env('DATABASE_USER'),
+                    'dbname' => env('DATABASE_NAME'),
+                    'user' => env('DATABASE_USER'),
                     'password' => env('DATABASE_PASSWORD'),
                     'port' => env('DATABASE_PORT'),
                     'prefix' => env('DATABASE_TABLE_PREFIX'),

@@ -46,7 +46,7 @@ class implements CommandInterface {
     /**
      * @inheritDoc
      */
-    public function execute(IOInterface $io)
+    public function execute(IOInterface $io): int
     {
         show($io->getArgument('name'), $io->getOption('foo'));
     }
