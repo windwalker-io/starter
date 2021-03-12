@@ -24,6 +24,11 @@ return [
         'local' => ref('factories.instances.local'),
     ],
 
+    'backup' => [
+        'dir' => '@temp/sql-backup',
+        'max' => 20
+    ],
+
     'providers' => [
         DatabaseProvider::class,
     ],

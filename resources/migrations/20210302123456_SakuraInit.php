@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Part of starter project.
+ * Part of Windwalker project.
  *
- * @copyright  Copyright (C) 2021 __ORGANIZATION__.
+ * @copyright  Copyright (C) 2021 LYRASOFT.
  * @license    __LICENSE__
  */
 
@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Migration;
 
+use Windwalker\Core\Auth\AuthService;
 use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\Database\Schema\Schema;
@@ -19,7 +20,8 @@ use Windwalker\Database\Schema\Schema;
 /** @var Migration $this */
 
 $mig->up(
-    static function (DatabaseAdapter $db) use ($mig) {
+    function (DatabaseAdapter $db) use ($mig) {
+        /** @var Migration $this */
         $db->getTable('sakuras')->create(
             function (Schema $schema) {
                 $schema->primary('id');
@@ -36,4 +38,3 @@ $mig->down(
         $mig->db->getTable('sakuras')->drop();
     }
 );
-
