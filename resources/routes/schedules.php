@@ -19,8 +19,9 @@ use Windwalker\Core\Schedule\Schedule;
  * @var ConsoleApplication $app
  */
 
-$schedule->monthly('hello')
-    ->dayOfMonth(1, 5, 10, 15, 20)
+$schedule->hourly('hello')
+    ->minuteOfHour(5)
+    ->tags('foo', 'yoo', 'bar')
     ->handler(function () {
         show('GGGG');
     });

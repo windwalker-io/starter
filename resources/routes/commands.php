@@ -14,7 +14,7 @@ return [
 
     // 'server:start' => '',
     //
-    // 'mail:test' => '',
+    'mail:test' => \Windwalker\Core\Command\MailTestCommand::class,
     //
     'dump-server' => \Windwalker\Core\Command\DumpServerCommand::class,
 
