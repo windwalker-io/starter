@@ -38,7 +38,7 @@ $server->on('request', function (RequestEvent $event) use ($server, $container) 
     $app = $container->resolve('app.main');
     $app->boot();
 
-    $server->getDispatcher()->registerDealer($app->getDispatcher());
+    $server->getEventDispatcher()->addDealer($app->getEventDispatcher());
 
     $event->setResponse($app->execute($req));
 });

@@ -22,6 +22,7 @@ return [
 
     'connections' => [
         'local' => ref('factories.instances.local'),
+        'second' => ref('factories.instances.second'),
     ],
 
     'backup' => [
@@ -44,6 +45,17 @@ return [
                 [
                     'host' => env('DATABASE_HOST') ?: 'localhost',
                     'dbname' => env('DATABASE_NAME'),
+                    'user' => env('DATABASE_USER'),
+                    'password' => env('DATABASE_PASSWORD'),
+                    'port' => env('DATABASE_PORT'),
+                    'prefix' => env('DATABASE_TABLE_PREFIX'),
+                ]
+            ),
+            'second' => fn (DatabaseFactory $factory) => $factory->create(
+                env('DATABASE_DRIVER'),
+                [
+                    'host' => env('DATABASE_HOST') ?: 'localhost',
+                    'dbname' => 'second',
                     'user' => env('DATABASE_USER'),
                     'password' => env('DATABASE_PASSWORD'),
                     'port' => env('DATABASE_PORT'),

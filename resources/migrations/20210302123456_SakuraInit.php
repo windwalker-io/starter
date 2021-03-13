@@ -22,7 +22,8 @@ use Windwalker\Database\Schema\Schema;
 $mig->up(
     function (DatabaseAdapter $db) use ($mig) {
         /** @var Migration $this */
-        $db->getTable('sakuras')->create(
+        $mig->createTable(
+            'sakuras',
             function (Schema $schema) {
                 $schema->primary('id');
                 $schema->varchar('title');
@@ -35,6 +36,6 @@ $mig->up(
 
 $mig->down(
     static function () use ($mig) {
-        $mig->db->getTable('sakuras')->drop();
+        $mig->dropTables('sakuras');
     }
 );

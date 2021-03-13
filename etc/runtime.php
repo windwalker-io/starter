@@ -7,7 +7,6 @@
  * @license    __LICENSE__
  */
 
-use Composer\InstalledVersions;
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\Console\ConsoleApplication;
 use Windwalker\DI\Container;

@@ -9,9 +9,7 @@
 
 declare(strict_types=1);
 
-use Windwalker\Utilities\Arr;
-
-return Arr::mergeRecursive(
+return array_merge(
     require __DIR__ . '/windwalker.php',
     [
         'middlewares' => [

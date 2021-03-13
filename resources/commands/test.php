@@ -12,15 +12,15 @@ declare(strict_types=1);
 namespace App\Command;
 
 use Symfony\Component\Console\Command\Command;
-use Windwalker\Core\Console\CommandInterface;
-use Windwalker\Core\Console\CommandWrapper;
-use Windwalker\Core\Console\Input\InputArgument;
-use Windwalker\Core\Console\Input\InputOption;
-use Windwalker\Core\Console\IOInterface;
+use Windwalker\Console\CommandInterface;
+use Windwalker\Console\CommandWrapper;
+use Windwalker\Console\Input\InputArgument;
+use Windwalker\Console\Input\InputOption;
+use Windwalker\Console\IOInterface;
 
 return new
 #[
-    CommandWrapper('Hello command'),
+    CommandWrapper(description: 'Hello command'),
     InputArgument(
         'name',
         InputArgument::OPTIONAL,
