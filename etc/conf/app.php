@@ -14,6 +14,10 @@ return [
 
     'mode' => env('APP_ENV') ?? 'prod',
 
+    'timezone' => 'UTC',
+
+    'server_timezone' => 'UTC',
+
     'dump_server' => [
         'host' => env('DUMP_SERVER_HOST') ?: 'tcp://127.0.0.1:9912'
     ]

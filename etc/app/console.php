@@ -22,7 +22,7 @@ return array_merge(
             __DIR__ . '/../../resources/routes/schedules.php'
         ],
 
-        'scripts' => include __DIR__ . '/../../resources/routes/commands.php'
+        'scripts' => include __DIR__ . '/../../resources/routes/scripts.php'
     ],
     require __DIR__ . '/../config.php'
 );

@@ -21,6 +21,7 @@ return Arr::mergeRecursive(
         // 'whoops'   => include __DIR__ . '/conf/whoops.php',
         'events'   => include __DIR__ . '/conf/events.php',
         'database' => include __DIR__ . '/conf/database.php',
+        'mail'     => include __DIR__ . '/conf/mail.php',
         'routing'  => include __DIR__ . '/conf/routing.php',
         'cache'    => include __DIR__ . '/conf/cache.php',
         'security' => include __DIR__ . '/conf/security.php',
