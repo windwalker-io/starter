@@ -1,24 +1,23 @@
 /**
- * Part of windwalker project.
+ * Part of Windwalker Fusion project.
  *
- * @copyright  Copyright (C) 2018 Asikart.
- * @license    LGPL-2.0+
+ * @copyright  Copyright (C) 2021 LYRASOFT.
+ * @license    MIT
  */
 
-const fusion = require('windwalker-fusion');
+import fusion from '@windwalker-io/fusion';
 
-// The task `main`
-fusion.task('main', function () {
+export async function main() {
   // Watch start
-  fusion.watch('www/asset/scss/**/*.scss');
+  fusion.watch('resources/asset/scss/**/*.scss');
   // Watch end
 
   // Compile Start
-  fusion.sass('www/asset/scss/**/*.scss', 'www/asset/css/app.css');
+  fusion.sass('resources/asset/scss/**/*.scss', 'www/asset/css/app.css');
   // Compile end
-});
+}
 
-fusion.default(['main']);
+export default main;
 
 /*
  * APIs
@@ -26,10 +25,10 @@ fusion.default(['main']);
  * Compile entry:
  * fusion.js(source, dest, options = {})
  * fusion.babel(source, dest, options = {})
+ * fusion.module(source, dest, options = {})
  * fusion.ts(source, dest, options = {})
  * fusion.typeScript(source, dest, options = {})
  * fusion.css(source, dest, options = {})
- * fusion.less(source, dest, options = {})
  * fusion.sass(source, dest, options = {})
  * fusion.copy(source, dest, options = {})
  *
@@ -40,8 +39,12 @@ fusion.default(['main']);
  * Gulp proxy:
  * fusion.src(source, options)
  * fusion.dest(path, options)
- * fusion.task(name, deps, fn)
  * fusion.watch(glob, opt, fn)
+ * fusion.symlink(directory, options = {})
+ * fusion.lastRun(task, precision)
+ * fusion.tree(options = {})
+ * fusion.series(...tasks)
+ * fusion.parallel(...tasks)
  *
  * Stream Helper:
  * fusion.through(handler) // Same as through2.obj()
