@@ -19,6 +19,7 @@ use function Windwalker\ref;
 
 return [
     'ini' => [
+        'display_errors' => 'on',
         'error_reporting' => '-1'
     ],
 

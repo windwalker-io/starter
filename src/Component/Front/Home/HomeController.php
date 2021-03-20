@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace App\Front\Home;
+namespace App\Component\Front\Home;
 
 use Windwalker\Core\Attributes\Controller;
 use Windwalker\Core\Auth\AuthService;
@@ -29,25 +29,5 @@ use Windwalker\Session\Session;
 )]
 class HomeController
 {
-    public function index(Session $session, AuthService $auth)
-    {
-        // $r = $auth->authenticate(
-        //     [
-        //         'username' =>'admin',
-        //         'password' => '1234'
-        //     ]
-        // );
-        //
-        // $user =$r->getCredential();
-        //
-        // $r = $auth->authorise('can.save', $user, 'sss');
 
-        // show($r);
-
-        show(date_default_timezone_get());
-
-        echo date('Y-m-d H:i:s');
-
-        return 'asd';
-    }
 }

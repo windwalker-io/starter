@@ -45,6 +45,10 @@ return [
         ],
     ],
 
+    'options' => [
+        'cache_path' => WINDWALKER_CACHE . '/renderer'
+    ],
+
     'providers' => [
         RendererProvider::class
     ],

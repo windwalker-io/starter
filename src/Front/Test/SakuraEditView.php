@@ -26,11 +26,12 @@ class SakuraEditView implements ViewModelInterface
     /**
      * Prepare
      *
-     * @param  AppContext  $app
+     * @param  \Windwalker\Data\Collection  $state
+     * @param  AppContext                   $app
      *
      * @return  array
      */
-    public function prepare(AppContext $app): array
+    public function prepare(\Windwalker\Data\Collection $state, AppContext $app): array
     {
         $item = [
             'title' => 'Hello'

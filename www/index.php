@@ -18,8 +18,6 @@ if (!is_file($root . '/vendor/autoload.php')) {
 
 include $root . '/vendor/autoload.php';
 
-error_reporting(-1);
-
 include __DIR__ . '/../etc/define.php';
 
 Runtime::boot(WINDWALKER_ROOT, __DIR__);
