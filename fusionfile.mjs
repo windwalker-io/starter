@@ -17,6 +17,20 @@ export async function main() {
   // Compile end
 }
 
+export async function install() {
+  const vendors = [
+    //
+  ];
+
+  vendors.forEach((vendor) => {
+    console.log(`[Copy] node_modules/${vendor}/**/* => www/asset/vendor/${vendor}/`);
+    fusion.copy(`node_modules/${vendor}/**/*`, `www/asset/vendor/${vendor}/`);
+  });
+
+  console.log('[Copy] resources/asset/vendor/**/* => www/asset/vendor/');
+  fusion.copy('resources/asset/vendor/**/*', 'www/asset/vendor/');
+}
+
 export default main;
 
 /*

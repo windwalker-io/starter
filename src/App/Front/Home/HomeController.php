@@ -44,6 +44,10 @@ class HomeController
 
         // show($r);
 
+        show(date_default_timezone_get());
+
+        echo date('Y-m-d H:i:s');
+
         return 'asd';
     }
 }
