@@ -17,6 +17,16 @@ export async function main() {
   // Compile end
 }
 
+export async function sync() {
+  // Watch start
+  fusion.watch('src/Component/**/view/**/*.js');
+  // Watch end
+
+  // Compile Start
+  fusion.js('src/Component/**/view/**/*.js', 'www/asset/@view/');
+  // Compile end
+}
+
 export async function install() {
   const vendors = [
     //

@@ -74,5 +74,14 @@
 @yield('script')
 @stack('script')
 
+<script type="importmap">
+    {
+        "imports": {
+            "@view": "asset/@view/",
+            "@owl": "asset/vendor/owl/"
+        }
+    }
+</script>
+
 </body>
 </html>

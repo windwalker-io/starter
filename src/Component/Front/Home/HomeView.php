@@ -20,7 +20,10 @@ use Windwalker\Data\Collection;
  * The HomeView class.
  */
 #[ViewModel(
-    layout: 'home'
+    layout: 'home',
+    js: [
+        '@home' => 'home.js'
+    ]
 )]
 class HomeView implements ViewModelInterface
 {
