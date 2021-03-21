@@ -22,12 +22,20 @@ use Windwalker\Data\Collection;
 #[ViewModel(
     layout: 'home',
     css: 'home.scss',
-    js: [
+    modules: [
         '@home' => 'home.js'
     ]
 )]
 class HomeView implements ViewModelInterface
 {
+    /**
+     * HomeView constructor.
+     */
+    public function __construct()
+    {
+        //
+    }
+
     /**
      * Prepare
      *

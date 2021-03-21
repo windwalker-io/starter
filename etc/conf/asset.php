@@ -21,10 +21,14 @@ return [
 
     'import_map' => [
         'imports' => [
-            '@view/' => '@view/'
+            '@/' => 'js/',
+            '@view/' => 'js/view/',
+            '@vendor/' => 'js/vendor/'
         ],
         'scopes' => []
     ],
+
+    'namespace_root' => 'App\\Component',
 
     'version_file' => '@cache/asset/asset.version',
 
