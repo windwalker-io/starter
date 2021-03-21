@@ -28,8 +28,8 @@ return [
 
     'schedule' => \Windwalker\Core\Schedule\Command\ScheduleCommand::class,
     //
-    // 'asset:sync' => '',
-    // 'asset:makesum' => '',
+    'asset:sync' => \Windwalker\Core\Asset\Command\AssetSyncCommand::class,
+    'asset:version' => \Windwalker\Core\Asset\Command\AssetVersionCommand::class,
     //
     'run' => \Windwalker\Core\Command\RunCommand::class
 ];

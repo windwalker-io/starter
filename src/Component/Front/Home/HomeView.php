@@ -21,6 +21,7 @@ use Windwalker\Data\Collection;
  */
 #[ViewModel(
     layout: 'home',
+    css: 'home.scss',
     js: [
         '@home' => 'home.js'
     ]

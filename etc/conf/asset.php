@@ -19,6 +19,15 @@ return [
     // This is useful if you want to put all asset files on cloud storage.
     'uri' => '',
 
+    'import_map' => [
+        'imports' => [
+            '@view/' => '@view/'
+        ],
+        'scopes' => []
+    ],
+
+    'version_file' => '@cache/asset/asset.version',
+
     'providers' => [
         AssetProvider::class,
     ],

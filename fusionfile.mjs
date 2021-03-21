@@ -5,7 +5,8 @@
  * @license    MIT
  */
 
-import fusion from '@windwalker-io/fusion';
+import fusion, { waitAllEnded } from '@windwalker-io/fusion';
+import { execSync } from 'child_process';
 
 export async function main() {
   // Watch start
@@ -17,14 +18,38 @@ export async function main() {
   // Compile end
 }
 
+export async function js() {
+  // Watch start
+  fusion.watch('src/Component/**/asset/**/*.{js,mjs}');
+  // Watch end
+
+  // Compile Start
+  fusion.copy('src/Component/**/asset/**/*.{js,mjs}', 'www/asset/@test/');
+  // Compile end
+}
+
 export async function sync() {
   // Watch start
   fusion.watch('src/Component/**/view/**/*.js');
   // Watch end
 
   // Compile Start
-  fusion.js('src/Component/**/view/**/*.js', 'www/asset/@view/');
+  const wait = [];
+  let js = JSON.parse(execSync('php windwalker asset:sync "src/Component" --type=js').toString());
+
+  for (let key in js) {
+    console.log(`Copy: ${key} ==> www/asset/js/@view/${js[key]}`);
+    wait.push(fusion.js(key, `www/asset/js/@view/${js[key]}`));
+  }
+
+  const css = JSON.parse(execSync('php windwalker asset:sync "src/Component" --type=css').toString());
+
+  wait.push(
+    fusion.sass([...css], 'www/asset/css/main.css')
+  );
   // Compile end
+
+  return Promise.all(wait);
 }
 
 export async function install() {

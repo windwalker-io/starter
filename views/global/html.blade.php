@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ $app->config('language.locale') ? : $app->config('language.default', 'en-GB') }}">
 <head>
-    <base href="{{ $uri::clear($uri->path .  '/') }}" />
+    <base href="{{ $uri::normalize($uri->path .  '/') }}" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
@@ -68,20 +68,16 @@
     </div>
 @show
 
+<script>
+    const uid = 'eeee';
+</script>
+
 {{-- Bottom Scripts --}}
 {!! $asset->getTeleport()->render() !!}
+{!! $asset->getImportMap()->render() !!}
 {!! $asset->renderJS(true) !!}
 @yield('script')
 @stack('script')
-
-<script type="importmap">
-    {
-        "imports": {
-            "@view": "asset/@view/",
-            "@owl": "asset/vendor/owl/"
-        }
-    }
-</script>
 
 </body>
 </html>
