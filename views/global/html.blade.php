@@ -79,5 +79,7 @@
 @yield('script')
 @stack('script')
 
+<script src="@view/home/home.js?214b90bb6595358643b2dfeb" type="module"></script>
+
 </body>
 </html>

@@ -7,6 +7,7 @@
 
 import fusion, { waitAllEnded } from '@windwalker-io/fusion';
 import { execSync } from 'child_process';
+import { assetSync } from './vendor/windwalker/core/resources/asset/src/fusion.mjs';
 
 export async function main() {
   // Watch start
@@ -26,6 +27,25 @@ export async function js() {
   // Compile Start
   fusion.copy('src/Component/**/asset/**/*.{js,mjs}', 'www/asset/@test/');
   // Compile end
+}
+
+export async function sync2() {
+  // Watch start
+  fusion.watch('src/Component/**/view/**/*.js');
+  // Watch end
+
+  // Compile Start
+  assetSync(
+    'src/Component/Front/',
+    'www/asset/js/@view/'
+  )
+  assetSync(
+    'src/Component/Admin/',
+    'www/asset/js/@view/admin/'
+  )
+  // Compile end
+
+  return Promise.all([]);
 }
 
 export async function sync() {
