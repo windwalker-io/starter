@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace App\Component\Front\Home;
+namespace App\Module\Front\Home;
 
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;

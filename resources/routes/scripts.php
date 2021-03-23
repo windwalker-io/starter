@@ -13,10 +13,10 @@ use function Windwalker\cmd;
 
 return [
     'makelink' => [
-        'php windwalker asset sync phoenix -f',
-        'php windwalker asset sync luna -f',
-        'php windwalker asset sync warder -f',
-        'php windwalker asset sync unidev -f',
+        'php windwalker assets sync phoenix -f',
+        'php windwalker assets sync luna -f',
+        'php windwalker assets sync warder -f',
+        'php windwalker assets sync unidev -f',
     ],
 
     // Prepare assets and install dependencies
@@ -47,6 +47,6 @@ return [
         'cross-env COMPOSER_PROCESS_TIMEOUT=600 composer install --no-dev',
         'cross-env APP_ENV=dev php windwalker migration migrate',
         'cross-env NODE_ENV=production php windwalker run prepare',
-        'php windwalker asset makesum',
+        'php windwalker assets makesum',
     ],
 ];

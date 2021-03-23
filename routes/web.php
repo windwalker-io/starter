@@ -11,10 +11,8 @@ declare(strict_types=1);
 
 namespace App\Routes;
 
-use App\Component\Front\Home\HomeController;
-use App\Front\Sakura\Sakura;
-use App\Front\Test\TestController;
-use App\Component\Front\Home\HomeView;
+use App\Module\Front\Home\HomeController;
+use App\Module\Front\Home\HomeView;
 use Windwalker\Core\Router\RouteCreator;
 
 /** @var RouteCreator $router */

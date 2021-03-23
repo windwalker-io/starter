@@ -7,41 +7,37 @@
 
 import fusion, { waitAllEnded } from '@windwalker-io/fusion';
 import { execSync } from 'child_process';
-import { assetSync } from './vendor/windwalker/core/resources/asset/src/fusion.mjs';
+import { assetSync } from './vendor/windwalker/core/resources/assets/fusion/fusion.mjs';
 
 export async function main() {
   // Watch start
-  fusion.watch('resources/asset/scss/**/*.scss');
+  fusion.watch('resources/assets/scss/**/*.scss');
   // Watch end
 
   // Compile Start
-  fusion.sass('resources/asset/scss/**/*.scss', 'www/asset/css/app.css');
+  fusion.sass('resources/assets/scss/**/*.scss', 'www/assets/css/app.css');
   // Compile end
 }
 
 export async function js() {
   // Watch start
-  fusion.watch('src/Component/**/asset/**/*.{js,mjs}');
+  fusion.watch('src/Component/**/assets/**/*.{js,mjs}');
   // Watch end
 
   // Compile Start
-  fusion.copy('src/Component/**/asset/**/*.{js,mjs}', 'www/asset/@test/');
+  fusion.copy('src/Component/**/assets/**/*.{js,mjs}', 'www/assets/@test/');
   // Compile end
 }
 
 export async function sync2() {
   // Watch start
-  fusion.watch('src/Component/**/view/**/*.js');
+  fusion.watch('src/Component/**/assets/**/*.js');
   // Watch end
 
   // Compile Start
   assetSync(
-    'src/Component/Front/',
-    'www/asset/js/@view/'
-  )
-  assetSync(
-    'src/Component/Admin/',
-    'www/asset/js/@view/admin/'
+    'src/Component/',
+    'www/assets/js/@view/'
   )
   // Compile end
 
@@ -55,14 +51,14 @@ export async function sync() {
 
   // Compile Start
   const wait = [];
-  let js = JSON.parse(execSync('php windwalker asset:sync "src/Component" --type=js').toString());
+  let js = JSON.parse(execSync('php windwalker assets:sync "src/Component" --type=js').toString());
 
   for (let key in js) {
     console.log(`Copy: ${key} ==> www/asset/js/@view/${js[key]}`);
     wait.push(fusion.js(key, `www/asset/js/@view/${js[key]}`));
   }
 
-  const css = JSON.parse(execSync('php windwalker asset:sync "src/Component" --type=css').toString());
+  const css = JSON.parse(execSync('php windwalker assets:sync "src/Component" --type=css').toString());
 
   wait.push(
     fusion.sass([...css], 'www/asset/css/main.css')
@@ -83,7 +79,7 @@ export async function install() {
   });
 
   console.log('[Copy] resources/asset/vendor/**/* => www/asset/vendor/');
-  fusion.copy('resources/asset/vendor/**/*', 'www/asset/vendor/');
+  fusion.copy('resources/assets/vendor/**/*', 'www/asset/vendor/');
 }
 
 export default main;

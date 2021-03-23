@@ -10,7 +10,8 @@
         "postinstall": "yarn build install"
     },
     "dependencies": {
-        "@windwalker-io/fusion": "^1.0.0-beta"
+        "@windwalker-io/fusion": "^1.0.0-beta",
+        "bootstrap": "^5.0.0-beta"
     },
     "resolutions": {
         "graceful-fs": "^4.2.4"
