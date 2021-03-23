@@ -21,10 +21,18 @@ return [
 
     'import_map' => [
         'imports' => [
+<<<<<<< HEAD
             '@view/' => 'js/@view/'
+=======
+            '@/' => 'js/',
+            '@view/' => 'js/view/',
+            '@vendor/' => 'js/vendor/'
+>>>>>>> 7b372b31202a66cb23196ece28949df1921d2553
         ],
         'scopes' => []
     ],
+
+    'namespace_root' => 'App\\Component',
 
     'version_file' => '@cache/asset/asset.version',
 
