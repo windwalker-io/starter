@@ -6,6 +6,9 @@
  * @license    GNU Lesser General Public License version 3 or later. see LICENSE
  */
 
+namespace App\Public;
+
+use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\Runtime\Runtime;
 use Windwalker\Http\Event\RequestEvent;
 use Windwalker\Http\Server\HttpServer;
@@ -27,18 +30,18 @@ Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.php');
 $container = Runtime::getContainer();
 
 /** @var HttpServer $server */
+/** @var WebApplication $app */
 $server = $container->resolve('factories.servers.http');
+$app = $container->resolve('factories.apps.main');
+$app->boot();
+$server->getEventDispatcher()->addDealer($app->getEventDispatcher());
 
-$server->on('request', function (RequestEvent $event) use ($server, $container) {
+$server->on('request', function (RequestEvent $event) use ($app) {
     $req = $event->getRequest();
-
-    /** @var \Windwalker\Core\Application\WebApplication $app */
-    $app = $container->resolve('factories.apps.main');
-    $app->boot();
-
-    $server->getEventDispatcher()->addDealer($app->getEventDispatcher());
 
     $event->setResponse($app->execute($req));
 });
 
 $server->listen();
+
+$app->terminate();

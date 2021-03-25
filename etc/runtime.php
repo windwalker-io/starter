@@ -7,8 +7,8 @@
  * @license    __LICENSE__
  */
 
-use Windwalker\Core\Application\WebApplication;
-use Windwalker\Core\Console\ConsoleApplication;
+use App\Console\Application as ConsoleApplication;
+use App\Web\Application as WebApplication;
 use Windwalker\DI\Container;
 use Windwalker\Http\Server\HttpServer;
 use Windwalker\Http\Server\PhpServer;

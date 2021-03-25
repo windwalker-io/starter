@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>@yield('page_title')</title>
+    <title>@yield('page_title', 'Windwalker')</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ $asset->path('images/favicon.ico') }}"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
@@ -68,18 +68,12 @@
     </div>
 @show
 
-<script>
-    const uid = 'eeee';
-</script>
-
 {{-- Bottom Scripts --}}
 {!! $asset->getTeleport()->render() !!}
 {!! $asset->getImportMap()->render() !!}
 {!! $asset->renderJS(true) !!}
 @yield('script')
 @stack('script')
-
-<script src="@view/home/home.js?214b90bb6595358643b2dfeb" type="module"></script>
 
 </body>
 </html>

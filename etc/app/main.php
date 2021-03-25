@@ -17,7 +17,7 @@ return array_merge(
         ],
 
         'listeners' => [
-
+            //
         ]
     ],
     require __DIR__ . '/../config.php'
