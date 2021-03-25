@@ -27,13 +27,13 @@ Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.php');
 $container = Runtime::getContainer();
 
 /** @var HttpServer $server */
-$server = $container->resolve('server.http');
+$server = $container->resolve('factories.servers.http');
 
 $server->on('request', function (RequestEvent $event) use ($server, $container) {
     $req = $event->getRequest();
 
     /** @var \Windwalker\Core\Application\WebApplication $app */
-    $app = $container->resolve('app.main');
+    $app = $container->resolve('factories.apps.main');
     $app->boot();
 
     $server->getEventDispatcher()->addDealer($app->getEventDispatcher());

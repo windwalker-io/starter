@@ -27,9 +27,7 @@ return Arr::mergeRecursive(
         'cache'    => include __DIR__ . '/conf/cache.php',
         'security' => include __DIR__ . '/conf/security.php',
         'renderer' => include __DIR__ . '/conf/renderer.php',
-        // 'language' => include __DIR__ . '/conf/language.php',
-        // 'console' => include __DIR__ . '/conf/console.php',
-        // 'mail' => include __DIR__ . '/conf/mail.php',
+        'language' => include __DIR__ . '/conf/language.php',
         // 'queue' => include __DIR__ . '/conf/queue.php',
 
         'di' => include __DIR__ . '/di.php',

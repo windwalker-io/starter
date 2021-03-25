@@ -28,6 +28,6 @@ Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.php');
 $container = Runtime::getContainer();
 
 /** @var ConsoleApplication $console */
-$console = $container->resolve('console');
+$console = $container->resolve('factories.console');
 
 $console->run();

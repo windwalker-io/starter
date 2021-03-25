@@ -15,6 +15,7 @@ use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\DateTime\ChronosService;
+use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
@@ -29,6 +30,7 @@ use function Windwalker\with;
  * @var $chronos   ChronosService   PHP DateTime object of current time.
  * @var $nav       Navigator       Router object.
  * @var $asset     AssetService         The Asset manager.
+ * @var $lang      LangService         The language.
  */
 
 $app     = with(AppContext::class);
@@ -37,3 +39,4 @@ $uri     = with(SystemUri::class);
 $chronos = with(ChronosService::class);
 $nav     = with(Navigator::class);
 $asset   = with(AssetService::class);
+$lang    = with(LangService::class);

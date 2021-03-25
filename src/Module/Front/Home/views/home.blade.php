@@ -6,6 +6,7 @@ namespace App\View;
 
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
+use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
@@ -20,6 +21,7 @@ use Windwalker\Core\Router\SystemUri;
  * @var $chronos   ChronosService   PHP DateTime object of current time.
  * @var $nav       Navigator       Router object.
  * @var $asset     AssetService         The Asset manager.
+ * @var $lang     LangService         The Asset manager.
  */
 
 ?>

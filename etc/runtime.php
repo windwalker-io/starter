@@ -17,13 +17,16 @@ use function Windwalker\DI\create;
 use function Windwalker\ref;
 
 return [
-    'server' => [
-        'http' => ref('di.servers.http'),
+    'factories' => [
+        'servers' => [
+            'http' => ref('di.servers.http'),
+        ],
+        'apps' => [
+            'main' => ref('di.apps.main'),
+        ],
+        'console' => ref('di.console'),
     ],
-    'app' => [
-        'main' => ref('di.apps.main'),
-    ],
-    'console' => ref('di.console'),
+
     'di' => [
         'servers' => [
             'http' => create(
