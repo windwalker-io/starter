@@ -7,6 +7,7 @@ namespace App\View;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
 use Windwalker\Core\Language\LangService;
+use Windwalker\Core\Pagination\Pagination;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
@@ -23,6 +24,11 @@ use Windwalker\Core\Router\SystemUri;
  * @var $asset     AssetService         The Asset manager.
  * @var $lang     LangService         The Asset manager.
  */
+
+/** @var $pagin Pagination */
+// show($pagin->compile());
+//
+// show($pagin);
 
 ?>
 
@@ -58,4 +64,8 @@ use Windwalker\Core\Router\SystemUri;
             </div>
         </div>
     </div> <!-- /container -->
+
+    {!! $pagin->render() !!}
+
+{{--    @include('layout.pagination.basic-pagination', ['pagination' => $pagin])--}}
 @stop
