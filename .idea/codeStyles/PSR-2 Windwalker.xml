@@ -1,0 +1,154 @@
+<code_scheme name="PSR-2 Windwalker" version="173">
+  <option name="LINE_SEPARATOR" value="&#10;" />
+  <CssCodeStyleSettings>
+    <option name="HEX_COLOR_LOWER_CASE" value="true" />
+  </CssCodeStyleSettings>
+  <DB2CodeStyleSettings version="2">
+    <option name="KEYWORD_CASE" value="0" />
+  </DB2CodeStyleSettings>
+  <DerbyCodeStyleSettings version="2">
+    <option name="KEYWORD_CASE" value="0" />
+  </DerbyCodeStyleSettings>
+  <H2CodeStyleSettings version="2">
+    <option name="KEYWORD_CASE" value="0" />
+  </H2CodeStyleSettings>
+  <HSQLCodeStyleSettings version="2">
+    <option name="KEYWORD_CASE" value="0" />
+  </HSQLCodeStyleSettings>
+  <HTMLCodeStyleSettings>
+    <option name="HTML_TEXT_WRAP" value="0" />
+    <option name="HTML_ALIGN_ATTRIBUTES" value="false" />
+    <option name="HTML_SPACE_INSIDE_EMPTY_TAG" value="true" />
+  </HTMLCodeStyleSettings>
+  <MSSQLCodeStyleSettings version="2">
+    <option name="KEYWORD_CASE" value="0" />
+  </MSSQLCodeStyleSettings>
+  <MarkdownNavigatorCodeStyleSettings>
+    <option name="RIGHT_MARGIN" value="72" />
+  </MarkdownNavigatorCodeStyleSettings>
+  <MySQLCodeStyleSettings version="2">
+    <option name="KEYWORD_CASE" value="0" />
+  </MySQLCodeStyleSettings>
+  <OracleCodeStyleSettings version="2">
+    <option name="KEYWORD_CASE" value="0" />
+  </OracleCodeStyleSettings>
+  <PHPCodeStyleSettings>
+    <option name="ALIGN_PHPDOC_PARAM_NAMES" value="true" />
+    <option name="ALIGN_PHPDOC_COMMENTS" value="true" />
+    <option name="ALIGN_ASSIGNMENTS" value="true" />
+    <option name="PHPDOC_BLANK_LINES_AROUND_PARAMETERS" value="true" />
+    <option name="PHPDOC_WRAP_LONG_LINES" value="true" />
+    <option name="PHPDOC_PARAM_SPACES_BETWEEN_TAG_AND_TYPE" value="2" />
+    <option name="PHPDOC_PARAM_SPACES_BETWEEN_TYPE_AND_NAME" value="2" />
+    <option name="PHPDOC_PARAM_SPACES_BETWEEN_NAME_AND_DESCRIPTION" value="2" />
+    <option name="LOWER_CASE_BOOLEAN_CONST" value="true" />
+    <option name="LOWER_CASE_NULL_CONST" value="true" />
+    <option name="ELSE_IF_STYLE" value="COMBINE" />
+    <option name="FIELDS_DEFAULT_VISIBILITY" value="protected" />
+    <option name="KEEP_RPAREN_AND_LBRACE_ON_ONE_LINE" value="true" />
+    <option name="KEEP_BLANK_LINES_AFTER_LBRACE" value="1" />
+    <option name="FORCE_SHORT_DECLARATION_ARRAY_STYLE" value="true" />
+  </PHPCodeStyleSettings>
+  <PostgresCodeStyleSettings version="2">
+    <option name="KEYWORD_CASE" value="0" />
+  </PostgresCodeStyleSettings>
+  <SQLiteCodeStyleSettings version="2">
+    <option name="KEYWORD_CASE" value="0" />
+  </SQLiteCodeStyleSettings>
+  <SqlCodeStyleSettings version="2">
+    <option name="KEYWORD_CASE" value="0" />
+  </SqlCodeStyleSettings>
+  <SybaseCodeStyleSettings version="2">
+    <option name="KEYWORD_CASE" value="0" />
+  </SybaseCodeStyleSettings>
+  <codeStyleSettings language="Blade">
+    <indentOptions>
+      <option name="CONTINUATION_INDENT_SIZE" value="4" />
+    </indentOptions>
+  </codeStyleSettings>
+  <codeStyleSettings language="CSS">
+    <indentOptions>
+      <option name="INDENT_SIZE" value="2" />
+      <option name="CONTINUATION_INDENT_SIZE" value="2" />
+      <option name="TAB_SIZE" value="2" />
+    </indentOptions>
+  </codeStyleSettings>
+  <codeStyleSettings language="HTML">
+    <option name="LINE_COMMENT_AT_FIRST_COLUMN" value="false" />
+    <indentOptions>
+      <option name="CONTINUATION_INDENT_SIZE" value="4" />
+    </indentOptions>
+  </codeStyleSettings>
+  <codeStyleSettings language="JSON">
+    <indentOptions>
+      <option name="INDENT_SIZE" value="4" />
+      <option name="CONTINUATION_INDENT_SIZE" value="4" />
+    </indentOptions>
+  </codeStyleSettings>
+  <codeStyleSettings language="JavaScript">
+    <option name="RIGHT_MARGIN" value="100" />
+    <option name="WRAP_ON_TYPING" value="0" />
+    <indentOptions>
+      <option name="INDENT_SIZE" value="2" />
+      <option name="CONTINUATION_INDENT_SIZE" value="2" />
+      <option name="TAB_SIZE" value="2" />
+    </indentOptions>
+  </codeStyleSettings>
+  <codeStyleSettings language="LESS">
+    <indentOptions>
+      <option name="CONTINUATION_INDENT_SIZE" value="2" />
+    </indentOptions>
+  </codeStyleSettings>
+  <codeStyleSettings language="PHP">
+    <option name="LINE_COMMENT_AT_FIRST_COLUMN" value="false" />
+    <option name="LINE_COMMENT_ADD_SPACE" value="true" />
+    <option name="KEEP_BLANK_LINES_IN_DECLARATIONS" value="0" />
+    <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
+    <option name="KEEP_BLANK_LINES_BEFORE_RBRACE" value="0" />
+    <option name="BLANK_LINES_AFTER_PACKAGE" value="1" />
+    <option name="ALIGN_MULTILINE_PARAMETERS" value="false" />
+    <option name="SPACE_AFTER_TYPE_CAST" value="true" />
+    <option name="CALL_PARAMETERS_WRAP" value="1" />
+    <option name="METHOD_PARAMETERS_WRAP" value="5" />
+    <option name="METHOD_PARAMETERS_LPAREN_ON_NEXT_LINE" value="true" />
+    <option name="METHOD_PARAMETERS_RPAREN_ON_NEXT_LINE" value="true" />
+    <option name="ARRAY_INITIALIZER_WRAP" value="5" />
+    <option name="ARRAY_INITIALIZER_LBRACE_ON_NEXT_LINE" value="true" />
+    <option name="ARRAY_INITIALIZER_RBRACE_ON_NEXT_LINE" value="true" />
+    <option name="IF_BRACE_FORCE" value="3" />
+    <option name="DOWHILE_BRACE_FORCE" value="3" />
+    <option name="WHILE_BRACE_FORCE" value="3" />
+    <option name="FOR_BRACE_FORCE" value="3" />
+  </codeStyleSettings>
+  <codeStyleSettings language="SASS">
+    <indentOptions>
+      <option name="CONTINUATION_INDENT_SIZE" value="2" />
+    </indentOptions>
+  </codeStyleSettings>
+  <codeStyleSettings language="SCSS">
+    <indentOptions>
+      <option name="CONTINUATION_INDENT_SIZE" value="2" />
+    </indentOptions>
+  </codeStyleSettings>
+  <codeStyleSettings language="Twig">
+    <indentOptions>
+      <option name="CONTINUATION_INDENT_SIZE" value="4" />
+    </indentOptions>
+  </codeStyleSettings>
+  <codeStyleSettings language="TypeScript">
+    <indentOptions>
+      <option name="INDENT_SIZE" value="2" />
+      <option name="CONTINUATION_INDENT_SIZE" value="2" />
+    </indentOptions>
+  </codeStyleSettings>
+  <codeStyleSettings language="XML">
+    <indentOptions>
+      <option name="CONTINUATION_INDENT_SIZE" value="4" />
+    </indentOptions>
+  </codeStyleSettings>
+  <codeStyleSettings language="yaml">
+    <indentOptions>
+      <option name="INDENT_SIZE" value="4" />
+    </indentOptions>
+  </codeStyleSettings>
+</code_scheme>

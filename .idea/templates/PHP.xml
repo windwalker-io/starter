@@ -1,0 +1,39 @@
+<templateSet group="PHP">
+  <template name="sh" value="show($END$);" description="Show data" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="HTML" value="true" />
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="st" value="static" description="static" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="e" value="exit($OUTPUT$);" description="exit and shoe some info" toReformat="false" toShortenFQNames="true">
+    <variable name="OUTPUT" expression="" defaultValue="&quot;' @Checkpoint'&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="func" value="function $NAME$($PARAMETERS$) {&#10;    $END$&#10;}" description="Closure function" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="PARAMETERS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="funcu" value="function ($PARAMETERS$) use ($USE$) {&#10;    $END$&#10;}" description="Closure function" toReformat="false" toShortenFQNames="true">
+    <variable name="PARAMETERS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="USE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="fn" value="fn ($PARAMETERS$) =&gt; $END$" description="fn() =&gt; ... Arrow Function" toReformat="false" toShortenFQNames="true">
+    <variable name="PARAMETERS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+</templateSet>
