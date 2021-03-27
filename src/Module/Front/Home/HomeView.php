@@ -13,9 +13,8 @@ namespace App\Module\Front\Home;
 
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
-use Windwalker\Core\Pagination\Pagination;
 use Windwalker\Core\Pagination\PaginationFactory;
-use Windwalker\Core\Service\RendererService;
+use Windwalker\Core\Renderer\RendererService;
 use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\Data\Collection;
 use Windwalker\ORM\ORM;

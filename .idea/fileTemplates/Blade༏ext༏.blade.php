@@ -1,23 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
+namespace App\View;
+
+use Windwalker\Core\Application\AppContext;
+use Windwalker\Core\Asset\AssetService;
+use Windwalker\Core\Attributes\ViewModel;
+use Windwalker\Core\DateTime\ChronosService;
+use Windwalker\Core\Language\LangService;
+use Windwalker\Core\Router\Navigator;
+use Windwalker\Core\Router\SystemUri;
+
 /**
  * Global variables
  * --------------------------------------------------------------
- * @var ${DS}app           \Windwalker\Web\Application                 Global Application
- * @var ${DS}package       \Windwalker\Core\Package\AbstractPackage    Package object.
- * @var ${DS}view          \Windwalker\Data\Data                       Some information of this view.
- * @var ${DS}uri           \Windwalker\Uri\UriData                     Uri information, example: ${DS}uri->path
- * @var ${DS}datetime      \DateTime                                   PHP DateTime object of current time.
- * @var ${DS}helper        \Windwalker\Core\View\Helper\Set\HelperSet  The Windwalker HelperSet object.
- * @var ${DS}router        \Windwalker\Core\Router\PackageRouter       Router object.
- * @var ${DS}asset         \Windwalker\Core\Asset\AssetManager         The Asset manager.
+ * @var ${DS}app       AppContext                 Global Application
+ * @var ${DS}view      ViewModel                       Some information of this view.
+ * @var ${DS}uri       SystemUri                     Uri information, example: ${DS}uri->path
+ * @var ${DS}chronos   ChronosService   PHP DateTime object of current time.
+ * @var ${DS}nav       Navigator       Router object.
+ * @var ${DS}asset     AssetService         The Asset manager.
+ * @var ${DS}lang      LangService         The language.
  */
- 
- declare(strict_types=1);
 
 ?>
 
-@extends('_global.html')
+@extends('global.html')
 
 @section('content')
 
