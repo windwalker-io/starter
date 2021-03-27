@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Enum\State;
 use Windwalker\Core\DateTime\Chronos;
 use Windwalker\ORM\Attributes\AutoIncrement;
 use Windwalker\ORM\Attributes\Cast;
@@ -46,7 +47,11 @@ class Category implements NestedPathableInterface
     protected string $description = '';
 
     #[Column('state')]
-    protected int $state = 1;
+    #[
+        Cast('int'),
+        Cast(State::class)
+    ]
+    protected State $state;
 
     #[Column('created')]
     #[CastNullable(Chronos::class)]
@@ -178,26 +183,6 @@ class Category implements NestedPathableInterface
     }
 
     /**
-     * @return int
-     */
-    public function getState(): int
-    {
-        return $this->state;
-    }
-
-    /**
-     * @param  int  $state
-     *
-     * @return  static  Return self to support chaining.
-     */
-    public function setState(int $state): static
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
      * @return Chronos|null
      */
     public function getCreated(): ?Chronos
@@ -313,6 +298,26 @@ class Category implements NestedPathableInterface
     public function setParams(array $params): static
     {
         $this->params = $params;
+
+        return $this;
+    }
+
+    /**
+     * @return State
+     */
+    public function getState(): State
+    {
+        return $this->state ??= State::UNPUBLISHED();
+    }
+
+    /**
+     * @param  State  $state
+     *
+     * @return  static  Return self to support chaining.
+     */
+    public function setState(State $state): static
+    {
+        $this->state = $state;
 
         return $this;
     }

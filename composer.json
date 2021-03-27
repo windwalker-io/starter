@@ -25,7 +25,8 @@
         "symfony/console": "^5.2",
         "fakerphp/faker": "^1.0",
         "symfony/process": "^5.2",
-        "windwalker/unicorn": "dev-main"
+        "windwalker/unicorn": "dev-main",
+        "spatie/enum": "^3.7"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.0",

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Module\Front\Home;
 
+use App\Enum\State;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\Pagination\PaginationFactory;

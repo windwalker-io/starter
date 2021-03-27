@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Seeder;
 
 use App\Entity\Category;
+use App\Enum\State;
 use Unicorn\Utilities\SlugHelper;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
@@ -57,7 +58,10 @@ $seeder->import(
                 $category->setType($type);
                 $category->setDescription($faker->paragraph(5));
                 $category->setImage($faker->imageUrl());
-                $category->setState($faker->optional(0.7, 0)->passthrough(1));
+                $category->setState(
+                    $faker->optional(0.7, State::UNPUBLISHED())
+                        ->passthrough(State::PUBLISHED())
+                );
                 $category->setCreated(chronos());
                 $category->setCreatedBy($faker->randomElement($userIds));
                 $category->setModifiedBy($faker->randomElement($userIds));
