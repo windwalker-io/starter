@@ -9,9 +9,7 @@
 
 declare(strict_types=1);
 
-use Windwalker\Utilities\Arr;
-
-return Arr::mergeRecursive(
+return array_merge(
     [
         'app'      => include __DIR__ . '/conf/app.php',
         'asset'    => include __DIR__ . '/conf/asset.php',
@@ -32,6 +30,8 @@ return Arr::mergeRecursive(
 
         'di' => include __DIR__ . '/di.php',
     ],
+
+    \Windwalker\include_arrays(__DIR__ . '/packages/*.php'),
 
     // Load custom values
     is_file(__DIR__ . '/conf/custom.php') ? require __DIR__ . '/conf/custom.php' : []

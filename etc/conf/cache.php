@@ -19,7 +19,7 @@ use Windwalker\Core\Manager\LoggerManager;
 use Windwalker\DI\Container;
 
 return [
-    'enabled' => !env('CACHE_DISABLED'),
+    'no_cache' => env('CACHE_DISABLED'),
 
     // The default cache profile
     'default' => 'global',

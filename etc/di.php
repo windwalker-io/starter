@@ -20,12 +20,12 @@ use Windwalker\DI\Attributes\Decorator;
 use Windwalker\DI\Attributes\Inject;
 use Windwalker\Utilities\Arr;
 
-use function Windwalker\include_files;
+use function Windwalker\include_arrays;
 
 return Arr::mergeRecursive(
     // Load with namespace,
     [
-        'factories' => include_files(__DIR__ . '/di/*.php'),
+        'factories' => include_arrays(__DIR__ . '/di/*.php'),
         'providers' => [
 
         ],
@@ -34,6 +34,9 @@ return Arr::mergeRecursive(
         ],
         'aliases' => [
 
+        ],
+        'layouts' => [
+            //
         ],
         'attributes' => [
             // Declaration

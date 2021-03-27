@@ -30,6 +30,8 @@ return [
     //
     'asset:sync' => \Windwalker\Core\Asset\Command\AssetSyncCommand::class,
     'asset:version' => \Windwalker\Core\Asset\Command\AssetVersionCommand::class,
+
+    'pkg:install' => \Windwalker\Core\Package\Command\PackageInstallCommand::class,
     //
     'run' => \Windwalker\Core\Command\RunCommand::class
 ];
