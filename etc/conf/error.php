@@ -41,11 +41,11 @@ return [
 
     'handlers' => [
         ApplicationInterface::CLIENT_WEB => [
-            ref('error.factories.handlers.default'),
-            ref('error.factories.handlers.log'),
+            'default' => ref('error.factories.handlers.default'),
+            'log' => ref('error.factories.handlers.log'),
         ],
         ApplicationInterface::CLIENT_CONSOLE => [
-            ref('error.factories.handlers.console_log'),
+            'default' => ref('error.factories.handlers.console_log'),
         ]
     ],
 

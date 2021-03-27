@@ -10,5 +10,6 @@
 declare(strict_types=1);
 
 return [
-    __DIR__ . '/sakura-seeder.php'
+    __DIR__ . '/sakura-seeder.php',
+    __DIR__ . '/category-seeder.php',
 ];

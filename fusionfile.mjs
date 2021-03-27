@@ -29,6 +29,16 @@ export async function js() {
   // Compile end
 }
 
+export async function images() {
+  // Watch start
+  fusion.watch('resources/assets/images/**/*');
+  // Watch end
+
+  // Compile Start
+  return await fusion.copy('resources/assets/images/**/*', 'www/assets/images/')
+  // Compile end
+}
+
 export async function sync2() {
   // Watch start
   fusion.watch('src/Component/**/assets/**/*.js');

@@ -32,7 +32,7 @@ use Windwalker\Core\Router\SystemUri;
 
 ?>
 
-@extends('global.html')
+@extends('global.body')
 
 @section('content')
     <!-- Main jumbotron for a primary marketing message or call to action -->

@@ -1,8 +1,18 @@
 <?php
 
-declare(strict_types=1);
+/**
+ * Global variables
+ * --------------------------------------------------------------
+ * @var ${DS}app       AppContext      Application context.
+ * @var ${DS}view      ViewModel       The view modal object.
+ * @var ${DS}uri       SystemUri       System Uri information.
+ * @var ${DS}chronos   ChronosService  The chronos datetime service.
+ * @var ${DS}nav       Navigator       Navigator object to build route.
+ * @var ${DS}asset     AssetService    The Asset manage service.
+ * @var ${DS}lang      LangService     The language translation service.
+ */
 
-namespace App\View;
+declare(strict_types=1);
 
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
@@ -12,21 +22,9 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-/**
- * Global variables
- * --------------------------------------------------------------
- * @var ${DS}app       AppContext                 Global Application
- * @var ${DS}view      ViewModel                       Some information of this view.
- * @var ${DS}uri       SystemUri                     Uri information, example: ${DS}uri->path
- * @var ${DS}chronos   ChronosService   PHP DateTime object of current time.
- * @var ${DS}nav       Navigator       Router object.
- * @var ${DS}asset     AssetService         The Asset manager.
- * @var ${DS}lang      LangService         The language.
- */
-
 ?>
 
-@extends('global.html')
+@extends('global.body')
 
 @section('content')
 
