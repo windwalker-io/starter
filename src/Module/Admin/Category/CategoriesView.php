@@ -41,16 +41,14 @@ class CategoriesView implements ViewModelInterface
      */
     public function prepare(Collection $state, AppContext $app): array
     {
-        $category = $this->orm->findOne(Category::class, 3);
+        [$offset, $limit] = $app->input('offset', 'limit')->values();
 
-        $cat = new Category();
+        $items = $this->orm->from(Category::class)
+            ->order('id', 'DESC')
+            ->offset($offset ?? 0)
+            ->limit($limit ?? 5)
+            ->getIterator(Category::class);
 
-        show($cat->getState());
-
-        show(
-            $category->getState() === State::UNPUBLISHED()
-        );
-
-        return [];
+        return compact('items');
     }
 }
