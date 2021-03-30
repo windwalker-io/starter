@@ -49,6 +49,11 @@ return [
         'cache_path' => WINDWALKER_CACHE . '/renderer'
     ],
 
+    'pagination' => [
+        'template' => 'layout.pagination.basic-pagination',
+        'neighbours' => 4
+    ],
+
     'providers' => [
         RendererProvider::class
     ],

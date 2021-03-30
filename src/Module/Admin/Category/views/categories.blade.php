@@ -20,11 +20,13 @@ use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\DateTime\ChronosService;
 use Windwalker\Core\Language\LangService;
+use Windwalker\Core\Pagination\Pagination;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 /**
- * @var $items Category[]
+ * @var $items      Category[]
+ * @var $pagination Pagination
  */
 
 ?>
@@ -67,8 +69,8 @@ use Windwalker\Core\Router\SystemUri;
 
                         </td>
                         <td>
-                            <button class="btn btn-outline-secondary">
-                                <span class="far fa-check"></span>
+                            <button class="btn btn-light">
+                                <span class="fa fa-check text-success"></span>
                             </button>
                         </td>
                         <td>
@@ -82,6 +84,14 @@ use Windwalker\Core\Router\SystemUri;
                     </tr>
                 @endforeach
                 </tbody>
+
+                <tfoot>
+                <tr>
+                    <td colspan="20">
+                        {!! $pagination->render() !!}
+                    </td>
+                </tr>
+                </tfoot>
             </table>
         </div>
 

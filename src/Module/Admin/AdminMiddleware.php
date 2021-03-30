@@ -48,7 +48,12 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
      */
     protected function preprocess(ServerRequestInterface $request): void
     {
-        $this->asset->js('test/test.js');
+        // $this->asset->js('test/test.js');
+        // $this->asset->js('https://use.fontawesome.com/releases/v5.15.3/js/all.js', ['sri' => 'sha384-haqrlim99xjfMxRP6EWtafs0sB1WKcMdynwZleuUSwJR0mDeRYbhtY+KPMr+JL6f']);
+        $this->asset->css(
+            'https://use.fontawesome.com/releases/v5.15.3/css/all.css',
+            ['sri' => 'sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk']
+        );
     }
 
     /**
