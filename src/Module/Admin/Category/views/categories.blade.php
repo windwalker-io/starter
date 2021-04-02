@@ -29,13 +29,29 @@ use Windwalker\Core\Router\SystemUri;
  * @var $pagination Pagination
  */
 
+$asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
+
 ?>
 
 @extends('admin.global.body')
 
+@section('toolbar')
+    @include('toolbar')
+@stop
+
+@push('script')
+    <script type="module">
+        const a = await import('@alpinejs');
+        await import('@systemjs');
+        const { createApp } = await System.import('@unicorn/unicorn.js');
+
+        console.log(createApp);
+    </script>
+@endpush
+
 @section('content')
 
-    <form action="">
+    <form id="grid-form" action="" x-data="{}" x-ref="gridForm">
 
         @component('@theme.grid.filter-bar', [], get_defined_vars())
 

@@ -80,16 +80,18 @@ export async function sync() {
 
 export async function install() {
   const vendors = [
-    //
+    '@windwalker-io/unicorn',
+    'alpinejs',
+    'systemjs',
   ];
 
   vendors.forEach((vendor) => {
-    console.log(`[Copy] node_modules/${vendor}/**/* => www/asset/vendor/${vendor}/`);
-    fusion.copy(`node_modules/${vendor}/**/*`, `www/asset/vendor/${vendor}/`);
+    console.log(`[Link] node_modules/${vendor}/**/* => www/assets/vendor/${vendor}/`);
+    fusion.src(`node_modules/${vendor}/`).pipe(fusion.symlink(`www/assets/vendor/${vendor}`));
   });
 
-  console.log('[Copy] resources/asset/vendor/**/* => www/asset/vendor/');
-  fusion.copy('resources/assets/vendor/**/*', 'www/asset/vendor/');
+  console.log('[Copy] resources/assets/vendor/**/* => www/assets/vendor/');
+  fusion.copy('resources/assets/vendor/**/*', 'www/assets/vendor/');
 }
 
 export default main;

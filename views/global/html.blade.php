@@ -52,6 +52,7 @@ $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 {{-- Bottom Scripts --}}
 {!! $asset->getTeleport()->render() !!}
 {!! $asset->getImportMap()->render() !!}
+{!! $asset->getImportMap()->render('systemjs-importmap') !!}
 {!! $asset->renderJS(true) !!}
 @stack('script')
 

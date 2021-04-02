@@ -11,9 +11,13 @@
     },
     "dependencies": {
         "@windwalker-io/fusion": "^1.0.0-beta",
+        "alpinejs": "^2.8.2",
         "bootstrap": "^5.0.0-beta"
     },
     "resolutions": {
         "graceful-fs": "^4.2.4"
-    }
+    },
+    "workspaces": [
+        "vendor/windwalker/unicorn/*"
+    ]
 }

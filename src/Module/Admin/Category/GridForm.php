@@ -46,10 +46,10 @@ class GridForm implements FieldDefinitionInterface
         );
 
         $form->register(
-            #[Fieldset('filter')]
             #[NS('filter')]
             function (Form $form) {
                 $form->add('state', ListField::class)
+                    ->option('- Select State-', '')
                     ->option('Published', (string) State::PUBLISHED()->getValue())
                     ->option('Unpublished', (string) State::UNPUBLISHED()->getValue());
             }

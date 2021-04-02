@@ -23,7 +23,10 @@ return [
         'imports' => [
             '@/' => 'js/',
             '@view/' => 'js/view/',
-            '@vendor/' => 'vendor/'
+            '@vendor/' => 'vendor/',
+            '@systemjs' => 'vendor/systemjs/dist/system.js',
+            '@unicorn/' => 'vendor/@windwalker-io/unicorn/dist/',
+            '@alpinejs' => 'vendor/alpinejs/dist/alpine.js',
         ],
         'scopes' => []
     ],
