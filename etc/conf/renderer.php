@@ -9,8 +9,10 @@
 
 declare(strict_types=1);
 
+use Windwalker\Core\Form\FormProvider;
 use Windwalker\Core\Provider\RendererProvider;
-use Windwalker\Renderer\BladeRenderer;
+use Windwalker\Core\Theme\BootstrapTheme;
+use Windwalker\Core\Theme\ThemeInterface;
 use Windwalker\Renderer\EdgeRenderer;
 use Windwalker\Renderer\MustacheRenderer;
 use Windwalker\Renderer\PlatesRenderer;
@@ -55,11 +57,12 @@ return [
     ],
 
     'providers' => [
-        RendererProvider::class
+        RendererProvider::class,
+        FormProvider::class
     ],
 
     'bindings' => [
-        //
+        ThemeInterface::class => BootstrapTheme::class,
     ],
 
     'extends' => [

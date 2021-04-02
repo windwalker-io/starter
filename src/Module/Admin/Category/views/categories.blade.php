@@ -37,6 +37,10 @@ use Windwalker\Core\Router\SystemUri;
 
     <form action="">
 
+        @component('@theme.grid.filter-bar', [], get_defined_vars())
+
+        @endcomponent
+
         <div>
             <table class="table table-striped">
                 <thead>
@@ -74,6 +78,7 @@ use Windwalker\Core\Router\SystemUri;
                             </button>
                         </td>
                         <td>
+                            {{ str_repeat('—', $item->getLevel() - 1) }}
                             <a href="{{ $nav->to('category_edit')->id($item->getId()) }}">
                                 {{ $item->getTitle() }}
                             </a>

@@ -25,6 +25,7 @@ return array_merge(
         'cache'    => include __DIR__ . '/conf/cache.php',
         'security' => include __DIR__ . '/conf/security.php',
         'renderer' => include __DIR__ . '/conf/renderer.php',
+        'form'     => include __DIR__ . '/conf/form.php',
         'language' => include __DIR__ . '/conf/language.php',
         // 'queue' => include __DIR__ . '/conf/queue.php',
 
