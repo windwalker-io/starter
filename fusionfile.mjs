@@ -21,11 +21,11 @@ export async function main() {
 
 export async function js() {
   // Watch start
-  fusion.watch('src/Component/**/assets/**/*.{js,mjs}');
+  fusion.watch('resources/assets/src/**/*.{js,mjs}', js);
   // Watch end
 
   // Compile Start
-  fusion.copy('src/Component/**/assets/**/*.{js,mjs}', 'www/assets/@test/');
+  fusion.babel('resources/assets/src/**/*.{js,mjs}', 'www/assets/js/', { module: 'systemjs' });
   // Compile end
 }
 
@@ -84,7 +84,8 @@ export async function install() {
     '@windwalker-io/unicorn',
     'alpinejs',
     'systemjs',
-    'axios'
+    'axios',
+    'awesome-bootstrap-checkbox'
   ];
 
   vendors.forEach((vendor) => {

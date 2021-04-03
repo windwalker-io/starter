@@ -30,7 +30,6 @@ use Windwalker\Core\Router\SystemUri;
  */
 
 $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
-$asset->js('vendor/systemjs/dist/system.js');
 
 ?>
 
@@ -44,23 +43,18 @@ $asset->js('vendor/systemjs/dist/system.js');
     {{--<script>--}}
     {{--    const state = {};--}}
     {{--</script>--}}
-    <script type="module">
+    <script defer>
         window.gridState = {
             form: null,
             grid: null
         };
 
-        // await import('@systemjs');
-        const uni = await System.import('@unicorn/unicorn.js?{{ \Windwalker\uid() }}');
-        const { UIBootstrap5 } = await System.import('@unicorn/ui/ui-bootstrap5.js');
-        const a = await import('@alpinejs');
+        System.import('@/admin/main.js').then(function () {
+            gridState.grid = u.grid('#grid-form');
+            gridState.form = u.form('#grid-form');
 
-        u.use(UIBootstrap5);
-
-        gridState.form = u.form('#grid-form');
-        gridState.grid = u.grid('#grid-form');
-
-        u.ui.bootstrap.tooltip();
+            u.ui.bootstrap.tooltip();
+        });
     </script>
     <script>
         // const bs5 = System.import('@unicorn/ui/ui-bootstrap5.js?sdf').then(c => console.log(c));
@@ -79,8 +73,11 @@ $asset->js('vendor/systemjs/dist/system.js');
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>
-                        #
+                    <th style="width: 1%">
+                        <input type="checkbox" data-task="toggle-all"
+                            class="form-check-input"
+                            @click="grid.toggleAll($event.target.checked)"
+                        />
                     </th>
                     <th>
                         State
@@ -101,13 +98,15 @@ $asset->js('vendor/systemjs/dist/system.js');
                 </thead>
 
                 <tbody>
-                @foreach ($items as $item)
+                @foreach ($items as $i => $item)
                     <tr>
                         <td>
-
+                            <input id="cb{{ $i }}" type="checkbox" name="id[]"
+                                class="form-check-input"
+                                value="{{ $item->getId() }}" data-role="grid-checkbox" />
                         </td>
                         <td>
-                            <button class="btn btn-light">
+                            <button class="btn btn-light btn-sm">
                                 <span class="fa fa-check text-success"></span>
                             </button>
                         </td>
