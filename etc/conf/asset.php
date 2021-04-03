@@ -27,6 +27,7 @@ return [
             '@systemjs' => 'vendor/systemjs/dist/system.js',
             '@unicorn/' => 'vendor/@windwalker-io/unicorn/dist/',
             '@alpinejs' => 'vendor/alpinejs/dist/alpine.js',
+            '@axios' => 'vendor/axios/dist/axios.js',
         ],
         'scopes' => []
     ],

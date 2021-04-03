@@ -30,6 +30,7 @@ use Windwalker\Core\Router\SystemUri;
  */
 
 $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
+$asset->js('vendor/systemjs/dist/system.js');
 
 ?>
 
@@ -40,20 +41,37 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
 @stop
 
 @push('script')
+    {{--<script>--}}
+    {{--    const state = {};--}}
+    {{--</script>--}}
     <script type="module">
-        const a = await import('@alpinejs');
-        await import('@systemjs');
-        const { createApp } = await System.import('@unicorn/unicorn.js');
+        window.gridState = {
+            form: null,
+            grid: null
+        };
 
-        console.log(createApp);
+        // await import('@systemjs');
+        const uni = await System.import('@unicorn/unicorn.js?{{ \Windwalker\uid() }}');
+        const { UIBootstrap5 } = await System.import('@unicorn/ui/ui-bootstrap5.js');
+        const a = await import('@alpinejs');
+
+        u.use(UIBootstrap5);
+
+        gridState.form = u.form('#grid-form');
+        gridState.grid = u.grid('#grid-form');
+
+        u.ui.bootstrap.tooltip();
+    </script>
+    <script>
+        // const bs5 = System.import('@unicorn/ui/ui-bootstrap5.js?sdf').then(c => console.log(c));
     </script>
 @endpush
 
 @section('content')
 
-    <form id="grid-form" action="" x-data="{}" x-ref="gridForm">
+    <form id="grid-form" action="" x-data="gridState" x-ref="gridForm" method="post">
 
-        @component('@theme.grid.filter-bar', [], get_defined_vars())
+        @component('@theme.grid.filter-bar', ['open' => $showFilters], get_defined_vars())
 
         @endcomponent
 

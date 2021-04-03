@@ -11,10 +11,12 @@ declare(strict_types=1);
 
 use Windwalker\Core\Attributes\Ref;
 use Windwalker\Core\Provider\SessionProvider;
+use Windwalker\DI\Container;
 use Windwalker\Session\Bridge\BridgeInterface;
 use Windwalker\Session\Bridge\NativeBridge;
 use Windwalker\Session\Bridge\PhpBridge;
 use Windwalker\Session\Cookie\Cookies;
+use Windwalker\Session\Cookie\CookiesInterface;
 use Windwalker\Session\Handler\ArrayHandler;
 use Windwalker\Session\Handler\DatabaseHandler;
 use Windwalker\Session\Handler\FilesystemHandler;
@@ -48,7 +50,8 @@ return [
     ],
 
     'bindings' => [
-        //
+        CookiesInterface::class => fn (Container $container)
+            => $container->resolve('session.factories.cookies.request')
     ],
 
     'factories' => [
@@ -56,9 +59,9 @@ return [
             'native' => create(
                 Session::class,
                 options: fn(#[Ref('session.ini')] array $ini) => [
-                Session::OPTION_AUTO_COMMIT => true,
-                'ini' => $ini,
-            ],
+                    Session::OPTION_AUTO_COMMIT => true,
+                    'ini' => $ini,
+                ],
                 bridge: ref('session.factories.bridges.php'),
                 cookies: ref('session.factories.cookies.request')
             ),
@@ -88,7 +91,7 @@ return [
             ),
             'filesystem' => create(
                 FilesystemHandler::class,
-                path: null,
+                path: WINDWALKER_TEMP . '/sess',
                 options: []
             ),
             'redis' => create(RedisHandler::class),

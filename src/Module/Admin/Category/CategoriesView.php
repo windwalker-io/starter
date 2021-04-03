@@ -23,6 +23,8 @@ use Windwalker\DI\Attributes\Autowire;
 use Windwalker\ORM\ORM;
 use Windwalker\Query\Query;
 
+use Windwalker\Session\Session;
+
 use function Windwalker\filter;
 
 /**
@@ -38,6 +40,7 @@ class CategoriesView implements ViewModelInterface
      *
      * @param  ORM                 $orm
      * @param  CategoryRepository  $categoryRepository
+     * @param  Session             $session
      * @param  FormFactory         $formFactory
      * @param  FilterService       $filterService
      */
@@ -45,6 +48,7 @@ class CategoriesView implements ViewModelInterface
         protected ORM $orm,
         #[Autowire]
         protected CategoryRepository $categoryRepository,
+        protected Session $session,
         protected FormFactory $formFactory,
         protected FilterService $filterService
     ) {
@@ -60,7 +64,12 @@ class CategoriesView implements ViewModelInterface
         $page  = filter($page, 'int;range:min=1');
         $limit = filter($limit, 'int') ?? 15;
 
+        $filter = (array) $this->session->overrideWith('categories.filter', $app->input('filter'));
+        $search = (array) $this->session->overrideWith('categories.search', $app->input('search'));
+
         $items = $this->categoryRepository->getListSelector()
+            ->setFilters($filter)
+            ->setSearches($search)
             ->page($page)
             ->limit($limit)
             ->modifyQuery(
@@ -74,7 +83,21 @@ class CategoriesView implements ViewModelInterface
 
         // Form
         $form = $this->formFactory->create(GridForm::class);
+        $form->fill(compact('search', 'filter'));
 
-        return compact('items', 'pagination', 'form');
+        $showFilters = $this->showFilterBar($filter);
+
+        return compact('items', 'pagination', 'form', 'showFilters');
+    }
+
+    public function showFilterBar(array $filter): bool
+    {
+        foreach ($filter as $value) {
+            if ($value !== null || (string) $value === '') {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

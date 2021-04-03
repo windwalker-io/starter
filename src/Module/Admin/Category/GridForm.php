@@ -51,7 +51,8 @@ class GridForm implements FieldDefinitionInterface
                 $form->add('state', ListField::class)
                     ->option('- Select State-', '')
                     ->option('Published', (string) State::PUBLISHED()->getValue())
-                    ->option('Unpublished', (string) State::UNPUBLISHED()->getValue());
+                    ->option('Unpublished', (string) State::UNPUBLISHED()->getValue())
+                    ->attr('x-on:change', 'grid().sendFilter()');
             }
         );
     }

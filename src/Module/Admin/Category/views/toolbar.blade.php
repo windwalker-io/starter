@@ -24,9 +24,9 @@ use Windwalker\Core\Router\SystemUri;
 
 ?>
 
-<div x-id="toolbar" x-data="{ formId: '#grid-form' }">
+<div x-id="toolbar" x-data="gridState">
     <button type="button"
-        @click="$refs.gridForm.submit()">
+        @click="form.post()">
         Delete
     </button>
 </div>

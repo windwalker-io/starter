@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 return [
     'unicorn' => [
-        'package' => \Unicorn\UnicornPackage::class,
         'enabled' => true,
 
         'listeners' => [

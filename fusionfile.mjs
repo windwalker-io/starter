@@ -80,9 +80,11 @@ export async function sync() {
 
 export async function install() {
   const vendors = [
+    // Unicorn
     '@windwalker-io/unicorn',
     'alpinejs',
     'systemjs',
+    'axios'
   ];
 
   vendors.forEach((vendor) => {

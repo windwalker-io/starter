@@ -21,5 +21,6 @@ $router->group('category')
     ->register(function (RouteCreator $router) {
         $router->any('categories', 'categories')
             ->controller(CategoryController::class)
-            ->view(CategoriesView::class);
+            ->view(CategoriesView::class)
+            ->patchHandler(CategoryController::class, 'filter');
     });
