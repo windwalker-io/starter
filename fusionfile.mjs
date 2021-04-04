@@ -21,7 +21,7 @@ export async function main() {
 
 export async function js() {
   // Watch start
-  fusion.watch('resources/assets/src/**/*.{js,mjs}', js);
+  fusion.watch('resources/assets/src/**/*.{js,mjs}');
   // Watch end
 
   // Compile Start

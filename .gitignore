@@ -1,10 +1,19 @@
-# System
-.*
-!.gitignore
+# OS generated files #
+.DS_Store
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# IDE Ignores #
+.idea/
+
+# Extra #
 !.gitkeep
-!.htaccess
-!.editorconfig
-!web.config
+
+# Configuration #
+.env*
+!.env.dist
 
 # Libraries
 /vendor

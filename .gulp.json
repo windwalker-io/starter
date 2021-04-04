@@ -1,0 +1,7 @@
+{
+    "description": "Windwalker Fusion",
+    "flags": {
+        "gulpfile": "fusionfile.mjs",
+        "require": "@windwalker-io/fusion/bootstrap.cjs"
+    }
+}
