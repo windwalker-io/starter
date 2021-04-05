@@ -13,6 +13,7 @@ use Windwalker\Core\Form\FormProvider;
 use Windwalker\Core\Provider\RendererProvider;
 use Windwalker\Core\Theme\BootstrapTheme;
 use Windwalker\Core\Theme\ThemeInterface;
+use Windwalker\DI\Container;
 use Windwalker\Renderer\EdgeRenderer;
 use Windwalker\Renderer\MustacheRenderer;
 use Windwalker\Renderer\PlatesRenderer;
@@ -52,8 +53,12 @@ return [
     ],
 
     'pagination' => [
-        'template' => 'layout.pagination.basic-pagination',
+        'template' => '@pagination',
         'neighbours' => 4
+    ],
+
+    'aliases' => [
+        '@pagination' => 'layout.pagination.basic-pagination'
     ],
 
     'providers' => [

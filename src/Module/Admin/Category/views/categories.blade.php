@@ -63,9 +63,13 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
 
 @section('content')
 
-    <form id="grid-form" action="" x-data="gridState" x-ref="gridForm" method="post">
+    <form id="grid-form" action="" x-data="{ form: u.form('#grid-form'), grid: u.grid('#grid-form') }"
+        x-ref="gridForm"
+        data-ordering="{{ $ordering }}"
+        data-direction="{{ $direction }}"
+        method="post">
 
-        @component('@theme.grid.filter-bar', ['open' => $showFilters], get_defined_vars())
+        @component('@filter-bar', ['open' => $showFilters], get_defined_vars())
 
         @endcomponent
 
@@ -92,7 +96,9 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
                         Delete
                     </th>
                     <th>
-                        ID
+                        @component('@sort', ['field' => 'category.id'], get_defined_vars())
+                            ID
+                        @endcomponent
                     </th>
                 </tr>
                 </thead>
@@ -116,9 +122,13 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
                                 {{ $item->getTitle() }}
                             </a>
                         </td>
+                        <td>
+                            {{ $item->getLft() }}
+                        </td>
                         <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            {{ $item->getId() }}
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

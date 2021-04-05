@@ -66,6 +66,8 @@ class CategoriesView implements ViewModelInterface
 
         $filter = (array) $this->session->overrideWith('categories.filter', $app->input('filter'));
         $search = (array) $this->session->overrideWith('categories.search', $app->input('search'));
+        $ordering = $this->session->overrideWith('categories.list_ordering', $app->input('list_ordering')) ?? 'category.lft';
+        $direction = $this->session->overrideWith('categories.list_direction', $app->input('list_direction'));
 
         $items = $this->categoryRepository->getListSelector()
             ->setFilters($filter)
@@ -87,7 +89,7 @@ class CategoriesView implements ViewModelInterface
 
         $showFilters = $this->showFilterBar($filter);
 
-        return compact('items', 'pagination', 'form', 'showFilters');
+        return compact('items', 'pagination', 'form', 'showFilters', 'ordering', 'direction');
     }
 
     public function showFilterBar(array $filter): bool

@@ -6,8 +6,8 @@ module.exports = {
       '@js': path.resolve(__dirname, './www/assets/js'),
       '@view': path.resolve(__dirname, './www/assets/js/@view'),
 
-      '@vendor/': path.resolve(__dirname, './www/assets/vendor/'),
-      '@unicorn/': path.resolve(__dirname, './www/vendor/@windwalker-io/unicorn/dist/')
+      '@vendor': path.resolve(__dirname, './www/assets/vendor'),
+      '@unicorn': path.resolve(__dirname, './www/assets/vendor/@windwalker-io/unicorn/dist')
       // '@': './www/@assets',
     }
   }

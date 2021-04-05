@@ -25,7 +25,7 @@ use Windwalker\Session\Session;
 )]
 #[TaskMapping(
     methods: [
-        'PATCH' => 'filter'
+        'PUT' => 'filter'
     ]
 )]
 class CategoryController
