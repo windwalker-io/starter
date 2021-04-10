@@ -85,7 +85,8 @@ export async function install() {
     'alpinejs',
     'systemjs',
     'axios',
-    'awesome-bootstrap-checkbox'
+    'awesome-bootstrap-checkbox',
+    'regenerator-runtime'
   ];
 
   vendors.forEach((vendor) => {

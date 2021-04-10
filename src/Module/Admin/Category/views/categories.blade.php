@@ -44,16 +44,16 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
     {{--    const state = {};--}}
     {{--</script>--}}
     <script defer>
-        window.gridState = {
-            form: null,
-            grid: null
-        };
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('dom ready on page');
+        });
+        S.import(['@main']).then(function (m) {
+            window.gridState = u.grid('#grid-form').useState();
 
-        System.import('@/admin/main.js').then(function () {
-            gridState.grid = u.grid('#grid-form');
-            gridState.form = u.form('#grid-form');
+            u.$ui.bootstrap.tooltip();
 
-            u.ui.bootstrap.tooltip();
+            // u.initAlpine();
+            u.initAlpine('#grid-form');
         });
     </script>
     <script>
@@ -63,7 +63,7 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
 
 @section('content')
 
-    <form id="grid-form" action="" x-data="{ form: u.form('#grid-form'), grid: u.grid('#grid-form') }"
+    <form id="grid-form" action="" x-data="gridState"
         x-ref="gridForm"
         data-ordering="{{ $ordering }}"
         data-direction="{{ $direction }}"

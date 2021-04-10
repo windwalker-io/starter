@@ -5,9 +5,10 @@
  * @license    __LICENSE__
  */
 
+import '@regenerator-runtime';
 import Unicorn from '@unicorn/unicorn.js';
 import { UIBootstrap5 } from '@unicorn/ui/ui-bootstrap5.js';
 
 u.use(UIBootstrap5);
 
-u.initAlpine();
+export default u;
