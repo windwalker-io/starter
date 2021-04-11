@@ -44,17 +44,7 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
     {{--    const state = {};--}}
     {{--</script>--}}
     <script defer>
-        window.addEventListener('DOMContentLoaded', () => {
-            console.log('dom ready on page');
-        });
-        S.import(['@main']).then(function (m) {
-            window.gridState = u.grid('#grid-form').useState();
 
-            u.$ui.bootstrap.tooltip();
-
-            // u.initAlpine();
-            u.initAlpine('#grid-form');
-        });
     </script>
     <script>
         // const bs5 = System.import('@unicorn/ui/ui-bootstrap5.js?sdf').then(c => console.log(c));
@@ -66,7 +56,7 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
     <form id="grid-form" action="" x-data="gridState"
         x-ref="gridForm"
         data-ordering="{{ $ordering }}"
-        data-direction="{{ $direction }}"
+        x-init="gridState.init($el)"
         method="post">
 
         @component('@filter-bar', ['open' => $showFilters], get_defined_vars())

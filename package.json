@@ -19,6 +19,6 @@
     },
     "workspaces": [
         "vendor/windwalker/unicorn/*",
-        "vendor/windwalker/core/fusion"
+        "vendor/windwalker/core/assets/*"
     ]
 }

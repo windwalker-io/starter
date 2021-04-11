@@ -58,6 +58,7 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
             ['sri' => 'sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk']
         );
         $this->asset->css('@awesome-checkbox');
+        $this->asset->css('css/admin/app.css');
 
         $this->asset->js(
             'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js'

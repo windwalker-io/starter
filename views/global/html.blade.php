@@ -23,9 +23,11 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
+$htmlFrame->getHtmlElement()
+    ->setAttribute('lang', $app->config('language.locale') ?: $app->config('language.fallback', 'en-US'));
 
 ?><!DOCTYPE html>
-<html lang="{{ $app->config('language.locale') ? : $app->config('language.fallback', 'en-US') }}">
+<html {!! $htmlFrame->htmlAttributes() !!}>
 <head>
     <base href="{{ $uri::normalize($uri->path .  '/') }}" />
 
@@ -45,7 +47,7 @@ $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 
 {!! $htmlFrame->renderCustomTags() !!}
 </head>
-<body class="@yield('body_class')" style="">
+<body {!! $htmlFrame->bodyAttributes() !!}>
 
 @yield('superbody')
 

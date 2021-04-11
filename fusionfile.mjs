@@ -5,17 +5,30 @@
  * @license    MIT
  */
 
-import fusion, { waitAllEnded } from '@windwalker-io/fusion';
+import fusion, { sass, babel, parallel } from '@windwalker-io/fusion';
 import { execSync } from 'child_process';
-import { assetSync } from './vendor/windwalker/core/resources/assets/fusion/fusion.mjs';
+import { jsSync } from '@windwalker-io/core';
 
-export async function main() {
+export async function css() {
   // Watch start
-  fusion.watch('resources/assets/scss/**/*.scss');
+  fusion.watch(['resources/assets/scss/**/*.scss', 'src/Module/**/assets/*.scss']);
   // Watch end
 
   // Compile Start
-  fusion.sass('resources/assets/scss/**/*.scss', 'www/assets/css/app.css');
+  sass(
+    [
+      'resources/assets/scss/front/main.scss',
+      'src/Module/Front/**/assets/*.scss'
+    ],
+    'www/assets/css/front/app.css'
+  );
+  sass(
+    [
+      'resources/assets/scss/admin/main.scss',
+      'src/Module/Admin/**/assets/*.scss'
+    ],
+    'www/assets/css/admin/app.css'
+  );
   // Compile end
 }
 
@@ -25,7 +38,7 @@ export async function js() {
   // Watch end
 
   // Compile Start
-  fusion.babel('resources/assets/src/**/*.{js,mjs}', 'www/assets/js/', { module: 'systemjs' });
+  babel('resources/assets/src/**/*.{js,mjs}', 'www/assets/js/', { module: 'systemjs' });
   // Compile end
 }
 
@@ -39,44 +52,50 @@ export async function images() {
   // Compile end
 }
 
-export async function sync2() {
+export async function sync() {
   // Watch start
   fusion.watch('src/Component/**/assets/**/*.js');
   // Watch end
 
   // Compile Start
-  assetSync(
-    'src/Component/',
-    'www/assets/js/@view/'
+  const { dest } = await jsSync(
+    'src/Module/',
+    'www/assets/js/view/'
+  );
+
+  babel(
+    dest.path + '**/*.{mjs,js}',
+    null,
+    { module: 'systemjs' }
   )
   // Compile end
 
   return Promise.all([]);
 }
 
-export async function sync() {
-  // Watch start
-  fusion.watch('src/Component/**/view/**/*.js');
-  // Watch end
-
-  // Compile Start
-  const wait = [];
-  let js = JSON.parse(execSync('php windwalker assets:sync "src/Component" --type=js').toString());
-
-  for (let key in js) {
-    console.log(`Copy: ${key} ==> www/asset/js/@view/${js[key]}`);
-    wait.push(fusion.js(key, `www/asset/js/@view/${js[key]}`));
-  }
-
-  const css = JSON.parse(execSync('php windwalker assets:sync "src/Component" --type=css').toString());
-
-  wait.push(
-    fusion.sass([...css], 'www/asset/css/main.css')
-  );
-  // Compile end
-
-  return Promise.all(wait);
-}
+// export async function sync() {
+//   // Watch start
+//   fusion.watch('src/Component/**/view/**/*.js');
+//   // Watch end
+//
+//   // Compile Start
+//   const wait = [];
+//   let js = JSON.parse(execSync('php windwalker assets:sync "src/Component" --type=js').toString());
+//
+//   for (let key in js) {
+//     console.log(`Copy: ${key} ==> www/asset/js/@view/${js[key]}`);
+//     wait.push(fusion.js(key, `www/asset/js/@view/${js[key]}`));
+//   }
+//
+//   const css = JSON.parse(execSync('php windwalker assets:sync "src/Component" --type=css').toString());
+//
+//   wait.push(
+//     fusion.sass([...css], 'www/asset/css/main.css')
+//   );
+//   // Compile end
+//
+//   return Promise.all(wait);
+// }
 
 export async function install() {
   const vendors = [
@@ -98,7 +117,7 @@ export async function install() {
   fusion.copy('resources/assets/vendor/**/*', 'www/assets/vendor/');
 }
 
-export default main;
+export default parallel(css, sync, js, images);
 
 /*
  * APIs

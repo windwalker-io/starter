@@ -31,7 +31,9 @@ use function Windwalker\filter;
  * The CategoriesView class.
  */
 #[ViewModel(
-    layout: 'categories'
+    name: 'categories',
+    layout: 'categories',
+    js: 'category.js'
 )]
 class CategoriesView implements ViewModelInterface
 {
@@ -64,19 +66,20 @@ class CategoriesView implements ViewModelInterface
         $page  = filter($page, 'int;range:min=1');
         $limit = filter($limit, 'int') ?? 15;
 
-        $filter = (array) $this->session->overrideWith('categories.filter', $app->input('filter'));
-        $search = (array) $this->session->overrideWith('categories.search', $app->input('search'));
-        $ordering = $this->session->overrideWith('categories.list_ordering', $app->input('list_ordering')) ?? 'category.lft';
-        $direction = $this->session->overrideWith('categories.list_direction', $app->input('list_direction'));
+        $userState = $app->getUserState('category');
+
+        $filter = (array) $userState->getFromRequest('filter');
+        $search = (array) $userState->getFromRequest('search');
+        $ordering = $userState->getFromRequest('ordering') ?? 'category.id ASC';
 
         $items = $this->categoryRepository->getListSelector()
             ->setFilters($filter)
             ->setSearches($search)
+            ->ordering($ordering)
             ->page($page)
             ->limit($limit)
             ->modifyQuery(
                 fn(Query $query) => $query->where('parent_id', '!=', 0)
-                    ->order('category.lft', 'ASC')
             );
 
         $pagination = $items->getPagination();
@@ -89,7 +92,7 @@ class CategoriesView implements ViewModelInterface
 
         $showFilters = $this->showFilterBar($filter);
 
-        return compact('items', 'pagination', 'form', 'showFilters', 'ordering', 'direction');
+        return compact('items', 'pagination', 'form', 'showFilters', 'ordering');
     }
 
     public function showFilterBar(array $filter): bool
