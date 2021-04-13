@@ -11,7 +11,8 @@ declare(strict_types=1);
 
 namespace App\Routes;
 
-use App\Module\Admin\Category\CategoriesView;
+use App\Module\Admin\Category\CategoryEditView;
+use App\Module\Admin\Category\CategoryListView;
 use App\Module\Admin\Category\CategoryController;
 use Windwalker\Core\Router\RouteCreator;
 
@@ -19,8 +20,11 @@ use Windwalker\Core\Router\RouteCreator;
 
 $router->group('category')
     ->register(function (RouteCreator $router) {
-        $router->any('categories', 'categories')
+        $router->any('category_list', '/categories')
             ->controller(CategoryController::class)
-            ->view(CategoriesView::class)
-            ->patchHandler(CategoryController::class, 'filter');
+            ->view(CategoryListView::class);
+
+        $router->any('category_edit', '/category/edit[/{id:\d+}]')
+            ->controller(CategoryController::class)
+            ->view(CategoryEditView::class);
     });

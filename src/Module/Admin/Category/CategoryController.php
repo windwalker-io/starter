@@ -32,12 +32,13 @@ class CategoryController
 {
     public function filter(AppContext $app, Session $session, Navigator $nav)
     {
-        $session->overrideWith('categories.filter', $app->input('filter'));
-        $session->overrideWith('categories.search', $app->input('search'));
-        $session->overrideWith('categories.page', $app->input('page'));
-        $session->overrideWith('categories.limit', $app->input('limit'));
-        $session->overrideWith('categories.list_order', $app->input('list_order'));
-        $session->overrideWith('categories.list_dir', $app->input('list_dir'));
+        $state = $app->getSubState('category');
+
+        $state->persistFromRequest('filter');
+        $state->persistFromRequest('search');
+        $state->persistFromRequest('page');
+        $state->persistFromRequest('limit');
+        $state->persistFromRequest('list_ordering');
 
         $route = $app->getMatchedRoute();
 

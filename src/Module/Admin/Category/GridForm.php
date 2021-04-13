@@ -15,6 +15,7 @@ use App\Enum\State;
 use Windwalker\Form\Attributes\Fieldset;
 use Windwalker\Form\Attributes\NS;
 use Windwalker\Form\Field\ListField;
+use Windwalker\Form\Field\SearchField;
 use Windwalker\Form\Field\TextField;
 use Windwalker\Form\FieldDefinitionInterface;
 use Windwalker\Form\Form;
@@ -36,12 +37,9 @@ class GridForm implements FieldDefinitionInterface
         $form->register(
             #[NS('search')]
             function (Form $form) {
-                $form->add('fields', ListField::class)
-                    ->option('', 'category.title')
-                    ->option('', 'category.alias');
-
-                $form->add('content', TextField::class)
-                    ->addFilter('trim');
+                $form->add('*', SearchField::class)
+                    ->addFilter('trim')
+                    ->attr('x-on:keydown.enter', '$store.grid.sendFilter($event)');
             }
         );
 
@@ -52,7 +50,7 @@ class GridForm implements FieldDefinitionInterface
                     ->option('- Select State-', '')
                     ->option('Published', (string) State::PUBLISHED()->getValue())
                     ->option('Unpublished', (string) State::UNPUBLISHED()->getValue())
-                    ->attr('x-on:change', 'grid().sendFilter()');
+                    ->attr('x-on:change', '$store.grid.sendFilter()');
             }
         );
     }

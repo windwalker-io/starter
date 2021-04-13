@@ -11,13 +11,12 @@ declare(strict_types=1);
 
 namespace App\Module\Front\Home;
 
-use App\Enum\State;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\Pagination\PaginationFactory;
 use Windwalker\Core\Renderer\RendererService;
+use Windwalker\Core\State\AppState;
 use Windwalker\Core\View\ViewModelInterface;
-use Windwalker\Data\Collection;
 use Windwalker\ORM\ORM;
 
 /**
@@ -27,7 +26,7 @@ use Windwalker\ORM\ORM;
     layout: 'home',
     css: 'home.scss',
     modules: [
-        '@home' => 'home.js'
+        '@home' => 'home.js',
     ]
 )]
 class HomeView implements ViewModelInterface
@@ -45,12 +44,13 @@ class HomeView implements ViewModelInterface
     /**
      * Prepare
      *
-     * @param  Collection  $state
+     * @param  AppState    $state
      * @param  AppContext  $app
      *
      * @return  array
+     * @throws \Windwalker\DI\Exception\DefinitionException
      */
-    public function prepare(Collection $state, AppContext $app): array
+    public function prepare(AppState $state, AppContext $app): array
     {
         $page = (int) $app->input('page');
 
@@ -65,7 +65,7 @@ class HomeView implements ViewModelInterface
             ->total($articles->count());
 
         $renderer = $app->service(RendererService::class);
-        $tmpl = $renderer->make('layout.pagination.basic-pagination');
+        $tmpl     = $renderer->make('layout.pagination.basic-pagination');
 
         $pagin->template($renderer->make('layout.pagination.basic-pagination'));
 

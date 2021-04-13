@@ -36,7 +36,7 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
 @extends('admin.global.body')
 
 @section('toolbar')
-    @include('toolbar')
+    @include('toolbar-list')
 @stop
 
 @push('script')
@@ -53,10 +53,9 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
 
 @section('content')
 
-    <form id="grid-form" action="" x-data="gridState"
+    <form id="grid-form" action="" x-data
         x-ref="gridForm"
         data-ordering="{{ $ordering }}"
-        x-init="gridState.init($el)"
         method="post">
 
         @component('@filter-bar', ['open' => $showFilters], get_defined_vars())
@@ -74,19 +73,25 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
                         />
                     </th>
                     <th>
-                        State
+                        @component('@sort', ['field' => 'category.state'])
+                            State
+                        @endcomponent
                     </th>
                     <th>
-                        Title
+                        @component('@sort', ['field' => 'category.title'])
+                            Title
+                        @endcomponent
                     </th>
                     <th>
-                        Order
+                        @component('@sort', ['field' => 'category.lft'])
+                            Order
+                        @endcomponent
                     </th>
                     <th>
                         Delete
                     </th>
                     <th>
-                        @component('@sort', ['field' => 'category.id'], get_defined_vars())
+                        @component('@sort', ['field' => 'category.id'])
                             ID
                         @endcomponent
                     </th>
@@ -132,7 +137,6 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
                 </tfoot>
             </table>
         </div>
-
     </form>
 
 @stop

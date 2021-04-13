@@ -54,7 +54,7 @@ export async function images() {
 
 export async function sync() {
   // Watch start
-  fusion.watch('src/Component/**/assets/**/*.js');
+  fusion.watch('src/Module/**/assets/**/*.{js,mjs}');
   // Watch end
 
   // Compile Start
@@ -101,8 +101,9 @@ export async function install() {
   const vendors = [
     // Unicorn
     '@windwalker-io/unicorn',
-    'alpinejs',
     'systemjs',
+    'alpinejs',
+    '@ryangjchandler/spruce',
     'axios',
     'awesome-bootstrap-checkbox',
     'regenerator-runtime'

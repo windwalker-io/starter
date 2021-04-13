@@ -29,5 +29,6 @@ class CategoryRepository implements DatabaseRepositoryInterface
         $query->from(Category::class);
 
         // $selector->addFilterHandler()
+
     }
 }

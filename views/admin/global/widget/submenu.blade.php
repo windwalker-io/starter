@@ -43,7 +43,7 @@ $menu = $app->service(\Unicorn\Legacy\Html\MenuHelper::class);
 {{--</div>--}}
 
 <ul id="submenu" class="nav nav-stacked nav-pills flex-column">
-    <li class="nav-item {{ $menu->active('categories', ['type' => 'article']) }}">
+    <li class="nav-item {{ $menu->active('category_list', ['type' => 'article']) }}">
         <a href="{{ $nav->to('categories', ['type' => 'article']) }}"
            class="nav-link {{ $menu->active('categories', ['type' => 'article']) }}">
             @lang('unicorn.article.categories')
