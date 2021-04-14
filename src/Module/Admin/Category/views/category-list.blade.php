@@ -44,7 +44,7 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
     {{--    const state = {};--}}
     {{--</script>--}}
     <script defer>
-
+        window.foo = 123;
     </script>
     <script>
         // const bs5 = System.import('@unicorn/ui/ui-bootstrap5.js?sdf').then(c => console.log(c));
@@ -58,9 +58,11 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
         data-ordering="{{ $ordering }}"
         method="post">
 
-        @component('@filter-bar', ['open' => $showFilters], get_defined_vars())
+        <x-filter-bar :form="$form" :open="$showFilters" ::goo="goo"></x-filter-bar>
 
-        @endcomponent
+{{--        @component('@filter-bar', ['open' => $showFilters])--}}
+
+{{--        @endcomponent--}}
 
         <div>
             <table class="table table-striped">
@@ -73,27 +75,27 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
                         />
                     </th>
                     <th>
-                        @component('@sort', ['field' => 'category.state'])
+                        <x-sort field="category.state">
                             State
-                        @endcomponent
+                        </x-sort>
                     </th>
                     <th>
-                        @component('@sort', ['field' => 'category.title'])
+                        <x-sort field="category.title">
                             Title
-                        @endcomponent
+                        </x-sort>
                     </th>
                     <th>
-                        @component('@sort', ['field' => 'category.lft'])
+                        <x-sort field="category.lft">
                             Order
-                        @endcomponent
+                        </x-sort>
                     </th>
                     <th>
                         Delete
                     </th>
                     <th>
-                        @component('@sort', ['field' => 'category.id'])
+                        <x-sort field="category.id">
                             ID
-                        @endcomponent
+                        </x-sort>
                     </th>
                 </tr>
                 </thead>

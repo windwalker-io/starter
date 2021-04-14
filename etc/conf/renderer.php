@@ -9,6 +9,8 @@
 
 declare(strict_types=1);
 
+use Windwalker\Core\Edge\Component\XComponent;
+use Windwalker\Core\Edge\EdgeProvider;
 use Windwalker\Core\Form\FormProvider;
 use Windwalker\Core\Provider\RendererProvider;
 use Windwalker\Core\Theme\BootstrapTheme;
@@ -61,8 +63,16 @@ return [
         '@pagination' => 'layout.pagination.basic-pagination'
     ],
 
+    'edge' => [
+        'components' => [
+            'component' => XComponent::class,
+            'template' => XComponent::class,
+        ]
+    ],
+
     'providers' => [
         RendererProvider::class,
+        EdgeProvider::class,
         FormProvider::class
     ],
 
