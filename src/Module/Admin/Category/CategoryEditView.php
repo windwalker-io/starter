@@ -24,7 +24,8 @@ use Windwalker\ORM\ORM;
  */
 #[ViewModel(
     name: 'category',
-    layout: 'category-edit'
+    layout: 'category-edit',
+    js: 'category-edit.js'
 )]
 class CategoryEditView implements ViewModelInterface
 {

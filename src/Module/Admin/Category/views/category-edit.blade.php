@@ -22,6 +22,10 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
+/**
+ * @var $form \Windwalker\Form\Form
+ */
+
 $lang = $lang->extract('luna.');
 
 $a = [
@@ -38,27 +42,33 @@ $a = [
     <form name="admin-form" id="admin-form" action="{{ $nav->to('category', ['type' => $type]) }}"
         method="POST" enctype="multipart/form-data">
 
-        @component('@title-bar', ['form' => $form])
-            @slot('end')
-                @scope($field)
-                {{ json_encode($field)  }}
-                Hello
-            @endslot
+        <x-title-bar :form="$form"></x-title-bar>
 
-            @slot
-                @scope($field)
-                {{ json_encode($field)  }}
-                Main
-            @endslot
-            {{-- todo: Must add root slot --}}
-        @endcomponent
+{{--        @component('@title-bar', ['form' => $form])--}}
+{{--            @slot('end')--}}
+{{--                @scope($field)--}}
+{{--                {{ json_encode($field)  }}--}}
+{{--                Hello--}}
+{{--            @endslot--}}
+
+{{--            @slot--}}
+{{--                @scope($field)--}}
+{{--                {{ json_encode($field)  }}--}}
+{{--                Main--}}
+{{--            @endslot--}}
+{{--            --}}{{-- todo: Must add root slot --}}
+{{--        @endcomponent--}}
 
         <div class="row">
             <div class="col-md-7">
                 <fieldset class="form-horizontal">
                     <legend>@lang('category.edit.fieldset.basic')</legend>
 
-                    {!! $form->renderFields('basic') !!}
+{{--                    {!! $form->renderFields('basic') !!}--}}
+
+                    @foreach ($form->getFields('basic') as $field)
+                        <x-field :field="$field" class="mb-3"></x-field>
+                    @endforeach
                 </fieldset>
 
                 <fieldset class="form-horizontal">

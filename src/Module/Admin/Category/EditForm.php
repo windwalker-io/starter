@@ -18,6 +18,7 @@ use Windwalker\Form\Field\DatetimeLocalField;
 use Windwalker\Form\Field\HiddenField;
 use Windwalker\Form\Field\TextareaField;
 use Windwalker\Form\Field\TextField;
+use Windwalker\Form\Field\UrlField;
 use Windwalker\Form\FieldDefinitionInterface;
 use Windwalker\Form\Form;
 
@@ -64,6 +65,10 @@ class EditForm implements FieldDefinitionInterface
             #[Fieldset('basic', 'Basic')]
             function (Form $form) use ($lang) {
                 $type = $this->options['type'] ?? '';
+
+                $form->add('url', UrlField::class)
+                    ->label('URL')
+                    ->placeholder('URL');
 
                 // ID
                 $form->add('id', HiddenField::class);
