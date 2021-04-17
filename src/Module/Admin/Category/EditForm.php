@@ -22,6 +22,8 @@ use Windwalker\Form\Field\UrlField;
 use Windwalker\Form\FieldDefinitionInterface;
 use Windwalker\Form\Form;
 
+use function Windwalker\DOM\h;
+
 /**
  * The Editform class.
  */
@@ -52,13 +54,16 @@ class EditForm implements FieldDefinitionInterface
         $form->add('title', TextField::class)
             ->label($lang('category.field.title'))
             ->placeholder($lang('category.field.title'))
+            ->attr('data-validate', 'url')
             ->addFilter('trim')
             ->required(true);
 
         // Alias
         $form->add('alias', TextField::class)
             ->label($lang('category.field.alias'))
-            ->placeholder($lang('category.field.alias'));
+            ->placeholder($lang('category.field.alias'))
+            ->help('Alias Help' . h('a', ['href' => '#'], 'link'))
+            ->description('Alias Description');
 
         // Basic fieldset
         $form->register(

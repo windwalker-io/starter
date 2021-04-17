@@ -38,7 +38,7 @@ $a = [
 @extends('admin.global.body')
 
 @section('content')
-
+<uni-form-validate>
     <form name="admin-form" id="admin-form" action="{{ $nav->to('category', ['type' => $type]) }}"
         method="POST" enctype="multipart/form-data">
 
@@ -91,5 +91,5 @@ $a = [
         </div>
 
     </form>
-
+</uni-form-validate>
 @stop

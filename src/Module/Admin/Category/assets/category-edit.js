@@ -7,6 +7,6 @@
 
 import u from '@main';
 
-const validation = u.validation('#admin-form');
+// const validation = u.validation('#admin-form');
 
-console.log(validation);
+u.$ui.bootstrap.tooltip();
