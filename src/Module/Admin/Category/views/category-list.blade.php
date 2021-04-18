@@ -35,7 +35,7 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
 
 @extends('admin.global.body')
 
-@section('toolbar')
+@section('toolbar-buttons')
     @include('toolbar-list')
 @stop
 
@@ -109,9 +109,7 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
                                 value="{{ $item->getId() }}" data-role="grid-checkbox" />
                         </td>
                         <td>
-                            <button class="btn btn-light btn-sm">
-                                <span class="fa fa-check text-success"></span>
-                            </button>
+                            <x-state-button></x-state-button>
                         </td>
                         <td>
                             {{ str_repeat('—', $item->getLevel() - 1) }}

@@ -100,6 +100,8 @@ export async function sync() {
 export async function install() {
   const vendors = [
     // Unicorn
+    '@fortawesome/fontawesome-free',
+
     '@windwalker-io/unicorn',
     'systemjs',
     'alpinejs',

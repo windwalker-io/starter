@@ -7,6 +7,7 @@
 
 import u from '@main';
 
-// const validation = u.validation('#admin-form');
+u.validation();
+u.form('#admin-form').initComponent();
 
 u.$ui.bootstrap.tooltip();

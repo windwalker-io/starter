@@ -31,7 +31,7 @@ use Windwalker\Core\Router\SystemUri;
     @include('admin.global.widget.banner')
 @show
 
-@section('toolbar')
+@section('admin-toolbar')
     @include('admin.global.widget.toolbar')
 @show
 

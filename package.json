@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "@windwalker-io/fusion": "^1.0.0-beta",
+        "@fortawesome/fontawesome-free": "^5.0.0",
         "alpinejs": "^2.8.2",
         "bootstrap": "^5.0.0-beta"
     },

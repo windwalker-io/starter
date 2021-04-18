@@ -4,7 +4,7 @@
  * Global variables
  * --------------------------------------------------------------
  * @var $app       AppContext      Application context.
- * @var $view      ViewModel       The view modal object.
+ * @var $vm        object          The view model object.
  * @var $uri       SystemUri       System Uri information.
  * @var $chronos   ChronosService  The chronos datetime service.
  * @var $nav       Navigator       Navigator object to build route.
@@ -16,21 +16,13 @@ declare(strict_types=1);
 
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
-use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\DateTime\ChronosService;
 use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 ?>
-<aside id="admin-toolbar" class="mb-4">
-    <button data-bs-toggle="collapse" class="btn btn-default toolbar-toggle-button"
-        data-bs-target=".admin-toolbar-buttons">
-        <span class="glyphicon glyphicon-wrench"></span>
-        @lang('phoenix.toolbar.toggle')
-    </button>
-    <div class="admin-toolbar-buttons">
-        <hr/>
-        @yield('toolbar-buttons')
-    </div>
-</aside>
+
+<button class="btn btn-light btn-sm">
+    <span class="fa fa-check text-success"></span>
+</button>

@@ -37,52 +37,33 @@ $a = [
 
 @extends('admin.global.body')
 
+@section('toolbar-buttons')
+    @include('toolbar-edit')
+@stop
+
 @section('content')
 <uni-form-validate>
-    <form name="admin-form" id="admin-form" action="{{ $nav->to('category', ['type' => $type]) }}"
+    <form name="admin-form" id="admin-form" action="{{ $nav->to('category_edit', ['type' => $type]) }}"
         method="POST" enctype="multipart/form-data">
 
         <x-title-bar :form="$form"></x-title-bar>
 
-{{--        @component('@title-bar', ['form' => $form])--}}
-{{--            @slot('end')--}}
-{{--                @scope($field)--}}
-{{--                {{ json_encode($field)  }}--}}
-{{--                Hello--}}
-{{--            @endslot--}}
-
-{{--            @slot--}}
-{{--                @scope($field)--}}
-{{--                {{ json_encode($field)  }}--}}
-{{--                Main--}}
-{{--            @endslot--}}
-{{--            --}}{{-- todo: Must add root slot --}}
-{{--        @endcomponent--}}
-
         <div class="row">
             <div class="col-md-7">
-                <fieldset class="form-horizontal">
-                    <legend>@lang('category.edit.fieldset.basic')</legend>
-
-{{--                    {!! $form->renderFields('basic') !!}--}}
-
-                    @foreach ($form->getFields('basic') as $field)
-                        <x-field :field="$field" class="mb-3"></x-field>
-                    @endforeach
-                </fieldset>
-
-                <fieldset class="form-horizontal">
-                    <legend>@lang('category.edit.fieldset.text')</legend>
-
-                    {!! $form->getField('description')->renderInput() !!}
-                </fieldset>
+                <x-fieldset name="basic" :title="$lang('category.edit.fieldset.basic')"
+                    :form="$form" class="mb-4">
+                    <x-slot name="urlEndSlot">
+                        sdf
+                    </x-slot>
+                </x-fieldset>
+                <x-fieldset name="text" :title="$lang('category.edit.fieldset.text')"
+                    :form="$form" class="mb-4">
+                </x-fieldset>
             </div>
             <div class="col-md-5">
-                <fieldset class="form-horizontal">
-                    <legend>@lang('category.edit.fieldset.created')</legend>
-
-                    {!! $form->renderFields('created') !!}
-                </fieldset>
+                <x-fieldset name="meta" :title="$lang('category.edit.fieldset.meta')"
+                    :form="$form" class="mb-4">
+                </x-fieldset>
             </div>
         </div>
 
