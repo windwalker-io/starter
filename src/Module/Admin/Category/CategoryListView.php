@@ -12,20 +12,17 @@ declare(strict_types=1);
 namespace App\Module\Admin\Category;
 
 use App\Entity\Category;
+use App\Module\Admin\Category\Form\GridForm;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
-use Windwalker\Core\Events\Web\AfterControllerDispatchEvent;
 use Windwalker\Core\Form\FormFactory;
-use Windwalker\Core\Service\FilterService;
 use Windwalker\Core\State\AppState;
 use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\DI\Attributes\Autowire;
 use Windwalker\ORM\ORM;
 use Windwalker\Query\Query;
-use Windwalker\Session\Session;
 
 use function Windwalker\filter;
-use function Windwalker\response;
 
 /**
  * The CategoriesView class.

@@ -9,22 +9,22 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Admin\Category;
+namespace App\Module\Admin\Category\Form;
 
+use App\Entity\Category;
 use Unicorn\Field\CalendarField;
 use Unicorn\Field\SwitcherField;
+use Windwalker\Core\Http\AppRequest;
 use Windwalker\Core\Language\LangService;
 use Windwalker\Form\Attributes\Fieldset;
-use Windwalker\Form\Field\CheckboxField;
-use Windwalker\Form\Field\DatetimeLocalField;
 use Windwalker\Form\Field\HiddenField;
 use Windwalker\Form\Field\TextareaField;
 use Windwalker\Form\Field\TextField;
 use Windwalker\Form\Field\UrlField;
 use Windwalker\Form\FieldDefinitionInterface;
 use Windwalker\Form\Form;
-
-use function Windwalker\DOM\h;
+use Windwalker\ORM\SelectorQuery;
+use Windwalker\Query\Query;
 
 /**
  * The Editform class.
@@ -35,10 +35,14 @@ class EditForm implements FieldDefinitionInterface
      * EditForm constructor.
      *
      * @param  LangService  $lang
+     * @param  AppRequest   $request
      * @param  array        $options
      */
-    public function __construct(protected LangService $lang, protected array $options = [])
-    {
+    public function __construct(
+        protected LangService $lang,
+        protected AppRequest $request,
+        protected array $options = []
+    ) {
     }
 
     /**
@@ -68,7 +72,9 @@ class EditForm implements FieldDefinitionInterface
         // Basic fieldset
         $form->register(
             #[Fieldset('basic', 'Basic')]
-            function (Form $form) use ($lang) {
+            function (
+                Form $form
+            ) use ($lang) {
                 $type = $this->options['type'] ?? '';
 
                 $form->add('url', UrlField::class)
@@ -79,20 +85,24 @@ class EditForm implements FieldDefinitionInterface
                 $form->add('id', HiddenField::class);
 
                 // Parent
-                // $form->categoryList('parent_id')
-                //     ->label($lang('category.field.parent'))
-                //     ->class('has-select2')
-                //     ->option($lang('category.root'), 1)
-                //     ->categoryType($type)
-                //     ->postQueryHandler(function (Query $query) {
-                //         $input = Ioc::getInput();
-                //
-                //         if ($id = $input->get('id')) {
-                //             $self = CategoryMapper::findOne($id);
-                //
-                //             $query->where('(lft < ' . $self->lft . ' OR rgt > ' . $self->rgt . ')');
-                //         }
-                //     });
+                $form->add('parent_id', CategoryListField::class)
+                    ->label($lang('category.field.parent'))
+                    ->option($lang('category.root'), '1')
+                    // ->categoryType($type)
+                    ->configureQuery(
+                        function (SelectorQuery $query) {
+                            if ($id = $this->request->input('id')) {
+                                if ($self = $query->getORM()->findOne(Category::class, $id)) {
+                                    $query->orWhere(
+                                        function (Query $query) use ($self) {
+                                            $query->where('lft', '<', $self->getLft());
+                                            $query->where('rgt', '>', $self->getRgt());
+                                        }
+                                    );
+                                }
+                            }
+                        }
+                    );
 
                 // Images
                 // $this->singleImageDrag('image')
@@ -127,7 +137,9 @@ class EditForm implements FieldDefinitionInterface
         // Created fieldset
         $form->register(
             #[Fieldset('meta')]
-            function (Form $form) use ($lang) {
+            function (
+                Form $form
+            ) use ($lang) {
                 // State
                 $form->add('state', SwitcherField::class)
                     ->label($lang('category.field.published'))
@@ -148,8 +160,7 @@ class EditForm implements FieldDefinitionInterface
                 $form->add('created', CalendarField::class)
                     ->label($lang('category.field.created'))
                     ->enableTime(true)
-                    ->calendarOptions([])
-                    // ->addFilter()
+                    ->calendarOptions([])// ->addFilter()
                 ;
 
                 // Modified

@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Module\Admin\Category;
 
 use App\Entity\Category;
+use App\Module\Admin\Category\Form\EditForm;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\Form\FormFactory;

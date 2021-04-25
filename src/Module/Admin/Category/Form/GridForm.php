@@ -9,14 +9,12 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Admin\Category;
+namespace App\Module\Admin\Category\Form;
 
 use App\Enum\State;
-use Windwalker\Form\Attributes\Fieldset;
 use Windwalker\Form\Attributes\NS;
 use Windwalker\Form\Field\ListField;
 use Windwalker\Form\Field\SearchField;
-use Windwalker\Form\Field\TextField;
 use Windwalker\Form\FieldDefinitionInterface;
 use Windwalker\Form\Form;
 
