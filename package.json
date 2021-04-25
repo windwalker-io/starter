@@ -13,7 +13,8 @@
         "@windwalker-io/fusion": "^1.0.0-beta",
         "@fortawesome/fontawesome-free": "^5.0.0",
         "alpinejs": "^2.8.2",
-        "bootstrap": "^5.0.0-beta"
+        "bootstrap": "^5.0.0-beta",
+        "flatpickr": "^4.6.9"
     },
     "resolutions": {
         "graceful-fs": "^4.2.4"

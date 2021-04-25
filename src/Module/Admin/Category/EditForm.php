@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Category;
 
+use Unicorn\Field\CalendarField;
+use Unicorn\Field\SwitcherField;
 use Windwalker\Core\Language\LangService;
 use Windwalker\Form\Attributes\Fieldset;
 use Windwalker\Form\Field\CheckboxField;
@@ -54,7 +56,6 @@ class EditForm implements FieldDefinitionInterface
         $form->add('title', TextField::class)
             ->label($lang('category.field.title'))
             ->placeholder($lang('category.field.title'))
-            ->attr('data-validate', 'url')
             ->addFilter('trim')
             ->required(true);
 
@@ -62,7 +63,6 @@ class EditForm implements FieldDefinitionInterface
         $form->add('alias', TextField::class)
             ->label($lang('category.field.alias'))
             ->placeholder($lang('category.field.alias'))
-            ->help('Alias Help' . h('a', ['href' => '#'], 'link'))
             ->description('Alias Description');
 
         // Basic fieldset
@@ -126,14 +126,15 @@ class EditForm implements FieldDefinitionInterface
 
         // Created fieldset
         $form->register(
-            #[Fieldset('register', 'Register')]
+            #[Fieldset('meta')]
             function (Form $form) use ($lang) {
                 // State
-                $form->add('state', CheckboxField::class)
+                $form->add('state', SwitcherField::class)
                     ->label($lang('category.field.published'))
                     ->addClass('')
-                    // ->circle(true)
-                    // ->color('success')
+                    ->checkedValue('1')
+                    ->circle(true)
+                    ->color('success')
                     ->defaultValue(1);
 
                 // if (Locale::isEnabled()) {
@@ -144,13 +145,15 @@ class EditForm implements FieldDefinitionInterface
                 // }
 
                 // Created
-                $form->add('created', DatetimeLocalField::class)
+                $form->add('created', CalendarField::class)
                     ->label($lang('category.field.created'))
+                    ->enableTime(true)
+                    ->calendarOptions([])
                     // ->addFilter()
                 ;
 
                 // Modified
-                $form->add('modified', DatetimeLocalField::class)
+                $form->add('modified', CalendarField::class)
                     ->label($lang('category.field.modified'))
                     ->disabled(true);
 

@@ -11,3 +11,4 @@ u.validation();
 u.form('#admin-form').initComponent();
 
 u.$ui.bootstrap.tooltip();
+u.$ui.flatpickr();

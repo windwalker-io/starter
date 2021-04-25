@@ -14,6 +14,7 @@ namespace App\Module\Admin\Category;
 use App\Entity\Category;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
+use Windwalker\Core\Events\Web\AfterControllerDispatchEvent;
 use Windwalker\Core\Form\FormFactory;
 use Windwalker\Core\Service\FilterService;
 use Windwalker\Core\State\AppState;
@@ -24,12 +25,13 @@ use Windwalker\Query\Query;
 use Windwalker\Session\Session;
 
 use function Windwalker\filter;
+use function Windwalker\response;
 
 /**
  * The CategoriesView class.
  */
 #[ViewModel(
-    name: 'category',
+    module: CategoryModule::class,
     layout: 'category-list',
     js: 'category-list.js'
 )]
@@ -53,18 +55,16 @@ class CategoryListView implements ViewModelInterface
     /**
      * @inheritDoc
      */
-    public function prepare(AppState $state, AppContext $app): array
+    public function prepare(AppState $state, AppContext $app): mixed
     {
         [$page, $limit] = $app->input('page', 'limit')->values();
 
-        $page  = filter($page, 'int;range:min=1');
+        $page  = filter($page, 'int|range(min=1)');
         $limit = filter($limit, 'int') ?? 15;
 
-        $state = $state->withPrefix('category');
-
-        $filter   = (array) $state->persistFromRequest('filter');
-        $search   = (array) $state->persistFromRequest('search');
-        $ordering = $state->persistFromRequest('list_ordering') ?? 'category.id ASC';
+        $filter   = (array) $state->rememberFromRequest('filter');
+        $search   = (array) $state->rememberFromRequest('search');
+        $ordering = $state->rememberFromRequest('list_ordering') ?? 'category.id ASC';
 
         $items = $this->categoryRepository->getListSelector()
             ->setFilters($filter)

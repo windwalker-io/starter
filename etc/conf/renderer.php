@@ -60,7 +60,8 @@ return [
     ],
 
     'aliases' => [
-        '@pagination' => 'layout.pagination.basic-pagination'
+        '@pagination' => 'layout.pagination.basic-pagination',
+        '@messages' => 'layout.messages.bs5-messages'
     ],
 
     'edge' => [

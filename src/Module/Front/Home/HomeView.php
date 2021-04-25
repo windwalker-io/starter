@@ -47,10 +47,10 @@ class HomeView implements ViewModelInterface
      * @param  AppState    $state
      * @param  AppContext  $app
      *
-     * @return  array
+     * @return  mixed
      * @throws \Windwalker\DI\Exception\DefinitionException
      */
-    public function prepare(AppState $state, AppContext $app): array
+    public function prepare(AppState $state, AppContext $app): mixed
     {
         $page = (int) $app->input('page');
 

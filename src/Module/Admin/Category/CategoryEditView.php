@@ -15,6 +15,7 @@ use App\Entity\Category;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\Form\FormFactory;
+use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\State\AppState;
 use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\ORM\ORM;
@@ -23,7 +24,7 @@ use Windwalker\ORM\ORM;
  * The CategoryEditView class.
  */
 #[ViewModel(
-    name: 'category',
+    module: CategoryModule::class,
     layout: 'category-edit',
     js: 'category-edit.js'
 )]
@@ -38,8 +39,8 @@ class CategoryEditView implements ViewModelInterface
     public function __construct(
         protected ORM $orm,
         protected FormFactory $formFactory,
-    )
-    {
+        protected Navigator $nav
+    ) {
     }
 
     /**
@@ -48,17 +49,19 @@ class CategoryEditView implements ViewModelInterface
      * @param  AppState    $state
      * @param  AppContext  $app
      *
-     * @return  array
+     * @return  mixed
      */
-    public function prepare(AppState $state, AppContext $app): array
+    public function prepare(AppState $state, AppContext $app): mixed
     {
         [$id, $type] = $app->input('id', 'type')->values();
 
         $item = $this->orm->findOne(Category::class, $id);
 
-        $form = $this->formFactory->create(EditForm::class, options: ['type' => $type]);
+        $form = $this->formFactory
+            ->create(EditForm::class, options: ['type' => $type])
+            ->setNamespace('item');
 
-        $form->fill($this->orm->extractEntity($item));
+        $form->fill($state->getAndForget('edit.data') ?: $this->orm->extractEntity($item));
 
         return compact('form', 'type', 'id', 'item');
     }

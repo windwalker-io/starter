@@ -24,7 +24,7 @@ $router->group('category')
             ->controller(CategoryController::class)
             ->view(CategoryListView::class);
 
-        $router->any('category_edit', '/category/edit[/{id:\d+}]')
+        $router->any('category_edit', '/category/edit[/{id}]')
             ->controller(CategoryController::class)
             ->view(CategoryEditView::class);
     });

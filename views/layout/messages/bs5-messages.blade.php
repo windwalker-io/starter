@@ -4,7 +4,7 @@
  * Global variables
  * --------------------------------------------------------------
  * @var $app       AppContext      Application context.
- * @var $view      ViewModel       The view modal object.
+ * @var $vm        object          The view model object.
  * @var $uri       SystemUri       System Uri information.
  * @var $chronos   ChronosService  The chronos datetime service.
  * @var $nav       Navigator       Navigator object to build route.
@@ -16,30 +16,26 @@ declare(strict_types=1);
 
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
-use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\DateTime\ChronosService;
 use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
+$session = $app->service(\Windwalker\Session\Session::class);
+
+$messageGroup = $session->getFlashBag()->all();
+
 ?>
 
-@extends('admin.global.admin-wrapper')
+<div class="c-messages-container">
+    @foreach ($messageGroup as $type => $messages)
+        <div class="alert alert-{{ $type }}">
+            @foreach ($messages as $message)
+                <div>
+                    {!! $message !!}
+                </div>
+            @endforeach
+        </div>
+    @endforeach
+</div>
 
-@section('body')
-@section('banner')
-    @include('admin.global.widget.banner')
-@show
-
-@section('admin-toolbar')
-    @include('admin.global.widget.toolbar')
-@show
-
-@section('admin-area')
-    <section id="admin-area">
-        @include('@messages')
-
-        @yield('content', 'Admin Content')
-    </section>
-@show
-@stop

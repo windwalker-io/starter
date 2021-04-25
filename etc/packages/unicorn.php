@@ -13,8 +13,15 @@ return [
     'unicorn' => [
         'enabled' => true,
 
+        'csrf' => [
+            'auto_set_cookie' => true,
+            'cookie_name' => 'XSRF-TOKEN'
+        ],
+
         'listeners' => [
-            //
+            \Windwalker\Core\Asset\AssetService::class => [
+                \Unicorn\Listener\UnicornAssetListener::class
+            ]
         ],
 
         'providers' => [

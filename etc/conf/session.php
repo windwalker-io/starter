@@ -41,7 +41,7 @@ return [
 
     'ini' => [
         'name' => 'WINDWALKER_SESSID',
-        'save_path' => null,
+        'save_path' => WINDWALKER_TEMP . '/sess',
         'use_cookies' => '0',
     ],
 

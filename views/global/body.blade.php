@@ -33,9 +33,9 @@ use Windwalker\Core\Router\SystemUri;
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container">
                     <a class="navbar-brand" href="#">
-                        <img src="https://cloud.githubusercontent.com/assets/1639206/2870854/176b987a-d2e4-11e3-8be6-9f70304a8499.png"
+                        <img src="{{ $asset->path('images/logo-h.png') }}"
                             alt="Windwalker LOGO"
-                            style="max-height: 35px; filter: invert(100)"
+                            style="max-height: 25px;"
                         />
                     </a>
                     <button class="navbar-toggler" type="button"

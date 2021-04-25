@@ -28,22 +28,20 @@ use Windwalker\Core\Router\SystemUri;
 
 $lang = $lang->extract('luna.');
 
-$a = [
-    'foo' => 'FOO',
-    'bar' => 'BAR'
-];
+$app->service(\Unicorn\Script\UnicornScript::class)->data('foo', 'Bar');
 
 ?>
 
 @extends('admin.global.body')
 
 @section('toolbar-buttons')
-    @include('toolbar-edit')
+    @include('edit-toolbar')
 @stop
 
 @section('content')
-<uni-form-validate>
-    <form name="admin-form" id="admin-form" action="{{ $nav->to('category_edit', ['type' => $type]) }}"
+<uni-form-validate scroll>
+    <form name="admin-form" id="admin-form"
+        action="{{ $nav->to('category_edit', ['type' => $type]) }}"
         method="POST" enctype="multipart/form-data">
 
         <x-title-bar :form="$form"></x-title-bar>
@@ -61,6 +59,7 @@ $a = [
                 </x-fieldset>
             </div>
             <div class="col-md-5">
+                <vaadin-date-time-picker></vaadin-date-time-picker>
                 <x-fieldset name="meta" :title="$lang('category.edit.fieldset.meta')"
                     :form="$form" class="mb-4">
                 </x-fieldset>

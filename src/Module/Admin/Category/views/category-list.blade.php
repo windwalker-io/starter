@@ -36,7 +36,7 @@ $asset->css('https://unpkg.com/vue2-animate@2.1.4/dist/vue2-animate.min.css');
 @extends('admin.global.body')
 
 @section('toolbar-buttons')
-    @include('toolbar-list')
+    @include('list-toolbar')
 @stop
 
 @push('script')

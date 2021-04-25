@@ -10,9 +10,8 @@
 declare(strict_types=1);
 
 use Windwalker\Console\CommandWrapper;
-use Windwalker\Console\CoreCommand;
 use Windwalker\Core\Attributes\Controller;
-use Windwalker\Core\Attributes\Prop;
+use Windwalker\Core\Attributes\Module;
 use Windwalker\Core\Attributes\Ref;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\DI\Attributes\AttributeType;
@@ -47,6 +46,7 @@ return Arr::mergeRecursive(
             Ref::class => AttributeType::PARAMETERS,
 
             // Decorators
+            Module::class => AttributeType::CLASSES,
             Controller::class => AttributeType::CLASSES,
             ViewModel::class => AttributeType::CLASSES,
             CommandWrapper::class => AttributeType::CLASSES | AttributeType::CALLABLE,

@@ -108,6 +108,9 @@ export async function install() {
     '@ryangjchandler/spruce',
     'axios',
     'awesome-bootstrap-checkbox',
+    'flatpickr',
+
+    // Babel
     'regenerator-runtime'
   ];
 
