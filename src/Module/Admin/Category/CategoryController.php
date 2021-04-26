@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Module\Admin\Category;
 
 use App\Entity\Category;
+use App\Module\Admin\Category\Form\EditForm;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\Controller;
 use Windwalker\Core\Attributes\TaskMapping;
@@ -61,7 +62,7 @@ class CategoryController
 
             /** @var Category $item */
             $item = $repository->createSaveAction()
-                ->processDataAndSave($item);
+                ->processDataAndSave($item, EditForm::class);
 
             return $nav->self()->id($item->getId());
         } catch (\RuntimeException $e) {

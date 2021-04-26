@@ -40,7 +40,7 @@ $app->service(\Unicorn\Script\UnicornScript::class)->data('foo', 'Bar');
 
 @section('content')
 <uni-form-validate scroll>
-    <form name="admin-form" id="admin-form"
+    <form name="admin-form" id="admin-form" novalidate
         action="{{ $nav->to('category_edit', ['type' => $type]) }}"
         method="POST" enctype="multipart/form-data">
 

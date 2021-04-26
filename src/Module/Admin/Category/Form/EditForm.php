@@ -13,11 +13,15 @@ namespace App\Module\Admin\Category\Form;
 
 use App\Entity\Category;
 use Unicorn\Field\CalendarField;
+use Unicorn\Field\InlineField;
 use Unicorn\Field\SwitcherField;
 use Windwalker\Core\Http\AppRequest;
 use Windwalker\Core\Language\LangService;
+use Windwalker\Data\Collection;
 use Windwalker\Form\Attributes\Fieldset;
 use Windwalker\Form\Field\HiddenField;
+use Windwalker\Form\Field\ListField;
+use Windwalker\Form\Field\NumberField;
 use Windwalker\Form\Field\TextareaField;
 use Windwalker\Form\Field\TextField;
 use Windwalker\Form\Field\UrlField;
@@ -25,6 +29,8 @@ use Windwalker\Form\FieldDefinitionInterface;
 use Windwalker\Form\Form;
 use Windwalker\ORM\SelectorQuery;
 use Windwalker\Query\Query;
+
+use function Windwalker\now;
 
 /**
  * The Editform class.
@@ -101,6 +107,29 @@ class EditForm implements FieldDefinitionInterface
                                     );
                                 }
                             }
+                        }
+                    );
+
+                $form->add('inline', InlineField::class)
+                    ->label('Inline')
+                    ->showLabel(true)
+                    ->widths(3, 6, 3)
+                    ->configureForm(
+                        function (Form $form) {
+                            $form->add('year', ListField::class)
+                                ->label('Year')
+                                ->required(true)
+                                ->registerOptions(array_reverse(range(1950, now('Y'))));
+                            $form->add('month', NumberField::class)
+                                ->label('Month')
+                                ->required(true)
+                                ->min(1)
+                                ->max(12);
+                            $form->add('day', NumberField::class)
+                                ->label('Day')
+                                ->required(true)
+                                ->min(1)
+                                ->max(31);
                         }
                     );
 
