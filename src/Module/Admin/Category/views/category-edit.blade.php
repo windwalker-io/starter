@@ -50,16 +50,12 @@ $app->service(\Unicorn\Script\UnicornScript::class)->data('foo', 'Bar');
             <div class="col-md-7">
                 <x-fieldset name="basic" :title="$lang('category.edit.fieldset.basic')"
                     :form="$form" class="mb-4">
-                    <x-slot name="urlEndSlot">
-                        sdf
-                    </x-slot>
                 </x-fieldset>
                 <x-fieldset name="text" :title="$lang('category.edit.fieldset.text')"
                     :form="$form" class="mb-4">
                 </x-fieldset>
             </div>
             <div class="col-md-5">
-                <vaadin-date-time-picker></vaadin-date-time-picker>
                 <x-fieldset name="meta" :title="$lang('category.edit.fieldset.meta')"
                     :form="$form" class="mb-4">
                 </x-fieldset>

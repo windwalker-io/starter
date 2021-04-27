@@ -20,6 +20,7 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\State\AppState;
 use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\ORM\ORM;
+use Windwalker\Utilities\Arr;
 
 /**
  * The CategoryEditView class.
@@ -36,6 +37,7 @@ class CategoryEditView implements ViewModelInterface
      *
      * @param  ORM          $orm
      * @param  FormFactory  $formFactory
+     * @param  Navigator    $nav
      */
     public function __construct(
         protected ORM $orm,

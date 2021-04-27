@@ -110,10 +110,11 @@ class EditForm implements FieldDefinitionInterface
                         }
                     );
 
-                $form->add('inline', InlineField::class)
+                $form->add('foo', InlineField::class)
                     ->label('Inline')
                     ->showLabel(true)
                     ->widths(3, 6, 3)
+                    // ->asGroup('qoo')
                     ->configureForm(
                         function (Form $form) {
                             $form->add('year', ListField::class)
@@ -123,15 +124,19 @@ class EditForm implements FieldDefinitionInterface
                             $form->add('month', NumberField::class)
                                 ->label('Month')
                                 ->required(true)
-                                ->min(1)
-                                ->max(12);
+                                ->min(1, false)
+                                ->max(12, false);
                             $form->add('day', NumberField::class)
                                 ->label('Day')
                                 ->required(true)
-                                ->min(1)
-                                ->max(31);
+                                ->min(1, false)
+                                ->max(31, false);
                         }
                     );
+
+                $form->ns('foo', function (Form $form) {
+
+                });
 
                 // Images
                 // $this->singleImageDrag('image')
