@@ -17,8 +17,12 @@ use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\Form\FormFactory;
 use Windwalker\Core\State\AppState;
+use Windwalker\Core\View\Event\AfterRenderEvent;
+use Windwalker\Core\View\Event\BeforeRenderEvent;
 use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\DI\Attributes\Autowire;
+use Windwalker\Event\Attributes\EventSubscriber;
+use Windwalker\Event\Attributes\ListenTo;
 use Windwalker\ORM\ORM;
 use Windwalker\Query\Query;
 
@@ -32,6 +36,7 @@ use function Windwalker\filter;
     layout: 'category-list',
     js: 'category-list.js'
 )]
+#[EventSubscriber]
 class CategoryListView implements ViewModelInterface
 {
     /**
@@ -47,6 +52,12 @@ class CategoryListView implements ViewModelInterface
         protected CategoryRepository $categoryRepository,
         protected FormFactory $formFactory
     ) {
+    }
+
+    #[BeforeRenderEvent]
+    public function beforeRender(BeforeRenderEvent $event): void
+    {
+        //
     }
 
     /**
