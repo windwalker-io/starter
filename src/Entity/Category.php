@@ -19,7 +19,9 @@ use Windwalker\ORM\Attributes\CastNullable;
 use Windwalker\ORM\Attributes\Column;
 use Windwalker\ORM\Attributes\NestedSet;
 use Windwalker\ORM\Attributes\PK;
+use Windwalker\ORM\Attributes\Watch;
 use Windwalker\ORM\Cast\JsonCast;
+use Windwalker\ORM\Event\WatchEvent;
 use Windwalker\ORM\Nested\NestedPathableInterface;
 use Windwalker\ORM\Nested\NestedPathableTrait;
 
