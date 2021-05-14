@@ -15,6 +15,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Unicorn\Script\UnicornScript;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Language\LangService;
@@ -35,7 +36,8 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
     public function __construct(
         protected AppContext $app,
         protected AssetService $asset,
-        protected LangService $lang
+        protected LangService $lang,
+        protected UnicornScript $unicornScript
     ) {
     }
 
@@ -56,20 +58,10 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
 
         $this->asset->js(
             'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js'
-        );
+        )
+            ->sri('sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf');
 
-        $version = $this->asset->getVersion();
-        // $this->asset->js('@regenerator-runtime');
-        $this->asset->js('@systemjs', [], ['onload' => 'window.S = System']);
-        $this->asset->js('@unicorn/system-hooks.js', [], ['onload' => "hookSystemJS('$version')"]);
-        // $this->asset->internalJS(
-        //     <<<JS
-        //     System.constructor.prototype.resolve = function (id, parentUrl) {
-        //         console.log(id, parentUrl);
-        //         return id + '?eqwrwer';
-        //     }
-        //     JS);
-        $this->asset->internalJS('System.import("@/admin/main.js")');
+        $this->unicornScript->systemJS();
     }
 
     /**

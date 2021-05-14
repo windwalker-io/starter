@@ -7,8 +7,8 @@
 
 import u from '@main';
 
-// u.validation();
+u.formValidation();
 u.form('#admin-form').initComponent();
 
 u.$ui.bootstrap.tooltip();
-u.$ui.flatpickr();
+u.$ui.listDependent();
