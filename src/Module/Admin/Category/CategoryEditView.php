@@ -19,6 +19,7 @@ use Windwalker\Core\Form\FormFactory;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\State\AppState;
 use Windwalker\Core\View\ViewModelInterface;
+use Windwalker\DI\Attributes\AttributesResolver;
 use Windwalker\ORM\ORM;
 use Windwalker\Utilities\Arr;
 
@@ -57,7 +58,7 @@ class CategoryEditView implements ViewModelInterface
     public function prepare(AppState $state, AppContext $app): mixed
     {
         [$id, $type] = $app->input('id', 'type')->values();
-
+        
         $item = $this->orm->findOne(Category::class, $id);
 
         $form = $this->formFactory

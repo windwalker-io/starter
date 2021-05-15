@@ -11,17 +11,20 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Enum\State;
+use App\Module\Admin\Category\CategoryState;
+use App\Module\Admin\Category\CategoryStateWorkflow;
 use Windwalker\Core\DateTime\Chronos;
+use Windwalker\DI\Attributes\Autowire;
 use Windwalker\ORM\Attributes\AutoIncrement;
 use Windwalker\ORM\Attributes\Cast;
 use Windwalker\ORM\Attributes\CastNullable;
 use Windwalker\ORM\Attributes\Column;
+use Windwalker\ORM\Attributes\EntitySetup;
 use Windwalker\ORM\Attributes\NestedSet;
 use Windwalker\ORM\Attributes\PK;
-use Windwalker\ORM\Attributes\Watch;
 use Windwalker\ORM\Cast\JsonCast;
 use Windwalker\ORM\Event\WatchEvent;
+use Windwalker\ORM\Metadata\EntityMetadata;
 use Windwalker\ORM\Nested\NestedPathableInterface;
 use Windwalker\ORM\Nested\NestedPathableTrait;
 
@@ -51,9 +54,9 @@ class Category implements NestedPathableInterface
     #[Column('state')]
     #[
         Cast('int'),
-        Cast(State::class)
+        Cast(CategoryState::class)
     ]
-    protected State $state;
+    protected ?CategoryState $state = null;
 
     #[Column('created')]
     #[CastNullable(Chronos::class)]
@@ -75,6 +78,21 @@ class Category implements NestedPathableInterface
     #[Column('params')]
     #[Cast(JsonCast::class)]
     protected array $params = [];
+
+    #[EntitySetup]
+    public static function setup(
+        EntityMetadata $metadata,
+        #[Autowire] CategoryStateWorkflow $stateWorkflow
+    ) {
+        $stateWorkflow->listen($metadata);
+
+        // $metadata->watch(
+        //     'state',
+        //     function (WatchEvent $event) use ($metadata, $stateWorkflow) {
+        //         $stateWorkflow->build($metadata->getORM())->
+        //     }
+        // );
+    }
 
     /**
      * @inheritDoc
@@ -305,19 +323,19 @@ class Category implements NestedPathableInterface
     }
 
     /**
-     * @return State
+     * @return CategoryState
      */
-    public function getState(): State
+    public function getState(): CategoryState
     {
-        return $this->state ??= State::UNPUBLISHED();
+        return $this->state ??= CategoryState::UNPUBLISHED();
     }
 
     /**
-     * @param  State  $state
+     * @param  CategoryState  $state
      *
      * @return  static  Return self to support chaining.
      */
-    public function setState(State $state): static
+    public function setState(CategoryState $state): static
     {
         $this->state = $state;
 

@@ -12,12 +12,15 @@ declare(strict_types=1);
 namespace App\Module\Admin\Category\Form;
 
 use App\Entity\Category;
+use App\Module\Admin\Category\CategoryStateWorkflow;
 use Unicorn\Field\CalendarField;
 use Unicorn\Field\InlineField;
+use Unicorn\Field\StateListField;
 use Unicorn\Field\SwitcherField;
 use Windwalker\Core\Http\AppRequest;
 use Windwalker\Core\Language\LangService;
 use Windwalker\Data\Collection;
+use Windwalker\DI\Attributes\Autowire;
 use Windwalker\Form\Attributes\Fieldset;
 use Windwalker\Form\Field\HiddenField;
 use Windwalker\Form\Field\ListField;
@@ -47,6 +50,7 @@ class EditForm implements FieldDefinitionInterface
     public function __construct(
         protected LangService $lang,
         protected AppRequest $request,
+        #[Autowire] protected CategoryStateWorkflow $categoryStateWorkflow,
         protected array $options = []
     ) {
     }
@@ -151,13 +155,9 @@ class EditForm implements FieldDefinitionInterface
                 Form $form
             ) use ($lang) {
                 // State
-                $form->add('state', SwitcherField::class)
-                    ->label($lang('category.field.published'))
-                    ->addClass('')
-                    ->checkedValue('1')
-                    ->circle(true)
-                    ->color('success')
-                    ->defaultValue(1);
+                $form->add('state', StateListField::class)
+                    ->label($lang('category.field.state'))
+                    ->workflow($this->categoryStateWorkflow);
 
                 // if (Locale::isEnabled()) {
                 //     // Language

@@ -27,7 +27,6 @@
         "symfony/process": "^5.2",
         "windwalker/unicorn": "dev-main",
         "myclabs/php-enum": "^1.8",
-        "symfony/workflow": "^5.2",
         "jenssegers/agent": "^2.6"
     },
     "require-dev": {

@@ -55,8 +55,10 @@ class CategoryController
         AppState $state,
         Navigator $nav,
         #[Autowire] CategoryRepository $repository,
-        ORM $orm
+        ORM $orm,
+        #[Autowire] CategoryStateWorkflow $workflow
     ): RouteUri {
+
         try {
             $item = $app->input('item');
 
