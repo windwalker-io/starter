@@ -35,19 +35,8 @@ return [
     'factories' => [
         'instances' => [
             'none' => static fn(): CachePool => new CachePool(new NullStorage()),
-            'global' =>
-            static function (Container $container, string $instanceName): CachePool {
-                return new CachePool(
-                    $container->resolve('cache.factories.storages.file', compact('instanceName')),
-                    new PhpSerializer(),
-                    $container->get(LoggerManager::class)->get('error')
-                );
-            },
-            'html' => static fn(Container $container, string $instanceName): CachePool => new CachePool(
-                $container->resolve('cache.factories.storages.file', compact('instanceName')),
-                new RawSerializer(),
-                $container->get(LoggerManager::class)->get('error')
-            ),
+            'global' => CacheManager::cachePoolFactory('file', PhpSerializer::class),
+            'html' => CacheManager::cachePoolFactory('file', RawSerializer::class),
         ],
         'storages' => [
             'file' => static fn(Container $container, string $instanceName): FileStorage => new FileStorage(

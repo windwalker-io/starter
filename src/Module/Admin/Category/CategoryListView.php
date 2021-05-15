@@ -17,12 +17,10 @@ use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\Form\FormFactory;
 use Windwalker\Core\State\AppState;
-use Windwalker\Core\View\Event\AfterRenderEvent;
 use Windwalker\Core\View\Event\BeforeRenderEvent;
 use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\DI\Attributes\Autowire;
 use Windwalker\Event\Attributes\EventSubscriber;
-use Windwalker\Event\Attributes\ListenTo;
 use Windwalker\ORM\ORM;
 use Windwalker\Query\Query;
 
@@ -55,8 +53,9 @@ class CategoryListView implements ViewModelInterface
     }
 
     #[BeforeRenderEvent]
-    public function beforeRender(BeforeRenderEvent $event): void
-    {
+    public function beforeRender(
+        BeforeRenderEvent $event
+    ): void {
         //
     }
 
@@ -80,7 +79,7 @@ class CategoryListView implements ViewModelInterface
                 $search['*'] ?? null,
                 [
                     'category.title',
-                    'category.alias'
+                    'category.alias',
                 ]
             )
             ->ordering($ordering)
