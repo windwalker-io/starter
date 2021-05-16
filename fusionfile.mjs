@@ -109,6 +109,7 @@ export async function install() {
     'axios',
     'awesome-bootstrap-checkbox',
     'flatpickr',
+    'tinymce',
 
     // Babel
     'regenerator-runtime'

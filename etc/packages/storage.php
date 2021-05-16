@@ -9,6 +9,7 @@
 
 declare(strict_types=1);
 
+use Unicorn\Aws\S3Service;
 use Unicorn\Flysystem\FlysystemFactory;
 use Unicorn\Provider\StorageProvider;
 use Unicorn\Storage\StorageFactory;
@@ -18,7 +19,7 @@ return [
         'default' => 'local',
 
         's3' => [
-            'default_region' => 'ap-northeast-1'
+            'default_region' => 'ap-northeast-1',
         ],
 
         'providers' => [
@@ -29,7 +30,7 @@ return [
             'instances' => [
                 'local' => fn (StorageFactory $factory) => $factory->localStorage(
                     [
-                        'path' => env('STORAGE_LOCAL_PATH') ?? 'www/assets/upload'
+                        'path' => env('STORAGE_LOCAL_PATH') ?? 'assets/upload'
                     ]
                 ),
                 's3' => fn (StorageFactory $factory) => $factory->s3Storage(
@@ -39,10 +40,13 @@ return [
                         'bucket' => env('AWS_S3_BUCKET'),
                         'subfolder' => env('AWS_S3_SUBFOLDER'),
                         'endpoint' => env('AWS_S3_ENDPOINT'),
-                        'region' => env('AWS_S3_REGION')
+                        'region' => env('AWS_S3_REGION'),
+                        'args' => [
+                            'ACL' => S3Service::ACL_PUBLIC_READ
+                        ]
                     ]
                 ),
-                'flys3' => fn (StorageFactory $factory) => $factory->flysystem(
+                'flys3' => fn (StorageFactory $factory) => $factory->flysystemStorage(
                     fn (FlysystemFactory $factory) => $factory->s3v3Adapter(
                         [
                             'access_key' => env('AWS_ACCESS_KEY'),
