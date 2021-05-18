@@ -42,9 +42,9 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
      *
      * @param  ServerRequestInterface  $request
      *
-     * @return  void
+     * @return  mixed
      */
-    protected function preprocess(ServerRequestInterface $request): void
+    protected function preprocess(ServerRequestInterface $request): mixed
     {
         $this->asset->js('test/test.js');
     }
@@ -56,7 +56,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
      *
      * @return  mixed
      */
-    protected function postProcess(ResponseInterface $response): void
+    protected function postProcess(ResponseInterface $response): mixed
     {
     }
 }

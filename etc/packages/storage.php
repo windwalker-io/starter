@@ -46,6 +46,19 @@ return [
                         ]
                     ]
                 ),
+                'linode' => fn (StorageFactory $factory) => $factory->s3Storage(
+                    [
+                        'access_key' => env('LINODE_OS_ACCESS_KEY'),
+                        'secret' => env('LINODE_OS_SECRET'),
+                        'bucket' => env('LINODE_OS_BUCKET'),
+                        'subfolder' => env('LINODE_OS_SUBFOLDER'),
+                        'endpoint' => env('LINODE_OS_ENDPOINT'),
+                        'region' => env('LINODE_OS_REGION'),
+                        'args' => [
+                            'ACL' => S3Service::ACL_PUBLIC_READ
+                        ]
+                    ]
+                ),
                 'flys3' => fn (StorageFactory $factory) => $factory->flysystemStorage(
                     fn (FlysystemFactory $factory) => $factory->s3v3Adapter(
                         [

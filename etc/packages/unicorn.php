@@ -26,6 +26,29 @@ return [
 
         'providers' => [
             \Unicorn\UnicornPackage::class
+        ],
+
+        'file_upload' => [
+            'default' => 'default',
+            'profiles' => [
+                'default' => [
+                    'storage' => 's3',
+                    'accept' => null,
+                ],
+                'image' => [
+                    'storage' => 's3',
+                    'accept' => 'image/*',
+                    'dir' => 'images/test',
+                    'resize' => [
+                        'enabled' => true,
+                        'width' => 1200,
+                        'height' => 1200,
+                        'crop' => false,
+                        'quality' => 85,
+                        'output_format' => null
+                    ],
+                ]
+            ]
         ]
     ]
 ];

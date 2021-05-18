@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 use Windwalker\Console\CommandWrapper;
 use Windwalker\Core\Attributes\Controller;
+use Windwalker\Core\Attributes\Json;
 use Windwalker\Core\Attributes\Module;
 use Windwalker\Core\Attributes\Ref;
 use Windwalker\Core\Attributes\ViewModel;
@@ -50,6 +51,9 @@ return Arr::mergeRecursive(
             Controller::class => AttributeType::CLASSES,
             ViewModel::class => AttributeType::CLASSES,
             CommandWrapper::class => AttributeType::CLASSES | AttributeType::CALLABLE,
+
+            // Middleware
+            Json::class => AttributeType::CALLABLE,
         ]
     ]
 );

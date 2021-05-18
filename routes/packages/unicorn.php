@@ -12,9 +12,12 @@ declare(strict_types=1);
 namespace App\Routes;
 
 use Unicorn\Module\FileUpload\FileUploadController;
+use Windwalker\Core\Middleware\JsonApiMiddleware;
+use Windwalker\Core\Middleware\JsonResponseMiddleware;
 use Windwalker\Core\Router\RouteCreator;
 
 /** @var RouteCreator $router */
 
 $router->post('file_upload', '/file/upload')
-    ->controller(FileUploadController::class);
+    ->controller(FileUploadController::class)
+    ->middleware(JsonApiMiddleware::class);
