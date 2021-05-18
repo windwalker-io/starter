@@ -17,7 +17,7 @@ use function Windwalker\DI\create;
 
 return [
     'routes' => [
-        __DIR__ . '/../../routes/web.php'
+        __DIR__ . '/../../routes/routes.php'
     ],
 
     'providers' => [

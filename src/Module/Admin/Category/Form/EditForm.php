@@ -17,6 +17,7 @@ use Unicorn\Field\CalendarField;
 use Unicorn\Field\InlineField;
 use Unicorn\Field\StateListField;
 use Unicorn\Field\SwitcherField;
+use Unicorn\Field\TinymceEditorField;
 use Windwalker\Core\Http\AppRequest;
 use Windwalker\Core\Language\LangService;
 use Windwalker\Data\Collection;
@@ -137,7 +138,7 @@ class EditForm implements FieldDefinitionInterface
             'text',
             function (Form $form) use ($lang) {
                 // Description
-                $form->add('description', TextareaField::class)
+                $form->add('description', TinymceEditorField::class)
                     ->label($lang('category.field.description'))
                     // ->editorOptions(
                     //     [
