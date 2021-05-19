@@ -48,7 +48,7 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
      *
      * @return  mixed
      */
-    protected function preprocess(ServerRequestInterface $request): mixed
+    protected function preprocess(ServerRequestInterface $request): void
     {
         $this->asset->importMap('@main', '@/admin/main.js');
 
@@ -71,7 +71,7 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
      *
      * @return  mixed
      */
-    protected function postProcess(ResponseInterface $response): mixed
+    protected function postProcess(ResponseInterface $response): void
     {
     }
 }
