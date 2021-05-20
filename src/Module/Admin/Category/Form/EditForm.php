@@ -15,6 +15,7 @@ use App\Entity\Category;
 use App\Module\Admin\Category\CategoryStateWorkflow;
 use Unicorn\Field\CalendarField;
 use Unicorn\Field\InlineField;
+use Unicorn\Field\SingleImageDragField;
 use Unicorn\Field\StateListField;
 use Unicorn\Field\SwitcherField;
 use Unicorn\Field\TinymceEditorField;
@@ -114,6 +115,9 @@ class EditForm implements FieldDefinitionInterface
                             }
                         }
                     );
+
+                $form->add('image', SingleImageDragField::class)
+                    ->label('image');
 
                 $form->ns('foo', function (Form $form) {
 
