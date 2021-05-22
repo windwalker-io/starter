@@ -59,7 +59,9 @@ class CategoryController
         ORM $orm,
         #[Autowire] CategoryStateWorkflow $workflow
     ): RouteUri {
-        
+
+        show($app->input('item'));exit(' @Checkpoint');
+
         try {
             $item = $app->input('item');
 

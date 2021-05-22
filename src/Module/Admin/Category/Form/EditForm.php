@@ -117,7 +117,12 @@ class EditForm implements FieldDefinitionInterface
                     );
 
                 $form->add('image', SingleImageDragField::class)
-                    ->label('image');
+                    ->label('image')
+                    ->width(800)
+                    ->height(600)
+                    // ->crop(true)
+                    ->ajax(true)
+                    ->accept('image/*');
 
                 $form->ns('foo', function (Form $form) {
 
