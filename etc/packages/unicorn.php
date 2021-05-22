@@ -36,7 +36,7 @@ return [
                     'accept' => null,
                 ],
                 'image' => [
-                    'storage' => 'local',
+                    'storage' => 's3',
                     'accept' => 'image/*',
                     'dir' => 'images/test',
                     'resize' => [

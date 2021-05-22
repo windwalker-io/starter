@@ -29,6 +29,7 @@ return [
     'schedule' => \Windwalker\Core\Schedule\Command\ScheduleCommand::class,
     //
     'asset:sync' => \Windwalker\Core\Asset\Command\AssetSyncCommand::class,
+    'asset:vendors' => \Windwalker\Core\Asset\Command\AssetSyncCommand::class,
     'asset:version' => \Windwalker\Core\Asset\Command\AssetVersionCommand::class,
 
     'pkg:install' => \Windwalker\Core\Package\Command\PackageInstallCommand::class,

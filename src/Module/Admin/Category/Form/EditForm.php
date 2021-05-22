@@ -120,8 +120,9 @@ class EditForm implements FieldDefinitionInterface
                     ->label('image')
                     ->width(800)
                     ->height(600)
-                    // ->crop(true)
-                    ->ajax(true)
+                    ->crop(true)
+                    // ->ajax(true)
+                    ->showSizeNotice(true)
                     ->accept('image/*');
 
                 $form->ns('foo', function (Form $form) {

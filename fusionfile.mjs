@@ -6,8 +6,7 @@
  */
 
 import fusion, { sass, babel, parallel } from '@windwalker-io/fusion';
-import { execSync } from 'child_process';
-import { jsSync } from '@windwalker-io/core';
+import { jsSync, installVendors } from '@windwalker-io/core';
 
 export async function css() {
   // Watch start
@@ -98,30 +97,9 @@ export async function sync() {
 // }
 
 export async function install() {
-  const vendors = [
-    // Unicorn
-    '@fortawesome/fontawesome-free',
-
-    '@windwalker-io/unicorn',
-    'systemjs',
-    'alpinejs',
-    '@ryangjchandler/spruce',
-    'axios',
-    'awesome-bootstrap-checkbox',
-    'flatpickr',
-    'tinymce',
-
-    // Babel
-    'regenerator-runtime'
-  ];
-
-  vendors.forEach((vendor) => {
-    console.log(`[Link] node_modules/${vendor}/**/* => www/assets/vendor/${vendor}/`);
-    fusion.src(`node_modules/${vendor}/`).pipe(fusion.symlink(`www/assets/vendor/${vendor}`));
-  });
-
-  console.log('[Copy] resources/assets/vendor/**/* => www/assets/vendor/');
-  fusion.copy('resources/assets/vendor/**/*', 'www/assets/vendor/');
+  return installVendors([
+    //
+  ]);
 }
 
 export default parallel(css, sync, js, images);

@@ -14,6 +14,7 @@ namespace App\Module\Admin\Category;
 use App\Entity\Category;
 use App\Module\Admin\Category\Form\EditForm;
 use Unicorn\Storage\StorageManager;
+use Unicorn\Upload\FileUploadManager;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\Controller;
 use Windwalker\Core\Attributes\TaskMapping;
@@ -57,17 +58,27 @@ class CategoryController
         Navigator $nav,
         #[Autowire] CategoryRepository $repository,
         ORM $orm,
-        #[Autowire] CategoryStateWorkflow $workflow
+        #[Autowire] CategoryStateWorkflow $workflow,
+        FileUploadManager $fileUploadManager
     ): RouteUri {
-
-        show($app->input('item'));exit(' @Checkpoint');
-
         try {
             $item = $app->input('item');
 
             /** @var Category $item */
             $item = $repository->createSaveAction()
                 ->processDataAndSave($item, EditForm::class);
+
+            $result = $fileUploadManager->get('image')
+                ->handleFileIfSuccess(
+                    $app->file('item')['image'] ?? null,
+                    "category/" . md5('WW-' . $item->getId()) . '.jpg'
+                );
+
+            if ($result) {
+                $item->setImage((string) $result->getUri());
+            }
+
+            $repository->createSaveAction()->save($item);
 
             return $nav->self()->id($item->getId());
         } catch (\RuntimeException $e) {
