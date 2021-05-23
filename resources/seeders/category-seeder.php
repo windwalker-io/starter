@@ -13,6 +13,7 @@ namespace App\Seeder;
 
 use App\Entity\Category;
 use App\Enum\State;
+use App\Module\Admin\Category\CategoryState;
 use Unicorn\Utilities\SlugHelper;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
@@ -59,8 +60,8 @@ $seeder->import(
                 $category->setDescription($faker->paragraph(5));
                 $category->setImage($faker->imageUrl());
                 $category->setState(
-                    $faker->optional(0.7, State::UNPUBLISHED())
-                        ->passthrough(State::PUBLISHED())
+                    $faker->optional(0.7, CategoryState::UNPUBLISHED())
+                        ->passthrough(CategoryState::PUBLISHED())
                 );
                 $category->setCreated(chronos());
                 $category->setCreatedBy($faker->randomElement($userIds));

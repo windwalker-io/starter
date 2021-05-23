@@ -71,7 +71,7 @@ class CategoryListView implements ViewModelInterface
 
         $filter   = (array) $state->rememberFromRequest('filter');
         $search   = (array) $state->rememberFromRequest('search');
-        $ordering = $state->rememberFromRequest('list_ordering') ?? 'category.id ASC';
+        $ordering = $state->rememberFromRequest('list_ordering') ?? 'category.lft ASC';
 
         $items = $this->categoryRepository->getListSelector()
             ->setFilters($filter)

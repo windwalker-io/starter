@@ -25,6 +25,7 @@ use Windwalker\Core\Router\RouteUri;
 use Windwalker\Core\State\AppState;
 use Windwalker\DI\Attributes\Autowire;
 use Windwalker\ORM\Event\BeforeSaveEvent;
+use Windwalker\ORM\NestedSetMapper;
 use Windwalker\ORM\ORM;
 use Windwalker\Session\Session;
 
@@ -37,6 +38,7 @@ use Windwalker\Session\Session;
 #[TaskMapping(
     methods: [
         'PUT' => 'filter',
+        'DELETE' => 'deleteList'
     ]
 )]
 class CategoryController
@@ -89,5 +91,20 @@ class CategoryController
                 ->id($item['id'] ?? null)
                 ->withMessage($e->getMessage(), 'warning');
         }
+    }
+
+    public function deleteList(AppContext $app, #[Autowire] CategoryRepository $repository, Navigator $nav)
+    {
+        $ids = (array) $app->input('id');
+
+        /** @var NestedSetMapper $mapper */
+        $mapper = $repository->getEntityMapper();
+        $key    = $mapper->getMainKey() ?? 'id';
+
+        $repository->getDb()->transaction(fn () => $repository->delete([$key => $ids]));
+
+        // $mapper->rebuild(1);
+
+        return $nav->back();
     }
 }

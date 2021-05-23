@@ -24,9 +24,11 @@ use Windwalker\Core\Router\SystemUri;
 
 ?>
 
-<div x-id="toolbar" x-data="{ form: $store.grid.form }">
+<div x-id="toolbar" x-data="{ form: $store.grid.form, grid: $store.grid }">
     <button type="button"
-        @click="form.post()">
+        class="btn btn-outline-danger btn-sm"
+        @click="grid.deleteList()">
+        <span class="fa fa-trash"></span>
         Delete
     </button>
 </div>
