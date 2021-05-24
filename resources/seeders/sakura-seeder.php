@@ -11,9 +11,13 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
+use App\Entity\Category;
+use App\Entity\Sakura;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\ORM;
+
+use function Windwalker\chronos;
 
 /**
  * Sakura Seeder
@@ -26,7 +30,18 @@ $seeder->import(
     static function () use ($seeder, $orm, $db) {
         $faker = $seeder->faker('zh_TW');
 
-        foreach (range(1, 5000) as $i) {
+        $categoryIds = $orm->from(Category::class)->loadColumn('id')->values();
+
+        foreach (range(1, 50) as $i) {
+            $item = new Sakura();
+            $item->setTitle($faker->sentence);
+            $item->setContent($faker->paragraph);
+            $item->setCategoryId((int) $faker->randomElement($categoryIds));
+            $item->setCreated(chronos());
+            $item->setOrdering($i);
+
+            $orm->saveOne(Sakura::class, $item);
+
             $seeder->outCounting();
         }
     }

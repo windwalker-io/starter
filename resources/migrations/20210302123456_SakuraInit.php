@@ -28,6 +28,7 @@ $mig->up(
                 $schema->primary('id');
                 $schema->varchar('title');
                 $schema->text('content');
+                $schema->integer('ordering');
                 $schema->datetime('created');
             }
         );

@@ -38,7 +38,8 @@ use Windwalker\Session\Session;
 #[TaskMapping(
     methods: [
         'PUT' => 'filter',
-        'DELETE' => 'deleteList'
+        'DELETE' => 'deleteList',
+        'PATCH' => 'batch'
     ]
 )]
 class CategoryController
@@ -106,5 +107,17 @@ class CategoryController
         // $mapper->rebuild(1);
 
         return $nav->back();
+    }
+
+    public function batch(AppContext $app)
+    {
+        [$task, $id] = $app->input('task', 'id');
+
+        $ids = (array) $id;
+
+
+        
+        show($all);
+        exit(' @Checkpoint');
     }
 }
