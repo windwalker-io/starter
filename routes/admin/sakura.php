@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Routes;
 
 // use App\Module\Admin\Sakura\SakuraEditView;
+use App\Module\Admin\Sakura\SakuraEditView;
 use App\Module\Admin\Sakura\SakuraListView;
 use App\Module\Admin\Sakura\SakuraController;
 use Windwalker\Core\Router\RouteCreator;
@@ -24,7 +25,7 @@ $router->group('sakura')
             ->controller(SakuraController::class)
             ->view(SakuraListView::class);
 
-        // $router->any('sakura_edit', '/sakura/edit[/{id}]')
-        //     ->controller(SakuraController::class)
-        //     ->view(SakuraEditView::class);
+        $router->any('sakura_edit', '/sakura/edit[/{id}]')
+            ->controller(SakuraController::class)
+            ->view(SakuraEditView::class);
     });

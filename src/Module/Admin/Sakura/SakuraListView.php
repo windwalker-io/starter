@@ -75,6 +75,7 @@ class SakuraListView implements ViewModelInterface
             ->page($page)
             ->limit($limit);
 
+        show(iterator_to_array($items));exit(' @Checkpoint');
         $pagination = $items->getPagination();
 
         $items = $items->getIterator(Sakura::class);

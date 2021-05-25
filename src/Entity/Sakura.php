@@ -15,6 +15,7 @@ use Windwalker\Core\DateTime\Chronos;
 use Windwalker\ORM\Attributes\AutoIncrement;
 use Windwalker\ORM\Attributes\CastNullable;
 use Windwalker\ORM\Attributes\Column;
+use Windwalker\ORM\Attributes\ManyToOne;
 use Windwalker\ORM\Attributes\PK;
 use Windwalker\ORM\Attributes\Table;
 use Windwalker\ORM\EntityInterface;
@@ -46,6 +47,12 @@ class Sakura implements EntityInterface
     #[Column('created')]
     #[CastNullable(Chronos::class)]
     protected ?Chronos $created = null;
+
+    #[ManyToOne(
+        Category::class,
+        category_id: 'id'
+    )]
+    protected ?Category $category = null;
 
     /**
      * @return int|null

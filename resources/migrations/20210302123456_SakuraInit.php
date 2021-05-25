@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Migration;
 
+use App\Entity\Sakura;
 use Windwalker\Core\Auth\AuthService;
 use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\DatabaseAdapter;
@@ -23,13 +24,16 @@ $mig->up(
     function (DatabaseAdapter $db) use ($mig) {
         /** @var Migration $this */
         $mig->createTable(
-            'sakuras',
+            Sakura::class,
             function (Schema $schema) {
                 $schema->primary('id');
                 $schema->varchar('title');
+                $schema->integer('category_id');
                 $schema->text('content');
                 $schema->integer('ordering');
                 $schema->datetime('created');
+
+                $schema->addIndex('category_id');
             }
         );
     }
@@ -37,6 +41,6 @@ $mig->up(
 
 $mig->down(
     static function () use ($mig) {
-        $mig->dropTables('sakuras');
+        $mig->dropTables(Sakura::class);
     }
 );

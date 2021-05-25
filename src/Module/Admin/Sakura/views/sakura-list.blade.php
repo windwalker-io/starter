@@ -45,14 +45,22 @@ use Windwalker\Core\Router\SystemUri;
                         <x-toggle-all></x-toggle-all>
                     </th>
                     <th>
-                        <x-sort field="category.title">
+                        <x-sort field="sakura.title">
                             Title
                         </x-sort>
                     </th>
-                    <th style="width: 10%">
-                        <x-sort field="category.lft">
-                            Order
+                    <th>
+                        <x-sort field="sakura.category_id">
+                            Category
                         </x-sort>
+                    </th>
+                    <th style="width: 10%" class="">
+                        <div class="d-flex w-100 justify-content-between">
+                            <x-sort field="category.lft">
+                                Order
+                            </x-sort>
+                            <x-save-order></x-save-order>
+                        </div>
                     </th>
                     <th>
                         Delete
@@ -75,6 +83,9 @@ use Windwalker\Core\Router\SystemUri;
                             <a href="{{ $nav->to('sakura_edit')->id($item->getId()) }}">
                                 {{ $item->getTitle() }}
                             </a>
+                        </td>
+                        <td>
+                            {{ $item->category->getTitle() }}
                         </td>
                         <td>
                             <x-order-control

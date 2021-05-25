@@ -30,12 +30,15 @@ $seeder->import(
     static function () use ($seeder, $orm, $db) {
         $faker = $seeder->faker('zh_TW');
 
-        $categoryIds = $orm->from(Category::class)->loadColumn('id')->values();
+        $categoryIds = $orm->from(Category::class)
+            ->where('id', '!=', 1)
+            ->loadColumn('id')
+            ->values();
 
         foreach (range(1, 50) as $i) {
             $item = new Sakura();
-            $item->setTitle($faker->sentence);
-            $item->setContent($faker->paragraph);
+            $item->setTitle($faker->sentence());
+            $item->setContent($faker->paragraph());
             $item->setCategoryId((int) $faker->randomElement($categoryIds));
             $item->setCreated(chronos());
             $item->setOrdering($i);
