@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Windwalker\Core\DateTime\Chronos;
+use Windwalker\Data\Collection;
 use Windwalker\ORM\Attributes\AutoIncrement;
 use Windwalker\ORM\Attributes\CastNullable;
 use Windwalker\ORM\Attributes\Column;
@@ -52,7 +53,7 @@ class Sakura implements EntityInterface
         Category::class,
         category_id: 'id'
     )]
-    protected ?Category $category = null;
+    public Category|Collection|null $category = null;
 
     /**
      * @return int|null

@@ -56,7 +56,10 @@ use Windwalker\Core\Router\SystemUri;
                     </th>
                     <th style="width: 10%" class="">
                         <div class="d-flex w-100 justify-content-between">
-                            <x-sort field="category.lft">
+                            <x-sort
+                                asc="sakura.category_id ASC, sakura.ordering ASC"
+                                desc="sakura.category_id DESC, sakura.ordering DESC"
+                            >
                                 Order
                             </x-sort>
                             <x-save-order></x-save-order>
@@ -85,7 +88,7 @@ use Windwalker\Core\Router\SystemUri;
                             </a>
                         </td>
                         <td>
-                            {{ $item->category->getTitle() }}
+                            {{ $item->category->title }}
                         </td>
                         <td>
                             <x-order-control

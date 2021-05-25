@@ -60,7 +60,7 @@ class SakuraListView implements ViewModelInterface
 
         $filter   = (array) $state->rememberFromRequest('filter');
         $search   = (array) $state->rememberFromRequest('search');
-        $ordering = $state->rememberFromRequest('list_ordering') ?? 'sakura.ordering ASC';
+        $ordering = $state->rememberFromRequest('list_ordering') ?? 'sakura.category_id ASC, sakura.ordering ASC';
 
         $items = $this->sakuraRepository->getListSelector()
             ->setFilters($filter)
@@ -75,7 +75,6 @@ class SakuraListView implements ViewModelInterface
             ->page($page)
             ->limit($limit);
 
-        show(iterator_to_array($items));exit(' @Checkpoint');
         $pagination = $items->getPagination();
 
         $items = $items->getIterator(Sakura::class);

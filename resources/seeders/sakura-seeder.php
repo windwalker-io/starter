@@ -32,6 +32,7 @@ $seeder->import(
 
         $categoryIds = $orm->from(Category::class)
             ->where('id', '!=', 1)
+            ->limit(7)
             ->loadColumn('id')
             ->values();
 
