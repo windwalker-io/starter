@@ -11,9 +11,13 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Enum\State;
+use App\Module\Admin\Sakura\SakuraRepository;
 use Windwalker\Core\DateTime\Chronos;
 use Windwalker\Data\Collection;
+use Windwalker\DI\Attributes\Autowire;
 use Windwalker\ORM\Attributes\AutoIncrement;
+use Windwalker\ORM\Attributes\Cast;
 use Windwalker\ORM\Attributes\CastNullable;
 use Windwalker\ORM\Attributes\Column;
 use Windwalker\ORM\Attributes\ManyToOne;
@@ -21,6 +25,7 @@ use Windwalker\ORM\Attributes\PK;
 use Windwalker\ORM\Attributes\Table;
 use Windwalker\ORM\EntityInterface;
 use Windwalker\ORM\EntityTrait;
+use Windwalker\ORM\Event\BeforeSaveEvent;
 
 /**
  * The Sakura class.
@@ -38,6 +43,9 @@ class Sakura implements EntityInterface
 
     #[Column('title')]
     protected string $title = '';
+
+    #[Column('state'), Cast('int'), Cast(State::class)]
+    protected State $state;
 
     #[Column('content')]
     protected string $content = '';
@@ -171,6 +179,26 @@ class Sakura implements EntityInterface
     public function setOrdering(int $ordering): static
     {
         $this->ordering = $ordering;
+
+        return $this;
+    }
+
+    /**
+     * @return State
+     */
+    public function getState(): ?State
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param  State  $state
+     *
+     * @return  static  Return self to support chaining.
+     */
+    public function setState(State $state): static
+    {
+        $this->state = $state;
 
         return $this;
     }

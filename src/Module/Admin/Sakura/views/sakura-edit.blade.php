@@ -32,7 +32,7 @@ use Windwalker\Core\Router\SystemUri;
 @section('content')
     <uni-form-validate scroll>
         <form name="admin-form" id="admin-form" novalidate
-            action="{{ $nav->to('category_edit', ['type' => $type]) }}"
+            action="{{ $nav->to('sakura_edit') }}"
             method="POST" enctype="multipart/form-data">
 
             <x-title-bar :form="$form"></x-title-bar>
@@ -40,15 +40,21 @@ use Windwalker\Core\Router\SystemUri;
             <div class="row">
                 <div class="col-md-7">
                     <x-fieldset name="basic" title="Basic"
-                        :form="$form" class="mb-4">
+                        :form="$form" class="mb-4"
+                        floating
+                    >
                     </x-fieldset>
                     <x-fieldset name="text" title="Text"
-                        :form="$form" class="mb-4">
+                        :form="$form" class="mb-4"
+                        floating
+                    >
                     </x-fieldset>
                 </div>
                 <div class="col-md-5">
                     <x-fieldset name="meta" title="Meta"
-                        :form="$form" class="mb-4">
+                        :form="$form" class="mb-4"
+                        floating
+                    >
                     </x-fieldset>
                 </div>
             </div>

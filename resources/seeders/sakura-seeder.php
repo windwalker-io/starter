@@ -13,6 +13,7 @@ namespace App\Seeder;
 
 use App\Entity\Category;
 use App\Entity\Sakura;
+use App\Module\Admin\Sakura\SakuraState;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\ORM;
@@ -40,6 +41,7 @@ $seeder->import(
             $item = new Sakura();
             $item->setTitle($faker->sentence());
             $item->setContent($faker->paragraph());
+            $item->setState(SakuraState::PUBLISHED());
             $item->setCategoryId((int) $faker->randomElement($categoryIds));
             $item->setCreated(chronos());
             $item->setOrdering($i);

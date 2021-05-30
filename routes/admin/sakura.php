@@ -23,6 +23,10 @@ $router->group('sakura')
     ->register(function (RouteCreator $router) {
         $router->any('sakura_list', '/sakuras')
             ->controller(SakuraController::class)
+            ->postHandler('copy')
+            ->patchHandler('batch')
+            ->putHandler('filter')
+            ->deleteHandler('delete')
             ->view(SakuraListView::class);
 
         $router->any('sakura_edit', '/sakura/edit[/{id}]')

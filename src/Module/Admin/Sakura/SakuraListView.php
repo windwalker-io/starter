@@ -11,18 +11,16 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Sakura;
 
-use App\Entity\Category;
 use App\Entity\Sakura;
-use App\Module\Admin\Category\CategoryRepository;
-use App\Module\Admin\Category\Form\GridForm;
+use App\Module\Admin\Sakura\Form\GridForm;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\Form\FormFactory;
 use Windwalker\Core\State\AppState;
 use Windwalker\Core\View\ViewModelInterface;
+use Windwalker\Data\Collection;
 use Windwalker\DI\Attributes\Autowire;
 use Windwalker\ORM\ORM;
-use Windwalker\Query\Query;
 
 use function Windwalker\filter;
 
@@ -77,7 +75,7 @@ class SakuraListView implements ViewModelInterface
 
         $pagination = $items->getPagination();
 
-        $items = $items->getIterator(Sakura::class);
+        $items = $items->getIterator(Collection::class);
 
         // Form
         $form = $this->formFactory->create(GridForm::class);

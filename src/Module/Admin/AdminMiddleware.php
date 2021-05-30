@@ -52,10 +52,10 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
     {
         $this->asset->importMap('@main', '@/admin/main.js');
 
-        $this->asset->css('@vendor/@fortawesome/fontawesome-free/css/all.css');
         $this->asset->css('@awesome-checkbox');
         $this->asset->css('css/admin/app.css');
 
+        $this->asset->js('https://kit.fontawesome.com/59f5955d51.js');
         $this->asset->js(
             'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js'
         )

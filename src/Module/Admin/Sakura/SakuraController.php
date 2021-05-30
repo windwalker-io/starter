@@ -11,13 +11,11 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Sakura;
 
+use Unicorn\Controller\BatchControllerTrait;
+use Unicorn\Controller\CrudControllerTrait;
 use Unicorn\Controller\GridControllerTrait;
-use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\Controller;
 use Windwalker\Core\Attributes\TaskMapping;
-use Windwalker\Core\Router\Navigator;
-use Windwalker\Core\Router\RouteUri;
-use Windwalker\DI\Attributes\Autowire;
 
 /**
  * The SakuraController class.
@@ -25,16 +23,27 @@ use Windwalker\DI\Attributes\Autowire;
 #[Controller(
     module: SakuraModule::class
 )]
-#[TaskMapping(
-    methods: [
-        'PUT' => 'filter',
-        'DELETE' => 'deleteList',
-        'PATCH' => 'batch'
-    ]
-)]
+// #[TaskMapping(
+//     methods: [
+//         'PUT' => 'filter',
+//         'DELETE' => 'deleteList',
+//         'PATCH' => 'batch',
+//         'POST' => 'batchCopy',
+//     ]
+// )]
 class SakuraController
 {
     use GridControllerTrait;
+    use BatchControllerTrait;
+    use CrudControllerTrait;
 
+    public function getRepositoryClass(): string
+    {
+        return SakuraRepository::class;
+    }
 
+    public function getEditForm(): string
+    {
+        return EditForm::class;
+    }
 }

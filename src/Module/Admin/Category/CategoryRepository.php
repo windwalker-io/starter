@@ -13,6 +13,7 @@ namespace App\Module\Admin\Category;
 
 use App\Entity\Category;
 use Unicorn\Attributes\Repository;
+use Unicorn\Repository\Actions\ActionsFactory;
 use Unicorn\Repository\CrudRepositoryTrait;
 use Unicorn\Repository\DatabaseRepositoryInterface;
 use Unicorn\Repository\DatabaseRepositoryTrait;
@@ -33,5 +34,9 @@ class CategoryRepository implements DatabaseRepositoryInterface
 
         // $selector->addFilterHandler()
 
+    }
+
+    protected function configureActions(ActionsFactory $actionsFactory): void
+    {
     }
 }

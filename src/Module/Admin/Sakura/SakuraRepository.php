@@ -20,7 +20,10 @@ use Unicorn\Repository\Actions\SaveAction;
 use Unicorn\Repository\CrudRepositoryTrait;
 use Unicorn\Repository\DatabaseRepositoryInterface;
 use Unicorn\Repository\DatabaseRepositoryTrait;
+use Unicorn\Repository\ListRepositoryTrait;
+use Unicorn\Repository\ManageRepositoryTrait;
 use Unicorn\Selector\ListSelector;
+use Windwalker\ORM\Event\BeforeSaveEvent;
 use Windwalker\ORM\SelectorQuery;
 use Windwalker\Query\Query;
 
@@ -30,7 +33,8 @@ use Windwalker\Query\Query;
 #[Repository(Sakura::class)]
 class SakuraRepository implements DatabaseRepositoryInterface
 {
-    use CrudRepositoryTrait;
+    use ManageRepositoryTrait;
+    use ListRepositoryTrait;
 
     protected function configureSelector(SelectorQuery $query, ListSelector $selector): void
     {

@@ -29,6 +29,7 @@ $mig->up(
                 $schema->primary('id');
                 $schema->varchar('title');
                 $schema->integer('category_id');
+                $schema->tinyint('state');
                 $schema->text('content');
                 $schema->integer('ordering');
                 $schema->datetime('created');

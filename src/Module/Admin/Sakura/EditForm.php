@@ -56,7 +56,8 @@ class EditForm implements FieldDefinitionInterface
             'meta',
             function (Form $form) {
                 $form->add('created', CalendarField::class)
-                    ->label('Created');
+                    ->label('Created')
+                    ->set('floating', false);
             }
         );
     }

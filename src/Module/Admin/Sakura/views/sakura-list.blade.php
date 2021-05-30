@@ -45,6 +45,11 @@ use Windwalker\Core\Router\SystemUri;
                         <x-toggle-all></x-toggle-all>
                     </th>
                     <th>
+                        <x-sort field="sakura.state">
+                            State
+                        </x-sort>
+                    </th>
+                    <th>
                         <x-sort field="sakura.title">
                             Title
                         </x-sort>
@@ -62,7 +67,9 @@ use Windwalker\Core\Router\SystemUri;
                             >
                                 Order
                             </x-sort>
-                            <x-save-order></x-save-order>
+                            @if ($ordering === 'sakura.category_id ASC, sakura.ordering ASC')
+                                <x-save-order></x-save-order>
+                            @endif
                         </div>
                     </th>
                     <th>
@@ -80,27 +87,30 @@ use Windwalker\Core\Router\SystemUri;
                 @foreach ($items as $i => $item)
                     <tr>
                         <td>
-                            <x-row-checkbox :row="$i" :id="$item->getId()"></x-row-checkbox>
+                            <x-row-checkbox :row="$i" :id="$item->id"></x-row-checkbox>
                         </td>
+                        <th>
+                            {{ $item->state }}
+                        </th>
                         <td>
-                            <a href="{{ $nav->to('sakura_edit')->id($item->getId()) }}">
-                                {{ $item->getTitle() }}
+                            <a href="{{ $nav->to('sakura_edit')->id($item->id) }}">
+                                {{ $item->title }}
                             </a>
                         </td>
                         <td>
-                            {{ $item->category->title }}
+                            {{ $item->category->title ?? '' }}
                         </td>
                         <td>
                             <x-order-control
-                                :enabled="true"
+                                :enabled="$ordering === 'sakura.category_id ASC, sakura.ordering ASC'"
                                 :row="$i"
-                                :id="$item->getId()"
-                                :value="$item->getOrdering()"
+                                :id="$item->id"
+                                :value="$item->ordering"
                             ></x-order-control>
                         </td>
                         <td></td>
                         <td>
-                            {{ $item->getId() }}
+                            {{ $item->id }}
                         </td>
                     </tr>
                 @endforeach
@@ -115,6 +125,12 @@ use Windwalker\Core\Router\SystemUri;
                 </tfoot>
             </table>
         </div>
+
+        <div class="d-none">
+
+        </div>
+
+        <x-batch-modal :form="$form" namespace="batch"></x-batch-modal>
     </form>
 
 @stop

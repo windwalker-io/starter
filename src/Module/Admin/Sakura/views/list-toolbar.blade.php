@@ -22,3 +22,33 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 ?>
+
+<div x-id="toolbar" x-data="{ form: $store.grid.form, grid: $store.grid }">
+    <a type="button" class="btn btn-success btn-sm"
+        href="{{ $nav->to('sakura_edit')->var('new', 1) }}"
+        style="min-width: 150px"
+    >
+        <i class="fa fa-plus"></i>
+        New
+    </a>
+    <button type="button" class="btn btn-info btn-sm"
+        @click="grid.form.post()"
+    >
+        <i class="fa fa-clone"></i>
+        Duplicate
+    </button>
+    <button type="button" class="btn btn-dark btn-sm"
+        @click="grid.validateChecked(null, function () {
+            (new bootstrap.Modal('#batch-modal')).show();
+        })"
+    >
+        <i class="fa fa-sliders"></i>
+        Batch
+    </button>
+    <button type="button" class="btn btn-outline-danger btn-sm"
+        @click="grid.deleteList()"
+    >
+        <i class="fa fa-trash"></i>
+        Delete
+    </button>
+</div>
