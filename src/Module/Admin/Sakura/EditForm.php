@@ -13,6 +13,7 @@ namespace App\Module\Admin\Sakura;
 
 use App\Module\Admin\Category\Form\CategoryListField;
 use Unicorn\Field\CalendarField;
+use Unicorn\Field\FileDragField;
 use Windwalker\Form\Field\TextareaField;
 use Windwalker\Form\Field\TextField;
 use Windwalker\Form\FieldDefinitionInterface;
@@ -40,6 +41,15 @@ class EditForm implements FieldDefinitionInterface
             function (Form $form) {
                 $form->add('category_id', CategoryListField::class)
                     ->label('Category');
+
+                $form->add('file', FileDragField::class)
+                    ->label('File')
+                    ->set('floating', false)
+                    ->multiple(true)
+                    ->height(300)
+                    ->maxFiles(3)
+                    ->maxSize(1)
+                    ->accept('.pdf');
             }
         );
 

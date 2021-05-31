@@ -30,9 +30,11 @@ use Windwalker\Core\Router\SystemUri;
 @stop
 
 @section('content')
+    @lang('unicorn.foo')
     <uni-form-validate scroll>
         <form name="admin-form" id="admin-form" novalidate
             action="{{ $nav->to('sakura_edit') }}"
+            uni-modal-link="sdf"
             method="POST" enctype="multipart/form-data">
 
             <x-title-bar :form="$form"></x-title-bar>
@@ -63,6 +65,9 @@ use Windwalker\Core\Router\SystemUri;
                 @formToken
             </div>
 
+            <a href="{{ $nav->self() }}" uni-modal-link="#modal-1" data-size="modal-xl">Modal</a>
+
+            <uni-iframe-modal id="modal-1"></uni-iframe-modal>
         </form>
     </uni-form-validate>
 @stop
