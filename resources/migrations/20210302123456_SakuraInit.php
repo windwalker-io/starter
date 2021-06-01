@@ -27,6 +27,7 @@ $mig->up(
             Sakura::class,
             function (Schema $schema) {
                 $schema->primary('id');
+                $schema->integer('parent_id');
                 $schema->varchar('title');
                 $schema->integer('category_id');
                 $schema->tinyint('state');

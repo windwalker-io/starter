@@ -12,8 +12,10 @@ declare(strict_types=1);
 namespace App\Module\Admin\Sakura;
 
 use App\Module\Admin\Category\Form\CategoryListField;
+use App\Module\Admin\Sakura\Form\SakuraModalField;
 use Unicorn\Field\CalendarField;
 use Unicorn\Field\FileDragField;
+use Windwalker\Form\Field\HiddenField;
 use Windwalker\Form\Field\TextareaField;
 use Windwalker\Form\Field\TextField;
 use Windwalker\Form\FieldDefinitionInterface;
@@ -42,6 +44,13 @@ class EditForm implements FieldDefinitionInterface
                 $form->add('category_id', CategoryListField::class)
                     ->label('Category');
 
+                $form->add('parent_id', SakuraModalField::class)
+                    ->label('Parent')
+                    ->set('floating', false)
+                    ->multiple(true)
+                    ->sortable(true)
+                    ->max(3);
+
                 $form->add('file', FileDragField::class)
                     ->label('File')
                     ->set('floating', false)
@@ -50,6 +59,8 @@ class EditForm implements FieldDefinitionInterface
                     ->maxFiles(3)
                     ->maxSize(1)
                     ->accept('.pdf');
+
+                $form->add('id', HiddenField::class);
             }
         );
 

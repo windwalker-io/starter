@@ -23,7 +23,7 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 ?>
-@extends('admin.global.admin')
+@extends('admin.global.admin-wrapper')
 
 @section('admin-area')
     <section id="admin-area">

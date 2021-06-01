@@ -29,7 +29,10 @@ use function Windwalker\filter;
  */
 #[ViewModel(
     module: SakuraModule::class,
-    layout: 'sakura-list',
+    layout: [
+        'default' => 'sakura-list',
+        'modal' => 'sakura-modal'
+    ],
     js: 'sakura-list.js'
 )]
 class SakuraListView implements ViewModelInterface

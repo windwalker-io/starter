@@ -24,7 +24,7 @@ use Windwalker\Core\Router\SystemUri;
 
 ?>
 
-@extends('admin.global.html')
+@extends('global.html')
 
 @section('superbody')
     {{-- Force Background white i template has colored bg --}}

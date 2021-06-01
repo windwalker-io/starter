@@ -53,16 +53,16 @@ class SakuraEditView implements ViewModelInterface
      */
     public function prepare(AppState $state, AppContext $app): mixed
     {
-        [$id, $type] = $app->input('id', 'type')->values();
+        $id = $app->input('id');
 
         $item = $this->orm->findOne(Sakura::class, $id);
 
         $form = $this->formFactory
-            ->create(EditForm::class, options: ['type' => $type])
+            ->create(EditForm::class)
             ->setNamespace('item');
 
         $form->fill($state->getAndForget('edit.data') ?: $this->orm->extractEntity($item));
 
-        return compact('form', 'type', 'id', 'item');
+        return compact('form', 'id', 'item');
     }
 }

@@ -38,7 +38,7 @@ use Windwalker\Core\Router\SystemUri;
         <x-filter-bar :form="$form" :open="$showFilters"></x-filter-bar>
 
         <div>
-            <table class="table table-striped">
+            <table class="table table-striped table-hover">
                 <thead>
                 <tr>
                     <th style="width: 1%">
@@ -127,7 +127,7 @@ use Windwalker\Core\Router\SystemUri;
         </div>
 
         <div class="d-none">
-
+            @formToken
         </div>
 
         <x-batch-modal :form="$form" namespace="batch"></x-batch-modal>

@@ -21,11 +21,12 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
+$callback = $app->input('callback');
 ?>
 
-@extends('admin.global.admin-pure')
+@extends('admin.global.pure')
 
-@section('content')
+@section('superbody')
     <form id="grid-form" action="" x-data="{ grid: $store.grid }"
         x-ref="gridForm"
         data-ordering="{{ $ordering }}"
@@ -34,11 +35,13 @@ use Windwalker\Core\Router\SystemUri;
         <x-filter-bar :form="$form" :open="$showFilters"></x-filter-bar>
 
         <div>
-            <table class="table table-striped">
+            <table class="table table-striped table-hover">
                 <thead>
                 <tr>
-                    <th style="width: 1%">
-                        <x-toggle-all></x-toggle-all>
+                    <th>
+                        <x-sort field="sakura.title">
+                            Title
+                        </x-sort>
                     </th>
                     <th>
                         <x-sort field="sakura.state">
@@ -46,30 +49,9 @@ use Windwalker\Core\Router\SystemUri;
                         </x-sort>
                     </th>
                     <th>
-                        <x-sort field="sakura.title">
-                            Title
-                        </x-sort>
-                    </th>
-                    <th>
                         <x-sort field="sakura.category_id">
                             Category
                         </x-sort>
-                    </th>
-                    <th style="width: 10%" class="">
-                        <div class="d-flex w-100 justify-content-between">
-                            <x-sort
-                                asc="sakura.category_id ASC, sakura.ordering ASC"
-                                desc="sakura.category_id DESC, sakura.ordering DESC"
-                            >
-                                Order
-                            </x-sort>
-                            @if ($ordering === 'sakura.category_id ASC, sakura.ordering ASC')
-                                <x-save-order></x-save-order>
-                            @endif
-                        </div>
-                    </th>
-                    <th>
-                        Delete
                     </th>
                     <th>
                         <x-sort field="category.id">
@@ -81,30 +63,25 @@ use Windwalker\Core\Router\SystemUri;
 
                 <tbody>
                 @foreach ($items as $i => $item)
+                    @php($data = [
+                        'title' => $item->title,
+                        'value' => $item->id,
+                        'image' => $item->image,
+                    ])
                     <tr>
                         <td>
-                            <x-row-checkbox :row="$i" :id="$item->id"></x-row-checkbox>
+                            <a href="javascript://"
+                                onclick="parent.{{ $callback }}({{ json_encode($data) }})">
+                                <span class="fa fa-angle-right text-muted"></span>
+                                {{ $item->title }}
+                            </a>
                         </td>
                         <th>
                             {{ $item->state }}
                         </th>
                         <td>
-                            <a href="{{ $nav->to('sakura_edit')->id($item->id) }}">
-                                {{ $item->title }}
-                            </a>
-                        </td>
-                        <td>
                             {{ $item->category->title ?? '' }}
                         </td>
-                        <td>
-                            <x-order-control
-                                :enabled="$ordering === 'sakura.category_id ASC, sakura.ordering ASC'"
-                                :row="$i"
-                                :id="$item->id"
-                                :value="$item->ordering"
-                            ></x-order-control>
-                        </td>
-                        <td></td>
                         <td>
                             {{ $item->id }}
                         </td>
@@ -123,7 +100,7 @@ use Windwalker\Core\Router\SystemUri;
         </div>
 
         <div class="d-none">
-
+            @formToken
         </div>
 
         <x-batch-modal :form="$form" namespace="batch"></x-batch-modal>

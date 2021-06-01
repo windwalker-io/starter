@@ -23,6 +23,7 @@ use Windwalker\ORM\Attributes\Column;
 use Windwalker\ORM\Attributes\ManyToOne;
 use Windwalker\ORM\Attributes\PK;
 use Windwalker\ORM\Attributes\Table;
+use Windwalker\ORM\Cast\JsonCast;
 use Windwalker\ORM\EntityInterface;
 use Windwalker\ORM\EntityTrait;
 use Windwalker\ORM\Event\BeforeSaveEvent;
@@ -37,6 +38,10 @@ class Sakura implements EntityInterface
 
     #[Column('id'), PK, AutoIncrement]
     protected ?int $id = null;
+
+    #[Column('parent_id')]
+    #[Cast(JsonCast::class)]
+    protected mixed $parentId = null;
 
     #[Column('category_id')]
     protected int $categoryId = 0;
@@ -199,6 +204,26 @@ class Sakura implements EntityInterface
     public function setState(State $state): static
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getParentId(): int
+    {
+        return $this->parentId;
+    }
+
+    /**
+     * @param  int  $parentId
+     *
+     * @return  static  Return self to support chaining.
+     */
+    public function setParentId(int $parentId): static
+    {
+        $this->parentId = $parentId;
 
         return $this;
     }
