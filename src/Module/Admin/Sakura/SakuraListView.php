@@ -17,10 +17,13 @@ use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\Form\FormFactory;
 use Windwalker\Core\State\AppState;
+use Windwalker\Core\View\View;
 use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\Data\Collection;
 use Windwalker\DI\Attributes\Autowire;
 use Windwalker\ORM\ORM;
+
+use Windwalker\Session\Session;
 
 use function Windwalker\filter;
 
@@ -52,8 +55,9 @@ class SakuraListView implements ViewModelInterface
     ) {
     }
 
-    public function prepare(AppState $state, AppContext $app): mixed
+    public function prepare(AppContext $app, View $view): mixed
     {
+        $state = $this->sakuraRepository->getState();
         [$page, $limit] = $app->input('page', 'limit')->values();
 
         $page  = filter($page, 'int|range(min=1)');

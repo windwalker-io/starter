@@ -29,10 +29,10 @@ class CategoryStateWorkflow extends AbstractWorkflow
 {
     public function configure(WorkflowController $workflow): void
     {
-        $workflow->setStateTitle(State::PUBLISHED(), 'Published');
-        $workflow->setStateTitle(State::UNPUBLISHED(), 'Unpublished');
-        $workflow->setStateTitle(State::TRASHED(), 'Trashed');
-        $workflow->setStateTitle(State::ARCHIVED(), 'Archived');
+        $workflow->setStateMeta(State::PUBLISHED(), 'Published');
+        $workflow->setStateMeta(State::UNPUBLISHED(), 'Unpublished');
+        $workflow->setStateMeta(State::TRASHED(), 'Trashed');
+        $workflow->setStateMeta(State::ARCHIVED(), 'Archived');
 
         $workflow->setInitialStates(
             [

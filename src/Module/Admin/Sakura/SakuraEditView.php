@@ -16,8 +16,9 @@ use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\Form\FormFactory;
 use Windwalker\Core\Router\Navigator;
-use Windwalker\Core\State\AppState;
+use Windwalker\Core\View\View;
 use Windwalker\Core\View\ViewModelInterface;
+use Windwalker\DI\Attributes\Autowire;
 use Windwalker\ORM\ORM;
 
 /**
@@ -39,19 +40,20 @@ class SakuraEditView implements ViewModelInterface
     public function __construct(
         protected ORM $orm,
         protected FormFactory $formFactory,
-        protected Navigator $nav
+        protected Navigator $nav,
+        #[Autowire] protected SakuraRepository $repository
     ) {
     }
 
     /**
      * Prepare
      *
-     * @param  AppState    $state
      * @param  AppContext  $app
+     * @param  View        $view
      *
      * @return  mixed
      */
-    public function prepare(AppState $state, AppContext $app): mixed
+    public function prepare(AppContext $app, View $view): mixed
     {
         $id = $app->input('id');
 
@@ -59,9 +61,11 @@ class SakuraEditView implements ViewModelInterface
 
         $form = $this->formFactory
             ->create(EditForm::class)
-            ->setNamespace('item');
-
-        $form->fill($state->getAndForget('edit.data') ?: $this->orm->extractEntity($item));
+            ->setNamespace('item')
+            ->fill(
+                $this->repository->getState()->getAndForget('edit.data')
+                    ?: $this->orm->extractEntity($item)
+            );
 
         return compact('form', 'id', 'item');
     }

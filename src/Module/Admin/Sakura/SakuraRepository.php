@@ -17,11 +17,15 @@ use Unicorn\Attributes\Repository;
 use Unicorn\Repository\Actions\ActionsFactory;
 use Unicorn\Repository\Actions\ReorderAction;
 use Unicorn\Repository\Actions\SaveAction;
+use Unicorn\Repository\CrudRepositoryInterface;
 use Unicorn\Repository\CrudRepositoryTrait;
 use Unicorn\Repository\DatabaseRepositoryInterface;
 use Unicorn\Repository\DatabaseRepositoryTrait;
+use Unicorn\Repository\ListRepositoryInterface;
 use Unicorn\Repository\ListRepositoryTrait;
+use Unicorn\Repository\ManageRepositoryInterface;
 use Unicorn\Repository\ManageRepositoryTrait;
+use Unicorn\Repository\StateControlRepositoryTrait;
 use Unicorn\Selector\ListSelector;
 use Windwalker\ORM\Event\BeforeSaveEvent;
 use Windwalker\ORM\SelectorQuery;
@@ -31,7 +35,7 @@ use Windwalker\Query\Query;
  * The SakuraRepository class.
  */
 #[Repository(Sakura::class)]
-class SakuraRepository implements DatabaseRepositoryInterface
+class SakuraRepository implements ManageRepositoryInterface, ListRepositoryInterface
 {
     use ManageRepositoryTrait;
     use ListRepositoryTrait;

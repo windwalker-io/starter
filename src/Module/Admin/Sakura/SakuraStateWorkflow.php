@@ -29,10 +29,10 @@ class SakuraStateWorkflow extends AbstractWorkflow
 {
     public function configure(WorkflowController $workflow): void
     {
-        $workflow->setStateTitle(State::PUBLISHED(), 'Published');
-        $workflow->setStateTitle(State::UNPUBLISHED(), 'Unpublished');
-        $workflow->setStateTitle(State::TRASHED(), 'Trashed');
-        $workflow->setStateTitle(State::ARCHIVED(), 'Archived');
+        $workflow->setStateMeta(State::PUBLISHED(), 'Published', 'fa fa-fw fa-check', 'success');
+        $workflow->setStateMeta(State::UNPUBLISHED(), 'Unpublished', 'fa fa-fw fa-xmark', 'danger');
+        $workflow->setStateMeta(State::TRASHED(), 'Trashed', 'fa fa-fw fa-trash');
+        $workflow->setStateMeta(State::ARCHIVED(), 'Archived', 'fa fa-fw fa-file-zipper');
 
         $workflow->setInitialStates(
             [
@@ -45,19 +45,22 @@ class SakuraStateWorkflow extends AbstractWorkflow
             'publish',
             State::UNPUBLISHED(),
             State::PUBLISHED()
-        );
+        )
+            ->button('fa fa-fw fa-check', 'Publish');
 
         $workflow->addTransition(
             'unpublish',
             State::PUBLISHED(),
             State::UNPUBLISHED()
-        );
+        )
+            ->button('fa fa-fw fa-xmark', 'Unpublish');
 
         $workflow->addTransition(
             'archive',
             State::UNPUBLISHED(),
             State::ARCHIVED(),
-        );
+        )
+            ->button('fa fa-fw fa-file-zipper', 'Archive');
 
         $workflow->addTransition(
             'trash',
@@ -67,12 +70,14 @@ class SakuraStateWorkflow extends AbstractWorkflow
                 State::ARCHIVED()
             ],
             State::TRASHED(),
-        );
+        )
+            ->button('fa fa-fw fa-trash', 'Trash');
 
         $workflow->addTransition(
             'untrash',
             State::TRASHED(),
             State::UNPUBLISHED(),
-        );
+        )
+            ->button('fa fa-fw fa-check', 'Untrash');
     }
 }

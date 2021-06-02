@@ -50,12 +50,12 @@ class CategoryEditView implements ViewModelInterface
     /**
      * Prepare
      *
-     * @param  AppState    $state
-     * @param  AppContext  $app
+     * @param  AppContext                  $app
+     * @param  \Windwalker\Core\View\View  $view
      *
      * @return  mixed
      */
-    public function prepare(AppState $state, AppContext $app): mixed
+    public function prepare(AppContext $app, \Windwalker\Core\View\View $view): mixed
     {
         [$id, $type] = $app->input('id', 'type')->values();
         

@@ -21,6 +21,15 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
+$workflow = $app->service(\App\Module\Admin\Sakura\SakuraStateWorkflow::class);
+$state = $workflow->getStateButton();
+$state->getState('0')
+    ->task('publish')
+    ->description('Click to publish');
+
+$state->getState('1')
+    ->task('unpublish')
+    ->description('Click to unpublish');
 ?>
 
 @extends('admin.global.body')
@@ -90,7 +99,8 @@ use Windwalker\Core\Router\SystemUri;
                             <x-row-checkbox :row="$i" :id="$item->id"></x-row-checkbox>
                         </td>
                         <th>
-                            {{ $item->state }}
+                            <x-state-dropdown color-on="text"
+                                :workflow="$workflow" :id="$item->id" :value="$item->state" />
                         </th>
                         <td>
                             <a href="{{ $nav->to('sakura_edit')->id($item->id) }}">

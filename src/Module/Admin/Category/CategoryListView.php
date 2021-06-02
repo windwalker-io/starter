@@ -60,9 +60,11 @@ class CategoryListView implements ViewModelInterface
     }
 
     /**
+     * @param  \Windwalker\Core\View\View  $view  *
+     *
      * @inheritDoc
      */
-    public function prepare(AppState $state, AppContext $app): mixed
+    public function prepare(AppContext $app, \Windwalker\Core\View\View $view): mixed
     {
         [$page, $limit] = $app->input('page', 'limit')->values();
 
