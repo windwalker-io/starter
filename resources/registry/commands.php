@@ -12,6 +12,8 @@ declare(strict_types=1);
 return [
     'cache:clear' => \Windwalker\Core\Command\CacheClearCommand::class,
 
+    'generate' => \Windwalker\Core\Generator\Command\GenerateCommand::class,
+
     // 'server:start' => '',
     //
     'mail:test' => \Windwalker\Core\Command\MailTestCommand::class,

@@ -11,15 +11,10 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Sakura;
 
-use Unicorn\Controller\BatchControllerTrait;
 use Unicorn\Controller\CrudController;
-use Unicorn\Controller\CrudControllerTrait;
 use Unicorn\Controller\GridController;
-use Unicorn\Controller\GridControllerTrait;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\Controller;
-use Windwalker\Core\Attributes\TaskMapping;
-use Windwalker\Core\Router\Navigator;
 use Windwalker\DI\Attributes\Autowire;
 
 use function Windwalker\pipe;
@@ -62,9 +57,16 @@ class SakuraController
         $data = match ($task) {
             'publish' => ['state' => 1],
             'unpublish' => ['state' => 0],
+            'archive' => ['state' => -1],
+            'trash' => ['state' => -2],
             default => null
         };
 
         return $app->call([$controller, 'batch'], compact('repository', 'data'));
+    }
+
+    public function copy(AppContext $app, #[Autowire] SakuraRepository $repository, GridController $controller): mixed
+    {
+        return $app->call([$controller, 'copy'], compact('repository'));
     }
 }
