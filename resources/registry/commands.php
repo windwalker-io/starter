@@ -35,5 +35,7 @@ return [
 
     'pkg:install' => \Windwalker\Core\Package\Command\PackageInstallCommand::class,
     //
-    'run' => \Windwalker\Core\Command\RunCommand::class
+    'run' => \Windwalker\Core\Command\RunCommand::class,
+
+    'build:entity' => \Windwalker\Core\Command\BuildEntityCommand::class
 ];

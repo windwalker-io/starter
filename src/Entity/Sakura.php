@@ -20,6 +20,7 @@ use Windwalker\ORM\Attributes\AutoIncrement;
 use Windwalker\ORM\Attributes\Cast;
 use Windwalker\ORM\Attributes\CastNullable;
 use Windwalker\ORM\Attributes\Column;
+use Windwalker\ORM\Attributes\EntitySetup;
 use Windwalker\ORM\Attributes\ManyToOne;
 use Windwalker\ORM\Attributes\PK;
 use Windwalker\ORM\Attributes\Table;
@@ -27,6 +28,7 @@ use Windwalker\ORM\Cast\JsonCast;
 use Windwalker\ORM\EntityInterface;
 use Windwalker\ORM\EntityTrait;
 use Windwalker\ORM\Event\BeforeSaveEvent;
+use Windwalker\ORM\Metadata\EntityMetadata;
 
 /**
  * The Sakura class.
@@ -67,6 +69,12 @@ class Sakura implements EntityInterface
         category_id: 'id'
     )]
     public Category|Collection|null $category = null;
+
+    #[EntitySetup]
+    public static function setup(EntityMetadata $metadata): void
+    {
+        //
+    }
 
     /**
      * @return int|null
