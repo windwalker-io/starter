@@ -18,6 +18,7 @@ use Windwalker\Core\Router\RouteCreator;
 
 $router->group('admin')
     ->prefix('/admin')
+    ->namespace('admin')
     ->middleware(AdminMiddleware::class)
     ->register(function (RouteCreator $router) {
         //

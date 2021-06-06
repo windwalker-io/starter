@@ -20,6 +20,7 @@ use Windwalker\Core\Router\RouteCreator;
 /** @var RouteCreator $router */
 
 $router->group('front')
+    ->namespace('front')
     ->middleware(FrontMiddleware::class)
     ->register(function (RouteCreator $router) {
         $router->get('home', '/')
