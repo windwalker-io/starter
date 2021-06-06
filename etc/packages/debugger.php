@@ -10,7 +10,7 @@
 declare(strict_types=1);
 
 return [
-    'unicorn' => [
+    'debugger' => [
         'enabled' => true,
 
         'listeners' => [

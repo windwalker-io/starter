@@ -12,7 +12,9 @@ declare(strict_types=1);
 return [
     'cache:clear' => \Windwalker\Core\Command\CacheClearCommand::class,
 
-    'generate' => \Windwalker\Core\Generator\SubCommand\GenerateCommand::class,
+    'g' => \Windwalker\Core\Generator\Command\GenerateCommand::class,
+    'generate:make' => \Windwalker\Core\Generator\Command\GenerateCommand::class,
+    'generate:revise' => \Windwalker\Core\Generator\Command\GenReviseCommand::class,
 
     // 'server:start' => '',
     //
@@ -37,5 +39,5 @@ return [
     //
     'run' => \Windwalker\Core\Command\RunCommand::class,
 
-    'build:entity' => \Windwalker\Core\Generator\Command\BuildEntityCommand::class
+    'build:entity' => \Windwalker\Core\Generator\Command\BuildEntityCommand::class,
 ];

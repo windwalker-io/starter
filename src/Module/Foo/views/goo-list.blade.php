@@ -3,13 +3,13 @@
 /**
  * Global variables
  * --------------------------------------------------------------
- * @var $app       AppContext      Application context.
- * @var $vm        object          The view model object.
- * @var $uri       SystemUri       System Uri information.
- * @var $chronos   ChronosService  The chronos datetime service.
- * @var $nav       Navigator       Navigator object to build route.
- * @var $asset     AssetService    The Asset manage service.
- * @var $lang      LangService     The language translation service.
+ * @var  $app       AppContext      Application context.
+ * @var  $vm        object          The view model object.
+ * @var  $uri       SystemUri       System Uri information.
+ * @var  $chronos   ChronosService  The chronos datetime service.
+ * @var  $nav       Navigator       Navigator object to build route.
+ * @var  $asset     AssetService    The Asset manage service.
+ * @var  $lang      LangService     The language translation service.
  */
 
 declare(strict_types=1);
@@ -27,8 +27,7 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
 @extends('admin.global.body')
 
 @section('toolbar-buttons')
-    @include('list-toolbar')
-@stop
+    list-toolbar@stop
 
 @section('content')
     <form id="grid-form" action="" x-data="{ grid: $store.grid }"
@@ -46,24 +45,24 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                         <x-toggle-all></x-toggle-all>
                     </th>
                     <th style="width: 5%">
-                        <x-sort field="sakura.state">
+                        <x-sort field="goo.state">
                             State
                         </x-sort>
                     </th>
                     <th>
-                        <x-sort field="sakura.title">
+                        <x-sort field="goo.title">
                             Title
                         </x-sort>
                     </th>
                     <th style="width: 10%" class="">
                         <div class="d-flex w-100 justify-content-between">
                             <x-sort
-                                asc="sakura.category_id ASC, sakura.ordering ASC"
-                                desc="sakura.category_id DESC, sakura.ordering DESC"
+                                asc="goo.ordering ASC"
+                                desc="goo.ordering DESC"
                             >
                                 Order
                             </x-sort>
-                            @if ($ordering === 'sakura.ordering ASC')
+                            @if ($ordering === 'goo.ordering ASC')
                                 <x-save-order></x-save-order>
                             @endif
                         </div>
@@ -80,7 +79,7 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                 </thead>
 
                 <tbody>
-                @foreach ($items as $i => $item)
+                @foreach($items as $i => $item)
                     <tr>
                         <td>
                             <x-row-checkbox :row="$i" :id="$item->id"></x-row-checkbox>
@@ -93,7 +92,7 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                             />
                         </th>
                         <td>
-                            <a href="{{ $nav->to('sakura_edit')->id($item->id) }}">
+                            <a href="{{ $nav->to('goo_edit')->id($item->id) }}">
                                 {{ $item->title }}
                             </a>
                         </td>

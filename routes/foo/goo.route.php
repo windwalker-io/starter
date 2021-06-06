@@ -6,7 +6,7 @@ use Windwalker\Core\Router\RouteCreator;
 
 /** @var  RouteCreator $router */
 
-$router->group('hello')
+$router->group('goo')
     ->register(function (RouteCreator $router) {
         $router->any('hello', '/hello');
             //->controller()

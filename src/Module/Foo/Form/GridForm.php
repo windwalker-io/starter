@@ -3,13 +3,13 @@
 /**
  * Part of starter project.
  *
- * @copyright  Copyright (C) 2021 __ORGANIZATION__.
- * @license    __LICENSE__
+ * @copyright    Copyright (C) 2021 __ORGANIZATION__.
+ * @license        __LICENSE__
  */
 
 declare(strict_types=1);
 
-namespace App\Module\Admin\Sakura\Form;
+namespace App\Module\Foo\Form;
 
 use Unicorn\Enum\BasicState;
 use Windwalker\Form\Field\ListField;
@@ -25,9 +25,9 @@ class GridForm implements FieldDefinitionInterface
     /**
      * Define the form fields.
      *
-     * @param  Form  $form  The Windwalker form object.
+     * @param    Form  $form  The Windwalker form object.
      *
-     * @return  void
+     * @return    void
      */
     public function define(Form $form): void
     {
@@ -43,7 +43,7 @@ class GridForm implements FieldDefinitionInterface
         $form->ns(
             'filter',
             function (Form $form) {
-                $form->add('sakura.state', ListField::class)
+                $form->add('goo.state', ListField::class)
                     ->label('State')
                     ->option('- Select -', '')
                     ->option('Published', (string) BasicState::PUBLISHED()->getValue())

@@ -3,13 +3,13 @@
 /**
  * Part of starter project.
  *
- * @copyright  Copyright (C) 2021 __ORGANIZATION__.
- * @license    __LICENSE__
+ * @copyright    Copyright (C) 2021 __ORGANIZATION__.
+ * @license        __LICENSE__
  */
 
 declare(strict_types=1);
 
-namespace App\Module\Admin\Sakura;
+namespace App\Module\Foo;
 
 use Unicorn\Controller\CrudController;
 use Unicorn\Controller\GridController;
@@ -18,27 +18,27 @@ use Windwalker\Core\Attributes\Controller;
 use Windwalker\DI\Attributes\Autowire;
 
 /**
- * The SakuraController class.
+ * The GooController class.
  */
 #[Controller()]
-class SakuraController
+class GooController
 {
-    public function save(AppContext $app, #[Autowire] SakuraRepository $repository, #[Autowire] EditForm $form, CrudController $controller): mixed
+    public function save(AppContext $app, #[Autowire] GooRepository $repository, #[Autowire] EditForm $form, CrudController $controller): mixed
     {
         return $app->call([$controller, 'save'], compact('repository', 'form'));
     }
 
-    public function delete(AppContext $app, #[Autowire] SakuraRepository $repository, CrudController $controller): mixed
+    public function delete(AppContext $app, #[Autowire] GooRepository $repository, CrudController $controller): mixed
     {
         return $app->call([$controller, 'delete'], compact('repository'));
     }
 
-    public function filter(AppContext $app, #[Autowire] SakuraRepository $repository, GridController $controller): mixed
+    public function filter(AppContext $app, #[Autowire] GooRepository $repository, GridController $controller): mixed
     {
         return $app->call([$controller, 'filter'], compact('repository'));
     }
 
-    public function batch(AppContext $app, #[Autowire] SakuraRepository $repository, GridController $controller): mixed
+    public function batch(AppContext $app, #[Autowire] GooRepository $repository, GridController $controller): mixed
     {
         $task = $app->input('task');
         $data = match ($task) {
@@ -50,7 +50,7 @@ class SakuraController
         return $app->call([$controller, 'batch'], compact('repository', 'data'));
     }
 
-    public function copy(AppContext $app, #[Autowire] SakuraRepository $repository, GridController $controller): mixed
+    public function copy(AppContext $app, #[Autowire] GooRepository $repository, GridController $controller): mixed
     {
         return $app->call([$controller, 'copy'], compact('repository'));
     }

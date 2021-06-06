@@ -16,5 +16,6 @@ return [
     'form' => \Windwalker\Core\Generator\SubCommand\FormSubCommand::class,
     'route' => \Windwalker\Core\Generator\SubCommand\RouteSubCommand::class,
     'enum' => \Windwalker\Core\Generator\SubCommand\EnumSubCommand::class,
-    'field' => \Windwalker\Core\Generator\SubCommand\FieldSubCommand::class
+    'field' => \Windwalker\Core\Generator\SubCommand\FieldSubCommand::class,
+    'command' => \Windwalker\Core\Generator\SubCommand\CommandSubCommand::class,
 ];

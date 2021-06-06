@@ -19,7 +19,7 @@ if (!is_file($root . '/vendor/autoload.php')) {
     exit('Please run `composer install` First.');
 }
 
-include $root . '/vendor/autoload.php';
+$loader = include $root . '/vendor/autoload.php';
 
 include __DIR__ . '/../etc/define.php';
 

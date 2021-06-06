@@ -21,16 +21,12 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-$workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
+$callback = $app->input('callback');
 ?>
 
-@extends('admin.global.body')
+@extends('admin.global.pure')
 
-@section('toolbar-buttons')
-    @include('list-toolbar')
-@stop
-
-@section('content')
+@section('superbody')
     <form id="grid-form" action="" x-data="{ grid: $store.grid }"
         x-ref="gridForm"
         data-ordering="{{ $ordering }}"
@@ -42,34 +38,20 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
-                    <th style="width: 1%">
-                        <x-toggle-all></x-toggle-all>
+                    <th>
+                        <x-sort field="goo.title">
+                            Title
+                        </x-sort>
                     </th>
-                    <th style="width: 5%">
-                        <x-sort field="sakura.state">
+                    <th>
+                        <x-sort field="goo.state">
                             State
                         </x-sort>
                     </th>
                     <th>
-                        <x-sort field="sakura.title">
-                            Title
+                        <x-sort field="goo.category_id">
+                            Category
                         </x-sort>
-                    </th>
-                    <th style="width: 10%" class="">
-                        <div class="d-flex w-100 justify-content-between">
-                            <x-sort
-                                asc="sakura.category_id ASC, sakura.ordering ASC"
-                                desc="sakura.category_id DESC, sakura.ordering DESC"
-                            >
-                                Order
-                            </x-sort>
-                            @if ($ordering === 'sakura.ordering ASC')
-                                <x-save-order></x-save-order>
-                            @endif
-                        </div>
-                    </th>
-                    <th>
-                        Delete
                     </th>
                     <th>
                         <x-sort field="category.id">
@@ -80,33 +62,25 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                 </thead>
 
                 <tbody>
-                @foreach ($items as $i => $item)
+                @foreach($items as $i => $item)
+                    @php($data = [
+                        'title' => $item->title,
+                        'value' => $item->id,
+                        'image' => $item->image,
+                    ])
                     <tr>
                         <td>
-                            <x-row-checkbox :row="$i" :id="$item->id"></x-row-checkbox>
-                        </td>
-                        <th>
-                            <x-state-dropdown color-on="text"
-                                button-style="min-width: 150px"
-                                use-states
-                                :workflow="$workflow" :id="$item->id" :value="$item->state"
-                            />
-                        </th>
-                        <td>
-                            <a href="{{ $nav->to('sakura_edit')->id($item->id) }}">
+                            <a href="javascript://"
+                                onclick="parent.{{ $callback }}({{ json_encode($data) }})">
+                                <span class="fa fa-angle-right text-muted"></span>
                                 {{ $item->title }}
                             </a>
                         </td>
+                        <th>
+                            {{ $item->state }}
+                        </th>
                         <td>
-                            <x-order-control
-                                :enabled="$ordering === $vm->getDefaultOrdering()"
-                                :row="$i"
-                                :id="$item->id"
-                                :value="$item->ordering"
-                            ></x-order-control>
-                        </td>
-                        <td>
-
+                            {{ $item->category->title ?? '' }}
                         </td>
                         <td>
                             {{ $item->id }}

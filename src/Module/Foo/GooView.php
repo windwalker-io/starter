@@ -3,15 +3,15 @@
 /**
  * Part of starter project.
  *
- * @copyright  Copyright (C) 2021 __ORGANIZATION__.
- * @license    __LICENSE__
+ * @copyright    Copyright (C) 2021 __ORGANIZATION__.
+ * @license        __LICENSE__
  */
 
 declare(strict_types=1);
 
-namespace App\Module\Admin\Sakura;
+namespace App\Module\Foo;
 
-use App\Module\Admin\Sakura\Form\GridForm;
+use App\Module\Foo\Form\GridForm;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\Form\FormFactory;
@@ -22,28 +22,28 @@ use Windwalker\DI\Attributes\Autowire;
 use Windwalker\ORM\ORM;
 
 /**
- * The SakuraListView class.
+ * The GooView class.
  */
 #[ViewModel(
     layout: [
-        'default' => 'sakura-list',
-        'modal' => 'sakura-modal',
+        'default' => 'goo-list',
+        'modal' => 'goo-modal',
     ],
-    js: 'sakura-list.js'
+    js: 'goo-list.js'
 )]
-class SakuraListView implements ViewModelInterface
+class GooView implements ViewModelInterface
 {
     /**
      * CategoriesView constructor.
      *
-     * @param  ORM               $orm
-     * @param  SakuraRepository  $repository
-     * @param  FormFactory       $formFactory
+     * @param    ORM               $orm
+     * @param    GooRepository  $repository
+     * @param    FormFactory       $formFactory
      */
     public function __construct(
         protected ORM $orm,
         #[Autowire]
-        protected SakuraRepository $repository,
+        protected GooRepository $repository,
         protected FormFactory $formFactory
     ) {
     }
@@ -85,32 +85,32 @@ class SakuraListView implements ViewModelInterface
     /**
      * Get default ordering.
      *
-     * @return  string
+     * @return    string
      */
     public static function getDefaultOrdering(): string
     {
-        return 'sakura.id DESC';
+        return 'goo.id DESC';
     }
 
     /**
      * Get search fields.
      *
-     * @return  string[]
+     * @return    string[]
      */
     public static function getSearchFields(): array
     {
         return [
-            'sakura.title',
-            'sakura.alias',
+            'goo.title',
+            'goo.alias',
         ];
     }
 
     /**
      * Can show Filter bar
      *
-     * @param  array  $filter
+     * @param    array  $filter
      *
-     * @return  bool
+     * @return    bool
      */
     public function showFilterBar(array $filter): bool
     {
