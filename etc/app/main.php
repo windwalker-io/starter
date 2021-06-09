@@ -9,6 +9,8 @@
 
 declare(strict_types=1);
 
+$env = env('APP_ENV');
+
 return array_merge(
     require __DIR__ . '/windwalker.php',
     [

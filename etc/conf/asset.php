@@ -24,6 +24,7 @@ return [
             '@/' => 'js/',
             '@view/' => 'js/view/',
             '@vendor/' => 'vendor/',
+            '@core/' => 'vendor/@windwalker-io/core/dist/',
         ],
         'scopes' => []
     ],

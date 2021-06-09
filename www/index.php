@@ -19,9 +19,11 @@ if (!is_file($root . '/vendor/autoload.php')) {
     exit('Please run `composer install` First.');
 }
 
-$loader = include $root . '/vendor/autoload.php';
+include $root . '/vendor/autoload.php';
 
 include __DIR__ . '/../etc/define.php';
+
+Runtime::ipBlock(['dev'], env('DEV_ALLOW_IPS'));
 
 Runtime::boot(WINDWALKER_ROOT, __DIR__);
 

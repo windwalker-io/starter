@@ -65,7 +65,7 @@ use Windwalker\Core\Router\SystemUri;
         </div>
     </div> <!-- /container -->
 
-    {!! $pagin->render() !!}
+{{--    {!! $pagin->render() !!}--}}
 
 {{--    @include('layout.pagination.basic-pagination', ['pagination' => $pagin])--}}
 @stop

@@ -30,3 +30,9 @@ $env = WINDWALKER_ROOT . '/.env';
 if (is_file($env)) {
     (new Dotenv())->load($env);
 }
+
+$env = WINDWALKER_ROOT . '/.env.' . ($_ENV['APP_ENV'] ?? 'production');
+
+if (is_file($env)) {
+    (new Dotenv())->load($env);
+}

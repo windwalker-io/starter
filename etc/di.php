@@ -12,6 +12,7 @@ declare(strict_types=1);
 use Windwalker\Console\CommandWrapper;
 use Windwalker\Core\Attributes\Controller;
 use Windwalker\Core\Attributes\Json;
+use Windwalker\Core\Attributes\JsonApi;
 use Windwalker\Core\Attributes\Module;
 use Windwalker\Core\Attributes\Ref;
 use Windwalker\Core\Attributes\ViewModel;
@@ -54,6 +55,7 @@ return Arr::mergeRecursive(
 
             // Middleware
             Json::class => AttributeType::CALLABLE,
+            JsonApi::class => AttributeType::CALLABLE,
         ]
     ]
 );

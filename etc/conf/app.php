@@ -16,7 +16,7 @@ return [
 
     'mode' => env('APP_ENV') ?? 'prod',
 
-    'timezone' => 'Asia/Taipei',
+    'timezone' => 'UTC',
 
     'server_timezone' => 'UTC',
 
