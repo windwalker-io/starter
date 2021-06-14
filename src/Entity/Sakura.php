@@ -20,6 +20,7 @@ use Windwalker\ORM\Attributes\CastNullable;
 use Windwalker\ORM\Attributes\Column;
 use Windwalker\ORM\Attributes\PK;
 use Windwalker\ORM\Attributes\Table;
+use Windwalker\ORM\Cast\JsonCast;
 use Windwalker\ORM\EntityInterface;
 use Windwalker\ORM\EntityTrait;
 
@@ -59,6 +60,10 @@ class Sakura implements EntityInterface
     #[Column('created')]
     #[CastNullable(Chronos::class)]
     protected ?Chronos $created = null;
+
+    #[Column('images')]
+    #[Cast(JsonCast::class)]
+    protected array $images = [];
 
     public function getParentId(): ?int
     {

@@ -15,6 +15,7 @@ use App\Module\Admin\Category\Form\CategoryListField;
 use App\Module\Admin\Sakura\Form\SakuraModalField;
 use Unicorn\Field\CalendarField;
 use Unicorn\Field\FileDragField;
+use Unicorn\Field\MultiUploaderField;
 use Windwalker\Form\Field\HiddenField;
 use Windwalker\Form\Field\TextareaField;
 use Windwalker\Form\Field\TextField;
@@ -51,14 +52,28 @@ class EditForm implements FieldDefinitionInterface
                     ->sortable(true)
                     ->max(3);
 
-                $form->add('file', FileDragField::class)
-                    ->label('File')
+                // $form->add('file', FileDragField::class)
+                //     ->label('File')
+                //     ->set('floating', false)
+                //     ->multiple(true)
+                //     ->height(300)
+                //     ->maxFiles(3)
+                //     ->maxSize(1)
+                //     ->accept('.pdf');
+
+                $form->add('images', MultiUploaderField::class)
+                    ->label('images')
                     ->set('floating', false)
-                    ->multiple(true)
-                    ->height(300)
-                    ->maxFiles(3)
-                    ->maxSize(1)
-                    ->accept('.pdf');
+                    ->canReplace(true)
+                    ->maxFiles(5)
+                    ->accept('image/*')
+                    ->configureForm(function (Form $form) {
+                        $form->add('title', TextField::class)
+                            ->label('Title');
+
+                        $form->add('link', TextField::class)
+                            ->label('Link');
+                    });
 
                 $form->add('id', HiddenField::class);
             }

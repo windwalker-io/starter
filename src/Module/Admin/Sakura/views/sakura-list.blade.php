@@ -105,8 +105,11 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                                 :value="$item->ordering"
                             ></x-order-control>
                         </td>
-                        <td>
-
+                        <td class="text-center">
+                            <button type="button" class="btn btn-sm btn-outline-secondary"
+                                @click="grid.deleteRow({{ $item->id }})">
+                                <span class="fa fa-trash"></span>
+                            </button>
                         </td>
                         <td>
                             {{ $item->id }}
