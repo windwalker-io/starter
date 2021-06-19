@@ -13,9 +13,6 @@ namespace App\Module\Front\Home;
 
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
-use Windwalker\Core\Pagination\PaginationFactory;
-use Windwalker\Core\Renderer\RendererService;
-use Windwalker\Core\State\AppState;
 use Windwalker\Core\View\View;
 use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\ORM\ORM;
@@ -26,9 +23,7 @@ use Windwalker\ORM\ORM;
 #[ViewModel(
     layout: 'home',
     css: 'home.scss',
-    modules: [
-        '@home' => 'home.js',
-    ]
+    js: 'home.js',
 )]
 class HomeView implements ViewModelInterface
 {
@@ -45,11 +40,10 @@ class HomeView implements ViewModelInterface
     /**
      * Prepare
      *
-     * @param  AppContext                  $app
-     * @param  View  $view
+     * @param  AppContext  $app
+     * @param  View        $view
      *
      * @return  mixed
-     * @throws \Windwalker\DI\Exception\DefinitionException
      */
     public function prepare(AppContext $app, View $view): array
     {

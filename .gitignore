@@ -12,7 +12,7 @@ Thumbs.db
 !.gitkeep
 
 # Configuration #
-.env*
+.env
 !.env.dist
 
 # Libraries

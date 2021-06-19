@@ -18,13 +18,9 @@ use MyCLabs\Enum\Enum;
  *
  * @method static static ARCHIVED()
  * @method static static TRASHED()
- * @method static static UNPUBLISHED()
- * @method static static PUBLISHED()
  */
 class State extends Enum
 {
-    public const TRASHED = -2;
-    public const UNPUBLISHED = 0;
     public const PUBLISHED = 1;
     public const ARCHIVED = -1;
 

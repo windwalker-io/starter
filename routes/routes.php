@@ -21,6 +21,4 @@ $router->group('web')
     ->register(function (RouteCreator $router) {
         $router->load(__DIR__ . '/front.php');
         $router->load(__DIR__ . '/admin.php');
-
-        $router->load(__DIR__ . '/packages/*.php');
     });

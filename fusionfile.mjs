@@ -39,6 +39,8 @@ export async function js() {
   // Compile Start
   babel('resources/assets/src/**/*.{js,mjs}', 'www/assets/js/', { module: 'systemjs' });
   // Compile end
+
+  return syncJS();
 }
 
 export async function images() {
@@ -51,7 +53,7 @@ export async function images() {
   // Compile end
 }
 
-export async function sync() {
+export async function syncJS() {
   // Watch start
   fusion.watch('src/Module/**/assets/**/*.{js,mjs}');
   // Watch end
@@ -102,7 +104,7 @@ export async function install() {
   ]);
 }
 
-export default parallel(css, sync, js, images);
+export default parallel(css, js, images);
 
 /*
  * APIs

@@ -24,13 +24,13 @@ use function Windwalker\with;
 /**
  * Global variables
  * --------------------------------------------------------------
- * @var $app       AppContext                 Global Application
- * @var $view      ViewModel                       Some information of this view.
- * @var $uri       SystemUri                     Uri information, example: $uri->path
- * @var $chronos   ChronosService   PHP DateTime object of current time.
- * @var $nav       Navigator       Router object.
- * @var $asset     AssetService         The Asset manager.
- * @var $lang      LangService         The language.
+ * @var $app       AppContext     Global Application
+ * @var $view      ViewModel      Some information of this view.
+ * @var $uri       SystemUri      Uri information, example: $uri->path
+ * @var $chronos   ChronosService PHP DateTime object of current time.
+ * @var $nav       Navigator      Router object.
+ * @var $asset     AssetService   The Asset manager.
+ * @var $lang      LangService    The language.
  */
 
 $app     = with(AppContext::class);

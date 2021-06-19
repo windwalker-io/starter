@@ -61,7 +61,8 @@ return [
 
     'aliases' => [
         '@pagination' => 'layout.pagination.basic-pagination',
-        '@messages' => 'layout.messages.bs5-messages'
+        '@messages' => 'layout.messages.bs5-messages',
+        '@csrf' => 'layout.security.csrf',
     ],
 
     'edge' => [

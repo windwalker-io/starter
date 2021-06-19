@@ -1,2 +1,0 @@
-#!/bin/bash
-php8 $(which composer) update --prefer-stable
