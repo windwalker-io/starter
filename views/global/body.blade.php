@@ -30,7 +30,7 @@ use Windwalker\Core\Router\SystemUri;
     @section('header')
 
         <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div class="container">
                     <a class="navbar-brand" href="#">
                         <img src="{{ $asset->path('images/logo-h.svg') }}"
