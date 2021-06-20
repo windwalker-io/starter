@@ -35,8 +35,4 @@ return [
         'cross-env NODE_ENV=production php windwalker run prepare',
         'php windwalker asset:version',
     ],
-
-    'test' => [
-        '@php windwalker "\@php"'
-    ]
 ];

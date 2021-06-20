@@ -16,7 +16,8 @@
         "windwalker/framework": "4.x-dev",
         "windwalker/core": "4.x-dev",
         "windwalker/unicorn": "dev-main",
-        "myclabs/php-enum": "^1.8"
+        "myclabs/php-enum": "^1.8",
+        "asika/cross-env": "^1.0"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.0",

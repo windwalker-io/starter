@@ -29,7 +29,7 @@ return [
 
     'register_shutdown' => true,
 
-    'template' => 'windwalker.error.simple',
+    'template' => 'layout.error.default',
 
     'log' => true,
 
@@ -53,10 +53,12 @@ return [
         'handlers' => [
             'default' => create(
                 SimpleErrorPageHandler::class,
-                [
-                    'debug' => ref('system.debug'),
-                    'layout' => ref('error.template'),
-                ]
+                options: function (Container $container) {
+                    return [
+                        'debug' => $container->getParam('system.debug'),
+                        'layout' => $container->getParam('error.template'),
+                    ];
+                }
             ),
             'log' => create(
                 ErrorLogHandler::class,
