@@ -49,7 +49,7 @@
     "extra": {
         "branch-alias": {
             "dev-master": "4.x-dev",
-            "4.x-dev": "next-dev"
+            "next": "4.x-dev"
         }
     }
 }
