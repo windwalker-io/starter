@@ -27,10 +27,14 @@
     },
     "scripts": {
         "post-create-project-cmd": [
+            "php windwalker run prepare",
             "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall"
         ],
         "post-autoload-dump": "php windwalker cache:clear renderer",
-        "reinstall": "Windwalker\\Core\\Composer\\StarterInstaller::genEnv"
+        "reinstall": [
+            "composer install",
+            "Windwalker\\Core\\Composer\\StarterInstaller::genEnv"
+        ]
     },
     "autoload": {
         "psr-4": {
@@ -44,7 +48,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.x-dev"
+            "dev-master": "4.x-dev",
+            "4.x-dev": "next"
         }
     }
 }
