@@ -1,26 +1,23 @@
 # Windwalker Starter
 
-![logo](https://cloud.githubusercontent.com/assets/1639206/2870854/176b987a-d2e4-11e3-8be6-9f70304a8499.png)
+![logo](https://user-images.githubusercontent.com/1639206/122663390-a5cad880-d1cc-11eb-9592-33e507f2099f.png)
 
-This is [Windwlaker Framework](https://github.com/ventoviro/windwalker) starter package.
+This is [Windwlaker Framework](https://github.com/ventoviro/windwalker-framework) starter package.
 
 ## Installation Via Composer
 
 ``` bash
-$ php composer.phar create-project windwalker/starter windwalker ~3.0
+composer create-project windwalker/starter windwalker 4.x-dev
 ```
 
 ## Getting Started
 
 Open `http://{Your project root}/www`, you will see the sample page.
 
-![acme_page](https://cloud.githubusercontent.com/assets/1639206/5560315/dd714ccc-8dba-11e4-8911-8a29e2a2b1f2.png)
+![home](https://user-images.githubusercontent.com/1639206/122663411-d4e14a00-d1cc-11eb-892d-f20c6f0e9eec.jpg)
+
 
 Open `http://{Your project root}/www/dev.php`, you will enter the development mode.
-
-## Use Database
-
-Copy `etc/secret.dist.yml` to `etc/secret.yml` and fill database information.
 
 ## Using Console
 
@@ -33,38 +30,57 @@ php windwalker
 You will see console usage:
 
 ```
-Windwalker Console - version: 3.0
-------------------------------------------------------------
-
-[console Help]
-
-The default application command
+Windwalker Console 4.x
 
 Usage:
-  console <command> [option]
-
+  command [options] [arguments]
 
 Options:
+  -h, --help            Display help for the given command. When no command is given display help for the list command
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+      --ansi|--no-ansi  Force (or disable --no-ansi) ANSI output
+  -n, --no-interaction  Do not ask any interactive question
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 
-  -h | --help       Display this help message.
-  -q | --quiet      Do not output any message.
-  -v | --verbose    Increase the verbosity of messages.
-  --ansi            Set 'off' to suppress ANSI colors on unsupported terminals.
-
-Commands:
-
-  migration    Database migration system.
-  seed         The data seeder help you create fake data.
-  build        Some useful tools for building system.
-
-Welcome to Windwalker Console.
+Available commands:
+  dump-server      Start the dump server to collect dump information.
+  help             Display help for a command
+  list             List commands
+  run              Run custom scripts.
+  schedule         Run CRON schedule
+ asset
+  asset:version    Create assets version file.
+ build
+  build:entity     Build entity getters/setters and sync properties with database.
+  build:form       Build form definition from DB table.
+ cache
+  cache:clear      Clear cache
+ db
+  db:export        Export database to file.
+ generate
+  generate:make    [g] Generate files.
+  generate:revise  Revise file to template.
+ mail
+  mail:test        This command will send a test mail by your mail settings.
+ mig
+  mig:create       Create a migration version.
+  mig:go           Migrate to specific version or latest.
+  mig:reset        Reset migration versions.
+  mig:status       Show migration status.
+ pkg
+  pkg:install      Install package resources.
+ seed
+  seed:clear       Clear seeders
+  seed:create      Create a seeder.
+  seed:import      Import seeders
 ```
 
 ### Import Sample Schema
 
 ``` bash
-php windwalker migration status
-php windwalker migration migrate --seed
+php windwalker mig:status
+php windwalker mog:go --seed
 ```
 
 ## How To Use Windwalker

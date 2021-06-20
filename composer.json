@@ -29,7 +29,7 @@
             "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall"
         ],
         "post-autoload-dump": "php windwalker cache:clear renderer",
-        "gen-env": "Windwalker\\Core\\Composer\\StarterInstaller::genEnv"
+        "reinstall": "Windwalker\\Core\\Composer\\StarterInstaller::genEnv"
     },
     "autoload": {
         "psr-4": {
