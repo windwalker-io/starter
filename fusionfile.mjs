@@ -74,30 +74,6 @@ export async function syncJS() {
   return Promise.all([]);
 }
 
-// export async function sync() {
-//   // Watch start
-//   fusion.watch('src/Component/**/view/**/*.js');
-//   // Watch end
-//
-//   // Compile Start
-//   const wait = [];
-//   let js = JSON.parse(execSync('php windwalker assets:sync "src/Component" --type=js').toString());
-//
-//   for (let key in js) {
-//     console.log(`Copy: ${key} ==> www/asset/js/@view/${js[key]}`);
-//     wait.push(fusion.js(key, `www/asset/js/@view/${js[key]}`));
-//   }
-//
-//   const css = JSON.parse(execSync('php windwalker assets:sync "src/Component" --type=css').toString());
-//
-//   wait.push(
-//     fusion.sass([...css], 'www/asset/css/main.css')
-//   );
-//   // Compile end
-//
-//   return Promise.all(wait);
-// }
-
 export async function install() {
   return installVendors([
     //
