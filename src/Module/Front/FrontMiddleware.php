@@ -46,7 +46,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
      */
     protected function preprocess(ServerRequestInterface $request): void
     {
-        $this->asset->js('test/test.js');
+        $this->asset->css('css/front/app.css');
     }
 
     /**
