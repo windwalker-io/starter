@@ -15,6 +15,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
+use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\Middleware\AbstractLifecycleMiddleware;
 
 /**
@@ -22,12 +23,6 @@ use Windwalker\Core\Middleware\AbstractLifecycleMiddleware;
  */
 class AdminMiddleware extends AbstractLifecycleMiddleware
 {
-    /**
-     * FrontMiddleware constructor.
-     *
-     * @param  AppContext    $app
-     * @param  AssetService  $asset
-     */
     public function __construct(
         protected AppContext $app,
         protected AssetService $asset,
