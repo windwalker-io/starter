@@ -12,6 +12,7 @@ use Windwalker\Core\Error\ErrorLogHandler;
 use Windwalker\Core\Error\SimpleErrorPageHandler;
 use Windwalker\Core\Provider\ErrorHandlingProvider;
 
+use Windwalker\Core\Service\ErrorService;
 use Windwalker\DI\Container;
 
 use function Windwalker\DI\create;
@@ -20,10 +21,10 @@ use function Windwalker\ref;
 return [
     'ini' => [
         'display_errors' => 'on',
-        'error_reporting' => '-1'
+        'error_reporting' => (string) WINDWALKER_DEBUG ? E_ALL : ErrorService::getReportLevel(),
     ],
 
-    'report_level' => E_ALL | E_STRICT,
+    'report_level' => ErrorService::getReportLevel(),
 
     'restore' => false,
 

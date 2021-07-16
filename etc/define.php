@@ -36,3 +36,5 @@ $env = WINDWALKER_ROOT . '/.env.' . ($_ENV['APP_ENV'] ?? 'production');
 if (is_file($env)) {
     (new Dotenv())->overload($env);
 }
+
+define('WINDWALKER_DEBUG', (bool) env('APP_DEBUG'));

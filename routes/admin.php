@@ -25,5 +25,5 @@ $router->group('admin')
 
         $router->load(__DIR__ . '/admin/*.php');
 
-        $router->load(__DIR__ . '/packages/*.admin.php');
+        $router->load(__DIR__ . '/packages/admin/*.route.php');
     });

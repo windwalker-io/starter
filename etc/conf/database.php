@@ -10,11 +10,9 @@
 declare(strict_types=1);
 
 use Windwalker\Core\Provider\DatabaseProvider;
-use Windwalker\Database\DatabaseAdapter;
 
 use Windwalker\Database\DatabaseFactory;
 
-use function Windwalker\DI\create;
 use function Windwalker\ref;
 
 return [
@@ -48,6 +46,7 @@ return [
                     'password' => env('DATABASE_PASSWORD'),
                     'port' => env('DATABASE_PORT'),
                     'prefix' => env('DATABASE_TABLE_PREFIX'),
+                    'dsn' => env('DATABASE_DSN'),
                 ]
             ),
         ],
