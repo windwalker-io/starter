@@ -25,16 +25,22 @@ const WINDWALKER_MIGRATIONS = WINDWALKER_RESOURCES . DIRECTORY_SEPARATOR . 'migr
 const WINDWALKER_SEEDERS    = WINDWALKER_RESOURCES . DIRECTORY_SEPARATOR . 'seeders';
 const WINDWALKER_LANGUAGES  = WINDWALKER_RESOURCES . DIRECTORY_SEPARATOR . 'languages';
 
-$env = WINDWALKER_ROOT . '/.env';
+$dotenv = new Dotenv();
 
-if (is_file($env)) {
-    (new Dotenv())->load($env);
+if (is_file($env = WINDWALKER_ROOT . '/.env')) {
+    $dotenv->load($env);
 }
 
-$env = WINDWALKER_ROOT . '/.env.' . ($_ENV['APP_ENV'] ?? 'production');
+if (is_file($env = WINDWALKER_ROOT . '/.env.local')) {
+    $dotenv->overload($env);
+}
 
-if (is_file($env)) {
-    (new Dotenv())->overload($env);
+if (is_file($env = WINDWALKER_ROOT . '/.env.' . ($_ENV['APP_ENV'] ?? 'prod'))) {
+    $dotenv->overload($env);
+}
+
+if (is_file($env = WINDWALKER_ROOT . '/.env.' . ($_ENV['APP_ENV'] ?? 'prod') . '.local')) {
+    $dotenv->overload($env);
 }
 
 define('WINDWALKER_DEBUG', (bool) env('APP_DEBUG'));
