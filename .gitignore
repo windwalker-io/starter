@@ -13,6 +13,8 @@ Thumbs.db
 
 # Configuration #
 .env
+.env.local
+.env*.local
 !.env.dist
 
 # Libraries
@@ -25,9 +27,6 @@ Thumbs.db
 composer.lock
 yarn.lock
 package-lock.json
-
-# Windwalker
-!.env.dist
 
 #Test
 /phpunit.xml
