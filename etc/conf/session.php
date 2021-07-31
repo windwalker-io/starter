@@ -76,7 +76,7 @@ return [
                 PhpBridge::class,
                 options: [
                     BridgeInterface::OPTION_AUTO_COMMIT => true,
-                    BridgeInterface::OPTION_WITH_SUPER_GLOBAL => false,
+                    BridgeInterface::OPTION_WITH_SUPER_GLOBAL => true,
                 ],
                 handler: ref('session.factories.handlers.filesystem')
             ),

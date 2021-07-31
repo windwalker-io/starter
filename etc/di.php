@@ -32,13 +32,13 @@ return Arr::mergeRecursive(
     [
         'factories' => include_arrays(__DIR__ . '/di/*.php'),
         'providers' => [
-
+            //
         ],
-        'binding' => [
-
+        'bindings' => [
+            //
         ],
         'aliases' => [
-
+            //
         ],
         'layouts' => [
             //
