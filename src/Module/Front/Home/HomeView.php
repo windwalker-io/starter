@@ -29,10 +29,8 @@ class HomeView implements ViewModelInterface
 {
     /**
      * HomeView constructor.
-     *
-     * @param  ORM  $orm
      */
-    public function __construct(protected ORM $orm)
+    public function __construct()
     {
         //
     }
