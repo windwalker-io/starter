@@ -35,7 +35,8 @@
             "php windwalker cache:clear renderer"
         ],
         "reinstall": [
-            "Windwalker\\Core\\Composer\\StarterInstaller::genEnv"
+            "Windwalker\\Core\\Composer\\StarterInstaller::genEnv",
+            "php windwalker run prepare"
         ]
     },
     "autoload": {
