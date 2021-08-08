@@ -3,7 +3,7 @@
     "description": "Windwalker Starter.",
     "homepage": "https://github.com/ventoviro/windwalker-starter",
     "license": "MIT",
-    "minimum-stability": "dev",
+    "minimum-stability": "beta",
     "authors": [
         {
             "name": "Simon Asika",
@@ -13,10 +13,10 @@
     "require": {
         "php": ">=8.0",
         "ext-json": "*",
-        "windwalker/core": "4.x-dev",
-        "windwalker/renderer": "4.x-dev",
-        "windwalker/dom": "4.x-dev",
-        "windwalker/edge": "4.x-dev",
+        "windwalker/core": "^4.0",
+        "windwalker/renderer": "^4.0",
+        "windwalker/dom": "^4.0",
+        "windwalker/edge": "^4.0",
         "asika/cross-env": "^1.0"
     },
     "require-dev": {
