@@ -7,7 +7,7 @@ This is [Windwlaker Framework](https://github.com/ventoviro/windwalker-framework
 ## Installation Via Composer
 
 ``` bash
-composer create-project windwalker/starter windwalker dev-master --remove-vcs
+composer create-project windwalker/starter windwalker ^4.0 --remove-vcs
 ```
 
 ## Getting Started
