@@ -14,13 +14,19 @@
 
 declare(strict_types=1);
 
+use App\Entity\SunFlower;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
 use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
+use Windwalker\Form\Form;
 
+/**
+ * @var Form      $form
+ * @var SunFlower $item
+ */
 ?>
 
 @extends('admin.global.body')
@@ -30,37 +36,34 @@ use Windwalker\Core\Router\SystemUri;
 @stop
 
 @section('content')
-    <uni-form-validate scroll>
-        <form name="admin-form" id="admin-form" novalidate
-            action="{{ $nav->to('sun_flower_edit') }}"
-            method="POST" enctype="multipart/form-data">
+    <form name="admin-form" id="admin-form"
+        novalidate uni-form-validate='{"scroll": true}'
+        action="{{ $nav->to('sun_flower_edit') }}"
+        method="POST" enctype="multipart/form-data">
 
-            <x-title-bar :form="$form"></x-title-bar>
+        <x-title-bar :form="$form"></x-title-bar>
 
-            <div class="row">
-                <div class="col-md-7">
-                    <x-fieldset name="basic" title="Basic"
-                        :form="$form" class="mb-4"
-                    >
-                    </x-fieldset>
-                    <x-fieldset name="text" title="Text"
-                        :form="$form" class="mb-4"
-                    >
-                    </x-fieldset>
-                </div>
-                <div class="col-md-5">
-                    <x-fieldset name="meta" title="Meta"
-                        :form="$form" class="mb-4"
-                    >
-                    </x-fieldset>
-                </div>
+        <div class="row">
+            <div class="col-md-7">
+                <x-fieldset name="basic" title="Basic"
+                    :form="$form" class="mb-4"
+                >
+                </x-fieldset>
             </div>
-
-            <div class="d-none">
-                @include('@csrf')
+            <div class="col-md-5">
+                <x-fieldset name="meta" title="Meta"
+                    :form="$form" class="mb-4"
+                >
+                </x-fieldset>
             </div>
+        </div>
 
-            <uni-iframe-modal id="modal-1"></uni-iframe-modal>
-        </form>
-    </uni-form-validate>
+        <div class="d-none">
+            @if ($idField = $form?->getField('id'))
+                <input name="{{ $idField->getInputName() }}" type="hidden" value="{{ $idField->getValue() }}" />
+            @endif
+
+            @include('@csrf')
+        </div>
+    </form>
 @stop
