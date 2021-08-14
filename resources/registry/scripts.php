@@ -44,6 +44,12 @@ return [
         'php windwalker run revise:edit',
     ],
 
+    'gen:all' => [
+        'php windwalker g unicorn:controller Admin/SunFlower --model',
+        'php windwalker g unicorn:view-grid Admin/SunFlower --model',
+        'php windwalker g unicorn:view-edit Admin/SunFlower --model',
+    ],
+
     'revise:route' => [
         'php windwalker generate:revise src/Module/Admin/SunFlower/SunFlowerListView.php vendor/windwalker/unicorn/views/code/view/grid --name=SunFlower --ns=App/Module/Admin/SunFlower',
     ],
