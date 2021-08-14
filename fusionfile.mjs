@@ -37,7 +37,7 @@ export async function js() {
   // Watch end
 
   // Compile Start
-  babel('resources/assets/src/**/*.{js,mjs}', 'www/assets/js/');
+  babel('resources/assets/src/**/*.{js,mjs}', 'www/assets/js/', { module: 'systemjs' });
   // Compile end
 
   return syncJS();
@@ -64,7 +64,7 @@ export async function syncJS() {
     'www/assets/js/view/'
   );
 
-  babel(dest.path + '**/*.{mjs,js}');
+  babel(dest.path + '**/*.{mjs,js}', null, { module: 'systemjs' });
   // Compile end
 
   return Promise.all([]);
@@ -72,7 +72,8 @@ export async function syncJS() {
 
 export async function install() {
   return installVendors([
-    //
+    'bootstrap',
+    'choices.js'
   ]);
 }
 

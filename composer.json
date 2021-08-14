@@ -23,7 +23,9 @@
         "squizlabs/php_codesniffer": "^3.0",
         "dragonmantank/cron-expression": "^3.1",
         "symfony/mailer": "^5.2",
-        "composer-plugin-api": "^2.0"
+        "composer-plugin-api": "^2.0",
+        "windwalker/unicorn": "dev-main",
+        "windwalker/framework": "dev-master"
     },
     "scripts": {
         "post-create-project-cmd": [
