@@ -25,7 +25,7 @@ use function Windwalker\DI\create;
 use function Windwalker\ref;
 
 return [
-    'enabled' => !env('MAIL_ENABLED'),
+    'enabled' => (bool) env('MAIL_ENABLED'),
 
     'default' => 'default',
 
