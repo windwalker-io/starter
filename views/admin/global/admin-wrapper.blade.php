@@ -31,7 +31,7 @@ use Windwalker\Core\Router\SystemUri;
     @include('admin.global.header')
 @show
 
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top: 70px">
     <div class="row">
         <div class="main-sidebar col-md-2">
             @include('admin.global.widget.submenu')

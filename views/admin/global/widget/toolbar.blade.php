@@ -23,14 +23,8 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 ?>
-<aside id="admin-toolbar" class="mb-4">
-    <button data-bs-toggle="collapse" class="btn btn-default toolbar-toggle-button"
-        data-bs-target=".admin-toolbar-buttons">
-        <span class="glyphicon glyphicon-wrench"></span>
-        @lang('phoenix.toolbar.toggle')
-    </button>
+<aside id="admin-toolbar" class="my-4">
     <div class="admin-toolbar-buttons">
-        <hr/>
         @yield('toolbar-buttons')
     </div>
 </aside>
