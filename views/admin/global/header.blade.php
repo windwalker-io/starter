@@ -25,7 +25,7 @@ use Windwalker\Core\Router\SystemUri;
 ?>
 
 @section('header')
-    <div class="navbar navbar-dark bg-dark navbar-fixed-top navbar-expand-lg">
+    <div class="navbar navbar-dark bg-dark navbar-fixed-top navbar-expand-lg fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ $uri->path() }}">EARTH</a>
 

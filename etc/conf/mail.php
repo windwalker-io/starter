@@ -25,7 +25,7 @@ use function Windwalker\DI\create;
 use function Windwalker\ref;
 
 return [
-    'enabled' => !env('MAIL_ENABLED'),
+    'enabled' => true,
 
     'default' => 'default',
 
@@ -49,7 +49,7 @@ return [
             'default' => fn (MailerManager $manager) => $manager->createMailer(
                 [
                     'envelope' => $manager->config('envelope'),
-                    'dsn' => env('MAIL_DSN_DEFAULT'),
+                    'dsn' => env('MAIL_ENABLED') ? env('MAIL_DSN_DEFAULT') : 'null://null',
 
                     // 'dsn' => [
                     //     'scheme' => env('MAIL_TRANSPORT'),
