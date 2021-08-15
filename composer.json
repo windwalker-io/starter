@@ -1,7 +1,7 @@
 {
     "name": "windwalker/starter",
     "description": "Windwalker Starter.",
-    "homepage": "https://github.com/ventoviro/windwalker-starter",
+    "homepage": "https://github.com/windwalker-io/starter",
     "license": "MIT",
     "minimum-stability": "beta",
     "authors": [
