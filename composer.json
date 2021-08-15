@@ -17,7 +17,7 @@
         "windwalker/renderer": "^4.0",
         "windwalker/dom": "^4.0",
         "windwalker/edge": "^4.0",
-        "windwalker/unicorn": "dev-main",
+        "windwalker/unicorn": "^1.0",
         "asika/cross-env": "^1.0",
         "symfony/var-dumper": "^5.0"
     },
