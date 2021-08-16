@@ -13,6 +13,7 @@ namespace App\Module\Front;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Unicorn\Script\UnicornScript;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Html\HtmlFrame;
@@ -28,6 +29,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         protected AppContext $app,
         protected AssetService $asset,
         protected HtmlFrame $htmlFrame,
+        protected UnicornScript $unicornScript,
     ) {
     }
 
@@ -40,7 +42,9 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
      */
     protected function preprocess(ServerRequestInterface $request): void
     {
-        $this->asset->css('css/front/app.css');
+        $this->unicornScript->init('js/main,js');
+
+        $this->asset->css('css/front/main.css');
 
         $this->htmlFrame->setSiteName('Windwalker');
     }

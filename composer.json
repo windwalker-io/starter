@@ -25,7 +25,7 @@
         "dragonmantank/cron-expression": "^3.1",
         "symfony/mailer": "^5.2",
         "composer-plugin-api": "^2.0",
-        "windwalker/unicorn": "dev-main",
+        "windwalker/unicorn": "^1.0",
         "windwalker/framework": "dev-master"
     },
     "scripts": {
