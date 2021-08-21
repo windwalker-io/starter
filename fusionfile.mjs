@@ -72,8 +72,6 @@ export async function syncJS() {
 
 export async function install() {
   return installVendors([
-    'bootstrap',
-    'choices.js'
   ]);
 }
 

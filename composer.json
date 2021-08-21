@@ -1,7 +1,7 @@
 {
     "name": "windwalker/starter",
     "description": "Windwalker Starter.",
-    "homepage": "https://github.com/ventoviro/windwalker-starter",
+    "homepage": "https://github.com/windwalker-io/starter",
     "license": "MIT",
     "minimum-stability": "beta",
     "authors": [
@@ -21,11 +21,7 @@
         "myclabs/php-enum": "^1.8"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "^3.0",
-        "dragonmantank/cron-expression": "^3.1",
-        "symfony/mailer": "^5.2",
-        "composer-plugin-api": "^2.0",
-        "windwalker/unicorn": "dev-main",
+        "windwalker/unicorn": "^1.0",
         "windwalker/framework": "dev-master"
     },
     "scripts": {
