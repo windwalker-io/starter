@@ -11,10 +11,12 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.0.0",
-        "@windwalker-io/core": "latest",
-        "@windwalker-io/fusion": "latest",
-        "@windwalker-io/unicorn": "latest",
-        "bootstrap": "^5.0.0"
+        "@windwalker-io/core": "^4.0",
+        "@windwalker-io/fusion": "^1.0",
+        "@windwalker-io/unicorn": "^1.0",
+        "bootstrap": "^5.0"
+    },
+    "devDependencies": {
     },
     "workspaces": [
         "vendor/windwalker/unicorn/*",

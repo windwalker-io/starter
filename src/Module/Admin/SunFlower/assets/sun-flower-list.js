@@ -8,13 +8,10 @@
 import u from '@main';
 import '@vendor/choices.js/public/assets/scripts/choices.min.js';
 
-u.importCSS(
-  '@vendor/choices.js/public/assets/styles/choices.min.css',
-  '@vendor/choices.js/public/assets/styles/choices.min.css'
-);
-
 u.$ui.bootstrap.tooltip();
 
-u.grid('#grid-form').initComponent();
+const form = '#admin-form';
 
-new Choices('select');
+u.grid(form).initComponent();
+u.$ui.disableOnSubmit(form);
+u.$ui.checkboxesMultiSelect(form);

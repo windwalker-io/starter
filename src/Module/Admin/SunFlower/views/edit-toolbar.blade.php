@@ -32,9 +32,12 @@ use Windwalker\Core\Router\SystemUri;
             @lang('unicorn.toolbar.save')
         </button>
         <button type="button" class="btn btn-success btn-sm dropdown-toggle dropdown-toggle-split"
-            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            data-bs-toggle="dropdown"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
             <span class="caret"></span>
-            <span class="sr-only">Toggle Dropdown</span>
+            <span class="sr-only visually-hidden">Toggle Dropdown</span>
         </button>
 
         <ul class="dropdown-menu dropdown-menu-end">

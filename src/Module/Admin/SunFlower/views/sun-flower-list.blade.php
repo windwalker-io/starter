@@ -36,7 +36,7 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
 @stop
 
 @section('content')
-    <form id="grid-form" action="" x-data="{ grid: $store.grid }"
+    <form id="admin-form" action="" x-data="{ grid: $store.grid }"
         x-ref="gridForm"
         data-ordering="{{ $ordering }}"
         method="post">
@@ -95,9 +95,11 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                         </td>
                         <th>
                             <x-state-dropdown color-on="text"
-                                button-style="min-width: 150px"
+                                button-style="width: 100%"
                                 use-states
-                                :workflow="$workflow" :id="$entity->getId()" :value="$item->state"
+                                :workflow="$workflow"
+                                :id="$entity->getId()"
+                                :value="$item->state"
                             />
                         </th>
                         <td>
@@ -116,6 +118,7 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                         <td class="text-center">
                             <button type="button" class="btn btn-sm btn-outline-secondary"
                                 @click="grid.deleteItem('{{ $entity->getId() }}')"
+                                data-dos
                             >
                                 <i class="fa-solid fa-trash"></i>
                             </button>

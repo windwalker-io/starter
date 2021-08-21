@@ -37,7 +37,8 @@ class EditForm implements FieldDefinitionInterface
     {
         $form->add('title', TextField::class)
             ->label('Title')
-            ->addFilter('trim');
+            ->addFilter('trim')
+            ->required(true);
 
         $form->add('alias', TextField::class)
             ->label('Alias')
