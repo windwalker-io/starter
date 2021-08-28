@@ -11,13 +11,16 @@ declare(strict_types=1);
 
 namespace App\Module\Admin;
 
+use Lyrasoft\Luna\User\UserService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Unicorn\Script\UnicornScript;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\Middleware\AbstractLifecycleMiddleware;
+use Windwalker\Core\Router\Navigator;
 
 /**
  * The FrontMiddleware class.
@@ -47,6 +50,24 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
 
         $this->asset->css('css/admin/app.css');
     }
+
+    // protected function checkAccess(): bool
+    // {
+    //     $user = $this->app->service(UserService::class)->getUser();
+    //
+    //     return $user->isLogin();
+    // }
+    //
+    // public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    // {
+    //     $user = $this->app->service(UserService::class)->getUser();
+    //
+    //     if (!$user->isLogin()) {
+    //         return $this->app->service(Navigator::class)->redirectTo('front::home');
+    //     }
+    //
+    //     return parent::process($request, $handler);
+    // }
 
     /**
      * postExecute

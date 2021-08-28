@@ -6,7 +6,7 @@
  */
 
 import fusion, { sass, babel, parallel } from '@windwalker-io/fusion';
-import { jsSync, installVendors } from '@windwalker-io/core';
+import { jsSync, installVendors, findModules } from '@windwalker-io/core';
 
 export async function css() {
   // Watch start
@@ -17,6 +17,7 @@ export async function css() {
   sass(
     [
       'resources/assets/scss/front/main.scss',
+      ...findModules('Front/**/assets/*.scss'),
       'src/Module/Front/**/assets/*.scss'
     ],
     'www/assets/css/front/app.css'
@@ -24,6 +25,7 @@ export async function css() {
   sass(
     [
       'resources/assets/scss/admin/main.scss',
+      ...findModules('Admin/**/assets/*.scss'),
       'src/Module/Admin/**/assets/*.scss'
     ],
     'www/assets/css/admin/app.css'

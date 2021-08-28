@@ -22,6 +22,7 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
+$user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
 ?>
 
 @section('header')
@@ -39,7 +40,7 @@ use Windwalker\Core\Router\SystemUri;
                         @include('admin.global.widget.mainmenu')
                     @show
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right ms-auto">
                     <li class="nav-item">
                         <a href="{{ $nav->to('front@home')->mute() }}" target="_blank"
                             class="nav-link hasTooltip" title="Preview" data-placement="bottom">
@@ -47,14 +48,14 @@ use Windwalker\Core\Router\SystemUri;
                         </a>
                     </li>
 
-                    {{--                @if ($user->isMember())--}}
-                    {{--                    <li class="nav-item">--}}
-                    {{--                        <a href="{{ $router->to('logout')->mute() }}"--}}
-                    {{--                           class="nav-link hasTooltip" title="Logout" data-placement="bottom">--}}
-                    {{--                            <span class="glyphicon glyphicon-log-out fa fa-sign-out fa-sign-out-alt"></span>--}}
-                    {{--                        </a>--}}
-                    {{--                    </li>--}}
-                    {{--                @endif--}}
+                    @if ($user->isLogin())
+                        <li class="nav-item">
+                            <a href="{{ $nav->to('logout') }}"
+                               class="nav-link hasTooltip" title="Logout" data-placement="bottom">
+                                <span class="glyphicon glyphicon-log-out fa fa-sign-out fa-sign-out-alt"></span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
