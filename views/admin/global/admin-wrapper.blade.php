@@ -31,14 +31,14 @@ use Windwalker\Core\Router\SystemUri;
     @include('admin.global.header')
 @show
 
-@section('body')
-<div class="container-fluid" style="margin-top: 70px">
+@section('container')
+<div class="container-fluid" style="">
     <div class="row">
         <div class="main-sidebar col-md-2">
             @include('admin.global.widget.submenu')
         </div>
         <div class="main-body col-md-10">
-            @yield('content', 'Content Section')
+            @yield('body', 'Body Section')
 
             @section('copyright')
                 @include('admin.global.copyright')

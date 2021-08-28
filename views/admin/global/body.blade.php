@@ -27,19 +27,19 @@ use Windwalker\Core\Router\SystemUri;
 @extends('admin.global.admin-wrapper')
 
 @section('body')
-@section('banner')
-    @include('admin.global.widget.banner')
-@show
+    @section('banner')
+        @include('admin.global.widget.banner')
+    @show
 
-@section('admin-toolbar')
-    @include('admin.global.widget.toolbar')
-@show
+    @section('admin-toolbar')
+        @include('admin.global.widget.toolbar')
+    @show
 
-@section('admin-area')
-    <section id="admin-area">
-        @include('@messages')
+    @section('admin-area')
+        <section id="admin-area">
+            @include('@messages')
 
-        @yield('content', 'Admin Content')
-    </section>
-@show
+            @yield('content', 'Admin Content')
+        </section>
+    @show
 @stop
