@@ -23,7 +23,7 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 ?>
-<aside id="admin-toolbar" class="my-4">
+<aside id="admin-toolbar" class="">
     <div class="admin-toolbar-buttons">
         @yield('toolbar-buttons')
     </div>

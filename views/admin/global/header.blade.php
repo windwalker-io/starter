@@ -43,7 +43,9 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
                 <ul class="nav navbar-nav navbar-right ms-auto">
                     <li class="nav-item">
                         <a href="{{ $nav->to('front::home')->mute() }}" target="_blank"
-                            class="nav-link hasTooltip" title="Preview" data-placement="bottom">
+                            class="nav-link" title="Preview"
+                            data-bs-toggle="tooltip"
+                            data-placement="bottom">
                             <span class="far fa-eye"></span>
                         </a>
                     </li>
@@ -51,8 +53,12 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
                     @if ($user->isLogin())
                         <li class="nav-item">
                             <a href="{{ $nav->to('logout') }}"
-                               class="nav-link hasTooltip" title="Logout" data-placement="bottom">
-                                <span class="glyphicon glyphicon-log-out fa fa-sign-out fa-sign-out-alt"></span>
+                                class="nav-link"
+                                title="Logout"
+                                data-bs-toggle="tooltip"
+                                data-placement="bottom"
+                            >
+                                <span class="fa-solid fa-sign-out-alt"></span>
                             </a>
                         </li>
                     @endif

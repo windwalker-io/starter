@@ -94,11 +94,11 @@ $menu = $app->service(\Unicorn\Legacy\Html\MenuHelper::class);
     {{--    </a>--}}
     {{--</li>--}}
 
-    {{--<li class="nav-item {{ $menu->active('users') }}">--}}
-    {{--    <a href="{{ $nav->to('users') }}" class="nav-link {{ $menu->active('users') }}">--}}
-    {{--        @lang($warder->langPrefix . 'users.title')--}}
-    {{--    </a>--}}
-    {{--</li>--}}
+    <li class="nav-item {{ $menu->active('user_list') }}">
+        <a href="{{ $nav->to('user_list') }}" class="nav-link {{ $menu->active('user_list') }}">
+            @lang('luna.users.title')
+        </a>
+    </li>
 
     {{--<li class="nav-item {{ $menu->active('contacts') }}">--}}
     {{--    <a href="{{ $nav->to('contacts') }}" class="nav-link {{ $menu->active('contacts') }}">--}}

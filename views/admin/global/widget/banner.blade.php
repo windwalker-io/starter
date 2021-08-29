@@ -25,8 +25,16 @@ use Windwalker\Core\Router\SystemUri;
 $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 
 ?>
-<section class="jumbotron admin-header">
-    <div class="container-fluid">
-        <h1>{{ $htmlFrame->getTitle() }}</h1>
+<section class="admin-header bg-light py-3">
+    <div class="d-flex justify-content-between align-items-center px-3">
+        <div>
+            <h1 class="h3 m-0">{{ $htmlFrame->getTitle() }}</h1>
+        </div>
+
+        <div>
+            @section('admin-toolbar')
+                @include('admin.global.widget.toolbar')
+            @show
+        </div>
     </div>
 </section>
