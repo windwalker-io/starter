@@ -12,6 +12,8 @@ declare(strict_types=1);
 use Unicorn\Flysystem\FlysystemFactory;
 use Unicorn\Provider\StorageProvider;
 use Unicorn\Storage\StorageFactory;
+use Unicorn\Upload\FileUploadService;
+use Unicorn\Upload\FileUploadSubscriber;
 
 return [
     'storage' => [
@@ -25,11 +27,18 @@ return [
             StorageProvider::class
         ],
 
+        'listeners' => [
+            FileUploadService::class => [
+                FileUploadSubscriber::class
+            ]
+        ],
+
         'factories' => [
             'instances' => [
                 'local' => fn (StorageFactory $factory) => $factory->localStorage(
                     [
-                        'path' => env('STORAGE_LOCAL_PATH') ?? 'www/assets/upload'
+                        'path' => env('STORAGE_LOCAL_PATH') ?? 'www/assets/upload',
+                        'uri_base' => env('STORAGE_LOCAL_URI_BASE') ?? 'assets/upload',
                     ]
                 ),
                 's3' => fn (StorageFactory $factory) => $factory->s3Storage(

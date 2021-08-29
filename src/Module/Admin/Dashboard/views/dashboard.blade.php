@@ -27,7 +27,7 @@ $faker = \Faker\Factory::create();
 
 @extends('admin.global.admin-wrapper')
 
-@section('content')
+@section('body')
     <style>
         .placeholders {
             text-align: center;

@@ -10,7 +10,11 @@ import { jsSync, installVendors, findModules } from '@windwalker-io/core';
 
 export async function css() {
   // Watch start
-  fusion.watch(['resources/assets/scss/**/*.scss', 'src/Module/**/assets/*.scss']);
+  fusion.watch([
+    'resources/assets/scss/**/*.scss',
+    'src/Module/**/assets/*.scss',
+    ...findModules('**/assets/*.scss')
+  ]);
   // Watch end
 
   // Compile Start
@@ -35,7 +39,7 @@ export async function css() {
 
 export async function js() {
   // Watch start
-  fusion.watch('resources/assets/src/**/*.{js,mjs}');
+  fusion.watch(['resources/assets/src/**/*.{js,mjs}']);
   // Watch end
 
   // Compile Start
@@ -57,7 +61,7 @@ export async function images() {
 
 export async function syncJS() {
   // Watch start
-  fusion.watch('src/Module/**/assets/**/*.{js,mjs}');
+  fusion.watch(['src/Module/**/assets/**/*.{js,mjs}', ...findModules('**/assets/*.{js,mjs}')]);
   // Watch end
 
   // Compile Start

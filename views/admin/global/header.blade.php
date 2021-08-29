@@ -42,7 +42,7 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
                 </ul>
                 <ul class="nav navbar-nav navbar-right ms-auto">
                     <li class="nav-item">
-                        <a href="{{ $nav->to('front@home')->mute() }}" target="_blank"
+                        <a href="{{ $nav->to('front::home')->mute() }}" target="_blank"
                             class="nav-link hasTooltip" title="Preview" data-placement="bottom">
                             <span class="far fa-eye"></span>
                         </a>

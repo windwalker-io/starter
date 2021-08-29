@@ -15,6 +15,7 @@ namespace App\Routes;
 use App\Module\Front\FrontMiddleware;
 use App\Module\Front\Home\HomeController;
 use App\Module\Front\Home\HomeView;
+use Lyrasoft\Luna\LunaPackage;
 use Windwalker\Core\Router\RouteCreator;
 
 /** @var RouteCreator $router */
@@ -30,4 +31,6 @@ $router->group('front')
         $router->load(__DIR__ . '/front/*.php');
 
         $router->load(__DIR__ . '/packages/front/*.route.php');
+
+        $router->load(LunaPackage::path('routes/front/*.route.php'));
     });

@@ -32,12 +32,14 @@ use Windwalker\Core\Router\SystemUri;
 @show
 
 @section('container')
-<div class="container-fluid" style="">
-    <div class="row">
-        <div class="main-sidebar col-md-2">
-            @include('admin.global.widget.submenu')
-        </div>
-        <div class="main-body col-md-10">
+<div class="container-fluid" style="padding-top: 70px">
+    <div class="row flex-nowrap">
+        @section('sidebar')
+            <div class="main-sidebar col-md-2">
+                @include('admin.global.widget.submenu')
+            </div>
+        @show
+        <div class="main-body col">
             @yield('body', 'Body Section')
 
             @section('copyright')

@@ -80,7 +80,7 @@ $mig->up(
 
         // Session
         $mig->createTable(
-            UserSocial::class,
+            Session::class,
             function (Schema $schema) {
                 $schema->varchar('id')->length(192);
                 $schema->text('data');

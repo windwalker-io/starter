@@ -27,7 +27,7 @@ use Windwalker\Core\Router\SystemUri;
 
 @section('admin-area')
     <section id="admin-area">
-        @messages
+        @include('@messages')
 
         @yield('admin-body', 'Admin Body')
     </section>

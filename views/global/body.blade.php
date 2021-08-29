@@ -55,11 +55,11 @@ use Windwalker\Core\Router\SystemUri;
         </header>
     @show
 
-    {{--@section('message')--}}
-    {{--    @messages()--}}
-    {{--@show--}}
-
     @section('body')
+        @section('message')
+            @include('@messages')
+        @show
+
         @yield('content', 'Content')
     @show
 

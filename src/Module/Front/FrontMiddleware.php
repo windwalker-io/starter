@@ -42,7 +42,10 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
      */
     protected function preprocess(ServerRequestInterface $request): void
     {
-        $this->unicornScript->init('js/main,js');
+        $this->unicornScript->init('js/front/main.js');
+
+        $this->asset->js('https://kit.fontawesome.com/59f5955d51.js');
+        $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.js');
 
         $this->asset->css('css/front/app.css');
 

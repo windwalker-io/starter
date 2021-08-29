@@ -39,10 +39,9 @@ return [
     'factories' => [
         'methods' => [
             'database' => create(
-                DatabaseMethod::class,
+                \Lyrasoft\Luna\Auth\LunaAuthMethod::class,
                 options: [
-                    'table' => 'users',
-                    'login_name' => 'username'
+                    //
                 ]
             )
         ]
