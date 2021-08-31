@@ -27,14 +27,19 @@ use Windwalker\Core\Router\SystemUri;
 @section('header')
     <div class="navbar navbar-dark bg-dark navbar-fixed-top navbar-expand-lg fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ $uri->path() }}">EARTH</a>
+            <a class="navbar-brand" href="{{ $uri->path() }}">
+                <img src="{{ $asset->path('images/logo-h.svg') }}"
+                    alt="LOGO"
+                    style="height: 25px;"
+                />
+            </a>
 
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
                 data-bs-target="#top-navbar-content" aria-controls="#top-navbar-content" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div id="top-navbar-content" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav mr-auto">
+                <ul class="nav navbar-nav me-auto">
                     @section('nav')
                         @include('admin.global.widget.mainmenu')
                     @show
