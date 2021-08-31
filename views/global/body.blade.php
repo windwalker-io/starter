@@ -22,6 +22,11 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
+$categories = $app->service(\Lyrasoft\Luna\Repository\CategoryRepository::class)
+    ->getListSelector()
+    ->where('category.state', 1)
+    ->where('category.type', 'article')
+    ->ordering('category.lft', 'ASC');
 ?>
 
 @extends('global.html')
@@ -47,6 +52,25 @@ use Windwalker\Core\Router\SystemUri;
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" aria-current="page" href="#"
+
+                                    data-bs-toggle="dropdown"
+                                >
+                                    Categories
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="categories">
+                                    @foreach ($categories as $category)
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="{{ $nav->to('article_category')->var('path', $category->path) }}">
+                                                {{ str_repeat('-', $category->level - 1) }}
+                                                {{ $category->title }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </li>
                         </ul>
                     </div>

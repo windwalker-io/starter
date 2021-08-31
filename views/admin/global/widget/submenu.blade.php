@@ -44,17 +44,17 @@ $menu = $app->service(\Unicorn\Legacy\Html\MenuHelper::class);
 
 <ul id="submenu" class="nav nav-stacked nav-pills flex-column">
     <li class="nav-item {{ $menu->active('category_list', ['type' => 'article']) }}">
-        <a href="{{ $nav->to('categories', ['type' => 'article']) }}"
-           class="nav-link {{ $menu->active('categories', ['type' => 'article']) }}">
-            @lang('unicorn.article.categories')
+        <a href="{{ $nav->to('category_list', ['type' => 'article']) }}"
+           class="nav-link {{ $menu->active('category_list', ['type' => 'article']) }}">
+            @lang('luna.article.category.list')
         </a>
     </li>
 
-    {{--<li class="nav-item {{ $menu->active('articles') }}">--}}
-    {{--    <a href="{{ $nav->to('articles') }}" class="nav-link {{ $menu->active('articles') }}">--}}
-    {{--        @lang('unicorn.articles.title')--}}
-    {{--    </a>--}}
-    {{--</li>--}}
+    <li class="nav-item {{ $menu->active('article_list') }}">
+        <a href="{{ $nav->to('article_list') }}" class="nav-link {{ $menu->active('article_list') }}">
+            @lang('luna.article.list.title')
+        </a>
+    </li>
 
     {{--<li class="nav-item {{ $menu->active('pages') }}">--}}
     {{--    <a href="{{ $nav->to('pages') }}" class="nav-link {{ $menu->active('pages') }}">--}}

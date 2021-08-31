@@ -43,7 +43,7 @@ $seeder->import(
             $item->setUsername($faker->userName());
             $item->setEmail($faker->safeEmail());
             $item->setPassword($pass);
-            $item->setAvatar('https://i.pravatar.cc/400?u=' . uid());
+            $item->setAvatar($faker->avatar(400));
             $item->setEnabled((bool) $faker->randomElement([1, 1, 1, 0]));
             $item->setVerified(true);
             $item->setLastLogin($faker->dateTimeThisYear());
