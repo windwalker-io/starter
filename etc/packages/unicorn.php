@@ -20,7 +20,7 @@ return [
 
         'listeners' => [
             \Windwalker\Core\Asset\AssetService::class => [
-                \Unicorn\Listener\UnicornAssetListener::class
+                \Unicorn\Listener\UnicornAssetSubscriber::class
             ]
         ],
 
@@ -32,11 +32,11 @@ return [
             'default' => 'default',
             'profiles' => [
                 'default' => [
-                    'storage' => 'default',
+                    'storage' => 'local',
                     'accept' => null,
                 ],
                 'image' => [
-                    'storage' => 'default',
+                    'storage' => 'local',
                     'accept' => 'image/*',
                     'resize' => [
                         'enabled' => true,

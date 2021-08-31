@@ -17,6 +17,7 @@ use Unicorn\Controller\CrudController;
 use Unicorn\Controller\GridController;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\Controller;
+use Windwalker\Core\Router\Navigator;
 use Windwalker\DI\Attributes\Autowire;
 
 /**
@@ -27,11 +28,28 @@ class SunFlowerController
 {
     public function save(
         AppContext $app,
+        CrudController $controller,
+        Navigator $nav,
         #[Autowire] SunFlowerRepository $repository,
-        #[Autowire] EditForm $form,
-        CrudController $controller
     ): mixed {
-        return $app->call([$controller, 'save'], compact('repository', 'form'));
+        $form = $app->make(EditForm::class);
+
+        $uri = $app->call([$controller, 'save'], compact('repository', 'form'));
+
+        switch ($app->input('task')) {
+            case 'save2close':
+                return $nav->to(SunFlowerListView::class);
+
+            case 'save2new':
+                return $nav->to(SunFlowerEditView::class)->var('new', 1);
+
+            case 'save2copy':
+                $controller->rememberForClone($app, $repository);
+                return $nav->self($nav::WITHOUT_VARS)->var('new', 1);
+
+            default:
+                return $uri;
+        }
     }
 
     public function delete(

@@ -7,9 +7,11 @@
 
 import u from '@main';
 
-u.formValidation();
-u.form('#admin-form').initComponent();
-
 u.$ui.bootstrap.tooltip();
 
-u.$ui.iframeModal();
+const form = '#admin-form';
+
+u.formValidation()
+  .then(() => u.$ui.disableOnSubmit(form));
+u.form(form).initComponent();
+u.$ui.keepAlive(location.href);
