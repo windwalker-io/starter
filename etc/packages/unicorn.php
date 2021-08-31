@@ -22,7 +22,7 @@ return [
             \Windwalker\Core\Asset\AssetService::class => [
                 \Unicorn\Listener\UnicornAssetSubscriber::class
             ],
-            \Unicorn\Listener\DumpOrphansListener::class
+            \Unicorn\Listener\DumpOrphansSubscriber::class
         ],
 
         'providers' => [
