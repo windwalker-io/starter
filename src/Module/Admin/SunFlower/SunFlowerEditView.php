@@ -52,7 +52,7 @@ class SunFlowerEditView implements ViewModelInterface
     {
         $id = $app->input('id');
 
-        $item = $this->orm->findOne(SunFlower::class, $id);
+        $item = $this->repository->getItem($id);
 
         $form = $this->formFactory
             ->create(EditForm::class)
