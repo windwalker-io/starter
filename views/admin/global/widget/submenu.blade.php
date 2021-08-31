@@ -106,11 +106,12 @@ $menu = $app->service(\Unicorn\Legacy\Html\MenuHelper::class);
     {{--    </a>--}}
     {{--</li>--}}
 
-    {{--<li class="nav-item {{ $menu->active('config', ['type' => 'core']) }}">--}}
-    {{--    <a href="{{ $nav->to('config', ['type' => 'core']) }}" class="nav-link {{ $menu->active('config', ['type' => 'core']) }}">--}}
-    {{--        @lang('unicorn.config.title')--}}
-    {{--    </a>--}}
-    {{--</li>--}}
+    <li class="nav-item {{ $menu->active('config_core') }}">
+        <a href="{{ $nav->to('config_core') }}"
+            class="nav-link {{ $menu->active('config_core') }}">
+            @lang('luna.config.title', $lang('luna.config.type.core'))
+        </a>
+    </li>
 
     {{-- @muse-placeholder  submenu  Do not remove this line --}}
 </ul>
