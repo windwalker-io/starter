@@ -10,7 +10,6 @@
 declare(strict_types=1);
 
 use Lyrasoft\Luna\LunaPackage;
-use Lyrasoft\Luna\Repository\ArticleRepository;
 
 return [
     'luna' => [
@@ -19,11 +18,5 @@ return [
         'providers' => [
             LunaPackage::class
         ],
-
-        'content' => [
-            'repository' => [
-                'article' => ArticleRepository::class
-            ]
-        ]
     ]
 ];
