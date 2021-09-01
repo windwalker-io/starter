@@ -33,11 +33,11 @@ return [
             'default' => 'default',
             'profiles' => [
                 'default' => [
-                    'storage' => 'local',
+                    'storage' => env('UPLOAD_STORAGE_DEFAULT') ?: 'local',
                     'accept' => null,
                 ],
                 'image' => [
-                    'storage' => 'local',
+                    'storage' =>  env('UPLOAD_STORAGE_DEFAULT') ?: 'local',
                     'accept' => 'image/*',
                     'resize' => [
                         'enabled' => true,
