@@ -25,7 +25,7 @@ $mig->up(
         $mig->createTable(Config::class, function (Schema $schema) {
             $schema->char('type')->length(50)->comment('Type');
             $schema->char('subtype')->length(50)->comment('Sub Type');
-            $schema->longtext('content')->comment('Content');
+            $schema->json('content')->comment('Content');
             $schema->datetime('modified')->nullable(true)->comment('Modified');
             $schema->integer('modified_by')->comment('Modified User');
 

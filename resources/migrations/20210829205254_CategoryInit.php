@@ -45,7 +45,7 @@ $mig->up(
                 $schema->datetime('modified')->nullable(true)->comment('Modified Date');
                 $schema->integer('created_by')->comment('Author');
                 $schema->integer('modified_by')->comment('Modified User');
-                $schema->json('params')->nullable(true)->comment('Params');
+                $schema->json('params')->comment('Params');
 
                 $schema->addIndex('alias');
                 $schema->addIndex('path');

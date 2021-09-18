@@ -11,10 +11,17 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Dashboard;
 
+use Lyrasoft\Luna\Entity\Article;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\View\View;
 use Windwalker\Core\View\ViewModelInterface;
+use Windwalker\Filesystem\Path;
+use Windwalker\Http\HttpClient;
+use Windwalker\ORM\ORM;
+
+use function Windwalker\collect;
+use function Windwalker\DI\create;
 
 /**
  * The DashboardView class.
@@ -28,7 +35,7 @@ class DashboardView implements ViewModelInterface
     /**
      * DashboardView constructor.
      */
-    public function __construct()
+    public function __construct(protected ORM $orm)
     {
         //
     }
@@ -43,6 +50,7 @@ class DashboardView implements ViewModelInterface
      */
     public function prepare(AppContext $app, View $view): array
     {
+
         return [];
     }
 }

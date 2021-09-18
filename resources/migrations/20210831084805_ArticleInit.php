@@ -38,13 +38,13 @@ $mig->up(
                 $schema->longtext('fulltext')->comment('Full Text');
                 $schema->tinyint('state')->length(1)->comment('0: unpublished, 1:published');
                 $schema->integer('ordering')->comment('Ordering');
-                $schema->json('extra')->nullable(true)->comment('Extra Data');
+                $schema->json('extra')->comment('Extra Data');
                 $schema->datetime('created')->comment('Created Date');
                 $schema->datetime('modified')->comment('Modified Date');
                 $schema->integer('created_by')->comment('Author');
                 $schema->integer('modified_by')->comment('Modified User');
                 $schema->char('language')->length(7)->comment('Language');
-                $schema->json('params')->nullable(true)->comment('Params');
+                $schema->json('params')->comment('Params');
 
                 $schema->addIndex('category_id');
                 $schema->addIndex('alias');
