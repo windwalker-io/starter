@@ -11,16 +11,13 @@ declare(strict_types=1);
 
 namespace App\Module\Admin;
 
-use Lyrasoft\Luna\User\UserService;
+use Lyrasoft\Luna\Script\FontAwesomeScript;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 use Unicorn\Script\UnicornScript;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
-use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\Middleware\AbstractLifecycleMiddleware;
-use Windwalker\Core\Router\Navigator;
 
 /**
  * The FrontMiddleware class.
@@ -31,24 +28,31 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
         protected AppContext $app,
         protected AssetService $asset,
         protected UnicornScript $unicornScript,
+        protected FontAwesomeScript $fontAwesomeScript
     ) {
     }
 
     /**
      * prepareExecute
      *
-     * @param  ServerRequestInterface  $request
+     * @param ServerRequestInterface $request
      *
      * @return  mixed
      */
     protected function preprocess(ServerRequestInterface $request): void
     {
+        // Unicorn
         $this->unicornScript->init('js/admin/main.js');
 
-        $this->asset->js('https://kit.fontawesome.com/59f5955d51.js');
-        $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.js');
+        // Font Awesome
+        $this->fontAwesomeScript->cssFont(FontAwesomeScript::DEFAULT_SET);
 
-        $this->asset->css('css/admin/app.css');
+        // Bootstrap
+        $this->asset->css('vendor/bootstrap/dist/css/bootstrap.min.css');
+        $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.min.js');
+
+        // Main
+        $this->asset->css('css/admin/main.css');
     }
 
     // protected function checkAccess(): bool
@@ -72,7 +76,7 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
     /**
      * postExecute
      *
-     * @param  ResponseInterface  $response
+     * @param ResponseInterface $response
      *
      * @return  mixed
      */

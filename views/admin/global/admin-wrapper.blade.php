@@ -32,7 +32,7 @@ use Windwalker\Core\Router\SystemUri;
 @show
 
 @section('container')
-<div class="" style="">
+<div uni-cloak class="" style="">
     <div class="row flex-nowrap">
         @section('sidebar')
             <div class="main-sidebar col-md-2">

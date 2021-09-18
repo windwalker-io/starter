@@ -24,7 +24,7 @@ export async function css() {
       ...findModules('Front/**/assets/*.scss'),
       'src/Module/Front/**/assets/*.scss'
     ],
-    'www/assets/css/front/app.css'
+    'www/assets/css/front/main.css'
   );
   sass(
     [
@@ -32,7 +32,7 @@ export async function css() {
       ...findModules('Admin/**/assets/*.scss'),
       'src/Module/Admin/**/assets/*.scss'
     ],
-    'www/assets/css/admin/app.css'
+    'www/assets/css/admin/main.css'
   );
   // Compile end
 }
@@ -78,6 +78,7 @@ export async function syncJS() {
 
 export async function install() {
   return installVendors([
+    '@fortawesome/fontawesome-free'
   ]);
 }
 

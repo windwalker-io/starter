@@ -58,7 +58,7 @@ $seeder->import(
                 $item->setTitle(Utf8String::ucwords($faker->sentence(3)));
                 $item->setAlias(SlugHelper::safe($item->getTitle()));
                 $item->setDescription($faker->paragraph(5));
-                $item->setImage($faker->imageUrl(800, 600));
+                $item->setImage($faker->unsplashImage(800, 600));
                 $item->setState($faker->randomElement([1, 1, 1, 0]));
                 $item->setCreated($created = $faker->dateTimeThisYear());
                 $item->setModified($created->modify('+10days'));
