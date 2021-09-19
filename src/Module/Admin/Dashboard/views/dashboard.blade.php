@@ -28,39 +28,28 @@ $faker = \Faker\Factory::create();
 @extends('admin.global.admin-wrapper')
 
 @section('body')
-    <style>
-        .placeholders {
-            text-align: center;
-        }
-
-        .placeholder img {
-            display: inline-block;
-            border-radius: 50%;
-        }
-    </style>
-
-    <div class="row placeholders mb-5">
-        <div class="col-xs-6 col-sm-3 placeholder">
+    <div class="row text-center mb-5">
+        <div class="col-xs-6 col-sm-3 ">
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
-                height="200" class="img-responsive img-fluid" alt="Generic placeholder thumbnail">
+                height="200" class="rounded-circle mb-3" alt="Generic  thumbnail">
             <h4>Label</h4>
             <span class="text-muted">Something else</span>
         </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
+        <div class="col-xs-6 col-sm-3 ">
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
-                height="200" class="img-responsive img-fluid" alt="Generic placeholder thumbnail">
+                height="200" class="rounded-circle mb-3" alt="Generic  thumbnail">
             <h4>Label</h4>
             <span class="text-muted">Something else</span>
         </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
+        <div class="col-xs-6 col-sm-3 ">
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
-                height="200" class="img-responsive img-fluid" alt="Generic placeholder thumbnail">
+                height="200" class="rounded-circle mb-3" alt="Generic  thumbnail">
             <h4>Label</h4>
             <span class="text-muted">Something else</span>
         </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
+        <div class="col-xs-6 col-sm-3 ">
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
-                height="200" class="img-responsive img-fluid" alt="Generic placeholder thumbnail">
+                height="200" class="rounded-circle mb-3" alt="Generic  thumbnail">
             <h4>Label</h4>
             <span class="text-muted">Something else</span>
         </div>

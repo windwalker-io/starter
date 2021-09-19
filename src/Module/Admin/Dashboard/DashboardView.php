@@ -50,6 +50,7 @@ class DashboardView implements ViewModelInterface
      */
     public function prepare(AppContext $app, View $view): array
     {
+        $view->setTitle('Dashboard');
 
         return [];
     }
