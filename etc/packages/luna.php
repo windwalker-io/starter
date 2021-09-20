@@ -12,6 +12,8 @@ declare(strict_types=1);
 use Lyrasoft\Luna\LunaPackage;
 use Lyrasoft\Luna\Subscriber\BuildFormFieldSubscriber;
 use Lyrasoft\Luna\Subscriber\EntityBuildingSubscriber;
+use Lyrasoft\Luna\User\Handler\SessionDatabaseHandler;
+use Windwalker\Session\Handler\DatabaseHandler;
 
 return [
     'luna' => [
@@ -24,6 +26,10 @@ return [
         'listeners' => [
             EntityBuildingSubscriber::class,
             BuildFormFieldSubscriber::class,
+        ],
+
+        'aliases' => [
+            DatabaseHandler::class => SessionDatabaseHandler::class
         ]
     ]
 ];
