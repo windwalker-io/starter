@@ -31,7 +31,6 @@ use function Windwalker\now;
  * @var ConsoleApplication $app
  */
 
-// Workaround before WebProvider merge to main process in CLI
 $app->prepareWebSimulator();
 
 $mig->up(
