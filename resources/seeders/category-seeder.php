@@ -13,6 +13,7 @@ namespace App\Seeder;
 
 use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\Luna\Entity\User;
+use Unicorn\Enum\BasicState;
 use Unicorn\Utilities\SlugHelper;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
@@ -59,7 +60,7 @@ $seeder->import(
                 $item->setAlias(SlugHelper::safe($item->getTitle()));
                 $item->setDescription($faker->paragraph(5));
                 $item->setImage($faker->unsplashImage(800, 600));
-                $item->setState($faker->randomElement([1, 1, 1, 0]));
+                $item->setState(BasicState::from($faker->randomElement([1, 1, 1, 0])));
                 $item->setCreated($created = $faker->dateTimeThisYear());
                 $item->setModified($created->modify('+10days'));
                 $item->setCreatedBy((int) $faker->randomElement($userIds));

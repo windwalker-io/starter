@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * Part of Windwalker project.
+ *
+ * @copyright  Copyright (C) 2021.
+ * @license    __LICENSE__
+ */
+
+declare(strict_types=1);
+
+namespace App\Migration;
+
+use Lyrasoft\Luna\Entity\Rule;
+use Windwalker\Core\Console\ConsoleApplication;
+use Windwalker\Core\Migration\Migration;
+use Windwalker\Database\Schema\Schema;
+
+/**
+ * Migration UP: 20210828163500_RuleInit.
+ *
+ * @var Migration          $mig
+ * @var ConsoleApplication $app
+ */
+$mig->up(
+    static function () use ($mig) {
+        $mig->createTable(
+            Rule::class,
+            function (Schema $schema) {
+                $schema->primary('id');
+                $schema->varchar('role_id');
+                $schema->varchar('name');
+                $schema->varchar('type');
+                $schema->varchar('action');
+                $schema->varchar('target_id');
+                $schema->varchar('title');
+                $schema->tinyint('allow')->length(1)->nullable(true);
+
+                $schema->addIndex('role_id');
+                $schema->addIndex('type');
+                $schema->addIndex('name');
+                $schema->addIndex('target_id');
+                $schema->addIndex('action');
+            }
+        );
+    }
+);
+
+/**
+ * Migration DOWN.
+ */
+$mig->down(
+    static function () use ($mig) {
+        $mig->dropTables(Rule::class);
+    }
+);

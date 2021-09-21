@@ -13,16 +13,16 @@ namespace App\Migration;
 
 use Lyrasoft\Luna\Entity\Session;
 use Lyrasoft\Luna\Entity\User;
+use Lyrasoft\Luna\Entity\UserRole;
+use Lyrasoft\Luna\Entity\UserRoleMap;
 use Lyrasoft\Luna\Entity\UserSocial;
 use Lyrasoft\Luna\User\UserService;
+use Unicorn\Enum\BasicState;
 use Windwalker\Core\Console\ConsoleApplication;
 use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\Schema\Schema;
-
+use Windwalker\ORM\NestedSetMapper;
 use Windwalker\ORM\ORM;
-
-use function Windwalker\chronos;
-use function Windwalker\now;
 
 /**
  * Migration UP: 20210828063500_UserInit.
@@ -63,6 +63,42 @@ $mig->up(
             }
         );
 
+        // User Group
+        $mig->createTable(
+            UserRole::class,
+            function (Schema $schema) {
+                $schema->primary('id')->comment('Primary Key');
+                $schema->integer('parent_id')->comment('Parent ID');
+                $schema->integer('lft')->comment('Left Key');
+                $schema->integer('rgt')->comment('Right key');
+                $schema->integer('level')->comment('Nested Level');
+                $schema->varchar('title')->comment('Title');
+                $schema->longtext('description')->comment('Description');
+                $schema->tinyint('state')->length(1)->comment('0: unpublished, 1:published');
+                $schema->datetime('created')->nullable(true)->comment('Created Date');
+                $schema->datetime('modified')->nullable(true)->comment('Modified Date');
+                $schema->integer('created_by')->comment('Author');
+                $schema->integer('modified_by')->comment('Modified User');
+                $schema->json('params')->comment('Params');
+
+                $schema->addIndex(['lft', 'rgt']);
+                $schema->addIndex('created_by');
+            }
+        );
+
+        $mig->createTable(
+            UserRoleMap::class,
+            function (Schema $schema) {
+                $schema->integer('user_id');
+                $schema->varchar('role_id');
+
+                $schema->addIndex('user_id');
+                $schema->addIndex('role_id');
+                $schema->addPrimaryKey(['user_id', 'role_id']);
+                $schema->addIndex(['user_id', 'role_id']);
+            }
+        );
+
         // User Social
         $mig->createTable(
             UserSocial::class,
@@ -93,6 +129,17 @@ $mig->up(
             }
         );
 
+        /** @var NestedSetMapper<UserRole> $roleMapper */
+        $roleMapper = $orm->mapper(UserRole::class);
+        $root = $roleMapper->createRoot();
+
+        $role = new UserRole();
+        $role->setTitle('Super User');
+        $role->setState(BasicState::PUBLISHED());
+
+        $roleMapper->setPosition($role, $root->getPrimaryKeyValue());
+        $roleMapper->createOne($role);
+
         /** @var User $user */
         $user = $userService->createUserEntity();
 
@@ -105,7 +152,14 @@ $mig->up(
         $user->setVerified(true);
         $user->setReceiveMail(true);
 
-        $orm->createOne($userEntity, $user);
+        /** @var User $user */
+        $user = $orm->createOne($userEntity, $user);
+
+        $map = new UserRoleMap();
+        $map->setUserId($user->getId());
+        $map->setRoleId('superuser');
+
+        $orm->createOne($map::class, $map);
     }
 );
 
@@ -117,6 +171,8 @@ $mig->down(
         $mig->dropTables(
             User::class,
             UserSocial::class,
+            UserRole::class,
+            UserRoleMap::class,
             Session::class
         );
     }

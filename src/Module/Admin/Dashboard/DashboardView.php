@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Dashboard;
 
+use Lyrasoft\Luna\Access\AccessService;
 use Lyrasoft\Luna\Entity\Article;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;

@@ -26,8 +26,8 @@ $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 
 ?>
 <section class="admin-header bg-light py-3">
-    <div class="d-flex justify-content-between align-items-center px-3">
-        <div>
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center px-3">
+        <div class="mb-3 mb-lg-0">
             <h1 class="h3 m-0">{{ $htmlFrame->getTitle() }}</h1>
         </div>
 

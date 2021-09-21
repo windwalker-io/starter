@@ -33,9 +33,9 @@ use Windwalker\Core\Router\SystemUri;
 
 @section('container')
 <div uni-cloak class="" style="">
-    <div class="row flex-nowrap">
+    <div class="row flex-lg-nowrap">
         @section('sidebar')
-            <div class="main-sidebar col-md-2">
+            <div class="main-sidebar col-lg-2">
                 @include('admin.global.widget.submenu')
             </div>
         @show
