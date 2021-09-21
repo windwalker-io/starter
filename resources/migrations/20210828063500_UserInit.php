@@ -35,11 +35,9 @@ $app->prepareWebSimulator();
 
 $mig->up(
     static function (UserService $userService, ORM $orm) use ($mig) {
-        $userEntity = $userService->getUserEntityClass();
-
         // User
         $mig->createTable(
-            $userEntity,
+            User::class,
             function (Schema $schema) {
                 $schema->primary('id');
                 $schema->varchar('username')->comment('Username');
@@ -140,8 +138,7 @@ $mig->up(
         $roleMapper->setPosition($role, $root->getPrimaryKeyValue());
         $roleMapper->createOne($role);
 
-        /** @var User $user */
-        $user = $userService->createUserEntity();
+        $user = new User();
 
         $user->setUsername('admin');
         $user->setEmail('webadmin@simular.co');
@@ -153,7 +150,7 @@ $mig->up(
         $user->setReceiveMail(true);
 
         /** @var User $user */
-        $user = $orm->createOne($userEntity, $user);
+        $user = $orm->createOne(User::class, $user);
 
         $map = new UserRoleMap();
         $map->setUserId($user->getId());
