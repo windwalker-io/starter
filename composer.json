@@ -21,7 +21,7 @@
         "lyrasoft/luna": "^2.0",
         "symfony/var-dumper": "^5.0",
         "asika/cross-env": "^1.0",
-        "myclabs/php-enum": "^1.8"
+        "myclabs/php-enum": "^1.8",
         "thl/pinyin": "^1.2"
     },
     "require-dev": {
