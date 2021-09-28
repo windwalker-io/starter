@@ -17,6 +17,8 @@
         "windwalker/renderer": "^4.0",
         "windwalker/dom": "^4.0",
         "windwalker/edge": "^4.0",
+        "windwalker/orm": "^4.0",
+        "windwalker/session": "^4.0",
         "windwalker/unicorn": "^1.0",
         "lyrasoft/luna": "^2.0",
         "symfony/var-dumper": "^5.0",
