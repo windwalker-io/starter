@@ -19,6 +19,8 @@
         "windwalker/edge": "^4.0",
         "windwalker/orm": "^4.0",
         "windwalker/session": "^4.0",
+        "windwalker/form": "^4.0",
+        "windwalker/authentication": "^4.0",
         "windwalker/unicorn": "^1.0",
         "lyrasoft/luna": "^2.0",
         "symfony/var-dumper": "^5.0",
