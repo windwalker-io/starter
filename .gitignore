@@ -23,6 +23,7 @@ Thumbs.db
 /bower_components
 /yarn-error.log
 .npmrc
+/theme
 
 # Remove above lines when you start a project
 composer.lock
