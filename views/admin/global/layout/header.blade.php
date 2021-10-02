@@ -26,7 +26,7 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
 ?>
 
 @section('header')
-    <div class="navbar navbar-dark bg-dark navbar-fixed-top navbar-expand-lg fixed-top">
+    <div class="navbar navbar-dark bg-dark navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ $uri->path() }}">EARTH</a>
 
