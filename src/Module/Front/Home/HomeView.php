@@ -22,7 +22,6 @@ use Windwalker\ORM\ORM;
  */
 #[ViewModel(
     layout: 'home',
-    css: 'home.scss',
     js: 'home.js',
 )]
 class HomeView implements ViewModelInterface

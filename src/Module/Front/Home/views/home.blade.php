@@ -25,11 +25,6 @@ use Windwalker\Core\Router\SystemUri;
  * @var $lang     LangService         The Asset manager.
  */
 
-/** @var $pagin Pagination */
-// show($pagin->compile());
-//
-// show($pagin);
-
 ?>
 
 @extends('global.body')

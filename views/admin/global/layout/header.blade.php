@@ -46,19 +46,20 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
                             class="nav-link" title="Preview"
                             data-bs-toggle="tooltip"
                             data-placement="bottom">
-                            <span class="far fa-eye"></span>
+                            <span class="fa-regular fa-eye"></span>
                         </a>
                     </li>
 
                     @if ($user->isLogin())
                         <li class="nav-item">
-                            <a href="{{ $nav->to('logout') }}"
+                            <a href="javascript://"
+                                onclick="u.form().post('{{ $nav->to('logout') }}')"
                                 class="nav-link"
                                 title="Logout"
                                 data-bs-toggle="tooltip"
                                 data-placement="bottom"
                             >
-                                <span class="fa-solid fa-sign-out-alt"></span>
+                                <i class="fa-solid fa-right-from-bracket"></i>
                             </a>
                         </li>
                     @endif
