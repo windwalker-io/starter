@@ -22,31 +22,19 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
+$htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
+
 ?>
+<section class="admin-header bg-light py-3">
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center px-3">
+        <div class="mb-3 mb-lg-0">
+            <h1 class="h3 m-0">{{ $htmlFrame->getTitle() }}</h1>
+        </div>
 
-@extends('global.html')
-
-@section('superbody')
-@section('header')
-    @include('admin.global.header')
-@show
-
-@section('container')
-<div uni-cloak class="" style="">
-    <div class="row flex-lg-nowrap">
-        @section('sidebar')
-            <div class="main-sidebar col-lg-2">
-                @include('admin.global.widget.submenu')
-            </div>
-        @show
-        <div class="main-body col">
-            @yield('body', 'Body Section')
-
-            @section('copyright')
-                @include('admin.global.copyright')
+        <div>
+            @section('admin-toolbar')
+                @include('admin.global.layout.toolbar')
             @show
         </div>
     </div>
-</div>
-@show
-@stop
+</section>

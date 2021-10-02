@@ -37,7 +37,7 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
             <div id="top-navbar-content" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav mr-auto">
                     @section('nav')
-                        @include('admin.global.widget.mainmenu')
+                        @include('admin.global.layout.mainmenu')
                     @show
                 </ul>
                 <ul class="nav navbar-nav navbar-right ms-auto">

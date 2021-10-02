@@ -30,6 +30,21 @@ return [
 
         'aliases' => [
             DatabaseHandler::class => SessionDatabaseHandler::class
+        ],
+
+        'view_extends' => [
+            'front' => [
+                'base' => 'global.body',
+                'auth' => 'global.body'
+            ],
+
+            'admin' => [
+                'base' => 'admin.global.body',
+                'auth' => 'admin.global.body',
+                'edit' => 'admin.global.body-edit',
+                'list' => 'admin.global.body-list',
+                'modal' => 'admin.global.pure',
+            ]
         ]
     ]
 ];

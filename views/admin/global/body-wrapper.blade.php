@@ -22,13 +22,35 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
+$htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 ?>
-@extends('admin.global.admin-wrapper')
 
-@section('admin-area')
-    <section id="admin-area">
-        @include('@messages')
+@extends('global.html')
 
-        @yield('admin-body', 'Admin Body')
-    </section>
+@section('superbody')
+<div class="main-wrapper" uni-cloak>
+    {{-- Header --}}
+    @section('header')
+        @include('admin.global.layout.header')
+    @show
+
+    {{-- Main Container --}}
+    @section('container')
+    {{-- Sidebar --}}
+    <div class="row flex-lg-nowrap">
+        @section('sidebar')
+            <div class="main-sidebar col-lg-2">
+                @include('admin.global.layout.submenu')
+            </div>
+        @show
+        <div class="main-body col">
+            @yield('body', 'Body Section')
+
+            @section('footer')
+                @include('admin.global.layout.footer')
+            @show
+        </div>
+    </div>
+    @show
+</div>
 @stop

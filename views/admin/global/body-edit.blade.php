@@ -24,18 +24,10 @@ use Windwalker\Core\Router\SystemUri;
 
 ?>
 
-@extends('admin.global.body-wrapper')
+@extends('admin.global.body')
 
-@section('body')
-    @section('banner')
-        @include('admin.global.layout.banner')
-    @show
+@section('content-container')
+    @include('@messages')
 
-    <section id="content-container" class="mt-3">
-        @section('admin-area')
-            @include('@messages')
-
-            @yield('content', 'Admin Content')
-        @show
-    </section>
+    @yield('content', 'Admin Edit Content')
 @stop

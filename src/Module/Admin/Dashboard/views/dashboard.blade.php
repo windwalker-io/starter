@@ -25,7 +25,7 @@ use Windwalker\Core\Router\SystemUri;
 $faker = \Faker\Factory::create();
 ?>
 
-@extends('admin.global.admin-wrapper')
+@extends('admin.global.body')
 
 @section('body')
     <div class="row text-center mb-5">
