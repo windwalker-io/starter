@@ -50,7 +50,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         $this->fontAwesomeScript->cssFont(FontAwesomeScript::DEFAULT_SET);
 
         // Bootstrap
-        $this->asset->css('vendor/bootstrap/dist/css/bootstrap.min.css');
+        $this->asset->css('css/front/bootstrap.min.css');
         $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.min.js');
 
         // Main

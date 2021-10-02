@@ -17,7 +17,7 @@ export async function css() {
   ]);
   // Watch end
 
-  // Compile Start
+  // Front
   sass(
     [
       'resources/assets/scss/front/main.scss',
@@ -27,6 +27,12 @@ export async function css() {
     'www/assets/css/front/main.css'
   );
   sass(
+    'resources/assets/scss/front/bootstrap.scss',
+    'www/assets/css/front/bootstrap.css'
+  );
+
+  // Admin
+  sass(
     [
       'resources/assets/scss/admin/main.scss',
       ...findModules('Admin/**/assets/*.scss'),
@@ -34,7 +40,6 @@ export async function css() {
     ],
     'www/assets/css/admin/main.css'
   );
-  // Compile end
 }
 
 export async function js() {

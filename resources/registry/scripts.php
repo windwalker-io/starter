@@ -1,16 +1,28 @@
 <?php
 
 /**
- * Part of starter project.
+ * Part of Windwalker project.
  *
- * @copyright  Copyright (C) 2021 __ORGANIZATION__.
- * @license    __LICENSE__
+ * @copyright  Copyright (C) 2021 LYRASOFT.
+ * @license    MIT
  */
 
 declare(strict_types=1);
 
-use function Windwalker\cmd;
-
+/*
+ * --------------------------------------------------------------------------
+ * Custom Scripts
+ * --------------------------------------------------------------------------
+ *
+ * Add some commands here to batch execute. Example:
+ * 'foo' => [
+ *     'git pull'
+ *     'composer install'
+ *     'php windwalker mig:go'
+ *
+ * Then just run `$ php windwalker run foo` in terminal.
+ *
+ */
 return [
     // Prepare assets and install dependencies
     'prepare' => [
@@ -22,9 +34,7 @@ return [
     // Prepare for development and reset migration
     'preparedev' => [
         'cross-env NODE_ENV=development php windwalker run prepare',
-        function (\Windwalker\Core\Application\ApplicationInterface $app) {
-            return $app->createProcess('php windwalker mig:reset --seed -f');
-        }
+        'php windwalker mig:reset --seed -f'
     ],
 
     // Deploy new version

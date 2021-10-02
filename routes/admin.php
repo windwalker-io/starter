@@ -38,5 +38,5 @@ $router->group('admin')
 
         $router->load(__DIR__ . '/packages/admin/*.route.php');
 
-        $router->load(__DIR__ . '/custom/admin.route.php');
+        $router->load(__DIR__ . '/custom/admin/*.route.php');
     });
