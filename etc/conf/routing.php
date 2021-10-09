@@ -9,6 +9,7 @@
 
 declare(strict_types=1);
 
+use Windwalker\Core\Provider\RouterProvider;
 use Windwalker\Core\Router\Router;
 
 use Windwalker\DI\Container;
@@ -21,14 +22,11 @@ return [
     ],
 
     'providers' => [
-
+        RouterProvider::class
     ],
 
     'bindings' => [
-        Router::class => create(Router::class)
-            ->extend(
-                fn(Router $router, Container $container) => $router->register($container->getParam('routing.routes'))
-            )
+
     ],
 
     'extends' => [
