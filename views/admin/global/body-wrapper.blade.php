@@ -36,12 +36,14 @@ $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 
     {{-- Main Container --}}
     @section('container')
-    {{-- Sidebar --}}
     <div class="row flex-lg-nowrap">
+        {{-- Sidebar --}}
         @section('sidebar')
-            <div class="main-sidebar col-lg-2">
-                @include('admin.global.layout.submenu')
-            </div>
+            @if (!$app->state('sidebar_hide'))
+                <div class="main-sidebar col-lg-2">
+                    @include('admin.global.layout.submenu')
+                </div>
+            @endif
         @show
         <div class="main-body col">
             @yield('body', 'Body Section')

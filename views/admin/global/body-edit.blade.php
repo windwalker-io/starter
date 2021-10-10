@@ -22,6 +22,7 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
+$app->getState()->set('sidebar_hide', true);
 ?>
 
 @extends('admin.global.body')

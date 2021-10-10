@@ -52,7 +52,7 @@ $menu = $app->service(\Unicorn\Legacy\Html\MenuHelper::class);
 
     <li class="nav-item {{ $menu->active('article_list') }}">
         <a href="{{ $nav->to('article_list') }}" class="nav-link {{ $menu->active('article_list') }}">
-            @lang('luna.article.list.title')
+            @lang('unicorn.title.grid', title: $lang('luna.article.title'))
         </a>
     </li>
 
@@ -96,7 +96,7 @@ $menu = $app->service(\Unicorn\Legacy\Html\MenuHelper::class);
 
     <li class="nav-item {{ $menu->active('user_list') }}">
         <a href="{{ $nav->to('user_list') }}" class="nav-link {{ $menu->active('user_list') }}">
-            @lang('luna.users.title')
+            @lang('unicorn.title.grid', title: $lang('luna.user.title'))
         </a>
     </li>
 
