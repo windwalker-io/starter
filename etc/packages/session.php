@@ -9,10 +9,9 @@
 
 declare(strict_types=1);
 
-use Windwalker\Core\Attributes\Ref;
 use Windwalker\Core\Manager\SessionManager;
+use Windwalker\Core\Session\SessionRobotSubscriber;
 use Windwalker\DI\Container;
-use Windwalker\Session\Bridge\BridgeInterface;
 use Windwalker\Session\Bridge\NativeBridge;
 use Windwalker\Session\Bridge\PhpBridge;
 use Windwalker\Session\Cookie\Cookies;
@@ -21,8 +20,9 @@ use Windwalker\Session\Handler\ArrayHandler;
 use Windwalker\Session\Handler\DatabaseHandler;
 use Windwalker\Session\Handler\FilesystemHandler;
 use Windwalker\Session\Handler\NativeHandler;
+use Windwalker\Session\Handler\NullHandler;
 use Windwalker\Session\Handler\RedisHandler;
-use Windwalker\Session\Session;
+use Windwalker\Session\SessionInterface;
 use Windwalker\Session\SessionPackage;
 
 use function Windwalker\DI\create;
@@ -32,15 +32,15 @@ return [
     'session' => [
         'enabled' => true,
 
-        'default' => env('SESSION_DEFAULT') ?: 'native',
+        'default' => env('SESSION_DEFAULT') ?: 'database',
 
         'cookie_params' => [
-            'expires' => '+15minutes',
+            'expires' => '+150minutes',
             'path' => '/',
             'domain' => null,
             'secure' => false,
             'httponly' => true,
-            'samesite' => Cookies::SAMESITE_LAX,
+            'samesite' => CookiesInterface::SAMESITE_LAX,
         ],
 
         'ini' => [
@@ -53,6 +53,10 @@ return [
             SessionPackage::class,
         ],
 
+        'listeners' => [
+            SessionRobotSubscriber::class
+        ],
+
         'bindings' => [
             CookiesInterface::class => fn (Container $container)
             => $container->resolve('session.factories.cookies.request')
@@ -60,48 +64,59 @@ return [
 
         'factories' => [
             'instances' => [
-                'native' => create(
-                             Session::class,
-                    options: fn(#[Ref('session.ini')] array $ini) => [
-                        Session::OPTION_AUTO_COMMIT => true,
-                        'ini' => $ini,
-                    ],
-                    bridge: ref('session.factories.bridges.php'),
-                    cookies: ref('session.factories.cookies.request')
+                'native' => SessionManager::createSession(
+                    'php',
+                    'native',
+                    'request',
+                    [
+                        SessionInterface::OPTION_AUTO_COMMIT => true
+                    ]
+                ),
+                'filesystem' => SessionManager::createSession(
+                    'php',
+                    'filesystem',
+                    'request',
+                    [
+                        SessionInterface::OPTION_AUTO_COMMIT => true
+                    ]
+                ),
+                'database' => SessionManager::createSession(
+                    'php',
+                    'database',
+                    'request',
+                    [
+                        SessionInterface::OPTION_AUTO_COMMIT => true
+                    ]
+                ),
+                'null' => SessionManager::createSession(
+                    'php',
+                    'null',
+                    'request',
                 ),
             ],
             'bridges' => [
-                'native' => create(
-                             NativeBridge::class,
-                    options: [],
-                    handler: ref('session.factories.handlers.native')
-                ),
-                'php' => create(
-                             PhpBridge::class,
-                    options: [
-                                 BridgeInterface::OPTION_AUTO_COMMIT => true,
-                                 BridgeInterface::OPTION_WITH_SUPER_GLOBAL => false,
-                             ],
-                    handler: ref('session.factories.handlers.filesystem')
-                ),
+                'native' => NativeBridge::class,
+                'php' => PhpBridge::class,
             ],
             'handlers' => [
-                'array' => create(ArrayHandler::class),
-                'native' => create(NativeHandler::class),
+                'array' => ArrayHandler::class,
+                'null' => NullHandler::class,
+                'native' => NativeHandler::class,
                 'database' => create(
-                             DatabaseHandler::class,
-                    db: ref('database.connections.local'),
-                    options: []
+                    DatabaseHandler::class,
+                    options: [
+                        'table' => 'sessions'
+                    ]
                 ),
                 'filesystem' => create(
-                             FilesystemHandler::class,
-                    path: sys_get_temp_dir() . '/sess',
+                    FilesystemHandler::class,
+                    path: fn () => sys_get_temp_dir() . '/sess',
                     options: []
                 ),
-                'redis' => create(RedisHandler::class),
+                'redis' => RedisHandler::class,
             ],
             'cookies' => [
-                'request' => create(SessionManager::psrCookies()),
+                'request' => SessionManager::psrCookies(),
                 'native' => create(Cookies::class, ref('session.cookie_params')),
             ],
         ],
