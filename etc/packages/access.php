@@ -9,14 +9,7 @@
 
 declare(strict_types=1);
 
-use Lyrasoft\Luna\Entity\User;
-use Lyrasoft\Luna\Subscriber\AdminSessionSubscriber;
-use Lyrasoft\Luna\Subscriber\RememberMeSubscriber;
-use Lyrasoft\Luna\Subscriber\UserAuthSubscriber;
-use Lyrasoft\Luna\User\Handler\UserHandler;
-use Lyrasoft\Luna\User\Handler\UserHandlerInterface;
-use Lyrasoft\Luna\User\UserService;
-use Windwalker\Core\Application\AppContext;
+use Lyrasoft\Luna\Access\AccessService;
 
 use function Lyrasoft\Luna\create_role;
 
@@ -48,6 +41,14 @@ return [
         ],
 
         'actions' => [
+            AccessService::ADMIN_ACCESS_ACTION => [
+                'manager' => true
+            ],
+
+            AccessService::SUPERUSER_ACTION => [
+                'superuser' => true
+            ],
+
             'create' => [
                 'manager' => true
             ],
