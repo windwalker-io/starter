@@ -22,27 +22,35 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
+$htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 ?>
 
 @extends('global.html')
 
 @section('superbody')
-@section('header')
-    @include('admin.global.header')
-@show
+<div class="main-wrapper" uni-cloak>
+    {{-- Header --}}
+    @section('header')
+        @include('admin.global.layout.header')
+    @show
 
-<div class="container-fluid" style="margin-top: 70px">
-    <div class="row">
-        <div class="main-sidebar col-md-2">
-            @include('admin.global.widget.submenu')
-        </div>
-        <div class="main-body col-md-10">
-            @yield('body', 'Content Section')
+    {{-- Main Container --}}
+    @section('container')
+    {{-- Sidebar --}}
+    <div class="row flex-lg-nowrap">
+        @section('sidebar')
+            <div class="main-sidebar col-lg-2">
+                @include('admin.global.layout.submenu')
+            </div>
+        @show
+        <div class="main-body col">
+            @yield('body', 'Body Section')
 
-            @section('copyright')
-                @include('admin.global.copyright')
+            @section('footer')
+                @include('admin.global.layout.footer')
             @show
         </div>
     </div>
+    @show
 </div>
 @stop

@@ -20,7 +20,7 @@ return [
 
         'listeners' => [
             \Windwalker\Core\Asset\AssetService::class => [
-                \Unicorn\Listener\UnicornAssetListener::class
+                \Unicorn\Listener\UnicornAssetSubscriber::class
             ]
         ],
 

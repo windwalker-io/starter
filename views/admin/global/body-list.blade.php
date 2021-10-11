@@ -22,11 +22,12 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-$htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
-
 ?>
-<section class="jumbotron admin-header">
-    <div class="container-fluid">
-        <h1>{{ $htmlFrame->getTitle() }}</h1>
-    </div>
-</section>
+
+@extends('admin.global.body')
+
+@section('content-container')
+    @include('@messages')
+
+    @yield('content', 'Admin List Content')
+@stop

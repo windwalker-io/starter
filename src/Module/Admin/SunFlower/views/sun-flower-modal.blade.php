@@ -26,7 +26,7 @@ $callback = $app->input('callback');
 
 @extends('admin.global.pure')
 
-@section('superbody')
+@section('body')
     <form id="admin-form" action="" x-data="{ grid: $store.grid }"
         x-ref="gridForm"
         data-ordering="{{ $ordering }}"

@@ -24,18 +24,18 @@ use Windwalker\Core\Router\SystemUri;
 ?>
 
 <div x-id="toolbar" x-data="{ form: $store.grid.form, grid: $store.grid }">
-    <a type="button" class="btn btn-success btn-sm"
+    <a type="button" class="btn btn-primary btn-sm"
         href="{{ $nav->to('sun_flower_edit')->var('new', 1) }}"
         style="min-width: 150px"
     >
         <i class="fa fa-plus"></i>
-        New
+        @lang('unicorn.toolbar.new')
     </a>
     <button type="button" class="btn btn-info btn-sm"
         @click="grid.form.post()"
     >
         <i class="fa fa-clone"></i>
-        Duplicate
+        @lang('unicorn.toolbar.duplicate')
     </button>
     <button type="button" class="btn btn-dark btn-sm"
         @click="grid.validateChecked(null, function () {
@@ -43,12 +43,12 @@ use Windwalker\Core\Router\SystemUri;
         })"
     >
         <i class="fa fa-sliders"></i>
-        Batch
+        @lang('unicorn.toolbar.batch')
     </button>
     <button type="button" class="btn btn-outline-danger btn-sm"
         @click="grid.deleteList()"
     >
         <i class="fa fa-trash"></i>
-        Delete
+        @lang('unicorn.toolbar.delete')
     </button>
 </div>

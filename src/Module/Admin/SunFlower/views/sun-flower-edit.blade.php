@@ -29,7 +29,7 @@ use Windwalker\Form\Form;
  */
 ?>
 
-@extends('admin.global.body')
+@extends('admin.global.body-edit')
 
 @section('toolbar-buttons')
     @include('edit-toolbar')
@@ -45,14 +45,18 @@ use Windwalker\Form\Form;
 
         <div class="row">
             <div class="col-md-7">
-                <x-fieldset name="basic" title="Basic"
-                    :form="$form" class="mb-4"
+                <x-fieldset name="basic" :title="$lang('unicorn.fieldset.basic')"
+                    :form="$form"
+                    class="mb-4"
+                    is="card"
                 >
                 </x-fieldset>
             </div>
             <div class="col-md-5">
-                <x-fieldset name="meta" title="Meta"
-                    :form="$form" class="mb-4"
+                <x-fieldset name="meta" :title="$lang('unicorn.fieldset.meta')"
+                    :form="$form"
+                    class="mb-4"
+                    is="card"
                 >
                 </x-fieldset>
             </div>

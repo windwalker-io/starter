@@ -23,12 +23,11 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 ?>
-@extends('admin.global.admin-wrapper')
 
-@section('admin-area')
-    <section id="admin-area">
-        @messages
+@extends('admin.global.body')
 
-        @yield('admin-body', 'Admin Body')
-    </section>
+@section('content-container')
+    @include('@messages')
+
+    @yield('content', 'Admin Edit Content')
 @stop

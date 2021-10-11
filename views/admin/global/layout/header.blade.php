@@ -25,41 +25,29 @@ use Windwalker\Core\Router\SystemUri;
 ?>
 
 @section('header')
-    <div class="navbar navbar-dark bg-dark navbar-fixed-top navbar-expand-lg fixed-top">
+    <div class="navbar navbar-dark bg-dark navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ $uri->path() }}">
-                <img src="{{ $asset->path('images/logo-h.svg') }}"
-                    alt="LOGO"
-                    style="height: 25px;"
-                />
-            </a>
+            <a class="navbar-brand" href="{{ $uri->path() }}">EARTH</a>
 
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
                 data-bs-target="#top-navbar-content" aria-controls="#top-navbar-content" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div id="top-navbar-content" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav me-auto">
+                <ul class="nav navbar-nav mr-auto">
                     @section('nav')
-                        @include('admin.global.widget.mainmenu')
+                        @include('admin.global.layout.mainmenu')
                     @show
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right ms-auto">
                     <li class="nav-item">
-                        <a href="{{ $nav->to('front@home')->mute() }}" target="_blank"
-                            class="nav-link hasTooltip" title="Preview" data-placement="bottom">
-                            <span class="far fa-eye"></span>
+                        <a href="{{ $nav->to('front::home')->mute() }}" target="_blank"
+                            class="nav-link" title="Preview"
+                            data-bs-toggle="tooltip"
+                            data-placement="bottom">
+                            <span class="fa-regular fa-eye"></span>
                         </a>
                     </li>
-
-                    {{--                @if ($user->isMember())--}}
-                    {{--                    <li class="nav-item">--}}
-                    {{--                        <a href="{{ $router->to('logout')->mute() }}"--}}
-                    {{--                           class="nav-link hasTooltip" title="Logout" data-placement="bottom">--}}
-                    {{--                            <span class="glyphicon glyphicon-log-out fa fa-sign-out fa-sign-out-alt"></span>--}}
-                    {{--                        </a>--}}
-                    {{--                    </li>--}}
-                    {{--                @endif--}}
                 </ul>
             </div>
         </div>

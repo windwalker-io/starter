@@ -80,7 +80,7 @@ class SunFlowerListView implements ViewModelInterface
         $showFilters = $this->showFilterBar($filter);
 
         // Browser Title
-        $view->setTitle('SunFlower Edit');
+        $view->setTitle('SunFlower List');
 
         return compact('items', 'pagination', 'form', 'showFilters', 'ordering');
     }
