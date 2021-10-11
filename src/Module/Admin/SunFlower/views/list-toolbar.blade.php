@@ -37,7 +37,7 @@ use Windwalker\Core\Router\SystemUri;
         <i class="fa fa-clone"></i>
         @lang('unicorn.toolbar.duplicate')
     </button>
-    <button type="button" class="btn btn-dark btn-sm"
+    <button type="button" class="btn btn-outline-dark btn-sm"
         @click="grid.validateChecked(null, function () {
             (new bootstrap.Modal('#batch-modal')).show();
         })"

@@ -16,8 +16,6 @@
         "@windwalker-io/unicorn": "^1.0",
         "bootstrap": "^5.0"
     },
-    "devDependencies": {
-    },
     "workspaces": [
         "vendor/windwalker/unicorn/*",
         "vendor/windwalker/core/assets/*"

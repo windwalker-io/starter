@@ -32,11 +32,11 @@ return [
             'default' => 'default',
             'profiles' => [
                 'default' => [
-                    'storage' => 'default',
+                    'storage' => 'local',
                     'accept' => null,
                 ],
                 'image' => [
-                    'storage' => 'default',
+                    'storage' => 'local',
                     'accept' => 'image/*',
                     'resize' => [
                         'enabled' => true,
