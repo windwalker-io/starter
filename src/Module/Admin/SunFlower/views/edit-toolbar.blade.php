@@ -26,7 +26,7 @@ use Windwalker\Core\Router\SystemUri;
 
 <div x-id="toolbar" x-data="{ form: $store.form }">
     <div class="btn-group">
-        <button type="button" class="btn btn-success btn-sm phoenix-btn-save"
+        <button type="button" class="btn btn-success btn-sm"
             @click="form.post();">
             <span class="fa fa-save"></span>
             @lang('unicorn.toolbar.save')
@@ -42,7 +42,7 @@ use Windwalker\Core\Router\SystemUri;
 
         <ul class="dropdown-menu dropdown-menu-end">
             <li>
-                <a class="dropdown-item phoenix-btn-save2copy"
+                <a class="dropdown-item"
                     href="javascript://"
                     @click="form.post(null, { task: 'save2copy' });">
                     <span class="fa fa-copy"></span>
@@ -51,7 +51,7 @@ use Windwalker\Core\Router\SystemUri;
             </li>
 
             <li>
-                <a class="dropdown-item phoenix-btn-save2new"
+                <a class="dropdown-item"
                     href="javascript://"
                     @click="form.post(null, { task: 'save2new' });">
                     <span class="fa fa-plus"></span>
@@ -61,13 +61,13 @@ use Windwalker\Core\Router\SystemUri;
         </ul>
     </div>
 
-    <button type="button" class="btn  btn-primary btn-sm phoenix-btn-save2close"
+    <button type="button" class="btn  btn-primary btn-sm"
         @click="form.post(null, { task: 'save2close' });">
         <span class="fa fa-check"></span>
         @lang('unicorn.toolbar.save2close')
     </button>
 
-    <a role="button" class="btn btn-default btn-outline-secondary btn-sm"
+    <a class="btn btn-default btn-outline-secondary btn-sm"
         href="{{ $nav->to('sun_flower_list') }}">
         <span class="glyphicon glyphicon-remove fa fa-remove fa-times"></span>
         @lang('unicorn.toolbar.cancel')

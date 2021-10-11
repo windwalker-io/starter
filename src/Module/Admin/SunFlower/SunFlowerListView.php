@@ -16,6 +16,7 @@ use App\Repository\SunFlowerRepository;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\Form\FormFactory;
+use Windwalker\Core\Language\TranslatorTrait;
 use Windwalker\Core\View\View;
 use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\Data\Collection;
@@ -34,6 +35,8 @@ use Windwalker\ORM\ORM;
 )]
 class SunFlowerListView implements ViewModelInterface
 {
+    use TranslatorTrait;
+
     public function __construct(
         protected ORM $orm,
         #[Autowire]
@@ -79,8 +82,7 @@ class SunFlowerListView implements ViewModelInterface
 
         $showFilters = $this->showFilterBar($filter);
 
-        // Browser Title
-        $view->setTitle('SunFlower List');
+        $this->prepareMetadata($app, $view);
 
         return compact('items', 'pagination', 'form', 'showFilters', 'ordering');
     }
@@ -142,5 +144,21 @@ class SunFlowerListView implements ViewModelInterface
         }
 
         return false;
+    }
+
+    /**
+     * Prepare Metadata and HTML Frame.
+     *
+     * @param  AppContext  $app
+     * @param  View        $view
+     *
+     * @return  void
+     */
+    protected function prepareMetadata(AppContext $app, View $view): void
+    {
+        $view->getHtmlFrame()
+            ->setTitle(
+                $this->trans('unicorn.title.edit', title: 'SunFlower')
+            );
     }
 }

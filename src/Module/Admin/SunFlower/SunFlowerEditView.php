@@ -17,6 +17,8 @@ use App\Repository\SunFlowerRepository;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\Form\FormFactory;
+use Windwalker\Core\Html\HtmlFrame;
+use Windwalker\Core\Language\TranslatorTrait;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\View\View;
 use Windwalker\Core\View\ViewModelInterface;
@@ -32,6 +34,8 @@ use Windwalker\ORM\ORM;
 )]
 class SunFlowerEditView implements ViewModelInterface
 {
+    use TranslatorTrait;
+
     public function __construct(
         protected ORM $orm,
         protected FormFactory $formFactory,
@@ -62,9 +66,24 @@ class SunFlowerEditView implements ViewModelInterface
                     ?: $this->orm->extractEntity($item)
             );
 
-        // Browser Title
-        $view->setTitle('SunFlower Edit');
+        $this->prepareMetadata($app, $view);
 
         return compact('form', 'id', 'item');
+    }
+
+    /**
+     * Prepare Metadata and HTML Frame.
+     *
+     * @param  AppContext  $app
+     * @param  View        $view
+     *
+     * @return  void
+     */
+    protected function prepareMetadata(AppContext $app, View $view): void
+    {
+        $view->getHtmlFrame()
+            ->setTitle(
+                $this->trans('unicorn.title.grid', title: 'SunFlower')
+            );
     }
 }

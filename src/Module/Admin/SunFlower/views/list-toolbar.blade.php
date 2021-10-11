@@ -24,7 +24,7 @@ use Windwalker\Core\Router\SystemUri;
 ?>
 
 <div x-id="toolbar" x-data="{ form: $store.grid.form, grid: $store.grid }">
-    <a type="button" class="btn btn-primary btn-sm"
+    <a class="btn btn-primary btn-sm"
         href="{{ $nav->to('sun_flower_edit')->var('new', 1) }}"
         style="min-width: 150px"
     >
@@ -37,7 +37,7 @@ use Windwalker\Core\Router\SystemUri;
         <i class="fa fa-clone"></i>
         @lang('unicorn.toolbar.duplicate')
     </button>
-    <button type="button" class="btn btn-outline-dark btn-sm"
+    <button type="button" class="btn btn-dark btn-sm"
         @click="grid.validateChecked(null, function () {
             (new bootstrap.Modal('#batch-modal')).show();
         })"
