@@ -19,14 +19,14 @@ export async function css() {
       'resources/assets/scss/front/main.scss',
       'src/Module/Front/**/assets/*.scss'
     ],
-    'www/assets/css/front/app.css'
+    'www/assets/css/front/main.css'
   );
   sass(
     [
       'resources/assets/scss/admin/main.scss',
       'src/Module/Admin/**/assets/*.scss'
     ],
-    'www/assets/css/admin/app.css'
+    'www/assets/css/admin/main.css'
   );
   // Compile end
 }

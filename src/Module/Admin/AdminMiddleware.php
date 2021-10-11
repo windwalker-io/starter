@@ -45,7 +45,7 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
         $this->asset->js('https://kit.fontawesome.com/59f5955d51.js');
         $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.js');
 
-        $this->asset->css('css/admin/app.css');
+        $this->asset->css('css/admin/main.css');
     }
 
     /**

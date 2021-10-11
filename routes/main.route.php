@@ -11,16 +11,14 @@ declare(strict_types=1);
 
 namespace App\Routes;
 
-use App\Module\Front\Home\HomeController;
-use App\Module\Front\Home\HomeView;
 use Windwalker\Core\Router\RouteCreator;
 
 /** @var RouteCreator $router */
 
 $router->group('web')
     ->register(function (RouteCreator $router) {
-        $router->load(__DIR__ . '/front.php');
-        $router->load(__DIR__ . '/admin.php');
+        $router->load(__DIR__ . '/front.route.php');
+        $router->load(__DIR__ . '/admin.route.php');
 
         $router->load(__DIR__ . '/packages/*.route.php');
     });

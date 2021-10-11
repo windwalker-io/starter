@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Part of starter project.
+ * Part of Windwalker project.
  *
- * @copyright  Copyright (C) 2020 __ORGANIZATION__.
- * @license    __LICENSE__
+ * @copyright  Copyright (C) 2020 LYRASOFT.
+ * @license    MIT
  */
 
 declare(strict_types=1);
@@ -25,8 +25,6 @@ use function Windwalker\DI\create;
 use function Windwalker\ref;
 
 return [
-    'enabled' => true,
-
     'default' => 'default',
 
     'from' => 'Windwalker <noreply@windwalker.local>',
@@ -49,7 +47,7 @@ return [
             'default' => fn (MailerManager $manager) => $manager->createMailer(
                 [
                     'envelope' => $manager->config('envelope'),
-                    'dsn' => env('MAIL_ENABLED') ? env('MAIL_DSN_DEFAULT') : 'null://null',
+                    'dsn' => env('MAIL_DSN_DEFAULT'),
 
                     // 'dsn' => [
                     //     'scheme' => env('MAIL_TRANSPORT'),

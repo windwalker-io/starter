@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Part of starter project.
+ * Part of Windwalker project.
  *
  * @copyright  Copyright (C) 2020 ${ORGANIZATION}.
- * @license    __LICENSE__
+ * @license    MIT
  */
 
 use Monolog\Formatter\LineFormatter;
@@ -31,6 +31,8 @@ return [
         'default' => ref('logs.factories.loggers.default'),
     ],
 
+    'max_files' => env('LOG_MAX_FILES'),
+
     'global_handlers' => [],
     'global_processors' => [
         PsrLogMessageProcessor::class
@@ -43,8 +45,7 @@ return [
         //
     ],
     'aliases' => [
-        'logger.manager' => LoggerManager::class,
-        'logger.service' => LoggerService::class,
+        //
     ],
     'factories' => [
         'instances' => [
@@ -64,6 +65,8 @@ return [
                 $args['filename'] ??= $args[0] ?? $container->getParam('@logs') . '/' . $instanceName . '.log';
 
                 unset($args[0]);
+
+                $args['maxFiles'] = (int) ($container->getParam('logs.max_files') ?? 7);
 
                 return create(RotatingFileHandler::class, ...$args);
             },
