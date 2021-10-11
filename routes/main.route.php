@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace App\Routes;
 
-use App\Module\Front\Home\HomeController;
-use App\Module\Front\Home\HomeView;
 use Windwalker\Core\Router\RouteCreator;
 
 /** @var RouteCreator $router */

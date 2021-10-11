@@ -9,13 +9,11 @@
 
 declare(strict_types=1);
 
-
 namespace App\Routes;
 
 use App\Module\Front\FrontMiddleware;
 use App\Module\Front\Home\HomeController;
 use App\Module\Front\Home\HomeView;
-use Lyrasoft\Luna\LunaPackage;
 use Windwalker\Core\Router\RouteCreator;
 
 /** @var RouteCreator $router */
