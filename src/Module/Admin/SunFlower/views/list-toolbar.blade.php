@@ -37,6 +37,14 @@ use Windwalker\Core\Router\SystemUri;
         <i class="fa fa-clone"></i>
         @lang('unicorn.toolbar.duplicate')
     </button>
+    <x-state-dropdown color-on="text"
+        button-style="width: 100%"
+        use-states
+        batch
+        :workflow="[$workflow]"
+    >
+        @lang('unicorn.toolbar.state.change')
+    </x-state-dropdown>
     <button type="button" class="btn btn-dark btn-sm"
         @click="grid.validateChecked(null, function () {
             (new bootstrap.Modal('#batch-modal')).show();

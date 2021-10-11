@@ -44,6 +44,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
     {
         $this->unicornScript->init('js/main.js');
 
+        $this->asset->css('vendor/bootstrap/dist/css/bootstrap.min.css');
         $this->asset->css('css/front/main.css');
 
         $this->htmlFrame->setSiteName('Windwalker');

@@ -43,7 +43,13 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
 
         <x-filter-bar :form="$form" :open="$showFilters"></x-filter-bar>
 
-        <div>
+        @if (count($items))
+        {{-- RESPONSIVE TABLE DESC --}}
+        <p class="d-sm-block d-md-none">
+            @lang('unicorn.grid.responsive.table.desc')
+        </p>
+
+        <div class="grid-table table-responsive">
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
@@ -61,7 +67,7 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                         </x-sort>
                     </th>
                     <th style="width: 10%" class="text-nowrap">
-                        <div class="d-flex w-100 justify-content-between">
+                        <div class="d-flex w-100 justify-content-end">
                             <x-sort
                                 asc="sun_flower.ordering ASC"
                                 desc="sun_flower.ordering DESC"
@@ -69,14 +75,14 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                                 @lang('unicorn.field.ordering')
                             </x-sort>
                             @if($vm->reorderEnabled($ordering))
-                                <x-save-order></x-save-order>
+                                <x-save-order class="ml-2 ms-2"></x-save-order>
                             @endif
                         </div>
                     </th>
                     <th style="width: 1%" class="text-nowrap">
                         @lang('unicorn.field.delete')
                     </th>
-                    <th style="width: 1%" class="text-nowrap text-right">
+                    <th style="width: 1%" class="text-nowrap text-right text-end">
                         <x-sort field="sun_flower.id">
                             @lang('unicorn.field.id')
                         </x-sort>
@@ -109,7 +115,7 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                                 </a>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-end text-right">
                             <x-order-control
                                 :enabled="$vm->reorderEnabled($ordering)"
                                 :row="$i"
@@ -125,7 +131,7 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
-                        <td class="text-right">
+                        <td class="text-right text-end">
                             {{ $entity->getId() }}
                         </td>
                     </tr>
@@ -141,6 +147,13 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                 </tfoot>
             </table>
         </div>
+        @else
+            <div class="grid-no-items card bg-light" style="padding: 125px 0;">
+                <div class="card-body text-center">
+                    <h3 class="text-secondary">@lang('unicorn.grid.no.items')</h3>
+                </div>
+            </div>
+        @endif
 
         <div class="d-none">
             <input name="_method" type="hidden" value="PUT" />

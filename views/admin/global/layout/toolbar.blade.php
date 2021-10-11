@@ -23,8 +23,16 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 ?>
-<aside id="admin-toolbar" class="">
-    <div class="admin-toolbar-buttons">
+<aside id="admin-toolbar" class="navbar-expand-lg">
+    <button class="navbar-toggler w-100 mb-3" type="button" data-bs-toggle="collapse"
+        data-bs-target="#admin-toolbar-content"
+        aria-controls="admin-toolbar-content"
+        aria-expanded="false" aria-label="Toggle navigation"
+    >
+        <span class="fa fa-tools"></span>
+        Toggle Toolbar
+    </button>
+    <div id="admin-toolbar-content" class="admin-toolbar-buttons collapse navbar-collapse">
         @yield('toolbar-buttons')
     </div>
 </aside>
