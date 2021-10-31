@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Module\Admin\SunFlower\Form;
 
 use Unicorn\Enum\BasicState;
+use Unicorn\Field\ButtonRadioField;
 use Windwalker\Form\Field\ListField;
 use Windwalker\Form\Field\TextField;
 use Windwalker\Form\FieldDefinitionInterface;
@@ -42,7 +43,9 @@ class EditForm implements FieldDefinitionInterface
         $form->fieldset(
             'basic',
             function (Form $form) {
-                //
+                $form->add('state', ButtonRadioField::class)
+                    ->registerOptions(BasicState::class)
+                    ->disabled(true);
             }
         );
     }
