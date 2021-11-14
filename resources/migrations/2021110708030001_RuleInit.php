@@ -17,7 +17,7 @@ use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\Schema\Schema;
 
 /**
- * Migration UP: 20210828163500_RuleInit.
+ * Migration UP: 2021110708030001RuleInit.
  *
  * @var Migration          $mig
  * @var ConsoleApplication $app

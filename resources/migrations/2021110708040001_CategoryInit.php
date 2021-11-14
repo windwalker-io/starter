@@ -19,7 +19,7 @@ use Windwalker\ORM\NestedSetMapper;
 use Windwalker\ORM\ORM;
 
 /**
- * Migration UP: 20210829205254_CategoryInit.
+ * Migration UP: 2021110708050001CategoryInit.
  *
  * @var Migration          $mig
  * @var ConsoleApplication $app

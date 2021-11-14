@@ -25,7 +25,7 @@ use Windwalker\ORM\NestedSetMapper;
 use Windwalker\ORM\ORM;
 
 /**
- * Migration UP: 20210828063500_UserInit.
+ * Migration UP: 2021110708010001_UserInit.
  *
  * @var Migration          $mig
  * @var ConsoleApplication $app

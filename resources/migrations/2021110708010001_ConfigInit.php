@@ -16,7 +16,7 @@ use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\Schema\Schema;
 
 /**
- * Migration UP: 20181118043519_ConfigInit.
+ * Migration UP: 2021110708010001_ConfigInit.
  *
  * @var Migration $mig
  */

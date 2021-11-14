@@ -87,12 +87,13 @@ $menu = $app->service(\Unicorn\Legacy\Html\MenuHelper::class);
     {{--    </a>--}}
     {{--</li>--}}
 
-    {{--<li class="nav-item {{ $menu->active('menus', ['type' => 'mainmenu']) }}">--}}
-    {{--    <a href="{{ $nav->to('menus', ['type' => 'mainmenu']) }}"--}}
-    {{--        class="nav-link {{ $menu->active('menus', ['type' => 'mainmenu']) }}">--}}
-    {{--        @lang('unicorn.menu.manager.title', __('unicorn.menu.type.mainmenu'))--}}
-    {{--    </a>--}}
-    {{--</li>--}}
+    <li class="nav-item {{ $menu->active('menu_list', ['type' => 'mainmenu']) }}">
+        <a href="{{ $nav->to('menu_list', ['type' => 'mainmenu']) }}"
+            class="nav-link {{ $menu->active('menu_list', ['type' => 'mainmenu']) }}">
+            @lang('luna.menu.manager.title', title: $lang('luna.menu.type.mainmenu'))
+
+        </a>
+    </li>
 
     <li class="nav-item {{ $menu->active('user_list') }}">
         <a href="{{ $nav->to('user_list') }}" class="nav-link {{ $menu->active('user_list') }}">
