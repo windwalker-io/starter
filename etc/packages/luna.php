@@ -3,8 +3,8 @@
 /**
  * Part of earth project.
  *
- * @copyright  Copyright (C) 2021 LYRASOFT.
- * @license    MIT
+ * @copyright  Copyright (C) 2021 __ORGANIZATION__.
+ * @license    __LICENSE__
  */
 
 declare(strict_types=1);
@@ -35,7 +35,8 @@ return [
         'view_extends' => [
             'front' => [
                 'base' => 'global.body',
-                'auth' => 'global.body'
+                'auth' => 'global.body',
+                'error' => 'global.body',
             ],
 
             'admin' => [
@@ -44,7 +45,13 @@ return [
                 'edit' => 'admin.global.body-edit',
                 'list' => 'admin.global.body-list',
                 'modal' => 'admin.global.pure',
+                'error' => 'admin.global.pure',
             ]
+        ],
+
+        'error' => [
+            'route' => 'front::home',
+            'layout' => 'error'
         ]
     ]
 ];
