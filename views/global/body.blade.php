@@ -22,6 +22,8 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
+$coreConfig = $app->service(\Lyrasoft\Luna\Services\ConfigService::class)->getConfig('core');
+
 $categories = $app->service(\Lyrasoft\Luna\Repository\CategoryRepository::class)
     ->getListSelector()
     ->where('category.state', 1)
@@ -30,6 +32,20 @@ $categories = $app->service(\Lyrasoft\Luna\Repository\CategoryRepository::class)
 ?>
 
 @extends('global.html')
+
+@if ($ga = trim($coreConfig->get('ga')))
+@push('meta')
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ $ga }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '{{ $ga }}');
+    </script>
+@endpush
+@endif
 
 @section('superbody')
     @section('header')

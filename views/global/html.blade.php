@@ -40,12 +40,14 @@ $htmlFrame->getHtmlElement()
     <link rel="shortcut icon" type="image/x-icon" href="{{ $htmlFrame->getFavicon() ?? $asset->path('images/favicon.png') }}"/>
     <meta name="generator" content="Windwalker Framework"/>
     {!! $htmlFrame->renderMetadata() !!}
-    @yield('meta')
+@stack('meta')
+@yield('meta')
 
     {!! $asset->renderCSS(true) !!}
-    @stack('style')
+@stack('style')
 
     {!! $htmlFrame->renderCustomTags() !!}
+@stack('head')
 </head>
 <body {!! $htmlFrame->bodyAttributes() !!}>
 

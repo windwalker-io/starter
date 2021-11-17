@@ -13,6 +13,7 @@ namespace App\Routes;
 
 use App\Module\Admin\AdminMiddleware;
 use Lyrasoft\Luna\Middleware\LoginRequireMiddleware;
+use Windwalker\Core\Middleware\MetadataMiddleware;
 use Windwalker\Core\Router\RouteCreator;
 
 /** @var RouteCreator $router */
@@ -20,6 +21,7 @@ use Windwalker\Core\Router\RouteCreator;
 $router->group('admin')
     ->prefix('/admin')
     ->namespace('admin')
+    ->middleware(MetadataMiddleware::class, meta: ['robots' => 'noindex'])
     ->middleware(
         LoginRequireMiddleware::class,
         excludes: [

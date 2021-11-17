@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Module\Front;
 
 use Lyrasoft\Luna\Script\FontAwesomeScript;
+use Lyrasoft\Luna\Services\ConfigService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Unicorn\Script\UnicornScript;
@@ -57,10 +58,16 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         $this->asset->css('css/front/main.css');
 
         // Metadata
+        $coreConfig = $this->app->service(ConfigService::class)->getConfig('core');
+
         $this->htmlFrame->setFavicon('images/favicon.png');
         $this->htmlFrame->setSiteName('Windwalker');
         $this->htmlFrame->setDescription('Windwalker Site Description.');
         // $this->htmlFrame->setCoverImages($this->asset->root('...'));
+
+        if ($sc = trim($coreConfig->get('google_search_console'))) {
+            $this->htmlFrame->addMetadata('google-site-verification', $sc);
+        }
     }
 
     /**
