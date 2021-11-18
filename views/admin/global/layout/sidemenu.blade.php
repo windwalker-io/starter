@@ -22,37 +22,19 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-$htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
+$menu = $app->service(\Unicorn\Legacy\Html\MenuHelper::class);
+
+$root = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
+    ->loadMenuFromFile('sidemenu', WINDWALKER_RESOURCES . '/menu/admin/sidemenu.menu.php');
 ?>
 
-@extends('global.html')
-
-@section('superbody')
-<div class="main-wrapper" uni-cloak>
-    {{-- Header --}}
-    @section('header')
-        @include('admin.global.layout.header')
-    @show
-
-    {{-- Main Container --}}
-    @section('container')
-    <div class="row flex-lg-nowrap">
-        {{-- Sidebar --}}
-        @section('sidebar')
-            @if (!$app->state('sidebar_hide'))
-                <div class="main-sidebar col-lg-2">
-                    @include('admin.global.layout.sidemenu')
-                </div>
-            @endif
-        @show
-        <div class="main-body col">
-            @yield('body', 'Body Section')
-
-            @section('footer')
-                @include('admin.global.layout.footer')
-            @show
-        </div>
-    </div>
-    @show
-</div>
-@stop
+<ul id="submenu" class="nav nav-stacked nav-pills flex-column">
+    @foreach ($root->getChildren() as $menuItem)
+        <li class="nav-item {{ $menuItem->isActive(true) ? 'active' : '' }}">
+            <a href="{{ $menuItem->route($nav) }}"
+                class="nav-link {{ $menuItem->isActive(true) ? 'active' : '' }}">
+                {{ $menuItem->getTitle() }}
+            </a>
+        </li>
+    @endforeach
+</ul>

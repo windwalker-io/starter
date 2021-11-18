@@ -14,5 +14,6 @@ return [
     __DIR__ . '/config-seeder.php',
     __DIR__ . '/category-seeder.php',
     __DIR__ . '/article-seeder.php',
+    __DIR__ . '/page-seeder.php',
     __DIR__ . '/menu-seeder.php',
 ];
