@@ -82,9 +82,14 @@ export async function syncJS() {
 }
 
 export async function install() {
-  return installVendors([
-    '@fortawesome/fontawesome-free'
-  ]);
+  return installVendors(
+    [
+      '@fortawesome/fontawesome-free'
+    ],
+    [
+      'lyrasoft/luna'
+    ]
+  );
 }
 
 export default parallel(css, js, images);

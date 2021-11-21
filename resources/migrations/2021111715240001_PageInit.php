@@ -11,7 +11,8 @@ declare(strict_types=1);
 
 namespace App\Migration;
 
-use App\Entity\Page;
+use Lyrasoft\Luna\Entity\Page;
+use Lyrasoft\Luna\Entity\PageTemplate;
 use Windwalker\Core\Console\ConsoleApplication;
 use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\Schema\Schema;
@@ -31,6 +32,7 @@ $mig->up(
                 $schema->varchar('extends')->comment('Extends Layout');
                 $schema->varchar('title')->comment('Title');
                 $schema->varchar('alias')->comment('Alias');
+                $schema->varchar('image')->comment('Image');
                 $schema->json('content')->comment('Page data');
                 $schema->longtext('css')->comment('CSS');
                 $schema->json('meta')->comment('Metadata');
@@ -41,13 +43,28 @@ $mig->up(
                 $schema->datetime('modified')->comment('Modified Date');
                 $schema->integer('modified_by')->comment('Modified User');
                 $schema->char('language')->length(7)->comment('Language');
-                $schema->char('preview_secret')->length(32);
                 $schema->json('params')->comment('Params');
 
                 $schema->addIndex('extends');
                 $schema->addIndex('alias');
                 $schema->addIndex('language');
-                $schema->addIndex('preview_secret');
+            }
+        );
+
+        $mig->createTable(
+            PageTemplate::class,
+            function (Schema $schema) {
+                $schema->primary('id')->comment('Primary Key');
+                $schema->varchar('title')->comment('Title');
+                $schema->char('type')->length(6);
+                $schema->text('description');
+                $schema->varchar('image')->comment('Image');
+                $schema->json('content')->comment('Page data');
+                $schema->datetime('created')->comment('Created Date');
+                $schema->integer('created_by')->comment('Author');
+                $schema->datetime('modified')->comment('Modified Date');
+                $schema->integer('modified_by')->comment('Modified User');
+                $schema->json('params')->comment('Params');
             }
         );
     }
@@ -58,6 +75,6 @@ $mig->up(
  */
 $mig->down(
     static function () use ($mig) {
-        $mig->dropTables(Page::class);
+        $mig->dropTables(Page::class, PageTemplate::class);
     }
 );

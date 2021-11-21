@@ -65,7 +65,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         $this->htmlFrame->setDescription('Windwalker Site Description.');
         // $this->htmlFrame->setCoverImages($this->asset->root('...'));
 
-        if ($sc = trim($coreConfig->get('google_search_console'))) {
+        if ($sc = trim((string) $coreConfig->get('google_search_console'))) {
             $this->htmlFrame->addMetadata('google-site-verification', $sc);
         }
     }

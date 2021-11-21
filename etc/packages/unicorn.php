@@ -37,6 +37,9 @@ return [
                 'default' => [
                     'storage' => env('UPLOAD_STORAGE_DEFAULT') ?: 'local',
                     'accept' => null,
+                    'options' => [
+                        'ACL' => S3Service::ACL_PUBLIC_READ
+                    ]
                 ],
                 'image' => [
                     'storage' => env('UPLOAD_STORAGE_DEFAULT') ?: 'local',
