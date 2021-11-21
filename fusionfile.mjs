@@ -84,7 +84,10 @@ export async function syncJS() {
 export async function install() {
   return installVendors(
     [
-      '@fortawesome/fontawesome-free'
+      '@fortawesome/fontawesome-free',
+      'wowjs',
+      'animate.css',
+      'jarallax',
     ],
     [
       'lyrasoft/luna'
