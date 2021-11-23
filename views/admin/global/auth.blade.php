@@ -4,7 +4,7 @@
  * Global variables
  * --------------------------------------------------------------
  * @var $app       AppContext      Application context.
- * @var $vm        object          The view model object.
+ * @var $view      ViewModel       The view modal object.
  * @var $uri       SystemUri       System Uri information.
  * @var $chronos   ChronosService  The chronos datetime service.
  * @var $nav       Navigator       Navigator object to build route.
@@ -16,25 +16,30 @@ declare(strict_types=1);
 
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
+use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\DateTime\ChronosService;
 use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-/**
- * @var \Lyrasoft\Luna\Entity\Page $page
- * @var array            $rows
- */
-
-$builder = $app->service(PageBuilder::class);
 ?>
 
-@extends($page->getExtends())
+@extends('global.html')
 
-@section('content')
-    <div class="l-page-container">
-        @if (is_array($rows))
+@section('superbody')
+    <div class="container" style="margin-top: 100px">
+        <div class="mx-auto w-100" style="max-width: 450px">
+            <div class="mb-4 p-4">
+                <a href="{{ $nav->to('front::home') }}" target="_blank">
+                    <img class="img-fluid" src="https://i.imgur.com/tjr9ixV.png" alt="LOGO">
+                </a>
+            </div>
 
-        @endif
+            @section('message')
+                @include('@messages')
+            @show
+
+            @yield('container', 'Container')
+        </div>
     </div>
 @stop
