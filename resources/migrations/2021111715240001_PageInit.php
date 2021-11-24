@@ -29,6 +29,7 @@ $mig->up(
             Page::class,
             function (Schema $schema) {
                 $schema->primary('id')->comment('Primary Key');
+                $schema->integer('category_id')->comment('Category');
                 $schema->varchar('extends')->comment('Extends Layout');
                 $schema->varchar('title')->comment('Title');
                 $schema->varchar('alias')->comment('Alias');
@@ -45,6 +46,7 @@ $mig->up(
                 $schema->char('language')->length(7)->comment('Language');
                 $schema->json('params')->comment('Params');
 
+                $schema->addIndex('category_id');
                 $schema->addIndex('extends');
                 $schema->addIndex('alias');
                 $schema->addIndex('language');
