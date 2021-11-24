@@ -27,7 +27,7 @@ $faker = \Faker\Factory::create();
 
 @extends('admin.global.body')
 
-@section('body')
+@section('content')
     <div class="row text-center mb-5">
         <div class="col-xs-6 col-sm-3 ">
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
