@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Part of starter project.
+ * Part of Windwalker project.
  *
  * @copyright  Copyright (C) 2020 ${ORGANIZATION}.
- * @license    __LICENSE__
+ * @license    MIT
  */
 
 use App\Console\Application as ConsoleApplication;
