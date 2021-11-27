@@ -17,7 +17,6 @@ use Unicorn\Script\UnicornScript;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Html\HtmlFrame;
-use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Middleware\AbstractLifecycleMiddleware;
 
 /**
@@ -29,7 +28,6 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         protected AppContext $app,
         protected AssetService $asset,
         protected HtmlFrame $htmlFrame,
-        protected UnicornScript $unicornScript,
     ) {
     }
 
@@ -42,7 +40,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
      */
     protected function preprocess(ServerRequestInterface $request): void
     {
-        $this->unicornScript->init('js/main.js');
+        $this->asset->js('js/main.js');
 
         $this->asset->css('vendor/bootstrap/dist/css/bootstrap.min.css');
         $this->asset->css('css/front/main.css');

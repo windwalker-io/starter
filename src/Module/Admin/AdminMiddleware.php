@@ -13,10 +13,8 @@ namespace App\Module\Admin;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Unicorn\Script\UnicornScript;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
-use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\Middleware\AbstractLifecycleMiddleware;
 
 /**
@@ -27,7 +25,6 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
     public function __construct(
         protected AppContext $app,
         protected AssetService $asset,
-        protected UnicornScript $unicornScript,
     ) {
     }
 
@@ -40,7 +37,7 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
      */
     protected function preprocess(ServerRequestInterface $request): void
     {
-        $this->unicornScript->init('js/admin/main.js');
+        $this->asset->js('js/admin/main.js');
 
         $this->asset->js('https://kit.fontawesome.com/59f5955d51.js');
         $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.js');

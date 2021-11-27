@@ -21,7 +21,6 @@
         "myclabs/php-enum": "^1.8"
     },
     "require-dev": {
-        "windwalker/unicorn": "^1.0",
         "windwalker/framework": "dev-master"
     },
     "scripts": {
