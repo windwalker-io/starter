@@ -37,7 +37,7 @@ export async function js() {
   // Watch end
 
   // Compile Start
-  babel('resources/assets/src/**/*.{js,mjs}', 'www/assets/js/', { module: 'systemjs' });
+  babel('resources/assets/src/**/*.{js,mjs}', 'www/assets/js/');
   // Compile end
 
   return syncJS();
@@ -64,7 +64,7 @@ export async function syncJS() {
     'www/assets/js/view/'
   );
 
-  babel(dest.path + '**/*.{mjs,js}', null, { module: 'systemjs' });
+  babel(dest.path + '**/*.{mjs,js}');
   // Compile end
 
   return Promise.all([]);

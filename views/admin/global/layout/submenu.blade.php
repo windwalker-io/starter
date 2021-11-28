@@ -22,18 +22,13 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-$menu = $app->service(\Unicorn\Legacy\Html\MenuHelper::class);
 ?>
 
-<h3 class="visible-xs-block d-sm-block d-md-none">
-    @lang('unicorn.title.submenu')
-</h3>
-
-<ul id="submenu" class="nav nav-stacked nav-pills flex-column">
-    <li class="nav-item {{ $menu->active('sun_flower_list') }}">
-        <a href="{{ $nav->to('sun_flower_list') }}"
-            class="nav-link {{ $menu->active('sun_flower_list') }}">
-            Sun Flowers
+<ul id="sidemenu" class="nav nav-stacked nav-pills flex-column">
+    <li class="nav-item">
+        <a href="#"
+            class="nav-link">
+            Menu Item
         </a>
     </li>
 
