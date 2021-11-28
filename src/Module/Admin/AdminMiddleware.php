@@ -17,6 +17,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Unicorn\Script\UnicornScript;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
+use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\Middleware\AbstractLifecycleMiddleware;
 
 /**
@@ -28,7 +29,8 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
         protected AppContext $app,
         protected AssetService $asset,
         protected UnicornScript $unicornScript,
-        protected FontAwesomeScript $fontAwesomeScript
+        protected FontAwesomeScript $fontAwesomeScript,
+        protected HtmlFrame $htmlFrame,
     ) {
     }
 
@@ -53,6 +55,9 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
 
         // Main
         $this->asset->css('css/admin/main.css');
+
+        // HtmlFrame
+        $this->htmlFrame->setFavicon($this->asset->path('images/admin/favicon.png'));
     }
 
     // protected function checkAccess(): bool
