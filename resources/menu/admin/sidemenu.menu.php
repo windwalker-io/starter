@@ -41,6 +41,12 @@ $menu->link(
     $nav->to('page_list')
 );
 
+// Tag
+$menu->link(
+    $lang('unicorn.title.grid', title: $lang('luna.tag.title')),
+    $nav->to('tag_list')
+);
+
 // Menu
 $menu->link(
     $lang('luna.menu.manager.title', title: $lang('luna.menu.type.mainmenu')),

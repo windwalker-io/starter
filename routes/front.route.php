@@ -28,5 +28,7 @@ $router->group('front')
 
         $router->load(__DIR__ . '/front/*.php');
 
+        $router->load(__DIR__ . '/packages/front/*.route.php');
+
         $router->load(__DIR__ . '/custom/front/*.route.php');
     });

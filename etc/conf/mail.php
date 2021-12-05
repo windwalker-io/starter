@@ -27,7 +27,7 @@ use function Windwalker\ref;
 return [
     'default' => 'default',
 
-    'from' => 'Windwalker <noreply@windwalker.local>',
+    'from' => env('MAIL_FROM') ?: 'Windwalker <noreply@windwalker.local>',
 
     'envelope' => [
         // Must use `new \Symfony\Component\Mime\Address('email', 'name')`
