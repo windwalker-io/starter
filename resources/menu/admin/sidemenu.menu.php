@@ -24,43 +24,29 @@ use Windwalker\Core\Language\LangService;
  */
 
 // Category
-$menu->link(
-    $lang('luna.article.category.list'),
-    $nav->to('category_list', ['type' => 'article'])
-);
+$menu->link($lang('luna.article.category.list'))
+    ->to($nav->to('category_list', ['type' => 'article']));
 
 // Article
-$menu->link(
-    $lang('unicorn.title.grid', title: $lang('luna.article.title')),
-    $nav->to('article_list')
-);
+$menu->link($lang('unicorn.title.grid', title: $lang('luna.article.title')))
+    ->to($nav->to('article_list'));
 
 // Page
-$menu->link(
-    $lang('unicorn.title.grid', title: $lang('luna.page.title')),
-    $nav->to('page_list')
-);
+$menu->link($lang('unicorn.title.grid', title: $lang('luna.page.title')))
+    ->to($nav->to('page_list'));
 
 // Tag
-$menu->link(
-    $lang('unicorn.title.grid', title: $lang('luna.tag.title')),
-    $nav->to('tag_list')
-);
+$menu->link($lang('unicorn.title.grid', title: $lang('luna.tag.title')))
+    ->to($nav->to('tag_list'));
 
 // Menu
-$menu->link(
-    $lang('luna.menu.manager.title', title: $lang('luna.menu.type.mainmenu')),
-    $nav->to('menu_list', ['type' => 'mainmenu'])
-);
+$menu->link($lang('luna.menu.manager.title', title: $lang('luna.menu.type.mainmenu')))
+    ->to($nav->to('menu_list', ['type' => 'mainmenu']));
 
 // User
-$menu->link(
-    $lang('unicorn.title.grid', title: $lang('luna.user.title')),
-    $nav->to('user_list')
-);
+$menu->link($lang('unicorn.title.grid', title: $lang('luna.user.title')))
+    ->to($nav->to('user_list'));
 
 // Config Core
-$menu->link(
-    $lang('luna.config.title', $lang('luna.config.type.core')),
-    $nav->to('config_core')
-);
+$menu->link($lang('luna.config.title', $lang('luna.config.type.core')))
+    ->to($nav->to('config_core'));
