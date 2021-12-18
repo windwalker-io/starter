@@ -40,7 +40,7 @@ class GridForm implements FieldDefinitionInterface
                 $form->add('*', SearchField::class)
                     ->label($this->trans('unicorn.grid.search.label'))
                     ->placeholder($this->trans('unicorn.grid.search.label'))
-                    ->attr('x-on:keydown.enter', '$store.grid.sendFilter($event)');
+                    ->onchange('this.form.submit()');
             }
         );
 
@@ -48,10 +48,10 @@ class GridForm implements FieldDefinitionInterface
             'filter',
             function (Form $form) {
                 $form->add('sun_flower.state', ListField::class)
-                    ->label('State')
+                    ->label($this->trans('unicorn.field.state'))
                     ->option($this->trans('unicorn.select.placeholder'), '')
                     ->registerOptions(BasicState::getTransItems($this->lang))
-                    ->attr('x-on:change', '$store.grid.sendFilter()');
+                    ->onchange('this.form.submit()');
             }
         );
 
