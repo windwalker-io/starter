@@ -59,9 +59,8 @@ class GridForm implements FieldDefinitionInterface
             'batch',
             function (Form $form) {
                 $form->add('state', ListField::class)
-                    ->label('State')
+                    ->label($this->trans('unicorn.field.state'))
                     ->option($this->trans('unicorn.select.no.change'), '')
-                    ->option('Published', (string) BasicState::PUBLISHED()->getValue())
                     ->registerOptions(BasicState::getTransItems($this->lang));
             }
         );

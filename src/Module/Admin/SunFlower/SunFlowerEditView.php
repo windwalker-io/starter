@@ -83,7 +83,7 @@ class SunFlowerEditView implements ViewModelInterface
     {
         $view->getHtmlFrame()
             ->setTitle(
-                $this->trans('unicorn.title.grid', title: 'SunFlower')
+                $this->trans('unicorn.title.edit', title: 'SunFlower')
             );
     }
 }
