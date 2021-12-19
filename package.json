@@ -19,6 +19,10 @@
         "jarallax": "^1.12.8",
         "wowjs": "^1.1.3"
     },
+    "workspaces": [
+        "vendor/windwalker/unicorn/*",
+        "vendor/windwalker/core/assets/*"
+    ],
     "//": {
         "workspaces": [
             "vendor/windwalker/unicorn/*",
