@@ -17,6 +17,7 @@ return [
     'access' => [
         'enabled' => true,
 
+        'roles_db_enabled' => false,
         'roles' => [
             'superuser' => create_role(
                 'Super User',
@@ -40,6 +41,7 @@ return [
             ),
         ],
 
+        'actions_db_enabled' => false,
         'actions' => [
             AccessService::ADMIN_ACCESS_ACTION => [
                 'manager' => true

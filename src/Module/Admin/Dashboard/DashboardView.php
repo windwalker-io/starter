@@ -13,6 +13,7 @@ namespace App\Module\Admin\Dashboard;
 
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
+use Windwalker\Core\Language\TranslatorTrait;
 use Windwalker\Core\View\View;
 use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\ORM\ORM;
@@ -26,6 +27,8 @@ use Windwalker\ORM\ORM;
 )]
 class DashboardView implements ViewModelInterface
 {
+    use TranslatorTrait;
+
     /**
      * DashboardView constructor.
      */
@@ -44,7 +47,7 @@ class DashboardView implements ViewModelInterface
      */
     public function prepare(AppContext $app, View $view): array
     {
-        $view->setTitle('Dashboard');
+        $view->setTitle($this->trans('unicorn.title.dashboard'));
 
         return [];
     }
