@@ -18,10 +18,3 @@ use Windwalker\Core\Schedule\Schedule;
  * @var Schedule           $schedule
  * @var ConsoleApplication $app
  */
-
-$schedule->hourly('hello')
-    ->minuteOfHour(5)
-    ->tags('foo', 'yoo', 'bar')
-    ->handler(function () {
-        show('GGGG');
-    });

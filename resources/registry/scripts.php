@@ -33,7 +33,12 @@ return [
     // Prepare for development and reset migration
     'preparedev' => [
         'cross-env NODE_ENV=development php windwalker run prepare',
-        'php windwalker mig:reset --seed -f'
+        'php windwalker mig:reset --seed -f',
+        \Windwalker\cmd(
+            'lyra pstorm:sniffer -p',
+            null,
+            true
+        )
     ],
 
     // Update code and dependencies

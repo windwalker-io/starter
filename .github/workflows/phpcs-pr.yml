@@ -1,6 +1,6 @@
-name: Code Styles
+name: Code Styles for PR
 
-on: [ push, pull_request ]
+on: [ pull_request ]
 
 env:
     COMPOSER_VENDOR: /home/runner/.composer/vendor
