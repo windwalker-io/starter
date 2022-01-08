@@ -14,7 +14,7 @@ use Windwalker\Core\Provider\DateTimeProvider;
 return [
     'secret' => '{{ REPLACE THIS AS RANDOM SECRET CODE }}',
 
-    'name' => env('APP_NAME'),
+    'name' => 'Windwalker',
 
     'debug' => (bool) (env('APP_DEBUG') ?? false),
 
