@@ -19,6 +19,7 @@ use Unicorn\Script\UnicornScript;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Html\HtmlFrame;
+use Windwalker\Core\Language\TranslatorTrait;
 use Windwalker\Core\Middleware\AbstractLifecycleMiddleware;
 
 /**
@@ -26,6 +27,8 @@ use Windwalker\Core\Middleware\AbstractLifecycleMiddleware;
  */
 class FrontMiddleware extends AbstractLifecycleMiddleware
 {
+    use TranslatorTrait;
+
     public function __construct(
         protected AppContext $app,
         protected AssetService $asset,
@@ -44,6 +47,8 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
      */
     protected function preprocess(ServerRequestInterface $request): void
     {
+        $this->lang->loadAll('ini');
+
         // Unicorn
         $this->unicornScript->init('js/front/main.js');
 
