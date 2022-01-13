@@ -7,6 +7,7 @@ Thumbs.db
 
 # IDE Ignores #
 .idea/
+.vscode/
 
 # Extra #
 !.gitkeep
