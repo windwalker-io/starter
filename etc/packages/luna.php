@@ -55,7 +55,7 @@ return [
         ],
 
         'i18n' => [
-            'enabled' => true,
+            'enabled' => false,
             'uri_prefix' => true,
         ],
 
