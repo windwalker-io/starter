@@ -47,6 +47,8 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
      */
     protected function preprocess(ServerRequestInterface $request): void
     {
+        $this->lang->loadAllFromVendor('windwalker/unicorn', 'ini');
+        $this->lang->loadAllFromVendor('lyrasoft/luna', 'ini');
         $this->lang->loadAll('ini');
 
         // Unicorn

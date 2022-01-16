@@ -29,6 +29,9 @@ $categories = $app->service(\Lyrasoft\Luna\Repository\CategoryRepository::class)
     ->where('category.state', 1)
     ->where('category.type', 'article')
     ->ordering('category.lft', 'ASC');
+
+$user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
+
 ?>
 
 @extends('global.html')
@@ -71,7 +74,6 @@ $categories = $app->service(\Lyrasoft\Luna\Repository\CategoryRepository::class)
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" aria-current="page" href="#"
-
                                     data-bs-toggle="dropdown"
                                 >
                                     Categories
@@ -88,6 +90,26 @@ $categories = $app->service(\Lyrasoft\Luna\Repository\CategoryRepository::class)
                                     @endforeach
                                 </ul>
                             </li>
+                        </ul>
+
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <x-locale-dropdown class="nav-item" />
+
+                            @if (!$user->isLogin())
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ $nav->to('login')->withReturn($uri->current()) }}">
+                                        <span class="fa fa-sign-in-alt"></span>
+                                        Login
+                                    </a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ $nav->to('logout') }}">
+                                        <span class="fa fa-sign-out-alt"></span>
+                                        Logout
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>

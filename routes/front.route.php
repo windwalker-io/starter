@@ -14,12 +14,14 @@ namespace App\Routes;
 use App\Module\Front\FrontMiddleware;
 use App\Module\Front\Home\HomeController;
 use App\Module\Front\Home\HomeView;
+use Lyrasoft\Luna\Middleware\LocaleMiddleware;
 use Windwalker\Core\Router\RouteCreator;
 
 /** @var RouteCreator $router */
 
 $router->group('front')
     ->namespace('front')
+    ->middleware(LocaleMiddleware::class)
     ->middleware(FrontMiddleware::class)
     ->register(function (RouteCreator $router) {
         $router->get('home', '/')

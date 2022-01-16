@@ -47,6 +47,10 @@ $menu->link($lang('luna.menu.manager.title', title: $lang('luna.menu.type.mainme
 $menu->link($lang('unicorn.title.grid', title: $lang('luna.user.title')))
     ->to($nav->to('user_list'));
 
+// Language
+$menu->link($lang('unicorn.title.grid', title: $lang('luna.language.title')))
+    ->to($nav->to('language_list'));
+
 // Config Core
 $menu->link($lang('luna.config.title', $lang('luna.config.type.core')))
     ->to($nav->to('config_core'));
