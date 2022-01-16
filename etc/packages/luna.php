@@ -12,7 +12,9 @@ declare(strict_types=1);
 use Lyrasoft\Luna\LunaPackage;
 use Lyrasoft\Luna\Subscriber\BuildFormFieldSubscriber;
 use Lyrasoft\Luna\Subscriber\EntityBuildingSubscriber;
+use Lyrasoft\Luna\Subscriber\LocaleSubscriber;
 use Lyrasoft\Luna\User\Handler\SessionDatabaseHandler;
+use Windwalker\Core\Application\AppContext;
 use Windwalker\Session\Handler\DatabaseHandler;
 
 return [
@@ -26,6 +28,9 @@ return [
         'listeners' => [
             EntityBuildingSubscriber::class,
             BuildFormFieldSubscriber::class,
+            AppContext::class => [
+                LocaleSubscriber::class
+            ]
         ],
 
         'aliases' => [
@@ -47,6 +52,11 @@ return [
                 'modal' => 'admin.global.pure',
                 'error' => 'admin.global.pure',
             ]
+        ],
+
+        'i18n' => [
+            'enabled' => true,
+            'uri_prefix' => true,
         ],
 
         'error' => [
