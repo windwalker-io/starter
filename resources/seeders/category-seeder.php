@@ -61,7 +61,7 @@ $seeder->import(
                 $faker = $seeder->faker($langCode);
 
                 $item->setType($type);
-                $item->setTitle(Utf8String::ucwords($faker->sentence(3)));
+                $item->setTitle(Utf8String::ucwords($faker->sentence(2)));
                 $item->setAlias(SlugHelper::safe($item->getTitle()));
                 $item->setDescription($faker->paragraph(5));
                 $item->setImage($faker->unsplashImage(800, 600));
