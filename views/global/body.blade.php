@@ -25,7 +25,7 @@ use Windwalker\Core\Router\SystemUri;
 $coreConfig = $app->service(\Lyrasoft\Luna\Services\ConfigService::class)->getConfig('core');
 
 $categories = $app->service(\Lyrasoft\Luna\Repository\CategoryRepository::class)
-    ->getListSelector()
+    ->getAvailableListSelector()
     ->where('category.state', 1)
     ->where('category.type', 'article')
     ->ordering('category.lft', 'ASC');

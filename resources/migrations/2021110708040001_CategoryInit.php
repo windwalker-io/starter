@@ -45,12 +45,14 @@ $mig->up(
                 $schema->datetime('modified')->nullable(true)->comment('Modified Date');
                 $schema->integer('created_by')->comment('Author');
                 $schema->integer('modified_by')->comment('Modified User');
+                $schema->char('language')->length(7)->comment('Language');
                 $schema->json('params')->comment('Params');
 
                 $schema->addIndex('alias');
                 $schema->addIndex('path');
                 $schema->addIndex(['lft', 'rgt']);
                 $schema->addIndex('created_by');
+                $schema->addIndex('language');
             }
         );
 
