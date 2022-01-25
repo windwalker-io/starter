@@ -397,7 +397,7 @@ use Windwalker\Core\Router\SystemUri;
                         <tr>
                             <td class="content-block powered-by">
                                 &copy; <a href="{{ $uri->root }}">
-                                    {{ $app->config('company.name', 'Windwalker') }}
+                                    {{ $app->config('company.name') }}
                                 </a> All rights reserved.
                             </td>
                         </tr>
