@@ -390,14 +390,14 @@ use Windwalker\Core\Router\SystemUri;
                         <tr>
                             <td class="content-block">
                                 <span class="apple-link">
-                                    {{ $app->config('company.address', '5F, No.58, Yitong Street, Zhongshan District, Taipei') }}
+                                    {{ $app->config('company.address') }}
                                 </span>
                             </td>
                         </tr>
                         <tr>
                             <td class="content-block powered-by">
                                 &copy; <a href="{{ $uri->root }}">
-                                    {{ $app->config('company.name', 'Windwalker') }}
+                                    {{ $app->config('company.name') }}
                                 </a> All rights reserved.
                             </td>
                         </tr>
