@@ -74,6 +74,6 @@ $seeder->import(
 
 $seeder->clear(
     static function () use ($seeder, $orm, $db) {
-        //
+        $seeder->truncate(Article::class);
     }
 );
