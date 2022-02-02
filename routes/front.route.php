@@ -15,16 +15,19 @@ use App\Module\Front\FrontMiddleware;
 use App\Module\Front\Home\HomeController;
 use App\Module\Front\Home\HomeView;
 use Lyrasoft\Luna\Middleware\LocaleMiddleware;
+use Windwalker\Core\Middleware\CsrfMiddleware;
 use Windwalker\Core\Router\RouteCreator;
 
 /** @var RouteCreator $router */
 
 $router->group('front')
     ->namespace('front')
+    ->middleware(CsrfMiddleware::class)
     ->middleware(LocaleMiddleware::class)
     ->middleware(FrontMiddleware::class)
     ->register(function (RouteCreator $router) {
         $router->get('home', '/')
+            ->alias('foo')
             ->handler(HomeController::class)
             ->view(HomeView::class);
 

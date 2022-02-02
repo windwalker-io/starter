@@ -29,6 +29,8 @@ return [
 
     'from' => env('MAIL_FROM') ?: 'Windwalker <noreply@windwalker.local>',
 
+    'reply_to' => env('MAIL_REPLY_TO'),
+
     'envelope' => [
         // Must use `new \Symfony\Component\Mime\Address('email', 'name')`
         'sender' => null,

@@ -16,13 +16,13 @@ use Windwalker\Core\Router\SystemUri;
 /**
  * Global variables
  * --------------------------------------------------------------
- * @var $app       AppContext                 Global Application
- * @var $view      ViewModel                       Some information of this view.
- * @var $uri       SystemUri                     Uri information, example: $uri->path
- * @var $chronos   ChronosService   PHP DateTime object of current time.
+ * @var $app       AppContext      Global Application
+ * @var $view      ViewModel       Some information of this view.
+ * @var $uri       SystemUri       Uri information, example: $uri->path
+ * @var $chronos   ChronosService  PHP DateTime object of current time.
  * @var $nav       Navigator       Router object.
- * @var $asset     AssetService         The Asset manager.
- * @var $lang     LangService         The Asset manager.
+ * @var $asset     AssetService    The Asset service.
+ * @var $lang      LangService     The lang service.
  */
 
 ?>
