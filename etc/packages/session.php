@@ -58,7 +58,7 @@ return [
             SessionRobotSubscriber::class,
             create(
                 CookiesAutoSecureSubscriber::class,
-                enabled: (bool) env('COOKIES_AUTO_SECURE', true)
+                enabled: (bool) env('COOKIES_AUTO_SECURE', '1')
             )
         ],
 
