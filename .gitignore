@@ -36,3 +36,9 @@ package-lock.json
 /phpunit.core.xml
 
 # Others
+
+# @Dev
+etc/packages/*.php
+!etc/packages/debugger.php
+!etc/packages/session.php
+# @EndDev
