@@ -23,6 +23,7 @@
         "windwalker/authentication": "^4.0",
         "windwalker/unicorn": "^1.0",
         "lyrasoft/luna": "^2.0",
+        "lyrasoft/toolkit": "^1.0",
         "symfony/var-dumper": "^5.0",
         "asika/cross-env": "^1.0",
         "myclabs/php-enum": "^1.8",
