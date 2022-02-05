@@ -35,7 +35,8 @@
         "post-create-project-cmd": [
             "php windwalker pkg:install lyrasoft/luna --tag routes",
             "php windwalker run prepare",
-            "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall"
+            "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall",
+            "App\\EarthInstaller::install"
         ],
         "post-autoload-dump": [
             "php windwalker pkg:install --tag config",
