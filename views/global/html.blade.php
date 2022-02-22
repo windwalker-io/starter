@@ -29,7 +29,7 @@ $htmlFrame->getHtmlElement()
 ?><!DOCTYPE html>
 <html {!! $htmlFrame->htmlAttributes() !!}>
 <head>
-    <base href="{{ $uri::normalize($uri->path .  '/') }}" />
+    <base href="{{ $uri::normalize($uri->path) ?: '/' }}" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
