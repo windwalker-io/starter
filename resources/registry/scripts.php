@@ -35,10 +35,9 @@ return [
         'cross-env NODE_ENV=development php windwalker run prepare',
         'php windwalker mig:reset --seed -f',
         \Windwalker\cmd(
-            'lyra pstorm:sniffer -p',
-            null,
-            true
-        )
+            cmd: 'lyra pstorm:sniffer -p',
+            ignoreError: true
+        ),
     ],
 
     // Update code and dependencies
