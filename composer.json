@@ -40,6 +40,7 @@
         ],
         "post-autoload-dump": [
             "php windwalker pkg:install --tag config",
+            "php windwalker pkg:install lyrasoft/toolkit --tag ide",
             "php windwalker cache:clear renderer"
         ],
         "env": [
