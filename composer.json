@@ -36,7 +36,7 @@
             "php windwalker pkg:install lyrasoft/luna --tag routes",
             "php windwalker run prepare",
             "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall",
-            "App\\EarthInstaller::install"
+            "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::install"
         ],
         "post-autoload-dump": [
             "php windwalker pkg:install --tag config",
@@ -45,6 +45,7 @@
         ],
         "env": [
             "Windwalker\\Core\\Composer\\StarterInstaller::genEnv",
+            "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::npmrc",
             "php windwalker run prepare"
         ]
     },
