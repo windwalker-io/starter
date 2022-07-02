@@ -47,6 +47,7 @@ $mig->up(
                 $schema->json('params')->comment('Params');
 
                 $schema->addIndex('category_id');
+                $schema->addIndex('page_id');
                 $schema->addIndex('alias');
                 $schema->addIndex('language');
                 $schema->addIndex('created_by');

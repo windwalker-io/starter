@@ -48,6 +48,7 @@ $mig->up(
                 $schema->char('language')->length(7)->comment('Language');
                 $schema->json('params')->comment('Params');
 
+                $schema->addIndex('parent_id');
                 $schema->addIndex('alias');
                 $schema->addIndex('path');
                 $schema->addIndex(['lft', 'rgt']);
