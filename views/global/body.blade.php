@@ -36,7 +36,7 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
 
 @extends('global.html')
 
-@if ($ga = trim($coreConfig->get('ga')))
+@if ($ga = trim((string) $coreConfig->get('ga')))
 @push('meta')
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ $ga }}"></script>
