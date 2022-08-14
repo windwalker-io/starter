@@ -27,7 +27,6 @@ $mig->up(
         $mig->createTable(
             Rule::class,
             function (Schema $schema) {
-                $schema->primary('id');
                 $schema->varchar('role_id');
                 $schema->varchar('name');
                 $schema->varchar('type');
@@ -36,6 +35,7 @@ $mig->up(
                 $schema->varchar('title');
                 $schema->tinyint('allow')->length(1)->nullable(true);
 
+                $schema->addPrimaryKey(['role_id', 'name', 'target_id']);
                 $schema->addIndex('role_id');
                 $schema->addIndex('type');
                 $schema->addIndex('name');
