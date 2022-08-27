@@ -27,6 +27,11 @@ return array_merge(
         'generator' => [
             'commands' => include __DIR__ . '/../../resources/registry/generator.php'
         ],
+
+        'web_simulator' => [
+            'uri' => env('WEB_SIMULATOR_URI'),
+            'docroot' => env('WEB_SIMULATOR_DOCROOT'),
+        ]
     ],
     require __DIR__ . '/../config.php'
 );
