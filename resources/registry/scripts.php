@@ -44,13 +44,6 @@ return [
     'update' => [
         'git pull',
         'cross-env COMPOSER_PROCESS_TIMEOUT=600 composer install',
-        'php windwalker run prepare',
-    ],
-
-    // Sync with last deps
-    'sync' => [
-        'git pull',
-        'cross-env COMPOSER_PROCESS_TIMEOUT=600 composer install',
         'cross-env APP_ENV=dev php windwalker mig:go -f',
         'php windwalker run prepare',
     ],
