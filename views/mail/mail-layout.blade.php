@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+namespace App\View;
+
 /**
  * Global variables
  * --------------------------------------------------------------
  * @var $app       AppContext      Application context.
- * @var $vm        object          The view model object.
+ * @var $view      ViewModel       The view modal object.
  * @var $uri       SystemUri       System Uri information.
  * @var $chronos   ChronosService  The chronos datetime service.
  * @var $nav       Navigator       Navigator object to build route.
@@ -12,10 +16,9 @@
  * @var $lang      LangService     The language translation service.
  */
 
-declare(strict_types=1);
-
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
+use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\DateTime\ChronosService;
 use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
@@ -57,7 +60,9 @@ use Windwalker\Core\Router\SystemUri;
             border-collapse: separate;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
-            width: 100%; }
+            width: 100%;
+        }
+
         table td {
             font-family: sans-serif;
             font-size: 14px;
@@ -117,6 +122,7 @@ use Windwalker\Core\Router\SystemUri;
             text-align: center;
             width: 100%;
         }
+
         .footer td,
         .footer p,
         .footer span,
@@ -157,6 +163,7 @@ use Windwalker\Core\Router\SystemUri;
             margin: 0;
             margin-bottom: 15px;
         }
+
         p li,
         ul li,
         ol li {
@@ -175,7 +182,9 @@ use Windwalker\Core\Router\SystemUri;
         .btn {
             text-align: center;
             box-sizing: border-box;
-            padding-bottom: 15px; }
+            padding-bottom: 15px;
+        }
+
         .btn {
             background-color: #ffffff;
             border: solid 1px #3498db;
@@ -268,6 +277,7 @@ use Windwalker\Core\Router\SystemUri;
                 font-size: 28px !important;
                 margin-bottom: 10px !important;
             }
+
             table[class=body] p,
             table[class=body] ul,
             table[class=body] ol,
@@ -276,28 +286,35 @@ use Windwalker\Core\Router\SystemUri;
             table[class=body] a {
                 font-size: 16px !important;
             }
+
             table[class=body] .wrapper,
             table[class=body] .article {
                 padding: 10px !important;
             }
+
             table[class=body] .content {
                 padding: 0 !important;
             }
+
             table[class=body] .container {
                 padding: 0 !important;
                 width: 100% !important;
             }
+
             table[class=body] .main {
                 border-left-width: 0 !important;
                 border-radius: 0 !important;
                 border-right-width: 0 !important;
             }
+
             table[class=body] .btn table {
                 width: 100% !important;
             }
+
             table[class=body] .btn a {
                 width: 100% !important;
             }
+
             table[class=body] .img-responsive {
                 height: auto !important;
                 max-width: 100% !important;
@@ -312,6 +329,7 @@ use Windwalker\Core\Router\SystemUri;
             .ExternalClass {
                 width: 100%;
             }
+
             .ExternalClass,
             .ExternalClass p,
             .ExternalClass span,
@@ -320,6 +338,7 @@ use Windwalker\Core\Router\SystemUri;
             .ExternalClass div {
                 line-height: 100%;
             }
+
             .apple-link a {
                 color: inherit !important;
                 font-family: inherit !important;
@@ -328,6 +347,7 @@ use Windwalker\Core\Router\SystemUri;
                 line-height: inherit !important;
                 text-decoration: none !important;
             }
+
             #MessageViewBody a {
                 color: inherit;
                 text-decoration: none;
@@ -336,9 +356,11 @@ use Windwalker\Core\Router\SystemUri;
                 font-weight: inherit;
                 line-height: inherit;
             }
+
             .btn-primary table td:hover {
                 background-color: #34495e !important;
             }
+
             .btn-primary a:hover {
                 background-color: #34495e !important;
                 border-color: #34495e !important;
