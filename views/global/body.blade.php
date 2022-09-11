@@ -42,21 +42,17 @@ $user = $app->service(UserService::class)->getUser();
 @extends('global.html')
 
 @if ($ga = trim((string) $coreConfig->get('ga')))
-    @push('meta')
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $ga }}"></script>
-        <script>
+@push('meta')
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ $ga }}"></script>
+    <script>
       window.dataLayer = window.dataLayer || [];
-
-      function gtag() {
-          dataLayer.push(arguments);
-      }
-
+      function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', '{{ $ga }}');
     </script>
-    @endpush
+@endpush
 @endif
 
 @section('superbody')
