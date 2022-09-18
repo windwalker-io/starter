@@ -14,6 +14,7 @@ return array_merge(
         'app'      => include __DIR__ . '/conf/app.php',
         'asset'    => include __DIR__ . '/conf/asset.php',
         'auth'     => include __DIR__ . '/conf/auth.php',
+        'company'  => include __DIR__ . '/conf/company.php',
         'logs'     => include __DIR__ . '/conf/logs.php',
         'error'    => include __DIR__ . '/conf/error.php',
         'whoops'   => include __DIR__ . '/conf/whoops.php',

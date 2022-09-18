@@ -27,9 +27,19 @@
         "symfony/var-dumper": "^5.0",
         "asika/cross-env": "^1.0",
         "myclabs/php-enum": "^1.8",
-        "thl/pinyin": "^1.2"
+        "thl/pinyin": "^1.2",
+        "symfony/mime": "^6.0",
+        "aws/aws-sdk-php": "^3.218",
+        "tijsverkoyen/css-to-inline-styles": "^2.2",
+        "asika/autolink": "^2.0"
     },
     "require-dev": {
+        "windwalker/framework": "dev-master",
+        "phpoffice/phpspreadsheet": "^1.22",
+        "ramsey/uuid": "^4.3",
+        "lyrasoft/attachment": "dev-master",
+        "symfony/mailer": "^6.0",
+        "phpstan/phpstan": "^1.8"
     },
     "scripts": {
         "post-create-project-cmd": [
@@ -67,5 +77,11 @@
             "dev-master": "4.x-dev",
             "next": "4.x-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./vendor/lyrasoft/attachment"
+        }
+    ]
 }
