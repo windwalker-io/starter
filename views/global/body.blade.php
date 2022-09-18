@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace App\View;
+
 /**
  * Global variables
  * --------------------------------------------------------------
@@ -12,8 +16,9 @@
  * @var $lang      LangService     The language translation service.
  */
 
-declare(strict_types=1);
-
+use Lyrasoft\Luna\Repository\CategoryRepository;
+use Lyrasoft\Luna\Services\ConfigService;
+use Lyrasoft\Luna\User\UserService;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Attributes\ViewModel;
@@ -22,15 +27,15 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-$coreConfig = $app->service(\Lyrasoft\Luna\Services\ConfigService::class)->getConfig('core');
+$coreConfig = $app->service(ConfigService::class)->getConfig('core');
 
-$categories = $app->service(\Lyrasoft\Luna\Repository\CategoryRepository::class)
+$categories = $app->service(CategoryRepository::class)
     ->getAvailableListSelector()
     ->where('category.state', 1)
     ->where('category.type', 'article')
     ->ordering('category.lft', 'ASC');
 
-$user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
+$user = $app->service(UserService::class)->getUser();
 
 ?>
 

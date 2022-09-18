@@ -28,7 +28,7 @@ class Application extends ConsoleApplication
      */
     protected function booting(Container $container): void
     {
-        //
+        $this->prepareWebSimulator();
     }
 
     /**

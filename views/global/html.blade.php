@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace App\View;
+
 /**
  * Global variables
  * --------------------------------------------------------------
@@ -12,8 +16,6 @@
  * @var $lang      LangService     The language translation service.
  */
 
-declare(strict_types=1);
-
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Attributes\ViewModel;
@@ -25,6 +27,8 @@ use Windwalker\Core\Router\SystemUri;
 $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 $htmlFrame->getHtmlElement()
     ->setAttribute('lang', $app->config('language.locale') ?: $app->config('language.fallback', 'en-US'));
+
+$htmlFrame->addBodyClass('env-' . env('APP_ENV', 'prod'));
 
 ?><!DOCTYPE html>
 <html {!! $htmlFrame->htmlAttributes() !!}>

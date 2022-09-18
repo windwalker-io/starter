@@ -30,9 +30,6 @@ use Windwalker\ORM\ORM;
  * @var Migration          $mig
  * @var ConsoleApplication $app
  */
-
-$app->prepareWebSimulator();
-
 $mig->up(
     static function (UserService $userService, ORM $orm) use ($mig) {
         // User
