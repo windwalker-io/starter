@@ -13,6 +13,8 @@ return [
     'debugger' => [
         'enabled' => env('APP_ENV') === 'dev',
 
+        'editor' => env('DEBUGGER_EDITOR', 'phpstorm'),
+
         'listeners' => [
             \Windwalker\Core\Application\AppContext::class => [
                 \Windwalker\Debugger\Subscriber\DebuggerSubscriber::class
