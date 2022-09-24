@@ -68,11 +68,5 @@
             "dev-master": "4.x-dev",
             "next": "4.x-dev"
         }
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "./vendor/lyrasoft/attachment"
-        }
-    ]
+    }
 }
