@@ -36,7 +36,7 @@ $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 
     {{-- Main Container --}}
     @section('container')
-    <div class="row flex-lg-nowrap">
+    <div class="row gx-0 flex-lg-nowrap">
         {{-- Sidebar --}}
         @section('sidebar')
             @if (!$app->state('sidebar_hide'))

@@ -31,7 +31,7 @@ use Windwalker\Core\Router\SystemUri;
         @include('admin.global.layout.banner')
     @show
 
-    <section id="content-container" class="mt-3">
+    <section id="content-container" class="container-fluid mt-3">
         @section('admin-area')
             @include('@messages')
 
