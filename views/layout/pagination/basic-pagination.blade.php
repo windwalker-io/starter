@@ -19,7 +19,7 @@ use Windwalker\Core\Pagination\Pagination;
 $result = $pagination->compile();
 $current = $result->getCurrent();
 
-$mobileNeighbours = 1;
+$mobileNeighbours = 2;
 ?>
 
 @if ($pagination->getPages() >= 1)
