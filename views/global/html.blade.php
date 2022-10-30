@@ -16,19 +16,23 @@ namespace App\View;
  * @var $lang      LangService     The language translation service.
  */
 
+use Unicorn\Script\UnicornScript;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\DateTime\ChronosService;
+use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-$htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
+$app->service(UnicornScript::class)->disableTransitionBeforeLoad();
+
+$htmlFrame = $app->service(HtmlFrame::class);
 $htmlFrame->getHtmlElement()
     ->setAttribute('lang', $app->config('language.locale') ?: $app->config('language.fallback', 'en-US'));
 
-$htmlFrame->addBodyClass('env-' . env('APP_ENV', 'prod'));
+$htmlFrame->addBodyClass('env-' . ($app->getMode() ?: 'prod'));
 
 ?><!DOCTYPE html>
 <html {!! $htmlFrame->htmlAttributes() !!}>
@@ -41,8 +45,9 @@ $htmlFrame->addBodyClass('env-' . env('APP_ENV', 'prod'));
 
     <title>{{ $htmlFrame->getPageTitle() }}</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ $htmlFrame->getFavicon() ?? $asset->path('images/favicon.png') }}"/>
-    <meta name="generator" content="Windwalker Framework"/>
+    <link rel="shortcut icon" type="image/x-icon"
+        href="{{ $htmlFrame->getFavicon() ?? $asset->path('images/favicon.png') }}" />
+    <meta name="generator" content="Windwalker Framework" />
     {!! $htmlFrame->renderMetadata() !!}
 @stack('meta')
 @yield('meta')
