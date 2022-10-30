@@ -48,6 +48,7 @@
         "env": [
             "Windwalker\\Core\\Composer\\StarterInstaller::genEnv",
             "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::npmrc",
+            "php windwalker pkg:install lyrasoft/toolkit --tag ide",
             "php windwalker run prepare"
         ]
     },
