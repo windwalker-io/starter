@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
+use Lyrasoft\Luna\Access\AccessService;
 use Lyrasoft\Luna\Entity\User;
+use Lyrasoft\Luna\Entity\UserRoleMap;
 use Lyrasoft\Luna\User\Password;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
@@ -28,13 +30,14 @@ use function Windwalker\uid;
  * @var DatabaseAdapter $db
  */
 $seeder->import(
-    static function (Password $password) use ($seeder, $orm, $db) {
+    static function (Password $password, AccessService $accessService) use ($seeder, $orm, $db) {
         $faker = $seeder->faker('en_US');
 
         /** @var EntityMapper<User> $mapper */
         $mapper = $orm->mapper(User::class);
 
         $pass = $password->hash('1234');
+        $basicRole = $accessService->getBasicRole();
 
         foreach (range(1, 50) as $i) {
             $item = $mapper->createEntity();
@@ -50,6 +53,8 @@ $seeder->import(
             $item->setRegistered($faker->dateTimeThisYear());
 
             $item = $mapper->createOne($item);
+
+            $accessService->addRolesToUser($item, $basicRole);
 
             $seeder->outCounting();
         }

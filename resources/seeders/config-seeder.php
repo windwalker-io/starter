@@ -39,7 +39,7 @@ $seeder->import(
         $item->setType('core');
         $item->setContent(['ga' => '']);
         $item->setModified($faker->dateTimeThisYear());
-        $item->setModifiedBy($faker->randomElement($userIds));
+        $item->setModifiedBy((int) $faker->randomElement($userIds));
 
         $mapper->createOne($item);
 
