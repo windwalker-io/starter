@@ -37,7 +37,7 @@ $container = Runtime::getContainer();
 
 /** @var HttpServer $server */
 /** @var WebApplication $app */
-$server = $container->resolve('factories.servers.http');
+$server = $container->resolve('factories.servers.swoole');
 $app = $container->resolve('factories.apps.main');
 $app->boot();
 $server->getEventDispatcher()->addDealer($app->getEventDispatcher());
@@ -45,9 +45,11 @@ $server->getEventDispatcher()->addDealer($app->getEventDispatcher());
 $server->onRequest(function (RequestEvent $event) use ($app) {
     $req = $event->getRequest();
 
+    show((string) $req->getUri());
+
     $event->setResponse($app->execute($req));
 });
 
-$server->listen();
+$server->listen('0.0.0.0', 9501);
 
 $app->terminate();

@@ -13,6 +13,8 @@ use Windwalker\DI\Container;
 use Windwalker\Http\Server\HttpServer;
 use Windwalker\Http\Server\PhpServer;
 
+use Windwalker\Http\Server\SwooleHttpServer;
+
 use function Windwalker\DI\create;
 use function Windwalker\ref;
 
@@ -20,6 +22,7 @@ return [
     'factories' => [
         'servers' => [
             'http' => ref('di.servers.http'),
+            'swoole' => ref('di.servers.swoole'),
         ],
         'apps' => [
             'main' => ref('di.apps.main'),
@@ -32,6 +35,10 @@ return [
             'http' => create(
                 HttpServer::class,
                 adapter: create(PhpServer::class)
+            ),
+            'swoole' => create(
+                HttpServer::class,
+                adapter: create(SwooleHttpServer::class)
             ),
         ],
         'apps' => [
