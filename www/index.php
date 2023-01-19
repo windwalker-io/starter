@@ -38,7 +38,7 @@ $app = $container->resolve('factories.apps.main');
 $app->boot();
 $server->getEventDispatcher()->addDealer($app->getEventDispatcher());
 
-$server->on('request', function (RequestEvent $event) use ($app) {
+$server->onRequest(function (RequestEvent $event) use ($app) {
     $req = $event->getRequest();
 
     $event->setResponse($app->execute($req));

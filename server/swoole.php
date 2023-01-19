@@ -9,22 +9,45 @@
 
 declare(strict_types=1);
 
+namespace App;
+
+use Swoole\Http\Request;
+use Swoole\Http\Response;
+use Swoole\Http\Server;
+use Windwalker\Core\Application\WebApplication;
+use Windwalker\Core\Runtime\Runtime;
+use Windwalker\Http\Event\RequestEvent;
+use Windwalker\Http\Server\HttpServer;
+
+$root = __DIR__ . '/..';
+
 include __DIR__ . '/../vendor/autoload.php';
 
-$http = new \Swoole\Http\Server('127.0.0.1');
-$http1 = $http->listen('127.0.0.1', 9501, SWOOLE_TCP);
-$http1->on(
-    'request',
-    function (\Swoole\Http\Request $request, \Swoole\Http\Response $response) {
-        $response->end("<h1>Hello Swoole1. #" . rand(1000, 9999) . "</h1>");
-    }
-);
+include $root . '/vendor/autoload.php';
 
-$http2 = $http->listen('127.0.0.1', 9502, SWOOLE_TCP);
-$http2->on(
-    'request',
-    function (\Swoole\Http\Request $request, \Swoole\Http\Response $response) {
-        $response->end("<h1>Hello Swoole2. #" . rand(1000, 9999) . "</h1>");
-    }
-);
-$http->start();
+include __DIR__ . '/../etc/define.php';
+
+Runtime::ipBlock(['dev'], env('DEV_ALLOW_IPS'));
+
+Runtime::boot(WINDWALKER_ROOT, __DIR__);
+
+Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.php');
+
+$container = Runtime::getContainer();
+
+/** @var HttpServer $server */
+/** @var WebApplication $app */
+$server = $container->resolve('factories.servers.http');
+$app = $container->resolve('factories.apps.main');
+$app->boot();
+$server->getEventDispatcher()->addDealer($app->getEventDispatcher());
+
+$server->onRequest(function (RequestEvent $event) use ($app) {
+    $req = $event->getRequest();
+
+    $event->setResponse($app->execute($req));
+});
+
+$server->listen();
+
+$app->terminate();
