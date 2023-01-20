@@ -11,16 +11,13 @@ declare(strict_types=1);
 
 namespace App;
 
-use Swoole\Http\Request;
-use Swoole\Http\Response;
-use Swoole\Http\Server;
 use Symfony\Component\Mime\MimeTypes;
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\Runtime\Runtime;
 use Windwalker\Filesystem\Path;
 use Windwalker\Http\Event\RequestEvent;
-use Windwalker\Http\Server\HttpServer;
-
+use Windwalker\Http\Response\Response;
+use Windwalker\Http\Server\SwooleHttpServer;
 use Windwalker\Stream\Stream;
 
 use const Windwalker\Stream\READ_ONLY_FROM_BEGIN;
@@ -43,7 +40,7 @@ Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.php');
 
 $container = Runtime::getContainer();
 
-/** @var HttpServer $server */
+/** @var SwooleHttpServer $server */
 /** @var WebApplication $app */
 $server = $container->resolve('factories.servers.swoole');
 $app = $container->resolve('factories.apps.main');
@@ -56,7 +53,7 @@ $server->onRequest(function (RequestEvent $event) use ($app) {
     $path = $req->getUri()->getPath();
 
     if ($path === '/favicon.ico') {
-        $event->setResponse(\Windwalker\Http\Response\Response::fromString('', 200, []));
+        $event->setResponse(Response::fromString('', 200, []));
         return;
     }
 
@@ -69,7 +66,7 @@ $server->onRequest(function (RequestEvent $event) use ($app) {
         $stream = new Stream($abPath, READ_ONLY_FROM_BEGIN);
 
         $event->setResponse(
-            (new \Windwalker\Http\Response\Response($stream, 200, []))
+            (new Response($stream, 200, []))
                 ->withHeader('Content-Type', $type)
         );
         return;

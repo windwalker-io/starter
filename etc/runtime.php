@@ -33,12 +33,10 @@ return [
     'di' => [
         'servers' => [
             'http' => create(
-                HttpServer::class,
-                adapter: create(PhpServer::class)
+                PhpServer::class
             ),
             'swoole' => create(
-                HttpServer::class,
-                adapter: create(SwooleHttpServer::class)
+                SwooleHttpServer::class
             ),
         ],
         'apps' => [
