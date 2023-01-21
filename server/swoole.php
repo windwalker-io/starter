@@ -11,12 +11,26 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Web\Application;
+use Psr\Http\Message\ServerRequestInterface;
+use Swoole\ExitException;
 use Symfony\Component\Mime\MimeTypes;
+use Windwalker\Core\Application\AppContext;
+use Windwalker\Core\Application\ApplicationInterface;
 use Windwalker\Core\Application\WebApplication;
+use Windwalker\Core\Http\ProxyResolver;
+use Windwalker\Core\Router\SystemUri;
 use Windwalker\Core\Runtime\Runtime;
+use Windwalker\Core\Service\ErrorService;
 use Windwalker\Filesystem\Path;
+use Windwalker\Http\Event\ErrorEvent;
 use Windwalker\Http\Event\RequestEvent;
+use Windwalker\Http\Helper\ResponseHelper;
+use Windwalker\Http\Output\Output;
+use Windwalker\Http\Output\SwooleOutput;
+use Windwalker\Http\Request\ServerRequest;
 use Windwalker\Http\Response\Response;
+use Windwalker\Http\Server\HttpServerInterface;
 use Windwalker\Http\Server\SwooleHttpServer;
 use Windwalker\Stream\Stream;
 
@@ -43,6 +57,8 @@ $container = Runtime::getContainer();
 /** @var SwooleHttpServer $server */
 /** @var WebApplication $app */
 $server = $container->resolve('factories.servers.swoole');
+$container->share(HttpServerInterface::class, $server);
+
 $app = $container->resolve('factories.apps.main');
 $app->boot();
 $server->getEventDispatcher()->addDealer($app->getEventDispatcher());
@@ -50,9 +66,14 @@ $server->getEventDispatcher()->addDealer($app->getEventDispatcher());
 $server->onRequest(function (RequestEvent $event) use ($app) {
     $req = $event->getRequest();
 
+    // todo: store server / output into container
+
+    $output = $event->getOutput();
+    $app->getContainer()->share(Output::class, $output);
+
     $path = $req->getUri()->getPath();
 
-    if ($path === '/favicon.ico') {
+    if (str_ends_with($path, 'favicon.ico')) {
         $event->setResponse(Response::fromString('', 200, []));
         return;
     }
@@ -74,6 +95,26 @@ $server->onRequest(function (RequestEvent $event) use ($app) {
 
     $event->setResponse($app->execute($req));
 });
+
+$server->onError(
+    function (ErrorEvent $event) use ($server, $app) {
+        $e = $event->getException();
+
+        $event->stopPropagation();
+
+        echo "[Error: {$e->getCode()}] " .  $e->getMessage() . "\n";
+
+        try {
+            $container = $app->getContainer();
+            $error = $container->get(ErrorService::class);
+
+            $error->handle($e);
+        } catch (\Throwable $e) {
+            echo '[Infinite loop in error handling]: ' . $e->getMessage() . "\n";
+            return;
+        }
+    }
+);
 
 $server->listen('0.0.0.0', 9501);
 

@@ -47,6 +47,10 @@ return [
         ],
         ApplicationInterface::CLIENT_CONSOLE => [
             'default' => ref('error.factories.handlers.console_log'),
+        ],
+        'cli_web' => [
+            'default' => ref('error.factories.handlers.default'),
+            'log' => ref('error.factories.handlers.log'),
         ]
     ],
 
