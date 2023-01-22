@@ -26,7 +26,7 @@ use Windwalker\Stream\Stream;
 
 use const Windwalker\Stream\READ_ONLY_FROM_BEGIN;
 
-$_ENV['APP_ENV'] = 'dev';
+$_ENV['APP_ENV'] = 'prod';
 
 $root = __DIR__ . '/..';
 
@@ -59,7 +59,6 @@ $server->onRequest(function (RequestEvent $event) use ($app) {
     // todo: store server / output into container
 
     $output = $event->getOutput();
-    $app->getContainer()->share(Output::class, $output);
 
     // $path = $req->getUri()->getPath();
     //
@@ -97,10 +96,13 @@ $server->onError(
         echo "[Error: {$e->getCode()}] " . $e->getMessage() . "\n";
 
         try {
-            $container = $app->getContainer();
-            $error = $container->get(ErrorService::class);
+            $event->getOutput()->write((string) $e);
+            $event->getOutput()->close();
 
-            $error->handle($e);
+            // $container = $app->getContainer();
+            // $error = $container->get(ErrorService::class);
+            //
+            // $error->handle($e);
         } catch (\Throwable $e) {
             echo '[Infinite loop in error handling]: ' . $e->getMessage() . "\n";
 
