@@ -38,7 +38,7 @@ return [
     'factories' => [
         'handlers' => [
             'default' => WhoopsProvider::prettyPageHandler(),
-            'cli_server' => WhoopsProvider::cliServerHandler()
+            // 'cli_server' => WhoopsProvider::cliServerHandler()
         ]
     ],
 ];

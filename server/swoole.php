@@ -11,24 +11,14 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Web\Application;
-use Psr\Http\Message\ServerRequestInterface;
-use Swoole\ExitException;
 use Symfony\Component\Mime\MimeTypes;
-use Windwalker\Core\Application\AppContext;
-use Windwalker\Core\Application\ApplicationInterface;
 use Windwalker\Core\Application\WebApplication;
-use Windwalker\Core\Http\ProxyResolver;
-use Windwalker\Core\Router\SystemUri;
 use Windwalker\Core\Runtime\Runtime;
 use Windwalker\Core\Service\ErrorService;
 use Windwalker\Filesystem\Path;
 use Windwalker\Http\Event\ErrorEvent;
 use Windwalker\Http\Event\RequestEvent;
-use Windwalker\Http\Helper\ResponseHelper;
 use Windwalker\Http\Output\Output;
-use Windwalker\Http\Output\SwooleOutput;
-use Windwalker\Http\Request\ServerRequest;
 use Windwalker\Http\Response\Response;
 use Windwalker\Http\Server\HttpServerInterface;
 use Windwalker\Http\Server\SwooleHttpServer;
@@ -71,27 +61,29 @@ $server->onRequest(function (RequestEvent $event) use ($app) {
     $output = $event->getOutput();
     $app->getContainer()->share(Output::class, $output);
 
-    $path = $req->getUri()->getPath();
-
-    if (str_ends_with($path, 'favicon.ico')) {
-        $event->setResponse(Response::fromString('', 200, []));
-        return;
-    }
-
-    $abPath = $app->path('@public/' . $path);
-
-    if (is_file($abPath)) {
-        $mime = new MimeTypes();
-        [$type] = $mime->getMimeTypes(Path::getExtension($abPath)) ?: ['x-empty'];
-
-        $stream = new Stream($abPath, READ_ONLY_FROM_BEGIN);
-
-        $event->setResponse(
-            (new Response($stream, 200, []))
-                ->withHeader('Content-Type', $type)
-        );
-        return;
-    }
+    // $path = $req->getUri()->getPath();
+    //
+    // if (str_ends_with($path, 'favicon.ico')) {
+    //     $event->setResponse(Response::fromString('', 200, []));
+    //
+    //     return;
+    // }
+    //
+    // $abPath = $app->path('@public/' . $path);
+    //
+    // if (is_file($abPath)) {
+    //     $mime = new MimeTypes();
+    //     [$type] = $mime->getMimeTypes(Path::getExtension($abPath)) ?: ['x-empty'];
+    //
+    //     $stream = new Stream($abPath, READ_ONLY_FROM_BEGIN);
+    //
+    //     $event->setResponse(
+    //         (new Response($stream, 200, []))
+    //             ->withHeader('Content-Type', $type)
+    //     );
+    //
+    //     return;
+    // }
 
     $event->setResponse($app->execute($req));
 });
@@ -102,7 +94,7 @@ $server->onError(
 
         $event->stopPropagation();
 
-        echo "[Error: {$e->getCode()}] " .  $e->getMessage() . "\n";
+        echo "[Error: {$e->getCode()}] " . $e->getMessage() . "\n";
 
         try {
             $container = $app->getContainer();
@@ -111,6 +103,7 @@ $server->onError(
             $error->handle($e);
         } catch (\Throwable $e) {
             echo '[Infinite loop in error handling]: ' . $e->getMessage() . "\n";
+
             return;
         }
     }

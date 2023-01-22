@@ -10,6 +10,7 @@
 use App\Console\Application as ConsoleApplication;
 use App\Web\Application as WebApplication;
 use Windwalker\DI\Container;
+use Windwalker\Http\Middleware\FileProcessMiddleware;
 use Windwalker\Http\Server\HttpServer;
 use Windwalker\Http\Server\PhpServer;
 
@@ -36,7 +37,14 @@ return [
                 PhpServer::class
             ),
             'swoole' => create(
-                SwooleHttpServer::class
+                SwooleHttpServer::factory(
+                    middlewares: [
+                        create(
+                            FileProcessMiddleware::class,
+                            WINDWALKER_PUBLIC
+                        )
+                    ]
+                )
             ),
         ],
         'apps' => [

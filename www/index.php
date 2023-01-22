@@ -11,6 +11,7 @@ namespace App\Public;
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\Runtime\Runtime;
 use Windwalker\Http\Event\RequestEvent;
+use Windwalker\Http\Output\Output;
 use Windwalker\Http\Server\HttpServer;
 
 $root = __DIR__ . '/..';
@@ -40,6 +41,9 @@ $server->getEventDispatcher()->addDealer($app->getEventDispatcher());
 
 $server->onRequest(function (RequestEvent $event) use ($app) {
     $req = $event->getRequest();
+
+    $output = $event->getOutput();
+    $app->getContainer()->share(Output::class, $output);
 
     $event->setResponse($app->execute($req));
 });
