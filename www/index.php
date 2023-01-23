@@ -40,12 +40,9 @@ $app->boot();
 $server->getEventDispatcher()->addDealer($app->getEventDispatcher());
 
 $server->onRequest(function (RequestEvent $event) use ($app) {
-    $req = $event->getRequest();
+    $request = $event->getRequest();
 
-    $output = $event->getOutput();
-    $app->getContainer()->share(Output::class, $output);
-
-    $event->setResponse($app->execute($req));
+    $event->setResponse($app->execute($request));
 });
 
 $server->listen();

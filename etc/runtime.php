@@ -41,7 +41,14 @@ return [
                     middlewares: [
                         create(
                             FileProcessMiddleware::class,
-                            WINDWALKER_PUBLIC
+                            publicPath: WINDWALKER_PUBLIC,
+                            options: [
+                                'headers' => [
+                                    'X-Content-Type-Options' => 'nosniff',
+                                    'X-Frame-Options' => 'SAMEORIGIN',
+                                    'X-XSS-Protection' => '1; mode=block',
+                                ]
+                            ]
                         )
                     ]
                 )

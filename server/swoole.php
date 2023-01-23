@@ -11,22 +11,15 @@ declare(strict_types=1);
 
 namespace App;
 
-use Symfony\Component\Mime\MimeTypes;
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\Runtime\Runtime;
 use Windwalker\Core\Service\ErrorService;
-use Windwalker\Filesystem\Path;
-use Windwalker\Http\Event\ErrorEvent;
 use Windwalker\Http\Event\RequestEvent;
-use Windwalker\Http\Output\Output;
-use Windwalker\Http\Response\Response;
+use Windwalker\Http\Output\SwooleOutput;
 use Windwalker\Http\Server\HttpServerInterface;
 use Windwalker\Http\Server\SwooleHttpServer;
-use Windwalker\Stream\Stream;
 
-use const Windwalker\Stream\READ_ONLY_FROM_BEGIN;
-
-$_ENV['APP_ENV'] = 'prod';
+$_ENV['APP_ENV'] = 'dev';
 
 $root = __DIR__ . '/..';
 
@@ -51,65 +44,32 @@ $container->share(HttpServerInterface::class, $server);
 
 $app = $container->resolve('factories.apps.main');
 $app->boot();
-$server->getEventDispatcher()->addDealer($app->getEventDispatcher());
+
+$server->setOutputBuilder(
+    function ($res) {
+        return (new SwooleOutput($res))->setMaxBufferLength(0);
+    }
+);
 
 $server->onRequest(function (RequestEvent $event) use ($app) {
-    $req = $event->getRequest();
+    $appContext = $app->createContextFromServerEvent($event);
 
-    // todo: store server / output into container
-
-    $output = $event->getOutput();
-
-    // $path = $req->getUri()->getPath();
-    //
-    // if (str_ends_with($path, 'favicon.ico')) {
-    //     $event->setResponse(Response::fromString('', 200, []));
-    //
-    //     return;
-    // }
-    //
-    // $abPath = $app->path('@public/' . $path);
-    //
-    // if (is_file($abPath)) {
-    //     $mime = new MimeTypes();
-    //     [$type] = $mime->getMimeTypes(Path::getExtension($abPath)) ?: ['x-empty'];
-    //
-    //     $stream = new Stream($abPath, READ_ONLY_FROM_BEGIN);
-    //
-    //     $event->setResponse(
-    //         (new Response($stream, 200, []))
-    //             ->withHeader('Content-Type', $type)
-    //     );
-    //
-    //     return;
-    // }
-
-    $event->setResponse($app->execute($req));
-});
-
-$server->onError(
-    function (ErrorEvent $event) use ($server, $app) {
-        $e = $event->getException();
-
-        $event->stopPropagation();
-
+    try {
+        $event->setResponse($app->runContext($appContext));
+    } catch (\Throwable $e) {
         echo "[Error: {$e->getCode()}] " . $e->getMessage() . "\n";
 
         try {
-            $event->getOutput()->write((string) $e);
-            $event->getOutput()->close();
+            $error = $appContext->service(ErrorService::class);
 
-            // $container = $app->getContainer();
-            // $error = $container->get(ErrorService::class);
-            //
-            // $error->handle($e);
+            $error->handle($e);
         } catch (\Throwable $e) {
             echo '[Infinite loop in error handling]: ' . $e->getMessage() . "\n";
-
-            return;
         }
+    } finally {
+        $event->setEndHandler(fn () => $app->stopContext($appContext));
     }
-);
+});
 
 $server->listen('0.0.0.0', 9501);
 
