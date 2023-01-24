@@ -55,11 +55,13 @@ return [
         ],
 
         'listeners' => [
-            SessionRobotSubscriber::class,
-            create(
-                CookiesAutoSecureSubscriber::class,
-                enabled: (bool) env('COOKIES_AUTO_SECURE', '1')
-            )
+            \Windwalker\Core\Application\AppContext::class => [
+                SessionRobotSubscriber::class,
+                create(
+                    CookiesAutoSecureSubscriber::class,
+                    enabled: (bool) env('COOKIES_AUTO_SECURE', '1')
+                )
+            ]
         ],
 
         'bindings' => [

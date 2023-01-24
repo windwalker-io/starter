@@ -15,9 +15,10 @@ use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\Runtime\Runtime;
 use Windwalker\Core\Service\ErrorService;
 use Windwalker\Http\Event\RequestEvent;
-use Windwalker\Http\Output\SwooleOutput;
 use Windwalker\Http\Server\HttpServerInterface;
 use Windwalker\Http\Server\SwooleHttpServer;
+
+use function Windwalker\uid;
 
 $_ENV['APP_ENV'] = 'dev';
 
@@ -44,12 +45,6 @@ $container->share(HttpServerInterface::class, $server);
 
 $app = $container->resolve('factories.apps.main');
 $app->boot();
-
-$server->setOutputBuilder(
-    function ($res) {
-        return (new SwooleOutput($res))->setMaxBufferLength(0);
-    }
-);
 
 $server->onRequest(function (RequestEvent $event) use ($app) {
     $appContext = $app->createContextFromServerEvent($event);
