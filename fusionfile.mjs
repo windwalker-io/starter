@@ -8,11 +8,11 @@
 import fusion, { sass, babel, parallel, wait } from '@windwalker-io/fusion';
 import { jsSync, installVendors, findModules } from '@windwalker-io/core';
 
-export async function css() {
+export async function mainCSS() {
   // Watch start
   fusion.watch([
-    'resources/assets/scss/**/*.scss',
-    'src/Module/**/assets/*.scss',
+    'resources/assets/scss/front/**/*.scss',
+    'src/Module/Front/**/assets/*.scss',
     ...findModules('**/assets/*.scss')
   ]);
   // Watch end
@@ -27,11 +27,19 @@ export async function css() {
       ],
       'www/assets/css/front/main.css'
     ),
-    // Boostrap
-    sass(
-      'resources/assets/scss/front/bootstrap.scss',
-      'www/assets/css/front/bootstrap.css'
-    ),
+  );
+}
+
+export async function adminCSS() {
+  // Watch start
+  fusion.watch([
+    'resources/assets/scss/admin/**/*.scss',
+    'src/Module/Admin/**/assets/*.scss',
+    ...findModules('**/assets/*.scss')
+  ]);
+  // Watch end
+
+  return wait(
     // Admin
     sass(
       [
@@ -44,6 +52,30 @@ export async function css() {
   );
 }
 
+export async function bootstrap() {
+  // Watch start
+  fusion.watch('resources/assets/scss/front/_variables.scss');
+  // Watch end
+
+  return wait(
+    // Front
+    sass(
+      'resources/assets/scss/front/bootstrap.scss',
+      'www/assets/css/front/bootstrap.css'
+    )
+  );
+}
+
+export async function css() {
+  return wait(
+    // Front
+    mainCSS(),
+    // Boostrap
+    bootstrap(),
+    // Admin
+    adminCSS(),
+  );
+}
 export async function js() {
   // Watch start
   fusion.watch(['resources/assets/src/**/*.{js,mjs}']);
