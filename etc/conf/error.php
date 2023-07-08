@@ -11,20 +11,20 @@ use Windwalker\Core\Application\ApplicationInterface;
 use Windwalker\Core\Error\ErrorLogHandler;
 use Windwalker\Core\Error\SimpleErrorPageHandler;
 use Windwalker\Core\Provider\ErrorHandlingProvider;
-
-use Windwalker\Core\Service\ErrorService;
 use Windwalker\DI\Container;
 
 use function Windwalker\DI\create;
 use function Windwalker\ref;
 
+$errorReporting = include __DIR__ . '/error-reporting.php';
+
 return [
     'ini' => [
         'display_errors' => 'on',
-        'error_reporting' => (string) WINDWALKER_DEBUG ? E_ALL : ErrorService::getReportLevel(),
+        'error_reporting' => (string) WINDWALKER_DEBUG ? E_ALL : $errorReporting,
     ],
 
-    'report_level' => ErrorService::getReportLevel(),
+    'report_level' => $errorReporting,
 
     'restore' => false,
 
