@@ -8,6 +8,7 @@
  */
 
 use Windwalker\Core\Application\ApplicationInterface;
+use Windwalker\Core\Application\AppType;
 use Windwalker\Core\Error\ErrorLogHandler;
 use Windwalker\Core\Error\SimpleErrorPageHandler;
 use Windwalker\Core\Provider\ErrorHandlingProvider;
@@ -19,15 +20,44 @@ use function Windwalker\ref;
 $errorReporting = include __DIR__ . '/error-reporting.php';
 
 return [
+    /**
+     * --------------------------------------------------------------------------
+     * Php.ini Configurations
+     * --------------------------------------------------------------------------
+     * Windwalker will use ini_set() to configure PHP by these settings.
+     * All values should be **STRING**.
+     */
     'ini' => [
         'display_errors' => 'on',
         'error_reporting' => (string) WINDWALKER_DEBUG ? E_ALL : $errorReporting,
     ],
 
-    'report_level' => $errorReporting,
+    /**
+     * --------------------------------------------------------------------------
+     * Error Report Level
+     * --------------------------------------------------------------------------
+     * PHP Error Levels to show error page and stop running.
+     * Please see ./error-reporting.php file to configure reporting levels.
+     * If the php.ini error_reporting set to E_ALL and some error level set to false here,
+     * it will only show error text on web page but won't show error page.
+     */
+    'report_level' => env('ERROR_REPORT_LEVEL') ?? $errorReporting,
 
+    /**
+     * --------------------------------------------------------------------------
+     * Restore Error Handler
+     * --------------------------------------------------------------------------
+     * Restore default error / exception handlers before register
+     * framework error handlers.
+     */
     'restore' => false,
 
+    /**
+     * --------------------------------------------------------------------------
+     * Register shutdown handler
+     * --------------------------------------------------------------------------
+     * Register the shutdown handler to catch errors if PHP unexpectedly stop.
+     */
     'register_shutdown' => true,
 
     'template' => 'layout.error.default',
@@ -41,14 +71,14 @@ return [
     ],
 
     'handlers' => [
-        ApplicationInterface::CLIENT_WEB => [
+        AppType::WEB->name => [
             'default' => ref('error.factories.handlers.default'),
             'log' => ref('error.factories.handlers.log'),
         ],
-        ApplicationInterface::CLIENT_CONSOLE => [
+        AppType::CONSOLE->name => [
             'default' => ref('error.factories.handlers.console_log'),
         ],
-        'cli_web' => [
+        AppType::CLI_WEB->name => [
             'default' => ref('error.factories.handlers.default'),
             'log' => ref('error.factories.handlers.log'),
         ]
