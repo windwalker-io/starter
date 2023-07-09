@@ -61,7 +61,7 @@ $user = $app->service(UserService::class)->getUser();
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div class="container">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="{{ $uri->path() }}">
                         <img src="{{ $asset->path('images/logo-h.svg') }}"
                             alt="Windwalker LOGO"
                             style="height: 25px;"
@@ -75,7 +75,7 @@ $user = $app->service(UserService::class)->getUser();
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                <a class="nav-link active" aria-current="page" href="{{ $uri->path() }}">Home</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" aria-current="page" href="#"
