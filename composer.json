@@ -24,7 +24,7 @@
         "windwalker/authorization": "^4.0",
         "windwalker/unicorn": "1.1.x-dev",
         "lyrasoft/luna": "dev-next",
-        "lyrasoft/toolkit": "^1.0",
+        "lyrasoft/toolkit": "dev-next",
         "symfony/var-dumper": "^5.0||^6.0",
         "asika/cross-env": "^1.0",
         "asika32764/pinyin": "^1.2"
