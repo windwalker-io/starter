@@ -13,6 +13,7 @@ namespace App\Module\Front;
 
 use Lyrasoft\Luna\Script\FontAwesomeScript;
 use Lyrasoft\Luna\Services\ConfigService;
+use Psr\Cache\InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Unicorn\Script\UnicornScript;
@@ -21,6 +22,7 @@ use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\Language\TranslatorTrait;
 use Windwalker\Core\Middleware\AbstractLifecycleMiddleware;
+use Windwalker\DI\Exception\DefinitionException;
 
 /**
  * The FrontMiddleware class.
@@ -41,9 +43,11 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
     /**
      * prepareExecute
      *
-     * @param ServerRequestInterface $request
+     * @param  ServerRequestInterface  $request
      *
-     * @return  mixed
+     * @return void
+     * @throws InvalidArgumentException
+     * @throws DefinitionException
      */
     protected function preprocess(ServerRequestInterface $request): void
     {
