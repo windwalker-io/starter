@@ -17,7 +17,6 @@ use App\Module\Front\Home\HomeView;
 use Lyrasoft\Luna\Middleware\LocaleMiddleware;
 use Windwalker\Core\Middleware\CsrfMiddleware;
 use Windwalker\Core\Middleware\SefMiddleware;
-use Windwalker\Core\Middleware\SimpleCspMiddleware;
 use Windwalker\Core\Router\RouteCreator;
 
 /** @var RouteCreator $router */
@@ -30,9 +29,6 @@ $router->group('front')
     ->middleware(
         SefMiddleware::class,
         flags: SefMiddleware::REPLACE_LINK_HASH
-    )
-    ->middleware(
-        SimpleCspMiddleware::class
     )
     ->register(function (RouteCreator $router) {
         $router->get('home', '/')

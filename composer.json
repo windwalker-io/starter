@@ -13,7 +13,7 @@
     "require": {
         "php": ">=8.2",
         "ext-json": "*",
-        "windwalker/core": "4.1.x-dev",
+        "windwalker/core": "dev-next",
         "windwalker/renderer": "^4.0",
         "windwalker/dom": "^4.0",
         "windwalker/edge": "^4.0",
@@ -22,15 +22,16 @@
         "windwalker/form": "^4.0",
         "windwalker/authentication": "^4.0",
         "windwalker/authorization": "^4.0",
-        "windwalker/unicorn": "1.1.x-dev",
+        "windwalker/unicorn": "dev-next",
         "lyrasoft/luna": "dev-next",
         "lyrasoft/toolkit": "dev-next",
+        "masterminds/html5": "^2.8",
         "symfony/var-dumper": "^5.0||^6.0",
         "asika/cross-env": "^1.0",
         "asika32764/pinyin": "^1.2"
     },
     "require-dev": {
-        "windwalker/framework": "4.1.x-dev",
+        "windwalker/framework": "dev-next",
         "myclabs/php-enum": "^1.8"
     },
     "scripts": {
