@@ -47,7 +47,6 @@ $htmlFrame->addBodyClass('env-' . ($app->getMode() ?: 'prod'));
 
     <link rel="shortcut icon" type="image/x-icon"
         href="{{ $htmlFrame->getFavicon() ?? $asset->path('images/favicon.png') }}" />
-    <meta name="generator" content="Windwalker Framework" />
     {!! $htmlFrame->renderMetadata() !!}
 @stack('meta')
 @yield('meta')

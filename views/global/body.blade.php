@@ -102,7 +102,7 @@ $user = $app->service(UserService::class)->getUser();
 
                             @if (!$user->isLogin())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ $nav->to('login')->withReturn($uri->current()) }}">
+                                    <a class="nav-link" href="{{ $nav->to('login')->withReturn() }}">
                                         <span class="fa fa-sign-in-alt"></span>
                                         Login
                                     </a>
