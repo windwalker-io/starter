@@ -7,7 +7,6 @@
  * @license    MIT
  */
 
-use Windwalker\Core\Application\ApplicationInterface;
 use Windwalker\Core\Application\AppType;
 use Windwalker\Core\Error\ErrorLogHandler;
 use Windwalker\Core\Error\SimpleErrorPageHandler;
