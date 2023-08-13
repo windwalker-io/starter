@@ -58,6 +58,16 @@ return [
                     ]
                 );
             },
+            'cli-web' => function (string $instanceName) {
+                return MonologProvider::logger(
+                    $instanceName,
+                    [
+                        ref('logs.factories.handlers.stdout'),
+                        ref('logs.factories.handlers.rotating'),
+                    ],
+                    formatter: 'console_formatter'
+                );
+            }
         ],
         'handlers' => [
             'stream' => create(StreamHandler::class),
@@ -70,9 +80,21 @@ return [
 
                 return create(RotatingFileHandler::class, ...$args);
             },
+            'stdout' => static fn() => new StreamHandler(fopen('php://stdout', 'wb')),
         ],
         'formatters' => [
-            'line_formatter' => create(LineFormatter::class, null, null, true)
+            'line_formatter' => create(LineFormatter::class, allowInlineLineBreaks: true)
+                ->extend(
+                    fn(LineFormatter $formatter) =>
+                    $formatter->includeStacktraces(true, LoggerService::parseTrace(...))
+                ),
+            'console_formatter' => create(
+                LineFormatter::class,
+                format: "[%datetime%] %level_name%: %message% %context%\n",
+                dateFormat: 'Y-m-d\TH:i:s',
+                allowInlineLineBreaks: true,
+                includeStacktraces: true,
+            ),
         ]
     ],
 ];

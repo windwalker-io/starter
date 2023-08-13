@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use Swoole\Coroutine\WaitGroup;
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\Runtime\Runtime;
 use Windwalker\Core\Service\ErrorService;
@@ -18,7 +19,7 @@ use Windwalker\Http\Event\RequestEvent;
 use Windwalker\Http\Server\HttpServerInterface;
 use Windwalker\Http\Server\SwooleHttpServer;
 
-use function Windwalker\uid;
+use function Swoole\Coroutine\run;
 
 $_ENV['APP_ENV'] = 'dev';
 
@@ -44,7 +45,14 @@ $server = $container->resolve('factories.servers.swoole');
 $container->share(HttpServerInterface::class, $server);
 
 $app = $container->resolve('factories.apps.main');
-$app->boot();
+
+run(
+    function () use ($app) {
+        $wg = new WaitGroup();
+        $app->boot();
+        $wg->wait();
+    }
+);
 
 $server->onRequest(function (RequestEvent $event) use ($app) {
     $appContext = $app->createContextFromServerEvent($event);
@@ -52,7 +60,7 @@ $server->onRequest(function (RequestEvent $event) use ($app) {
     try {
         $event->setResponse($app->runContext($appContext));
     } catch (\Throwable $e) {
-        echo "[Error: {$e->getCode()}] " . $e->getMessage() . "\n";
+        $app->log("[Error: {$e->getCode()}] " . $e->getMessage());
 
         try {
             $error = $appContext->service(ErrorService::class);

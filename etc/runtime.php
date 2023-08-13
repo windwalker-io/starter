@@ -36,8 +36,13 @@ return [
             'http' => create(
                 PhpServer::class
             ),
-            'swoole' => create(
+            'swoole' => fn() => create(
                 SwooleHttpServer::factory(
+                    config: [
+                        'display_errors' => true,
+                        'log_file' => WINDWALKER_TEMP . '/swoole-server.log',
+                        'log_rotation' => SWOOLE_LOG_ROTATION_DAILY,
+                    ],
                     middlewares: [
                         create(
                             FileProcessMiddleware::class,
