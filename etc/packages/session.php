@@ -48,6 +48,8 @@ return [
             'name' => 'WINDWALKER_SESSID',
             // 'save_path' => '@temp/sess',
             'use_cookies' => '0',
+            'gc_divisor' => '1000',
+            'gc_probability' => env('SESSION_GC_PROBABILITY', '1'),
         ],
 
         'providers' => [
