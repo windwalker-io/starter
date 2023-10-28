@@ -126,11 +126,11 @@ $mig->up(
 
         /** @var NestedSetMapper<UserRole> $roleMapper */
         $roleMapper = $orm->mapper(UserRole::class);
-        $root = $roleMapper->createRoot();
+        $root = $roleMapper->createRootIfNotExist();
 
         $role = new UserRole();
         $role->setTitle('Super User');
-        $role->setState(BasicState::PUBLISHED());
+        $role->setState(BasicState::PUBLISHED);
 
         $roleMapper->setPosition($role, $root->getPrimaryKeyValue());
         $roleMapper->createOne($role);
