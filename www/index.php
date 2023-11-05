@@ -36,13 +36,11 @@ $container = Runtime::getContainer();
 /** @var WebApplication $app */
 $server = $container->resolve('factories.servers.http');
 $app = $container->resolve('factories.apps.main');
-$app->boot();
+$app->bootForServer($server);
 $server->getEventDispatcher()->addDealer($app->getEventDispatcher());
 
 $server->onRequest(function (RequestEvent $event) use ($app) {
-    $request = $event->getRequest();
-
-    $event->setResponse($app->execute($request));
+    $event->setResponse($app->executeServerEvent($event));
 });
 
 $server->listen();
