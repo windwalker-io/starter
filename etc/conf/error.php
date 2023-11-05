@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2020 ${ORGANIZATION}.
- * @license    MIT
- */
-
 use Windwalker\Core\Application\AppType;
 use Windwalker\Core\Error\ErrorLogHandler;
 use Windwalker\Core\Error\SimpleErrorPageHandler;

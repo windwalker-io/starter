@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2020 ${ORGANIZATION}.
- * @license    MIT
- */
-
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;

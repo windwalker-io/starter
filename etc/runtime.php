@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2020 ${ORGANIZATION}.
- * @license    MIT
- */
-
 use App\Console\Application as ConsoleApplication;
 use App\Web\Application as WebApplication;
 use Windwalker\DI\Container;
