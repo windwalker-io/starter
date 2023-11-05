@@ -53,9 +53,7 @@ $mig->up(
         /** @var NestedSetMapper $mapper */
         $mapper = $orm->mapper(Category::class);
 
-        if (!$mapper->getRoot()) {
-            $mapper->createRoot();
-        }
+        $mapper->createRootIfNotExist();
     }
 );
 

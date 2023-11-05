@@ -8,6 +8,8 @@ return [
 
         'editor' => env('DEBUGGER_EDITOR', 'phpstorm'),
 
+        'profiler_disabled' => false,
+
         'listeners' => [
             \Windwalker\Core\Application\AppContext::class => [
                 \Windwalker\Debugger\Subscriber\DebuggerSubscriber::class

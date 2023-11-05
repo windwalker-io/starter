@@ -16,6 +16,7 @@ use App\Module\Front\Home\HomeController;
 use App\Module\Front\Home\HomeView;
 use Lyrasoft\Luna\Middleware\LocaleMiddleware;
 use Windwalker\Core\Middleware\CsrfMiddleware;
+use Windwalker\Core\Middleware\MaintenanceMiddleware;
 use Windwalker\Core\Middleware\SefMiddleware;
 use Windwalker\Core\Router\RouteCreator;
 
@@ -23,6 +24,7 @@ use Windwalker\Core\Router\RouteCreator;
 
 $router->group('front')
     ->namespace('front')
+    ->middleware(MaintenanceMiddleware::class)
     ->middleware(CsrfMiddleware::class)
     ->middleware(LocaleMiddleware::class)
     ->middleware(FrontMiddleware::class)
