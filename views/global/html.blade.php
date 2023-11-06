@@ -61,6 +61,9 @@ $htmlFrame->addBodyClass('env-' . ($app->getMode() ?: 'prod'));
 
 @yield('superbody')
 
+{!! $asset->renderCSS(true, [], true) !!}
+@stack('footerStyle')
+
 {{-- Bottom Scripts --}}
 {!! $asset->getTeleport()->render() !!}
 {!! $asset->getImportMap()->render() !!}
