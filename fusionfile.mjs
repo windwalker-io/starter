@@ -7,7 +7,6 @@
 
 import fusion, { sass, babel, parallel, wait, ts } from '@windwalker-io/fusion';
 import { syncModuleScripts, installVendors, findModules } from '@windwalker-io/core';
-import path from 'path';
 
 export async function mainCSS() {
   // Watch start

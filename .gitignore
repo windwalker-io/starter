@@ -23,6 +23,9 @@ Thumbs.db
 /node_modules
 /bower_components
 /yarn-error.log
+/.yarn/
+/.yarnrc
+.yarnrc.yml
 .npmrc
 /theme
 
