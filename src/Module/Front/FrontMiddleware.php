@@ -17,9 +17,6 @@ use Windwalker\Core\Language\TranslatorTrait;
 use Windwalker\Core\Middleware\AbstractLifecycleMiddleware;
 use Windwalker\DI\Exception\DefinitionException;
 
-/**
- * The FrontMiddleware class.
- */
 class FrontMiddleware extends AbstractLifecycleMiddleware
 {
     use TranslatorTrait;

@@ -7,9 +7,6 @@ namespace App\Web;
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\DI\Container;
 
-/**
- * The Application class.
- */
 class Application extends WebApplication
 {
     /**

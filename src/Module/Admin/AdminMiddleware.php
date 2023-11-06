@@ -14,9 +14,6 @@ use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\Language\TranslatorTrait;
 use Windwalker\Core\Middleware\AbstractLifecycleMiddleware;
 
-/**
- * The FrontMiddleware class.
- */
 class AdminMiddleware extends AbstractLifecycleMiddleware
 {
     use TranslatorTrait;

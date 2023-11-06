@@ -7,9 +7,6 @@ namespace App\Console;
 use Windwalker\Core\Console\ConsoleApplication;
 use Windwalker\DI\Container;
 
-/**
- * The Application class.
- */
 class Application extends ConsoleApplication
 {
     /**
