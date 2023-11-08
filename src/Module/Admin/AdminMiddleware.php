@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Module\Admin;
 
+use Lyrasoft\Luna\LunaPackage;
 use Lyrasoft\Luna\Script\FontAwesomeScript;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Unicorn\Script\UnicornScript;
+use Unicorn\UnicornPackage;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Html\HtmlFrame;
@@ -36,8 +38,8 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
      */
     protected function preprocess(ServerRequestInterface $request): void
     {
-        $this->lang->loadAllFromVendor('windwalker/unicorn', 'ini');
-        $this->lang->loadAllFromVendor('lyrasoft/luna', 'ini');
+        $this->lang->loadAllFromVendor(UnicornPackage::class, 'ini');
+        $this->lang->loadAllFromVendor(LunaPackage::class, 'ini');
         $this->lang->loadAll('ini');
 
         // Unicorn

@@ -76,6 +76,7 @@ export async function css() {
     adminCSS(),
   );
 }
+
 export async function js() {
   // Watch start
   fusion.watch([
