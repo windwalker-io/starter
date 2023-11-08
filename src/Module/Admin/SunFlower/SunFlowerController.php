@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright  Copyright (C) 2021 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Module\Admin\SunFlower;
@@ -20,9 +13,6 @@ use Windwalker\Core\Attributes\Controller;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\DI\Attributes\Autowire;
 
-/**
- * The SunFlowerController class.
- */
 #[Controller()]
 class SunFlowerController
 {
@@ -36,20 +26,10 @@ class SunFlowerController
 
         $uri = $app->call([$controller, 'save'], compact('repository', 'form'));
 
-        switch ($app->input('task')) {
-            case 'save2close':
-                return $nav->to(SunFlowerListView::class);
-
-            case 'save2new':
-                return $nav->to(SunFlowerEditView::class)->var('new', 1);
-
-            case 'save2copy':
-                $controller->rememberForClone($app, $repository);
-                return $nav->self($nav::WITHOUT_VARS)->var('new', 1);
-
-            default:
-                return $uri;
-        }
+        return match ($app->input('task')) {
+            'save2close' => $nav->to('sun_flower_list'),
+            default => $uri,
+        };
     }
 
     public function delete(

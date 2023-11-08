@@ -5,8 +5,8 @@
  * @license    MIT
  */
 
-import fusion, { sass, babel, parallel } from '@windwalker-io/fusion';
-import { jsSync, installVendors } from '@windwalker-io/core';
+import fusion, { sass, babel, parallel, wait, ts } from '@windwalker-io/fusion';
+import { findModules, installVendors, syncModuleScripts } from '@windwalker-io/core';
 
 export async function css() {
   // Watch start
@@ -33,14 +33,28 @@ export async function css() {
 
 export async function js() {
   // Watch start
-  fusion.watch('resources/assets/src/**/*.{js,mjs}');
+  fusion.watch([
+    'resources/assets/src/**/*.{js,mjs,ts}',
+    'src/Module/**/assets/**/*.{js,mjs,ts}',
+    ...findModules('**/assets/*.{js,mjs,ts}')
+  ]);
   // Watch end
 
   // Compile Start
-  babel('resources/assets/src/**/*.{js,mjs}', 'www/assets/js/', { module: 'systemjs' });
+  return wait(
+    babel('resources/assets/src/**/*.{js,mjs}', 'www/assets/js/', { module: 'systemjs' }),
+    ts('resources/assets/src/**/*.ts', 'www/assets/js/', { tsconfig: 'tsconfig.js.json' }),
+    syncJS()
+  );
   // Compile end
+}
 
-  return syncJS();
+export async function syncJS() {
+  // Compile Start
+  return wait(
+    ...syncModuleScripts()
+  );
+  // Compile end
 }
 
 export async function images() {
@@ -51,23 +65,6 @@ export async function images() {
   // Compile Start
   return await fusion.copy('resources/assets/images/**/*', 'www/assets/images/')
   // Compile end
-}
-
-export async function syncJS() {
-  // Watch start
-  fusion.watch('src/Module/**/assets/**/*.{js,mjs}');
-  // Watch end
-
-  // Compile Start
-  const { dest } = await jsSync(
-    'src/Module/',
-    'www/assets/js/view/'
-  );
-
-  babel(dest.path + '**/*.{mjs,js}', null, { module: 'systemjs' });
-  // Compile end
-
-  return Promise.all([]);
 }
 
 export async function install() {

@@ -3,8 +3,8 @@
 /**
  * Part of Windwalker project.
  *
- * @copyright    Copyright (C) 2021.
- * @license        __LICENSE__
+ * @copyright  Copyright (C) 2023.
+ * @license    __LICENSE__
  */
 
 declare(strict_types=1);
@@ -17,10 +17,10 @@ use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\Schema\Schema;
 
 /**
- * Migration UP: 20210622063819_SunFlowerInit.
+ * Migration UP: 2023110811370001_SunFlowerInit.
  *
- * @var  Migration          $mig
- * @var  ConsoleApplication $app
+ * @var Migration          $mig
+ * @var ConsoleApplication $app
  */
 $mig->up(
     static function () use ($mig) {
@@ -31,7 +31,8 @@ $mig->up(
             $schema->tinyint('state');
             $schema->varchar('alias');
             $schema->varchar('image');
-            $schema->text('attachments');
+            $schema->integer('ordering');
+            $schema->json('attachments');
             $schema->text('content');
             $schema->datetime('created')->nullable(true);
             $schema->integer('created_by');

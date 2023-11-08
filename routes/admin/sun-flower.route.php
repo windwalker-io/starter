@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Routes;
 
 use App\Module\Admin\SunFlower\SunFlowerController;
@@ -10,6 +12,7 @@ use Windwalker\Core\Router\RouteCreator;
 /** @var  RouteCreator $router */
 
 $router->group('sun-flower')
+    ->extra('menu', ['sidemenu' => 'sun_flower_list'])
     ->register(function (RouteCreator $router) {
         $router->any('sun_flower_list', '/sun-flower/list')
             ->controller(SunFlowerController::class)
@@ -18,7 +21,7 @@ $router->group('sun-flower')
             ->putHandler('filter')
             ->patchHandler('batch');
 
-        $router->any('sun_flower_edit', '/sun-flower/edit[/{id}[/type/{type}]]')
+        $router->any('sun_flower_edit', '/sun-flower/edit[/{id}]')
             ->controller(SunFlowerController::class)
             ->view(SunFlowerEditView::class);
     });

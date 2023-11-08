@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace App\View;
+
 /**
  * Global variables
  * --------------------------------------------------------------
@@ -12,8 +16,6 @@
  * @var  $lang      LangService     The language translation service.
  */
 
-declare(strict_types=1);
-
 use App\Module\Admin\SunFlower\SunFlowerEditView;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
@@ -24,52 +26,27 @@ use Windwalker\Core\Router\SystemUri;
 
 ?>
 
-<div x-title="toolbar" x-data="{ form: $store.form }">
-    <div class="btn-group">
-        <button type="button" class="btn btn-success btn-sm"
-            @click="form.post();"
-            style="width: 150px"
-        >
-            <span class="fa fa-save"></span>
-            @lang('unicorn.toolbar.save')
-        </button>
-        <button type="button" class="btn btn-success btn-sm dropdown-toggle dropdown-toggle-split"
-            data-bs-toggle="dropdown"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false">
-            <span class="caret"></span>
-            <span class="sr-only visually-hidden">Toggle Dropdown</span>
-        </button>
+<div x-title="toolbar" x-data="{ form: $store.form }" class="l-toolbar">
+    {{-- Save --}}
+    <button type="button" class="btn btn-success btn-sm uni-btn-save"
+        data-task="save"
+        @click="form.post();"
+        style="width: 150px"
+    >
+        <span class="fa fa-save"></span>
+        @lang('unicorn.toolbar.save')
+    </button>
 
-        <ul class="dropdown-menu dropdown-menu-end">
-            <li>
-                <a class="dropdown-item"
-                    href="javascript://"
-                    @click="form.post(null, { task: 'save2copy' });">
-                    <span class="fa fa-copy"></span>
-                    @lang('unicorn.toolbar.save2copy')
-                </a>
-            </li>
-
-            <li>
-                <a class="dropdown-item"
-                    href="javascript://"
-                    @click="form.post(null, { task: 'save2new' });">
-                    <span class="fa fa-plus"></span>
-                    @lang('unicorn.toolbar.save2new')
-                </a>
-            </li>
-        </ul>
-    </div>
-
-    <button type="button" class="btn btn-primary btn-sm"
+    {{-- Save2Close --}}
+    <button type="button" class="btn btn-primary btn-sm uni-btn-save2close"
+        data-task="save"
         @click="form.post(null, { task: 'save2close' });">
         <span class="fa fa-check"></span>
         @lang('unicorn.toolbar.save2close')
     </button>
 
-    <a class="btn btn-default btn-outline-secondary btn-sm"
+    {{-- Cancel --}}
+    <a class="btn btn-default btn-outline-secondary btn-sm uni-btn-cancel"
         href="{{ $nav->to('sun_flower_list') }}">
         <span class="fa fa-times"></span>
         @lang('unicorn.toolbar.cancel')

@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace App\View;
+
 /**
  * Global variables
  * --------------------------------------------------------------
@@ -12,8 +16,6 @@
  * @var  $lang      LangService     The language translation service.
  */
 
-declare(strict_types=1);
-
 use App\Entity\SunFlower;
 use App\Module\Admin\SunFlower\SunFlowerEditView;
 use Windwalker\Core\Application\AppContext;
@@ -25,8 +27,8 @@ use Windwalker\Core\Router\SystemUri;
 use Windwalker\Form\Form;
 
 /**
- * @var Form      $form
- * @var SunFlower $item
+ * @var $form Form
+ * @var $item SunFlower
  */
 ?>
 
@@ -38,14 +40,14 @@ use Windwalker\Form\Form;
 
 @section('content')
     <form name="admin-form" id="admin-form"
-        novalidate uni-form-validate='{"scroll": true}'
+        uni-form-validate='{"scroll": true}'
         action="{{ $nav->to('sun_flower_edit') }}"
         method="POST" enctype="multipart/form-data">
 
         <x-title-bar :form="$form"></x-title-bar>
 
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-lg-7">
                 <x-fieldset name="basic" :title="$lang('unicorn.fieldset.basic')"
                     :form="$form"
                     class="mb-4"
@@ -53,7 +55,7 @@ use Windwalker\Form\Form;
                 >
                 </x-fieldset>
             </div>
-            <div class="col-md-5">
+            <div class="col-lg-5">
                 <x-fieldset name="meta" :title="$lang('unicorn.fieldset.meta')"
                     :form="$form"
                     class="mb-4"
@@ -68,7 +70,7 @@ use Windwalker\Form\Form;
                 <input name="{{ $idField->getInputName() }}" type="hidden" value="{{ $idField->getValue() }}" />
             @endif
 
-            @include('@csrf')
+            <x-csrf></x-csrf>
         </div>
     </form>
 @stop

@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright  Copyright (C) 2021 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Module\Admin\SunFlower;
@@ -56,6 +49,7 @@ class SunFlowerEditView implements ViewModelInterface
     {
         $id = $app->input('id');
 
+        /** @var SunFlower $item */
         $item = $this->repository->getItem($id);
 
         $form = $this->formFactory

@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright    Copyright (C) 2021 __ORGANIZATION__.
- * @license        __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Repository;
@@ -24,9 +17,6 @@ use Unicorn\Repository\ManageRepositoryTrait;
 use Unicorn\Selector\ListSelector;
 use Windwalker\ORM\SelectorQuery;
 
-/**
- * The SunFlowerRepository class.
- */
 #[Repository(entityClass: SunFlower::class)]
 class SunFlowerRepository implements ManageRepositoryInterface, ListRepositoryInterface
 {

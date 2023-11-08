@@ -1,49 +1,38 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright  Copyright (C) 2021 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Module\Admin\SunFlower\Form;
 
 use Unicorn\Enum\BasicState;
+use Windwalker\Core\Language\TranslatorTrait;
+use Windwalker\Form\Attributes\Fieldset;
+use Windwalker\Form\Attributes\FormDefine;
 use Windwalker\Form\Field\ListField;
 use Windwalker\Form\Field\TextField;
-use Windwalker\Form\FieldDefinitionInterface;
 use Windwalker\Form\Form;
 
-/**
- * The EditForm class.
- */
-class EditForm implements FieldDefinitionInterface
+class EditForm
 {
-    /**
-     * Define the form fields.
-     *
-     * @param  Form  $form  The Windwalker form object.
-     *
-     * @return  void
-     */
-    public function define(Form $form): void
+    use TranslatorTrait;
+
+    #[FormDefine]
+    public function main(Form $form): void
     {
         $form->add('title', TextField::class)
-            ->label('Title')
-            ->addFilter('trim');
+            ->label($this->trans('unicorn.field.title'))
+            ->addFilter('trim')
+            ->required(true);
 
         $form->add('alias', TextField::class)
-            ->label('Alias')
+            ->label($this->trans('unicorn.field.alias'))
             ->addFilter('trim');
+    }
 
-        $form->fieldset(
-            'basic',
-            function (Form $form) {
-                //
-            }
-        );
+    #[FormDefine]
+    #[Fieldset('basic')]
+    public function basic(Form $form): void
+    {
+        //
     }
 }

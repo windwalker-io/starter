@@ -1,22 +1,17 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright  Copyright (C) 2021 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Module\Admin\SunFlower;
 
+use App\Entity\SunFlower;
 use App\Module\Admin\SunFlower\Form\GridForm;
 use App\Repository\SunFlowerRepository;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\Form\FormFactory;
 use Windwalker\Core\Language\TranslatorTrait;
+use Windwalker\Core\View\SortableViewModelInterface;
 use Windwalker\Core\View\View;
 use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\Data\Collection;
@@ -72,7 +67,8 @@ class SunFlowerListView implements ViewModelInterface
             )
             ->ordering($ordering)
             ->page($page)
-            ->limit($limit);
+            ->limit($limit)
+            ->setDefaultItemClass(SunFlower::class);
 
         $pagination = $items->getPagination();
 
@@ -85,11 +81,6 @@ class SunFlowerListView implements ViewModelInterface
         $this->prepareMetadata($app, $view);
 
         return compact('items', 'pagination', 'form', 'showFilters', 'ordering');
-    }
-
-    public function prepareItem(Collection $item): object
-    {
-        return $this->repository->getEntityMapper()->toEntity($item);
     }
 
     /**
@@ -114,18 +105,6 @@ class SunFlowerListView implements ViewModelInterface
             'sun_flower.title',
             'sun_flower.alias',
         ];
-    }
-
-    /**
-     * Is reorder enabled.
-     *
-     * @param  string  $ordering
-     *
-     * @return  bool
-     */
-    public function reorderEnabled(string $ordering): bool
-    {
-        return $ordering === 'sun_flower.ordering ASC';
     }
 
     /**

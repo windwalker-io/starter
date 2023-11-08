@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace App\View;
+
 /**
  * Global variables
  * --------------------------------------------------------------
@@ -12,8 +16,8 @@
  * @var  $lang      LangService     The language translation service.
  */
 
-declare(strict_types=1);
-
+use App\Entity\SunFlower;
+use Unicorn\Workflow\BasicStateWorkflow;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
@@ -23,10 +27,10 @@ use Windwalker\Core\Router\SystemUri;
 use App\Module\Admin\SunFlower\SunFlowerListView;
 
 /**
- * @var \App\Entity\SunFlower $entity
+ * @var $item SunFlower
  */
 
-$workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
+$workflow = $app->service(BasicStateWorkflow::class);
 ?>
 
 @extends('admin.global.body-list')
@@ -43,13 +47,12 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
 
         <x-filter-bar :form="$form" :open="$showFilters"></x-filter-bar>
 
-        @if (count($items))
         {{-- RESPONSIVE TABLE DESC --}}
         <div class="d-block d-lg-none mb-3">
             @lang('unicorn.grid.responsive.table.desc')
         </div>
 
-        <div class="grid-table table-lg-responsive">
+        <div class="grid-table table-responsive-lg">
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
@@ -72,28 +75,13 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                         </x-sort>
                     </th>
 
-                    {{-- Ordering --}}
-                    <th style="width: 10%" class="text-nowrap">
-                        <div class="d-flex w-100 justify-content-end">
-                            <x-sort
-                                asc="sun_flower.ordering ASC"
-                                desc="sun_flower.ordering DESC"
-                            >
-                                @lang('unicorn.field.ordering')
-                            </x-sort>
-                            @if($vm->reorderEnabled($ordering))
-                                <x-save-order class="ml-2 ms-2"></x-save-order>
-                            @endif
-                        </div>
-                    </th>
-
                     {{-- Delete --}}
                     <th style="width: 1%" class="text-nowrap">
                         @lang('unicorn.field.delete')
                     </th>
 
                     {{-- ID --}}
-                    <th style="width: 1%" class="text-nowrap text-right text-end">
+                    <th style="width: 1%" class="text-nowrap text-end">
                         <x-sort field="sun_flower.id">
                             @lang('unicorn.field.id')
                         </x-sort>
@@ -102,14 +90,11 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                 </thead>
 
                 <tbody>
-                @foreach($items as $i => $item)
-                    <?php
-                        $entity = $vm->prepareItem($item);
-                    ?>
+                @forelse($items as $i => $item)
                     <tr>
                         {{-- Checkbox --}}
                         <td>
-                            <x-row-checkbox :row="$i" :id="$entity->getId()"></x-row-checkbox>
+                            <x-row-checkbox :row="$i" :id="$item->getId()"></x-row-checkbox>
                         </td>
 
                         {{-- State --}}
@@ -118,34 +103,24 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                                 button-style="width: 100%"
                                 use-states
                                 :workflow="$workflow"
-                                :id="$entity->getId()"
+                                :id="$item->getId()"
                                 :value="$item->state"
-                            />
+                            ></x-state-dropdown>
                         </td>
 
                         {{-- Title --}}
                         <td>
                             <div>
-                                <a href="{{ $nav->to('sun_flower_edit')->id($entity->getId()) }}">
-                                    {{ $item->title }}
+                                <a href="{{ $nav->to('sun_flower_edit')->id($item->getId()) }}">
+                                    {{ $item->getTitle() }}
                                 </a>
                             </div>
-                        </td>
-
-                        {{-- Ordering --}}
-                        <td class="text-end text-right">
-                            <x-order-control
-                                :enabled="$vm->reorderEnabled($ordering)"
-                                :row="$i"
-                                :id="$entity->getId()"
-                                :value="$item->ordering"
-                            ></x-order-control>
                         </td>
 
                         {{-- Delete --}}
                         <td class="text-center">
                             <button type="button" class="btn btn-sm btn-outline-secondary"
-                                @click="grid.deleteItem('{{ $entity->getId() }}')"
+                                @click="grid.deleteItem('{{ $item->getId() }}')"
                                 data-dos
                             >
                                 <i class="fa-solid fa-trash"></i>
@@ -153,33 +128,30 @@ $workflow = $app->service(\Unicorn\Workflow\BasicStateWorkflow::class);
                         </td>
 
                         {{-- ID --}}
-                        <td class="text-right text-end">
-                            {{ $entity->getId() }}
+                        <td class="text-end">
+                            {{ $item->getId() }}
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="30">
+                            <div class="c-grid-no-items text-center" style="padding: 125px 0;">
+                                <h3 class="text-secondary">@lang('unicorn.grid.no.items')</h3>
+                            </div>
+                        </td>
+                    </tr>
+                @endforelse
                 </tbody>
-
-                <tfoot>
-                <tr>
-                    <td colspan="20">
-                        {!! $pagination->render() !!}
-                    </td>
-                </tr>
-                </tfoot>
             </table>
-        </div>
-        @else
-            <div class="grid-no-items card bg-light" style="padding: 125px 0;">
-                <div class="card-body text-center">
-                    <h3 class="text-secondary">@lang('unicorn.grid.no.items')</h3>
-                </div>
+
+            <div>
+                <x-pagination :pagination="$pagination"></x-pagination>
             </div>
-        @endif
+        </div>
 
         <div class="d-none">
             <input name="_method" type="hidden" value="PUT" />
-            @include('@csrf')
+            <x-csrf></x-csrf>
         </div>
 
         <x-batch-modal :form="$form" namespace="batch"></x-batch-modal>

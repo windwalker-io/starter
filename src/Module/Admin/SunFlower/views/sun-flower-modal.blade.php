@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace App\View;
+
 /**
  * Global variables
  * --------------------------------------------------------------
@@ -12,9 +16,8 @@
  * @var $lang      LangService     The language translation service.
  */
 
-declare(strict_types=1);
-
 use App\Module\Admin\SunFlower\SunFlowerListView;
+use Unicorn\Workflow\BasicStateWorkflow;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
@@ -23,6 +26,7 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 $callback = $app->input('callback');
+$workflow = $app->service(BasicStateWorkflow::class);
 ?>
 
 @extends('admin.global.pure')
@@ -39,19 +43,19 @@ $callback = $app->input('callback');
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
+                    <th style="width: 10%">
+                        <x-sort field="sun_flower.state">
+                            @lang('unicorn.field.state')
+                        </x-sort>
+                    </th>
                     <th>
                         <x-sort field="sun_flower.title">
-                            Title
+                            @lang('unicorn.field.title')
                         </x-sort>
                     </th>
-                    <th>
-                        <x-sort field="sun_flower.state">
-                            State
-                        </x-sort>
-                    </th>
-                    <th>
-                        <x-sort field="category.id">
-                            ID
+                    <th class="text-end text-nowrap" style="width: 1%">
+                        <x-sort field="sun_flower.id">
+                            @lang('unicorn.field.id')
                         </x-sort>
                     </th>
                 </tr>
@@ -66,16 +70,22 @@ $callback = $app->input('callback');
                     ])
                     <tr>
                         <td>
+                            <x-state-dropdown color-on="text"
+                                button-style="width: 100%"
+                                use-states
+                                readonly
+                                :workflow="$workflow"
+                                :id="$item->id"
+                                :value="$item->state"
+                            ></x-state-dropdown>
+                        </td>
+                        <td>
                             <a href="javascript://"
                                 onclick="parent.{{ $callback }}({{ json_encode($data) }})">
-                                <span class="fa fa-angle-right text-muted"></span>
                                 {{ $item->title }}
                             </a>
                         </td>
-                        <th>
-                            {{ $item->state }}
-                        </th>
-                        <td>
+                        <td class="text-end">
                             {{ $item->id }}
                         </td>
                     </tr>
@@ -93,7 +103,8 @@ $callback = $app->input('callback');
         </div>
 
         <div class="d-none">
-            @include('@csrf')
+            <input name="_method" type="hidden" value="PUT" />
+            <x-csrf></x-csrf>
         </div>
 
         <x-batch-modal :form="$form" namespace="batch"></x-batch-modal>
