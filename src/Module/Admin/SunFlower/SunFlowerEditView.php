@@ -8,6 +8,7 @@ use App\Entity\SunFlower;
 use App\Module\Admin\SunFlower\Form\EditForm;
 use App\Repository\SunFlowerRepository;
 use Windwalker\Core\Application\AppContext;
+use Windwalker\Core\Attributes\ViewMetadata;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\Form\FormFactory;
 use Windwalker\Core\Html\HtmlFrame;
@@ -52,6 +53,9 @@ class SunFlowerEditView implements ViewModelInterface
         /** @var SunFlower $item */
         $item = $this->repository->getItem($id);
 
+        // Bind item for injection
+        $view[$item::class] = $item;
+
         $form = $this->formFactory
             ->create(EditForm::class)
             ->setNamespace('item')
@@ -60,24 +64,14 @@ class SunFlowerEditView implements ViewModelInterface
                     ?: $this->orm->extractEntity($item)
             );
 
-        $this->prepareMetadata($app, $view);
-
         return compact('form', 'id', 'item');
     }
 
-    /**
-     * Prepare Metadata and HTML Frame.
-     *
-     * @param  AppContext  $app
-     * @param  View        $view
-     *
-     * @return  void
-     */
-    protected function prepareMetadata(AppContext $app, View $view): void
+    #[ViewMetadata]
+    protected function prepareMetadata(HtmlFrame $htmlFrame): void
     {
-        $view->getHtmlFrame()
-            ->setTitle(
-                $this->trans('unicorn.title.edit', title: 'SunFlower')
-            );
+        $htmlFrame->setTitle(
+            $this->trans('unicorn.title.edit', title: 'SunFlower')
+        );
     }
 }

@@ -36,13 +36,10 @@ return [
         'php windwalker asset:version',
     ],
 
-    // 'revise' => [
-    //     'php windwalker run revise:route',
-    //     'php windwalker run revise:controller',
-    //     'php windwalker run revise:repo',
-    //     'php windwalker run revise:grid',
-    //     'php windwalker run revise:edit',
-    // ],
+    'revise' => [
+        'php windwalker run revise:front',
+        'php windwalker run revise:admin',
+    ],
 
     'gen:admin' => [
         'php windwalker g unicorn:controller Admin/SunFlower --model',

@@ -11,9 +11,9 @@
         }
     ],
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.2",
         "ext-json": "*",
-        "windwalker/core": "^4.0",
+        "windwalker/core": "dev-next",
         "windwalker/renderer": "^4.0",
         "windwalker/dom": "^4.0",
         "windwalker/edge": "^4.0",
@@ -21,8 +21,8 @@
         "myclabs/php-enum": "^1.8"
     },
     "require-dev": {
-        "windwalker/unicorn": "^1.0",
-        "windwalker/framework": "dev-master"
+        "windwalker/unicorn": "dev-next",
+        "windwalker/framework": "4.1.x-dev"
     },
     "scripts": {
         "post-create-project-cmd": [
@@ -44,13 +44,13 @@
     },
     "config": {
         "platform": {
-            "php": "8.0.0"
+            "php": "8.2.0"
         }
     },
     "extra": {
         "branch-alias": {
             "dev-master": "4.x-dev",
-            "next": "4.x-dev"
+            "next": "4.1.x-dev"
         }
     }
 }

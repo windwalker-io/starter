@@ -42,7 +42,7 @@ use Windwalker\Core\Router\SystemUri;
         <ul>
             @foreach ($items as $item)
             <li>
-                <a href="{{ $nav->to('sunflower_item')->id($item->getId()) }}">
+                <a href="{{ $nav->to('sun_flower_item')->id($item->getId()) }}">
                     {{ $item->getTitle() }}
                 </a>
             </li>
