@@ -82,6 +82,7 @@ return [
     '@routes' => WINDWALKER_ROUTES,
     '@seeders' => WINDWALKER_SEEDERS,
     '@source' => WINDWALKER_SOURCE,
+    '@servers' => WINDWALKER_SERVERS,
     '@temp' => WINDWALKER_TEMP,
     '@vendor' => WINDWALKER_VENDOR,
     '@views' => WINDWALKER_VIEWS,
