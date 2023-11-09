@@ -64,7 +64,7 @@ return [
         'php windwalker generate:revise src/Module/Admin/SunFlower/SunFlowerEditView.php vendor/windwalker/unicorn/views/code/view/edit --name=SunFlower --ns=App/Module/Admin/SunFlower',
         'php windwalker generate:revise "src/Module/Admin/SunFlower/**/*-edit.*" vendor/windwalker/unicorn/views/code/view/edit/ --name=SunFlower --ns=App/Module/Admin/SunFlower',
         'php windwalker generate:revise "src/Module/Admin/SunFlower/views/edit-toolbar.blade.php" vendor/windwalker/unicorn/views/code/view/edit/views/ --name=SunFlower --ns=App/Module/Admin/SunFlower',
-        // 'php windwalker generate:revise "src/Module/Admin/SunFlower/Form/EditForm.php" vendor/windwalker/unicorn/views/code/view/edit/Form/ --name=SunFlower --ns=App/Module/Admin/SunFlower',
+        'php windwalker generate:revise "src/Module/Admin/SunFlower/Form/EditForm.php" vendor/windwalker/unicorn/views/code/view/edit/Form/ --name=SunFlower --ns=App/Module/Admin/SunFlower',
     ],
 
     'gen:front' => [
