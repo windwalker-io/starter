@@ -31,8 +31,6 @@
         "asika32764/pinyin": "^1.2"
     },
     "require-dev": {
-        "windwalker/framework": "dev-next",
-        "myclabs/php-enum": "^1.8"
         "nunomaduro/collision": "^7.8"
     },
     "scripts": {
