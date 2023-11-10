@@ -13,7 +13,7 @@
     "require": {
         "php": ">=8.2",
         "ext-json": "*",
-        "windwalker/core": "dev-next",
+        "windwalker/core": "^4.0",
         "windwalker/renderer": "^4.0",
         "windwalker/dom": "^4.0",
         "windwalker/edge": "^4.0",
@@ -22,11 +22,11 @@
         "windwalker/form": "^4.0",
         "windwalker/authentication": "^4.0",
         "windwalker/authorization": "^4.0",
-        "windwalker/unicorn": "dev-next",
-        "lyrasoft/luna": "dev-next",
-        "lyrasoft/toolkit": "dev-next",
+        "windwalker/unicorn": "^1.0",
+        "lyrasoft/luna": "^2.0",
+        "lyrasoft/toolkit": "^2.0",
         "masterminds/html5": "^2.8",
-        "symfony/var-dumper": "^5.0||^6.0",
+        "symfony/var-dumper": "^5.0||^6.0||^7.0",
         "asika/cross-env": "^1.0",
         "asika32764/pinyin": "^1.2"
     },
@@ -43,6 +43,7 @@
         "post-autoload-dump": [
             "php windwalker pkg:install --tag config",
             "php windwalker pkg:install lyrasoft/toolkit --tag ide -f",
+            "php windwalker asset:sync || true",
             "php windwalker cache:clear renderer",
             "lyra pstorm:sniffer -p || true"
         ],
