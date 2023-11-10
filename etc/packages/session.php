@@ -37,9 +37,14 @@ return [
             'samesite' => CookiesInterface::SAMESITE_LAX,
         ],
 
-        'ini' => [
+        'session_options' => [
             'name' => 'WINDWALKER_SESSID',
-            // 'save_path' => '@temp/sess',
+            'use_cookies' => '0',
+            'gc_divisor' => '1000',
+            'gc_probability' => env('SESSION_GC_PROBABILITY', '1'),
+        ],
+
+        'ini' => [
             'use_cookies' => '0',
             'gc_divisor' => '1000',
             'gc_probability' => env('SESSION_GC_PROBABILITY', '1'),
@@ -103,13 +108,13 @@ return [
                 'array' => ArrayHandler::class,
                 'null' => NullHandler::class,
                 'native' => NativeHandler::class,
-                'database' => create(
+                'database' => static fn () => create(
                     DatabaseHandler::class,
                     options: [
                         'table' => 'sessions'
                     ]
                 ),
-                'filesystem' => create(
+                'filesystem' => static fn () => create(
                     FilesystemHandler::class,
                     path: fn () => sys_get_temp_dir() . '/sess',
                     options: []

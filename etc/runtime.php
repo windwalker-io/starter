@@ -3,11 +3,7 @@
 use App\Console\Application as ConsoleApplication;
 use App\Web\Application as WebApplication;
 use Windwalker\DI\Container;
-use Windwalker\Http\Middleware\FileProcessMiddleware;
-use Windwalker\Http\Server\HttpServer;
 use Windwalker\Http\Server\PhpServer;
-
-use Windwalker\Http\Server\SwooleHttpServer;
 
 use function Windwalker\DI\create;
 use function Windwalker\ref;
@@ -16,7 +12,6 @@ return [
     'factories' => [
         'servers' => [
             'http' => ref('di.servers.http'),
-            'swoole' => ref('di.servers.swoole'),
         ],
         'apps' => [
             'main' => ref('di.apps.main'),
@@ -28,28 +23,6 @@ return [
         'servers' => [
             'http' => create(
                 PhpServer::class
-            ),
-            'swoole' => fn() => create(
-                SwooleHttpServer::factory(
-                    config: [
-                        'display_errors' => true,
-                        'log_file' => WINDWALKER_TEMP . '/swoole-server.log',
-                        'log_rotation' => SWOOLE_LOG_ROTATION_DAILY,
-                    ],
-                    middlewares: [
-                        create(
-                            FileProcessMiddleware::class,
-                            publicPath: WINDWALKER_PUBLIC,
-                            options: [
-                                'headers' => [
-                                    'X-Content-Type-Options' => 'nosniff',
-                                    'X-Frame-Options' => 'SAMEORIGIN',
-                                    'X-XSS-Protection' => '1; mode=block',
-                                ]
-                            ]
-                        )
-                    ]
-                )
             ),
         ],
         'apps' => [
@@ -69,6 +42,9 @@ return [
             $console->boot();
             return $console;
         }
+    ],
+    'ini' => [
+        //
     ],
     '@bin' => WINDWALKER_BIN,
     '@cache' => WINDWALKER_CACHE,
