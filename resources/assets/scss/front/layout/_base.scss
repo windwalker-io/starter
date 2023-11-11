@@ -5,6 +5,10 @@ body {
   padding-bottom: 20px;
 }
 
+[uni-cloak] * {
+  pointer-events: none;
+}
+
 .navbar-brand img {
   height: 35px;
   margin-top: -8px;

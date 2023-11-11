@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright  Copyright (C) 2021 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Console;
@@ -14,9 +7,6 @@ namespace App\Console;
 use Windwalker\Core\Console\ConsoleApplication;
 use Windwalker\DI\Container;
 
-/**
- * The Application class.
- */
 class Application extends ConsoleApplication
 {
     /**
@@ -28,7 +18,7 @@ class Application extends ConsoleApplication
      */
     protected function booting(Container $container): void
     {
-        //
+        // $this->prepareWebSimulator();
     }
 
     /**

@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2020 ${ORGANIZATION}.
- * @license    MIT
- */
-
 declare(strict_types=1);
 
 return array_merge(
@@ -14,6 +7,7 @@ return array_merge(
         'app'      => include __DIR__ . '/conf/app.php',
         'asset'    => include __DIR__ . '/conf/asset.php',
         'auth'     => include __DIR__ . '/conf/auth.php',
+        'company'  => include __DIR__ . '/conf/company.php',
         'logs'     => include __DIR__ . '/conf/logs.php',
         'error'    => include __DIR__ . '/conf/error.php',
         'whoops'   => include __DIR__ . '/conf/whoops.php',

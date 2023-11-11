@@ -1,33 +1,14 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2020 LYRASOFT.
- * @license    MIT
- */
-
-declare(strict_types=1);
-
-use Windwalker\Cache\CachePool;
-use Windwalker\Cache\Serializer\PhpSerializer;
-use Windwalker\Cache\Serializer\RawSerializer;
-use Windwalker\Cache\Storage\FileStorage;
-use Windwalker\Cache\Storage\NullStorage;
-use Windwalker\Core\Attributes\Ref;
-use Windwalker\Core\Manager\CacheManager;
-use Windwalker\Core\Manager\LoggerManager;
 use Windwalker\Core\Manager\MailerManager;
 use Windwalker\Core\Provider\MailerProvider;
-use Windwalker\DI\Container;
-
-use function Windwalker\DI\create;
-use function Windwalker\ref;
 
 return [
     'default' => 'default',
 
-    'from' => 'Windwalker <noreply@windwalker.local>',
+    'from' => env('MAIL_FROM') ?: 'Windwalker <noreply@windwalker.local>',
+
+    'reply_to' => env('MAIL_REPLY_TO'),
 
     'envelope' => [
         // Must use `new \Symfony\Component\Mime\Address('email', 'name')`

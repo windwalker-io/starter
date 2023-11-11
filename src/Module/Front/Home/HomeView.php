@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright  Copyright (C) 2021 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Module\Front\Home;
@@ -22,7 +15,6 @@ use Windwalker\ORM\ORM;
  */
 #[ViewModel(
     layout: 'home',
-    css: 'home.scss',
     js: 'home.js',
 )]
 class HomeView implements ViewModelInterface

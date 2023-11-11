@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2020 LYRASOFT.
- * @license    MIT
- */
-
 declare(strict_types=1);
 
 return array_merge(
@@ -27,6 +20,11 @@ return array_merge(
         'generator' => [
             'commands' => include __DIR__ . '/../../resources/registry/generator.php'
         ],
+
+        'web_simulator' => [
+            'uri' => env('WEB_SIMULATOR_URI'),
+            'docroot' => env('WEB_SIMULATOR_DOCROOT'),
+        ]
     ],
     require __DIR__ . '/../config.php'
 );

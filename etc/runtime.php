@@ -1,16 +1,8 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2020 ${ORGANIZATION}.
- * @license    MIT
- */
-
 use App\Console\Application as ConsoleApplication;
 use App\Web\Application as WebApplication;
 use Windwalker\DI\Container;
-use Windwalker\Http\Server\HttpServer;
 use Windwalker\Http\Server\PhpServer;
 
 use function Windwalker\DI\create;
@@ -30,8 +22,7 @@ return [
     'di' => [
         'servers' => [
             'http' => create(
-                HttpServer::class,
-                adapter: create(PhpServer::class)
+                PhpServer::class
             ),
         ],
         'apps' => [
@@ -52,6 +43,9 @@ return [
             return $console;
         }
     ],
+    'ini' => [
+        //
+    ],
     '@bin' => WINDWALKER_BIN,
     '@cache' => WINDWALKER_CACHE,
     '@etc' => WINDWALKER_ETC,
@@ -64,6 +58,7 @@ return [
     '@routes' => WINDWALKER_ROUTES,
     '@seeders' => WINDWALKER_SEEDERS,
     '@source' => WINDWALKER_SOURCE,
+    '@servers' => WINDWALKER_SERVERS,
     '@temp' => WINDWALKER_TEMP,
     '@vendor' => WINDWALKER_VENDOR,
     '@views' => WINDWALKER_VIEWS,

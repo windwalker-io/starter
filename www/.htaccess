@@ -67,7 +67,9 @@ Options +FollowSymLinks
     ## End - SEF Section.
 
     ## Security
-    Header setifempty X-XSS-Protection "1; mode=block"
-    Header setifempty X-Content-Type-Options "nosniff"
-    Header setifempty X-Frame-Options "SAMEORIGIN"
+    <IfModule mod_headers.c>
+        Header setifempty X-XSS-Protection "1; mode=block"
+        Header setifempty X-Content-Type-Options "nosniff"
+        Header setifempty X-Frame-Options "SAMEORIGIN"
+    </IfModule>
 </IfModule>
