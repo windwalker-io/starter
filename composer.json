@@ -25,6 +25,7 @@
         "windwalker/unicorn": "^1.0",
         "lyrasoft/luna": "^2.0",
         "lyrasoft/toolkit": "^1.0",
+        "dragonmantank/cron-expression": "^3.3",
         "masterminds/html5": "^2.8",
         "symfony/var-dumper": "^5.0||^6.0||^7.0",
         "asika/cross-env": "^1.0",
