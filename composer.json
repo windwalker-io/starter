@@ -20,7 +20,8 @@
         "asika/cross-env": "^1.0"
     },
     "require-dev": {
-        "nunomaduro/collision": "^7.8"
+        "nunomaduro/collision": "^7.8",
+        "windwalker/framework": "dev-master"
     },
     "scripts": {
         "post-create-project-cmd": [
@@ -30,7 +31,6 @@
         ],
         "post-autoload-dump": [
             "php windwalker pkg:install --tag config",
-            "php windwalker pkg:install lyrasoft/toolkit --tag ide -f",
             "php windwalker asset:sync || true",
             "php windwalker cache:clear renderer"
         ],

@@ -16,9 +16,6 @@ namespace App\View;
  * @var $lang      LangService     The language translation service.
  */
 
-use Lyrasoft\Luna\Repository\CategoryRepository;
-use Lyrasoft\Luna\Services\ConfigService;
-use Lyrasoft\Luna\User\UserService;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Attributes\ViewModel;
@@ -27,33 +24,9 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-$coreConfig = $app->service(ConfigService::class)->getConfig('core');
-
-$categories = $app->service(CategoryRepository::class)
-    ->getAvailableListSelector()
-    ->where('category.state', 1)
-    ->where('category.type', 'article')
-    ->ordering('category.lft', 'ASC');
-
-$user = $app->service(UserService::class)->getUser();
-
 ?>
 
 @extends('global.html')
-
-@if ($ga = trim((string) $coreConfig->get('ga')))
-@push('meta')
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ $ga }}"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', '{{ $ga }}');
-    </script>
-@endpush
-@endif
 
 @section('superbody')
     @section('header')
@@ -77,44 +50,10 @@ $user = $app->service(UserService::class)->getUser();
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="{{ $uri->path() }}">Home</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" aria-current="page" href="#"
-                                    data-bs-toggle="dropdown"
-                                >
-                                    Categories
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="categories">
-                                    @foreach ($categories as $category)
-                                        <li>
-                                            <a class="dropdown-item"
-                                                href="{{ $nav->to('article_category')->var('path', $category->path) }}">
-                                                {{ str_repeat('-', $category->level - 1) }}
-                                                {{ $category->title }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </li>
                         </ul>
 
                         <ul class="navbar-nav mb-2 mb-lg-0">
-                            <x-locale-dropdown class="nav-item" />
 
-                            @if (!$user->isLogin())
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ $nav->to('login')->withReturn() }}">
-                                        <span class="fa fa-sign-in-alt"></span>
-                                        Login
-                                    </a>
-                                </li>
-                            @else
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ $nav->to('logout') }}">
-                                        <span class="fa fa-sign-out-alt"></span>
-                                        Logout
-                                    </a>
-                                </li>
-                            @endif
                         </ul>
                     </div>
                 </div>

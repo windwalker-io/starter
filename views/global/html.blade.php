@@ -16,7 +16,6 @@ namespace App\View;
  * @var $lang      LangService     The language translation service.
  */
 
-use Unicorn\Script\UnicornScript;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Attributes\ViewModel;
@@ -25,8 +24,6 @@ use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
-
-$app->service(UnicornScript::class)->disableTransitionBeforeLoad();
 
 $htmlFrame = $app->service(HtmlFrame::class);
 $htmlFrame->getHtmlElement()

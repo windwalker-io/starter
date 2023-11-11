@@ -7,7 +7,6 @@ namespace App\View;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
 use Windwalker\Core\Language\LangService;
-use Windwalker\Core\Pagination\Pagination;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;

@@ -25,7 +25,6 @@ $router->group('front')
     ->namespace('front')
     ->middleware(MaintenanceMiddleware::class)
     ->middleware(CsrfMiddleware::class)
-    ->middleware(LocaleMiddleware::class)
     ->middleware(FrontMiddleware::class)
     ->middleware(
         SefMiddleware::class,
