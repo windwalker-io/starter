@@ -4,9 +4,7 @@ use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Processor\PsrLogMessageProcessor;
-use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Windwalker\Core\Manager\LoggerManager;
 use Windwalker\Core\Provider\LoggerProvider;
 use Windwalker\Core\Provider\MonologProvider;
 use Windwalker\Core\Service\LoggerService;
@@ -28,11 +26,11 @@ return [
 
     'global_handlers' => [],
     'global_processors' => [
-        PsrLogMessageProcessor::class
+        PsrLogMessageProcessor::class,
     ],
 
     'providers' => [
-        LoggerProvider::class
+        LoggerProvider::class,
     ],
     'bindings' => [
         //
@@ -60,7 +58,7 @@ return [
                     ],
                     formatter: 'console_formatter'
                 );
-            }
+            },
         ],
         'handlers' => [
             'stream' => create(StreamHandler::class),
@@ -78,8 +76,7 @@ return [
         'formatters' => [
             'line_formatter' => create(LineFormatter::class, allowInlineLineBreaks: true)
                 ->extend(
-                    fn(LineFormatter $formatter) =>
-                    $formatter->includeStacktraces(true, LoggerService::parseTrace(...))
+                    fn(LineFormatter $formatter) => $formatter->includeStacktraces(true, LoggerService::parseTrace(...))
                 ),
             'console_formatter' => create(
                 LineFormatter::class,
@@ -88,6 +85,6 @@ return [
                 allowInlineLineBreaks: true,
                 includeStacktraces: true,
             ),
-        ]
+        ],
     ],
 ];
