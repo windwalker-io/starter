@@ -1,6 +1,6 @@
 {
     "extends": [
-        "@windwalker-io/core/tsconfig.js.json"
+        "@windwalker-io/unicorn/tsconfig.js.json"
     ],
     "include": [
         "resources/assets/src/**/*.ts",
