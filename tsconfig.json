@@ -19,7 +19,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "paths": {
-            "@/*": ["./resources/assets/vue/*"],
+            "@/*": ["./resources/assets/*"]
         }
     }
 }
