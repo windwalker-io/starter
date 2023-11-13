@@ -1,17 +1,3 @@
 {
-    "extends": [
-        "@windwalker-io/unicorn/tsconfig.js.json"
-    ],
-    "include": [
-        "resources/assets/src/**/*.ts",
-        "src/Module/**/*.ts"
-    ],
-    "exclude": [
-        "node_modules/**/*"
-    ],
-    "compilerOptions": {
-        "paths": {
-            "@/*": ["./resources/assets/*"]
-        }
-    }
+    "extends": "tsconfig.json"
 }
