@@ -1,7 +1,7 @@
 {
     "extends": [
         "@windwalker-io/unicorn/tsconfig.js.json",
-        "@vue/tsconfig/tsconfig.dom.json"
+        // "@vue/tsconfig/tsconfig.dom.json"
     ],
     "include": [
         "vendor/**/src/Module/**/assets/**/*.ts",
