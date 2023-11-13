@@ -1,10 +1,3 @@
-/**
- * Part of Windwalker Fusion project.
- *
- * @copyright  Copyright (C) 2021 LYRASOFT.
- * @license    MIT
- */
-
 import fusion, { sass, babel, parallel, wait, ts } from '@windwalker-io/fusion';
 import { syncModuleScripts, installVendors, findModules } from '@windwalker-io/core';
 
