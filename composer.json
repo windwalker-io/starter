@@ -39,6 +39,7 @@
             "php windwalker pkg:install lyrasoft/luna --tag routes",
             "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall",
             "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::install",
+            "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::npmrc",
             "php windwalker run prepare"
         ],
         "post-autoload-dump": [
