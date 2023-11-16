@@ -6,14 +6,11 @@ namespace App\Seeder;
 
 use Lyrasoft\Luna\Access\AccessService;
 use Lyrasoft\Luna\Entity\User;
-use Lyrasoft\Luna\Entity\UserRoleMap;
-use Lyrasoft\Luna\User\Password;
 use Windwalker\Core\Seed\Seeder;
+use Windwalker\Crypt\Hasher\PasswordHasherInterface;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
-
-use function Windwalker\uid;
 
 /**
  * User Seeder
@@ -23,7 +20,7 @@ use function Windwalker\uid;
  * @var DatabaseAdapter $db
  */
 $seeder->import(
-    static function (Password $password, AccessService $accessService) use ($seeder, $orm, $db) {
+    static function (PasswordHasherInterface $password, AccessService $accessService) use ($seeder, $orm, $db) {
         $faker = $seeder->faker('en_US');
 
         /** @var EntityMapper<User> $mapper */

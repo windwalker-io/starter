@@ -34,7 +34,7 @@ $mig->up(
                 $schema->varchar('email')->comment('Email');
                 $schema->varchar('name')->comment('Name');
                 $schema->varchar('avatar')->comment('Avatar');
-                $schema->varchar('password')->comment('Password');
+                $schema->varchar('password')->length(1024)->comment('Password');
                 $schema->tinyint('enabled')->comment('0: disabled, 1: enabled');
                 $schema->tinyint('verified')->comment('0: unverified, 1: verified');
                 $schema->varchar('activation')->comment('Activation code.');
