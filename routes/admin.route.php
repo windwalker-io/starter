@@ -30,6 +30,7 @@ $router->group('admin')
         excludes: [
             'admin::login',
             'admin::logout',
+            'admin::auth_ajax',
         ]
     )
     ->middleware(AdminAccessMiddleware::class)
