@@ -23,6 +23,7 @@
         "windwalker/authentication": "^4.0",
         "windwalker/authorization": "^4.0",
         "windwalker/unicorn": "^1.0",
+        "windwalker/srp": "^0.1.0",
         "lyrasoft/luna": "^2.0",
         "lyrasoft/toolkit": "^1.0",
         "dragonmantank/cron-expression": "^3.3",

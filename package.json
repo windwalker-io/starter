@@ -14,6 +14,7 @@
         "@windwalker-io/core": "^4.0",
         "@windwalker-io/fusion": "^1.0",
         "@windwalker-io/unicorn": "^1.0",
+        "@windwalker-io/srp": "^0.1.0",
         "animate.css": "^4.1.1",
         "bootstrap": "^5.0.0",
         "jarallax": "^1.12.8",
