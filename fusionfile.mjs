@@ -91,11 +91,15 @@ export async function js() {
 export async function syncJS() {
   // Compile Start
   return wait(
-    ...syncModuleScripts({
-      ts: {
-        tsconfig: 'tsconfig.js.json'
+    ...syncModuleScripts(
+      'src/Module',
+      'www/assets/js/view/',
+      {
+        ts: {
+          tsconfig: 'tsconfig.js.json'
+        }
       }
-    })
+    )
   );
   // Compile end
 }
