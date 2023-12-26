@@ -1,9 +1,12 @@
 {
     "extends": [
-        "@windwalker-io/unicorn/tsconfig.js.json"
+        "@windwalker-io/unicorn/tsconfig.js.json",
+        "@vue/tsconfig/tsconfig.dom.json"
     ],
     "include": [
         "vendor/**/src/Module/**/assets/**/*.ts",
+        "resources/assets/vue/**/*",
+        "resources/assets/vue/**/*.vue",
         "resources/assets/src/**/*.ts",
         "src/Module/**/*.ts"
     ],
@@ -15,9 +18,8 @@
         "allowJs": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "noEmit": false,
         "paths": {
-            "@/*": ["./resources/assets/*"]
+            "@/*": ["./resources/assets/vue/*"]
         }
     }
 }
