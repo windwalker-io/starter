@@ -1,6 +1,13 @@
 {
     "extends": [
-        "./tsconfig.vue.json",
         "./tsconfig.js.json",
-    ]
+        "./tsconfig.vue.json"
+    ],
+    "compilerOptions": {
+        "paths": {
+            "@/*": ["./resources/assets/"],
+            "@js/*": ["./resources/assets/src/*"],
+            "@vue/*": ["./resources/assets/vue/*"]
+        }
+    }
 }
