@@ -17,7 +17,6 @@
     "compilerOptions": {
         "allowJs": true,
         "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "noEmit": false
+        "experimentalDecorators": true
     }
 }
