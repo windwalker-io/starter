@@ -20,12 +20,10 @@
         "asika/cross-env": "^1.0"
     },
     "require-dev": {
-        "nunomaduro/collision": "^7.8",
-        "windwalker/framework": "dev-master"
+        "nunomaduro/collision": "^7.8||^8.0"
     },
     "scripts": {
         "post-create-project-cmd": [
-            "php windwalker pkg:install lyrasoft/luna --tag routes",
             "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall",
             "php windwalker run prepare"
         ],
