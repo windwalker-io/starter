@@ -17,7 +17,7 @@ use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\Schema\Schema;
 
 /**
- * Migration UP: 20210619155333_AcmeInit.
+ * Migration UP: 2021061915530001_AcmeInit.
  *
  * @var  Migration          $mig
  * @var  ConsoleApplication $app
