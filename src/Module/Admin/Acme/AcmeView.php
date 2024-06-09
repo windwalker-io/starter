@@ -1,18 +1,13 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright    Copyright (C) 2021 __ORGANIZATION__.
- * @license        __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Module\Admin\Acme;
 
 use Windwalker\Core\Application\AppContext;
+use Windwalker\Core\Attributes\ViewMetadata;
 use Windwalker\Core\Attributes\ViewModel;
+use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\View\View;
 use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\DI\Attributes\Autowire;
@@ -49,5 +44,12 @@ class AcmeView implements ViewModelInterface
         $items = $this->repository->getList();
 
         return compact('items');
+    }
+
+
+    #[ViewMetadata]
+    public function prepareMetadata(HtmlFrame $htmlFrame): void
+    {
+        $htmlFrame->setTitle('Acme List');
     }
 }

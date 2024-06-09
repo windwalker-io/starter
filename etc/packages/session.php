@@ -68,9 +68,9 @@ return [
         'factories' => [
             'instances' => [
                 'native' => SessionManager::createSession(
-                    'php',
                     'native',
-                    'request',
+                    'native',
+                    'native',
                     [
                         SessionInterface::OPTION_AUTO_COMMIT => true,
                     ]

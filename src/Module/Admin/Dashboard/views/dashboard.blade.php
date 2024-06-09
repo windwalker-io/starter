@@ -25,59 +25,61 @@ use Windwalker\Core\Router\SystemUri;
 $faker = \Faker\Factory::create();
 ?>
 
-@extends('admin.global.body')
+@extends('global.body')
 
 @section('content')
-    <div class="row text-center mb-5">
-        <div class="col-xs-6 col-sm-3 ">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
-                height="200" class="rounded-circle mb-3" alt="Generic  thumbnail">
-            <h4>Label</h4>
-            <span class="text-muted">Something else</span>
+    <div class="container" style="padding-top: 100px">
+        <div class="row text-center mb-5">
+            <div class="col-xs-6 col-sm-3 ">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
+                    height="200" class="rounded-circle mb-3" alt="Generic  thumbnail">
+                <h4>Label</h4>
+                <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 ">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
+                    height="200" class="rounded-circle mb-3" alt="Generic  thumbnail">
+                <h4>Label</h4>
+                <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 ">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
+                    height="200" class="rounded-circle mb-3" alt="Generic  thumbnail">
+                <h4>Label</h4>
+                <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 ">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
+                    height="200" class="rounded-circle mb-3" alt="Generic  thumbnail">
+                <h4>Label</h4>
+                <span class="text-muted">Something else</span>
+            </div>
         </div>
-        <div class="col-xs-6 col-sm-3 ">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
-                height="200" class="rounded-circle mb-3" alt="Generic  thumbnail">
-            <h4>Label</h4>
-            <span class="text-muted">Something else</span>
-        </div>
-        <div class="col-xs-6 col-sm-3 ">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
-                height="200" class="rounded-circle mb-3" alt="Generic  thumbnail">
-            <h4>Label</h4>
-            <span class="text-muted">Something else</span>
-        </div>
-        <div class="col-xs-6 col-sm-3 ">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
-                height="200" class="rounded-circle mb-3" alt="Generic  thumbnail">
-            <h4>Label</h4>
-            <span class="text-muted">Something else</span>
-        </div>
-    </div>
 
-    <h2 class="sub-header">Section title</h2>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (range(1, 25) as $i)
+        <h2 class="sub-header">Section title</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
                 <tr>
-                    <td>{{ number_format($i + 1000, 0) }}</td>
-                    <td>{{ $faker->word() }}</td>
-                    <td>{{ $faker->word() }}</td>
-                    <td>{{ $faker->word() }}</td>
-                    <td>{{ $faker->word() }}</td>
+                    <th>#</th>
+                    <th>Header</th>
+                    <th>Header</th>
+                    <th>Header</th>
+                    <th>Header</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                @foreach (range(1, 25) as $i)
+                    <tr>
+                        <td>{{ number_format($i + 1000, 0) }}</td>
+                        <td>{{ $faker->word() }}</td>
+                        <td>{{ $faker->word() }}</td>
+                        <td>{{ $faker->word() }}</td>
+                        <td>{{ $faker->word() }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 @stop
