@@ -15,6 +15,7 @@ return [
     'import_map' => [
         'imports' => [
             '@/' => 'js/',
+            '@js/' => 'js/',
             '@view/' => 'js/view/',
             '@vendor/' => 'vendor/',
             '@core/' => 'vendor/@windwalker-io/core/dist/',

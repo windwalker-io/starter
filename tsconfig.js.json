@@ -16,6 +16,9 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "noEmit": false,
-        "strict": true
+        "strict": true,
+        "paths": {
+            "@js/*": ["./resources/assets/src/*"],
+        }
     }
 }
