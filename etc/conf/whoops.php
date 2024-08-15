@@ -18,6 +18,7 @@ return [
                 'SERVER_ADMIN',
                 'SCRIPT_FILENAME',
                 'REMOTE_PORT',
+                'DATABASE_DSN',
             ],
             array_keys($_ENV ?? [])
         )

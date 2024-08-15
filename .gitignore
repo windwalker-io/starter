@@ -17,6 +17,8 @@ Thumbs.db
 .env.local
 .env*.local
 !.env.dist
+.dsn
+.dsn.*
 
 # Libraries
 /vendor
