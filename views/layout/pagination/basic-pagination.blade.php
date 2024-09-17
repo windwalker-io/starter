@@ -19,10 +19,15 @@ use Windwalker\Core\Pagination\Pagination;
 $result = $pagination->compile();
 $current = $result->getCurrent();
 
-$mobileNeighbours = 2;
+$mobileNeighbours ??= 2;
+$stats ??= null;
 ?>
 
-<nav aria-label="navigation">
+<nav aria-label="navigation" class="l-pagination d-flex flex-column flex-md-row gap-2">
+    @if (isset($start))
+        {!! $start(pagination: $pagination, result: $result) !!}
+    @endif
+
     <ul class="pagination c-pagination">
         @if ($first = $result->getFirst())
             <li class="page-item page-item--first">
@@ -92,4 +97,8 @@ $mobileNeighbours = 2;
             </li>
         @endif
     </ul>
+
+    @if (isset($end))
+        {!! $end(pagination: $pagination, result: $result) !!}
+    @endif
 </nav>
