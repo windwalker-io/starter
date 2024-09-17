@@ -18,6 +18,7 @@
         "windwalker/dom": "^4.0",
         "windwalker/edge": "^4.0",
         "windwalker/orm": "^4.0",
+        "windwalker/database": "^4.0",
         "windwalker/session": "^4.0",
         "windwalker/form": "^4.0",
         "windwalker/authentication": "^4.0",
@@ -29,6 +30,7 @@
         "dragonmantank/cron-expression": "^3.3",
         "masterminds/html5": "^2.8",
         "symfony/var-dumper": "^5.0||^6.0||^7.0",
+        "symfony/polyfill-php84": "^1.31",
         "asika/cross-env": "^1.0",
         "asika32764/pinyin": "^1.2"
     },
@@ -37,24 +39,24 @@
     },
     "scripts": {
         "post-create-project-cmd": [
-            "php windwalker pkg:install lyrasoft/luna --tag routes",
+            "@php windwalker pkg:install lyrasoft/luna --tag routes",
             "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall",
             "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::install",
             "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::npmrc",
-            "php windwalker run prepare"
+            "@php windwalker run prepare"
         ],
         "post-autoload-dump": [
-            "php windwalker pkg:install --tag config",
-            "php windwalker pkg:install lyrasoft/toolkit --tag ide -f",
-            "php windwalker asset:sync || true",
-            "php windwalker cache:clear renderer",
+            "@php windwalker pkg:install --tag config",
+            "@php windwalker pkg:install lyrasoft/toolkit --tag ide -f",
+            "@php windwalker asset:sync || true",
+            "@php windwalker cache:clear renderer",
             "lyra pstorm:sniffer -p || true"
         ],
         "env": [
             "Windwalker\\Core\\Composer\\StarterInstaller::genEnv",
             "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::npmrc",
-            "php windwalker pkg:install lyrasoft/toolkit --tag ide",
-            "php windwalker run prepare"
+            "@php windwalker pkg:install lyrasoft/toolkit --tag ide",
+            "@php windwalker run prepare"
         ]
     },
     "autoload": {
