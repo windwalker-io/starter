@@ -101,7 +101,8 @@ return [
                 options: function (Container $container) {
                     return [
                         'channel' => 'console-error',
-                        'enabled' => $container->getParam('error.log')
+                        'enabled' => $container->getParam('error.log'),
+                        'ignore_40x' => false
                     ];
                 }
             ),
