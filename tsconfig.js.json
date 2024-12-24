@@ -1,4 +1,10 @@
 {
+<<<<<<< HEAD
+=======
+    "extends": [
+        "@windwalker-io/unicorn/tsconfig.js.json"
+    ],
+>>>>>>> earth
     "include": [
         "vendor/**/src/Module/**/assets/**/*.ts",
         "resources/assets/src/**/*.ts",
@@ -14,6 +20,7 @@
         "experimentalDecorators": true,
         "noEmit": false,
         "strict": true,
+<<<<<<< HEAD
         "module": "system",
         "moduleResolution": "node",
         "target": "es2020",
@@ -24,5 +31,10 @@
         "useDefineForClassFields": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true
+=======
+        "paths": {
+            "@js/*": ["./resources/assets/src/*"],
+        }
+>>>>>>> earth
     }
 }

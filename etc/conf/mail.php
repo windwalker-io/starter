@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Windwalker\Core\Manager\MailerManager;
 use Windwalker\Core\Provider\MailerProvider;
 
@@ -13,11 +15,11 @@ return [
     'envelope' => [
         // Must use `new \Symfony\Component\Mime\Address('email', 'name')`
         'sender' => null,
-        'recipients' => []
+        'recipients' => [],
     ],
 
     'providers' => [
-        MailerProvider::class
+        MailerProvider::class,
     ],
 
     'bindings' => [
@@ -25,7 +27,7 @@ return [
 
     'factories' => [
         'instances' => [
-            'default' => fn (MailerManager $manager) => $manager->createMailer(
+            'default' => fn(MailerManager $manager) => $manager->createMailer(
                 [
                     'envelope' => $manager->config('envelope'),
                     'dsn' => env('MAIL_DSN_DEFAULT'),
@@ -45,9 +47,9 @@ return [
                     'cc' => env('MAIL_CC'),
 
                     // Auto BCC to emails, use (,) separate addresses.
-                    'bcc' => env('MAIL_BCC')
+                    'bcc' => env('MAIL_BCC'),
                 ]
-            )
+            ),
         ],
     ],
 ];

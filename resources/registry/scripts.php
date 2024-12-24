@@ -31,7 +31,7 @@ return [
 
     // Update code and dependencies
     'update' => [
-        'git pull',
+        'git pull || true',
         'cross-env COMPOSER_PROCESS_TIMEOUT=600 composer install',
         'cross-env APP_ENV=dev php windwalker mig:go -f',
         'php windwalker run prepare',
@@ -41,7 +41,7 @@ return [
     'deploy' => [
         'git pull',
         'cross-env COMPOSER_PROCESS_TIMEOUT=600 composer install --no-dev',
-        'cross-env APP_ENV=dev php windwalker mig:go -f',
+        'php windwalker mig:go -f',
         'cross-env NODE_ENV=production php windwalker run prepare',
         'php windwalker asset:version',
     ],

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Public;
+namespace App;
 
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\Runtime\Runtime;
@@ -18,7 +18,9 @@ include $root . '/vendor/autoload.php';
 
 include __DIR__ . '/../etc/define.php';
 
-Runtime::ipBlock(['dev'], env('DEV_ALLOW_IPS'));
+if (Runtime::shouldBlock(['dev'], env('DEV_ALLOW_IPS'))) {
+    Runtime::forbidden();
+}
 
 Runtime::boot(WINDWALKER_ROOT, __DIR__);
 
