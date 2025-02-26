@@ -31,7 +31,6 @@
         "masterminds/html5": "^2.8",
         "symfony/var-dumper": "^5.0||^6.0||^7.0",
         "symfony/polyfill-php84": "^1.31",
-        "asika/cross-env": "^1.0",
         "asika32764/pinyin": "^1.2"
     },
     "require-dev": {
@@ -39,7 +38,7 @@
     },
     "scripts": {
         "post-create-project-cmd": [
-            "@php windwalker pkg:install lyrasoft/luna --tag routes",
+            "@php windwalker pkg:install windwalker/unicorn lyrasoft/luna --tag routes",
             "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall",
             "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::install",
             "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::npmrc",

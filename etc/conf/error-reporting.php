@@ -54,7 +54,7 @@ return env('ERROR_REPORTING') ?? ErrorService::getReportLevel(
          * and forward compatibility of your code.
          * @link https://php.net/manual/en/errorfunc.constants.php
          */
-        E_STRICT => (bool) (env('ERROR_REPORT_STRICT') ?? env('APP_DEBUG')),
+        2048 => (bool) (env('ERROR_REPORT_STRICT') ?? env('APP_DEBUG')), // E_STRICT
 
         /**
          * Run-time notices. Enable this to receive warnings about code
