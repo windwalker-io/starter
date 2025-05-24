@@ -11,9 +11,9 @@
         }
     ],
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.4.1",
         "ext-json": "*",
-        "windwalker/core": "^4.0",
+        "windwalker/core": "4.2.x-dev",
         "windwalker/renderer": "^4.0",
         "windwalker/dom": "^4.0",
         "windwalker/edge": "^4.0",
@@ -23,18 +23,20 @@
         "windwalker/form": "^4.0",
         "windwalker/authentication": "^4.0",
         "windwalker/authorization": "^4.0",
-        "windwalker/unicorn": "^1.0",
+        "windwalker/unicorn": "1.2.x-dev",
         "windwalker/srp": "^1.0",
-        "lyrasoft/luna": "^2.0",
+        "lyrasoft/luna": "2.2.x-dev",
         "lyrasoft/toolkit": "^1.0",
         "dragonmantank/cron-expression": "^3.3",
         "masterminds/html5": "^2.8",
-        "symfony/var-dumper": "^5.0||^6.0||^7.0",
+        "symfony/var-dumper": "^7.0||^8.0",
         "symfony/polyfill-php84": "^1.31",
-        "asika32764/pinyin": "^1.2"
+        "asika32764/pinyin": "^1.2",
+        "ramsey/uuid": "^4.0"
     },
     "require-dev": {
-        "nunomaduro/collision": "^7.8||^8.0"
+        "nunomaduro/collision": "^7.8||^8.0",
+        "windwalker/framework": "4.2.x-dev"
     },
     "scripts": {
         "post-create-project-cmd": [
@@ -68,7 +70,7 @@
     },
     "config": {
         "platform": {
-            "php": "8.2"
+            "php": "8.4.1"
         }
     },
     "extra": {
