@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": ">=8.4.1",
+        "php": ">=8.4.6",
         "ext-json": "*",
         "windwalker/core": "4.2.x-dev",
         "windwalker/renderer": "^4.0",
@@ -70,7 +70,7 @@
     },
     "config": {
         "platform": {
-            "php": "8.4.1"
+            "php": "8.4.6"
         }
     },
     "extra": {
