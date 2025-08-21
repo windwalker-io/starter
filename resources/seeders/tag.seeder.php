@@ -31,12 +31,12 @@ $seeder->import(
         foreach (range(1, 30) as $i) {
             $item = $mapper->createEntity();
 
-            $item->setTitle(Utf8String::ucfirst($faker->word));
-            $item->setState(1);
-            $item->setCreated($created = $faker->dateTimeThisYear);
-            $item->setModified($created->modify('+10days'));
-            $item->setCreatedBy((int) $faker->randomElement($userIds));
-            $item->setModifiedBy((int) $faker->randomElement($userIds));
+            $item->title = Utf8String::ucfirst($faker->word);
+            $item->state = 1;
+            $item->created = $created = $faker->dateTimeThisYear;
+            $item->modified = $created->modify('+10days');
+            $item->createdBy = (int) $faker->randomElement($userIds);
+            $item->modifiedBy = (int) $faker->randomElement($userIds);
 
             $mapper->createOne($item);
 

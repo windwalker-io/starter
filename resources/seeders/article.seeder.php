@@ -6,7 +6,6 @@ namespace App\Seeder;
 
 use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\Luna\Entity\Article;
-use Lyrasoft\Luna\Entity\Language;
 use Lyrasoft\Luna\Entity\Tag;
 use Lyrasoft\Luna\Entity\TagMap;
 use Lyrasoft\Luna\Entity\User;
@@ -43,31 +42,27 @@ $seeder->import(
 
             $faker = $seeder->faker($langCode);
 
-            $item->setCategoryId((int) $faker->randomElement($categoryIds));
-            $item->setType($type);
-            $item->setTitle(
-                Utf8String::ucwords(
-                    $faker->sentence(3)
-                )
-            );
-            $item->setAlias(SlugHelper::safe($item->getTitle()));
-            $item->setImage($faker->unsplashImage(800, 600));
-            $item->setState($faker->optional(0.7, 0)->passthrough(1));
-            $item->setIntrotext($faker->paragraph(5));
-            $item->setFulltext($faker->paragraph(20));
-            $item->setOrdering($i);
-            $item->setLanguage($langCode);
-            $item->setCreated($faker->dateTimeThisYear());
-            $item->setModified($item->getCreated()->modify('+10days'));
-            $item->setCreatedBy((int) $faker->randomElement($userIds));
+            $item->categoryId = (int) $faker->randomElement($categoryIds);
+            $item->type = $type;
+            $item->title = Utf8String::ucwords($faker->sentence(3));
+            $item->alias = SlugHelper::safe($item->title);
+            $item->image = $faker->unsplashImage(800, 600);
+            $item->state = $faker->optional(0.7, 0)->passthrough(1);
+            $item->introtext = $faker->paragraph(5);
+            $item->fulltext = $faker->paragraph(20);
+            $item->ordering = $i;
+            $item->language = $langCode;
+            $item->created = $faker->dateTimeThisYear();
+            $item->modified = $item->created->modify('+10days');
+            $item->createdBy = (int) $faker->randomElement($userIds);
 
             $item = $mapper->createOne($item);
 
             foreach ($faker->randomElements($tagIds, random_int(3, 5)) as $tagId) {
                 $map = new TagMap();
-                $map->setTagId((int) $tagId);
-                $map->setType('article');
-                $map->setTargetId($item->getId());
+                $map->tagId = (int) $tagId;
+                $map->type = 'article';
+                $map->targetId = $item->getId();
 
                 $orm->createOne(TagMap::class, $map);
             }

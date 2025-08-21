@@ -7,7 +7,6 @@ namespace App\Seeder;
 use Lyrasoft\Luna\Entity\Config;
 use Lyrasoft\Luna\Entity\User;
 use Windwalker\Core\Seed\Seeder;
-use Windwalker\Data\Collection;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
@@ -21,7 +20,7 @@ use Windwalker\ORM\ORM;
  */
 $seeder->import(
     static function () use ($seeder, $orm, $db) {
-        $faker   = $seeder->faker();
+        $faker = $seeder->faker();
 
         /** @var EntityMapper<Config> $mapper */
         $mapper = $orm->mapper(Config::class);
@@ -29,10 +28,10 @@ $seeder->import(
 
         $item = $mapper->createEntity();
 
-        $item->setType('core');
-        $item->setContent(['ga' => '']);
-        $item->setModified($faker->dateTimeThisYear());
-        $item->setModifiedBy((int) $faker->randomElement($userIds));
+        $item->type = 'core';
+        $item->content = ['ga' => ''];
+        $item->modified = $faker->dateTimeThisYear();
+        $item->modifiedBy = (int) $faker->randomElement($userIds);
 
         $mapper->createOne($item);
 

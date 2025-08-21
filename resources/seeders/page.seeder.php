@@ -31,16 +31,16 @@ $seeder->import(
         foreach (range(1, 50) as $i) {
             $item = $mapper->createEntity();
 
-            $item->setExtends('global.body');
-            $item->setTitle($faker->sentence(2));
-            $item->setImage($faker->unsplashImage(800, 600));
-            $item->setContent($content);
-            $item->setState(1);
-            $item->setOrdering($i);
-            $item->setCreated($created = $faker->dateTimeThisYear);
-            $item->setModified($created->modify('+1month'));
-            $item->setCreatedBy((int) $faker->randomElement($userIds));
-            $item->setModifiedBy((int) $faker->randomElement($userIds));
+            $item->extends = 'global.body';
+            $item->title = $faker->sentence(2);
+            $item->image = $faker->unsplashImage(800, 600);
+            $item->content = $content;
+            $item->state = 1;
+            $item->ordering = $i;
+            $item->created = $created = $faker->dateTimeThisYear;
+            $item->modified = $created->modify('+1month');
+            $item->createdBy = (int) $faker->randomElement($userIds);
+            $item->modifiedBy = (int) $faker->randomElement($userIds);
 
             $mapper->createOne($item);
 

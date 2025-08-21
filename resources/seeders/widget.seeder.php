@@ -43,21 +43,17 @@ $seeder->import(
 
             $faker = $seeder->faker($langCode);
 
-            $item->setType($widgetType::getType());
-            $item->setTitle(
-                Utf8String::ucwords(
-                    $faker->sentence(3)
-                )
-            );
-            $item->setPosition($faker->randomElement($positions));
-            $item->setNote($faker->sentence(5));
-            $item->setContent($faker->paragraph(10));
-            $item->setState(BasicState::PUBLISHED());
-            $item->setOrdering($i);
-            $item->setLanguage($langCode);
-            $item->setCreated($faker->dateTimeThisYear());
-            $item->setModified($item->getCreated()->modify('+10days'));
-            $item->setCreatedBy((int) $faker->randomElement($userIds));
+            $item->type = $widgetType::getType();
+            $item->title = Utf8String::ucwords($faker->sentence(3));
+            $item->position = $faker->randomElement($positions);
+            $item->note = $faker->sentence(5);
+            $item->content = $faker->paragraph(10);
+            $item->state = BasicState::PUBLISHED;
+            $item->ordering = $i;
+            $item->language = $langCode;
+            $item->created = $faker->dateTimeThisYear();
+            $item->modified = $item->created->modify('+10days');
+            $item->createdBy = (int) $faker->randomElement($userIds);
 
             $item = $mapper->createOne($item);
 

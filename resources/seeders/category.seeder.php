@@ -53,28 +53,28 @@ $seeder->import(
 
                 $faker = $seeder->faker($langCode);
 
-                $item->setType($type);
-                $item->setTitle(Utf8String::ucwords($faker->sentence(2)));
-                $item->setAlias(SlugHelper::safe($item->getTitle()));
-                $item->setDescription($faker->paragraph(5));
-                $item->setImage($faker->unsplashImage(800, 600));
-                $item->setState(BasicState::from($faker->randomElement([1, 1, 1, 0])));
-                $item->setLanguage($langCode);
-                $item->setCreated($created = $faker->dateTimeThisYear());
-                $item->setModified($created->modify('+10days'));
-                $item->setCreatedBy((int) $faker->randomElement($userIds));
+                $item->type = $type;
+                $item->title = Utf8String::ucwords($faker->sentence(2));
+                $item->alias = SlugHelper::safe($item->title);
+                $item->description = $faker->paragraph(5);
+                $item->image = $faker->unsplashImage(800, 600);
+                $item->state = $faker->randomElement([1, 1, 1, 0]);
+                $item->language = $langCode;
+                $item->created = $created = $faker->dateTimeThisYear();
+                $item->modified = $created->modify('+10days');
+                $item->createdBy = (int) $faker->randomElement($userIds);
 
                 $mapper->setPosition(
                     $item,
-                    $faker->randomElement($existsRecordIds[$item->getType()]),
+                    $faker->randomElement($existsRecordIds[$item->type]),
                     Position::LAST_CHILD
                 );
 
                 /** @var Category $item */
                 $item = $mapper->createOne($item);
 
-                if ($item->getLevel() < $maxLevel) {
-                    $existsRecordIds[$item->getType()][] = $item->getId();
+                if ($item->level < $maxLevel) {
+                    $existsRecordIds[$item->type][] = $item->id;
                 }
 
                 $seeder->outCounting();

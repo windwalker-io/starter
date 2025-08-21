@@ -32,15 +32,15 @@ $seeder->import(
         foreach (range(1, 50) as $i) {
             $item = $mapper->createEntity();
 
-            $item->setName($faker->name());
-            $item->setUsername($faker->userName());
-            $item->setEmail($faker->safeEmail());
-            $item->setPassword($pass);
-            $item->setAvatar($faker->avatar(400));
-            $item->setEnabled((bool) $faker->randomElement([1, 1, 1, 0]));
-            $item->setVerified(true);
-            $item->setLastLogin($faker->dateTimeThisYear());
-            $item->setRegistered($faker->dateTimeThisYear());
+            $item->name = $faker->name();
+            $item->username = $faker->userName();
+            $item->email = $faker->safeEmail();
+            $item->password = $pass;
+            $item->avatar = $faker->avatar(400);
+            $item->enabled = (bool) $faker->randomElement([1, 1, 1, 0]);
+            $item->verified = true;
+            $item->lastLogin = $faker->dateTimeThisYear();
+            $item->registered = $faker->dateTimeThisYear();
 
             $item = $mapper->createOne($item);
 

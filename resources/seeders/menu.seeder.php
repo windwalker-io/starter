@@ -10,7 +10,6 @@ use Lyrasoft\Luna\Entity\Menu;
 use Lyrasoft\Luna\Enum\MenuTarget;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
-use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\Nested\Position;
 use Windwalker\ORM\NestedSetMapper;
 use Windwalker\ORM\ORM;
@@ -25,8 +24,8 @@ $types = [
 /**
  * Menu Seeder
  *
- * @var Seeder $seeder
- * @var ORM $orm
+ * @var Seeder          $seeder
+ * @var ORM             $orm
  * @var DatabaseAdapter $db
  */
 $seeder->import(
@@ -55,52 +54,48 @@ $seeder->import(
 
                 $view = $faker->randomElement($views);
 
-                $item->setTitle($faker->sentence(2));
-                $item->setType($type);
-                $item->setView($view);
+                $item->title = $faker->sentence(2);
+                $item->type = $type;
+                $item->view = $view;
 
                 switch ($view) {
                     case 'article':
                         /** @var Article $article */
                         $article = $faker->randomElement($articles);
-                        $item->setVariables(
-                            [
-                                'id' => $article->getId(),
-                                'alias' => $article->getAlias(),
-                            ]
-                        );
+                        $item->variables = [
+                            'id' => $article->getId(),
+                            'alias' => $article->getAlias(),
+                        ];
                         break;
 
                     case 'article_category':
                         /** @var Category $category */
                         $category = $faker->randomElement($categories);
 
-                        $item->setVariables(
-                            [
-                                'id' => $category->getId(),
-                                'path' => $category->getPath(),
-                            ]
-                        );
+                        $item->variables = [
+                            'id' => $category->getId(),
+                            'path' => $category->getPath(),
+                        ];
                         break;
                 }
 
-                $item->setImage($faker->unsplashImage());
-                $item->setState(1);
-                $item->setTarget(MenuTarget::SELF());
-                $item->setCreated($faker->dateTimeThisYear);
-                $item->setModified($item->getCreated()->modify('+5days'));
+                $item->image = $faker->unsplashImage();
+                $item->state = 1;
+                $item->target = MenuTarget::SELF;
+                $item->created = $faker->dateTimeThisYear;
+                $item->modified = $item->created->modify('+5days');
 
                 $mapper->setPosition(
                     $item,
-                    $faker->randomElement($existsMenuIds[$item->getType()]),
+                    $faker->randomElement($existsMenuIds[$item->type]),
                     Position::LAST_CHILD
                 );
 
                 /** @var Menu $item */
                 $item = $mapper->createOne($item);
 
-                if ($item->getLevel() < $maxLevel) {
-                    $existsMenuIds[$item->getType()][] = $item->getId();
+                if ($item->level < $maxLevel) {
+                    $existsMenuIds[$item->type][] = $item->id;
                 }
 
                 $seeder->outCounting();

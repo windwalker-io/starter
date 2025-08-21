@@ -13,6 +13,7 @@ use Lyrasoft\Luna\User\UserService;
 use Unicorn\Enum\BasicState;
 use Windwalker\Core\Console\ConsoleApplication;
 use Windwalker\Core\Migration\Migration;
+use Windwalker\Crypt\Hasher\PasswordHasherInterface;
 use Windwalker\Database\Schema\Schema;
 use Windwalker\ORM\NestedSetMapper;
 use Windwalker\ORM\ORM;
@@ -20,11 +21,11 @@ use Windwalker\ORM\ORM;
 /**
  * Migration UP: 2021110708010001_UserInit.
  *
- * @var Migration          $mig
+ * @var Migration $mig
  * @var ConsoleApplication $app
  */
 $mig->up(
-    static function (UserService $userService, ORM $orm) use ($mig) {
+    static function (UserService $userService, ORM $orm, PasswordHasherInterface $hasher) use ($mig) {
         // User
         $mig->createTable(
             User::class,
@@ -35,8 +36,8 @@ $mig->up(
                 $schema->varchar('name')->comment('Name');
                 $schema->varchar('avatar')->comment('Avatar');
                 $schema->varchar('password')->length(1024)->comment('Password');
-                $schema->tinyint('enabled')->comment('0: disabled, 1: enabled');
-                $schema->tinyint('verified')->comment('0: unverified, 1: verified');
+                $schema->bool('enabled')->comment('0: disabled, 1: enabled');
+                $schema->bool('verified')->comment('0: unverified, 1: verified');
                 $schema->varchar('activation')->comment('Activation code.');
                 $schema->tinyint('receive_mail')->defaultValue(0)->length(1);
                 $schema->varchar('reset_token')->comment('Reset Token');
@@ -122,29 +123,29 @@ $mig->up(
         $root = $roleMapper->createRootIfNotExist();
 
         $role = new UserRole();
-        $role->setTitle('Super User');
-        $role->setState(BasicState::PUBLISHED);
+        $role->title = 'Super User';
+        $role->state = BasicState::PUBLISHED;
 
         $roleMapper->setPosition($role, $root->getPrimaryKeyValue());
         $roleMapper->createOne($role);
 
         $user = new User();
 
-        $user->setUsername('admin');
-        $user->setEmail('webadmin@simular.co');
-        $user->setName('Simular');
-        $user->setPassword(password_hash('1234', PASSWORD_DEFAULT));
-        $user->setAvatar('https://avatars.githubusercontent.com/u/13175487#.jpg');
-        $user->setEnabled(true);
-        $user->setVerified(true);
-        $user->setReceiveMail(true);
+        $user->username = 'admin';
+        $user->email = 'webadmin@simular.co';
+        $user->name = 'Simular';
+        $user->password = $hasher->hash('1234');
+        $user->avatar = 'https://avatars.githubusercontent.com/u/13175487#.jpg';
+        $user->enabled = true;
+        $user->verified = true;
+        $user->receiveMail = true;
 
         /** @var User $user */
         $user = $orm->createOne(User::class, $user);
 
         $map = new UserRoleMap();
-        $map->setUserId($user->getId());
-        $map->setRoleId('superuser');
+        $map->userId = $user->getId();
+        $map->roleId = 'superuser';
 
         $orm->createOne($map::class, $map);
     }
