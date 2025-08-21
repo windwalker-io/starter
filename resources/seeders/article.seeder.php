@@ -4,43 +4,38 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
-use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\Luna\Entity\Article;
+use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\Luna\Entity\Tag;
 use Lyrasoft\Luna\Entity\TagMap;
 use Lyrasoft\Luna\Entity\User;
 use Lyrasoft\Luna\Services\LocaleService;
 use Unicorn\Utilities\SlugHelper;
-use Windwalker\Core\Seed\Seeder;
-use Windwalker\Database\DatabaseAdapter;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeederTask;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\ORM\EntityMapper;
-use Windwalker\ORM\ORM;
 use Windwalker\Utilities\Utf8String;
 
-/**
- * Article Seeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function () use ($seeder, $orm, $db) {
-        $faker = $seeder->faker('en_US');
+return new class extends SeederTask {
+    #[SeedImport]
+    public function import(): void
+    {
+        $faker = $this->faker('en_US');
         $type = 'article';
 
         /** @var EntityMapper<Article> $mapper */
-        $mapper = $orm->mapper(Article::class);
-        $langCodes = LocaleService::getSeederLangCodes($orm);
-        $categoryIds = $orm->findColumn(Category::class, 'id', ['type' => $type])->dump();
-        $userIds = $orm->findColumn(User::class, 'id')->dump();
-        $tagIds = $orm->findColumn(Tag::class, 'id')->dump();
+        $mapper = $this->orm->mapper(Article::class);
+        $langCodes = LocaleService::getSeederLangCodes($this->orm);
+        $categoryIds = $this->orm->findColumn(Category::class, 'id', ['type' => $type])->dump();
+        $userIds = $this->orm->findColumn(User::class, 'id')->dump();
+        $tagIds = $this->orm->findColumn(Tag::class, 'id')->dump();
 
         foreach (range(1, 150) as $i) {
             $langCode = $faker->randomElement($langCodes);
             $item = $mapper->createEntity();
 
-            $faker = $seeder->faker($langCode);
+            $faker = $this->faker($langCode);
 
             $item->categoryId = (int) $faker->randomElement($categoryIds);
             $item->type = $type;
@@ -64,16 +59,16 @@ $seeder->import(
                 $map->type = 'article';
                 $map->targetId = $item->getId();
 
-                $orm->createOne(TagMap::class, $map);
+                $this->orm->createOne(TagMap::class, $map);
             }
 
-            $seeder->outCounting();
+            $this->printCounting();
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Article::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(Article::class);
     }
-);
+};
