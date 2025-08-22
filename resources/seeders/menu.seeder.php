@@ -8,34 +8,29 @@ use Lyrasoft\Luna\Entity\Article;
 use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\Luna\Entity\Menu;
 use Lyrasoft\Luna\Enum\MenuTarget;
-use Windwalker\Core\Seed\Seeder;
-use Windwalker\Database\DatabaseAdapter;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\ORM\Nested\Position;
 use Windwalker\ORM\NestedSetMapper;
-use Windwalker\ORM\ORM;
 
-$types = [
-    'mainmenu' => [
-        'max_level' => 3,
-        'number' => 30,
-    ],
-];
+return new /** Menu Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(): void
+    {
+        $types = [
+            'mainmenu' => [
+                'max_level' => 3,
+                'number' => 30,
+            ],
+        ];
 
-/**
- * Menu Seeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function () use ($seeder, $orm, $db, $types) {
-        $faker = $seeder->faker('en_US');
+        $faker = $this->faker('en_US');
 
         /** @var NestedSetMapper $mapper */
-        $mapper = $orm->mapper(Menu::class);
-        $articles = $orm->findList(Article::class, ['state' => 1])->all()->dump();
-        $categories = $orm->findList(Category::class, ['type' => 'article'])->all()->dump();
+        $mapper = $this->orm->mapper(Menu::class);
+        $articles = $this->orm->findList(Article::class, ['state' => 1])->all()->dump();
+        $categories = $this->orm->findList(Category::class, ['type' => 'article'])->all()->dump();
 
         $existsMenuIds = [];
         $views = [
@@ -87,25 +82,24 @@ $seeder->import(
 
                 $mapper->setPosition(
                     $item,
-                    $faker->randomElement($existsMenuIds[$item->type]),
+                    $faker->randomElement($existsMenuIds[$type]),
                     Position::LAST_CHILD
                 );
 
-                /** @var Menu $item */
                 $item = $mapper->createOne($item);
 
                 if ($item->level < $maxLevel) {
-                    $existsMenuIds[$item->type][] = $item->id;
+                    $existsMenuIds[$type][] = $item->id;
                 }
 
-                $seeder->outCounting();
+                $this->printCounting();
             }
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Menu::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(Menu::class);
     }
-);
+};

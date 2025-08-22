@@ -9,50 +9,45 @@ use Lyrasoft\Luna\Entity\User;
 use Lyrasoft\Luna\Services\LocaleService;
 use Unicorn\Enum\BasicState;
 use Unicorn\Utilities\SlugHelper;
-use Windwalker\Core\Seed\Seeder;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\Nested\Position;
 use Windwalker\ORM\NestedSetMapper;
 use Windwalker\ORM\ORM;
 use Windwalker\Utilities\Utf8String;
 
-/**
- * Category Seeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function () use ($seeder, $orm, $db) {
+return new /** Category Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(): void
+    {
         $types = [
             'article' => [
                 'max_level' => 3,
-                'number' => 30
+                'number' => 30,
             ],
         ];
 
-        $faker = $seeder->faker('en_US');
+        $faker = $this->faker('en_US');
 
         /** @var NestedSetMapper<Category> $mapper */
-        $mapper = $orm->mapper(Category::class);
-        $langCodes = LocaleService::getSeederLangCodes($orm);
-        $userIds = $orm->findColumn(User::class, 'id')->dump();
+        $mapper = $this->orm->mapper(Category::class);
+        $langCodes = LocaleService::getSeederLangCodes($this->orm);
+        $userIds = $this->orm->findColumn(User::class, 'id')->dump();
 
         $existsRecordIds = [];
 
         foreach ($types as $type => $detail) {
             $maxLevel = $detail['max_level'];
-
             $existsRecordIds[$type] = [1];
 
             foreach (range(1, $detail['number']) as $i) {
                 $langCode = $faker->randomElement($langCodes);
+
                 /** @var Category $item */
                 $item = $mapper->createEntity();
-
-                $faker = $seeder->faker($langCode);
-
+                $faker = $this->faker($langCode);
                 $item->type = $type;
                 $item->title = Utf8String::ucwords($faker->sentence(2));
                 $item->alias = SlugHelper::safe($item->title);
@@ -63,13 +58,11 @@ $seeder->import(
                 $item->created = $created = $faker->dateTimeThisYear();
                 $item->modified = $created->modify('+10days');
                 $item->createdBy = (int) $faker->randomElement($userIds);
-
                 $mapper->setPosition(
                     $item,
                     $faker->randomElement($existsRecordIds[$item->type]),
                     Position::LAST_CHILD
                 );
-
                 /** @var Category $item */
                 $item = $mapper->createOne($item);
 
@@ -77,14 +70,14 @@ $seeder->import(
                     $existsRecordIds[$item->type][] = $item->id;
                 }
 
-                $seeder->outCounting();
+                $this->printCounting();
             }
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Category::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(Category::class);
     }
-);
+};

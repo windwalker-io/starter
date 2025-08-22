@@ -5,21 +5,18 @@ declare(strict_types=1);
 namespace App\Migration;
 
 use Lyrasoft\Luna\Entity\Menu;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 use Windwalker\ORM\NestedSetMapper;
 use Windwalker\ORM\ORM;
 
-/**
- * Migration UP: 2021110708110001_MenuInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function (ORM $orm) use ($mig) {
-        $mig->createTable(
+return new /** 2021110708110001_MenuInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(ORM $orm): void
+    {
+        $this->createTable(
             Menu::class,
             function (Schema $schema) {
                 $schema->primary('id')->comment('Primary Key');
@@ -35,40 +32,29 @@ $mig->up(
                 $schema->varchar('url')->comment('URL');
                 $schema->char('target')->length(10)->comment('Target');
                 $schema->json('variables')->comment('Vars');
-                $schema->varchar('image')->comment('Main Image');
+                $schema->longtext('description')->comment('Description');
                 $schema->tinyint('state')->length(1)->comment('0: unpublished, 1:published');
-                $schema->bool('hidden');
-                $schema->datetime('created')->comment('Created Date');
-                $schema->datetime('modified')->comment('Modified Date');
+                $schema->datetime('created')->nullable(true)->comment('Created Date');
+                $schema->datetime('modified')->nullable(true)->comment('Modified Date');
                 $schema->integer('created_by')->comment('Author');
                 $schema->integer('modified_by')->comment('Modified User');
                 $schema->char('language')->length(7)->comment('Language');
                 $schema->json('params')->comment('Params');
 
-                $schema->addIndex('alias');
-                $schema->addIndex('path');
-                $schema->addIndex('view');
-                $schema->addIndex('type');
                 $schema->addIndex(['lft', 'rgt']);
-                $schema->addIndex('language');
                 $schema->addIndex('created_by');
+                $schema->addIndex('type');
             }
         );
 
-        /** @var NestedSetMapper $mapper */
+        /** @var NestedSetMapper<Menu> $mapper */
         $mapper = $orm->mapper(Menu::class);
-
-        if (!$mapper->getRoot()) {
-            $mapper->createRoot();
-        }
+        $mapper->createRootIfNotExist();
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(Menu::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Menu::class);
     }
-);
+};

@@ -10,29 +10,27 @@ use Lyrasoft\Luna\Services\LocaleService;
 use Lyrasoft\Luna\Widget\AbstractWidget;
 use Lyrasoft\Luna\Widget\WidgetService;
 use Unicorn\Enum\BasicState;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
 use Windwalker\Core\Seed\Seeder;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
 use Windwalker\Utilities\Utf8String;
 
-/**
- * Widget Seeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function (WidgetService $widgetService) use ($seeder, $orm, $db) {
-        $faker = $seeder->faker('en_US');
+return new /** Widget Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(WidgetService $widgetService): void
+    {
+        $faker = $this->faker('en_US');
 
         $positions = $faker->words(5);
 
         /** @var EntityMapper<Widget> $mapper */
-        $mapper = $orm->mapper(Widget::class);
-        $langCodes = LocaleService::getSeederLangCodes($orm);
-        $userIds = $orm->findColumn(User::class, 'id')->dump();
+        $mapper = $this->orm->mapper(Widget::class);
+        $langCodes = LocaleService::getSeederLangCodes($this->orm);
+        $userIds = $this->orm->findColumn(User::class, 'id')->dump();
 
         foreach (range(1, 30) as $i) {
             $langCode = $faker->randomElement($langCodes);
@@ -41,7 +39,7 @@ $seeder->import(
             /** @var AbstractWidget $widgetType */
             $widgetType = $faker->randomElement($widgetService->getWidgetTypes());
 
-            $faker = $seeder->faker($langCode);
+            $faker = $this->faker($langCode);
 
             $item->type = $widgetType::getType();
             $item->title = Utf8String::ucwords($faker->sentence(3));
@@ -57,13 +55,13 @@ $seeder->import(
 
             $item = $mapper->createOne($item);
 
-            $seeder->outCounting();
+            $this->printCounting();
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Widget::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(Widget::class);
     }
-);
+};

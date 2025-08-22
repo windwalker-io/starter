@@ -7,12 +7,12 @@ namespace App\Seeder;
 use Lyrasoft\Luna\Access\AccessService;
 use Lyrasoft\Luna\Entity\User;
 use Windwalker\Core\Seed\SeedClear;
-use Windwalker\Core\Seed\SeederTask;
+use Windwalker\Core\Seed\AbstractSeeder;
 use Windwalker\Core\Seed\SeedImport;
 use Windwalker\Crypt\Hasher\PasswordHasherInterface;
 use Windwalker\ORM\EntityMapper;
 
-return new class extends SeederTask {
+return new /** Article Seeder */ class extends AbstractSeeder {
     #[SeedImport]
     public function import(PasswordHasherInterface $password, AccessService $accessService): void
     {

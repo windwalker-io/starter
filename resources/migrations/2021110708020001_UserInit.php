@@ -11,23 +11,20 @@ use Lyrasoft\Luna\Entity\UserRoleMap;
 use Lyrasoft\Luna\Entity\UserSocial;
 use Lyrasoft\Luna\User\UserService;
 use Unicorn\Enum\BasicState;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Crypt\Hasher\PasswordHasherInterface;
 use Windwalker\Database\Schema\Schema;
 use Windwalker\ORM\NestedSetMapper;
 use Windwalker\ORM\ORM;
 
-/**
- * Migration UP: 2021110708010001_UserInit.
- *
- * @var Migration $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function (UserService $userService, ORM $orm, PasswordHasherInterface $hasher) use ($mig) {
+return new /** 2021110708020001_UserInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(UserService $userService, ORM $orm, PasswordHasherInterface $hasher): void
+    {
         // User
-        $mig->createTable(
+        $this->createTable(
             User::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -53,7 +50,7 @@ $mig->up(
         );
 
         // User Group
-        $mig->createTable(
+        $this->createTable(
             UserRole::class,
             function (Schema $schema) {
                 $schema->primary('id')->comment('Primary Key');
@@ -75,7 +72,7 @@ $mig->up(
             }
         );
 
-        $mig->createTable(
+        $this->createTable(
             UserRoleMap::class,
             function (Schema $schema) {
                 $schema->integer('user_id');
@@ -89,7 +86,7 @@ $mig->up(
         );
 
         // User Social
-        $mig->createTable(
+        $this->createTable(
             UserSocial::class,
             function (Schema $schema) {
                 $schema->integer('user_id')->comment('User ID');
@@ -103,7 +100,7 @@ $mig->up(
         );
 
         // Session
-        $mig->createTable(
+        $this->createTable(
             Session::class,
             function (Schema $schema) {
                 $schema->varchar('id')->length(192);
@@ -149,14 +146,11 @@ $mig->up(
 
         $orm->createOne($map::class, $map);
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(
             User::class,
             UserSocial::class,
             UserRole::class,
@@ -164,4 +158,4 @@ $mig->down(
             Session::class
         );
     }
-);
+};

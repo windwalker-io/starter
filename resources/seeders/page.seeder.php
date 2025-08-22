@@ -6,25 +6,20 @@ namespace App\Seeder;
 
 use Lyrasoft\Luna\Entity\Page;
 use Lyrasoft\Luna\Entity\User;
-use Windwalker\Core\Seed\Seeder;
-use Windwalker\Database\DatabaseAdapter;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\ORM\EntityMapper;
-use Windwalker\ORM\ORM;
 
-/**
- * Page Seeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function () use ($seeder, $orm, $db) {
-        $faker = $seeder->faker('en_US');
+return new /** Page Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(): void
+    {
+        $faker = $this->faker('en_US');
 
-        $userIds = $orm->findColumn(User::class, 'id', [])->dump();
+        $userIds = $this->orm->findColumn(User::class, 'id', [])->dump();
         /** @var EntityMapper<Page> $mapper */
-        $mapper = $orm->mapper(Page::class);
+        $mapper = $this->orm->mapper(Page::class);
 
         $content = json_decode(file_get_contents(__DIR__ . '/data/page.json'), true);
 
@@ -44,13 +39,13 @@ $seeder->import(
 
             $mapper->createOne($item);
 
-            $seeder->outCounting();
+            $this->printCounting();
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Page::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(Page::class);
     }
-);
+};

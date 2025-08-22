@@ -11,13 +11,13 @@ use Lyrasoft\Luna\Entity\TagMap;
 use Lyrasoft\Luna\Entity\User;
 use Lyrasoft\Luna\Services\LocaleService;
 use Unicorn\Utilities\SlugHelper;
+use Windwalker\Core\Seed\AbstractSeeder;
 use Windwalker\Core\Seed\SeedClear;
-use Windwalker\Core\Seed\SeederTask;
 use Windwalker\Core\Seed\SeedImport;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\Utilities\Utf8String;
 
-return new class extends SeederTask {
+return new /** Article Seeder */ class extends AbstractSeeder {
     #[SeedImport]
     public function import(): void
     {

@@ -6,25 +6,20 @@ namespace App\Seeder;
 
 use Lyrasoft\Luna\Entity\Config;
 use Lyrasoft\Luna\Entity\User;
-use Windwalker\Core\Seed\Seeder;
-use Windwalker\Database\DatabaseAdapter;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\ORM\EntityMapper;
-use Windwalker\ORM\ORM;
 
-/**
- * ConfigSeeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function () use ($seeder, $orm, $db) {
-        $faker = $seeder->faker();
+return new /** Config Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(): void
+    {
+        $faker = $this->faker();
 
         /** @var EntityMapper<Config> $mapper */
-        $mapper = $orm->mapper(Config::class);
-        $userIds = $orm->mapper(User::class)->findColumn('id')->dump();
+        $mapper = $this->orm->mapper(Config::class);
+        $userIds = $this->orm->mapper(User::class)->findColumn('id')->dump();
 
         $item = $mapper->createEntity();
 
@@ -35,12 +30,12 @@ $seeder->import(
 
         $mapper->createOne($item);
 
-        $seeder->outCounting();
+        $this->printCounting();
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Config::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(Config::class);
     }
-);
+};

@@ -7,26 +7,21 @@ namespace App\Seeder;
 use Lyrasoft\Luna\Entity\Tag;
 use Lyrasoft\Luna\Entity\TagMap;
 use Lyrasoft\Luna\Entity\User;
-use Windwalker\Core\Seed\Seeder;
-use Windwalker\Database\DatabaseAdapter;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\ORM\EntityMapper;
-use Windwalker\ORM\ORM;
 use Windwalker\Utilities\Utf8String;
 
-/**
- * Tag Seeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function () use ($seeder, $orm, $db) {
-        $faker = $seeder->faker('en_US');
+return new /** Tag Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(): void
+    {
+        $faker = $this->faker('en_US');
 
-        $userIds = $orm->findColumn(User::class, 'id', [])->dump();
+        $userIds = $this->orm->findColumn(User::class, 'id', [])->dump();
         /** @var EntityMapper<Tag> $mapper */
-        $mapper = $orm->mapper(Tag::class);
+        $mapper = $this->orm->mapper(Tag::class);
 
         foreach (range(1, 30) as $i) {
             $item = $mapper->createEntity();
@@ -40,13 +35,13 @@ $seeder->import(
 
             $mapper->createOne($item);
 
-            $seeder->outCounting();
+            $this->printCounting();
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Tag::class, TagMap::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(Tag::class, TagMap::class);
     }
-);
+};
