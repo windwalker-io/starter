@@ -31,7 +31,7 @@ return new /** 2021111715240001_PageInit */ class extends AbstractMigration {
                 $schema->integer('ordering')->comment('Ordering');
                 $schema->datetime('created')->comment('Created Date');
                 $schema->integer('created_by')->comment('Author');
-                $schema->datetime('modified')->nullable(true)->comment('Modified Date');
+                $schema->datetime('modified')->comment('Modified Date');
                 $schema->integer('modified_by')->comment('Modified User');
                 $schema->char('language')->length(7)->comment('Language');
                 $schema->json('params')->comment('Params');
@@ -40,7 +40,6 @@ return new /** 2021111715240001_PageInit */ class extends AbstractMigration {
                 $schema->addIndex('extends');
                 $schema->addIndex('alias');
                 $schema->addIndex('language');
-                $schema->addIndex('created_by');
             }
         );
 

@@ -33,11 +33,10 @@ return new /** 2021110708110001_MenuInit */ class extends AbstractMigration {
                 $schema->char('target')->length(10)->comment('Target');
                 $schema->json('variables')->comment('Vars');
                 $schema->varchar('image')->comment('Main Image');
-                $schema->longtext('description')->comment('Description');
                 $schema->bool('state')->comment('0: unpublished, 1:published');
                 $schema->bool('hidden');
-                $schema->datetime('created')->nullable(true)->comment('Created Date');
-                $schema->datetime('modified')->nullable(true)->comment('Modified Date');
+                $schema->datetime('created')->comment('Created Date');
+                $schema->datetime('modified')->comment('Modified Date');
                 $schema->integer('created_by')->comment('Author');
                 $schema->integer('modified_by')->comment('Modified User');
                 $schema->char('language')->length(7)->comment('Language');

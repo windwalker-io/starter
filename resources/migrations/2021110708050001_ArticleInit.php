@@ -30,7 +30,7 @@ return new /** 2021110708050001_ArticleInit */ class extends AbstractMigration {
                 $schema->integer('ordering')->comment('Ordering');
                 $schema->json('extra')->comment('Extra Data');
                 $schema->datetime('created')->comment('Created Date');
-                $schema->datetime('modified')->nullable(true)->comment('Modified Date');
+                $schema->datetime('modified')->comment('Modified Date');
                 $schema->integer('created_by')->comment('Author');
                 $schema->integer('modified_by')->comment('Modified User');
                 $schema->char('language')->length(7)->comment('Language');

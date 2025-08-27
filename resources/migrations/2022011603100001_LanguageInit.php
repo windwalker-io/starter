@@ -10,6 +10,8 @@ use Windwalker\Core\Migration\MigrateDown;
 use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
+use function Windwalker\fs;
+
 return new /** 2022011603100001_LanguageInit */ class extends AbstractMigration {
     #[MigrateUp]
     public function up(): void
@@ -36,13 +38,13 @@ return new /** 2022011603100001_LanguageInit */ class extends AbstractMigration 
             }
         );
 
-        $mapper = $orm->mapper(Language::class);
+        $mapper = $this->orm->mapper(Language::class);
         $languages = fs(__DIR__ . '/data/languages.json')->read()->jsonDecode();
 
         foreach ($languages as $language) {
             $mapper->createOne($language);
 
-            $mig->outCounting();
+            $this->printCounting();
         }
     }
 

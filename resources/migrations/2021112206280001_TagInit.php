@@ -31,6 +31,7 @@ return new /** 2021112206280001_TagInit */ class extends AbstractMigration {
 
                 $schema->addIndex('alias');
                 $schema->addIndex('language');
+                $schema->addIndex('created_by');
             }
         );
 
