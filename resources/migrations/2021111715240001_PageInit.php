@@ -57,8 +57,6 @@ return new /** 2021111715240001_PageInit */ class extends AbstractMigration {
                 $schema->datetime('modified')->comment('Modified Date');
                 $schema->integer('modified_by')->comment('Modified User');
                 $schema->json('params')->comment('Params');
-
-                $schema->addIndex('alias');
             }
         );
     }

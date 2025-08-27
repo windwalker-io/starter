@@ -45,7 +45,7 @@ return new /** 2021112206280001_TagInit */ class extends AbstractMigration {
                 $schema->addIndex('target_id');
                 $schema->addIndex('type');
                 $schema->addIndex('tag_id');
-                $schema->addPrimaryKey(['target_id', 'target_type', 'tag_id']);
+                $schema->addPrimaryKey(['target_id', 'type', 'tag_id']);
             }
         );
     }

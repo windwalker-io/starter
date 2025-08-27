@@ -4,3 +4,6 @@
 /js
 /vendor
 /upload/*
+
+# For dev
+vite
