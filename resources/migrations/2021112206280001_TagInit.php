@@ -37,12 +37,12 @@ return new /** 2021112206280001_TagInit */ class extends AbstractMigration {
         $this->createTable(
             TagMap::class,
             function (Schema $schema) {
+                $schema->varchar('type')->comment('Type');
                 $schema->integer('target_id');
-                $schema->varchar('target_type');
                 $schema->integer('tag_id');
 
                 $schema->addIndex('target_id');
-                $schema->addIndex('target_type');
+                $schema->addIndex('type');
                 $schema->addIndex('tag_id');
                 $schema->addPrimaryKey(['target_id', 'target_type', 'tag_id']);
             }

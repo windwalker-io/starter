@@ -33,13 +33,14 @@ return new /** 2021110708050001_ArticleInit */ class extends AbstractMigration {
                 $schema->datetime('modified')->nullable(true)->comment('Modified Date');
                 $schema->integer('created_by')->comment('Author');
                 $schema->integer('modified_by')->comment('Modified User');
+                $schema->char('language')->length(7)->comment('Language');
                 $schema->json('params')->comment('Params');
 
                 $schema->addIndex('category_id');
-                $schema->addIndex('type');
-                $schema->addIndex('state');
-                $schema->addIndex('created_by');
+                $schema->addIndex('page_id');
                 $schema->addIndex('alias');
+                $schema->addIndex('language');
+                $schema->addIndex('created_by');
             }
         );
     }

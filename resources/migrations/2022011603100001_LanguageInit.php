@@ -30,8 +30,20 @@ return new /** 2022011603100001_LanguageInit */ class extends AbstractMigration 
                 $schema->integer('ordering')->comment('Ordering');
 
                 $schema->addIndex('code');
+                $schema->addIndex('alias');
+                $schema->addIndex('ordering');
+                $schema->addIndex('image');
             }
         );
+
+        $mapper = $orm->mapper(Language::class);
+        $languages = fs(__DIR__ . '/data/languages.json')->read()->jsonDecode();
+
+        foreach ($languages as $language) {
+            $mapper->createOne($language);
+
+            $mig->outCounting();
+        }
     }
 
     #[MigrateDown]

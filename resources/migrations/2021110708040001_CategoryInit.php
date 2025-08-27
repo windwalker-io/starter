@@ -31,15 +31,19 @@ return new /** 2021110708040001_CategoryInit */ class extends AbstractMigration 
                 $schema->varchar('image')->comment('Main Image');
                 $schema->longtext('description')->comment('Description');
                 $schema->tinyint('state')->length(1)->comment('0: unpublished, 1:published');
-                $schema->datetime('created')->nullable(true)->comment('Created Date');
-                $schema->datetime('modified')->nullable(true)->comment('Modified Date');
+                $schema->datetime('created')->comment('Created Date');
+                $schema->datetime('modified')->comment('Modified Date');
                 $schema->integer('created_by')->comment('Author');
                 $schema->integer('modified_by')->comment('Modified User');
                 $schema->char('language')->length(7)->comment('Language');
                 $schema->json('params')->comment('Params');
 
+                $schema->addIndex('parent_id');
+                $schema->addIndex('alias');
+                $schema->addIndex('path');
                 $schema->addIndex(['lft', 'rgt']);
                 $schema->addIndex('created_by');
+                $schema->addIndex('language');
                 $schema->addIndex('type');
             }
         );

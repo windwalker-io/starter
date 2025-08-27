@@ -33,11 +33,13 @@ return new /** 2021111715240001_PageInit */ class extends AbstractMigration {
                 $schema->integer('created_by')->comment('Author');
                 $schema->datetime('modified')->nullable(true)->comment('Modified Date');
                 $schema->integer('modified_by')->comment('Modified User');
+                $schema->char('language')->length(7)->comment('Language');
                 $schema->json('params')->comment('Params');
 
                 $schema->addIndex('category_id');
+                $schema->addIndex('extends');
                 $schema->addIndex('alias');
-                $schema->addIndex('state');
+                $schema->addIndex('language');
                 $schema->addIndex('created_by');
             }
         );
@@ -47,21 +49,17 @@ return new /** 2021111715240001_PageInit */ class extends AbstractMigration {
             function (Schema $schema) {
                 $schema->primary('id')->comment('Primary Key');
                 $schema->varchar('title')->comment('Title');
-                $schema->varchar('alias')->comment('Alias');
-                $schema->json('content')->comment('Template Data');
-                $schema->longtext('css')->comment('CSS');
-                $schema->json('meta')->comment('Metadata');
-                $schema->bool('state')->comment('0: unpublished, 1:published');
-                $schema->integer('ordering')->comment('Ordering');
+                $schema->char('type')->length(6);
+                $schema->text('description');
+                $schema->varchar('image')->comment('Image');
+                $schema->json('content')->comment('Page data');
                 $schema->datetime('created')->comment('Created Date');
                 $schema->integer('created_by')->comment('Author');
-                $schema->datetime('modified')->nullable(true)->comment('Modified Date');
+                $schema->datetime('modified')->comment('Modified Date');
                 $schema->integer('modified_by')->comment('Modified User');
                 $schema->json('params')->comment('Params');
 
                 $schema->addIndex('alias');
-                $schema->addIndex('state');
-                $schema->addIndex('created_by');
             }
         );
     }

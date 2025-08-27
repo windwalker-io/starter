@@ -30,6 +30,11 @@ return new /** 2022020214590001_WidgetInit */ class extends AbstractMigration {
                 $schema->datetime('modified')->comment('Modified Date');
                 $schema->integer('modified_by')->comment('Modified User');
                 $schema->char('language')->length(7)->comment('Language');
+                $schema->json('params')->comment('Params');
+
+                $schema->addIndex('position');
+                $schema->addIndex('language');
+                $schema->addIndex('created_by');
             }
         );
     }
