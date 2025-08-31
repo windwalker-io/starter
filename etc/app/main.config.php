@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 return array_merge(
-    require __DIR__ . '/windwalker.php',
+    require __DIR__ . '/windwalker.config.php',
     [
         'middlewares' => [
             \Windwalker\Core\Middleware\RoutingMiddleware::class,

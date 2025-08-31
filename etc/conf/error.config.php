@@ -9,7 +9,7 @@ use Windwalker\DI\Container;
 use function Windwalker\DI\create;
 use function Windwalker\ref;
 
-$errorReporting = include __DIR__ . '/error-reporting.php';
+$errorReporting = include __DIR__ . '/error-reporting.config.php';
 
 return [
     /*

@@ -29,7 +29,7 @@ return [
             'main' => create(
                 static function (Container $container) {
                     $app = new WebApplication($container->createChild());
-                    $app->loadConfig(__DIR__ . '/app/main.php');
+                    $app->loadConfig(__DIR__ . '/app/main.config.php');
 
                     return $app;
                 }
@@ -38,7 +38,7 @@ return [
         'console' => static function (Container $container) {
             $console = new ConsoleApplication($container->createChild());
             $console->setAutoExit(false);
-            $console->loadConfig(__DIR__ . '/app/console.php');
+            $console->loadConfig(__DIR__ . '/app/console.config.php');
             $console->boot();
             return $console;
         }
