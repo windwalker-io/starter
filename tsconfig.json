@@ -4,6 +4,7 @@
         "./tsconfig.vue.json"
     ],
     "compilerOptions": {
+        "module": "esnext",
         "paths": {
             "@/*": ["./resources/assets/"],
             "@js/*": ["./resources/assets/src/*"],
