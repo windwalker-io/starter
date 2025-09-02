@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+namespace App\Config;
+
+use function Windwalker\include_arrays;
+
 return array_merge(
     [
         'app'      => include __DIR__ . '/conf/app.config.php',
@@ -20,7 +24,7 @@ return array_merge(
         'di' => include __DIR__ . '/di.config.php',
     ],
 
-    \Windwalker\include_arrays(__DIR__ . '/packages/*.php'),
+    include_arrays(__DIR__ . '/packages/*.php'),
 
     // Load custom values
     is_file(__DIR__ . '/conf/custom.config.php') ? require __DIR__ . '/conf/custom.config.php' : []

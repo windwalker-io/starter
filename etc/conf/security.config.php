@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Config;
+
 use Windwalker\Core\Manager\HasherManager;
 use Windwalker\Core\Provider\SecurityProvider;
 use Windwalker\Crypt\Hasher\Hasher;

@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Config;
+
 use App\Console\Application as ConsoleApplication;
 use App\Web\Application as WebApplication;
 use Windwalker\DI\Container;

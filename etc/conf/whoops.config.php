@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Config;
+
 use Whoops\Run as Whoops;
 use Windwalker\Core\Provider\WhoopsProvider;
 

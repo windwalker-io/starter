@@ -2,26 +2,27 @@
 
 declare(strict_types=1);
 
-return [
-    'debugger' => [
-        'enabled' => env('APP_ENV') === 'dev',
+namespace App\Config;
 
-        'editor' => env('DEBUGGER_EDITOR', 'phpstorm'),
+use Windwalker\Core\Attributes\ConfigModule;
 
-        'profiler_disabled' => false,
+return #[ConfigModule(name: 'debugger', enabled: true, priority: 100, env: 'dev')]
+static fn() => [
+    'editor' => env('DEBUGGER_EDITOR', 'phpstorm'),
 
-        'listeners' => [
-            \Windwalker\Core\Application\AppContext::class => [
-                \Windwalker\Debugger\Subscriber\DebuggerSubscriber::class
-            ]
+    'profiler_disabled' => false,
+
+    'listeners' => [
+        \Windwalker\Core\Application\AppContext::class => [
+            \Windwalker\Debugger\Subscriber\DebuggerSubscriber::class,
         ],
+    ],
 
-        'providers' => [
-            \Windwalker\Debugger\DebuggerPackage::class
-        ],
+    'providers' => [
+        \Windwalker\Debugger\DebuggerPackage::class,
+    ],
 
-        'cache' => [
-            'max_files' => 100
-        ]
-    ]
+    'cache' => [
+        'max_files' => 100,
+    ],
 ];

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Config;
+
 use Windwalker\Core\Auth\Method\DatabaseMethod;
 use Windwalker\Core\Provider\AuthProvider;
 

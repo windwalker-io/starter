@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Config;
+
 use Windwalker\Core\Manager\MailerManager;
 use Windwalker\Core\Provider\MailerProvider;
 

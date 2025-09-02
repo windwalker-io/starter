@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Config;
+
 return array_merge(
     require __DIR__ . '/windwalker.php',
     [
