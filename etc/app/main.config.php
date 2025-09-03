@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Config;
 
+use App\Services\FooService;
+use App\Subscriber\FooSubscriber;
 use Windwalker\Core\Middleware\RoutingMiddleware;
 
 return array_merge(
@@ -14,7 +16,9 @@ return array_merge(
         ],
 
         'listeners' => [
-            //
+            FooService::class => [
+                FooSubscriber::class
+            ]
         ],
 
         'http' => [
