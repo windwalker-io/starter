@@ -44,29 +44,25 @@ return [
     ],
     'factories' => [
         'instances' => [
-            'none' => create(NullLogger::class),
-            'default' => function (string $instanceName) {
-                return MonologProvider::logger(
-                    $instanceName,
-                    [
-                        ref('logs.factories.handlers.rotating'),
-                    ]
-                );
-            },
-            'cli-web' => function (string $instanceName) {
-                return MonologProvider::logger(
-                    $instanceName,
-                    [
-                        ref('logs.factories.handlers.stdout'),
-                        ref('logs.factories.handlers.rotating'),
-                    ],
-                    formatter: 'console_formatter'
-                );
-            },
+            'none' => fn () => create(NullLogger::class),
+            'default' => static fn(string $instanceName) => MonologProvider::logger(
+                $instanceName,
+                [
+                    ref('logs.factories.handlers.rotating'),
+                ]
+            ),
+            'cli-web' => static fn(string $instanceName) => MonologProvider::logger(
+                $instanceName,
+                [
+                    ref('logs.factories.handlers.stdout'),
+                    ref('logs.factories.handlers.rotating'),
+                ],
+                formatter: 'console_formatter'
+            ),
         ],
         'handlers' => [
-            'stream' => create(StreamHandler::class),
-            'rotating' => function (Container $container, string $instanceName, ...$args) {
+            'stream' => static fn () => create(StreamHandler::class),
+            'rotating' => static function (Container $container, string $instanceName, ...$args) {
                 $args['filename'] ??= $args[0] ?? $container->getParam('@logs') . '/' . $instanceName . '.log';
 
                 unset($args[0]);
@@ -78,11 +74,11 @@ return [
             'stdout' => static fn() => new StreamHandler(fopen('php://stdout', 'wb')),
         ],
         'formatters' => [
-            'line_formatter' => create(LineFormatter::class, allowInlineLineBreaks: true)
+            'line_formatter' => static fn () => create(LineFormatter::class, allowInlineLineBreaks: true)
                 ->extend(
                     fn(LineFormatter $formatter) => $formatter->includeStacktraces(true, LoggerService::parseTrace(...))
                 ),
-            'console_formatter' => create(
+            'console_formatter' => static fn () => create(
                 LineFormatter::class,
                 format: "[%datetime%] %level_name%: %message% %context%\n",
                 dateFormat: 'Y-m-d\TH:i:s',

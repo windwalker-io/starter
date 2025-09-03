@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace App\Config;
 
-use Windwalker\Core\Manager\HasherManager;
 use Windwalker\Core\Provider\SecurityProvider;
 use Windwalker\Crypt\Hasher\Hasher;
 use Windwalker\Crypt\Hasher\PasswordHasher;
-use Windwalker\Crypt\Hasher\PasswordHasherInterface;
 use Windwalker\Crypt\Symmetric\OpensslCipher;
 use Windwalker\Crypt\Symmetric\SodiumCipher;
-use Windwalker\DI\Container;
 
 use function Windwalker\DI\create;
 
@@ -21,8 +18,8 @@ return [
 
         'factories' => [
             'instances' => [
-                'sodium' => create(SodiumCipher::class),
-                'blowfish' => create(OpensslCipher::class, 'blowfish'),
+                'sodium' => static fn() => create(SodiumCipher::class),
+                'blowfish' => static fn() => create(OpensslCipher::class, 'blowfish'),
             ],
         ],
     ],
@@ -32,8 +29,8 @@ return [
 
         'factories' => [
             'instances' => [
-                'hash' => create(Hasher::class, 'sha256'),
-                'password' => create(PasswordHasher::class, PASSWORD_DEFAULT),
+                'hash' => static fn() => create(Hasher::class, 'sha256'),
+                'password' => static fn() => create(PasswordHasher::class, PASSWORD_DEFAULT),
             ],
         ],
     ],
@@ -43,8 +40,6 @@ return [
     ],
 
     'bindings' => [
-        PasswordHasherInterface::class => static function (Container $container) {
-            return $container->get(HasherManager::class)->get('password');
-        },
+        //
     ],
 ];

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Config;
 
-use Windwalker\Core\Manager\MailerManager;
+use Windwalker\Core\Factory\MailerFactory;
 use Windwalker\Core\Provider\MailerProvider;
 
 return [
@@ -29,9 +29,9 @@ return [
 
     'factories' => [
         'instances' => [
-            'default' => fn(MailerManager $manager) => $manager->createMailer(
+            'default' => static fn(MailerFactory $factory) => MailerFactory::mailer(
                 [
-                    'envelope' => $manager->config('envelope'),
+                    'envelope' => $factory->config('envelope'),
                     'dsn' => env('MAIL_DSN_DEFAULT'),
 
                     // 'dsn' => [

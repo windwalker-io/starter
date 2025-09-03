@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Config;
 
+use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ConfigModule;
+use Windwalker\Debugger\DebuggerPackage;
+use Windwalker\Debugger\Subscriber\DebuggerSubscriber;
 
 return #[ConfigModule(name: 'debugger', enabled: true, priority: 100, env: 'dev')]
 static fn() => [
@@ -13,13 +16,13 @@ static fn() => [
     'profiler_disabled' => false,
 
     'listeners' => [
-        \Windwalker\Core\Application\AppContext::class => [
-            \Windwalker\Debugger\Subscriber\DebuggerSubscriber::class,
+        AppContext::class => [
+            DebuggerSubscriber::class,
         ],
     ],
 
     'providers' => [
-        \Windwalker\Debugger\DebuggerPackage::class,
+        DebuggerPackage::class,
     ],
 
     'cache' => [

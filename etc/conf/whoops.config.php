@@ -33,7 +33,7 @@ return [
     ],
     'factories' => [
         'handlers' => [
-            'default' => WhoopsProvider::prettyPageHandler(),
+            'default' => static fn () => WhoopsProvider::prettyPageHandler(),
             // 'cli_server' => WhoopsProvider::cliServerHandler()
         ]
     ],

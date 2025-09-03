@@ -28,14 +28,12 @@ return [
             ),
         ],
         'apps' => [
-            'main' => create(
-                static function (Container $container) {
-                    $app = new WebApplication($container->createChild());
-                    $app->loadConfig(__DIR__ . '/app/main.config.php');
+            'main' => static function (Container $container) {
+                $app = new WebApplication($container->createChild());
+                $app->loadConfig(__DIR__ . '/app/main.config.php');
 
-                    return $app;
-                }
-            ),
+                return $app;
+            },
         ],
         'console' => static function (Container $container) {
             $console = new ConsoleApplication($container->createChild());
