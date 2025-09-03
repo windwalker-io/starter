@@ -47,11 +47,10 @@
             "@php windwalker run prepare"
         ],
         "post-autoload-dump": [
-            "@php windwalker pkg:install --tag config",
-            "@php windwalker pkg:install lyrasoft/toolkit --tag ide -f",
+            "@php windwalker pkg:install --tag config --no-details || true",
+            "@php windwalker pkg:install lyrasoft/toolkit --tag ide -f --no-details || true",
             "@php windwalker asset:sync || true",
-            "@php windwalker cache:clear renderer",
-            "lyra pstorm:sniffer -p || true"
+            "@php windwalker cache:clear renderer"
         ],
         "env": [
             "Windwalker\\Core\\Composer\\StarterInstaller::genEnv",
