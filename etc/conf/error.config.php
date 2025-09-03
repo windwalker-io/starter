@@ -116,7 +116,7 @@ return [
             'deprecation' => static fn () => create(
                 ErrorLogHandler::class,
                 options: static fn(Container $container) => [
-                    'channel' => 'deprecations',
+                    'channel' => 'system/deprecations',
                     'enabled' => $container->getParam('error.log'),
                     'ignore_40x' => false,
                     'backtraces' => false,
