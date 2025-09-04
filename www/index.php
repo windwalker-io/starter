@@ -24,7 +24,7 @@ if (Runtime::shouldBlock(['dev'], env('DEV_ALLOW_IPS'))) {
 
 Runtime::boot(WINDWALKER_ROOT, __DIR__);
 
-Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.php');
+Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.config.php');
 
 $container = Runtime::getContainer();
 

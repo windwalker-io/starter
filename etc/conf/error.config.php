@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace App\Config;
+
 use Windwalker\Core\Application\AppType;
 use Windwalker\Core\Error\ErrorLogHandler;
 use Windwalker\Core\Error\SimpleErrorPageHandler;
@@ -9,7 +13,7 @@ use Windwalker\DI\Container;
 use function Windwalker\DI\create;
 use function Windwalker\ref;
 
-$errorReporting = include __DIR__ . '/error-reporting.php';
+$errorReporting = include __DIR__ . '/error-reporting.config.php';
 
 return [
     /*
@@ -21,7 +25,7 @@ return [
      */
     'ini' => [
         'display_errors' => 'on',
-        'error_reporting' => (string) WINDWALKER_DEBUG ? E_ALL : $errorReporting,
+        'error_reporting' => (string) (WINDWALKER_DEBUG ? E_ALL : $errorReporting),
     ],
 
     /*
@@ -76,35 +80,48 @@ return [
         ]
     ],
 
+    'deprecation_handlers' => [
+        AppType::WEB->name => [],
+        AppType::CONSOLE->name => [],
+        AppType::CLI_WEB->name => [],
+        'all' => [
+            'deprecation' => ref('error.factories.handlers.deprecation')
+        ]
+    ],
+
     'factories' => [
         'handlers' => [
-            'default' => create(
+            'default' => static fn () => create(
                 SimpleErrorPageHandler::class,
-                options: function (Container $container) {
-                    return [
-                        'debug' => $container->getParam('system.debug'),
-                        'layout' => $container->getParam('error.template'),
-                    ];
-                }
+                options: static fn(Container $container) => [
+                    'debug' => $container->getParam('system.debug'),
+                    'layout' => $container->getParam('error.template'),
+                ]
             ),
-            'log' => create(
+            'log' => static fn () => create(
                 ErrorLogHandler::class,
-                options: function (Container $container) {
-                    return [
-                        'channel' => 'error',
-                        'enabled' => $container->getParam('error.log')
-                    ];
-                }
+                options: static fn(Container $container) => [
+                    'channel' => 'error',
+                    'enabled' => $container->getParam('error.log')
+                ]
             ),
-            'console_log' => create(
+            'console_log' => static fn () => create(
                 ErrorLogHandler::class,
-                options: function (Container $container) {
-                    return [
-                        'channel' => 'console-error',
-                        'enabled' => $container->getParam('error.log'),
-                        'ignore_40x' => false
-                    ];
-                }
+                options: static fn(Container $container) => [
+                    'channel' => 'console-error',
+                    'enabled' => $container->getParam('error.log'),
+                    'ignore_40x' => false
+                ]
+            ),
+            'deprecation' => static fn () => create(
+                ErrorLogHandler::class,
+                options: static fn(Container $container) => [
+                    'channel' => 'system/deprecations',
+                    'enabled' => $container->getParam('error.log'),
+                    'ignore_40x' => false,
+                    'backtraces' => false,
+                    'print' => false,
+                ]
             ),
         ]
     ]

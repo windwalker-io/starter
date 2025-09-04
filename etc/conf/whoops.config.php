@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Config;
+
 use Whoops\Run as Whoops;
 use Windwalker\Core\Provider\WhoopsProvider;
 
@@ -31,7 +33,7 @@ return [
     ],
     'factories' => [
         'handlers' => [
-            'default' => WhoopsProvider::prettyPageHandler(),
+            'default' => static fn () => WhoopsProvider::prettyPageHandler(),
             // 'cli_server' => WhoopsProvider::cliServerHandler()
         ]
     ],
