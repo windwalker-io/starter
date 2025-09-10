@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Config;
 
+use Symfony\Component\Mailer\Envelope;
+use Symfony\Component\Mailer\Transport\Dsn;
 use Windwalker\Core\Factory\MailerFactory;
+use Windwalker\Core\Mailer\MailerOptions;
 use Windwalker\Core\Provider\MailerProvider;
 
 return [
@@ -30,27 +33,23 @@ return [
     'factories' => [
         'instances' => [
             'default' => static fn(MailerFactory $factory) => MailerFactory::mailer(
-                [
-                    'envelope' => $factory->config('envelope'),
-                    'dsn' => env('MAIL_DSN_DEFAULT'),
+                static fn () => new MailerOptions(
+                    envelope: MailerFactory::createEnvelope($factory->config('envelope') ?? []),
+                    dsn: Dsn::fromString(env('MAIL_DSN_DEFAULT')),
 
-                    // 'dsn' => [
-                    //     'scheme' => env('MAIL_TRANSPORT'),
-                    //     'host' => env('MAIL_HOST'),
-                    //     'user' => env('MAIL_USER') ?: null,
-                    //     'password' => env('MAIL_PASSWORD') ?: null,
-                    //     'port' => ((int) env('MAIL_PORT')) ?: null,
-                    //     'options' => [
-                    //         'verify_peer' => env('MAIL_VERIFY')
+                    // dsn: new Dsn(
+                    //     scheme: env('MAIL_TRANSPORT'),
+                    //     host: env('MAIL_HOST'),
+                    //     user: env('MAIL_USER') ?: null,
+                    //     password: env('MAIL_PASSWORD') ?: null,
+                    //     port: ((int) env('MAIL_PORT')) ?: null,
+                    //     options: [
+                    //         'verify_peer' => env('MAIL_VERIFY', true)
                     //     ],
-                    // ],
-
-                    // Auto CC to emails, use (,) separate addresses.
-                    'cc' => env('MAIL_CC'),
-
-                    // Auto BCC to emails, use (,) separate addresses.
-                    'bcc' => env('MAIL_BCC'),
-                ]
+                    // ),
+                    cc: env('MAIL_CC'),
+                    bcc: env('MAIL_BCC')
+                )
             ),
         ],
     ],

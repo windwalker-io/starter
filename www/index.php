@@ -36,7 +36,7 @@ $app->bootForServer($server);
 $server->getEventDispatcher()->addDealer($app->getEventDispatcher());
 
 $server->onRequest(function (RequestEvent $event) use ($app) {
-    $event->setResponse($app->executeServerEvent($event));
+    $event->response = $app->executeServerEvent($event);
 });
 
 $server->listen();
