@@ -13,6 +13,8 @@ return [
 
     'debug' => (bool) (env('APP_DEBUG') ?? false),
 
+    'verbosity' => env('APP_VERBOSITY'),
+
     'mode' => env('APP_ENV', 'prod'),
 
     'timezone' => env('APP_TIMEZONE', 'UTC'),

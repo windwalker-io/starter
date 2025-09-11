@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace App\Config;
 
 use Monolog\Formatter\LineFormatter;
-use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Processor\PsrLogMessageProcessor;
 use Psr\Log\NullLogger;
+use Windwalker\Core\Factory\LoggerFactory;
 use Windwalker\Core\Provider\LoggerProvider;
-use Windwalker\Core\Provider\MonologProvider;
-use Windwalker\Core\Service\LoggerService;
-use Windwalker\DI\Container;
 
 use function Windwalker\DI\create;
 use function Windwalker\ref;
@@ -44,15 +41,15 @@ return [
     ],
     'factories' => [
         'instances' => [
-            'none' => fn () => create(NullLogger::class),
-            'default' => static fn(string $instanceName) => MonologProvider::logger(
-                $instanceName,
+            'none' => static fn () => create(NullLogger::class),
+            'default' => static fn(string $tag) => LoggerFactory::monolog(
+                $tag,
                 [
                     ref('logs.factories.handlers.rotating'),
                 ]
             ),
-            'cli-web' => static fn(string $instanceName) => MonologProvider::logger(
-                $instanceName,
+            'cli-web' => static fn(string $tag) => LoggerFactory::monolog(
+                $tag,
                 [
                     ref('logs.factories.handlers.stdout'),
                     ref('logs.factories.handlers.rotating'),
@@ -62,24 +59,12 @@ return [
         ],
         'handlers' => [
             'stream' => static fn () => create(StreamHandler::class),
-            'rotating' => static function (Container $container, string $instanceName, ...$args) {
-                $args['filename'] ??= $args[0] ?? $container->getParam('@logs') . '/' . $instanceName . '.log';
-
-                unset($args[0]);
-
-                $args['maxFiles'] = (int) ($container->getParam('logs.max_files') ?? 7);
-
-                return create(RotatingFileHandler::class, ...$args);
-            },
+            'rotating' => static fn () => LoggerFactory::rotatingFileHandler(),
             'stdout' => static fn() => new StreamHandler(fopen('php://stdout', 'wb')),
         ],
         'formatters' => [
-            'line_formatter' => static fn () => create(LineFormatter::class, allowInlineLineBreaks: true)
-                ->extend(
-                    fn(LineFormatter $formatter) => $formatter->includeStacktraces(true, LoggerService::parseTrace(...))
-                ),
-            'console_formatter' => static fn () => create(
-                LineFormatter::class,
+            'line_formatter' => static fn () => LoggerFactory::lineFormatter(),
+            'console_formatter' => static fn () => new LineFormatter(
                 format: "[%datetime%] %level_name%: %message% %context%\n",
                 dateFormat: 'Y-m-d\TH:i:s',
                 allowInlineLineBreaks: true,

@@ -30,12 +30,10 @@
         "dragonmantank/cron-expression": "^3.3",
         "masterminds/html5": "^2.8",
         "symfony/var-dumper": "^7.0||^8.0",
-        "symfony/polyfill-php84": "^1.31",
         "asika32764/pinyin": "^1.2",
         "ramsey/uuid": "^4.0"
     },
     "require-dev": {
-        "nunomaduro/collision": "^7.8||^8.0",
         "windwalker/framework": "4.2.x-dev"
     },
     "scripts": {
@@ -46,16 +44,18 @@
             "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::npmrc",
             "@php windwalker run prepare"
         ],
+        "post-package-update": [
+            "Windwalker\\Core\\Composer\\PackageUpgrader::upgrade"
+        ],
         "post-autoload-dump": [
-            "@php windwalker pkg:install --tag config --no-details || true",
+            "@php windwalker pkg:postinstall || true",
             "@php windwalker pkg:install lyrasoft/toolkit --tag ide -f --no-details || true",
-            "@php windwalker asset:sync || true",
             "@php windwalker cache:clear renderer"
         ],
         "env": [
             "Windwalker\\Core\\Composer\\StarterInstaller::genEnv",
             "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::npmrc",
-            "@php windwalker pkg:install lyrasoft/toolkit --tag ide",
+            "@php windwalker pkg:install lyrasoft/toolkit --tag ide -f --no-details || true",
             "@php windwalker run prepare"
         ]
     },

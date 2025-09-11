@@ -395,7 +395,7 @@ use Windwalker\Core\Router\SystemUri;
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td>
-                                        @yield('content', 'Content')
+                                        @yield('content', $content ?? 'Content')
                                     </td>
                                 </tr>
                             </table>
