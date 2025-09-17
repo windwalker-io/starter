@@ -1,7 +1,7 @@
 {
     "extends": [
         "./tsconfig.js.json",
-        "./tsconfig.vue.json"
+//        "./tsconfig.vue.json"
     ],
     "compilerOptions": {
         "module": "esnext",
