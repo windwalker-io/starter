@@ -25,6 +25,12 @@ return [
         'scopes' => []
     ],
 
+    'vite' => [
+        'manifest' => '@public/assets/manifest.json',
+        'base' => 'resources',
+        'server_file' => '@temp/vite-server',
+    ],
+
     'namespace_base' => 'App\\Module',
 
     'version_file' => '@cache/asset/asset.version',

@@ -7,7 +7,18 @@ import {
   windwalkerAssets
 } from './vendor/windwalker/core/assets/core/next';
 
-fusion.outDir('www/assets/dist/');
+fusion.outDir('www/assets/');
+fusion.mergeViteConfig({
+  resolve: {
+    // alias: {
+    //   "@": "./resources",
+    //   "@js": "./resources/js",
+    //   "@css": "./resources/css",
+    //   "@vue": "./resources/vue",
+    //   "@images": "./resources/images",
+    // }
+  }
+})
 fusion.plugin(windwalkerAssets({
   clone: {
     //
@@ -18,12 +29,16 @@ fusion.plugin(windwalkerAssets({
 }));
 
 export function js() {
+  fusion.clean('*.js', 'chunks/**/*', 'vite/**/*');
+
   return [
     fusion.js('resources/assets/src/front/main.ts')
   ];
 }
 
 export function css() {
+  fusion.clean('*.css', '*.css.map');
+
   return [
     cssModulize('resources/assets/scss/front/main.scss', 'app.css')
       .parseBlades(
