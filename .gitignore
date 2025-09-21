@@ -11,6 +11,7 @@ Thumbs.db
 
 # Extra #
 !.gitkeep
+/dist
 
 # Configuration #
 .env

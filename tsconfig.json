@@ -5,6 +5,7 @@
     ],
     "compilerOptions": {
         "module": "esnext",
+        "moduleResolution": "bundler",
         "paths": {
             "@/*": ["./resources/assets/"],
             "@js/*": ["./resources/assets/src/*"],

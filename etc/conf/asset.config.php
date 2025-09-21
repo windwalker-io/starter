@@ -22,7 +22,11 @@ return [
             '@vendor/' => 'vendor/',
             '@core/' => 'vendor/@windwalker-io/core/dist/',
         ],
-        'scopes' => []
+        'scopes' => [],
+    ],
+
+    'modules' => [
+        'main' => '@main'
     ],
 
     'vite' => [
