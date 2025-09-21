@@ -2,12 +2,12 @@
     "name": "windwalker",
     "private": true,
     "scripts": {
-        "build": "cross-env gulp",
-        "build:dev": "cross-env NODE_ENV=development gulp",
-        "build:prod": "cross-env NODE_ENV=production gulp",
-        "watch": "cross-env NODE_ENV=development gulp --watching=1",
-        "watch:reload": "cross-env NODE_ENV=development gulp --watching=1 --livereload=1",
-        "postinstall": "",
+        "build": "yarn vite build",
+        "build:dev": "yarn vite build --mode development",
+        "build:prod": "yarn vite build",
+        "watch": "yarn vite build --watch",
+        "watch:dev": "yarn vite build --watch --mode development",
+        "postinstall": "yarn build -- install",
         "vite": "vite"
     },
     "dependencies": {

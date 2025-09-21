@@ -43,17 +43,18 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
         $this->lang->loadAll('ini');
 
         // Unicorn
-        $this->unicornScript->init('js/admin/main.js');
+        $this->unicornScript->initNext('@vite/assets/src/admin/main.ts');
 
         // Font Awesome
         $this->fontAwesomeScript->cssFont(FontAwesomeScript::DEFAULT_SET);
 
         // Bootstrap
         $this->asset->css('vendor/bootstrap/dist/css/bootstrap.min.css');
-        $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.min.js');
+        // $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.min.js');
 
         // Main
-        $this->asset->css('css/admin/main.css');
+        $this->asset->css('@vite/assets/scss/admin/main.scss');
+        // $this->asset->css('css/admin/main.css');
 
         // HtmlFrame
         $this->htmlFrame->setFavicon($this->asset->path('images/admin/favicon.png'));

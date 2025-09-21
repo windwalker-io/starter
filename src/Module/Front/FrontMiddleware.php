@@ -48,7 +48,6 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         $this->lang->loadAll('ini');
 
         // Unicorn
-        $this->asset->importMap('@app', '@vite/assets/src/front/app.js');
         $this->unicornScript->initNext('@vite/assets/src/front/main.ts');
 
         // Font Awesome

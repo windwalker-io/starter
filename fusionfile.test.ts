@@ -13,17 +13,15 @@ fusion.outDir('www/assets/');
 fusion.mergeViteConfig({
   resolve: {
     alias: {
-      "@": "./resources/assets",
-      "@js": resolve("./resources/assets/src"),
-      "@css": "./resources/assets/scss",
-      "@vue": "./resources/assets/vue",
-      "@images": "./resources/images",
-      // "@main": resolve('./resources/assets/src/front/main.ts')
+      '@': resolve('./resources/assets'),
+      '@js': resolve('./resources/assets/src'),
+      '@css': resolve('./resources/assets/scss'),
+      '@vue': resolve('./resources/assets/vue'),
+      '@images': resolve('./resources/images'),
     }
-  }
+  },
 });
-fusion.external('@main');
-fusion.external('@app');
+// fusion.external('@main');
 fusion.plugin(globalAssets({
   clone: {
     //
