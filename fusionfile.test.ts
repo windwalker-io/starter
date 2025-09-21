@@ -1,11 +1,12 @@
-import * as fusion from '@windwalker-io/fusion-next';
+import fusion from '@windwalker-io/fusion-next';
 import {
   cloneAssets,
   cssModulize,
   findModules,
   installVendors,
-  windwalkerAssets
-} from './vendor/windwalker/core/assets/core/next';
+  windwalkerAssets,
+  jsModulize
+} from '@windwalker-io/core/next';
 
 fusion.outDir('www/assets/');
 fusion.mergeViteConfig({
@@ -32,7 +33,11 @@ export function js() {
   fusion.clean('*.js', 'chunks/**/*', 'vite/**/*');
 
   return [
-    fusion.js('resources/assets/src/front/main.ts')
+    jsModulize('resources/assets/src/front/main.ts')
+      .modules(
+        findModules('Front/**/assets/*.ts'),
+        'src/Module/Front/**/assets/*.ts'
+      )
   ];
 }
 
