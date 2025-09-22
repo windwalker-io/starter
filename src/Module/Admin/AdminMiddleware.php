@@ -43,7 +43,7 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
         $this->lang->loadAll('ini');
 
         // Unicorn
-        $this->unicornScript->initNext('@vite/assets/src/admin/main.ts');
+        $this->unicornScript->init('@vite/src/admin/main.ts');
 
         // Font Awesome
         $this->fontAwesomeScript->cssFont(FontAwesomeScript::DEFAULT_SET);
@@ -53,7 +53,7 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
         // $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.min.js');
 
         // Main
-        $this->asset->css('@vite/assets/scss/admin/main.scss');
+        $this->asset->css('@vite/scss/admin/main.scss');
         // $this->asset->css('css/admin/main.css');
 
         // HtmlFrame

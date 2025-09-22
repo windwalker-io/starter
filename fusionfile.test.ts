@@ -21,6 +21,9 @@ fusion.mergeViteConfig({
     }
   },
 });
+fusion.fullReloads(
+  './src/Module/**/*.blade.php'
+);
 // fusion.external('@main');
 fusion.plugin(globalAssets({
   clone: {

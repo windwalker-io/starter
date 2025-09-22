@@ -31,7 +31,7 @@ return [
 
     'vite' => [
         'manifest' => '@public/assets/manifest.json',
-        'base' => 'resources',
+        'base' => 'resources/assets',
         'server_file' => '@temp/vite-server',
     ],
 

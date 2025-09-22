@@ -48,13 +48,13 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         $this->lang->loadAll('ini');
 
         // Unicorn
-        $this->unicornScript->initNext('@vite/assets/src/front/main.ts');
+        $this->unicornScript->init('@vite/src/front/main.ts');
 
         // Font Awesome
         $this->fontAwesomeScript->cssFont(FontAwesomeScript::DEFAULT_SET);
 
         // Bootstrap
-        $this->asset->css('@vite/assets/scss/front/main.scss');
+        $this->asset->css('@vite/scss/front/main.scss');
         // $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.min.js');
 
         // Main

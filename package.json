@@ -2,13 +2,13 @@
     "name": "windwalker",
     "private": true,
     "scripts": {
-        "build": "yarn vite build",
-        "build:dev": "yarn vite build --mode development",
-        "build:prod": "yarn vite build",
-        "watch": "yarn vite build --watch",
-        "watch:dev": "yarn vite build --watch --mode development",
-        "postinstall": "yarn build -- install",
-        "vite": "vite"
+        "dev": "vite",
+        "build": "vite build",
+        "build:dev": "vite build --mode development",
+        "build:prod": "vite build",
+        "watch": "vite build --watch",
+        "watch:dev": "vite build --watch --mode development",
+        "postinstall": "yarn build -- install"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.0",
