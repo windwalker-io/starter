@@ -6,7 +6,7 @@
 /js
 /vendor
 /upload/*
-manifest.json
+/manifest.json
 /*.js
 /*.css
 /*.jpg
