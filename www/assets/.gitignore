@@ -1,4 +1,5 @@
 /admin
+/chunks
 /css
 /dist
 /images
@@ -6,16 +7,16 @@
 /vendor
 /upload/*
 manifest.json
-*.js
-*.css
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.svg
-*.webp
-*.ico
-*.map
+/*.js
+/*.css
+/*.jpg
+/*.jpeg
+/*.png
+/*.gif
+/*.svg
+/*.webp
+/*.ico
+/*.map
 
 # For dev
 vite
