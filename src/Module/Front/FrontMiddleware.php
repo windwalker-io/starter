@@ -63,7 +63,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         // Metadata
         $coreConfig = $this->app->service(ConfigService::class)->getConfig('core');
 
-        $this->htmlFrame->setFavicon($this->asset->path('images/favicon.png'));
+        $this->htmlFrame->setFavicon('@vite/images/favicon.png');
         $this->htmlFrame->setSiteName('Windwalker');
         $this->htmlFrame->setDescription('Windwalker Site Description.');
         // $this->htmlFrame->setCoverImages($this->asset->root('...'));
@@ -73,13 +73,6 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         }
     }
 
-    /**
-     * postExecute
-     *
-     * @param ResponseInterface $response
-     *
-     * @return  mixed
-     */
     protected function postProcess(ResponseInterface $response): void
     {
     }

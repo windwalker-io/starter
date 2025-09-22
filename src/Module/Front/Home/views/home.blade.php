@@ -29,6 +29,17 @@ use Windwalker\Core\Router\SystemUri;
 
 @extends('global.body')
 
+@push('script')
+    
+<script id="home.go" lang="ts" type="module">
+    function foo(foo: string) {
+        console.log('Home Page 123');
+    }
+
+    foo();
+</script>
+@endpush
+
 @section('content')
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="bg-light py-5">
