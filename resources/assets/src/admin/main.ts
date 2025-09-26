@@ -1,3 +1,4 @@
+import 'bootstrap';
 import { App, defineJsModules } from '@windwalker-io/core/app';
 import { useUIBootstrap5, useUnicorn } from '@windwalker-io/unicorn-next';
 
