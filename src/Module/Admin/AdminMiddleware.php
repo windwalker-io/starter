@@ -37,7 +37,7 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
 
         // Unicorn
         $this->unicornScript->init('@vite/src/admin/main.ts');
-        $this->unicornScript->systemJS();
+        // $this->unicornScript->systemJS();
 
         // Font Awesome
         $this->fontAwesomeScript->cssFont(FontAwesomeScript::DEFAULT_SET);

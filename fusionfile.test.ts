@@ -10,7 +10,7 @@ import {
 import { resolve } from 'node:path';
 
 fusion.outDir('www/assets/');
-fusion.mergeViteConfig({
+fusion.overrideViteConfig({
   resolve: {
     alias: {
       '@': resolve('./resources/assets'),
@@ -20,6 +20,9 @@ fusion.mergeViteConfig({
       '@images': resolve('./resources/images'),
     }
   },
+});
+fusion.overrideOptions({
+  chunkNameObfuscation: true
 });
 fusion.fullReloads(
   './src/Module/**/*.blade.php'

@@ -10,7 +10,6 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   build: {
-    manifest: true,
     minify: false,
   },
   optimizeDeps: {
@@ -25,7 +24,7 @@ export default defineConfig({
     }
   },
   plugins: [
-    useFusion(() => import('./fusionfile.test'))
+    useFusion(() => import('./fusionfile.test')),
     // sassGlobImports(),
     // {
     //   name: 'merge-module-scss',
@@ -72,45 +71,45 @@ export default defineConfig({
   ]
 });
 
-function parseStylesFromBlades(patterns: string | string[]) {
-  let files = globSync(patterns);
-  
-  return files.map((file) => {
-    const bladeText = readFileSync(file, 'utf8');
-
-    const html = parse(bladeText);
-
-    return html.querySelectorAll('style[type],script[type]')
-      .filter(
-        (el) => ['text/scss', 'text/css'].includes(el.getAttribute('type'))
-      )
-      .map((el) => {
-        const scope = el.getAttribute('data-scope');
-        
-        if (scope) {
-          return `${scope} {
-          ${el.innerHTML}
-        }`;
-        } else {
-          return el.innerHTML;
-        }
-      });
-  })
-    .filter((c) => c.length > 0)
-    .flat();
-}
-
-function fileNameHash(bufferOrString: Crypto.BinaryLike, short = 8) {
-  return Crypto.createHash('sha1')
-    .update(bufferOrString)
-    .digest('hex')
-    .substring(0, short);
-}
-
-function getStyleScope(fullLayout: string): string {
-  const relativePath = relative(process.cwd(), fullLayout);
-  const segments = basename(relativePath).split('.');
-  const layoutName = segments.shift() || '';
-
-  return layoutName + '-' + fileNameHash(relativePath, 8);
-}
+// function parseStylesFromBlades(patterns: string | string[]) {
+//   let files = globSync(patterns);
+//
+//   return files.map((file) => {
+//     const bladeText = readFileSync(file, 'utf8');
+//
+//     const html = parse(bladeText);
+//
+//     return html.querySelectorAll('style[type],script[type]')
+//       .filter(
+//         (el) => ['text/scss', 'text/css'].includes(el.getAttribute('type'))
+//       )
+//       .map((el) => {
+//         const scope = el.getAttribute('data-scope');
+//
+//         if (scope) {
+//           return `${scope} {
+//           ${el.innerHTML}
+//         }`;
+//         } else {
+//           return el.innerHTML;
+//         }
+//       });
+//   })
+//     .filter((c) => c.length > 0)
+//     .flat();
+// }
+//
+// function fileNameHash(bufferOrString: Crypto.BinaryLike, short = 8) {
+//   return Crypto.createHash('sha1')
+//     .update(bufferOrString)
+//     .digest('hex')
+//     .substring(0, short);
+// }
+//
+// function getStyleScope(fullLayout: string): string {
+//   const relativePath = relative(process.cwd(), fullLayout);
+//   const segments = basename(relativePath).split('.');
+//   const layoutName = segments.shift() || '';
+//
+//   return layoutName + '-' + fileNameHash(relativePath, 8);
+// }

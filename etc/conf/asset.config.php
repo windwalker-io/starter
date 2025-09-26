@@ -26,7 +26,13 @@ return [
     ],
 
     'modules' => [
-        'main' => '@main'
+        'main' => '@main',
+        'importHandler' => static function (string $url, array $options = []) {
+            $comment = $options['comment'] ?? '';
+            return <<<JS
+            import('@main').then(({ default: app }) => app.import('$url'));{$comment}
+            JS;
+        }
     ],
 
     'vite' => [

@@ -1,8 +1,8 @@
-import * as bootstrap from 'bootstrap';
-import '@windwalker-io/unicorn-next';
-import '@windwalker-io/unicorn-next/dist/ui/ui-bootstrap5.js';
+import { App, defineJsModules } from '@windwalker-io/core/app';
+import { useUIBootstrap5, useUnicorn } from '@windwalker-io/unicorn-next';
 
-u.use(UIBootstrap5.UIBootstrap5);
-window.bootstrap = bootstrap;
+const app = new App(defineJsModules());
+const u = useUnicorn();
+await useUIBootstrap5(true);
 
-export { u };
+export { app as default, u };
