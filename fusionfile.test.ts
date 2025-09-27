@@ -16,7 +16,8 @@ fusion.overrideViteConfig({
       '@': resolve('./resources/assets'),
       '@js': resolve('./resources/assets/src'),
       '@css': resolve('./resources/assets/scss'),
-      '@vue': resolve('./resources/assets/vue'),
+      // '@vue': resolve('./resources/assets/vue'),
+      'vue': 'vue/dist/vue.esm-bundler.js',
       '@images': resolve('./resources/images'),
     }
   },
