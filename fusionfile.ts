@@ -9,26 +9,25 @@ import {
 } from '@windwalker-io/core/next';
 import { resolve } from 'node:path';
 
+// Our Dir
 fusion.outDir('www/assets/');
-fusion.overrideViteConfig({
-  resolve: {
-    alias: {
-      '@': resolve('./resources/assets'),
-      '@js': resolve('./resources/assets/src'),
-      '@css': resolve('./resources/assets/scss'),
-      // '@vue': resolve('./resources/assets/vue'),
-      'vue': 'vue/dist/vue.esm-bundler.js',
-      '@images': resolve('./resources/images'),
-    }
-  },
-});
+
+// Aliases
+fusion.alias('@/', resolve('./resources/assets/'));
+fusion.alias('@js/', resolve('./resources/assets/src/'));
+fusion.alias('vue', 'vue/dist/vue.esm-bundler.js');
+
+// Fusion Options
 fusion.overrideOptions({
-  chunkNameObfuscation: true
+  chunkNameObfuscation: false
 });
-fusion.fullReloads(
-  './src/Module/**/*.blade.php'
-);
-// fusion.external('@main');
+
+// Watch all blade files for changes
+// fusion.fullReloads(
+//   './src/Module/**/*.blade.php'
+// );
+
+// Assets
 fusion.plugin(globalAssets({
   clone: {
     //
@@ -44,23 +43,21 @@ export function css() {
   return [
     // Front
     cssModulize('resources/assets/scss/front/main.scss', 'css/front/main.css')
-      .parseBlades(
-        findModules('Front/**/*.blade.php'),
-        'src/Module/Front/**/*.blade.php'
-      )
       .mergeCss(
         findModules('Front/**/assets/*.scss'),
-        'src/Module/Front/**/assets/*.scss'
+      )
+      .parseBlades(
+        findModules('Front/**/*.blade.php'),
+        findModules('views/**/*.blade.php'),
       ),
     // Admin
     cssModulize('resources/assets/scss/admin/main.scss', 'css/admin/main.css')
-      .parseBlades(
-        findModules('Admin/**/*.blade.php'),
-        'src/Module/Admin/**/*.blade.php'
-      )
       .mergeCss(
         findModules('Admin/**/assets/*.scss'),
-        'src/Module/Admin/**/assets/*.scss'
+      )
+      .parseBlades(
+        findModules('Admin/**/*.blade.php'),
+        findModules('views/**/*.blade.php'),
       )
   ];
 }
@@ -73,21 +70,19 @@ export function js() {
       .stage('front')
       .mergeScripts(
         findModules('Front/**/assets/*.ts'),
-        'src/Module/Front/**/assets/*.ts'
       )
       .parseBlades(
         findModules('Front/**/*.blade.php'),
-        'src/Module/Front/**/*.blade.php'
+        findModules('views/**/*.blade.php'),
       ),
     jsModulize('resources/assets/src/admin/main.ts', 'js/admin/main.js')
       .stage('admin')
       .mergeScripts(
         findModules('Admin/**/assets/*.ts'),
-        'src/Module/Admin/**/assets/*.ts'
       )
       .parseBlades(
         findModules('Admin/**/*.blade.php'),
-        'src/Module/Admin/**/*.blade.php'
+        findModules('views/**/*.blade.php'),
       ),
   ];
 }

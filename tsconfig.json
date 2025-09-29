@@ -1,15 +1,20 @@
 {
     "extends": [
-        "./tsconfig.js.json",
-//        "./tsconfig.vue.json"
+        "@windwalker-io/unicorn-next/tsconfig.js.json"
     ],
+    "include": [
+        "vendor/**/src/Module/**/assets/**/*.ts",
+        "resources/assets/src/**/*.ts",
+        "src/Module/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules/**/*"
+    ],
+    "types": ["reflect-metadata"],
     "compilerOptions": {
-        "module": "esnext",
-        "moduleResolution": "bundler",
         "paths": {
             "@/*": ["./resources/assets/"],
             "@js/*": ["./resources/assets/src/*"],
-            "@vue/*": ["./resources/assets/vue/*"]
         }
     }
 }

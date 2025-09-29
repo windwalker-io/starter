@@ -29,14 +29,11 @@ use Windwalker\Core\Router\SystemUri;
 
 @extends('global.body')
 
-@push('script')
-    
-<script id="home.go" lang="ts" type="module">
-    function foo(foo: string) {
-        console.log('Home Page 123');
-    }
+@push('macro')
+<style data-macro type="text/scss">
+</style>
 
-    foo();
+<script data-macro="home" lang="ts" type="module">
 </script>
 @endpush
 

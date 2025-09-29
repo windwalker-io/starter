@@ -7,10 +7,10 @@ namespace App\Module\Admin\Dashboard;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewMetadata;
 use Windwalker\Core\Attributes\ViewModel;
+use Windwalker\Core\Attributes\ViewPrepare;
 use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\Language\TranslatorTrait;
 use Windwalker\Core\View\View;
-use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\ORM\ORM;
 
 /**
@@ -18,9 +18,9 @@ use Windwalker\ORM\ORM;
  */
 #[ViewModel(
     layout: 'dashboard',
-    js: 'dashboard.js'
+    js: 'dashboard.ts'
 )]
-class DashboardView implements ViewModelInterface
+class DashboardView
 {
     use TranslatorTrait;
 
@@ -32,14 +32,7 @@ class DashboardView implements ViewModelInterface
         //
     }
 
-    /**
-     * Prepare View.
-     *
-     * @param  AppContext  $app   The web app context.
-     * @param  View        $view  The view object.
-     *
-     * @return    mixed
-     */
+    #[ViewPrepare]
     public function prepare(AppContext $app, View $view): array
     {
         return [];

@@ -9,6 +9,7 @@ const u = useUnicorn();
 await useUIBootstrap5(true, true);
 
 useUnicornPhpAdapter();
+
 pushUnicornToGlobal();
 
 export { app as default, u };
