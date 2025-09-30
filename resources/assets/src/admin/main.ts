@@ -1,6 +1,11 @@
 import 'bootstrap';
 import { App, defineJsModules } from '@windwalker-io/core/app';
-import { pushUnicornToGlobal, useUIBootstrap5, useUnicorn, useUnicornPhpAdapter } from '@windwalker-io/unicorn-next';
+import {
+  pushUnicornToGlobal,
+  useUIBootstrap5,
+  useUnicorn,
+  useUnicornPhpAdapter
+} from '@windwalker-io/unicorn-next';
 
 const app = new App(defineJsModules());
 
