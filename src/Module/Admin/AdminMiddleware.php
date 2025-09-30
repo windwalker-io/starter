@@ -27,6 +27,7 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
      */
     protected function preprocess(ServerRequestInterface $request): void
     {
+        $this->asset->importMap('@main', '@vite/src/admin/main.ts');
         $this->asset->module('@vite/src/admin/main.ts');
 
         $this->asset->css('@vite/scss/admin/main.scss');
