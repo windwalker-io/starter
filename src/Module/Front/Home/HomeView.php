@@ -6,18 +6,17 @@ namespace App\Module\Front\Home;
 
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
+use Windwalker\Core\Attributes\ViewPrepare;
 use Windwalker\Core\View\View;
-use Windwalker\Core\View\ViewModelInterface;
-use Windwalker\ORM\ORM;
 
 /**
  * The HomeView class.
  */
 #[ViewModel(
     layout: 'home',
-    js: 'home.js',
+    js: 'home.ts',
 )]
-class HomeView implements ViewModelInterface
+class HomeView
 {
     /**
      * HomeView constructor.
@@ -27,14 +26,7 @@ class HomeView implements ViewModelInterface
         //
     }
 
-    /**
-     * Prepare
-     *
-     * @param  AppContext  $app
-     * @param  View        $view
-     *
-     * @return  mixed
-     */
+    #[ViewPrepare]
     public function prepare(AppContext $app, View $view): array
     {
         return [];

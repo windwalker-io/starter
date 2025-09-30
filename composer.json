@@ -11,13 +11,13 @@
         }
     ],
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.4.6",
         "ext-json": "*",
-        "windwalker/core": "^4.0",
+        "windwalker/core": "dev-master",
         "windwalker/renderer": "^4.0",
         "windwalker/dom": "^4.0",
         "windwalker/edge": "^4.0",
-        "asika/cross-env": "^1.0"
+        "asika/cross-env": "^2.0"
     },
     "require-dev": {
         "nunomaduro/collision": "^7.8||^8.0",
@@ -28,13 +28,16 @@
             "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall",
             "php windwalker run prepare"
         ],
+        "post-package-update": [
+            "Windwalker\\Core\\Composer\\PackageUpgrader::upgrade"
+        ],
         "post-autoload-dump": [
-            "php windwalker pkg:install --tag config",
-            "php windwalker asset:sync || true",
+            "@php windwalker pkg:postinstall || true",
             "php windwalker cache:clear renderer"
         ],
         "env": [
-            "Windwalker\\Core\\Composer\\StarterInstaller::genEnv"
+            "Windwalker\\Core\\Composer\\StarterInstaller::genEnv",
+            "@php windwalker run prepare"
         ]
     },
     "autoload": {
@@ -47,7 +50,7 @@
     },
     "config": {
         "platform": {
-            "php": "8.2"
+            "php": "8.4.6"
         }
     },
     "extra": {

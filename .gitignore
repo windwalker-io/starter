@@ -11,12 +11,15 @@ Thumbs.db
 
 # Extra #
 !.gitkeep
+/dist
 
 # Configuration #
 .env
 .env.local
 .env*.local
 !.env.dist
+.dsn
+.dsn.*
 
 # Libraries
 /vendor
@@ -42,6 +45,6 @@ package-lock.json
 
 # @Dev
 etc/packages/*.php
-!etc/packages/debugger.php
-!etc/packages/session.php
+!etc/packages/debugger*.php
+!etc/packages/session*.php
 # @EndDev

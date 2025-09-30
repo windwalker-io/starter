@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Public;
+namespace App;
 
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\Runtime\Runtime;
@@ -18,11 +18,13 @@ include $root . '/vendor/autoload.php';
 
 include __DIR__ . '/../etc/define.php';
 
-Runtime::ipBlock(['dev'], env('DEV_ALLOW_IPS'));
+if (Runtime::shouldBlock(['dev'], env('DEV_ALLOW_IPS'))) {
+    Runtime::forbidden();
+}
 
 Runtime::boot(WINDWALKER_ROOT, __DIR__);
 
-Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.php');
+Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.config.php');
 
 $container = Runtime::getContainer();
 
@@ -34,7 +36,7 @@ $app->bootForServer($server);
 $server->getEventDispatcher()->addDealer($app->getEventDispatcher());
 
 $server->onRequest(function (RequestEvent $event) use ($app) {
-    $event->setResponse($app->executeServerEvent($event));
+    $event->response = $app->executeServerEvent($event);
 });
 
 $server->listen();

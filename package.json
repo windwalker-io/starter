@@ -2,24 +2,26 @@
     "name": "windwalker",
     "private": true,
     "scripts": {
-        "build": "cross-env node_modules/.bin/gulp",
-        "build:dev": "cross-env NODE_ENV=development node_modules/.bin/gulp",
-        "build:prod": "cross-env NODE_ENV=production node_modules/.bin/gulp",
-        "watch": "cross-env NODE_ENV=development node_modules/.bin/gulp --watching=1",
-        "watch:reload": "cross-env NODE_ENV=development node_modules/.bin/gulp --watching=1 --livereload=1",
-        "postinstall": "yarn build install"
+        "dev": "vite",
+        "build": "vite build --mode development",
+        "build:prod": "vite build",
+        "watch": "vite build --watch --mode development",
+        "postinstall": "yarn build -- install"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.0",
         "@windwalker-io/core": "^4.0",
-        "@windwalker-io/fusion": "^1.0",
-        "bootstrap": "^5.0",
-        "gulp-typescript": "^6.0.0-alpha.1",
-        "typescript": "^5.4.5"
+        "@windwalker-io/fusion-next": "^0.1.0",
+        "@windwalker-io/unicorn-next": "^0.1.0"
     },
+    "workspaces": [
+        "vendor/windwalker/unicorn/*",
+        "vendor/windwalker/core/assets/*"
+    ],
     "//": {
         "workspaces": [
             "vendor/windwalker/core/assets/*"
         ]
-    }
+    },
+    "packageManager": "yarn@4.9.4+sha512.7b1cb0b62abba6a537b3a2ce00811a843bea02bcf53138581a6ae5b1bf563f734872bd47de49ce32a9ca9dcaff995aa789577ffb16811da7c603dcf69e73750b"
 }

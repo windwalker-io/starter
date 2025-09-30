@@ -1,6 +1,22 @@
 /admin
+/chunks
 /css
+/dist
 /images
 /js
 /vendor
 /upload/*
+/manifest.json
+/*.js
+/*.css
+/*.jpg
+/*.jpeg
+/*.png
+/*.gif
+/*.svg
+/*.webp
+/*.ico
+/*.map
+
+# For dev
+vite

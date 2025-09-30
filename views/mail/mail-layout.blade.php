@@ -26,7 +26,7 @@ use Windwalker\Core\Router\SystemUri;
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="{{ $lang->getLocale() }}">
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -395,7 +395,7 @@ use Windwalker\Core\Router\SystemUri;
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td>
-                                        @yield('content', 'Content')
+                                        @yield('content', $content ?? 'Content')
                                     </td>
                                 </tr>
                             </table>

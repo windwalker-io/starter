@@ -32,7 +32,6 @@ $router->group('front')
     )
     ->register(function (RouteCreator $router) {
         $router->get('home', '/')
-            ->alias('foo')
             ->handler(HomeController::class)
             ->view(HomeView::class);
 

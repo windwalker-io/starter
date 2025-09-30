@@ -36,10 +36,9 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
      */
     protected function preprocess(ServerRequestInterface $request): void
     {
-        $this->asset->js('js/main.js');
+        $this->asset->module('@vite/src/front/main.ts');
 
-        $this->asset->css('vendor/bootstrap/dist/css/bootstrap.min.css');
-        $this->asset->css('css/front/main.css');
+        $this->asset->css('@vite/scss/front/main.ts');
 
         $this->htmlFrame->setFavicon($this->asset->path('images/favicon.png'));
         $this->htmlFrame->setSiteName('Windwalker');
