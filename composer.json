@@ -11,46 +11,50 @@
         }
     ],
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.4.6",
         "ext-json": "*",
-        "windwalker/core": "dev-next",
+        "windwalker/core": "dev-master",
         "windwalker/renderer": "^4.0",
         "windwalker/dom": "^4.0",
         "windwalker/edge": "^4.0",
-        "asika/cross-env": "^1.0",
-        "myclabs/php-enum": "^1.8"
+        "asika/cross-env": "^2.0"
     },
     "require-dev": {
-        "windwalker/unicorn": "dev-next",
-        "windwalker/framework": "4.1.x-dev"
+        "windwalker/framework": "dev-master"
     },
     "scripts": {
         "post-create-project-cmd": [
-            "php windwalker run prepare",
-            "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall"
+            "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall",
+            "php windwalker run prepare"
+        ],
+        "post-package-update": [
+            "Windwalker\\Core\\Composer\\PackageUpgrader::upgrade"
         ],
         "post-autoload-dump": [
-            "php windwalker pkg:install --tag config",
+            "@php windwalker pkg:postinstall || true",
             "php windwalker cache:clear renderer"
         ],
-        "reinstall": [
-            "Windwalker\\Core\\Composer\\StarterInstaller::genEnv"
+        "env": [
+            "Windwalker\\Core\\Composer\\StarterInstaller::genEnv",
+            "@php windwalker run prepare"
         ]
     },
     "autoload": {
         "psr-4": {
             "App\\": "src/"
-        }
+        },
+        "files": [
+            "src/bootstrap.php"
+        ]
     },
     "config": {
         "platform": {
-            "php": "8.2.0"
+            "php": "8.4.6"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.x-dev",
-            "next": "4.1.x-dev"
+            "dev-master": "4.x-dev"
         }
     }
 }

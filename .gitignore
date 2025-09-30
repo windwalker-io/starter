@@ -7,21 +7,30 @@ Thumbs.db
 
 # IDE Ignores #
 .idea/
+.vscode/
 
 # Extra #
 !.gitkeep
+/dist
 
 # Configuration #
 .env
 .env.local
 .env*.local
 !.env.dist
+.dsn
+.dsn.*
 
 # Libraries
 /vendor
 /node_modules
 /bower_components
 /yarn-error.log
+/.yarn/
+/.yarnrc
+.yarnrc.yml
+.npmrc
+/theme
 
 # Remove above lines when you start a project
 composer.lock
@@ -33,3 +42,7 @@ package-lock.json
 /phpunit.core.xml
 
 # Others
+
+# @Dev
+etc/packages/*.php
+# @EndDev

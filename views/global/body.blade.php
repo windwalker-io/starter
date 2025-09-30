@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace App\View;
+
 /**
  * Global variables
  * --------------------------------------------------------------
@@ -11,8 +15,6 @@
  * @var $asset     AssetService    The Asset manage service.
  * @var $lang      LangService     The language translation service.
  */
-
-declare(strict_types=1);
 
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
@@ -32,7 +34,7 @@ use Windwalker\Core\Router\SystemUri;
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div class="container">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="{{ $uri->path() }}">
                         <img src="{{ $asset->path('images/logo-h.svg') }}"
                             alt="Windwalker LOGO"
                             style="height: 25px;"
@@ -46,8 +48,12 @@ use Windwalker\Core\Router\SystemUri;
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                <a class="nav-link active" aria-current="page" href="{{ $uri->path() }}">Home</a>
                             </li>
+                        </ul>
+
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+
                         </ul>
                     </div>
                 </div>
@@ -55,11 +61,11 @@ use Windwalker\Core\Router\SystemUri;
         </header>
     @show
 
-    {{--@section('message')--}}
-    {{--    @messages()--}}
-    {{--@show--}}
-
     @section('body')
+        @section('message')
+            @include('@messages')
+        @show
+
         @yield('content', 'Content')
     @show
 

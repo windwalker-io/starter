@@ -1,20 +1,15 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright      Copyright (C) 2021 __ORGANIZATION__.
- * @license        __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Entity;
 
 use Windwalker\Core\DateTime\Chronos;
+use Windwalker\Core\DateTime\ServerTimeCast;
 use Windwalker\ORM\Attributes\AutoIncrement;
 use Windwalker\ORM\Attributes\CastNullable;
 use Windwalker\ORM\Attributes\Column;
+use Windwalker\ORM\Attributes\CreatedTime;
 use Windwalker\ORM\Attributes\PK;
 use Windwalker\ORM\Attributes\Table;
 use Windwalker\ORM\EntityInterface;
@@ -24,6 +19,7 @@ use Windwalker\ORM\EntityTrait;
  * The Acme class.
  */
 #[Table('acmes', 'acme')]
+#[\AllowDynamicProperties]
 class Acme implements EntityInterface
 {
     use EntityTrait;
@@ -41,7 +37,8 @@ class Acme implements EntityInterface
     protected int $createdBy = 0;
 
     #[Column('created')]
-    #[CastNullable(Chronos::class)]
+    #[CastNullable(ServerTimeCast::class)]
+    #[CreatedTime]
     protected ?Chronos $created = null;
 
     public function getId(): ?int
@@ -99,7 +96,7 @@ class Acme implements EntityInterface
 
     public function setCreated(\DateTimeInterface|string|null $created): static
     {
-        $this->created = Chronos::wrap($created);
+        $this->created = Chronos::tryWrap($created);
 
         return $this;
     }

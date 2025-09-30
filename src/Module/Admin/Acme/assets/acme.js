@@ -1,1 +1,1 @@
-// JS file for Acme
+//
