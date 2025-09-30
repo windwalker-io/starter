@@ -3,7 +3,6 @@
         //
     ],
     "include": [
-        "node_modules/@windwalker-io/**/*",
         "./vite.config.ts",
         "./fusionfile.ts"
     ],

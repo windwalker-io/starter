@@ -13,8 +13,7 @@ import { resolve } from 'node:path';
 fusion.outDir('www/assets/');
 
 // Aliases
-fusion.alias('@/', resolve('./resources/assets/'));
-fusion.alias('@js/', resolve('./resources/assets/src/'));
+fusion.alias('~/', resolve('./resources/assets/src/'));
 fusion.alias('vue', 'vue/dist/vue.esm-bundler.js');
 
 // Fusion Options

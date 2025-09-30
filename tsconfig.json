@@ -13,8 +13,8 @@
     "types": ["reflect-metadata"],
     "compilerOptions": {
         "paths": {
-            "@/*": ["./resources/assets/"],
-            "@js/*": ["./resources/assets/src/*"],
+            "~/*": ["./resources/assets/src/*"],
+            "~vue/*": ["./resources/assets/src/vue/*"],
         }
     }
 }
