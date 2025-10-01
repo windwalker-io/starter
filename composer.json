@@ -44,7 +44,7 @@
         ],
         "post-autoload-dump": [
             "@php windwalker pkg:postinstall || true",
-            "@php windwalker pkg:install lyrasoft/toolkit --tag ide -f --no-details || true",
+            "@php windwalker pkg:install lyrasoft/toolkit --tag ide -f --details 2 || true",
             "@php windwalker cache:clear renderer"
         ],
         "env": [
