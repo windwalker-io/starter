@@ -33,7 +33,7 @@
     },
     "scripts": {
         "post-create-project-cmd": [
-            "@php windwalker pkg:install windwalker/unicorn lyrasoft/luna --tag routes",
+            "@php windwalker pkg:install windwalker/unicorn lyrasoft/luna --tag routes --details 2",
             "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall",
             "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::install",
             "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::npmrc",
@@ -50,7 +50,7 @@
         "env": [
             "Windwalker\\Core\\Composer\\StarterInstaller::genEnv",
             "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::npmrc",
-            "@php windwalker pkg:install lyrasoft/toolkit --tag ide -f --no-details || true",
+            "@php windwalker pkg:install lyrasoft/toolkit --tag ide -f --details 2 || true",
             "@php windwalker run prepare"
         ]
     },
