@@ -17,12 +17,9 @@ use Windwalker\Core\Language\TranslatorTrait;
 use Windwalker\Core\View\View;
 use Windwalker\DI\Attributes\Autowire;
 
-/**
- * The SunFlowerEditView class.
- */
 #[ViewModel(
     layout: 'sun-flower-edit',
-    js: 'sun-flower-edit.js'
+    js: 'sun-flower-edit.ts'
 )]
 class SunFlowerEditView
 {

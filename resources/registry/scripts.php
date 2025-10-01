@@ -68,10 +68,10 @@ return [
     ],
 
     'gen:front' => [
-        // 'php windwalker g controller Front/SunFlower --model',
-        // 'php windwalker g view Front/SunFlower/SunFlowerListView --model',
-        // 'php windwalker g view Front/SunFlower --model',
-        // 'php windwalker g unicorn:route Front/SunFlower',
+        'php windwalker g controller Front/SunFlower',
+        'php windwalker g unicorn:view-list Front/SunFlower',
+        'php windwalker g unicorn:view-item Front/SunFlower',
+        'php windwalker g unicorn:route Front/SunFlower --type=simple',
     ],
 
     'revise:front' => [
@@ -83,7 +83,7 @@ return [
         'php windwalker generate:revise src/Module/Front/SunFlower/SunFlowerListView.php vendor/windwalker/unicorn/views/code/view/list --name=SunFlower --ns=App/Module/Front/SunFlower',
         'php windwalker generate:revise "src/Module/Front/SunFlower/**/*-list.*" vendor/windwalker/unicorn/views/code/view/list/ --name=SunFlower --ns=App/Module/Front/SunFlower',
         // item
-        'php windwalker generate:revise src/Module/Front/SunFlower/SunFlowerEditView.php vendor/windwalker/unicorn/views/code/view/item --name=SunFlower --ns=App/Module/Front/SunFlower',
+        'php windwalker generate:revise src/Module/Front/SunFlower/SunFlowerItemView.php vendor/windwalker/unicorn/views/code/view/item --name=SunFlower --ns=App/Module/Front/SunFlower',
         'php windwalker generate:revise "src/Module/Front/SunFlower/**/*-item.*" vendor/windwalker/unicorn/views/code/view/item/ --name=SunFlower --ns=App/Module/Front/SunFlower',
     ],
 ];

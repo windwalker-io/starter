@@ -19,15 +19,12 @@ use Windwalker\Core\View\Traits\FilterAwareViewModelTrait;
 use Windwalker\Core\View\View;
 use Windwalker\DI\Attributes\Autowire;
 
-/**
- * The SunFlowerListView class.
- */
 #[ViewModel(
     layout: [
         'default' => 'sun-flower-list',
         'modal' => 'sun-flower-modal',
     ],
-    js: 'sun-flower-list.js'
+    js: 'sun-flower-list.ts'
 )]
 class SunFlowerListView implements FilterAwareViewModelInterface
 {
