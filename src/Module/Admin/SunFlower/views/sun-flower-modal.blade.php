@@ -39,7 +39,12 @@ $workflow = $app->service(BasicStateWorkflow::class);
 
         <x-filter-bar :form="$form" :open="$showFilters"></x-filter-bar>
 
-        <div>
+        {{-- RESPONSIVE TABLE DESC --}}
+        <div class="d-block d-lg-none mb-3">
+            @lang('unicorn.grid.responsive.table.desc')
+        </div>
+
+        <div class="grid-table table-responsive-lg">
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
@@ -91,23 +96,22 @@ $workflow = $app->service(BasicStateWorkflow::class);
                     </tr>
                 @endforeach
                 </tbody>
-
-                <tfoot>
-                <tr>
-                    <td colspan="20">
-                        {!! $pagination->render() !!}
-                    </td>
-                </tr>
-                </tfoot>
             </table>
+
+            <div>
+                <x-pagination :pagination="$pagination">
+                    <x-slot name="end">
+                        <x-pagination-jump :pagination="$pagination" />
+                        <x-pagination-stats :pagination="$pagination" class="ms-0 ms-md-auto" />
+                    </x-slot>
+                </x-pagination>
+            </div>
         </div>
 
         <div class="d-none">
             <input name="_method" type="hidden" value="PUT" />
             <x-csrf></x-csrf>
         </div>
-
-        <x-batch-modal :form="$form" namespace="batch"></x-batch-modal>
     </form>
 
 @stop

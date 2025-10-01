@@ -23,9 +23,11 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 $menu = $app->service(\Unicorn\Legacy\Html\MenuHelper::class);
-
 ?>
-
-<ul id="submenu" class="nav nav-stacked nav-pills flex-column">
-
-</ul>
+@section('nav')
+    <li class="nav-item {{ $menu->active('home') }}">
+        <a class="nav-link" href="{{ $nav->to('home') }}">
+            @lang('unicorn.title.dashboard')
+        </a>
+    </li>
+@stop

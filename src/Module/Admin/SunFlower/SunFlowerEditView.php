@@ -5,19 +5,17 @@ declare(strict_types=1);
 namespace App\Module\Admin\SunFlower;
 
 use App\Entity\SunFlower;
-use App\Module\Admin\SunFlower\Form\EditForm;
 use App\Repository\SunFlowerRepository;
+use Unicorn\View\FormAwareViewModelTrait;
+use Unicorn\View\ORMAwareViewModelTrait;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewMetadata;
 use Windwalker\Core\Attributes\ViewModel;
-use Windwalker\Core\Form\FormFactory;
+use Windwalker\Core\Attributes\ViewPrepare;
 use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\Language\TranslatorTrait;
-use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\View\View;
-use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\DI\Attributes\Autowire;
-use Windwalker\ORM\ORM;
 
 /**
  * The SunFlowerEditView class.
@@ -26,42 +24,31 @@ use Windwalker\ORM\ORM;
     layout: 'sun-flower-edit',
     js: 'sun-flower-edit.js'
 )]
-class SunFlowerEditView implements ViewModelInterface
+class SunFlowerEditView
 {
     use TranslatorTrait;
+    use ORMAwareViewModelTrait;
+    use FormAwareViewModelTrait;
 
     public function __construct(
-        protected ORM $orm,
-        protected FormFactory $formFactory,
-        protected Navigator $nav,
-        #[Autowire] protected SunFlowerRepository $repository
+        #[Autowire] protected SunFlowerRepository $repository,
     ) {
     }
 
-    /**
-     * Prepare
-     *
-     * @param  AppContext  $app
-     * @param  View        $view
-     *
-     * @return  mixed
-     */
+    #[ViewPrepare]
     public function prepare(AppContext $app, View $view): mixed
     {
         $id = $app->input('id');
 
-        /** @var SunFlower $item */
+        /** @var ?SunFlower $item */
         $item = $this->repository->getItem($id);
 
         // Bind item for injection
-        $view[$item::class] = $item;
+        $view[SunFlower::class] = $item;
 
-        $form = $this->formFactory
-            ->create(EditForm::class)
-            ->fill(
-                $this->repository->getState()->getAndForget('edit.data')
-                    ?: $this->orm->extractEntity($item)
-            );
+        $form = $this->createForm(SunFlowerEditForm::class)
+            ->fillTo('item', $this->orm->extractEntity($item))
+            ->fillTo('item', $this->repository->getState()->getAndForget('edit.data'));
 
         return compact('form', 'id', 'item');
     }

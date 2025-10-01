@@ -1,19 +1,20 @@
-import '@main';
-
-u.$ui.bootstrap.tooltip();
+import {
+  useBs5Tooltip,
+  useDisableIfStackNotEmpty,
+  useDisableOnSubmit,
+  useFormComponent,
+  useFormValidation,
+  useKeepAlive,
+} from '@windwalker-io/unicorn-next';
 
 const formSelector = '#admin-form';
 
-// Validation
-u.formValidation().then(() => {
-  u.$ui.disableOnSubmit(formSelector);
-});
+useBs5Tooltip();
 
-// Init form
-u.form(formSelector).initComponent();
+useFormComponent(formSelector);
 
-// Disable if uploading
-u.$ui.disableIfStackNotEmpty();
+useFormValidation().then(() => useDisableOnSubmit(formSelector));
 
-// Keep Alive
-u.$ui.keepAlive(location.href);
+useDisableIfStackNotEmpty();
+
+useKeepAlive(location.href);

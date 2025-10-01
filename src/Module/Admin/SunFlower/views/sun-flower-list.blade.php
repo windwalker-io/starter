@@ -94,7 +94,7 @@ $workflow = $app->service(BasicStateWorkflow::class);
                     <tr>
                         {{-- Checkbox --}}
                         <td>
-                            <x-row-checkbox :row="$i" :id="$item->getId()"></x-row-checkbox>
+                            <x-row-checkbox :row="$i" :id="$item->id"></x-row-checkbox>
                         </td>
 
                         {{-- State --}}
@@ -103,7 +103,7 @@ $workflow = $app->service(BasicStateWorkflow::class);
                                 button-style="width: 100%"
                                 use-states
                                 :workflow="$workflow"
-                                :id="$item->getId()"
+                                :id="$item->id"
                                 :value="$item->state"
                             ></x-state-dropdown>
                         </td>
@@ -111,8 +111,8 @@ $workflow = $app->service(BasicStateWorkflow::class);
                         {{-- Title --}}
                         <td>
                             <div>
-                                <a href="{{ $nav->to('sun_flower_edit')->id($item->getId()) }}">
-                                    {{ $item->getTitle() }}
+                                <a href="{{ $nav->to('sun_flower_edit')->id($item->id) }}">
+                                    {{ $item->title }}
                                 </a>
                             </div>
                         </td>
@@ -120,7 +120,7 @@ $workflow = $app->service(BasicStateWorkflow::class);
                         {{-- Delete --}}
                         <td class="text-center">
                             <button type="button" class="btn btn-sm btn-outline-secondary"
-                                @click="grid.deleteItem('{{ $item->getId() }}')"
+                                @click="grid.deleteItem('{{ $item->id }}')"
                                 data-dos
                             >
                                 <i class="fa-solid fa-trash"></i>
@@ -129,7 +129,7 @@ $workflow = $app->service(BasicStateWorkflow::class);
 
                         {{-- ID --}}
                         <td class="text-end">
-                            {{ $item->getId() }}
+                            {{ $item->id }}
                         </td>
                     </tr>
                 @empty
@@ -145,7 +145,12 @@ $workflow = $app->service(BasicStateWorkflow::class);
             </table>
 
             <div>
-                <x-pagination :pagination="$pagination"></x-pagination>
+                <x-pagination :pagination="$pagination">
+                    <x-slot name="end">
+                        <x-pagination-jump :pagination="$pagination" />
+                        <x-pagination-stats :pagination="$pagination" class="ms-0 ms-md-auto" />
+                    </x-slot>
+                </x-pagination>
             </div>
         </div>
 

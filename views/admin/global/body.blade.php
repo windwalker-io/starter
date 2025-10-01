@@ -22,10 +22,20 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-$menu = $app->service(\Unicorn\Legacy\Html\MenuHelper::class);
-
 ?>
 
-<ul id="submenu" class="nav nav-stacked nav-pills flex-column">
+@extends('admin.global.body-wrapper')
 
-</ul>
+@section('body')
+    @section('banner')
+        @include('admin.global.layout.banner')
+    @show
+
+    <section id="content-container" class="container-fluid mt-3">
+        @section('admin-area')
+            @include('@messages')
+
+            @yield('content', 'Admin Content')
+        @show
+    </section>
+@stop

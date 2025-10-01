@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Admin\SunFlower\Form;
+namespace App\Module\Admin\SunFlower;
 
 use Unicorn\Enum\BasicState;
 use Windwalker\Core\Language\TranslatorTrait;
@@ -12,7 +12,7 @@ use Windwalker\Form\Field\ListField;
 use Windwalker\Form\Field\SearchField;
 use Windwalker\Form\Form;
 
-class GridForm
+class SunFlowerGridForm
 {
     use TranslatorTrait;
 

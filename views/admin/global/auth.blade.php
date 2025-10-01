@@ -22,10 +22,24 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-$menu = $app->service(\Unicorn\Legacy\Html\MenuHelper::class);
-
 ?>
 
-<ul id="submenu" class="nav nav-stacked nav-pills flex-column">
+@extends('global.html')
 
-</ul>
+@section('superbody')
+    <div class="container" style="margin-top: 100px">
+        <div class="mx-auto w-100" style="max-width: 450px">
+            <div class="mb-4 p-4">
+                <a href="{{ $nav->to('front::home') }}" target="_blank">
+                    <img class="img-fluid" src="https://i.imgur.com/tjr9ixV.png" alt="LOGO">
+                </a>
+            </div>
+
+            @section('message')
+                @include('@messages')
+            @show
+
+            @yield('container', 'Container')
+        </div>
+    </div>
+@stop

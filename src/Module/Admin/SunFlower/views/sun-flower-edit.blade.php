@@ -44,7 +44,7 @@ use Windwalker\Form\Form;
         action="{{ $nav->to('sun_flower_edit') }}"
         method="POST" enctype="multipart/form-data">
 
-        <x-title-bar :form="$form"></x-title-bar>
+        <x-title-bar :form="$form" ns="item"></x-title-bar>
 
         <div class="row">
             <div class="col-lg-7">
@@ -66,7 +66,7 @@ use Windwalker\Form\Form;
         </div>
 
         <div class="d-none">
-            @if ($idField = $form?->getField('id'))
+            @if ($idField = $form?->getField('item/id') ?? $form?->getField('id'))
                 <input name="{{ $idField->getInputName() }}" type="hidden" value="{{ $idField->getValue() }}" />
             @endif
 

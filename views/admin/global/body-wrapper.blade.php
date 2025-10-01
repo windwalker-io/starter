@@ -22,10 +22,37 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-$menu = $app->service(\Unicorn\Legacy\Html\MenuHelper::class);
-
+$htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 ?>
 
-<ul id="submenu" class="nav nav-stacked nav-pills flex-column">
+@extends('global.html')
 
-</ul>
+@section('superbody')
+<div class="main-wrapper" uni-cloak>
+    {{-- Header --}}
+    @section('header')
+        @include('admin.global.layout.header')
+    @show
+
+    {{-- Main Container --}}
+    @section('container')
+    <div class="row gx-0 flex-lg-nowrap">
+        {{-- Sidebar --}}
+        @section('sidebar')
+            @if (!$app->state('sidebar_hide'))
+                <div class="main-sidebar col-lg-2">
+                    @include('admin.global.layout.sidemenu')
+                </div>
+            @endif
+        @show
+        <div class="main-body col">
+            @yield('body', 'Body Section')
+
+            @section('footer')
+                @include('admin.global.layout.footer')
+            @show
+        </div>
+    </div>
+    @show
+</div>
+@stop
