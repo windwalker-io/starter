@@ -14,10 +14,10 @@ export default defineConfig(({ mode }) => {
         scss: {
           silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import']
         },
-      }
+      },
     },
     plugins: [
       useFusion(() => import('./fusionfile')),
-    ]
+    ],
   };
 });

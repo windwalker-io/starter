@@ -1,4 +1,3 @@
-import 'bootstrap';
 import { App, defineJsModules } from '@windwalker-io/core/app';
 import {
   pushUnicornToGlobal,

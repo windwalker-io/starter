@@ -15,6 +15,7 @@
         "paths": {
             "~/*": ["./resources/assets/src/*"],
             "~vue/*": ["./resources/assets/src/vue/*"],
+            "~vendor/*": ["./www/assets/vendor/*"],
         }
     }
 }
