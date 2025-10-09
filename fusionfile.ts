@@ -57,11 +57,13 @@ export function images() {
 }
 
 export function install() {
-  return installVendors(
-    [
-      '@fortawesome/fontawesome-free'
-    ]
-  );
+  return [
+    installVendors(
+      [
+        '@fortawesome/fontawesome-free'
+      ]
+    )
+  ];
 }
 
 export default [js, css, images];
