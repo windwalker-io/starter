@@ -1,13 +1,5 @@
-import {
-  cloneAssets,
-  cssModulize,
-  findModules,
-  findPackages,
-  globalAssets,
-  installVendors,
-  jsModulize
-} from '@windwalker-io/core/next';
 import fusion from '@windwalker-io/fusion-next';
+import { cloneAssets, cssModulizeDeep, globalAssets, installVendors, jsModulizeDeep } from '@windwalker-io/core/next';
 import { resolve } from 'node:path';
 
 // Our Dir
@@ -41,24 +33,8 @@ export function css() {
   fusion.clean('*.css', '*.css.map', 'css/**/*');
 
   return [
-    // Front
-    cssModulize('resources/assets/scss/front/main.scss', 'css/front/main.css')
-      .mergeCss(
-        findModules('Front/**/assets/*.scss'),
-      )
-      .parseBlades(
-        findModules('Front/**/*.blade.php'),
-        findPackages('views/**/*.blade.php'),
-      ),
-    // Admin
-    cssModulize('resources/assets/scss/admin/main.scss', 'css/admin/main.css')
-      .mergeCss(
-        findModules('Admin/**/assets/*.scss'),
-      )
-      .parseBlades(
-        findModules('Admin/**/*.blade.php'),
-        findPackages('views/**/*.blade.php'),
-      )
+    cssModulizeDeep('Front', 'resources/assets/scss/front/main.scss', 'css/front/main.css'),
+    cssModulizeDeep('Admin', 'resources/assets/scss/admin/main.scss', 'css/admin/main.css')
   ];
 }
 
@@ -66,24 +42,8 @@ export function js() {
   fusion.clean('*.js', 'js/**/*', 'chunks/**/*', 'vite/**/*');
 
   return [
-    jsModulize('resources/assets/src/front/main.ts', 'js/front/main.js')
-      .stage('front')
-      .mergeScripts(
-        findModules('Front/**/assets/*.ts'),
-      )
-      .parseBlades(
-        findModules('Front/**/*.blade.php'),
-        findPackages('views/**/*.blade.php'),
-      ),
-    jsModulize('resources/assets/src/admin/main.ts', 'js/admin/main.js')
-      .stage('admin')
-      .mergeScripts(
-        findModules('Admin/**/assets/*.ts'),
-      )
-      .parseBlades(
-        findModules('Admin/**/*.blade.php'),
-        findPackages('views/**/*.blade.php'),
-      ),
+    jsModulizeDeep('Front', 'resources/assets/src/front/main.ts', 'js/front/main.js'),
+    jsModulizeDeep('Admin', 'resources/assets/src/admin/main.ts', 'js/admin/main.js'),
   ];
 }
 
