@@ -18,7 +18,6 @@ namespace App\View;
 
 use Lyrasoft\Luna\Repository\CategoryRepository;
 use Lyrasoft\Luna\Services\ConfigService;
-use Lyrasoft\Luna\User\UserService;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Attributes\ViewModel;
@@ -35,8 +34,6 @@ $categories = $app->service(CategoryRepository::class)
     ->where('category.type', 'article')
     ->ordering('category.lft', 'ASC');
 
-$user = $app->service(UserService::class)->getUser();
-
 ?>
 
 @extends('global.html')
@@ -49,77 +46,37 @@ $user = $app->service(UserService::class)->getUser();
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', '{{ $ga }}');
     </script>
 @endpush
 @endif
 
+@if ($gtm = trim((string) $coreConfig->get('gtm')))
+@push('meta')
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l] = w[l] || []; w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'}); var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:''; j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','{{ $gtm }}');
+    </script>
+    <!-- End Google Tag Manager -->
+@endpush
+@endif
+
 @section('superbody')
+    @if ($gtm = trim((string) $coreConfig->get('gtm')))
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id={{ $gtm }}"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+    @endif
+
     @section('header')
-
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-                <div class="container">
-                    <a class="navbar-brand" href="{{ $uri->path() }}">
-                        <img src="{{ $asset->path('images/logo-h.svg') }}"
-                            alt="Windwalker LOGO"
-                            style="height: 25px;"
-                        />
-                    </a>
-                    <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{ $uri->path() }}">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" aria-current="page" href="#"
-                                    data-bs-toggle="dropdown"
-                                >
-                                    Categories
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="categories">
-                                    @foreach ($categories as $category)
-                                        <li>
-                                            <a class="dropdown-item"
-                                                href="{{ $nav->to('article_category')->var('path', $category->path) }}">
-                                                {{ str_repeat('-', $category->level - 1) }}
-                                                {{ $category->title }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <ul class="navbar-nav mb-2 mb-lg-0">
-                            <x-locale-dropdown class="nav-item" />
-
-                            @if (!$user->isLogin())
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ $nav->to('login')->withReturn() }}">
-                                        <span class="fa fa-sign-in-alt"></span>
-                                        Login
-                                    </a>
-                                </li>
-                            @else
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ $nav->to('logout') }}">
-                                        <span class="fa fa-sign-out-alt"></span>
-                                        Logout
-                                    </a>
-                                </li>
-                            @endif
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
+        @include('global.header')
     @show
 
     @section('body')
@@ -130,20 +87,7 @@ $user = $app->service(UserService::class)->getUser();
         @yield('content', 'Content')
     @show
 
-    @section('copyright')
-        <div id="copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-
-                        <hr />
-
-                        <footer>
-                            &copy; Windwalker {{ $chronos->localNow('Y') }}
-                        </footer>
-                    </div>
-                </div>
-            </div>
-        </div>
+    @section('footer')
+        @include('global.footer')
     @show
 @stop
