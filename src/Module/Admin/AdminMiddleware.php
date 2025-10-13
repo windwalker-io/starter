@@ -44,7 +44,6 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
 
         // Bootstrap
         $this->asset->css('@vendor/bootstrap/dist/css/bootstrap.min.css');
-        // $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.min.js');
 
         // Main
         $this->asset->css('@vite/scss/admin/main.scss');

@@ -32,7 +32,13 @@ return [
             return <<<JS
             import('@main').then(({ default: app }) => app.import('$url'));{$comment}
             JS;
-        }
+        },
+        'importSyncHandler' => static function (string $url, string $props, array $options = []) {
+            $comment = $options['comment'] ?? '';
+            return <<<JS
+            import('@main').then(({ default: app }) => app.importSync('$url', $props));{$comment}
+            JS;
+        },
     ],
 
     'vite' => [
