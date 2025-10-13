@@ -45,4 +45,5 @@ package-lock.json
 
 # @Dev
 etc/packages/*.php
+routes/packages/**/*.php
 # @EndDev
