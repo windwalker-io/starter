@@ -13,7 +13,7 @@
     "require": {
         "php": ">=8.4.6",
         "ext-json": "*",
-        "windwalker/core": "dev-master",
+        "windwalker/core": "^4.0",
         "windwalker/renderer": "^4.0",
         "windwalker/dom": "^4.0",
         "windwalker/edge": "^4.0",
@@ -23,13 +23,12 @@
         "windwalker/form": "^4.0",
         "windwalker/authentication": "^4.0",
         "windwalker/authorization": "^4.0",
-        "windwalker/unicorn": "dev-main",
+        "windwalker/unicorn": "^1.2",
         "windwalker/srp": "^1.0",
-        "lyrasoft/luna": "2.2.x-dev",
+        "lyrasoft/luna": "^2.2",
         "lyrasoft/toolkit": "^1.0"
     },
     "require-dev": {
-        "windwalker/framework": "dev-master"
     },
     "scripts": {
         "post-create-project-cmd": [
