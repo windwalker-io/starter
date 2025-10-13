@@ -1,7 +1,7 @@
 import 'bootstrap';
 import { App, defineJsModules } from '@windwalker-io/core/app';
 import { pushUnicornToGlobal, useUIBootstrap5, useUnicorn, useUnicornPhpAdapter } from '@windwalker-io/unicorn-next';
-import { useLuna } from '~vendor/lyrasoft/luna/dist/luna';
+import { useLuna } from '@lyrasoft/luna';
 
 const app = new App(defineJsModules());
 
