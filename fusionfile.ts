@@ -12,7 +12,7 @@ fusion.alias('vue', 'vue/dist/vue.esm-bundler.js');
 
 // Fusion Options
 fusion.overrideOptions({
-  chunkNameObfuscation: false
+  chunkNameObfuscation: true
 });
 
 // Watch all blade files for changes
