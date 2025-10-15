@@ -16,10 +16,10 @@
     "compilerOptions": {
         "paths": {
             "~/*": [
-                "./resources/assets/src/*"
+                "./resources/assets/*"
             ],
-            "~vue/*": [
-                "./resources/assets/src/vue/*"
+            "~js/*": [
+                "./resources/assets/src/*"
             ],
             "~vendor/*": [
                 "./www/assets/vendor/*"
