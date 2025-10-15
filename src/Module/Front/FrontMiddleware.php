@@ -54,6 +54,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         $this->fontAwesomeScript->cssFont(FontAwesomeScript::DEFAULT_SET);
 
         // Main
+        $this->asset->css('@vite/scss/front/bootstrap.scss');
         $this->asset->css('@vite/scss/front/main.scss');
 
         // Metadata

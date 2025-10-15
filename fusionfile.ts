@@ -35,6 +35,7 @@ export function css() {
   fusion.clean('*.css', '*.css.map', 'css/**/*');
 
   return [
+    fusion.css('resources/assets/scss/front/bootstrap.scss', 'css/front/bootstrap.css'),
     cssModulizeDeep('Front', 'resources/assets/scss/front/main.scss', 'css/front/main.css'),
     cssModulizeDeep('Admin', 'resources/assets/scss/admin/main.scss', 'css/admin/main.css')
   ];
