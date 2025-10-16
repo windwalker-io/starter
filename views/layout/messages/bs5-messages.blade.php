@@ -23,10 +23,14 @@ use Windwalker\Core\DateTime\ChronosService;
 use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
+use Windwalker\Session\Session;
 
-$session = $app->service(\Windwalker\Session\Session::class);
-
-$messageGroup = $session->getFlashBag()->all();
+if ($app->container->has(Session::class)) {
+    $session = $app->retrieve(Session::class);
+    $messageGroup = $session->getFlashBag()->all();
+} else {
+    $messageGroup = [];
+}
 
 ?>
 

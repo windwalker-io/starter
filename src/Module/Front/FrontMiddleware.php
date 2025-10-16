@@ -13,7 +13,6 @@ use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\Language\TranslatorTrait;
 use Windwalker\Core\Middleware\AbstractLifecycleMiddleware;
 use Windwalker\DI\Exception\DefinitionException;
-use Windwalker\Session\Session;
 
 class FrontMiddleware extends AbstractLifecycleMiddleware
 {
@@ -47,8 +46,6 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         $this->htmlFrame->setSiteName('Windwalker');
         $this->htmlFrame->setDescription('Windwalker Site Description.');
         // $this->htmlFrame->setCoverImages($this->asset->root('...'));
-
-        $this->app->retrieve(Session::class)->start();
     }
 
     /**

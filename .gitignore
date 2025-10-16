@@ -32,11 +32,6 @@ Thumbs.db
 .npmrc
 /theme
 
-# Remove above lines when you start a project
-composer.lock
-yarn.lock
-package-lock.json
-
 #Test
 /phpunit.xml
 /phpunit.core.xml
@@ -44,6 +39,9 @@ package-lock.json
 # Others
 
 # @Dev
+composer.lock
+yarn.lock
+package-lock.json
 etc/packages/*.php
 routes/packages/**/*.php
 # @EndDev
