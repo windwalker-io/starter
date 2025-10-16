@@ -13,6 +13,7 @@ use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\Language\TranslatorTrait;
 use Windwalker\Core\Middleware\AbstractLifecycleMiddleware;
 use Windwalker\DI\Exception\DefinitionException;
+use Windwalker\Session\Session;
 
 class FrontMiddleware extends AbstractLifecycleMiddleware
 {
@@ -36,15 +37,17 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
      */
     protected function preprocess(ServerRequestInterface $request): void
     {
-        $this->asset->js('js/main.js');
+        $this->asset->importMap('@main', '@vite/src/front/main.ts');
+        $this->asset->module('@vite/src/front/main.ts');
 
-        $this->asset->css('vendor/bootstrap/dist/css/bootstrap.min.css');
-        $this->asset->css('css/front/main.css');
+        $this->asset->css('@vite/scss/front/main.scss');
 
         $this->htmlFrame->setFavicon($this->asset->path('images/favicon.png'));
         $this->htmlFrame->setSiteName('Windwalker');
         $this->htmlFrame->setDescription('Windwalker Site Description.');
         // $this->htmlFrame->setCoverImages($this->asset->root('...'));
+
+        $this->app->retrieve(Session::class)->start();
     }
 
     /**

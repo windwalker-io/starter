@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
+namespace App\Config;
+
 return array_merge(
-    require __DIR__ . '/windwalker.php',
+    require __DIR__ . '/windwalker.config.php',
     [
         'commands' => include __DIR__ . '/../../resources/registry/commands.php',
 

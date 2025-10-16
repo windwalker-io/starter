@@ -61,7 +61,7 @@ return env('ERROR_REPORTING') ?? ErrorService::getReportLevel(
          * that will not work in future versions.
          * @link https://php.net/manual/en/errorfunc.constants.php
          */
-        E_DEPRECATED => (bool) (env('ERROR_REPORT_DEPRECATED') ??  env('APP_DEBUG')),
+        E_DEPRECATED => (bool) (env('ERROR_REPORT_DEPRECATED') ?? env('APP_DEBUG')),
 
         /**
          * Fatal errors that occur during PHP's initial startup. This is like an

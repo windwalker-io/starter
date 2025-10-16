@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Config;
+
 use Windwalker\Core\Provider\DateTimeProvider;
 
 return [
@@ -10,6 +12,8 @@ return [
     'name' => 'Windwalker',
 
     'debug' => (bool) (env('APP_DEBUG') ?? false),
+
+    'verbosity' => env('APP_VERBOSITY'),
 
     'mode' => env('APP_ENV', 'prod'),
 

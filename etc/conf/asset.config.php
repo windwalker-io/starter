@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Config;
+
 use Windwalker\Core\Asset\AssetProvider;
 
 return [
@@ -20,7 +22,23 @@ return [
             '@vendor/' => 'vendor/',
             '@core/' => 'vendor/@windwalker-io/core/dist/',
         ],
-        'scopes' => []
+        'scopes' => [],
+    ],
+
+    'modules' => [
+        'main' => '@main',
+        'importHandler' => static function (string $url, array $options = []) {
+            $comment = $options['comment'] ?? '';
+            return <<<JS
+            import('@main').then(({ default: app }) => app.import('$url'));{$comment}
+            JS;
+        }
+    ],
+
+    'vite' => [
+        'manifest' => '@public/assets/manifest.json',
+        'base' => 'resources/assets',
+        'server_file' => '@temp/vite-server',
     ],
 
     'namespace_base' => 'App\\Module',

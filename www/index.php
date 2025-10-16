@@ -24,7 +24,7 @@ if (Runtime::shouldBlock(['dev'], env('DEV_ALLOW_IPS'))) {
 
 Runtime::boot(WINDWALKER_ROOT, __DIR__);
 
-Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.php');
+Runtime::loadConfig(Runtime::getRootDir() . '/etc/runtime.config.php');
 
 $container = Runtime::getContainer();
 
@@ -36,7 +36,7 @@ $app->bootForServer($server);
 $server->getEventDispatcher()->addDealer($app->getEventDispatcher());
 
 $server->onRequest(function (RequestEvent $event) use ($app) {
-    $event->setResponse($app->executeServerEvent($event));
+    $event->response = $app->executeServerEvent($event);
 });
 
 $server->listen();

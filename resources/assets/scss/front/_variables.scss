@@ -3,12 +3,12 @@
 // Set to FALSE if this project no need dark-mode
 $enable-dark-mode: true;
 
-@import "./node_modules/bootstrap/scss/functions";
-@import "./node_modules/bootstrap/scss/variables";
-@import "./node_modules/bootstrap/scss/variables-dark";
-@import "./node_modules/bootstrap/scss/mixins";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/mixins";
 
 // Override maps here
 // $theme-colors: map-merge( $theme-colors, ('primary': #007bff) );
 
-@import "./node_modules/bootstrap/scss/maps";
+@import "bootstrap/scss/maps";

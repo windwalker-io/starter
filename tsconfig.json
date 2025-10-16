@@ -1,11 +1,35 @@
 {
     "extends": [
-        "./tsconfig.js.json"
+        //
     ],
+    "include": [
+        "vendor/**/src/Module/**/assets/**/*.ts",
+        "resources/assets/src/**/*.ts",
+        "src/Module/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules/**/*"
+    ],
+    "types": ["reflect-metadata"],
     "compilerOptions": {
+        "allowJs": true,
+        "module": "esnext",
+        "target": "esnext",
+        "moduleResolution": "bundler",
+        "skipLibCheck": true,
+        "jsx": "preserve",
+        "jsxImportSource": "vue",
+        "noImplicitThis": true,
+        "strict": true,
+        "useDefineForClassFields": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noEmit": true,
         "paths": {
-            "@/*": ["./resources/assets/"],
-            "@js/*": ["./resources/assets/src/*"],
+            "~/*": ["./resources/assets/src/*"],
+            "~vue/*": ["./resources/assets/src/vue/*"],
         }
     }
 }

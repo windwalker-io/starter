@@ -11,6 +11,7 @@ Thumbs.db
 
 # Extra #
 !.gitkeep
+/dist
 
 # Configuration #
 .env
@@ -44,6 +45,4 @@ package-lock.json
 
 # @Dev
 etc/packages/*.php
-!etc/packages/debugger.php
-!etc/packages/session.php
 # @EndDev

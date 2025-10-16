@@ -28,6 +28,14 @@ use Windwalker\Core\Router\SystemUri;
 
 @extends('global.body')
 
+@push('macro')
+<style data-macro type="text/scss">
+</style>
+
+<script data-macro="home" lang="ts" type="module">
+</script>
+@endpush
+
 @section('content')
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="bg-light py-5">
