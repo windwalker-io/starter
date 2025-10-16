@@ -40,6 +40,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         $this->asset->importMap('@main', '@vite/src/front/main.ts');
         $this->asset->module('@vite/src/front/main.ts');
 
+        $this->asset->css('@vite/scss/front/bootstrap.scss');
         $this->asset->css('@vite/scss/front/main.scss');
 
         $this->htmlFrame->setFavicon($this->asset->path('images/favicon.png'));
