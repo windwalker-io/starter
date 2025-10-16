@@ -24,9 +24,7 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-$session = $app->service(\Windwalker\Session\Session::class);
-
-$messageGroup = $session->getFlashBag()->all();
+$messageGroup = $app->getMessages();
 
 ?>
 
