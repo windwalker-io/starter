@@ -6,17 +6,17 @@
         "build": "vite build --mode development",
         "build:prod": "vite build",
         "watch": "vite build --watch --mode development",
-        "postinstall": "yarn build -- install"
+        "postinstall": "yarn build -- install",
+        "upgrade": "yarn up '**' -R"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^6.0",
-        "@windwalker-io/core": "*",
-        "@windwalker-io/fusion-next": "*",
-        "bootstrap": "^5.3.8"
+        "@fortawesome/fontawesome-free": "^7.0",
+        "@windwalker-io/core": "^4.0",
+        "@windwalker-io/fusion-next": "^0.1.0",
+        "bootstrap": "^5.3.8",
+        "cross-env": "^7.0.3",
+        "vite": "^7.1.7"
     },
-    "workspaces": [
-        "vendor/windwalker/core/assets/*"
-    ],
     "//": {
         "workspaces": [
             "vendor/windwalker/core/assets/*"

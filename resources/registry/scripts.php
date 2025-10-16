@@ -23,9 +23,15 @@ return [
         'yarn build',
     ],
 
+    // Prepare assets and install dependencies
+    'prepare:prod' => [
+        'yarn install',
+        'yarn build:prod',
+    ],
+
     // Prepare for development and reset migration
     'preparedev' => [
-        'cross-env NODE_ENV=development php windwalker run prepare',
+        'php windwalker run prepare',
         'php windwalker mig:reset --seed -f',
         'php windwalker run sniffer',
     ],
@@ -43,7 +49,7 @@ return [
         'git pull',
         'cross-env COMPOSER_PROCESS_TIMEOUT=600 composer install --no-dev',
         'php windwalker mig:go -f',
-        'cross-env NODE_ENV=production php windwalker run prepare',
+        'php windwalker run prepare:prod',
         'php windwalker asset:version',
     ],
 

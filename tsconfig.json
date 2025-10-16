@@ -10,7 +10,9 @@
     "exclude": [
         "node_modules/**/*"
     ],
-    "types": ["reflect-metadata"],
+    "types": [
+        "reflect-metadata"
+    ],
     "compilerOptions": {
         "allowJs": true,
         "module": "esnext",
@@ -28,8 +30,15 @@
         "experimentalDecorators": true,
         "noEmit": true,
         "paths": {
-            "~/*": ["./resources/assets/src/*"],
-            "~vue/*": ["./resources/assets/src/vue/*"],
+            "~/*": [
+                "./resources/assets/*"
+            ],
+            "~js/*": [
+                "./resources/assets/src/*"
+            ],
+            "~vendor/*": [
+                "./www/assets/vendor/*"
+            ]
         }
     }
 }

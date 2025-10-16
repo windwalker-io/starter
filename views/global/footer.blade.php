@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\View;
+namespace App\view;
 
 /**
  * Global variables
  * --------------------------------------------------------------
  * @var $app       AppContext      Application context.
- * @var $view      ViewModel       The view modal object.
+ * @var $vm        object          The view model object.
  * @var $uri       SystemUri       System Uri information.
  * @var $chronos   ChronosService  The chronos datetime service.
  * @var $nav       Navigator       Navigator object to build route.
@@ -18,30 +18,23 @@ namespace App\View;
 
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
-use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\DateTime\ChronosService;
 use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 ?>
+<div id="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
 
-@extends('global.html')
+                <hr />
 
-@section('superbody')
-    @section('header')
-        @include('global.header')
-    @show
-
-    @section('body')
-        @section('message')
-            @include('@messages')
-        @show
-
-        @yield('content', 'Content')
-    @show
-
-    @section('footer')
-        @include('global.footer')
-    @show
-@stop
+                <footer>
+                    &copy; Windwalker {{ $chronos->localNow('Y') }}
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
