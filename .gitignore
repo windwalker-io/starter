@@ -44,4 +44,7 @@ yarn.lock
 package-lock.json
 etc/packages/*.php
 routes/packages/**/*.php
+composer.lock
+yarn.lock
+package-lock.json
 # @EndDev
