@@ -19,10 +19,10 @@ return new /** Acme Seeder */ class extends AbstractSeeder {
 
         foreach (range(1, 15) as $i) {
             $acme = new Acme();
-            $acme->setTitle($faker->sentence(2));
-            $acme->setContent($faker->paragraph(5));
-            $acme->setCreated($faker->dateTimeThisYear());
-            $acme->setCreatedBy(1);
+            $acme->title = $faker->sentence(2);
+            $acme->content = $faker->paragraph(5);
+            $acme->created = $faker->dateTimeThisYear();
+            $acme->createdBy = 1;
 
             $mapper->createOne($acme);
 
