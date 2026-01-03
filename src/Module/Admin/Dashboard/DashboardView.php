@@ -27,7 +27,7 @@ class DashboardView
     /**
      * DashboardView constructor.
      */
-    public function __construct(protected ORM $orm)
+    public function __construct()
     {
         //
     }
