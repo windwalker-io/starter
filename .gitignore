@@ -39,9 +39,6 @@ Thumbs.db
 # Others
 
 # @Dev
-composer.lock
-yarn.lock
-package-lock.json
 etc/packages/*.php
 routes/packages/**/*.php
 composer.lock
